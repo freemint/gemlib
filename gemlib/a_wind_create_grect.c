@@ -1,15 +1,11 @@
-
 #include "gem.h"
 
 
 short
-wind_create_grect (short Parts, GRECT * r)
+wind_create_grect (short Parts, const GRECT * r)
 {
-	aes_intin[0] = Parts;
-	aes_intin[1] = r->g_x;
-	aes_intin[2] = r->g_y;
-	aes_intin[3] = r->g_w;
-	aes_intin[4] = r->g_h;
+	aes_intin[0]            = Parts;
+	*(GRECT*)(aes_intin +1) = *r;
 	
 	aes_control[0] = 100;
 	aes_control[1] = 5;
