@@ -81,7 +81,7 @@ affects all programs which use the library.
 @node "License"
 
     Gemma, support library for GEM application programs.
-    Copyright (C) 1999-2000 Draco/YC
+    Copyright (C) 1999-2002 Draco/YC
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -1311,6 +1311,21 @@ TODO:
 - add font selection support
 - support the xrsrc
 - emulate drawing WHITEBAK objects where not directly supported
+
+Version 1.09 pl 2
+
+- windial_create() now automatically links subsequently created 
+  windows in one chain, when at least one exists.
+- windial_link() returns 0, not `newhandle'
+- some DOS functions redirected to kernel.slb
+- appl_open(), when fails, now closes the kernel.slb
+- appl_close() doesn't check if kernel.slb is loaded before closing 
+  it (because kernel.slb is always exspected to be loaded)
+- improved trap #2 interface.
+- minor changes in the config tool program.
+- most of the code for proc_exec() now uses kernel.slb (this makes 
+  gemma.slb smaller).
+- function prototypes made as static inline functions for gcc.
 
 Version 1.09 pl 1
 
