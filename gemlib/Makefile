@@ -45,3 +45,12 @@ objs: .lib$(TARGET)
 .lib$(TARGET):
 	$(MKDIR) $@
 	$(CP) Makefile.objs $@/Makefile
+
+install:
+	install -m 644 -o root -g wheel lib{gem,gem16}.a $(PREFIX)/lib
+	install -m 644 -o root -g wheel {gem,gemx}.h $(PREFIX)/include
+
+uninstall:
+	rm -f $(PREFIX)/lib/lib{gem,gem16}.a
+	rm -f $(PREFIX)/include/{gem,gemx}.h
+
