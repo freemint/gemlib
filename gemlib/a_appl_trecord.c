@@ -11,7 +11,7 @@
  *         the AES will record events as indicated here: \n
  *         typedef struct pEvntrec \n
  *         { \n
- *         	WORD ap_event; \n
+ *         	LONG ap_event; \n
  *         	LONG ap_value; \n
  *         } EVNTREC; \n
  *         ap_event defines the required interpretation of ap_value
