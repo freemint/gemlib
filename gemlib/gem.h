@@ -1,6 +1,5 @@
-
 /*
- * gem.h - main header file for new gem-lib
+ *  $Id$
  */
 
 #ifndef _GEMLIB_H_
@@ -897,7 +896,7 @@ short	mt_evnt_timer  (unsigned long Interval, short *global_aes);
 #define event_keybd() mt_event_keybd(aes_global)
 #define event_mesag(a) mt_event_mesag(a,aes_global)
 #define event_mouse(a,b,c,d,e,f,g,h,i) mt_event_mouse(a,b,c,d,e,f,g,h,i,aes_global)
-#define event_multi(a,b,c,d, e,f,g,h,i, j,k,l,m,n, o,p,q,r, s,t,u,v) mt_event_multi(a,b,c,d, e,f,g,h,i, j,k,l,m,n, o,p,q,r, s,t,u,v,aes_global)
+#define event_multi(a,b,c,d, e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v) mt_event_multi(a,b,c,d, e,f,g,h,i, j,k,l,m,n, o,p,q,r, s,t,u,v,aes_global)
 #define event_multi_fast(a,b,c) mt_event_multi_fast(a,b,c,aes_global)
 #define event_timer(a) mt_event_timer(a,aes_global)
 /**@}*/
@@ -1012,27 +1011,43 @@ short	shel_write	(short Exit, short Graphic, short Aes, void *Command, char *Tai
 /** @addtogroup a_wind
  *  @{
  */
-short	wind_calc 	(short Type, short Parts, short InX, short InY, short InW, short InH, short *OutX, short *OutY, short *OutW, short *OutH);
-short	wind_close 	(short WindowHandle);
-short	wind_create 	(short Parts, short Wx, short Wy, short Ww, short Wh); 
-short	wind_delete 	(short WindowHandle);
-short	wind_find 	(short X, short Y);
-short	wind_get 	(short WindowHandle, short What, short *W1, short *W2, short *W3, short *W4);
-void	wind_new 	(void);
-short	wind_open 	(short WindowHandle, short Wx, short Wy, short Ww, short Wh);
-short	wind_set 	(short WindowHandle, short What, short W1, short W2, short W3, short W4);
-short	wind_update 	(short Code);
+short	mt_wind_calc 	(short Type, short Parts, short InX, short InY, short InW, short InH, short *OutX, short *OutY, short *OutW, short *OutH, short *global_aes);
+short	mt_wind_close 	(short WindowHandle, short *global_aes);
+short	mt_wind_create 	(short Parts, short Wx, short Wy, short Ww, short Wh, short *global_aes); 
+short	mt_wind_delete 	(short WindowHandle, short *global_aes);
+short	mt_wind_find 	(short X, short Y, short *global_aes);
+short	mt_wind_get 	(short WindowHandle, short What, short *W1, short *W2, short *W3, short *W4, short *global_aes);
+short	mt_wind_new 	(short *global_aes);
+short	mt_wind_open 	(short WindowHandle, short Wx, short Wy, short Ww, short Wh, short *global_aes);
+short	mt_wind_set 	(short WindowHandle, short What, short W1, short W2, short W3, short W4, short *global_aes);
+short	mt_wind_update 	(short Code, short *global_aes);
+#define wind_calc(a,b,c,d,e,f,g,h,i,j) mt_wind_calc(a,b,c,d,e,f,g,h,i,j,aes_global)	
+#define wind_close(a) mt_wind_close(a,aes_global)
+#define wind_create(a,b,c,d,e) mt_wind_create(a,b,c,d,e,aes_global) 
+#define wind_delete(a) mt_wind_delete(a,aes_global)
+#define wind_find(a,b) mt_wind_find(a,b,aes_global)
+#define wind_get(a,b,c,d,e,f) mt_wind_get(a,b,c,d,e,f,aes_global) 
+#define wind_new() mt_wind_new(aes_global)
+#define wind_open(a,b,c,d,e) mt_wind_open(a,b,c,d,e,aes_global)
+#define wind_set(a,b,c,d,e,f) mt_wind_set(a,b,c,d,e,f,aes_global)
+#define wind_update(a) mt_wind_update(a,aes_global)
 
 
 /*
  * Some useful extensions
  */
-short	wind_calc_grect   (short Type, short Parts, const GRECT *In, GRECT *Out);  
-short	wind_create_grect (short Parts, const GRECT *r); 
-short wind_get_grect    (short WindowHandle, short What, GRECT *r);
-short	wind_open_grect	(short WindowHandle, const GRECT *r);
-short wind_set_grect    (short WindowHandle, short What, const GRECT *r);
-short wind_set_str      (short WindowHandle, short What, const char *str);
+short	mt_wind_calc_grect   (short Type, short Parts, const GRECT *In, GRECT *Out, short *global_aes);  
+short	mt_wind_create_grect (short Parts, const GRECT *r, short *global_aes); 
+short	mt_wind_get_grect    (short WindowHandle, short What, GRECT *r, short *global_aes);
+short	mt_wind_open_grect   (short WindowHandle, const GRECT *r, short *global_aes);
+short	mt_wind_set_grect    (short WindowHandle, short What, const GRECT *r, short *global_aes);
+short	mt_wind_set_str      (short WindowHandle, short What, const char *str, short *global_aes);
+#define wind_calc_grect(a,b,c,d) mt_wind_calc_grect(a,b,c,d,aes_global)  
+#define wind_create_grect(a,b) mt_wind_create_grect(a,b,aes_global) 
+#define wind_get_grect(a,b,c) mt_wind_get_grect(a,b,c,aes_global)
+#define wind_open_grect(a,b) mt_wind_open_grect(a,b,aes_global)
+#define wind_set_grect(a,b,c) mt_wind_set_grect(a,b,c,aes_global)
+#define wind_set_str(a,b,c) mt_wind_set_str(a,b,c,aes_global)
 /**@}*/
 
 /** @addtogroup a_util
@@ -1055,21 +1070,29 @@ short * grect_to_array (const GRECT *area, short *array);
  */
 
 /* Array sizes in aes control block */
+
+/** size of the aes_control[] array */
 #define AES_CTRLMAX		5
+/** size of the aes_global[] array */
 #define AES_GLOBMAX		16
+/** size of the aes_intin[] array */
 #define AES_INTINMAX 		16
+/** size of the aes_intout[] array */
 #define AES_INTOUTMAX		16
+/** size of the aes_addrin[] array */
 #define AES_ADDRINMAX		16
+/** size of the aes_addrout[] array */
 #define AES_ADDROUTMAX		16
 
+/** AES parameter block structure */
 typedef struct
 {
-	short       *control;
-	short       *global;
-	const short *intin;
-	short       *intout;
-	const long  *addrin;
-	long        *addrout;
+	short       *control;   /**< aes_control[] array */
+	short       *global;    /**< aes_global[]  array */
+	const short *intin;     /**< aes_intin[]   array */
+	short       *intout;    /**< aes_intout[]  array */
+	const long  *addrin;    /**< aes_addrin[]  array */
+	long        *addrout;   /**< aes_addrout[] array */
 } AESPB;
 
 extern short gl_apid, gl_ap_version;			/* initialized in appl_init */
