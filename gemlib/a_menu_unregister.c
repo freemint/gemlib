@@ -4,17 +4,18 @@
 
 #include "gem_aesP.h"
 
-/** 
+/** remove accessory name from menu
  *
- *  @param id 
+ *  @param id application ID of the accessory
  *  @param global_aes global AES array
  *
- *  @return 
+ *  @return at present unknown
  *
- *  @since 
+ *  This function allows an Accessorie to remove its name from the menu line.
+ *  
+ *  @since PC/GEM2 and MagiC 2.0
  *
- *  @sa 
- *
+ *  @sa mt_menu_register()
  */
 
 short
