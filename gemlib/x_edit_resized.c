@@ -9,8 +9,10 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param oldrh Old net height of object
- *  @param newrh New net height of object
+ *  @param oldrh Old net height of object \p
+ *         [option CHECK_NULLPTR] oldrh may be NULL
+ *  @param newrh New net height of object \p
+ *         [option CHECK_NULLPTR] newrh may be NULL
  *  @param global_aes global AES array
  *
  *  @return 1 (OK) or 0 (error)
@@ -43,7 +45,13 @@ mt_edit_resized( OBJECT *tree, short obj, short *oldrh, short *newrh, short *glo
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (oldrh)
+#endif
 	*oldrh = aes_intout[1];
+#if CHECK_NULLPTR
+	if (newrh)
+#endif
 	*newrh = aes_intout[2];
 	
 	return(aes_intout[0]);
