@@ -28,7 +28,7 @@ v_value2color (short handle, unsigned long value, COLOR_ENTRY * color)
 	VDIPB vdi_params =               
 	{                                
 		&vdi_control[0],             /* vdi_control */
-		&value,                      /* vdi_intin   */
+		(short*)&value,              /* vdi_intin   */
 		0L,                          /* vdi_ptsin   */
 		&vdi_intout[0],              /* vdi_intout  */
 		0L                           /* vdi_ptsout  */

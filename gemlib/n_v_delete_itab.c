@@ -27,7 +27,7 @@ v_delete_itab (short handle, ITAB_REF itab)
 	VDIPB vdi_params =               
 	{                                
 		&vdi_control[0],             /* vdi_control */
-		&itab,                       /* vdi_intin   */
+		(short*)&itab,               /* vdi_intin   */
 		0L,                          /* vdi_ptsin   */
 		&vdi_intout[0],              /* vdi_intout  */
 		0L                           /* vdi_ptsout  */

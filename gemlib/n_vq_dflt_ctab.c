@@ -27,7 +27,7 @@ vq_dflt_ctab (short handle, long ctab_length, COLOR_TAB * ctab)
 	VDIPB vdi_params =               
 	{                                
 		&vdi_control[0],             /* vdi_control */
-		&ctab_length,                /* vdi_intin   */
+		(short*)&ctab_length,        /* vdi_intin   */
 		0L,                          /* vdi_ptsin   */
 		(short*)ctab,                /* vdi_intout  */
 		0L                           /* vdi_ptsout  */

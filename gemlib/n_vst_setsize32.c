@@ -33,7 +33,7 @@ vst_setsize32 (short handle, long point, short *wchar, short *hchar,
 	VDIPB vdi_params =               
 	{                                
 		&vdi_control[0],             /* vdi_control */
-		&point,                      /* vdi_intin   */
+		(short*)&point,              /* vdi_intin   */
 		0L,                          /* vdi_ptsin   */
 		&vdi_intout[0],              /* vdi_intout  */
 		&vdi_ptsout[0]               /* vdi_ptsout  */

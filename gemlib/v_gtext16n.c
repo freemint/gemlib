@@ -24,7 +24,7 @@ v_gtext16n (short handle, PXY pos, const short *wstr, short num)
 	{                                
 		&vdi_control[0],             /* vdi_control */
 		wstr,                        /* vdi_intin   */
-		&pos,                        /* vdi_ptsin   */
+		(short*)&pos,                /* vdi_ptsin   */
 		0L,                          /* vdi_intout  */
 		0L                           /* vdi_ptsout  */
 	};

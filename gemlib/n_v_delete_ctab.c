@@ -27,7 +27,7 @@ v_delete_ctab (short handle, COLOR_TAB * ctab)
 	VDIPB vdi_params =               
 	{                                
 		&vdi_control[0],             /* vdi_control */
-		&ctab,                       /* vdi_intin   */
+		(short*)&ctab,               /* vdi_intin   */
 		0L,                          /* vdi_ptsin   */
 		&vdi_intout[0],              /* vdi_intout  */
 		0L                           /* vdi_ptsout  */

@@ -56,7 +56,7 @@ vqt_fontheader (short handle, char *buffer, char *pathname)
 	VDIPB vdi_params =               
 	{                                
 		&vdi_control[0],             /* vdi_control */
-		&buffer,                     /* vdi_intin   */
+		(short*)&buffer,             /* vdi_intin   */
 		0L,                          /* vdi_ptsin   */
 		&vdi_intout[0],              /* vdi_intout  */
 		0L                           /* vdi_ptsout  */

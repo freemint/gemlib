@@ -21,7 +21,7 @@ vs_clip_pxy (short handle, PXY pxy[])
 	{                                
 		&vdi_control[0],             /* vdi_control */
 		&vdi_intin[0],               /* vdi_intin   */
-		pxy,                         /* vdi_ptsin   */
+		(short*)&pxy,                /* vdi_ptsin   */
 		0L,                          /* vdi_intout  */
 		0L                           /* vdi_ptsout  */
 	};
