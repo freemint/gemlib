@@ -82,6 +82,9 @@ ln -s %{_prefix}/include/mt_gemx.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include/
 
 
 %changelog
+* Fri Apr  1 2005 Arnaud Bercegeay <arnaud.bercegeay@free.fr>
+- updated to version 0.43.4
+
 * Wed Nov  3 2004 Arnaud Bercegeay <arnaud.bercegeay@free.fr>
 - updated to version 0.43.3
 
