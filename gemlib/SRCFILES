@@ -248,6 +248,7 @@ _VDI_EXTENSIONS = \
 	n_vst_charmap.c \
 	n_vst_fg_color.c \
 	n_vst_kern.c \
+	n_vst_map_mode.c \
 	n_vst_name.c \
 	n_vst_setsize.c \
 	n_vst_setsize32.c \
