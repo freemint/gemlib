@@ -850,14 +850,12 @@ typedef struct {
 /** @addtogroup a_appl
  *  @{
  */
-short	mt_appl_bvset  (short bvdisk, short bvhard, short *global_aes);
+short	mt_appl_bvset   (short bvdisk, short bvhard, short *global_aes);
 short	mt_appl_control (short ap_cid, short ap_cwhat, void *ap_cout, short *global_aes);
 short	mt_appl_exit    (short *global_aes);
 short	mt_appl_find    (const char *name, short *global_aes);
 short	mt_appl_getinfo (short type,
 						 short *out1, short *out2, short *out3, short *out4, short *global_aes);
-short	appl_xgetinfo(short type,
-					  short *out1, short *out2, short *out3, short *out4);
 short	mt_appl_init    (short *global_aes);
 short	mt_appl_read    (short ap_id, short length, void *ap_pbuff, short *global_aes);
 short	mt_appl_search  (short mode, char *fname, short *type, short *ap_id, short *global_aes);
@@ -870,6 +868,7 @@ short	mt_appl_yield   (short *global_aes);
 #define appl_exit() mt_appl_exit(aes_global)
 #define appl_find(a) mt_appl_find(a,aes_global)
 #define appl_getinfo(a,b,c,d,e) mt_appl_getinfo(a,b,c,d,e,aes_global)
+#define appl_xgetinfo(a,b,c,d,e) mt_appl_getinfo(a,b,c,d,e,aes_global)
 #define appl_init() mt_appl_init(aes_global)
 #define appl_read(a,b,c) mt_appl_read(a,b,c,aes_global)
 #define appl_search(a,b,c,d) mt_appl_search(a,b,c,d,aes_global)
@@ -984,18 +983,27 @@ short	menu_unregister	(short id);
 /** @addtogroup a_objc
  *  @{
  */
-short	objc_add	(OBJECT *, short Parent, short Child);
-short	objc_change	(OBJECT *, short Object, short Res,
-			 short Cx, short Cy, short Cw, short Ch,
-			 short NewState,short Redraw);
-short	objc_delete	(OBJECT *, short Object);
-short	objc_draw	(OBJECT *, short Start, short Depth,
-			 short Cx, short Cy, short Cw, short Ch);
-short	objc_edit	(OBJECT *, short Object, short Char, short *Index, short Kind); 
-short	objc_find	(OBJECT *, short Start, short Depth, short Mx, short My);
-short	objc_offset	(OBJECT *, short Object, short *X, short *Y);
-short	objc_order	(OBJECT *, short Object, short NewPos);
-short	objc_sysvar	(short mode, short which, short in1, short in2, short *out1, short *out2);
+short	mt_objc_add		(OBJECT *, short Parent, short Child);
+short	mt_objc_change	(OBJECT *, short Object, short Res,
+						 short Cx, short Cy, short Cw, short Ch,
+						 short NewState,short Redraw);
+short	mt_objc_delete	(OBJECT *, short Object);
+short	mt_objc_draw	(OBJECT *, short Start, short Depth,
+						 short Cx, short Cy, short Cw, short Ch);
+short	mt_objc_edit	(OBJECT *, short Object, short Char, short *Index, short Kind); 
+short	mt_objc_find	(OBJECT *, short Start, short Depth, short Mx, short My);
+short	mt_objc_offset	(OBJECT *, short Object, short *X, short *Y);
+short	mt_objc_order	(OBJECT *, short Object, short NewPos);
+short	mt_objc_sysvar	(short mode, short which, short in1, short in2, short *out1, short *out2);
+#define objc_add(a,b,c) mt_objc_add(a,b,c,aes_global)
+#define objc_change(a,b,c,d,e,f,g,h,i) mt_objc_change(a,b,c,d,e,f,g,h,i,aes_global)
+#define objc_delete(a,b) mt_objc_delete(a,b,aes_global)
+#define objc_draw(a,b,c,d,e,f,g) mt_objc_draw(a,b,c,d,e,f,g,aes_global)
+#define objc_edit(a,b,c,d,e) mt_objc_edit(a,b,c,d,e,aes_global)
+#define objc_find(a,b,c,d,e) mt_objc_find(a,b,c,d,e,aes_global)
+#define objc_offset(a,b,c,d) mt_objc_offset(a,b,c,d,aes_global)
+#define objc_order(a,b,c) mt_objc_order(a,b,c,aes_global)
+#define objc_sysvar(a,b,c,d,e,f) mt_objc_sysvar(a,b,c,d,e,f,aes_global)
 /**@}*/
 
 /** @addtogroup a_rsrc
