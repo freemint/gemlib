@@ -26,7 +26,7 @@
 
 short
 mt_xfrm_popup (OBJECT *tree, short x, short y, short firstscrlob, short lastscrlob, short nlines,
-			   void __CDECL (*init)(OBJECT *tree, short scrollpos, short nlines, void *param),
+			   void __CDECL (*init)(struct POPUP_INIT_args),
 			   void *param, short *lastscrlpos, short * global_aes)
 {
 	AES_PARAMS(135,6,2,3,0);
