@@ -9,13 +9,20 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param nlines will be filled with the Number of lines in text
- *  @param yscroll will be filled with the First visible line
- *  @param yvis will be filled with the Number of max. visible lines
- *  @param yval will be filled with the Number of currently visible lines
- *  @param ncols will be filled with the Number of columns, or -1 (unknown)
- *  @param xscroll will be filled with the Horiz. scroll offset in pixels
- *  @param xvis will be filled with the Number of visible columns (in pixels)
+ *  @param nlines will be filled with the Number of lines in text \p
+ *         [option CHECK_NULLPTR] nlines may be NULL
+ *  @param yscroll will be filled with the First visible line \p
+ *         [option CHECK_NULLPTR] yscroll may be NULL
+ *  @param yvis will be filled with the Number of max. visible lines \p
+ *         [option CHECK_NULLPTR] yvis may be NULL
+ *  @param yval will be filled with the Number of currently visible lines \p
+ *         [option CHECK_NULLPTR] yval may be NULL
+ *  @param ncols will be filled with the Number of columns, or -1 (unknown) \p
+ *         [option CHECK_NULLPTR] ncols may be NULL
+ *  @param xscroll will be filled with the Horiz. scroll offset in pixels \p
+ *         [option CHECK_NULLPTR] xscroll may be NULL
+ *  @param xvis will be filled with the Number of visible columns (in pixels) \p
+ *         [option CHECK_NULLPTR] xvis may be NULL
  *  @param global_aes global AES array
  *
  *  @since from MagiC 5.20 onwards. As it is 
@@ -49,12 +56,33 @@ mt_edit_get_scrollinfo( OBJECT *tree, short obj, long *nlines, long *yscroll,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (nlines)
+#endif
 	*nlines = *((long *) (aes_intout+1));
+#if CHECK_NULLPTR
+	if (yscroll)
+#endif
 	*yscroll = *((long *) (aes_intout+3));
+#if CHECK_NULLPTR
+	if (yvis)
+#endif
 	*yvis = aes_intout[5];
+#if CHECK_NULLPTR
+	if (yval)
+#endif
 	*yval = aes_intout[6];
+#if CHECK_NULLPTR
+	if (ncols)
+#endif
 	*ncols = aes_intout[7];
+#if CHECK_NULLPTR
+	if (xscroll)
+#endif
 	*xscroll = aes_intout[8];
+#if CHECK_NULLPTR
+	if (xvis)
+#endif
 	*xvis = aes_intout[9];
 }
 
