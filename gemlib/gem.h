@@ -42,6 +42,10 @@ __BEGIN_DECLS
 #define __GEMLIB_REVISION__  99
 #define __GEMLIB_BETATAG__   "-20021228"
 
+/* the other name of this release is MGEMLIB 42 */
+#define MGEMLIB				42
+#define __MGEMLIB__			42
+
 
 #ifdef __GEMLIB_DEFS
 
@@ -156,7 +160,48 @@ typedef struct pEvntrec
 #define RESCH_COMPLETED		61
 #define AP_DRAGDROP		63
 #define SH_WDRAW		72
+#define SC_CHANGED		80
+#define PRN_CHANGED		82
+#define FNT_CHANGED		83
+#define THR_EXIT		88
+#define PA_EXIT			89
 #define CH_EXIT			90
+#define WM_M_BDROPPED	100		/* KAOS 1.4  */
+#define SM_M_SPECIAL	101		/* MAG!X     */
+#define SM_M_RES2		102		/* MAG!X     */
+#define SM_M_RES3		103		/* MAG!X     */
+#define SM_M_RES4		104		/* MAG!X     */
+#define SM_M_RES5		105		/* MAG!X     */
+#define SM_M_RES6		106		/* MAG!X     */
+#define SM_M_RES7		107		/* MAG!X     */
+#define SM_M_RES8		108		/* MAG!X     */
+#define SM_M_RES9		109		/* MAG!X     */
+#define WM_SHADED	   	22360	/* [WM_SHADED apid 0 win 0 0 0 0] */
+#define WM_UNSHADED	   	22361	/* [WM_UNSHADED apid 0 win 0 0 0 0] */
+
+/* subcodes for SM_M_SPECIAL message for the SCREENMGR 
+	used:
+	INT16 msg[8];
+
+	msg[0] = SM_M_SPECIAL;	 101 
+	msg[1] = ap_id;	 ap_id, with SMC_TIDY_UP and SMC_UNHIDEALL own 
+	msg[2] = 0;		 No overrun 
+	msg[3] = 0;
+	msg[4] = 'MA';
+	msg[5] = 'GX';
+	msg[6] = ..subcode..;
+	msg[7] = 0;
+	appl_write(msg, 16, 1);		 apid #1 is the SCREENMGR 
+*/
+#define SMC_TIDY_UP		0			/* MagiC 2  */
+#define SMC_TERMINATE	1			/* MagiC 2  */
+#define SMC_SWITCH		2			/* MagiC 2  */
+#define SMC_FREEZE		3			/* MagiC 2  */
+#define SMC_UNFREEZE	4			/* MagiC 2  */
+#define SMC_RES5		5			/* MagiC 2  */
+#define SMC_UNHIDEALL	6			/* MagiC 3.1   */
+#define SMC_HIDEOTHERS	7			/* MagiC 3.1   */
+#define SMC_HIDEACT		8			/* MagiC 3.1   */
 
 /* evnt_mouse modes */
 #define MO_ENTER		0
@@ -169,6 +214,7 @@ typedef struct pEvntrec
 #define MU_M2			0x0008
 #define MU_MESAG		0x0010
 #define MU_TIMER		0x0020
+#define MU_MX			0x0100   /* XaAES */
 
 /* form_dial opcodes */
 #define FMD_START 		0
@@ -297,8 +343,10 @@ typedef struct _mn_set
 #define LFARROW			0x0200
 #define RTARROW			0x0400
 #define HSLIDE 			0x0800
+#define HOTCLOSEBOX		0x1000      /* GEM 2.x     */
 #define BACKDROP		0x2000
 #define SMALLER			0x4000
+#define ICONIFIER		SMALLER
 
 /* wind_create flags */
 #define WC_BORDER 	 	0
@@ -333,8 +381,21 @@ typedef struct _mn_set
 #define WF_TOOLBAR		 30
 #define WF_FTOOLBAR		 31
 #define WF_NTOOLBAR		 32
+#define WF_M_BACKDROP	100      /* KAOS 1.4    */
+#define WF_M_OWNER		101      /* KAOS 1.4    */
+#define WF_M_WINDLIST	102      /* KAOS 1.4    */
+#define WF_MINXYWH		103      /* MagiC 6     */
+#define WF_INFOXYWH		104      /* MagiC 6.10  */
 #define WF_WINX			 22360
 #define WF_WINXCFG		 22361
+#define WF_SHADE      22365      /* WINX 2.3 */
+#define WF_STACK	  22366      /* WINX 2.3 */
+#define WF_TOPALL	  22367      /* WINX 2.3 */
+#define WF_BOTTOMALL  22368		 /* WINX 2.3 */
+
+/* wind_set(WF_BEVENT) */
+#define BEVENT_WORK     0x0001    /* AES 4.0  */
+#define BEVENT_INFO     0x0002    /* MagiC 6  */
 
 /* window elements */
 #define W_BOX			0
@@ -357,6 +418,7 @@ typedef struct _mn_set
 #define W_HSLIDE		17
 #define W_HELEV			18
 #define W_SMALLER		19
+#define W_BOTTOMER  20      /* MagiC 3     */
 
 /* arrow message */
 #define WA_UPPAGE 		0
@@ -601,6 +663,7 @@ typedef struct _mn_set
 #define ACTBUTCOL 		4
 #define BACKGRCOL 		5
 #define AD3DVAL			6
+#define MX_ENABLE3D		10      /* MagiC 3.0   */
 
 /* Mouse Form Definition Block */
 typedef struct mouse_form
@@ -1634,15 +1697,6 @@ typedef struct
  short       *intout;
  short       *ptsout;
 } VDIPB;
-
-#if 0
-extern short vdi_intin[];
-extern short vdi_intout[];
-extern short vdi_ptsin[];
-extern short vdi_ptsout[];
-extern short vdi_control[];
-extern VDIPB vdi_params;
-#endif
 
 void vdi (VDIPB *pb);
 
