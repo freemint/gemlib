@@ -4,16 +4,17 @@
 
 #include "gem_aesP.h"
 
-/**
+/** forces an AES process switch.
  *
  *  @param global_aes global AES array
+ *  @return unknown
  *
- *  @return
+ *  @since PC-GEM (as of version 2.0), MagiC (as of version 2.0)
  *
- *  @since
+ *  @sa mt_evnt_timer()
  *
- *  @sa
- *
+ *  @note Use mt_evnt_timer(1,0) on other AES implementations.
+ *  
  */
 
 short
