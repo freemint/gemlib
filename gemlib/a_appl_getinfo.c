@@ -7,8 +7,8 @@
 /** returns information about the AES.
  *
  *  @param type specifies the type of information to be returned
- *         in the shorts pointed to by \p out1, \p out2, \p out3
- *         and \p out4.
+ *         in the shorts pointed to by \a out1, \a out2, \a out3
+ *         and \a out4.
  *  @param out1 1st return value \n
  *         [option CHECK_NULLPTR] out1 may be NULL
  *  @param out2 2nd return value \n
@@ -17,227 +17,6 @@
  *         [option CHECK_NULLPTR] out3 may be NULL
  *  @param out4 4th return value \n
  *         [option CHECK_NULLPTR] out4 may be NULL
-\verbatim
-    Name      Value               Returns
-
-AES_LARGEFONT  0    AES Large Font Information:
-                    out1 is filled in with the AES font's point size.
-                    out2 is filled in with the font id.
-                    out3 is a code indicating the type of font:
-                         SYSTEM_FONT (0) is the system font
-                         OUTLINE_FONT (1) is an outline font
-                    out4 is unused.
-
-AES_SMALLFONT  1    AES Large Font Information
-                    Same as above for the current small
-                    font.
-
-AES_SYSTEM     2    AES System Specifics
-                    out1 is filled in with the
-                         resolution number (as would
-                         be returned by Getrez()).
-                    out2 is filled in with the number
-                         of colors supported by the
-                         AES object library.
-                    out3 is 0 if color icons are not
-                         supported or 1 if they are.
-                    out4 is 0 to indicate that the
-                         extended resource file format
-                         is not supported or 1 if it is.
-
-AES_LANGUAGE   3    AES Globalization
-                    out1 is filled in with the current
-                         AES language code as follows:
-
-                          Name             out1  Language
-                          AESLANG_ENGLISH   0      English
-                          AESLANG_GERMAN    1      German
-                          AESLANG_FRENCH    2      French
-                          (reserved)        3      (Reserved)
-                          AESLANG_SPANISH   4      Spanish
-                          AESLANG_ITALIAN   5      Italian
-                          AESLANG_SWEDISH   6      Swedish
-
-                    out2, out3, and out4 are unused.
-
-AES_PROCESS    4    AES Multiple Process Support
-                    out1 is 0 to indicate the use of
-                         non-pre-emptive multitasking and 1 to
-                         indicate the use of pre-emptive
-                         multitasking.
-                    out2 is 0 if appl_find() cannot
-                         convert between MiNT and AES id's and
-                         1 to indicate that it can.
-                    out3 is 0 if appl_search() is not
-                         implemented and 1 if it is.
-                    out4 is 0 if rsrc_rcfix() is not
-                         implemented and 1 if it is.
-
-AES_PCGEM       5    AES PC-GEM Features
-                    out1 is 0 if objc_xfind() is not
-                         implemented and 1 if it is.
-                    out2 is currently reserved.
-                    out3 is 0 if menu_click() is not
-                         implemented and 1 if it is.
-                    out4 is 0 if shel_rdef() and
-                         shel_wdef() are not implemented and
-                         1 if they are.
-
-AES_INQUIRE    6    AES Extended Inquiry Functions
-                    out1 is 0 if -1 is not a valid
-                         ap_id parameter to appl_read() or 1
-                         if it is.
-                    out2 is 0 if -1 is not a valid
-                         length parameter to shel_get() or 1
-                         if it is.
-                    out3 is 0 if -1 is not a valid
-                         mode parameter to menu_bar() or 1
-                         if it is.
-                    out4 is 0 if MENU_INSTL is not
-                         a valid mode parameter to menu_bar()
-                         or 1 if it is.
-
-(reserved)      7    Currently reserved.
-
-AES_MOUSE       8    AES Mouse Support
-                    out1 is 0 to indicate that mode
-                         parameters of 258-260 are not
-                         supported by graf_mouse() and 1
-                         if they are.
-                    out2 is 0 to indicate that the
-                         application has control over the
-                         mouse form and 1 to indicate that
-                         the mouse form is maintained by
-                         the AES on a per-application basis.
-                    out3 and ap_gout4 are currently
-                         unused.
-
-AES_MENU       9    AES Menu Support
-                    out1 is 0 to indicate that
-                         sub-menus are not supported and 1
-                         if MultiTOS style sub-menus are.
-                    out2 is 0 to indicate that popup
-                         menus are not supported and 1 if
-                         MultiTOS style popup menus are.
-                    out3 is 0 to indicate that
-                         scrollable menus are not supported
-                         and 1 if MultiTOS style scrollable
-                         menus are.
-                    out4 is 0 to indicate that the
-                         MN_SELECTED message does not contain
-                         object tree information in msg[57]
-                         and 1 to indicate that it does.
-
-AES_SHELL       10    AES Shell Support
-                    out1 & 0x00FF indicates the
-                         highest legal value for the
-                         mode parameter of shel_write().
-                    out1 & 0xFF00 indicate which
-                         extended shel_write() mode bits
-                         are supported.
-                    out2 is 0 if shel_write() with
-                         a mode parameter of 0 launches
-                         an application or 1 if it cancels
-                         the previous shel_write().
-                    out3 is 0 if shel_write() with
-                         a mode parameter of 1 launches an
-                         application immediately or 1 if
-                         it takes effect when the current
-                         application exits.
-                    out4 is 0 if ARGV style parameter
-                         passing is not supported or
-                         1 if it is.
-
-AES_WINDOW     11    AES Window Features
-                    out1 is a bitmap of extended modes
-                         supported by wind_get() and
-                         wind_set() (if a bit is set, it is
-                         supported) as follows:
-                         Bit  mode
-                          0   WF_TOP returns window below the
-                               top also.
-                          1   wind_get( WF_NEWDESK, ... )
-                               supported.
-                          2   WF_COLOR get/set.
-                          3   WF_DCOLOR get/set.
-                          4   WF_OWNER get/set.
-                          5   WF_BEVENT get/set.
-                          6   WF_BOTTOM set.
-                          7   WF_ICONIFY set.
-                          8   WF_UNICONIFY set.
-                         9-15 Unused
-
-                    out2 is current unused.
-                    out3 is a bitmap of supported
-                         window behaviors (if a bit is set,
-                         it is supported) as follows:
-
-                         Bit   Behaviour
-                          0    Iconifier gadget present.
-                          1    Bottomer gadget present.
-                          2    shift-click sends window
-                               to bottom.
-                          3    "hot" close box supported.
-                         4-15  Unused
-
-                    out4 is currently unused.
-
-AES_MESSAGE    12    AES Extended Messages
-                    out1 is a bitmap of extra messages
-                         supported (if a bit is set, it is
-                         supported) as follows:
-                          Bit   Message
-                          0     WM_NEWTOP is meaningful.
-                          1     WM_UNTOPPED is sent.
-                          2     WM_ONTOP is sent.
-                          3     AP_TERM is sent.
-                          4     Shutdown and resolution
-                                change messages.
-                          5     CH_EXIT is sent.
-                          6     WM_BOTTOMED is sent.
-                          7     WM_ICONIFY is sent.
-                          8     WM_UNICONIFY is sent.
-                          9     WM_ALLICONIFY is sent.
-                          10-15 Unused
-
-                    out2 is a bitmap of extra messages
-                         supported. Current all bits are
-                         unused.
-                    out3 is a bitmap indicating
-                         message behaviour (if a bit is set,
-                         the behaviour exists) as follows:
-                         Bit  Message
-                          0   WM_ICONIFY message gives
-                              coordinates.
-                         1-15 Unused
-
-                    out4 is currently unused.
-
-AES_OBJECT     13    AES Extended Objects
-                    out1 is 0 if 3D objects are not
-                         supported or 1 if they are.
-                    out2 is 0 if objc_sysvar() is not
-                         present, 1 if MultiTOS v1.01
-                         objc_sysvar() is present, or 2
-                         if extended objc_sysvar()
-                         is present.
-                    out3 is 0 if the system font is
-                         the only font supported or 1 if
-                         GDOS fonts are also supported.
-                    out4 is reserved for OS
-                         extensions.
-
-AES_FORM       14    AES Form Support
-                    out1 is 0 if 'flying dialogs' are
-                         not supported or 1 if they are.
-                    out2 is 0 if keyboard tables are
-                         not supported or 1 if Mag!X style
-                         keyboard tables are supported.
-                    out3 is 0 if the last cursor
-                         position from objc_edit() is not
-                         returned or 1 if it is.
-                    out4 is currently reserved.
-\endverbatim
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.
@@ -246,10 +25,252 @@ AES_FORM       14    AES Form Support
  *
  *  @sa mt_appl_init()
  *
- *  Using an ap_gtype value of 4 and above is only supported as
+ *  The table hereafter summaries the values returned in
+ *  \a out1, \a out2, \a out3 and \a out4 depending on the
+ *  \a type of information requested.
+ *
+ *  <table>
+ *  <tr><td> Name <td> Value <td> Returns
+ *  <tr><td> #AES_LARGEFONT <td> 0  <td>
+ *     	              AES Large Font Information:
+ *                    - \a out1 is filled in with the AES font's point size.
+ *                    - \a out2 is filled in with the font id.
+ *                    - \a out3 is a code indicating the type of font:
+ *                         - #SYSTEM_FONT (0) is the system font
+ *                         - #OUTLINE_FONT (1) is an outline font
+ *                    - \a out4 is unused.
+ *
+ *  <tr><td> #AES_SMALLFONT  <td>1    <td>
+ *     	              AES Large Font Information:
+ *                    Same as above for the current small
+ *                    font.
+ *
+ *  <tr><td> #AES_SYSTEM    <td> 2    <td>
+ *     	              AES System Specifics
+ *                    - \a out1 is filled in with the
+ *                         resolution number (as would
+ *                         be returned by Getrez()).
+ *                    - \a out2 is filled in with the number
+ *                         of colors supported by the
+ *                         AES object library.
+ *                    - \a out3 is 0 if color icons are not
+ *                         supported or 1 if they are.
+ *                    - \a out4 is 0 to indicate that the
+ *                         extended resource file format
+ *                         is not supported or 1 if it is.
+ *
+ *  <tr><td> #AES_LANGUAGE  <td> 3    <td>
+ *     	              AES Globalization
+ *                    - \a out1 is filled in with the current
+ *                         AES language code as follows:
+ *                          <table>
+ *                          <tr><td>  Name             <td> out1 <td>   Language
+ *                          <tr><td> #AESLANG_ENGLISH  <td>	0   <td>   English
+ *                          <tr><td> #AESLANG_GERMAN   <td>	1   <td>   German
+ *                          <tr><td> #AESLANG_FRENCH   <td>	2   <td>   French
+ *                          <tr><td>  (reserved)       <td>	3   <td>   (Reserved)
+ *                          <tr><td> #AESLANG_SPANISH  <td>	4   <td>   Spanish
+ *                          <tr><td> #AESLANG_ITALIAN  <td>	5   <td>   Italian
+ *                          <tr><td> #AESLANG_SWEDISH  <td>	6   <td>   Swedish
+ *                          </table>
+ *                    - \a out2, \a out3, and \a out4 are unused.
+ *
+ *  <tr><td> #AES_PROCESS  <td>  4    <td>
+ *     	              AES Multiple Process Support
+ *                    - \a out1 is 0 to indicate the use of
+ *                         non-pre-emptive multitasking and 1 to
+ *                         indicate the use of pre-emptive
+ *                         multitasking.
+ *                    - \a out2 is 0 if mt_appl_find() cannot
+ *                         convert between MiNT and AES id's and
+ *                         1 to indicate that it can.
+ *                    - \a out3 is 0 if mt_appl_search() is not
+ *                         implemented and 1 if it is.
+ *                    - \a out4 is 0 if mt_rsrc_rcfix() is not
+ *                         implemented and 1 if it is.
+ *
+ *  <tr><td> #AES_PCGEM    <td>   5    <td>
+ *     	              AES PC-GEM Features
+ *                    - \a out1 is 0 if mt_objc_xfind() is not
+ *                         implemented and 1 if it is.
+ *                    - \a out2 is currently reserved.
+ *                    - \a out3 is 0 if mt_menu_click() is not
+ *                         implemented and 1 if it is.
+ *                    - \a out4 is 0 if mt_shel_rdef() and
+ *                         mt_shel_wdef() are not implemented and
+ *                         1 if they are.
+ *
+ *  <tr><td> #AES_INQUIRE  <td>  6    <td>
+ *     	              AES Extended Inquiry Functions
+ *                    - \a out1 is 0 if -1 is not a valid
+ *                         ap_id parameter to mt_appl_read() or 1
+ *                         if it is.
+ *                    - \a out2 is 0 if -1 is not a valid
+ *                         length parameter to mt_shel_get() or 1
+ *                         if it is.
+ *                    - \a out3 is 0 if -1 is not a valid
+ *                         mode parameter to mt_menu_bar() or 1
+ *                         if it is.
+ *                    - \a out4 is 0 if #MENU_INSTL is not
+ *                         a valid mode parameter to mt_menu_bar()
+ *                         or 1 if it is.
+ *
+ *  <tr><td> #(reserved)   <td>   7    <td>
+ *     	              Currently reserved.
+ *
+ *  <tr><td> #AES_MOUSE    <td>   8    <td>
+ *     	              AES Mouse Support
+ *                    - \a out1 is 0 to indicate that mode
+ *                         parameters of 258-260 are not
+ *                         supported by mt_graf_mouse() and 1
+ *                         if they are.
+ *                    - \a out2 is 0 to indicate that the
+ *                         application has control over the
+ *                         mouse form and 1 to indicate that
+ *                         the mouse form is maintained by
+ *                         the AES on a per-application basis.
+ *                    - \a out3 and \a out4 are currently
+ *                         unused.
+ *
+ *  <tr><td> #AES_MENU    <td>   9    <td>
+ *     	              AES Menu Support
+ *                    - \a out1 is 0 to indicate that
+ *                         sub-menus are not supported and 1
+ *                         if MultiTOS style sub-menus are.
+ *                    - \a out2 is 0 to indicate that popup
+ *                         menus are not supported and 1 if
+ *                         MultiTOS style popup menus are.
+ *                    - \a out3 is 0 to indicate that
+ *                         scrollable menus are not supported
+ *                         and 1 if MultiTOS style scrollable
+ *                         menus are.
+ *                    - \a out4 is 0 to indicate that the
+ *                         #MN_SELECTED message does not contain
+ *                         object tree information in msg[5,6,7]
+ *                         and 1 to indicate that it does.
+ *
+ *  <tr><td> #AES_SHELL    <td>   10    <td>
+ *     	              AES Shell Support
+ *                    - \a out1 & 0x00FF indicates the
+ *                         highest legal value for the
+ *                         mode parameter of mt_shel_write().
+ *                    - \a out1 & 0xFF00 indicate which
+ *                         extended mt_shel_write() mode bits
+ *                         are supported.
+ *                    - \a out2 is 0 if mt_shel_write() with
+ *                         a mode parameter of 0 launches
+ *                         an application or 1 if it cancels
+ *                         the previous mt_shel_write().
+ *                    - \a out3 is 0 if mt_shel_write() with
+ *                         a mode parameter of 1 launches an
+ *                         application immediately or 1 if
+ *                         it takes effect when the current
+ *                         application exits.
+ *                    - \a out4 is 0 if ARGV style parameter
+ *                         passing is not supported or
+ *                         1 if it is.
+ *
+ *  <tr><td> #AES_WINDOW  <td>   11    <td>
+ *     	              AES Window Features
+ *                    - \a out1 is a bitmap of extended modes
+ *                         supported by mt_wind_get() and/or
+ *                         mt_wind_set() (if a bit is set, it is
+ *                         supported) as follows:
+ *                         <table>
+ *                         <tr><td> Bit <td> mode
+ *                         <tr><td>  0  <td> #WF_TOP returns window below the
+ *                                           top also.
+ *                         <tr><td>  1  <td> #WF_NEWDESK get.
+ *                         <tr><td>  2  <td> #WF_COLOR get/set.
+ *                         <tr><td>  3  <td> #WF_DCOLOR get/set.
+ *                         <tr><td>  4  <td> #WF_OWNER get/set.
+ *                         <tr><td>  5  <td> #WF_BEVENT get/set.
+ *                         <tr><td>  6  <td> #WF_BOTTOM set.
+ *                         <tr><td>  7  <td> #WF_ICONIFY set.
+ *                         <tr><td>  8  <td> #WF_UNICONIFY set.
+ *                         <tr><td> 9-15<td> Unused
+ *                         </table>
+ *                    - \a out2 is current unused.
+ *                    - \a out3 is a bitmap of supported
+ *                         window behaviors (if a bit is set,
+ *                         it is supported) as follows:
+ *                         <table>
+ *                         <tr><td> Bit <td> Behaviour
+ *                         <tr><td>  0  <td>  Iconifier gadget present.
+ *                         <tr><td>  1  <td>  Bottomer gadget present.
+ *                         <tr><td>  2  <td>  shift-click sends window
+ *                                            to bottom.
+ *                         <tr><td>  3  <td>  "hot" close box supported.
+ *                         <tr><td> 4-15<td>  Unused
+ *                         </table>
+ *                    - \a out4 is currently unused.
+ *
+ *  <tr><td> #AES_MESSAGE  <td>  12    <td>
+ *     	              AES Extended Messages
+ *                    - \a out1 is a bitmap of extra messages
+ *                         supported (if a bit is set, it is
+ *                         supported) as follows:
+ *                         <table>
+ *                         <tr><td>  Bit  <td> Message
+ *                         <tr><td> 0     <td> #WM_NEWTOP is meaningful.
+ *                         <tr><td> 1     <td> #WM_UNTOPPED is sent.
+ *                         <tr><td> 2     <td> #WM_ONTOP is sent.
+ *                         <tr><td> 3     <td> #AP_TERM is sent.
+ *                         <tr><td> 4     <td> Shutdown and resolution
+ *                                             change messages.
+ *                         <tr><td> 5     <td> #CH_EXIT is sent.
+ *                         <tr><td> 6     <td> #WM_BOTTOMED is sent.
+ *                         <tr><td> 7     <td> #WM_ICONIFY is sent.
+ *                         <tr><td> 8     <td> #WM_UNICONIFY is sent.
+ *                         <tr><td> 9     <td> #WM_ALLICONIFY is sent.
+ *                         <tr><td> 10-15 <td> Unused
+ *                         </table>
+ *                    - \a out2 is a bitmap of extra messages
+ *                         supported. Current all bits are
+ *                         unused.
+ *                    - \a out3 is a bitmap indicating
+ *                         message behaviour (if a bit is set,
+ *                         the behaviour exists) as follows:
+ *                         <table>
+ *                         <tr><td> Bit <td> Message
+ *                         <tr><td>  0  <td>  #WM_ICONIFY message gives
+ *                                            coordinates.
+ *                         <tr><td> 1-15 <td> Unused
+ *                         </table>
+ *                    - \a out4 is currently unused.
+ *
+ *  <tr><td> #AES_OBJECT  <td>   13    <td>
+ *     	              AES Extended Objects
+ *                    - \a out1 is 0 if 3D objects are not
+ *                         supported or 1 if they are.
+ *                    - \a out2 is 0 if mt_objc_sysvar() is not
+ *                         present, 1 if MultiTOS v1.01
+ *                         mt_objc_sysvar() is present, or 2
+ *                         if extended mt_objc_sysvar()
+ *                         is present.
+ *                    - \a out3 is 0 if the system font is
+ *                         the only font supported or 1 if
+ *                         GDOS fonts are also supported.
+ *                    - \a out4 is reserved for OS
+ *                         extensions.
+ *
+ *  <tr><td> #AES_FORM     <td>  14    <td>
+ *     	              AES Form Support
+ *                    - \a out1 is 0 if 'flying dialogs' are
+ *                         not supported or 1 if they are.
+ *                    - \a out2 is 0 if keyboard tables are
+ *                         not supported or 1 if Mag!X style
+ *                         keyboard tables are supported.
+ *                    - \a out3 is 0 if the last cursor
+ *                         position from mt_objc_edit() is not
+ *                         returned or 1 if it is.
+ *                    - \a out4 is currently reserved.
+ *  </table>
+ *
+ *  Using an \a ap_gtype value of 4 and above is only supported as
  *  of AES version 4.1
  *
- *  Many of the ap_gtype return values identify features of TOS
+ *  Many of the \a ap_gtype return values identify features of TOS
  *  not supported by Atari but for the benefit of third-party
  *  vendors. You should contact the appropriate third-party for
  *  documentation on these functions.
@@ -262,8 +283,8 @@ AES_FORM       14    AES Form Support
  *  @note
  *  MagiC 2 have this AES call implemented, but "?AGI" is here since MagiC3 only...
  *  so this call will not work as expected with Magic2. One way is to check the magx cookie
- *  but i don't want to create dependencies between gemlib and any standard libc. So ATM, mt_appl_getinfo
- *  is not executed on Magic2. Is it a real problem ?
+ *  but i don't want to create dependencies between gemlib and any standard libc. So ATM,
+ *  mt_appl_getinfo() is not executed on Magic2. Is it a real problem ?
  *  
  */
 
