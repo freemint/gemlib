@@ -29,9 +29,9 @@
 
 
 int
-get_patchlev (char *id_str, char *pl)
+get_patchlev (const char *id_str, char *pl)
 {
-	char *p;
+	const char *p;
 	int len;
 	int ret = FALSE;
 
@@ -41,8 +41,10 @@ get_patchlev (char *id_str, char *pl)
 		p = id_str;
 		while (!isdigit (*p))
 			p++;
+		
 		while (*p != '$' && !isspace (*p))
 			*pl++ = *p++;
+		
 		*pl = '\0';
 		ret = TRUE;
 	}

@@ -352,7 +352,7 @@ void 	restore_background (GRECT *box, MFDB *buffer);
 
 void *	malloc_global (long size);
 
-int	get_patchlev (char *id_str, char *pl);
+int	get_patchlev (const char *id_str, char *pl);
 
 /*******************************************************************************
  * nkcc functions
