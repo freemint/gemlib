@@ -592,74 +592,102 @@ short		pdlg_validate_settings		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
  * Listbox definitions
  */
 
+/** @addtogroup x_lbox
+ *  @{
+ */
+ 
+ /** opaque structure */
 typedef void * LIST_BOX;
 
 typedef struct lbox_item LBOX_ITEM;
 struct lbox_item
 {
-	LBOX_ITEM	*next;		/* Pointer to the next entry in the list */
-	short		selected;	/* Specifies if the object is selected */
+	LBOX_ITEM	*next;		/**< Pointer to the next entry in the list */
+	short		selected;	/**< Specifies if the object is selected */
 
-	short		data1;		/* Data for the program... */
-	void		*data2;
-	void		*data3;
+	short		data1;		/**< Data for the program... */
+	void		*data2; 	/**< Data for the program... */
+	void		*data3; 	/**< Data for the program... */
 
 };
 
 typedef void  __CDECL (*SLCT_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, void *user_data, short obj_index, short last_state);
 typedef short __CDECL (*SET_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, short obj_index, void *user_data, GRECT *rect, short first);
 
-#define	LBOX_VERT		1	/* Listbox with vertical slider */
-#define	LBOX_AUTO		2	/* Auto-scrolling */
-#define	LBOX_AUTOSLCT		4	/* Automatic display during auto-scrolling */
-#define	LBOX_REAL		8	/* Real-time slider */
-#define	LBOX_SNGL		16	/* Only a selectable entry */
-#define	LBOX_SHFT		32	/* Multi-selection with Shift */
-#define	LBOX_TOGGLE		64	/* Toggle status of an entry at selection */
-#define	LBOX_2SLDRS		128	/* Listbox has a horiz. and a vertical slider */
+#define	LBOX_VERT		1	/**< Listbox with vertical slider */
+#define	LBOX_AUTO		2	/**< Auto-scrolling */
+#define	LBOX_AUTOSLCT	4	/**< Automatic display during auto-scrolling */
+#define	LBOX_REAL		8	/**< Real-time slider */
+#define	LBOX_SNGL		16	/**< Only a selectable entry */
+#define	LBOX_SHFT		32	/**< Multi-selection with Shift */
+#define	LBOX_TOGGLE		64	/**< Toggle status of an entry at selection */
+#define	LBOX_2SLDRS		128	/**< Listbox has a horiz. and a vertical slider */
 
+LIST_BOX *	mt_lbox_create (OBJECT *tree, SLCT_ITEM slct, SET_ITEM set,
+		    LBOX_ITEM *items, short visible_a, short first_a,
+		    short *ctrl_objs, short *objs, short flags,
+		    short pause_a, void *user_data, void *dialog,
+		    short visible_b, short first_b, short entries_b,
+		    short pause_b, short *global);
+void		mt_lbox_update (LIST_BOX *box, GRECT *rect, short *global);
+short		mt_lbox_do (LIST_BOX *box, short obj, short *global);
+short		mt_lbox_delete (LIST_BOX *box, short *global);
+short		mt_lbox_cnt_items (LIST_BOX *box, short *global);
+OBJECT *	mt_lbox_get_tree (LIST_BOX *box, short *global);
+short		mt_lbox_get_avis (LIST_BOX *box, short *global);
+void *		mt_lbox_get_udata (LIST_BOX *box, short *global);
+short		mt_lbox_get_afirst (LIST_BOX *box, short *global);
+short		mt_lbox_get_slct_idx (LIST_BOX *box, short *global);
+LBOX_ITEM *	mt_lbox_get_items (LIST_BOX *box, short *global);
+LBOX_ITEM *	mt_lbox_get_item (LIST_BOX *box, short n, short *global);
+LBOX_ITEM *	mt_lbox_get_slct_item (LIST_BOX *box, short *global);
+short		mt_lbox_get_idx (LBOX_ITEM *items, LBOX_ITEM *search, short *global);
+short		mt_lbox_get_bvis (LIST_BOX *box, short *global);
+short		mt_lbox_get_bentries (LIST_BOX *box, short *global);
+short		mt_lbox_get_bfirst (LIST_BOX *box, short *global);
+void		mt_lbox_set_asldr (LIST_BOX *box, short first, GRECT *rect, short *global);
+void		mt_lbox_set_items (LIST_BOX *box, LBOX_ITEM *items, short *global);
+void		mt_lbox_free_items (LIST_BOX *box, short *global);
+void		mt_lbox_free_list (LBOX_ITEM *items, short *global);
+void		mt_lbox_ascroll_to (LIST_BOX *box, short first, GRECT *box_rect,
+		    GRECT *slider_rect, short *global);
+void		mt_lbox_set_bsldr (LIST_BOX *box, short first, GRECT *rect, short *global);
+void		mt_lbox_set_bentries (LIST_BOX *box, short entries, short *global);
+void		mt_lbox_bscroll_to (LIST_BOX *box, short first, GRECT *box_rect,
+   		    GRECT *slider_rect, short *global);
+
+#define lbox_create(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p) \
+									mt_lbox_create(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,aes_global)
+#define lbox_update(a,b)			mt_lbox_update(a,b,aes_global)
+#define lbox_do(a,b)				mt_lbox_do(a,b,aes_global)
+#define lbox_delete(a)				mt_lbox_delete(a,aes_global)
+#define lbox_cnt_items(a)			mt_lbox_cnt_items(a,aes_global)
+#define lbox_get_tree(a)			mt_lbox_get_tree(a,aes_global)
+#define lbox_get_avis(a)			mt_lbox_get_avis(a,aes_global)
+#define lbox_get_udata(a)			mt_lbox_get_udata(a,aes_global)
+#define lbox_get_afirst(a)			mt_lbox_get_afirst(a,aes_global)
+#define lbox_get_slct_idx(a)		mt_lbox_get_slct_idx(a,aes_global)
+#define lbox_get_items(a)			mt_lbox_get_items(a,aes_global)
+#define lbox_get_item(a,b)			mt_lbox_get_item(a,b,aes_global)
+#define lbox_get_slct_item(a)		mt_lbox_get_slct_item(a,aes_global)
+#define lbox_get_idx(a,b)			mt_lbox_get_idx(a,b,aes_global)
+#define lbox_get_bvis(a)			mt_lbox_get_bvis(a,aes_global)
+#define lbox_get_bentries(a)		mt_lbox_get_bentries(a,aes_global)
+#define lbox_get_bfirst(a)			mt_lbox_get_bfirst(a,aes_global)
+#define lbox_set_asldr(a,b,c)		mt_lbox_set_asldr(a,b,c,aes_global)
+#define lbox_set_items(a,b)			mt_lbox_set_items(a,b,aes_global)
+#define lbox_free_items(a)			mt_lbox_free_items(a,aes_global)
+#define lbox_free_list(a)			mt_lbox_free_list(a,aes_global)
+#define lbox_ascroll_to(a,b,c,d)	mt_lbox_ascroll_to(a,b,c,d,aes_global)
+#define lbox_set_bsldr(a,b,c)		mt_lbox_set_bsldr(a,b,c,aes_global)
+#define lbox_set_bentries(a,b)		mt_lbox_set_bentries(a,b,aes_global)
+#define lbox_bscroll_to(a,b,c,d)	mt_lbox_bscroll_to(a,b,c,d,aes_global)
 /* #defines for listboxes with only one slider */
-#define	lbox_get_visible	lbox_get_avis
-#define	lbox_get_first		lbox_get_afirst
-#define	lbox_set_slider		lbox_set_asldr
-#define	lbox_scroll_to		lbox_ascroll_to
-
-LIST_BOX *	lbox_create (OBJECT *tree, SLCT_ITEM slct, SET_ITEM set,
-			     LBOX_ITEM *items, short visible_a, short first_a,
-			     short *ctrl_objs, short *objs, short flags,
-			     short pause_a, void *user_data, void *dialog,
-			     short visible_b, short first_b, short entries_b,
-			     short pause_b);
-
-void		lbox_update (LIST_BOX *box, GRECT *rect);
-short		lbox_do (LIST_BOX *box, short obj);
-short		lbox_delete (LIST_BOX *box);
-
-short		lbox_cnt_items (LIST_BOX *box);
-OBJECT *	lbox_get_tree (LIST_BOX *box);
-short		lbox_get_avis (LIST_BOX *box);
-void *		lbox_get_udata (LIST_BOX *box);
-short		lbox_get_afirst (LIST_BOX *box);
-short		lbox_get_slct_idx (LIST_BOX *box);
-LBOX_ITEM *	lbox_get_items (LIST_BOX *box);
-LBOX_ITEM *	lbox_get_item (LIST_BOX *box, short n);
-LBOX_ITEM *	lbox_get_slct_item (LIST_BOX *box);
-short		lbox_get_idx (LBOX_ITEM *items, LBOX_ITEM *search);
-short		lbox_get_bvis (LIST_BOX *box);
-short		lbox_get_bentries (LIST_BOX *box);
-short		lbox_get_bfirst (LIST_BOX *box);
-
-void		lbox_set_asldr (LIST_BOX *box, short first, GRECT *rect);
-void		lbox_set_items (LIST_BOX *box, LBOX_ITEM *items);
-void		lbox_free_items (LIST_BOX *box);
-void		lbox_free_list (LBOX_ITEM *items);
-void		lbox_ascroll_to (LIST_BOX *box, short first, GRECT *box_rect,
-				 GRECT *slider_rect);
-void		lbox_set_bsldr (LIST_BOX *box, short first, GRECT *rect);
-void		lbox_set_bentries (LIST_BOX *box, short entries);
-void		lbox_bscroll_to (LIST_BOX *box, short first, GRECT *box_rect,
-				 GRECT *slider_rect);
-
+#define	lbox_get_visible(a)			mt_lbox_get_avis(a,aes_global)
+#define	lbox_get_first(a)			mt_lbox_get_afirst(a,aes_global)
+#define	lbox_set_slider(a,b,c)		mt_lbox_set_asldr(a,b,c,aes_global)
+#define	lbox_scroll_to(a,b,c,d)		mt_lbox_ascroll_to(a,b,c,d,aes_global)
+/**@}*/
 
 /******************************************************************************
  * Wdialog definitions
