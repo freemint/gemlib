@@ -5,6 +5,11 @@
 
 # include "gem.h"
 
+/* i don't know any way to stringify using sozobonx built-in preprocessor */
+/* here is a very dirty hack just to get this file compilable with sozobonx */
+#ifdef __SOZOBON__
+#define str(x) "<str>"
+#endif
 
 #ifndef str
 # define str(x)		_stringify (x)
