@@ -1,20 +1,20 @@
-Summary: Christian Felsch's GEM utility library
-Name: cflib
-Version: 12
-Release: 1
-Copyright: Public Domain
-Group: Development/Libraries
-Source: cflib-%{version}.tar.gz
-BuildRoot: /var/tmp/cflib-root
-Prefix: %{_prefix}
-Packager: Guido Flohr <guido@freemint.de>
-Vendor: Sparemint
-Summary(de): Christian Felschs GEM-Utility-Bibliothek
+Summary       : Christian Felsch's GEM utility library
+Name          : cflib
+Version       : 20
+Release       : 1
+Copyright     : LGPL
+Group         : Development/Libraries
 
-# TODO for gemlib: The macros G_SHORTCUT and ED_CRSR were missing in
-# cflib.  Add them to gemlib.  Same for that stupid portab.h header 
-# file.  Then rebuild cflib without these patches and make it
-# conflict with gemlib less or equal version 38 release 2.
+Packager      : Frank Naumann <fnaumann@freemint.de>
+Vendor        : Sparemint
+URL           : http://wh58-508.st.uni-magdeburg.de/sparemint/
+
+Prefix        : %{_prefix}
+Docdir        : %{_prefix}/doc
+BuildRoot     : %{_tmppath}/%{name}-root
+
+Source: cflib-%{version}.tar.gz
+
 
 %description
 This is a utility library/toolkit that provide a lot of helper functions
@@ -41,7 +41,7 @@ die Dokumentation ist komplett auf Deutsch!
 BEMERKUNG: Dieses Paket hat experimentellen Support für die Installation
 von ST-Guide-Hypertexten. Sie werden in /usr/GEM/stguide installiert.
 Dieses Verzeichnis muss auf einem Dateisystem liegen, dass lange
-Dateinamen unterstützt.  Die Konfigurationsdatei stuide.inf sollte
+Dateinamen unterstützt.  Die Konfigurationsdatei stguide.inf sollte
 entsprechend geändert werden, damit der ST-Guide in diesem Verzeichnis
 nach Hypertexten sucht. Es ist ferner sicherzustellen, dass stool
 (oder stool.tos oder stool.ttp) entweder in /usr/GEM/stguide oder
@@ -51,38 +51,36 @@ Sie sollten die Cflib installieren, wenn Sie GEM-Applikationen schreiben
 wollen, die alle neueren GEM-Erweiterungen unterstützen, ohne sich um 
 den ganzen Kompatibilitäts-Kram kümmern zu müssen.
 
+
 %prep
-%setup -q -n cflib
+%setup -q -n cflib-0.20.0
+
 
 %build
 cd cflib
-
 make
 
+
 %install
+[ "${RPM_BUILD_ROOT}" != "/" ] && rm -rf ${RPM_BUILD_ROOT}
+
+mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/GEM/{include,lib,stguide}
+
 cd cflib
+install -m 644 lib{cflib,cflib16}.a ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
+install -m 644 cflib.h              ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
+install -m 644 cflib.hyp            ${RPM_BUILD_ROOT}%{_prefix}/GEM/stguide
+install -m 644 cflib.ref            ${RPM_BUILD_ROOT}%{_prefix}/GEM/stguide
 
-rm -rf $RPM_BUILD_ROOT
-mkdir -p "$RPM_BUILD_ROOT"%{_prefix}/GEM/{include,lib,stguide}
-install -m 644 -o root -g wheel lib{cflib,cflib16}.a \
-  "$RPM_BUILD_ROOT"%{_prefix}/GEM/lib
-install -m 644 -o root -g wheel cflib.h \
-  "$RPM_BUILD_ROOT"%{_prefix}/GEM/include
-install -m 644 cflib.hyp \
-  "$RPM_BUILD_ROOT"%{_prefix}/GEM/stguide
-install -m 644 cflib.ref \
-  "$RPM_BUILD_ROOT"%{_prefix}/GEM/stguide
-
-# Don't confuse people that want to compile the demo application.
-# rm demo/Makefile.sparemint
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+[ "${RPM_BUILD_ROOT}" != "/" ] && rm -rf ${RPM_BUILD_ROOT}
+
 
 %post
 # Try to run ST-Guide's stool.
 found_stool=yes
-PATH=%{_prefix}/GEM/stguide:/usr/GEM/stguide:/usr/GEM/bin:"$PATH"
+PATH=%{_prefix}/GEM/stguide:/usr/GEM/stguide:/usr/GEM/stguide:"$PATH"
 export PATH
 stool  >/dev/null 2>&1 || \
 stool.tos  >/dev/null 2>&1 || \
@@ -113,20 +111,20 @@ if test $found_stool = "no"; then
 	echo "in your PATH as stool, stool.tos or stool.ttp."
 fi
 
-# FIXME: How do we tell rpm that the ST-Guide hypertexts are really
-# documentation but don't get installed in /usr/doc?
+
 %files
 %defattr(-,root,root)
-%doc LiesMich LiesMich.src
-%doc demo intrface
+%doc cflib/COPYING.LIB cflib/LiesMich
+%doc cflib/demo cflib/intrface
 %{_prefix}/GEM/lib/lib*.a
 %{_prefix}/GEM/include/*.h
 %{_prefix}/GEM/stguide/cflib.hyp
 %{_prefix}/GEM/stguide/cflib.ref
 
+
 %changelog
-* Sat Sep 16 2000 Frank Naumann <fnaumann@freemint.de>
-- updated to new CVS maintained version
+* Thu Feb 15 2001 Frank Naumann <fnaumann@freemint.de>
+- updated to version 0.20.0
 
 * Mon May 26 2000 Frank Naumann <fnaumann@freemint.de>
 - patch in objc.c for new MiNTLib, replaced itoa by ltoa
