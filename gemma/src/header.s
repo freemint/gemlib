@@ -1,13 +1,26 @@
 | The header & some stuff
+
+|  This program is free software; you can redistribute it and/or modify
+|  it under the terms of the GNU General Public License as published by
+|  the Free Software Foundation; either version 2 of the License, or
+|  (at your option) any later version.
 |
+|  This program is distributed in the hope that it will be useful,
+|  but WITHOUT ANY WARRANTY; without even the implied warranty of
+|  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+|  GNU General Public License for more details.
+|
+|  You should have received a copy of the GNU General Public License
+|  along with this program; if not, write to the Free Software
+|  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 	.text
 
 	.long	0x70004afc	| magic value (clr.l d0, illegal)
-	.long	_slbname	| pointer to librarys (file)name
-	.long	0x0107	| version number
+	.long	_slbname	| pointer to library's (file)name
+	.long	0x0109	| version number
 	.long	0	| flags, currently 0L
-	.long	_gemma_init	| called when the librarys been loaded
+	.long	_gemma_init	| called when the library's been loaded
 	.long	_gemma_exit	| called before the library is removed
 	.long	_gemma_open	| called when a process opens the library
 	.long	_gemma_close	| called when a process closes the library
@@ -30,19 +43,19 @@
 	.long	_rsrc_xload
 	.long	_rsrc_xalloc
 	.long	_rsrc_xfree
-	.long	_thread_fork
+	.long	_thread_fork		| exec
 	.long	_windial_alert
 	.long	_objc_xchange
 	.long	_rsrc_xgaddr
 	.long	_appl_open
 	.long	_windial_error
-	.long	_windial_duplnk		| dup()
+	.long	0
 
-	.long	_windial_duplnk		| link()
+	.long	_windial_link		| link()
 	.long	_env_get
 	.long	_env_eval
-	.long	0 |_env_getargc
-	.long	0 |_env_getargv
+	.long	_env_getargc
+	.long	_env_getargv
 	.long	_appl_top
 	.long	_windial_setjmp
 	.long	_windial_unlink
@@ -53,9 +66,9 @@
 	.long	_av_view
 	.long	_av_help
 	.long	_va_send
-	.long	0
-	.long	0
-	.long	0
+	.long	_lib_control	| hidden
+	.long	_objc_xdraw
+	.long	_thread_fork	| overlay
 	.long	_menu_xpop
 	.long	_file_select
 	.long	_appl_close
@@ -65,6 +78,7 @@
 	.long	_get_version
 	.long	_get_users
 
+	.long	0
 	.long	0x070cffd6
 	.long	_sflags
 _slbname:	.asciz	"gemma.slb"
