@@ -27,7 +27,7 @@
  *  available.
  *
  *  @note The return value of this funtion is often
- *        named \p kreturn if it is used in the other mt_evnt
+ *        named \a kreturn if it is used in the other mt_evnt
  *        functions.
  *
  */

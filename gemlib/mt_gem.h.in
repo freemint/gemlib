@@ -176,31 +176,383 @@ typedef struct pEvntrec
  *
  */
 #define MN_SELECTED	 	10
-#define WM_REDRAW 	 	20	/**< TODO */
-#define WM_TOPPED 	 	21	/**< TODO */
-#define WM_CLOSED 	 	22	/**< TODO */
-#define WM_FULLED 	 	23	/**< TODO */
-#define WM_ARROWED	 	24	/**< TODO */
-#define WM_HSLID		25	/**< TODO */
-#define WM_VSLID		26	/**< TODO */
-#define WM_SIZED		27	/**< TODO */
-#define WM_MOVED		28	/**< TODO */
-#define WM_NEWTOP		29	/**< TODO */
-#define WM_UNTOPPED		30	/**< TODO */
-#define WM_ONTOP		31	/**< TODO */
-#define WM_BOTTOM		33	/**< TODO */
-#define WM_ICONIFY		34	/**< TODO */
-#define WM_UNICONIFY	35	/**< TODO */
-#define WM_ALLICONIFY	36	/**< TODO */
-#define WM_TOOLBAR		37	/**< TODO */
-#define AC_OPEN			40	/**< TODO */
-#define AC_CLOSE		41	/**< TODO */
-#define AP_TERM			50	/**< TODO */
-#define AP_TFAIL		51	/**< TODO */
-#define AP_RESCHG 		57	/**< TODO */
 
-/* old name */
-#define WM_BOTTOMED		WM_BOTTOM	/**< TODO */
+/** message received when a portion of the screen has to be redrawn
+ *
+ * - msg[0] = #WM_REDRAW
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window to redraw
+ * - msg[4] = x,
+ * - msg[5] = y,
+ * - msg[6] = w,
+ * - msg[7] = h: rectangle of the area to be redrawn.
+ *
+ *  When the message is received the window contents should be drawn (or a
+ *  representative icon if the window is iconified).
+ * 
+ */
+#define WM_REDRAW 	 	20
+
+/** message received when a window which is not the top window has been clicked on
+ *  by the user.
+ *
+ * - msg[0] = #WM_TOPPED
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  When an application received this message, it should sets the window to the top
+ *  by calling mt_wind_set( msg[3], #WF_TOP, 0, 0, 0, 0, aes_global);
+ */
+#define WM_TOPPED 	 	21
+
+/** message received when the user clicks on a window's close box.
+ *
+ * - msg[0] = #WM_CLOSED
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  When an application received this message, it should closes the window 
+ *  by calling mt_wind_close()
+ */
+#define WM_CLOSED 	 	22
+
+/** message received when the user clicks on a window's full box.
+ *
+ * - msg[0] = #WM_FULLED
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  When an application received this message, if the window is not at
+ *  full size, the window should ne resized using mt_wind_set() and #WF_CURRXYWH
+ *  to occupy the entire screen area minus the menu bar (see mt_wind_get()).
+ *  If the window was previously 'fulled' and has not been resized since, the
+ *  application should return the window to its previous size.
+ */
+#define WM_FULLED 	 	23
+
+/** message received when the user clicks on one of the slider gadgets of a window.
+ *
+ * - msg[0] = #WM_ARROWED
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = one of the following operation code:
+ *            - #WA_UPPAGE ( Page Up )
+ *            - #WA_DNPAGE ( Page Down )
+ *            - #WA_UPLINE ( Row Up )
+ *            - #WA_DNLINE ( Row Down )
+ *            - #WA_LFPAGE ( Page Left )
+ *            - #WA_RTPAGE ( Page Right )
+ *            - #WA_LFLINE ( Column Left )
+ *            - #WA_RTLINE ( Column Right )
+ *            - #WA_WHEEL  ( ??? XaAES ??? TODO )
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  A row or column message is sent when a slider arrow is selected. A 'page'
+ *  message is sent when a darkened area of the scroll bar is clicked. This usually
+ *  indicates that the application should adjust the window's contents by a larger
+ *  amount than with the row or column messages.
+ *
+ *  XaAES extension (mouse wheel) -- to be completed.
+ */
+#define WM_ARROWED	 	24
+
+/** message received when the user moves the horizontal slider of a window.
+ *
+ * - msg[0] = #WM_HSLID
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = new slider position from 0 to 1000.
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  Note: Slider position is relative and not related to slider size.
+ */
+#define WM_HSLID		25
+
+/** message received when the user moves the vertical slider of a window.
+ *
+ * - msg[0] = #WM_VSLID
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = new slider position from 0 to 1000.
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  Note: Slider position is relative and not related to slider size.
+ */
+#define WM_VSLID		26
+
+/** message received when the user drags the window sizing gadget.
+ *
+ * - msg[0] = #WM_SIZED
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = x
+ * - msg[5] = y
+ * - msg[6] = w
+ * - msg[7] = h of the new window location
+ *
+ *  Use mt_wind_set() with the command #WF_CURRXYWH to change the size
+ *  of the window. 
+ *
+ *  #WM_SIZED and #WM_MOVED usually share common handling code.
+ */
+#define WM_SIZED		27
+
+/** message received when the user moves the window by dragging the
+ *  window title bar.
+ *
+ * - msg[0] = #WM_MOVED
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = x
+ * - msg[5] = y
+ * - msg[6] = w
+ * - msg[7] = h of the new window location
+ *
+ *  Use mt_wind_set() with the command #WF_CURRXYWH to change the size
+ *  of the window. 
+ *
+ *  #WM_SIZED and #WM_MOVED usually share common handling code.
+ */
+#define WM_MOVED		28
+
+/** message received when the user has topped a window
+ *
+ * - msg[0] = #WM_NEWTOP
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ */
+#define WM_NEWTOP		29
+
+/** message received when the window is sent behind one or more windows
+ *  as the result of another window being topped.
+ *
+ * - msg[0] = #WM_UNTOPPED
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  The application need take no action. The message is for informational
+ *  use only.
+ */
+#define WM_UNTOPPED		30
+
+/** message received when the window is brought to the front on a multitasking
+*   AES.
+ *
+ * - msg[0] = #WM_ONTOP
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  The application need take no action. The message is for informational
+ *  use only.
+ */
+#define WM_ONTOP		31
+
+/** message received when the user act on the window to sent it to the bottom
+ *  of the window stack.
+ *
+ * - msg[0] = #WM_BOTTOM
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  The application should then sent the window to the bottom of the windows stack
+ *  by calling mt_wind_set() with #WF_BOTTOM command.
+ *
+ *  Note: the way the user may send a window to the bottom depend on the AES and its
+ *  configuration.
+ */
+#define WM_BOTTOM		33
+#define WM_BOTTOMED		WM_BOTTOM	/**< see #WM_BOTTOM */
+
+/** message received when the user clicks on the #SMALLER window gadget
+ *
+ * - msg[0] = #WM_ICONIFY
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = x
+ * - msg[5] = y
+ * - msg[6] = w
+ * - msg[7] = h : position of the iconified window
+ *
+ *  The application should then iconify the window
+ *  by calling mt_wind_set() with #WF_ICONIFY command.
+ *
+ */
+#define WM_ICONIFY		34
+
+/** message received when the user double-clicks on the iconified window
+ *
+ * - msg[0] = #WM_UNICONIFY
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = x
+ * - msg[5] = y
+ * - msg[6] = w
+ * - msg[7] = h : position of the iconified window
+ *
+ *  The application should then uniconify the window
+ *  by calling mt_wind_set() with #WF_UNICONIFY command.
+ *
+ */
+#define WM_UNICONIFY	35
+
+/** message received when the user clicks on the #SMALLER window gadget while
+ *  the CONTROL key is pressed.
+ *
+ * - msg[0] = #WM_ALLICONIFY
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = x
+ * - msg[5] = y
+ * - msg[6] = w
+ * - msg[7] = h : position of the iconified window
+ *
+ *  The application should then close all opened windows, and open a new iconified
+ *  window at the position indicated which represents the application.
+ */
+#define WM_ALLICONIFY	36
+
+/** message received when the user clicks on a toolbar object
+ *
+ * - msg[0] = #WM_TOOLBAR
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = index of the object clicked
+ * - msg[5] = number of clicks
+ * - msg[6] = state of the keyboard shift keys (see mt_evnt_keybd())
+ * - msg[7] = 
+ *
+ */
+#define WM_TOOLBAR		37
+
+/** message received when the user has selected a desk accessory to open
+ *
+ * - msg[0] = #AC_OPEN
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] =  
+ * - msg[4] = AES application ID of the accessory to open
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ */
+#define AC_OPEN			40
+
+/** message received by a desk accessory when the accessory
+ *  should be closed.
+ *
+ * - msg[0] = #AC_CLOSE
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = AES application ID of the accessory to close.
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  Do not close any windows your accessory had open, the system will do this for you.
+ *  Also, do not require any feedback from the user when this is received. Treat this
+ *  message as a 'Cancel' from the user.
+ *
+ */
+#define AC_CLOSE		41
+
+/** message received when the system requests that the application
+ *  terminate.
+ *
+ * - msg[0] = #AP_TERM
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = 
+ * - msg[4] = 
+ * - msg[5] = reason for the shut down:
+ *            - #AP_TERM (just shut down)
+ *            - #AP_RESCHG (resolution change)
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  This message is usually the result of a resolution change, but it may
+ *  laso occur if another application sends this message to gain total
+ *  control of the system.
+ *
+ *  The application should shutdown immediately after closing windows,
+ *  freeing resources, etc... If for some reason your application cannot
+ *  shutdown, you must inform the AES by sending an #AP_TFAIL message
+ *  by using mt_shel_write() mode #SWM_AESMSG.
+ *
+ *  Note: Desk accessory will always be sent #AC_CLOSE message, not
+ *  #AP_TERM
+ */
+#define AP_TERM			50
+
+/** message sent to the system when the application has received an
+ *  #AP_TERM message and cannot shutdown.
+ *
+ * - msg[0] = #AP_TFAIL
+ * - msg[1] = application error code
+ * - msg[2] = 0
+ * - msg[3] = 
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ */
+#define AP_TFAIL		51
+
+#define AP_RESCHG 		57  /**< indicates a resolution change, see #AP_TERM */
 
 /* Xcontrol messages */
 #define CT_UPDATE		50	/**< TODO */
@@ -208,17 +560,95 @@ typedef struct pEvntrec
 #define CT_NEWTOP		52	/**< TODO */
 #define CT_KEY			53	/**< TODO */
 
-#define SHUT_COMPLETED		60	/**< TODO */
-#define RESCHG_COMPLETED	61	/**< TODO */
-#define RESCH_COMPLETED		61	/**< TODO */
-#define AP_DRAGDROP 		63	/**< TODO */
-#define SH_WDRAW			72	/**< TODO */
+/** message received by the application which requested a shutdown, when the
+ *  shutdown is complete and was successful.
+ *
+ * - msg[0] = #SHUT_COMPLETED
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = 
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ */
+#define SHUT_COMPLETED		60
+
+/** message received by the application which requested a resolution change,
+ *  when the resolution change is complete.
+ *
+ * - msg[0] = #SHUT_COMPLETED
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = indicate the success of the resolution change:
+ *            - 1 if the resolution change was succesful
+ *            - 0 if an error occured.
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ */
+#define RESCHG_COMPLETED	61
+
+/** see #RESCHG_COMPLETED */
+#define RESCH_COMPLETED		RESCHG_COMPLETED
+
+/** message received when another apllication wishes to initiate a
+ *  drag and drop session.
+ *
+ * - msg[0] = #AP_DRAGDROP
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = handle of the window which had an object dropped on,
+ *            or -1 if no specific window was targeted
+ * - msg[4] = x
+ * - msg[5] = y position of the mouse when the object was dropped
+ * - msg[6] = keybord shift state at the time of the drop as
+ *            in mt_evnt_keybd()
+ * - msg[7] = two bytes ASCII packed pipe identifier which gives the
+ *            file extension of the pipe to open.
+ *
+ *  TODO: add more informations about drag 'n drop protocol...
+ */
+#define AP_DRAGDROP 		63
+
+/** message sent to the desktop to ask it to update an open drive
+ *  window.
+ *
+ * - msg[0] = #SH_WDRAW
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = drive number to update (0=A, 1=B, etc...) or -1
+ *            to update all windows
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] =
+ */
+#define SH_WDRAW			72
+
 #define SC_CHANGED			80	/**< TODO */
 #define PRN_CHANGED 		82	/**< TODO */
 #define FNT_CHANGED 		83	/**< TODO */
 #define THR_EXIT			88	/**< TODO */
 #define PA_EXIT 			89	/**< TODO */
-#define CH_EXIT 			90	/**< TODO */
+
+/** message received when a child process that this application has
+ *  started returns.
+ *
+ * - msg[0] = #CH_EXIT
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = child's application identifier
+ * - msg[4] = exit code of the child application
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] =
+ */
+#define CH_EXIT 			90
+
 #define WM_M_BDROPPED		100		/* KAOS 1.4  */	/**< TODO */
 
 /** MAG!X screen manager extension
@@ -583,15 +1013,15 @@ typedef  struct
 #define W_HIDER			30	/**< TODO */
 
 /* arrow message */
-#define WA_UPPAGE 		0	/**< TODO */
-#define WA_DNPAGE 		1	/**< TODO */
-#define WA_UPLINE 		2	/**< TODO */
-#define WA_DNLINE 		3	/**< TODO */
-#define WA_LFPAGE 		4	/**< TODO */
-#define WA_RTPAGE 		5	/**< TODO */
-#define WA_LFLINE 		6	/**< TODO */
-#define WA_RTLINE 		7	/**< TODO */
-#define WA_WHEEL		8	/* XaAES */	/**< TODO */
+#define WA_UPPAGE 		0	/**< Page Up,      see #WM_ARROWED  */
+#define WA_DNPAGE 		1	/**< Page Down,    see #WM_ARROWED  */
+#define WA_UPLINE 		2	/**< Row Up,       see #WM_ARROWED  */
+#define WA_DNLINE 		3	/**< Row Down,     see #WM_ARROWED  */
+#define WA_LFPAGE 		4	/**< Page Left ,   see #WM_ARROWED  */
+#define WA_RTPAGE 		5	/**< Page Right,   see #WM_ARROWED  */
+#define WA_LFLINE 		6	/**< Column Left,  see #WM_ARROWED  */
+#define WA_RTLINE 		7	/**< Column Right, see #WM_ARROWED  */
+#define WA_WHEEL		8	/**< XaAES TODOn   see #WM_ARROWED  */
 
 /* wind_update flags */
 #define END_UPDATE		0	/**< TODO */
