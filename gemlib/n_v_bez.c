@@ -54,23 +54,16 @@ void
 v_bez (short handle, short count, short *xyarr, char *bezarr,
        short *extent, short *totpts, short *totmoves)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_ptsin[VDI_PTSINMAX];   
 	short vdi_intout[6]; 
+
 	VDI_PARAMS( vdi_control, vdi_intin, vdi_ptsin, vdi_intout, extent);
-#else
-	vdi_params.ptsout = extent;
-#endif
 	
 	_v_bez (count, xyarr, bezarr, vdi_intin, vdi_ptsin);
 	
 	VDI_TRAP_ESC (vdi_params, handle, 6,13, count,(count +1) /2);
-	
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.ptsout = vdi_ptsout;
-#endif
 	
 	*totpts   = vdi_intout[0];
 	*totmoves = vdi_intout[1];
@@ -102,23 +95,16 @@ void
 v_bez_fill (short handle, short count, short *xyarr, char *bezarr,
             short *extent, short *totpts, short *totmoves)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_ptsin[VDI_PTSINMAX];   
 	short vdi_intout[6]; 
+
 	VDI_PARAMS (vdi_control, vdi_intin, vdi_ptsin, vdi_intout, extent);
-#else
-	vdi_params.ptsout = extent;
-#endif
 	
 	_v_bez (count, xyarr, bezarr, vdi_intin, vdi_ptsin);
 	
 	VDI_TRAP_ESC (vdi_params, handle, 9,13, count,(count +1) /2);
-	
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.ptsout = vdi_ptsout;
-#endif
 	
 	*totpts   = vdi_intout[0];
 	*totmoves = vdi_intout[1];

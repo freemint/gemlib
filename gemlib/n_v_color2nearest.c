@@ -25,12 +25,11 @@ long
 v_color2nearest (short handle, long color_space, COLOR_ENTRY * color,
                  COLOR_ENTRY * nearest_color)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[6];   
 	short vdi_intout[6]; 
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
-#endif
 	
 	*(long*)       &vdi_intin[0] = color_space;
 	*(COLOR_ENTRY*)&vdi_intin[2] = *color;

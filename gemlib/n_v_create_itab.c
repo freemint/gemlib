@@ -22,12 +22,11 @@
 ITAB_REF
 v_create_itab (short handle, COLOR_TAB * ctab, short bits)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[5];   
 	short vdi_intout[2]; 
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
-#endif
 	
 	vdi_intin_ptr(0) = ctab;
 	vdi_intin    [2] = bits;
