@@ -343,12 +343,21 @@ typedef struct
 
 typedef struct
 {
-	long	__CDECL (*proc)(void *par);
-	void	*user_stack;
-	long	stacksize;
-	long	mode;		/* immer auf 0 setzen! */
-	long	res1;		/* immer auf 0L setzen! */
+	long			__CDECL (*proc)(void *par);
+	void			*user_stack;
+	unsigned long	stacksize;
+	short			mode;		/* immer auf 0 setzen!  */
+	long			res1;		/* immer auf 0L setzen! */
 } THREADINFO;
+
+typedef  struct
+{
+	int   dummy;		/* a null  word 			 */ 
+	long  magic;		/* 'SHEL', if it's a Shell   */ 
+	int   isfirst;		/* first call of the Shell   */ 
+	long  lasterr;		/* last error  				 */ 
+	int   wasgr;		/* Program was a grafic app. */ 
+} SHELTAIL;
 
 
 /* shel_write modes */
@@ -375,12 +384,11 @@ typedef struct
 #define SHW_THR_CREATE		SWM_THRCREATE
 
 /* shel_write */
-#define SHW_IMMED			0
-#define SHW_CHAIN			1
-#define SHW_DOS				2
-#define SHW_RESCHANGE		5
-#define SHW_PARALLEL		100
-#define SHW_SINGLE			101
+#define SHW_IMMED			0	/* PC-GEM  2.x */
+#define SHW_CHAIN			1	/* TOS */
+#define SHW_DOS				2	/* PC-GEM  2.x */
+#define SHW_PARALLEL		100	/* MAG!X */
+#define SHW_SINGLE			101	/* MAG!X */
 
 /* command line parser (shel_write: parameter "isover") */
 #define CL_NORMAL		0
