@@ -6,24 +6,9 @@
 
 /** records AES events for later playback.
  *
- *  @param mem points to an array of \p Count EVNTREC structures
- *  @param count dimension of the array of EVNTREC structures into which
- *         the AES will record events as indicated here: \n
- *         typedef struct pEvntrec \n
- *         { \n
- *         	LONG ap_event; \n
- *         	LONG ap_value; \n
- *         } EVNTREC; \n
- *         ap_event defines the required interpretation of ap_value
- *         as follows:
- *         - ap_event : APPEVNT_TIMER (0) \n
- *           ap_value : Elapsed Time (in milliseconds -- see the note below)
- *         - ap_event : APPEVNT_BUTTON (1) \n
- *           ap_value : low word  = state (1 = down), high word = # of clicks
- *         - ap_event : APPEVNT_MOUSE (2) \n
- *           ap_value : low word  = X pos, high word = Y pos
- *         - ap_event : APPEVNT_KEYBOARD (3) \n
- *           ap_value : bits 0-7 = ASCII code, bits 8-15 = scan code, bits 16-31 = shift key
+ *  @param mem points to an array of \a Count ::EVNTREC structures
+ *  @param count dimension of the array of ::EVNTREC structures into which
+ *         the AES will record events
  *  @param global_aes global AES array
  *
  *  @return addreturns the number of events actually recorded.
@@ -36,7 +21,7 @@
  *  than 1.40 without a patch program available from Atari
  *  Corp.
  *
- *  @note \p ap_value seems to have words swapped (APPEVNT_MOUSE: X pos is in the high
+ *  @note \p ap_value seems to have words swapped (#APPEVNT_MOUSE: X pos is in the high
  *  word and Y pos is in the low word).
  *
  *  @note Warning: the "elapsed time" unit should be milliseconds but it seems that most
