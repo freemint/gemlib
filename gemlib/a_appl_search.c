@@ -8,17 +8,18 @@
  *  currently running processes.
  *
  *  @param mode specifies the search mode as follows:
- *         - APP_FIRST (0) Return the filename of the first process
- *         - APP_NEXT (1) Return the filename of subsequent processes
+ *         - #APP_FIRST (0) Return the filename of the first process
+ *         - #APP_NEXT (1) Return the filename of subsequent processes
+ *         - #APP_DESK (2) (??? return the filename of the desktop ???)
  *  @param fname should point to a memory location at least 9 bytes
  *		   long to hold the 8 character process filename found and
  *		   the NULL byte.
  *  @param type is a pointer to a WORD into which will be
  *		   placed the process type as follows:
- *	       - APP_SYSTEM        (0x01)   System process
- *	       - APP_APPLICATION   (0x02)   Application
- *	       - APP_ACCESSORY     (0x04)   Accessory
- *	       - APP_SHELL         (0x08)
+ *	       - #APP_SYSTEM        (0x01)   System process
+ *	       - #APP_APPLICATION   (0x02)   Application
+ *	       - #APP_ACCESSORY     (0x04)   Accessory
+ *	       - #APP_SHELL         (0x08)
  *         .
  *         [option CHECK_NULLPTR] type may be NULL
  *  @param ap_id is a pointer to a word into which will be placed the
@@ -32,10 +33,10 @@
  *  @since Available only in AES versions 4.0 and above when
  *         mt_appl_getinfo() indicates its presence.
  *
- *  The \p type parameter is actually a bit mask so it is possible
+ *  The \a type parameter is actually a bit mask so it is possible
  *  that a process containing more than one characteristic will
  *  appear. The currently running shell process (usually the
- *  desktop) will return a value of APP_APPLICATION | APP_SHELL
+ *  desktop) will return a value of #APP_APPLICATION | #APP_SHELL
  *  (0x0A).
  */
 

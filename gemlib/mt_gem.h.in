@@ -108,15 +108,15 @@ __BEGIN_DECLS
 #define APR_NOWAIT			-1	/**< Do not wait for message -- see mt_appl_read() */
 
 /* appl_search modes */
-#define APP_FIRST 			0	/**< TODO */
-#define APP_NEXT			1	/**< TODO */
-#define APP_DESK			2	/**< TODO */
+#define APP_FIRST 			0	/**< see mt_appl_search() */
+#define APP_NEXT			1	/**< see mt_appl_search() */
+#define APP_DESK			2	/**< see mt_appl_search() */
 
 /* appl_search return values*/
-#define APP_SYSTEM			0x01	/**< TODO */
-#define APP_APPLICATION		0x02	/**< TODO */
-#define APP_ACCESSORY		0x04	/**< TODO */
-#define APP_SHELL 			0x08	/**< TODO */
+#define APP_SYSTEM			0x01	/**< see mt_appl_search() */
+#define APP_APPLICATION		0x02	/**< see mt_appl_search() */
+#define APP_ACCESSORY		0x04	/**< see mt_appl_search() */
+#define APP_SHELL 			0x08	/**< see mt_appl_search() */
 
 /* appl_trecord types */
 #define APPEVNT_TIMER	 	0	/**< TODO */
