@@ -21,11 +21,10 @@
 void
 v_set_app_buff (short handle, void *buf_p, short size)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[3];   
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_dummy, vdi_dummy );
-#endif
 	
 	vdi_intin_ptr(0) = buf_p;
 	vdi_intin    [2] = size;

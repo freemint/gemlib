@@ -19,12 +19,9 @@
 void
 v_offset (short handle, short offset)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+
 	VDI_PARAMS(vdi_control, &offset, 0L, vdi_dummy, vdi_dummy );
-#else
-	vdi_intin[0] = offset;
-#endif
 		
 	VDI_TRAP_ESC (vdi_params, handle, 5,101, 0,1);
 }

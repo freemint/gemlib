@@ -22,12 +22,9 @@
 void
 v_show_c (short handle, short reset)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+
 	VDI_PARAMS(vdi_control, &reset, 0L, vdi_dummy, vdi_dummy );
-#else
-	vdi_intin[0] = reset;
-#endif
 		
 	VDI_TRAP (vdi_params, handle, 122, 0,1);
 }

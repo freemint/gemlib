@@ -30,11 +30,10 @@ void
 v_meta_extents (short handle,
                 short min_x, short min_y, short max_x, short max_y)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsin[4];   
+
 	VDI_PARAMS(vdi_control, 0L, vdi_ptsin, vdi_dummy, vdi_dummy );
-#endif
 	
 	vdi_ptsin[0] = min_x;
 	vdi_ptsin[1] = min_y;

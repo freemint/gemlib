@@ -18,11 +18,10 @@
 void
 v_sound (short handle, short freq, short duration)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[2]; 
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_dummy, vdi_dummy );
-#endif
 		
 	vdi_intin[0] = freq;
 	vdi_intin[1] = duration;
