@@ -917,6 +917,8 @@ short vst_setsize 	(VdiHdl, short point, short *wchar, short *hchar, short *wcel
 long  vst_setsize32 	(VdiHdl, long point, short *wchar, short *hchar, short *wcell, short *hcell);
 short vst_skew 	(VdiHdl, short skew);
 void  vst_track_offset(VdiHdl, long offset, short pairmode, short *tracks, short *pairs);
+/* another name for vst_track_offset */
+#define vst_kern_info vst_track_offset
 void  vst_width	(VdiHdl, short width, short *char_width, short *char_height, short *cell_width, short *cell_height);
 
 #endif 
