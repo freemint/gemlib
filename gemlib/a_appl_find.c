@@ -21,7 +21,9 @@
  *  @sa mt_appl_write(), mt_appl_init()
  *
  *  AES versions from 4.0 add several extensions to this call
- *  for the benefit of MultiTOS as follows:
+ *  for the benefit of MultiTOS. This functionality only exists if the
+ *  AES version is 4.0 and above and mt_appl_getinfo() indicates that it
+ *  is available. Here is the extension description:
  *  - If the upper word
  *    of the CHAR * is 0xFFFF, the lower word is assumed to be
  *    the MiNT id and mt_appl_find() will return the AES application
@@ -30,9 +32,7 @@
  *    is assumed to be the AES application identifier and the
  *    MiNT id is returned.
  *  - If the upper word of the CHAR * is 0x0000, the current
- *    processes' application identifier is returned.\n
- *  This functionality only exists if the AES version is 4.0 and
- *  above and mt_appl_getinfo() indicates that it is available.
+ *    processes' application identifier is returned.
  */
 
 short
