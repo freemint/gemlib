@@ -20,7 +20,7 @@
  *
  *  @sa mt_wind_close(), mt_wind_create(), mt_wind_delete()
  *
- *  This call will also trigger a WM_REDRAW message which
+ *  This call will also trigger a #WM_REDRAW message which
  *  encompasses the work area of the window so applications
  *  should not initially render the work area, rather, wait for
  *  the message.

@@ -1074,72 +1074,72 @@ typedef  struct
 #define SCRAP_USR       0x8000  /**< clipboard has a scrap.usr file, see mt_scrap_read() */
 
 /* Window Attributes */
-#define NAME			0x0001	/**< TODO */
-#define CLOSER 			0x0002	/**< TODO */
-#define FULLER 			0x0004	/**< TODO */
-#define MOVER			0x0008	/**< TODO */
-#define INFO			0x0010	/**< TODO */
-#define SIZER			0x0020	/**< TODO */
-#define UPARROW			0x0040	/**< TODO */
-#define DNARROW			0x0080	/**< TODO */
-#define VSLIDE 			0x0100	/**< TODO */
-#define LFARROW			0x0200	/**< TODO */
-#define RTARROW			0x0400	/**< TODO */
-#define HSLIDE 			0x0800	/**< TODO */
-#define HOTCLOSEBOX		0x1000      /* GEM 2.x (deprecated) */	/**< TODO */
-#define MENUBAR			0x1000		/* XaAES */	/**< TODO */
-#define BACKDROP		0x2000	/**< TODO */
-#define SMALLER			0x4000	/**< TODO */
-#define ICONIFIER		SMALLER	/**< TODO */
+#define NAME			0x0001	/**< Window has a title bar */
+#define CLOSER 			0x0002	/**< Window has a close box */
+#define FULLER 			0x0004	/**< Window has a fuller box */
+#define MOVER			0x0008	/**< Window may be moved by the user */
+#define INFO			0x0010	/**< Window has an information line */
+#define SIZER			0x0020	/**< Window has a sizer box */
+#define UPARROW			0x0040	/**< Window has an up arrow */
+#define DNARROW			0x0080	/**< Window has a down arrow */
+#define VSLIDE 			0x0100	/**< Window has a vertical slider */
+#define LFARROW			0x0200	/**< Window has a left arrow */
+#define RTARROW			0x0400	/**< Window has a right arrow */
+#define HSLIDE 			0x0800	/**< Window has a horizontal slider */
+#define HOTCLOSEBOX		0x1000  /**< Window has "hot close box" box (GEM 2.x) */
+#define MENUBAR			0x1000	/**< Window has a menu bar (XaAES) */
+#define BACKDROP		0x2000	/**< Window has a backdrop box */
+#define SMALLER			0x4000	/**< Window has an iconifier */
+#define ICONIFIER		SMALLER	/**< Window has an iconifier */
 
 /* wind_create flags */
-#define WC_BORDER 	 	0	/**< TODO */
-#define WC_WORK		 	1	/**< TODO */
+#define WC_BORDER 	 	0	/**< compute the extent of a window from its work area, see mt_wind_calc() */
+#define WC_WORK		 	1	/**< compute the work_area of a window from its extent, see mt_wind_calc() */
 
 /* wind_get flags */
-#define WF_KIND			  1	/**< TODO */
-#define WF_NAME			  2	/**< title name of the window, see mt_wind_set() */
-#define WF_INFO			  3	/**< info line of the window, see mt_wind_set() */
-#define WF_WORKXYWH		  4	/**< TODO */
-#define WF_CURRXYWH		  5	/**< current dimensions of the window (external area), see mt_wind_set()  */
-#define WF_PREVXYWH		  6	/**< TODO */
-#define WF_FULLXYWH		  7	/**< TODO */
-#define WF_HSLIDE 		  8	/**< position of the horizontal slider, see mt_wind_set() */
-#define WF_VSLIDE 		  9	/**< position of the vertical slider, see mt_wind_set()*/
-#define WF_TOP 			 10	/**< top window, see mt_wind_set() */
-#define WF_FIRSTXYWH 	 11	/**< TODO */
-#define WF_NEXTXYWH		 12	/**< TODO */
-#define WF_RESVD		 13	/**< TODO */
-#define WF_NEWDESK		 14	/**< OBJECT tree installed as desktop, see mt_wind_set() */
-#define WF_HSLSIZE		 15	/**< size of the horizontal slider, see mt_wind_set() */
-#define WF_VSLSIZE		 16	/**< size of the vertical slider, see mt_wind_set() */
-#define WF_SCREEN 		 17	/**< TODO */
-#define WF_COLOR		 18	/**< current color of widget, see mt_wind_set() */
-#define WF_DCOLOR 		 19	/**< default color of widget, see mt_wind_set() */
-#define WF_OWNER		 20	/**< TODO */
-#define WF_BEVENT 		 24	/**< window feature on mouse button event, see mt_wind_set() */
-#define WF_BOTTOM 		 25	/**< bottom window, see mt_wind_set() */
-#define WF_ICONIFY		 26	/**< iconification of the window, see mt_wind_set() */
-#define WF_UNICONIFY 	 27	/**< un-iconification of the window, see mt_wind_set() */
-#define WF_UNICONIFYXYWH 28	/**< window coordinates when uniconified , see mt_wind_set() */
-#define WF_TOOLBAR		 30	/**< tool bar attached to a window, see mt_wind_set() */
-#define WF_FTOOLBAR		 31	/**< TODO */
-#define WF_NTOOLBAR		 32	/**< TODO */
-#define WF_MENU			 33		 /* XaAEES */	/**< TODO */
-#define WF_WHEEL		 40	/**< window feature on mouse wheel event, see mt_wind_set() */
-#define WF_M_BACKDROP	100      /* KAOS 1.4    */	/**< TODO */
-#define WF_M_OWNER		101      /* KAOS 1.4    */	/**< TODO */
-#define WF_M_WINDLIST	102      /* KAOS 1.4    */	/**< TODO */
-#define WF_MINXYWH		103      /* MagiC 6     */	/**< TODO */
-#define WF_INFOXYWH		104      /* MagiC 6.10  */	/**< TODO */
-#define WF_WIDGETS		200		/**< actual positions of the slider widgets, see mt_wind_set() */
-#define WF_WINX			22360	/**< TODO */
-#define WF_WINXCFG		22361	/**< TODO */
-#define WF_SHADE	    22365      /* WINX 2.3 */	/**< TODO */
-#define WF_STACK		22366      /* WINX 2.3 */	/**< TODO */
-#define WF_TOPALL		22367      /* WINX 2.3 */	/**< TODO */
-#define WF_BOTTOMALL	22368	   /* WINX 2.3 */	/**< TODO */
-#define WF_XAAES		0x5841	   /* XaAES: 'XA' */	/**< TODO */
+#define WF_KIND			  1		/**< get     the actual window attributes, see mt_wind_get() */
+#define WF_NAME			  2 	/**< get/set title name of the window, see mt_wind_get() and mt_wind_set() */
+#define WF_INFO			  3 	/**< get/set info line of the window, see mt_wind_get() and mt_wind_set() */
+#define WF_WORKXYWH		  4 	/**< get     the work area coordinates of the work area, see mt_wind_get() */
+#define WF_CURRXYWH		  5 	/**< get/set current coordinates of the window (external area), see mt_wind_get() and mt_wind_set()  */
+#define WF_PREVXYWH		  6 	/**< get     the previous coordinates of the window (external area), see mt_wind_get() */
+#define WF_FULLXYWH		  7 	/**< get     the coordinates of the window when "fulled" the screen, see mt_wind_get() */
+#define WF_HSLIDE 		  8 	/**< get/set position of the horizontal slider, see mt_wind_get() and mt_wind_set() */
+#define WF_VSLIDE 		  9 	/**< get/set position of the vertical slider, see mt_wind_get() and mt_wind_set() */
+#define WF_TOP 			 10 	/**< get/set top window, see mt_wind_get() and mt_wind_set() */
+#define WF_FIRSTXYWH 	 11 	/**< get     the first rectangle in the list of rectangles for this window, see mt_wind_get() */
+#define WF_NEXTXYWH		 12 	/**< get     the next rectangle in the list of rectangles for this window, see mt_wind_get() */
+#define WF_RESVD		 13 	/**<         reserved */
+#define WF_NEWDESK		 14 	/**< get/set OBJECT tree installed as desktop, see mt_wind_get() and mt_wind_set() */
+#define WF_HSLSIZE		 15 	/**< get/set size of the horizontal slider, see mt_wind_get() and mt_wind_set() */
+#define WF_VSLSIZE		 16 	/**< get/set size of the vertical slider, see mt_wind_get() and mt_wind_set() */
+#define WF_SCREEN 		 17 	/**< get     current AES menu/alert buffer and its size, see mt_wind_get() */
+#define WF_COLOR		 18 	/**< get/set current color of widget, see mt_wind_get() and mt_wind_set() */
+#define WF_DCOLOR 		 19 	/**< get/set default color of widget, see mt_wind_get() and mt_wind_set() */
+#define WF_OWNER		 20 	/**< get     the owner of the window, see mt_wind_get() */
+#define WF_BEVENT 		 24 	/**< get/set window feature on mouse button event, see mt_wind_get() and mt_wind_set() */
+#define WF_BOTTOM 		 25 	/**< get/set bottom window, see mt_wind_get() and mt_wind_set() */
+#define WF_ICONIFY		 26 	/**< get/set iconification of the window, see mt_wind_get() and mt_wind_set() */
+#define WF_UNICONIFY 	 27 	/**< get/set un-iconification of the window, see mt_wind_get() and mt_wind_set() */
+#define WF_UNICONIFYXYWH 28 	/**<     set window coordinates when uniconified , see mt_wind_set() */
+#define WF_TOOLBAR		 30 	/**< get/set tool bar attached to a window, see mt_wind_get() and mt_wind_set() */
+#define WF_FTOOLBAR		 31 	/**< get     the first rectangle of the toolbar area, see mt_wind_get() */
+#define WF_NTOOLBAR		 32 	/**< get     the next rectangle of the toolbar area, see mt_wind_get() */
+#define WF_MENU			 33 	/**<         TODO (XaAES) */
+#define WF_WHEEL		 40 	/**<     set window feature on mouse wheel event, see mt_wind_set() */
+#define WF_M_BACKDROP	100 	/**<		 TODO (KAOS 1.4) */
+#define WF_M_OWNER		101 	/**<		 TODO (KAOS 1.4) */
+#define WF_M_WINDLIST	102 	/**<		 TODO (KAOS 1.4) */
+#define WF_MINXYWH		103 	/**<		 TODO (MagiC 6) */
+#define WF_INFOXYWH		104 	/**<		 TODO (MagiC 6.10) */
+#define WF_WIDGETS		200		/**< get/set actual positions of the slider widgets, see mt_wind_get() and mt_wind_set() */
+#define WF_WINX			22360	/**<		 TODO */
+#define WF_WINXCFG		22361	/**<		 TODO */
+#define WF_SHADE	    22365	/**<		 TODO (WINX 2.3) */
+#define WF_STACK		22366	/**<		 TODO (WINX 2.3) */
+#define WF_TOPALL		22367	/**<		 TODO (WINX 2.3) */
+#define WF_BOTTOMALL	22368	/**<		 TODO (WINX 2.3) */
+#define WF_XAAES		0x5841	/**<		 TODO (XaAES) : 'XA' */
 
 /* wind_set(WF_BEVENT) */
 #define BEVENT_WORK     0x0001    /**< window not topped when click on the work area, see #WF_BEVENT */
@@ -1178,7 +1178,7 @@ typedef  struct
 #define WA_RTPAGE 		5	/**< Page Right,   see #WM_ARROWED  */
 #define WA_LFLINE 		6	/**< Column Left,  see #WM_ARROWED  */
 #define WA_RTLINE 		7	/**< Column Right, see #WM_ARROWED  */
-#define WA_WHEEL		8	/**< XaAES TODOn   see #WM_ARROWED  */
+#define WA_WHEEL		8	/**< XaAES TODO,   see #WM_ARROWED  */
 
 /* wind_update flags */
 #define END_UPDATE		0	/**< release the screen lock, see mt_wind_update() */

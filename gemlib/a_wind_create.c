@@ -7,22 +7,25 @@
 /** initializes a new window structure and allocates any necessary memory.
  *
  *  @param Parts is a bit array whose elements determine the presence of
- *         any 'widgets' on the window as follows:<pre>
-Name     Mask     Meaning
-NAME     0x01     Window has a title bar.
-CLOSER   0x02     Window has a close box.
-FULLER   0x04     Window has a fuller box.
-MOVER    0x08     Window may be moved by the user.
-INFO     0x10     Window has an information line.
-SIZER    0x20     Window has a sizer box.
-UPARROW  0x40     Window has an up arrow.
-DNARROW  0x80     Window has a down arrow.
-VSLIDE   0x100    Window has a vertical slider.
-LFARROW  0x200    Window has a left arrow.
-RTARROW  0x400    Window has a right arrow.
-HSLIDE   0x800    Window has a horizontal slider.
-SMALLER  0x4000   Window has an iconifier.</pre>
- *         The parameter \p Parts is created by OR'ing together any desired
+ *         any 'widgets' on the window as follows:
+ *         - #NAME     (0x01)     Window has a title bar.
+ *         - #CLOSER   (0x02)     Window has a close box.
+ *         - #FULLER   (0x04)     Window has a fuller box.
+ *         - #MOVER    (0x08)     Window may be moved by the user.
+ *         - #INFO     (0x10)     Window has an information line.
+ *         - #SIZER    (0x20)     Window has a sizer box.
+ *         - #UPARROW  (0x40)     Window has an up arrow.
+ *         - #DNARROW  (0x80)     Window has a down arrow.
+ *         - #VSLIDE   (0x100)    Window has a vertical slider.
+ *         - #LFARROW  (0x200)    Window has a left arrow.
+ *         - #RTARROW  (0x400)    Window has a right arrow.
+ *         - #HSLIDE   (0x800)    Window has a horizontal slider.
+ *         - #HOTCLOSEBOX  (0x1000)   Window has "hot close box" box.
+ *         - #MENUBAR  (0x1000)   Window has a menu bar.
+ *         - #BACKDROP (0x2000)   Window has a backdrop box.
+ *         - #SMALLER  (0x4000)   Window has an iconifier.
+ *         .
+ *         The parameter \a Parts is created by OR'ing together any desired
  *         elements.
  *  @param Wx X-position of the maximum extents of the window.
  *  @param Wy Y-position of the maximum extents of the window.
@@ -30,7 +33,7 @@ SMALLER  0x4000   Window has an iconifier.</pre>
  *  @param Wh Height of the maximum extents of the window.\n
  *         Normally this is the entire screen area minus the menu bar
  *         (to find this area use mt_wind_get() with a parameter of
- *         WF_WORKXYWH ). The area may be smaller to bound the window
+ *         #WF_WORKXYWH ). The area may be smaller to bound the window
  *         to a particular size and location.
  *  @param global_aes global AES array
  *
@@ -41,7 +44,7 @@ SMALLER  0x4000   Window has an iconifier.</pre>
  *
  *  @sa mt_wind_open(), mt_wind_close(), mt_wind_delete()
  *
- *  The SMALLER gadget is only available as of AES version 4.1.
+ *  The #SMALLER gadget is only available as of AES version 4.1.
  *
  *  A window is not actually displayed on screen with this call,
  *  you need to call mt_wind_open() to do that.
