@@ -66,7 +66,7 @@ pc:
 	mkdir -p lib/purec; make -f pc.mak
 
 zip:
-	make -f zip.mak ZIP=zip
+	make -f zip.mak
 	
 all-compilers:
 	rm -f *.o; mkdir -p lib/sozobon lib/gcc lib/gcc281 include
@@ -74,7 +74,7 @@ all-compilers:
 	make -f gcc.mak; rm -f *.o; 
 	make -f gcc281.mak; rm -f *.o; 
 	make -f gcc281-16.mak; rm -f *.o; 
-	cp gem.h gemx.h mt_gem.h mt_gemx.h include; make -f zip.mak
+	make -f zip.mak
 
 libgem$(TARGET).a: objs
 	$(RM) $@

@@ -5,7 +5,7 @@
 # makefile for gemlib distrib
 
 # note:
-# ZIP must point to your zip.ttp program
+# $Id$
 
 include files.mak
 
@@ -18,7 +18,7 @@ purec:
 	mkdir $@ $@/lib $@/include
 	cp $(FILES_INC) include/purec/compiler.h $@/include
 	cp $(LIB_PUREC) $@/lib
-	$(ZIP) -ur $@.zip $@
+	zip -r $@.zip $@
 	rm -rf $@
 
 sozobonx:
@@ -26,7 +26,7 @@ sozobonx:
 	mkdir $@ $@/lib $@/include
 	cp $(FILES_INC) include/sozobon/compiler.h $@/include
 	cp $(LIB_SOZOBON) $@/lib
-	$(ZIP) -ur $@.zip $@
+	zip -r $@.zip $@
 	rm -rf $@
 
 gcc281:
@@ -34,7 +34,7 @@ gcc281:
 	mkdir $@ $@/lib $@/include
 	cp $(FILES_INC) include/gcc281/compiler.h $@/include
 	cp $(LIB_GCC281_MSHORT) $(LIB_GCC281) $@/lib
-	$(ZIP) -ur $@.zip $@
+	zip -r $@.zip $@
 	rm -rf $@
 
 gcc:
@@ -42,7 +42,7 @@ gcc:
 	mkdir $@ $@/lib $@/include
 	cp $(FILES_INC) $@/include
 	cp $(LIB_GCC) $(LIB_GCC_MSHORT) $@/lib
-	$(ZIP) -ur $@.zip $@
+	zip -r $@.zip $@
 	rm -rf $@
 
 sources:
