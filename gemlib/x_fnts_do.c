@@ -14,10 +14,14 @@
  *  @param id_in 
  *  @param pt_in
  *  @param ratio_in 
- *  @param check_boxes will contain the Status of the checkboxes
- *  @param id will contain the ID of the selected font
- *  @param pt will contain the Height in 1/65536 point
- *  @param ratio will contain the Width/height ratio
+ *  @param check_boxes will contain the Status of the checkboxes \n
+ *             [option CHECK_NULLPTR] check_boxes may be NULL
+ *  @param id will contain the ID of the selected font \n
+ *             [option CHECK_NULLPTR] id may be NULL
+ *  @param pt will contain the Height in 1/65536 point \n
+ *             [option CHECK_NULLPTR] pt may be NULL
+ *  @param ratio will contain the Width/height ratio \n
+ *             [option CHECK_NULLPTR] ratio may be NULL
  *  @param global_aes global AES array
  *
  *  @return Selected button (or 0)
@@ -50,9 +54,21 @@ mt_fnts_do(FNT_DIALOG *fnt_dialog, short button_flags, long id_in, long pt_in,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (check_boxes)
+#endif
 	*check_boxes = aes_intout[1];
+#if CHECK_NULLPTR
+	if (id)
+#endif
 	*id = ((long)aes_intout[2] << 16) | (aes_intout[3]);
+#if CHECK_NULLPTR
+	if (pt)
+#endif
 	*pt = ((long)aes_intout[4] << 16) | (aes_intout[5]);
+#if CHECK_NULLPTR
+	if (ratio)
+#endif
 	*ratio = ((long)aes_intout[6] << 16) | (aes_intout[7]);
 	
 	return aes_intout[0];
