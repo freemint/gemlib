@@ -28,7 +28,7 @@
 void 
 mt_edit_get_sel( OBJECT *tree, short obj, char **bsel, char **esel, short *global_aes)
 {
-	AES_PARAMS(216,2,0,1,0);
+	AES_PARAMS(216,2,0,1,2);
 
 	aes_intin[0]  = obj;
 	aes_intin[1]  = 8;
