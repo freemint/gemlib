@@ -65,6 +65,14 @@ __BEGIN_DECLS
 #define APC_SHOW			11
 #define APC_TOP 			12
 #define APC_HIDENOT 		13
+#define APC_INFO			14
+#define APC_MENU			15
+#define APC_WIDGETS			16
+
+/* APC_INFO bits */
+#define APCI_HIDDEN			0x01
+#define APCI_HASMBAR		0x02
+#define APCI_HASDESK		0x04
 
 /* appl_getinfo modes */
 #define AES_LARGEFONT		0
@@ -78,6 +86,9 @@ __BEGIN_DECLS
 #define AES_MENU			9
 #define AES_SHELL			10
 #define AES_WINDOW			11
+#define AES_MESSAGE			12
+#define AES_OBJECT			13
+#define AES_FORM			14
 
 /* appl_getinfo return values */
 #define SYSTEM_FONT			0
@@ -260,9 +271,19 @@ typedef struct pEvntrec
 #define SCROLL_YES		1
 
 /* menu_bar modes */
+#define MENU_INQUIRE	-1
 #define MENU_REMOVE		0
 #define MENU_INSTALL	1
-#define MENU_INQUIRE	-1
+#define MENU_GETMODE	3	   /**< Get the menu bar mode */
+#define MENU_SETMODE	4	   /**< Set the menu bar mode */
+#define MENU_UPDATE 	5	   /**< Update the system part of the menu bar */
+#define MENU_INSTL		100    /**< Install a menu without switching the top application (Magic) */
+
+
+/* MENU_GETMODE and MENU_SETMODE bits */
+#define  MENU_HIDDEN	0x0001 /**< menu bar only visible when needed */
+#define  MENU_PULLDOWN  0x0002 /**< Pulldown-Menus */
+#define  MENU_SHADOWED  0x0004 /**< menu bar with shadows */
 
 /* menu_icheck modes */
 #define UNCHECK			0
@@ -300,6 +321,36 @@ typedef struct _mn_set
 /* shel_get modes */
 #define SHEL_BUFSIZE (-1)
 
+/* Struktur fr erweiterte Start-Daten (fr shel_write) */
+typedef struct
+{
+	char *newcmd;
+	long psetlimit;
+	long prenice;
+	char *defdir;
+	char *env;
+} SHELW;
+
+/* Andere Definition dafr (aus MagiC-Doku) */
+typedef struct
+{
+	char	*command;
+	long	limit;
+	long	nice;
+	char	*defdir;
+	char	*env;
+} XSHW_COMMAND;
+
+typedef struct
+{
+	long	__CDECL (*proc)(void *par);
+	void	*user_stack;
+	long	stacksize;
+	long	mode;		/* immer auf 0 setzen! */
+	long	res1;		/* immer auf 0L setzen! */
+} THREADINFO;
+
+
 /* shel_write modes */
 #define SWM_LAUNCH			0
 #define SWM_LAUNCHNOW		1
@@ -310,16 +361,58 @@ typedef struct _mn_set
 #define SWM_ENVIRON			8
 #define SWM_NEWMSG			9
 #define SWM_AESMSG			10
+#define SWM_THRCREATE		20
+
+/* other names for shel_write modes */
+#define SHW_NOEXEC			SWM_LAUNCH
+#define SHW_EXEC			SWM_LAUNCHNOW
+#define SHW_EXEC_ACC		SWM_LAUNCHACC
+#define SHW_SHUTDOWN		SWM_SHUTDOWN
+#define SHW_RESCHNG			SWM_REZCHANGE
+#define SHW_BROADCAST		SWM_BROADCAST
+#define SHW_INFRECGN		SWM_NEWMSG
+#define SHW_AESSEND			SWM_AESMSG
+#define SHW_THR_CREATE		SWM_THRCREATE
+
+/* shel_write */
+#define SHW_IMMED			0
+#define SHW_CHAIN			1
+#define SHW_DOS				2
+#define SHW_RESCHANGE		5
+#define SHW_PARALLEL		100
+#define SHW_SINGLE			101
+
+/* command line parser (shel_write: parameter "isover") */
+#define CL_NORMAL		0
+#define CL_PARSE		1
+
+/* shutdown action (shel_write: mode SWM_SHUTDOWN, parameter "isover") */
+#define SD_ABORT		0		/**< Abort shutdown mode */
+#define SD_PARTIAL		1		/**< Partial shutdown mode */
+#define SD_COMPLETE		2		/**< Complete shutdown mode */
+
+/* shel_write: mode SWM_ENVIRON, parameter 'wisgr' */
+#define ENVIRON_SIZE	0
+#define ENVIRON_CHANGE	1
+#define ENVIRON_COPY	2
+
+/* shel_write: mode SWM_NEWMSG, parameter 'wisgr' */
+#define NM_APTERM		0x0001
+
+/* Werte fr Modus SWM_AESMSG (fr shel_write) */
+#define AP_AESTERM		52     /* Mode 10: N.AES komplett terminieren. */
+
+/* extended shel_write() modes and parameter structure */
+#define SHW_XMDLIMIT	256
+#define SHW_XMDNICE		512
+#define SHW_XMDDEFDIR	1024
+#define SHW_XMDENV		2048
 
 /* shel_write flags */
 #define SW_PSETLIMIT	0x0100
 #define SW_PRENICE		0x0200
 #define SW_DEFDIR 		0x0400
 #define SW_ENVIRON		0x0800
-
-#define SD_ABORT		0
-#define SD_PARTIAL		1
-#define SD_COMPLETE		2
 
 /* rsrc_gaddr structure types */
 #define R_TREE			0
@@ -401,6 +494,7 @@ typedef struct _mn_set
 #define WF_M_WINDLIST	102      /* KAOS 1.4    */
 #define WF_MINXYWH		103      /* MagiC 6     */
 #define WF_INFOXYWH		104      /* MagiC 6.10  */
+#define WF_WIDGETS		200		 /* NAES */
 #define WF_WINX			22360
 #define WF_WINXCFG		22361
 #define WF_SHADE	    22365      /* WINX 2.3 */
@@ -434,7 +528,8 @@ typedef struct _mn_set
 #define W_HSLIDE		17
 #define W_HELEV			18
 #define W_SMALLER		19
-#define W_BOTTOMER  20      /* MagiC 3     */
+#define W_BOTTOMER		20      /* MagiC 3     */
+#define W_HIDER			30
 
 /* arrow message */
 #define WA_UPPAGE 		0
