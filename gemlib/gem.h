@@ -20,7 +20,9 @@
 
 # else				/* New include scheme: one header defines all */
 #  define __GEMLIB_DEFS
-#  define __GEMLIB_AES
+#  ifndef _GEM_VDI_P_
+#   define __GEMLIB_AES
+#  endif
 #  ifndef _GEM_AES_P_
 #   define __GEMLIB_VDI
 #  endif
@@ -1153,186 +1155,212 @@ typedef struct memory_form
  * The VDI bindings from old vdibind.h
  */
 
+typedef short VdiHdl;   /* for better readability */
+
 /*
  * attribute functions 
  */
-void	vs_color		(short handle, short color_idx, short rgb[]);
-short 	vswr_mode		(short handle, short mode);
+void  vs_color  (VdiHdl , short color_idx, short rgb[]);
+short vswr_mode (VdiHdl , short mode);
 
-short 	vsf_color 		(short handle, short color_idx);
-short 	vsf_interior 		(short handle, short style);
-short 	vsf_perimeter 		(short handle, short vis);
-short 	vsf_style 		(short handle, short style);
-void	vsf_udpat 		(short handle, short pat[], short planes);
+short vsf_color     (VdiHdl , short color_idx);
+short vsf_interior  (VdiHdl , short style);
+short vsf_perimeter (VdiHdl , short vis);
+short vsf_style     (VdiHdl , short style);
+void  vsf_udpat     (VdiHdl , short pat[], short planes);
 
-short 	vsl_color 		(short handle, short color_idx);
-void	vsl_ends 		(short handle, short begstyle, short endstyle);
-short 	vsl_type 		(short handle, short style);
-void	vsl_udsty 		(short handle, short pat);
-short 	vsl_width 		(short handle, short width);
+short vsl_color (VdiHdl , short color_idx);
+void  vsl_ends  (VdiHdl , short begstyle, short endstyle);
+short vsl_type  (VdiHdl , short style);
+void  vsl_udsty (VdiHdl , short pat);
+short vsl_width (VdiHdl , short width);
 
-short 	vsm_color 		(short handle, short color_idx);
-short 	vsm_height 		(short handle, short height);
-short 	vsm_type 		(short handle, short symbol);
+short vsm_color  (VdiHdl , short color_idx);
+short vsm_height (VdiHdl , short height);
+short vsm_type   (VdiHdl , short symbol);
 
-void	vst_alignment 		(short handle, short hin, short vin, short *hout, short *vout);
-short 	vst_color	 	(short handle, short color_idx);
-short 	vst_effects		(short handle, short effects);
-void	vst_error		(short handle, short mode, short *errorvar);
-short 	vst_font 		(short handle, short font);
-short 	vst_height 		(short handle, short height,	short *charw, short *charh, short *cellw, short *cellh);
-short 	vst_point 		(short handle, short point, short *charw, short *charh, short *cellw, short *cellh);
-short 	vst_rotation 		(short handle, short ang);
-void	vst_scratch 		(short handle, short mode);
+void  vst_alignment (VdiHdl , short hin, short vin, short *hout, short *vout);
+short vst_color     (VdiHdl , short color_idx);
+short vst_effects   (VdiHdl , short effects);
+void  vst_error     (VdiHdl , short mode, short *errorvar);
+short vst_font      (VdiHdl , short font);
+short vst_height    (VdiHdl , short height, short *charw, short *charh,
+                                            short *cellw, short *cellh);
+short vst_point     (VdiHdl , short point, short *charw, short *charh,
+                                           short *cellw, short *cellh);
+short vst_rotation  (VdiHdl , short ang);
+void  vst_scratch   (VdiHdl , short mode);
 
 /*
  * control functions
  */
-void	v_clrwk			(short handle);
-void	v_clsvwk		(short handle);
-void	v_clswk			(short handle);
-short	v_flushcache		(short handle);
-short	v_loadcache		(short handle, const char *filename, short mode);
-void	v_opnvwk		(short work_in[], short *handle, short work_out[]);
-void	v_opnwk			(short work_in[], short *handle, short work_out[]);
-short	v_savecache		(short handle, const char *filename);
-void	v_set_app_buff		(short handle, void *buf_p, short size);
-void	v_updwk			(short handle);
-void	vs_clip			(short handle, short clip_flag, short pxy[]);
-short	vst_load_fonts		(short handle, short /* select */);
-void	vst_unload_fonts	(short handle, short /* select */);
+void  v_clrwk          (VdiHdl );
+void  v_clsvwk         (VdiHdl );
+void  v_clswk          (VdiHdl );
+short v_flushcache     (VdiHdl );
+short v_loadcache      (VdiHdl , const char *filename, short mode);
+void  v_opnvwk         (short work_in[], VdiHdl *, short work_out[]);
+void  v_opnwk          (short work_in[], VdiHdl *, short work_out[]);
+short v_savecache      (VdiHdl , const char *filename);
+void  v_set_app_buff   (VdiHdl , void *buf_p, short size);
+void  v_updwk          (VdiHdl );
+void  vs_clip          (VdiHdl , short clip_flag, short pxy[]);
+short vst_load_fonts   (VdiHdl , short /* select */);
+void  vst_unload_fonts (VdiHdl , short /* select */);
 
 /*
  * escape functions
  */
-void	v_bit_image		(short handle, const char *filename, short aspect, short x_scale, short y_scale, short h_align, short v_align, short *pxy);
-void	v_clear_disp_list	(short handle);
-short	v_copies		(short handle, short count);
-void	v_dspcur		(short handle, short x, short y);
-void	v_form_adv		(short handle);
-void	v_hardcopy		(short handle);
-short	v_orient		(short handle, short orientation);
-void	v_output_window		(short handle, short *pxy);
-short	v_page_size		(short handle, short page_id);
-void	v_rmcur			(short handle);
-void	v_trays			(short handle, short input, short output, short *set_input, short *set_output);
-short	vq_calibrate		(short handle, short *flag);
-short	vq_page_name		(short handle, short page_id, const char *page_name, long *page_width, long *page_height);
-void	vq_scan			(short handle, short *g_slice, short *g_page, short *a_slice, short *a_page, short *div_fac);
-short	vq_tabstatus		(short handle);
-void	vq_tray_names		(short handle, const char *input_name, const char *output_name, short *input, short *output);
-short	vs_calibrate		(short handle, short flag, short *rgb);
-short	vs_palette		(short handle, short palette);
+void  v_bit_image       (VdiHdl , const char *filename, short aspect,
+                                  short x_scale, short y_scale,
+                                  short h_align, short v_align, short *pxy);
+void  v_clear_disp_list (VdiHdl );
+short v_copies          (VdiHdl , short count);
+void  v_dspcur          (VdiHdl , short x, short y);
+void  v_form_adv        (VdiHdl );
+void  v_hardcopy        (VdiHdl );
+short v_orient          (VdiHdl , short orientation);
+void  v_output_window   (VdiHdl , short *pxy);
+short v_page_size       (VdiHdl , short page_id);
+void  v_rmcur           (VdiHdl );
+void  v_trays           (VdiHdl , short input, short output,
+                                  short *set_input, short *set_output);
+short vq_calibrate      (VdiHdl , short *flag);
+short vq_page_name      (VdiHdl , short page_id, char *page_name,
+                                  long *page_width, long *page_height);
+void  vq_scan           (VdiHdl , short *g_slice, short *g_page,
+                                  short *a_slice, short *a_page, short *div_fac);
+short vq_tabstatus      (VdiHdl );
+void  vq_tray_names     (VdiHdl , char *input_name, char *output_name,
+                                  short *input, short *output);
+short vs_calibrate      (VdiHdl , short flag, short *rgb);
+short vs_palette        (VdiHdl , short palette);
 
-void	vq_tdimensions		(short handle, short *xdimension, short *ydimension);
-void	vt_alignment		(short handle, short dx, short dy);
-void	vt_axis			(short handle, short xres, short yres, short *xset, short *yset);
-void	vt_origin		(short handle, short xorigin, short yorigin);
-void	vt_resolution		(short handle, short xres, short yres, short *xset, short *yset);
+void vq_tdimensions (VdiHdl , short *xdimension, short *ydimension);
+void vt_alignment   (VdiHdl , short dx, short dy);
+void vt_axis        (VdiHdl , short xres, short yres, short *xset, short *yset);
+void vt_origin      (VdiHdl , short xorigin, short yorigin);
+void vt_resolution  (VdiHdl , short xres, short yres, short *xset, short *yset);
 
-void	v_meta_extents		(short handle, short min_x, short min_y, short max_x, short max_y);
-void	v_write_meta		(short handle, short numvdi_intin, short *avdi_intin, short num_ptsin, short *a_ptsin);
-void	vm_coords		(short handle, short llx, short lly, short urx, short ury);
-void	vm_filename		(short handle, const char *filename);
-void	vm_pagesize		(short handle, short pgwidth, short pgheight);
+void v_meta_extents (VdiHdl , short min_x, short min_y,
+                              short max_x, short max_y);
+void v_write_meta   (VdiHdl , short numvdi_intin, short *avdi_intin,
+                              short num_ptsin, short *a_ptsin);
+void vm_coords      (VdiHdl , short llx, short lly, short urx, short ury);
+void vm_filename    (VdiHdl , const char *filename);
+void vm_pagesize    (VdiHdl , short pgwidth, short pgheight);
 
-void	vsc_expose		(short handle, short state);
-void	vsp_film		(short handle, short color_idx, short lightness);
+void vsc_expose (VdiHdl , short state);
+void vsp_film   (VdiHdl , short color_idx, short lightness);
 
-void	v_escape2000		(short handle, short times);
+void v_escape2000 (VdiHdl , short times);
 
-void	v_alpha_text		(short handle, const char *str);
-void	v_curdown		(short handle);
-void	v_curhome		(short handle);
-void	v_curleft		(short handle);
-void	v_curright		(short handle);
-void	v_curtext		(short handle, const char *str);
-void	v_curup			(short handle);
-void	v_eeol			(short handle);
-void	v_eeos			(short handle);
-void	v_enter_cur		(short handle);
-void	v_exit_cur		(short handle);
-void	v_rvoff			(short handle);
-void	v_rvon			(short handle);
-void	vq_chcells		(short handle, short *n_rows, short *n_cols);
-void	vq_curaddress		(short handle, short *cur_row, short *cur_col);
-void	vs_curaddress		(short handle, short row, short col);
-	
+void v_alpha_text  (VdiHdl , const char *str);
+void v_curdown     (VdiHdl );
+void v_curhome     (VdiHdl );
+void v_curleft     (VdiHdl );
+void v_curright    (VdiHdl );
+void v_curtext     (VdiHdl , const char *str);
+void v_curup       (VdiHdl );
+void v_eeol        (VdiHdl );
+void v_eeos        (VdiHdl );
+void v_enter_cur   (VdiHdl );
+void v_exit_cur    (VdiHdl );
+void v_rvoff       (VdiHdl );
+void v_rvon        (VdiHdl );
+void vq_chcells    (VdiHdl , short *n_rows, short *n_cols);
+void vq_curaddress (VdiHdl , short *cur_row, short *cur_col);
+void vs_curaddress (VdiHdl , short row, short col);
+ 
 
 /*
  * inquiry functions
  */
-void	vq_cellarray		(short handle, short pxy[], short row_len, short nrows, short *el_used, short *rows_used, short *status, short color[]);
-short	vq_color		(short handle, short color_idx, short flag, short rgb[]);
-void	vq_extnd		(short handle, short flag, short work_out[]);
-void	vqf_attributes		(short handle, short atrib[]);
-void	vqin_mode		(short handle, short dev, short *mode);
-void	vql_attributes		(short handle, short atrib[]);
-void	vqm_attributes		(short handle, short atrib[]);
-void	vqt_attributes		(short handle, short atrib[]);
-void	vqt_cachesize		(short handle, short which_cache, long *size);
-void	vqt_extent		(short handle, const char *str, short extent[]);
-void	vqt_fontinfo		(short handle, short *minade, short *maxade, short distances[], short *maxwidth, short effects[]);
-void	vqt_get_table		(short handle, short **map);
-short	vqt_name		(short handle, short element, char *name);
-short	vqt_width		(short handle, short chr, short *cw, short *ldelta, short *rdelta);
+void  vq_cellarray   (VdiHdl , short pxy[], short row_len, short nrows,
+                               short *el_used, short *rows_used,
+                               short *status, short color[]);
+short vq_color       (VdiHdl , short color_idx, short flag, short rgb[]);
+void  vq_extnd       (VdiHdl , short flag, short work_out[]);
+void  vqf_attributes (VdiHdl , short atrib[]);
+void  vqin_mode      (VdiHdl , short dev, short *mode);
+void  vql_attributes (VdiHdl , short atrib[]);
+void  vqm_attributes (VdiHdl , short atrib[]);
+void  vqt_attributes (VdiHdl , short atrib[]);
+void  vqt_cachesize  (VdiHdl , short which_cache, long *size);
+void  vqt_extent     (VdiHdl , const char *str, short extent[]);
+void  vqt_fontinfo   (VdiHdl , short *minade, short *maxade, short distances[],
+                               short *maxwidth, short effects[]);
+void  vqt_get_table  (VdiHdl , short **map);
+short vqt_name       (VdiHdl , short element, char *name);
+short vqt_width      (VdiHdl , short chr, short *cw,
+                               short *ldelta, short *rdelta);
 
-short	vq_gdos 		(void);
-long	vq_vgdos 		(void);
+short vq_gdos  (void);
+long  vq_vgdos (void);
 
 
 /*
  * input function
  */
-void	v_hide_c		(short handle);
-void	v_show_c		(short handle, short reset);
-void	vex_butv		(short handle, void *pusrcode, void **psavcode);
-void	vex_curv		(short handle, void *pusrcode, void **psavcode);
-void	vex_motv		(short handle, void *pusrcode, void **psavcode);
-void	vex_timv		(short handle, void *time_addr, void **otime_addr, short *time_conv);
-void	vq_key_s		(short handle, short *state);
-void	vq_mouse		(short handle, short *pstatus, short *x, short *y);
-void	vrq_choice		(short handle, short cin, short *cout);
-void	vrq_locator		(short handle, short x, short y, short *xout, short *yout, short *term);
-void	vrq_string		(short handle, short len, short echo, short echoxy[], char *str);
-void	vrq_valuator		(short handle, short in, short *out, short *term);
-void	vsc_form		(short handle, short form[]);
-short	vsin_mode		(short handle, short dev, short mode);
-short	vsm_choice		(short handle, short *choice);
-short	vsm_locator		(short handle, short x, short y, short *xout, short *yout, short *term);
-short	vsm_string		(short handle, short len, short echo, short echoxy[], char *str);
-void	vsm_valuator		(short handle, short in, short *out, short *term, short *status);
+void  v_hide_c     (VdiHdl );
+void  v_show_c     (VdiHdl , short reset);
+void  vex_butv     (VdiHdl , void *pusrcode, void **psavcode);
+void  vex_curv     (VdiHdl , void *pusrcode, void **psavcode);
+void  vex_motv     (VdiHdl , void *pusrcode, void **psavcode);
+void  vex_timv     (VdiHdl , void *time_addr,
+                             void **otime_addr, short *time_conv);
+void  vq_key_s     (VdiHdl , short *state);
+void  vq_mouse     (VdiHdl , short *pstatus, short *x, short *y);
+void  vrq_choice   (VdiHdl , short cin, short *cout);
+void  vrq_locator  (VdiHdl , short x, short y,
+                             short *xout, short *yout, short *term);
+void  vrq_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
+void  vrq_valuator (VdiHdl , short in, short *out, short *term);
+void  vsc_form     (VdiHdl , short form[]);
+short vsin_mode    (VdiHdl , short dev, short mode);
+short vsm_choice   (VdiHdl , short *choice);
+short vsm_locator  (VdiHdl , short x, short y,
+                             short *xout, short *yout, short *term);
+short vsm_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
+void  vsm_valuator (VdiHdl , short in, short *out, short *term, short *status);
 
 
 /*
  * output functions
  */
-void	v_arc			(short handle, short x, short y, short radius, short begang, short endang);
-void	v_bar			(short handle, short pxy[]);
-void	v_cellarray		(short handle, short pxy[], short row_length, short elements, short nrows, short write_mode, short colarray[]);
-void	v_circle		(short handle, short x, short y, short radius);
-void	v_contourfill		(short handle, short x, short y, short color_idx);
-void	v_ellarc		(short handle, short x, short y, short xrad, short yrad, short begang, short endang);
-void	v_ellipse		(short handle, short x, short y, short xrad, short yrad);
-void	v_ellpie		(short handle, short x, short y, short xrad, short yrad, short begang, short endang);
-void	v_fillarea		(short handle, short count, short pxy[]);
-void	v_gtext			(short handle, short x, short y, const char *str) ;
-void	v_gtext16		(short handle, short x, short y, const short *wstr) ;
-void	v_justified		(short handle, short x, short y, const char *str, short len, short word_space, short char_space);
-void	v_pieslice		(short handle, short x, short y, short radius, short begang, short endang);
-void	v_pline			(short handle, short count, short pxy[]);
-void	v_pmarker		(short handle, short count, short pxy[]);
-void	v_rbox			(short handle, short pxy[]);
-void	v_rfbox			(short handle, short pxy[]);
-void	vr_recfl		(short handle, short pxy[]);
+void v_arc         (VdiHdl , short x, short y,
+                             short radius, short begang, short endang);
+void v_bar         (VdiHdl , short pxy[]);
+void v_cellarray   (VdiHdl , short pxy[], short row_length, short elements,
+                             short nrows, short write_mode, short colarray[]);
+void v_circle      (VdiHdl , short x, short y, short radius);
+void v_contourfill (VdiHdl , short x, short y, short color_idx);
+void v_ellarc      (VdiHdl , short x, short y, short xrad, short yrad,
+                             short begang, short endang);
+void v_ellipse     (VdiHdl , short x, short y, short xrad, short yrad);
+void v_ellpie      (VdiHdl , short x, short y, short xrad, short yrad,
+                             short begang, short endang);
+void v_fillarea    (VdiHdl , short count, short pxy[]);
+void v_gtext       (VdiHdl , short x, short y, const char *str) ;
+void v_gtext16     (VdiHdl , short x, short y, const short *wstr) ;
+void v_justified   (VdiHdl , short x, short y, const char *str,
+                             short len, short word_space, short char_space);
+void v_pieslice    (VdiHdl , short x, short y,
+                             short radius, short begang, short endang);
+void v_pline       (VdiHdl , short count, short pxy[]);
+void v_pmarker     (VdiHdl , short count, short pxy[]);
+void v_rbox        (VdiHdl , short pxy[]);
+void v_rfbox       (VdiHdl , short pxy[]);
+void vr_recfl      (VdiHdl , short pxy[]);
 
 /*
  * raster functions
  */
-void	v_get_pixel		(short handle, short x, short y, short *pel, short *color_idx);
-void	vr_trnfm		(short handle, MFDB *src, MFDB *dst);
-void	vro_cpyfm		(short handle, short mode, short pxy[], MFDB *src, MFDB *dst);
-void	vrt_cpyfm		(short handle, short mode, short pxy[], MFDB *src, MFDB *dst, short color[]);
+void v_get_pixel (VdiHdl , short x, short y, short *pel, short *color_idx);
+void vr_trnfm    (VdiHdl , MFDB *src, MFDB *dst);
+void vro_cpyfm   (VdiHdl , short mode, short pxy[], MFDB *src, MFDB *dst);
+void vrt_cpyfm   (VdiHdl , short mode, short pxy[], MFDB *src, MFDB *dst,
+                           short color[]);
 
 
 /*
@@ -1347,27 +1375,27 @@ short vdi_wstrlen   (const short *wstr);
  */
 
 /* Array sizes in vdi control block */
-#define VDI_CNTRLMAX		15
-#define VDI_INTINMAX		1024
-#define VDI_INTOUTMAX		256
-#define VDI_PTSINMAX		256
-#define VDI_PTSOUTMAX		256
+#define VDI_CNTRLMAX     15
+#define VDI_INTINMAX   1024
+#define VDI_INTOUTMAX   256
+#define VDI_PTSINMAX    256
+#define VDI_PTSOUTMAX   256
 
 typedef struct
 {
-	short       *control;
-	const short *intin;
-	const short *ptsin;
-	short       *intout;
-	short       *ptsout;
+ short       *control;
+ const short *intin;
+ const short *ptsin;
+ short       *intout;
+ short       *ptsout;
 } VDIPB;
 
-extern short	vdi_intin[];
-extern short	vdi_intout[];
-extern short	vdi_ptsin[];
-extern short	vdi_ptsout[];
-extern short	vdi_control[];
-extern VDIPB	vdi_params;
+extern short vdi_intin[];
+extern short vdi_intout[];
+extern short vdi_ptsin[];
+extern short vdi_ptsout[];
+extern short vdi_control[];
+extern VDIPB vdi_params;
 
 void vdi (VDIPB *pb);
 
