@@ -299,6 +299,7 @@ COBJS = \
 	a_form_keybd.c \
 	a_fsel_exinput.c \
 	a_fsel_input.c \
+	a_fsel_boxinput.c \
 	a_graf_dragbox.c \
 	a_graf_growbox.c \
 	a_graf_handle.c \
@@ -309,6 +310,8 @@ COBJS = \
 	a_graf_shrinkbox.c \
 	a_graf_slidebox.c \
 	a_graf_watchbox.c \
+	a_graf_wwatchbox.c \
+	a_graf_xhandle.c \
 	a_menu_attach.c \
 	a_menu_bar.c \
 	a_menu_click.c \
@@ -327,6 +330,7 @@ COBJS = \
 	a_objc_draw.c \
 	a_objc_edit.c \
 	a_objc_find.c \
+	a_objc_xfind.c \
 	a_objc_offset.c \
 	a_objc_order.c \
 	a_objc_sysvar.c \
@@ -354,6 +358,7 @@ COBJS = \
 	a_wind_create.c \
 	a_wind_create_grect.c \
 	a_wind_delete.c \
+	a_wind_draw.c \
 	a_wind_find.c \
 	a_wind_get.c \
 	a_wind_get_grect.c \
