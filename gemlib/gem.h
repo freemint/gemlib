@@ -814,18 +814,24 @@ typedef struct mouse_event_type
 } MOUSE;
 #endif
 
+/** structure comprising the most of the input arguments of mt_evnt_multi()
+ */
 typedef struct {
-	short emi_flags;
-	short emi_bclicks, emi_bmask, emi_bstate;
+	short emi_flags;                           /**< the event mask to watch */
+	short emi_bclicks, emi_bmask, emi_bstate;  /**< see mt_evnt_multi() */
 	short emi_m1leave;
-	GRECT emi_m1;
+	GRECT emi_m1;                              /**< the first rectangle to watch */
 	short emi_m2leave;
-	GRECT emi_m2;
-	short emi_tlow, emi_thigh;
+	GRECT emi_m2;                              /**< the second rectangle to watch */
+	short emi_tlow, emi_thigh;                 /**< the timer 32-bit value of interval split into short type member */
 } EVMULT_IN;
 
+/** structure comprising the output arguments of mt_evnt_multi()
+ *
+ * @note For undocumented members consult the mt_evnt_multi() documentation.
+ */
 typedef struct {
-	short emo_events;
+	short emo_events;                          /**< the bitfield of events occured (also a return value of mt_evnt_multi_fast() */
 	PXY   emo_mouse;
 	short emo_mbutton;
 	short emo_kmeta;
@@ -833,7 +839,7 @@ typedef struct {
 	short emo_mclicks;
 } EVMULT_OUT;
 
-#endif 
+#endif
 
 #ifdef __GEMLIB_AES
 
