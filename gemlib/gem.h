@@ -997,15 +997,24 @@ short	scrp_write 	(const char *Scrappath);
 /** @addtogroup a_shel
  *  @{
  */
-short	shel_envrn 	(char **result, const char *param);
-short	shel_find 	(char *buf);
-short 	shel_get 	(char *Buf, short Len);
-short	shel_help	(short sh_hmode, const char *sh_hfile, const char *sh_hkey);
-short 	shel_put	(const char *Buf, short Len);
-short	shel_rdef	(char *lpcmd, char *lpdir);
-short	shel_read 	(char *Command, char *Tail);
-short	shel_wdef	(const char *lpcmd, const char *lpdir);
-short	shel_write	(short Exit, short Graphic, short Aes, void *Command, char *Tail);
+short	mt_shel_envrn 	(char **result, const char *param, short *global_aes);
+short	mt_shel_find 	(char *buf, short *global_aes);
+short 	mt_shel_get 	(char *Buf, short Len, short *global_aes);
+short	mt_shel_help	(short sh_hmode, const char *sh_hfile, const char *sh_hkey, short *global_aes);
+short 	mt_shel_put		(const char *Buf, short Len, short *global_aes);
+short	mt_shel_rdef	(char *lpcmd, char *lpdir, short *global_aes);
+short	mt_shel_read 	(char *Command, char *Tail, short *global_aes);
+short	mt_shel_wdef	(const char *lpcmd, const char *lpdir, short *global_aes);
+short	mt_shel_write	(short Exit, short Graphic, short Aes, void *Command, char *Tail, short *global_aes);
+#define shel_envrn(a,b) mt_shel_envrn(a,b,aes_global)
+#define shel_find(a) mt_shel_find(a,aes_global)
+#define shel_get(a,b) mt_shel_get(a,b,aes_global)
+#define shel_help(a,b,c) mt_shel_help(a,b,c,aes_global)
+#define shel_put(a,b) mt_shel_put(a,b,aes_global)
+#define shel_rdef(a,b) mt_shel_rdef(a,b,aes_global)
+#define shel_read(a,b) mt_shel_read(a,b,aes_global)
+#define shel_wdef(a,b) mt_shel_wdef(a,b,aes_global)
+#define shel_write(a,b,c,d,e) mt_shel_write(a,b,c,d,e,aes_global)
 /**@}*/
 
 /** @addtogroup a_wind
