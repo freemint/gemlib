@@ -51,3 +51,9 @@ _aes_trap (AESPB * aespb)
 
 
 #endif /* _GEM_AES_P_ */
+
+
+/* special feature for AES bindings: pointer in parameters (for return values)
+ * could be NULL (nice idea by Martin Elsasser against dummy variables) 
+ */
+#define CHECK_NULLPTR 1
