@@ -23,8 +23,8 @@
  *         this value can simply be a empty string). On function exit,
  *         file contains the filename which the user selected.
  *  @param exit_button is a short pointer which upon function exit will
- *         contain FSEL_CANCEL (0) if the user selected CANCEL or
- *         FSEL_OK (1) if OK. \n
+ *         contain #FSEL_CANCEL (0) if the user selected CANCEL or
+ *         #FSEL_OK (1) if OK. \n
  *         [option CHECK_NULLPTR] exit_button may be NULL
  *  @param title should be a pointer to a character string up to 30
  *         characters long which contains the title to appear in the
