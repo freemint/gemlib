@@ -28,6 +28,7 @@
  *
  *  The character string pointed to by name should include the
  *  name of the variable and the equals sign.
+ *
  */
 
 short 
@@ -39,6 +40,18 @@ mt_shel_envrn(char **result, const char *param, short *global_aes)
 	aes_addrin[1] = (long)param;
 
 	AES_TRAP(aes_params);
+	
+	/* Fix for the search for "PATH=" (bug of TOS)                       
+	 *
+	 * TOS has the nice bug, to read the system variable _bootdev ($446)
+	 * - when initializing the environemnt - as a BYTE and not as a WORD
+	 * So the boot device is added as a null byte into the PATH!
+	 */
+	
+	if( *result && **result=='\0' && 
+	     param[0]=='P' && param[1]=='A' && param[2]=='T' && param[3]=='H' && param[4]=='='
+	   )
+		(*result)++;
 
 	return aes_intout[0];
 }
