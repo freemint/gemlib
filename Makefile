@@ -7,6 +7,7 @@ ifndef BUILDLIB
 SUBDIRS = gemlib cflib gemma
 else
 SUBDIRS = $(BUILDLIB)
+include $(BUILDLIB)/VERSION
 endif
 
 srcdir = .
@@ -23,13 +24,13 @@ include $(top_srcdir)/PHONY
 all-here: 
 
 dist-gemlib:
-	$(MAKE) dist BUILDLIB=gemlib VERSION="0.42.99"
+	$(MAKE) dist BUILDLIB=gemlib
 
 dist-cflib:
-	$(MAKE) dist BUILDLIB=cflib VERSION="20"
+	$(MAKE) dist BUILDLIB=cflib
 
 dist-gemma:
-	$(MAKE) dist BUILDLIB=gemma VERSION="dist"
+	$(MAKE) dist BUILDLIB=gemma
 
 dist: distdir
 	-chmod -R a+r $(distdir) 
