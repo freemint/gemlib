@@ -1,17 +1,34 @@
+/*
+ *  $Id$
+ */
+
 #include "gemx.h"
 #include "gem_aesP.h"
 
+/** releases the memory allocated for the font selector.
+ *
+ *  @param fnt_dialog Pointer to management structure
+ *  @param vdi_handle Handle of the Workstation or 0, if vst_unload_fonts() is not
+ *         to be called
+ *  @param global_aes global AES array
+ *
+ *  @return 1
+ *
+ *  @since mt_appl_getinfo(7) give informations on mt_fnts_xx() functions availability
+ *
+ *
+ *
+ */
 
-short
-fnts_delete (FNT_DIALOG * fnt_dialog, short vdi_handle)
+short 
+mt_fnts_delete(FNT_DIALOG *fnt_dialog, short vdi_handle, short *global_aes)
 {
-	aes_intin[0] = vdi_handle;
-	aes_addrin[0] = (long) fnt_dialog;
-	aes_control[0] = 181;
-	aes_control[1] = 1;
-	aes_control[2] = 1;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	aes (&aes_params);
+	AES_PARAMS(181,1,1,1,0);
+                    
+	aes_intin[0]  = vdi_handle;
+	aes_addrin[0] = (long)fnt_dialog;
+
+	AES_TRAP(aes_params);
+
 	return aes_intout[0];
 }
