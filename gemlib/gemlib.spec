@@ -11,9 +11,9 @@ Release       : 20030323
 Copyright     : Public Domain
 Group         : Development/Libraries
 
-Packager      : Standa Opichal <opichals@seznam.cz>
+Packager      : Xavier Joubert <xavier.joubert@free.fr>
 Vendor        : Sparemint
-URL           : http://wh58-508.st.uni-magdeburg.de/sparemint/
+URL           : http://arnaud.bercegeay.free.fr/gemlib/
 
 Prefix        : %{_prefix}
 Docdir        : %{_prefix}/doc
