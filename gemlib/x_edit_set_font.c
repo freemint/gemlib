@@ -41,7 +41,7 @@ mt_edit_set_font( OBJECT *tree, short obj, short font_id, short font_h,
 
 	aes_intin[0] = obj;
 	aes_intin[1] = 3;
-	aes_intin[2] = font_iD;
+	aes_intin[2] = font_id;
 	aes_intin[3] = font_h;
 	aes_intin[4] = mono;
 	aes_intin[5] = font_pix;
