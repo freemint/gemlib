@@ -1016,16 +1016,13 @@ typedef struct
 	short m_h;		/**< TODO */
 } MOBLK;
 
-#if !( defined(__PUREC__) && defined(__TOS) )
-/** TODO */
 typedef struct mouse_event_type
 {
 	short *x;	/**< TODO */
 	short *y;	/**< TODO */
 	short *b;	/**< TODO */
 	short *k;	/**< TODO */
-} MOUSE;
-#endif
+} MOUSE_EVENT;
 
 /** structure comprising the most of the input arguments of mt_evnt_multi()
  */
