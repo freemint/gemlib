@@ -1,19 +1,12 @@
-
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
 v_pmarker (short handle, short count, short pxy[])
 {
-	vdi_control[0] = 7;
-	vdi_control[1] = count;
-	vdi_control[3] = 0;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
-
 	vdi_params.ptsin = pxy;
 
-	vdi (&vdi_params);
+	VDI_TRAP (vdi_params, handle, 7, count,0);
 
 	vdi_params.ptsin = vdi_ptsin;
 }
