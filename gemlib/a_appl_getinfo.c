@@ -265,7 +265,7 @@ mt_appl_getinfo (short type, short *out1, short *out2, short *out3, short *out4,
 
 	if (has_agi < 0) {
 		has_agi = gl_ap_version >= 0x400 || 
-		          mt_appl_find("?AGI\0\0\0\0") >= 0;
+		          mt_appl_find("?AGI\0\0\0\0",global_aes) >= 0;
 	}
 	if (!has_agi) {
 		return 0;
