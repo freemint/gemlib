@@ -11,9 +11,12 @@
  *
  *  @param handle Device handle
  *  @param chr character index
- *  @param cw character cell width
- *  @param ldelta left character alignment delta
- *  @param rdelta right character alignment delta
+ *  @param cw character cell width \n
+ *         [option CHECK_NULLPTR] cw may be NULL
+ *  @param ldelta left character alignment delta \n
+ *         [option CHECK_NULLPTR] ldelta may be NULL
+ *  @param rdelta right character alignment delta \n
+ *         [option CHECK_NULLPTR] rdelta may be NULL
  *
  *  @return character index or -1 (error)
  *
@@ -41,8 +44,17 @@ vqt_width (short handle, short chr, short *cw, short *ldelta, short *rdelta)
 	
 	VDI_TRAP (vdi_params, handle, 117, 0,1);
 
+#if CHECK_NULLPTR
+	if (cw)
+#endif
 	*cw     = vdi_ptsout[0];
+#if CHECK_NULLPTR
+	if (ldelta)
+#endif
 	*ldelta = vdi_ptsout[2];
+#if CHECK_NULLPTR
+	if (rdelta)
+#endif
 	*rdelta = vdi_ptsout[4];
 	
 	return vdi_intout[0];
