@@ -7,17 +7,20 @@
 /** allows the user to change the size of
  *  a box outline with a fixed starting point.
  *
- *  @param bx
- *  @param by define the fixed upper-left corner of the box to
- *               stretch or shrink.
- *  @param mw
- *  @param mh specify the minimum width and height that
- *               the rectangle can be shrunk to.
- *  @param rw
- *  @param rh are WORD pointers which will be filled in
- *               with the ending width and height of the box when the mouse
- *               button is released. \n
- *             [option CHECK_NULLPTR] rw and/or rh may be NULL
+ *  @param bx x-coordinate of the fixed upper-left corner of the box to
+ *         stretch or shrink.
+ *  @param by y-coordinate of the fixed upper-left corner of the box to
+ *         stretch or shrink.
+ *  @param mw minimum width that the rectangle can be shrunk to.
+ *  @param mh minimum height that the rectangle can be shrunk to.
+ *  @param rw pointer to a short integer which will be filled in
+ *         with the ending width of the box when the mouse
+ *         button is released. \n
+ *         [option CHECK_NULLPTR] \a rw may be NULL
+ *  @param rh pointer to a short integer which will be filled in
+ *         with the ending height of the box when the mouse
+ *         button is released. \n
+ *         [option CHECK_NULLPTR] \a rh may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.

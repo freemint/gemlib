@@ -11,11 +11,12 @@
  *  @param tree is pointer to the object tree containing the child and
  *               parent objects.
  *  @param parent is the object index of an object which bounds the
- *               movement of the \p object.
+ *               movement of the \a object.
  *  @param object is the object index of the
  *               object which can be moved within the bounds of parent.
- *  @param direction specifies the orientation of the allowed movement.
- *               0 is horizontal (left-right), 1 is vertical (up-down).
+ *  @param direction specifies the orientation of the allowed movement:
+ *               - 0 is horizontal (left-right),
+ *               - 1 is vertical (up-down).
  *  @param global_aes global AES array
  *
  *  @return a value specifying the relative offset of the child within
@@ -26,7 +27,7 @@
  *  @sa mt_graf_mbox()
  *
  *  This call can be used easily with sliders built into
- *  dialogs by making the slider bar a TOUCHEXIT and calling
+ *  dialogs by making the slider bar a #OF_TOUCHEXIT and calling
  *  this function when it is clicked.
  *
  *  This call should only be

@@ -6,8 +6,8 @@
 
 /** see mt_graf_shrinkbox()
  *
- *  @param in  see mt_graf_shrinkbox()
- *  @param out see mt_graf_shrinkbox()
+ *  @param in  rectangle to shrink to
+ *  @param out rectangle to shrink from
  *  @param global_aes global AES array
  *
  *  @return  see mt_graf_shrinkbox()

@@ -7,14 +7,14 @@
 /** displays an animated box shrinking from
  *  one rectangle to another.
  *
- *  @param fx
- *  @param fy
- *  @param fw
- *  @param fh are the coordinates of the rectangle to shrink to.
- *  @param sx
- *  @param sy
- *  @param sw
- *  @param sh are the coordinates of the rectangle to shrink from.
+ *  @param fx x-coordinate of the rectangle to shrink to.
+ *  @param fy y-coordinate of the rectangle to shrink to.
+ *  @param fw width of the rectangle to shrink to.
+ *  @param fh height of the rectangle to shrink to.
+ *  @param sx x-coordinate of the rectangle to shrink from
+ *  @param sy y-coordinate of the rectangle to shrink from
+ *  @param sw width of the rectangle to shrink from
+ *  @param sh height of the rectangle to shrink from
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occured or non-zero otherwise.
