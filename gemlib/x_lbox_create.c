@@ -246,7 +246,7 @@ mt_lbox_create( OBJECT *tree, SLCT_ITEM slct, SET_ITEM set, LBOX_ITEM *items,
 				short pause_a, void *user_data, void *dialog, short visible_b,
 				short first_b, short entries_b, short pause_b, short *global_aes )
 {
-	AES_PARAMS(170,8,0,8,0);
+	AES_PARAMS(170,8,0,8,1);
 
 	aes_intin[0]	= visible_a;
 	aes_intin[1]	= first_a;

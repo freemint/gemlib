@@ -20,7 +20,7 @@
 LBOX_ITEM  *
 mt_lbox_get_item( LIST_BOX *box, short n, short *global_aes )
 {
-	AES_PARAMS(174,2,0,1,0);
+	AES_PARAMS(174,2,0,1,1);
 
 	aes_intin[0]	= 7;
 	aes_intin[1]	= n;
