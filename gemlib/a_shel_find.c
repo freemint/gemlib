@@ -8,7 +8,7 @@
  *  path, any paths specified by the 'PATH' environmental
  *  variable, and the calling application's path.
  *
- *  @param buf should point to a character buffer of at least 128
+ *  @param buf should point to a character buffer of at least 260
  *		   characters and contain the filename of the file to search
  *		   for on entry. If the function was able to find the file,
  *		   the buffer pointed to by buf will be filled in with the
