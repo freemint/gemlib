@@ -35,14 +35,7 @@ vswr_mode (short handle, short mode)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[1]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&mode,                       /* vdi_intin   */
-		0L, 					     /* vdi_ptsin   */
-		&vdi_intout[0],              /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, &mode, 0L, vdi_intout, 0L );
 #else
 	vdi_intin[0] = mode;
 #endif

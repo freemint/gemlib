@@ -24,14 +24,7 @@ vsp_film (short handle, short index, short lightness)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[2];   
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&vdi_intin[0],               /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		0L,                          /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, 0L, 0L );
 #endif
 	
 	vdi_intin[0] = index;

@@ -31,14 +31,7 @@ vst_unload_fonts (short handle, short select)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],           /* vdi_control */  
-		&select,                   /* vdi_intin   */
-		0L,                        /* vdi_ptsin   */
-		0L,                        /* vdi_intout  */
-		0L                         /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, &select, 0L, 0L, 0L );
 #else
 	vdi_intin[0] = select;
 #endif
