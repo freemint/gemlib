@@ -20,7 +20,7 @@
 void *
 mt_wdlg_get_udata( DIALOG *dialog, short *global_aes )
 {
-	AES_PARAMS(164,1,0,1,0);
+	AES_PARAMS(164,1,0,1,1);
 
 	aes_intin[0] = 2;
 
