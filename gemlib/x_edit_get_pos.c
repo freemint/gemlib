@@ -9,12 +9,18 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param xscroll 
- *  @param yscroll 
- *  @param cyscroll 
- *  @param cursorpos 
- *  @param cx 
- *  @param cy 
+ *  @param xscroll  \p
+ *         [option CHECK_NULLPTR] xscroll may be NULL
+ *  @param yscroll  \p
+ *         [option CHECK_NULLPTR] yscroll may be NULL
+ *  @param cyscroll  \p
+ *         [option CHECK_NULLPTR] cyscroll may be NULL
+ *  @param cursorpos  \p
+ *         [option CHECK_NULLPTR] cursorpos may be NULL
+ *  @param cx  \p
+ *         [option CHECK_NULLPTR] cx may be NULL
+ *  @param cy  \p
+ *         [option CHECK_NULLPTR] cy may be NULL
  *  @param global_aes global AES array
  *
  *  @return 
@@ -40,11 +46,29 @@ mt_edit_get_pos( OBJECT *tree, short obj, short *xscroll, long *yscroll,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (xscroll)
+#endif
 	*xscroll = aes_intout[1];
+#if CHECK_NULLPTR
+	if (yscroll)
+#endif
 	*yscroll = *((long *) (aes_intout+2));
+#if CHECK_NULLPTR
+	if (cyscroll)
+#endif
 	*cyscroll = (char *)aes_addrout[0];
+#if CHECK_NULLPTR
+	if (cx)
+#endif
 	*cx = aes_intout[4];
+#if CHECK_NULLPTR
+	if (cy)
+#endif
 	*cy = aes_intout[5];
+#if CHECK_NULLPTR
+	if (cursorpos)
+#endif
 	*cursorpos = (char *)aes_addrout[1];
 }
 
