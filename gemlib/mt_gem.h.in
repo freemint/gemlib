@@ -1374,6 +1374,11 @@ extern void aes (AESPB *pb);
 #define ARROWED			1
 #define ROUND			2
 
+/* other names */
+#define LE_SQUARED	SQUARE
+#define LE_ARROWED	ARROWED
+#define LE_ROUNDED	ROUND
+
 /* vsl_type modes */
 #define SOLID			1
 #define LDASHED			2
@@ -1383,6 +1388,18 @@ extern void aes (AESPB *pb);
 #define DASHDOTDOT		6
 #define USERLINE		7
 
+/* other names */
+#define LT_SOLID		SOLID
+#define LT_LONGDASH		LDASHED
+#define LT_DOTTED		DOTTED
+#define LT_DASHDOT		DASHDOT
+#define LT_DASHED		DASH
+#define LT_DASHDOTDOT	DASHDOTDOT
+#define LT_USERDEF		USERLINE
+#define LONGDASH		LDASHED
+#define DOT				DOTTED
+#define DASH2DOT		DASHDOTDOT
+
 /* vsm_type modes */
 #define MRKR_DOT		1
 #define MRKR_PLUS 		2
@@ -1390,6 +1407,14 @@ extern void aes (AESPB *pb);
 #define MRKR_BOX		4
 #define MRKR_CROSS		5
 #define MRKR_DIAMOND		6
+
+/* other names */
+#define MT_DOT		MRKR_DOT
+#define MT_PLUS		MRKR_PLUS
+#define MT_ASTERISK	MRKR_ASTERISK
+#define MT_SQUARE	MRKR_BOX
+#define MT_DCROSS	MRKR_CROSS
+#define MT_DIAMOND	MRKR_DIAMOND
 
 /* vst_alignment modes */
 #define TA_LEFT         	0 /* horizontal */
@@ -1415,6 +1440,16 @@ extern void aes (AESPB *pb);
 #define TXT_UNDERLINED		0x0008
 #define TXT_OUTLINED		0x0010
 #define TXT_SHADOWED		0x0020
+
+/* other names */
+#define	TF_NORMAL		TXT_NORMAL
+#define TF_THICKENED	TXT_THICKENED
+#define TF_LIGHTENED	TXT_LIGHT
+#define TF_SLANTED		TXT_SKEWED
+#define TF_UNDERLINED	TXT_UNDERLINED
+#define TF_OUTLINED		TXT_OUTLINED
+#define TF_SHADOWED		TXT_SHADOWED
+
 
 /* vst_error modes */
 #define APP_ERROR		0
