@@ -2,7 +2,13 @@
  *  $Id$
  */
 
-#include <macros.h>
+#ifdef    __PUREC__
+ #define max(x,y)   	(((x)>(y))?(x):(y))
+ #define	min(x,y)   	(((x)<(y))?(x):(y))
+#else  /* __PUREC__ */
+ #include <macros.h>
+#endif /* __PUREC__ */
+
 #include "mt_gem.h"
 
 /** Compute the interesection of two rectangles
