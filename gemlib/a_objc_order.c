@@ -40,12 +40,3 @@ mt_objc_order(OBJECT *tree, short object, short new_pos, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef objc_order
-#undef objc_order
-#endif
-short 
-objc_order(OBJECT *tree, short object, short new_pos)
-{
-	return(mt_objc_order(tree, object, new_pos, aes_global));
-}

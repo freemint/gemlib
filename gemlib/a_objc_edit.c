@@ -55,13 +55,3 @@ mt_objc_edit(OBJECT *tree, short object, short ch, short *index, short kind, sho
 	
 	return aes_intout[0];
 }
-
-#ifdef objc_edit
-#undef objc_edit
-#endif
-short 
-objc_edit(OBJECT *tree, short object, short ch, short *index, short kind)
-{
-	return(mt_objc_edit(tree, object, ch, index, kind, aes_global));
-}
-

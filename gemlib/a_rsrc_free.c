@@ -28,13 +28,3 @@ mt_rsrc_free( short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef rsrc_free
-#undef rsrc_free
-#endif
-short 
-rsrc_free(void)
-{
-	return(mt_rsrc_free(aes_global));
-}
-

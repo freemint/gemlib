@@ -43,13 +43,3 @@ mt_shel_get(char *Buf, short Len, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef shel_get
-#undef shel_get
-#endif
-short 
-shel_get(char *Buf, short Len)
-{
-	return(mt_shel_get(Buf, Len, aes_global));
-}
-

@@ -344,11 +344,3 @@ short mt_evnt_mesag (short msg[], short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef evnt_mesag
-#undef evnt_mesag
-#endif
-short evnt_mesag(short msg[])
-{
-	return(mt_evnt_mesag(msg, aes_global));
-}

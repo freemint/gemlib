@@ -62,13 +62,3 @@ mt_graf_dragbox(short  w, short  h, short sx, short sy,
 
 	return aes_intout[0];
 }
-
-#ifdef graf_dragbox
-#undef graf_dragbox
-#endif
-short
-graf_dragbox(short  w, short  h, short sx, short sy,
-			 short bx, short by, short bw, short bh, short *rx, short *ry)
-{
-	return(mt_graf_dragbox(w, h, sx, sy, bx, by, bw, bh, rx, ry, aes_global));
-}

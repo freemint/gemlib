@@ -42,12 +42,3 @@ mt_form_do(OBJECT *tree, short startobj, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef form_do
-#undef form_do
-#endif
-short
-form_do(OBJECT *tree, short startobj)
-{
-	return(mt_form_do(tree, startobj, aes_global));
-}

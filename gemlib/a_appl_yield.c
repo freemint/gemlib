@@ -25,12 +25,3 @@ mt_appl_yield(short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef appl_yield
-#undef appl_yield
-#endif
-short
-appl_yield(void)
-{
-	return(mt_appl_yield(aes_global));
-}

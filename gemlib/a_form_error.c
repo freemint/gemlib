@@ -90,12 +90,3 @@ mt_form_error(short error_code, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef form_error
-#undef form_error
-#endif
-short
-form_error(short error_code)
-{
-	return(mt_form_error(error_code, aes_global));
-}

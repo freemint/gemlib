@@ -32,13 +32,3 @@ mt_wind_new (short *global_aes)
 
 	return (1);
 }	
-
-#ifdef wind_new
-#undef wind_new
-#endif
-short 
-wind_new( void)
-{
-	return(mt_wind_new(aes_global));
-}
-

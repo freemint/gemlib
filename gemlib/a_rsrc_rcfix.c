@@ -38,13 +38,3 @@ mt_rsrc_rcfix(void *rc_header, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef rsrc_rcfix
-#undef rsrc_rcfix
-#endif
-short 
-rsrc_rcfix(void *rc_header)
-{
-	return(mt_rsrc_rcfix(rc_header, aes_global));
-}
-

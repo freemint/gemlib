@@ -34,14 +34,3 @@ mt_wind_find (short X, short Y, short *global_aes)
 
 	return (aes_intout[0]);
 }
-
-
-#ifdef wind_find
-#undef wind_find
-#endif
-short 
-wind_find(short X, short Y)
-{
-	return(mt_wind_find( X, Y, aes_global));
-}
-

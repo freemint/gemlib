@@ -46,12 +46,3 @@ mt_graf_mbox(short w, short h, short sx, short sy, short dx, short dy, short *gl
 
 	return aes_intout[0];
 }
-
-#ifdef graf_mbox
-#undef graf_mbox
-#endif
-short
-graf_mbox(short w, short h, short sx, short sy, short dx, short dy)
-{
-	return(mt_graf_mbox( w, h, sx, sy, dx, dy, aes_global));
-}

@@ -37,12 +37,3 @@ mt_rsrc_obfix(OBJECT *Tree, short Index, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef rsrc_obfix
-#undef rsrc_obfix
-#endif
-short 
-rsrc_obfix(OBJECT *Tree, short Index)
-{
-	return(mt_rsrc_obfix(Tree, Index, aes_global));
-}

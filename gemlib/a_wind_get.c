@@ -301,15 +301,3 @@ mt_wind_get (short WindowHandle, short What,
 
 	return (aes_intout[0]);
 }
-
-
-#ifdef wind_get
-#undef wind_get
-#endif
-short 
-wind_get(short WindowHandle, short What, 
-         short *W1, short *W2, short *W3, short *W4)
-{
-	return(mt_wind_get(WindowHandle, What, W1, W2, W3, W4, aes_global));
-}
-

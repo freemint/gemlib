@@ -42,14 +42,3 @@ mt_shel_envrn(char **result, const char *param, short *global_aes)
 
 	return aes_intout[0];
 }
-
-
-#ifdef shel_envrn
-#undef shel_envrn
-#endif
-short 
-shel_envrn(char **result, const char *param)
-{
-	return(mt_shel_envrn(result,param, aes_global));
-}
-

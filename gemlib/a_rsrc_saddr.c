@@ -37,13 +37,3 @@ mt_rsrc_saddr(short Type, short Index, void *Address, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef rsrc_saddr
-#undef rsrc_saddr
-#endif
-short 
-rsrc_saddr(short Type, short Index, void *Address)
-{
-	return(mt_rsrc_saddr(Type, Index, Address,aes_global));
-}
-

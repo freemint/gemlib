@@ -30,13 +30,3 @@ mt_shel_wdef(const char *lpcmd, const char *lpdir, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef shel_wdef
-#undef shel_wdef
-#endif
-short 
-shel_wdef(const char *lpcmd, const char *lpdir)
-{
-	return(mt_shel_wdef(lpcmd, lpdir, aes_global));
-}
-

@@ -35,13 +35,3 @@ mt_objc_delete(OBJECT *tree, short object, short *global_aes)
 	
 	return aes_intout[0];
 }
-
-#ifdef objc_delete
-#undef objc_delete
-#endif
-short 
-objc_delete(OBJECT *tree, short object)
-{
-	return(mt_objc_delete(tree, object, aes_global));
-}
-

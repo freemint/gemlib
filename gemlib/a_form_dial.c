@@ -77,14 +77,3 @@ mt_form_dial(short mode,
 
 	return aes_intout[0];
 }
-
-#ifdef form_dial
-#undef form_dial
-#endif
-short
-form_dial(short mode,
-		  short x1, short y1, short w1, short h1,
-		  short x2, short y2, short w2, short h2)
-{
-	return(mt_form_dial( mode, x1, y1, w1, h1, x2, y2, w2, h2, aes_global));
-}

@@ -46,12 +46,3 @@ mt_form_center(OBJECT *tree, short *cx, short *cy, short *cw, short *ch, short *
 
  	return aes_intout[0];
 }
-
-#ifdef form_center
-#undef form_center
-#endif
-short
-form_center(OBJECT *tree, short *cx, short *cy, short *cw, short *ch)
-{
-	return(mt_form_center(tree, cx, cy, cw, ch, aes_global));
-}

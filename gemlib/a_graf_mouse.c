@@ -131,12 +131,3 @@ mt_graf_mouse (short shape, const MFORM *shape_addr, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef graf_mouse
-#undef graf_mouse
-#endif
-short
-graf_mouse(short shape, const MFORM *shape_addr)
-{
-	return(mt_graf_mouse( shape, shape_addr, aes_global));
-}

@@ -39,12 +39,3 @@ mt_evnt_timer (unsigned long interval, short *global_aes)
 
 	return (aes_intout[0]);
 }
-
-#ifdef evnt_timer
-#undef evnt_timer
-#endif
-short
-evnt_timer(unsigned long interval)
-{
-	return(mt_evnt_timer(interval, aes_global));
-}

@@ -52,14 +52,3 @@ mt_objc_change(OBJECT *tree, short object, short res, short cx, short cy,
 
 	return aes_intout[0];
 }
-
-#ifdef objc_change
-#undef objc_change
-#endif
-short 
-objc_change(OBJECT *tree, short object, short res, short cx, short cy,
-            short cw, short ch,  short new_state, short redraw)
-{
-	return(mt_objc_change(tree, object, res, cx, cy, cw, ch, new_state, redraw, aes_global));
-}
-

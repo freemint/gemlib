@@ -26,13 +26,3 @@ mt_wind_create_grect(short Parts, const GRECT *r, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef wind_create_grect
-#undef wind_create_grect
-#endif
-short 
-wind_create_grect(short Parts, const GRECT *r)
-{
-	return(mt_wind_create_grect( Parts, r, aes_global));
-}
-

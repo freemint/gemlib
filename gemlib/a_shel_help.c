@@ -32,13 +32,3 @@ mt_shel_help(short sh_hmode, const char *sh_hfile, const char *sh_hkey, short *g
 
 	return aes_intout[0];
 }
-
-#ifdef shel_help
-#undef shel_help
-#endif
-short 
-shel_help(short sh_hmode, const char *sh_hfile, const char *sh_hkey)
-{
-	return(mt_shel_help(sh_hmode, sh_hfile, sh_hkey, aes_global));
-}
-

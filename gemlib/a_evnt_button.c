@@ -85,14 +85,3 @@ mt_evnt_button (short clicks, short mask, short state,
 
 	return aes_intout[0];
 }
-
-#ifdef event_button
-#undef event_button
-#endif
-short
-event_button(short clicks, short mask, short state,
-				short *mx, short *my, short *mbutton, short *kmeta)
-{
-	return(mt_event_button(clicks,mask,state,
-						   mx,my,mbutton,kmeta, aes_global));
-}

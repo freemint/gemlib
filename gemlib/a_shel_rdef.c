@@ -30,14 +30,3 @@ mt_shel_rdef(char *lpcmd, char *lpdir, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef shel_rdef
-#undef shel_rdef
-#endif
-short 
-shel_rdef(char *lpcmd, char *lpdir)
-{
-	return(mt_shel_rdef(lpcmd, lpdir, aes_global));
-}
-
-

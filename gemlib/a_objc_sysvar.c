@@ -72,14 +72,3 @@ mt_objc_sysvar(short mode, short which, short in1, short in2,
 	
 	return aes_intout[0];
 }
-
-#ifdef objc_sysvar
-#undef objc_sysvar
-#endif
-short 
-objc_sysvar(short mode, short which, short in1, short in2,
-            short *out1, short *out2)
-{
-	return(mt_objc_sysvar(mode, which, in1, in2, out1, out2, aes_global));
-}
-

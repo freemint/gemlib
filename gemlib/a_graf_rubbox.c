@@ -51,18 +51,3 @@ mt_graf_rubberbox(short bx, short by, short mw, short mh, short *rw, short *rh, 
 
 	return aes_intout[0];
 }
-
-#ifdef graf_rubberbox
-#undef graf_rubberbox
-#endif
-short
-graf_rubberbox(short bx, short by, short mw, short mh, short *rw, short *rh)
-{
-	return(mt_graf_rubberbox( bx,  by, mw, mh, rw, rh, aes_global));
-}
-
-short
-graf_rubbbox(short bx, short by, short mw, short mh, short *rw, short *rh)
-{
-	return(mt_graf_rubberbox( bx,  by, mw, mh, rw, rh, aes_global));
-}

@@ -53,13 +53,3 @@ mt_scrp_read(char *Scrappath, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef scrp_read
-#undef scrp_read
-#endif
-short 
-scrp_read(char *Scrappath)
-{
-	return(mt_scrp_read(Scrappath, aes_global));
-}
-

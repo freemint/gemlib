@@ -49,13 +49,3 @@ mt_appl_trecord(void *mem, short count, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef appl_trecord
-#undef appl_trecord
-#endif
-short
-appl_trecord(void *mem, short count)
-{
-	return(mt_appl_trecord(mem, count, aes_global));
-}
-

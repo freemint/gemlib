@@ -49,12 +49,3 @@ mt_graf_slidebox(OBJECT *tree, short parent, short object, short direction, shor
 
 	return aes_intout[0];
 }
-
-#ifdef graf_slidebox
-#undef graf_slidebox
-#endif
-short
-graf_slidebox(OBJECT *tree, short parent, short object, short direction)
-{
-	return(mt_graf_slidebox(tree, parent, object, direction, aes_global));
-}

@@ -46,12 +46,3 @@ mt_graf_mkstate (short *mx, short *my, short *mbutton, short *kmeta, short *glob
 
 	return aes_intout[0];
 }
-
-#ifdef graf_mkstate
-#undef graf_mkstate
-#endif
-short
-graf_mkstate(short *mx, short *my, short *mbutton, short *kmeta)
-{
-	return(mt_graf_mkstate(mx, my, mbutton, kmeta, aes_global));
-}

@@ -68,15 +68,3 @@ mt_wind_calc (short Type, short Parts, short InX,  short InY, short InW, short I
 
 	return (aes_intout[0]);
 }
-
-
-#ifdef wind_calc
-#undef wind_calc
-#endif
-short 
-wind_calc(short Type, short Parts, short InX,  short InY, short InW, short InH,
-          short *OutX, short *OutY, short *OutW, short *OutH)
-{
-	return(mt_wind_calc( Type, Parts, InX, InY, InW, InH, OutX, OutY, OutW, OutH, aes_global));
-}
-

@@ -40,12 +40,3 @@ mt_objc_find(OBJECT *tree, short start, short depth, short mx, short my, short *
 
 	return aes_intout[0];
 }
-
-#ifdef objc_find
-#undef objc_find
-#endif
-short 
-objc_find(OBJECT *tree, short start, short depth, short mx, short my)
-{
-	return(mt_objc_find(tree, start, depth, mx, my, aes_global));
-}

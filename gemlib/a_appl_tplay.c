@@ -41,13 +41,3 @@ mt_appl_tplay(void *mem, short num, short scale, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef appl_tplay
-#undef appl_tplay
-#endif
-short
-appl_tplay(void *mem, short num, short scale)
-{
-	return(mt_appl_tplay(mem, num, scale, aes_global));
-}
-

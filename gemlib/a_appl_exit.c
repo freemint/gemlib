@@ -27,12 +27,3 @@ mt_appl_exit(short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef appl_exit
-#undef appl_exit
-#endif
-short
-appl_exit(void)
-{
-	return(mt_appl_exit(aes_global));
-}

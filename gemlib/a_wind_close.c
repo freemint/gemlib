@@ -37,12 +37,3 @@ mt_wind_close (short WindowHandle, short *global_aes)
 
 	return (aes_intout[0]);
 }
-
-#ifdef wind_close
-#undef wind_close
-#endif
-short 
-wind_close(short WindowHandle)
-{
-	return(mt_wind_close(WindowHandle, aes_global));
-}

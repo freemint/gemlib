@@ -51,13 +51,3 @@ mt_graf_shrinkbox(short fx, short fy, short fw, short fh,
 
 	return aes_intout[0];
 }
-
-#ifdef graf_shrinkbox
-#undef graf_shrinkbox
-#endif
-short
-graf_shrinkbox(short fx, short fy, short fw, short fh,
-			   short sx, short sy, short sw, short sh)
-{
-	return(mt_graf_shrinkbox( fx, fy, fw, fh, sx, sy, sw, sh, aes_global));
-}

@@ -91,13 +91,3 @@ mt_appl_init(short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef appl_init
-#undef appl_init
-#endif
-short
-appl_init(void)
-{
-	return(mt_appl_init(aes_global));
-}
-

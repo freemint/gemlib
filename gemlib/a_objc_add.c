@@ -39,13 +39,3 @@ mt_objc_add(OBJECT *tree, short parent, short child, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef objc_add
-#undef objc_add
-#endif
-short 
-objc_add(OBJECT *tree, short parent, short child)
-{
-	return(mt_objc_add(tree,parent,child,aes_global));
-}
-

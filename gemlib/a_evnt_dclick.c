@@ -41,11 +41,3 @@ mt_evnt_dclick (short value, short sflag, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef evnt_dclick
-#undef evnt_dclick
-#endif
-short evnt_dclick(short value, short sflag)
-{
-	return(mt_evnt_dclick(value, sflag, aes_global));
-}

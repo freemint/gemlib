@@ -27,12 +27,3 @@ mt_wind_set_str (short WindowHandle, short What, const char *str, short *global_
 
 	return (aes_intout[0]);
 }
-
-#ifdef wind_set_str
-#undef wind_set_str
-#endif
-short 
-wind_set_str(short WindowHandle, short What, const char *str)
-{
-	return(mt_wind_set_str(WindowHandle, What, str, aes_global));
-}

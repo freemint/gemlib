@@ -32,13 +32,3 @@ mt_wind_calc_grect(short Type, short Parts, const GRECT *In, GRECT *Out, short *
 	
 	return aes_intout[0];
 }
-
-#ifdef wind_calc_grect
-#undef wind_calc_grect
-#endif
-short 
-wind_calc_grect(short Type, short Parts, const GRECT *In, GRECT *Out)
-{
-	return(mt_wind_calc_grect(Type, Parts, In, Out, aes_global));
-}
-

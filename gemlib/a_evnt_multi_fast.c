@@ -38,12 +38,3 @@ mt_evnt_multi_fast (const EVMULT_IN * em_in, short msg[], EVMULT_OUT * em_out, s
 
 	return em_out->emo_events;
 }
-
-#ifdef evnt_multi_fast
-#undef evnt_multi_fast
-#endif
-short
-evnt_multi_fast (const EVMULT_IN * em_in, short msg[], EVMULT_OUT * em_out)
-{
-	return(mt_evnt_multi_fast(em_in,msg,em_out,aes_global));
-}

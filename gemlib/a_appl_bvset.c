@@ -29,12 +29,3 @@ mt_appl_bvset(short bvdisk, short bvhard, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef appl_bvset
-#undef appl_bvset
-#endif
-short
-appl_bvset(short bvdisk, short bvhard)
-{
-	return(mt_appl_bvset(bvdisk, bvhard, aes_global));
-}

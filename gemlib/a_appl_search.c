@@ -51,13 +51,3 @@ mt_appl_search(short mode, char *fname, short *type, short *ap_id, short *global
 
 	return aes_intout[0];
 }
-
-#ifdef appl_search
-#undef appl_search
-#endif
-short
-appl_search(short mode, char *fname, short *type, short *ap_id)
-{
-	return(mt_appl_search( mode, fname, type, ap_id, aes_global));
-}
-

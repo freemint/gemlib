@@ -30,13 +30,3 @@ mt_wind_get_grect(short WindowHandle, short What, GRECT *r, short *global_aes)
 	
 	return (aes_intout[0]);
 }
-
-#ifdef wind_get_grect
-#undef wind_get_grect
-#endif
-short 
-wind_get_grect(short WindowHandle, short What, GRECT *r)
-{
-	return(mt_wind_get_grect(WindowHandle, What, r, aes_global));
-}
-

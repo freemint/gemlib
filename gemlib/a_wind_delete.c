@@ -32,13 +32,3 @@ mt_wind_delete (short WindowHandle, short *global_aes)
 
 	return (aes_intout[0]);
 }
-
-#ifdef wind_delete
-#undef wind_delete
-#endif
-short 
-wind_delete(short WindowHandle)
-{
-	return(mt_wind_delete(WindowHandle, aes_global));
-}
-

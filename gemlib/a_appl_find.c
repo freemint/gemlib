@@ -46,14 +46,3 @@ mt_appl_find(const char *name, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef appl_find
-#undef appl_find
-#endif
-short
-appl_find(const char *name)
-{
-	return(mt_appl_find(name, aes_global));
-}
-
-

@@ -38,13 +38,3 @@ mt_shel_put(const char *Buf, short Len, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef shel_put
-#undef shel_put
-#endif
-short 
-shel_put(const char *Buf, short Len)
-{
-	return(mt_shel_put(Buf, Len, aes_global));
-}
-

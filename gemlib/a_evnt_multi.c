@@ -111,17 +111,3 @@ mt_evnt_multi (short events, short bclicks, short bmask, short bstate,
 
 	return (aes_intout[0]);
 }
-
-#ifdef evnt_multi
-#undef evnt_multi
-#endif
-short
-evnt_multi(short events, short bclicks, short bmask, short bstate,
-		   short m1_leave, short m1_x, short m1_y, short m1_w, short m1_h,
-		   short m2_leave, short m2_x, short m2_y, short m2_w, short m2_h,
-		   short msg[], unsigned long interval,
-		   short *mx, short *my,
-		   short *mbutton, short *kmeta, short *kreturn, short *mbclicks)
-{
-	return(mt_evnt_multi(events, bclicks, bmask, bstate, m1_leave, m1_x, m1_y, m1_w, m1_h, m2_leave, m2_x, m2_y, m2_w, m2_h, msg, interval, mx, my, mbutton, kmeta, kreturn, mbclicks, aes_global));
-}

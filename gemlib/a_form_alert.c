@@ -64,12 +64,3 @@ mt_form_alert(short default_button, const char *alert_string, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef form_alert
-#undef form_alert
-#endif
-short
-form_alert(short default_button, const char *alert_string)
-{
-	return (mt_form_alert(default_button,alert_string, aes_global));
-}

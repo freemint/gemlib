@@ -28,12 +28,3 @@ mt_wind_set_grect(short WindowHandle, short What, const GRECT *r, short *global_
 	return (aes_intout[0]);
 
 }
-
-#ifdef wind_set_grect
-#undef wind_set_grect
-#endif
-short 
-wind_set_grect(short WindowHandle, short What, const GRECT *r)
-{
-	return(mt_wind_set_grect(WindowHandle, What, r, aes_global));
-}

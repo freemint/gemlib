@@ -45,13 +45,3 @@ mt_wind_open (short WindowHandle, short Wx, short Wy, short Ww, short Wh, short 
 
 	return (aes_intout[0]);
 }
-
-#ifdef wind_open
-#undef wind_open
-#endif
-short 
-wind_open(short WindowHandle, short Wx, short Wy, short Ww, short Wh)
-{
-	return(mt_wind_open(WindowHandle, Wx, Wy, Ww, Wh, aes_global));
-}
-

@@ -38,13 +38,3 @@ mt_scrp_write(const char *Scrappath, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef scrp_write
-#undef scrp_write
-#endif
-short 
-scrp_write(const char *Scrappath)
-{
-	return(mt_scrp_write(Scrappath, aes_global));
-}
-

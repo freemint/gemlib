@@ -47,12 +47,3 @@ mt_appl_write(short ap_id, short length, void *ap_pbuff, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef appl_write
-#undef appl_write
-#endif
-short
-appl_write(short ap_id, short length, void *ap_pbuff)
-{
-	return(mt_appl_write( ap_id, length, ap_pbuff, aes_global));
-}

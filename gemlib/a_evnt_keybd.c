@@ -41,11 +41,3 @@ mt_evnt_keybd(short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef evnt_keybd
-#undef evnt_keybd
-#endif
-int evnt_keybd(void)
-{
-	return(mt_evnt_keybd(aes_global));
-}

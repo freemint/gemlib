@@ -49,13 +49,3 @@ mt_appl_read(short ap_id, short length, void *ap_pbuff, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef appl_read
-#undef appl_read
-#endif
-short
-appl_read(short ap_id, short length, void *ap_pbuff)
-{
-	return(mt_appl_read(ap_id, length, ap_pbuff, aes_global));
-}
-

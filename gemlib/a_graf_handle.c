@@ -47,12 +47,3 @@ mt_graf_handle (short *wcell, short *hcell, short *wbox, short *hbox, short *glo
 
 	return aes_intout[0];
 }
-
-#ifdef graf_handle
-#undef graf_handle
-#endif
-short
-graf_handle(short *wcell, short *hcell, short *wbox, short *hbox)
-{
-	return(mt_graf_handle(wcell, hcell, wbox, hbox, aes_global));
-}

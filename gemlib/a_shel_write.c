@@ -218,13 +218,3 @@ mt_shel_write(short wodex, short wisgr, short wiscr, void *cmd, char *tail, shor
 
 	return aes_intout[0];
 }
-
-#ifdef shel_write
-#undef shel_write
-#endif
-short 
-shel_write(short wodex, short wisgr, short wiscr, void *cmd, char *tail)
-{
-	return(mt_shel_write(wodex, wisgr, wiscr, cmd, tail, aes_global));
-}
-

@@ -51,12 +51,3 @@ mt_appl_control(short ap_cid, short ap_cwhat, void *ap_cout, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef appl_control
-#undef appl_control
-#endif
-short
-appl_control(short ap_cid, short ap_cwhat, void *ap_cout)
-{
-	return(mt_appl_control(ap_cid,ap_cwhat,ap_cout, aes_global));
-}

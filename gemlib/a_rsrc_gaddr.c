@@ -57,14 +57,3 @@ mt_rsrc_gaddr(short Type, short Index, void *Address, short *global_aes)
 	
 	return aes_intout[0];
 }
-
-#ifdef rsrc_gaddr
-#undef rsrc_gaddr
-#endif
-short 
-rsrc_gaddr(short Type, short Index, void *Address)
-{
-	return( mt_rsrc_gaddr( Type, Index,Address, aes_global));
-}
-
-

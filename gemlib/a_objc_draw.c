@@ -51,14 +51,3 @@ mt_objc_draw(OBJECT *tree, short start, short depth,
 
 	return aes_intout[0];
 }
-
-#ifdef objc_draw
-#undef objc_draw
-#endif
-short 
-objc_draw(OBJECT *tree, short start, short depth,
-          short cx, short cy, short cw, short ch)
-{
-	return(mt_objc_draw(tree, start, depth, cx, cy, cw, ch, aes_global));
-}
-

@@ -57,12 +57,3 @@ mt_form_keybd(OBJECT *tree, short object, short reserved, short key, short *next
 
 	return aes_intout[0];
 }
-
-#ifdef form_keybd
-#undef form_keybd
-#endif
-short
-form_keybd(OBJECT *tree, short object, short reserved, short key, short *nextobject, short *nextchar)
-{
-	return(mt_form_keybd(tree, object, reserved, key, nextobject, nextchar, aes_global));
-}

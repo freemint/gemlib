@@ -33,13 +33,3 @@ mt_shel_read(char *Command, char *Tail, short *global_aes)
 	
 	return aes_intout[0];
 }
-
-#ifdef shel_read
-#undef shel_read
-#endif
-short 
-shel_read(char *Command, char *Tail)
-{
-	return(mt_shel_read(Command, Tail, aes_global));
-}
-

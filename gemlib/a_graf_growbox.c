@@ -54,13 +54,3 @@ mt_graf_growbox(short sx, short sy, short sw, short sh,
 
 	return aes_intout[0];
 }
-
-#ifdef graf_growbox
-#undef graf_growbox
-#endif
-short
-graf_growbox(short sx, short sy, short sw, short sh,
-			 short fx, short fy, short fw, short fh)
-{
-	return(mt_graf_growbox( sx, sy, sw, sh, fx, fy, fw, fh, aes_global));
-}

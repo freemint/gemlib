@@ -58,12 +58,3 @@ mt_evnt_mouse(short flag, short x, short y, short w, short h,
 	*kmeta = aes_intout[4];
 	return aes_intout[0];
 }
-
-#ifdef evnt_mouse
-#undef evnt_mouse
-#endif
-short evnt_mouse(short flag, short x, short y, short w, short h,
-				 short *mx, short *my, short *mbutton, short *kmeta)
-{
-	return(mt_evnt_mouse(flag, x, y, w, h, mx, my, mbutton, kmeta, aes_global));
-}

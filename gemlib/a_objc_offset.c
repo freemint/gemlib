@@ -46,13 +46,3 @@ mt_objc_offset(OBJECT *tree, short object, short *x, short *y, short *global_aes
 	
 	return aes_intout[0];
 }
-
-#ifdef objc_offset
-#undef objc_offset
-#endif
-short 
-objc_offset(OBJECT *tree, short object, short *x, short *y)
-{
-	return(mt_objc_offset(tree, object, x, y, aes_global));
-}
-

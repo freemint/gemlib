@@ -85,12 +85,3 @@ mt_wind_update (short Code, short *global_aes)
 
 	return (aes_intout[0]);
 }
-
-#ifdef wind_update
-#undef wind_update
-#endif
-short 
-wind_update(short Code)
-{
-	return(mt_wind_update(Code, aes_global));
-}

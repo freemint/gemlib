@@ -73,13 +73,3 @@ mt_wind_create (short Parts, short Wx, short Wy, short Ww, short Wh, short *glob
 
 	return (aes_intout[0]);
 }
-
-#ifdef wind_create
-#undef wind_create
-#endif
-short 
-wind_create(short Parts, short Wx, short Wy, short Ww, short Wh)
-{
-	return(mt_wind_create(Parts, Wx, Wy, Ww, Wh, aes_global));
-}
-

@@ -50,12 +50,3 @@ mt_graf_watchbox(OBJECT *tree, short object, short in_state, short out_state, sh
 
 	return aes_intout[0];
 }
-
-#ifdef graf_watchbox
-#undef graf_watchbox
-#endif
-short
-graf_watchbox(OBJECT *tree, short object, short in_state, short out_state)
-{
-	return(mt_graf_watchbox(tree, object, in_state, out_state, aes_global));
-}

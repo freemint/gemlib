@@ -34,13 +34,3 @@ mt_rsrc_load(const char *Name, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef rsrc_load
-#undef rsrc_load
-#endif
-short 
-rsrc_load(const char *Name)
-{
-	return(mt_rsrc_load(Name, aes_global));
-}
-

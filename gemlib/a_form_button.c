@@ -53,13 +53,3 @@ mt_form_button(OBJECT *tree, short object, short clicks, short *nextobj, short *
 
 	return aes_intout[0];
 }
-
-
-#ifdef form_button
-#undef form_button
-#endif
-short
-form_button(OBJECT *tree, short object, short clicks, short *nextobj)
-{
-	return(mt_form_button(tree, object, clicks, nextobj, aes_global));
-}

@@ -34,13 +34,3 @@ mt_shel_find(char *buf, short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef shel_find
-#undef shel_find
-#endif
-short 
-shel_find(char *buf)
-{
-	return(mt_shel_find(buf, aes_global));
-}
-

@@ -25,13 +25,3 @@ mt_scrp_clear( short *global_aes)
 
 	return aes_intout[0];
 }
-
-#ifdef scrp_clear
-#undef scrp_clear
-#endif
-short 
-scrp_clear(void)
-{
-	return(mt_scrp_clear(aes_global));
-}
-
