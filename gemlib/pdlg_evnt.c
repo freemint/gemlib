@@ -13,6 +13,8 @@
  *  @param button Selected button (or 0)
  *         - PDLG_CANCEL (1)   "Cancel" was selected 
  *         - PDLG_OK	 (2)   "OK" was pressed 
+ *         .
+ *         [option CHECK_NULLPTR] button may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 (Exit button selected) or 1 (Nothing happened)
@@ -39,6 +41,9 @@ mt_pdlg_evnt(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, EVNT *events,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (button)
+#endif
 	*button = aes_intout[1];
 	
 	return aes_intout[0];
