@@ -287,12 +287,21 @@ mt_appl_getinfo (short type, short *out1, short *out2, short *out3, short *out4,
 #undef appl_getinfo
 #endif
 short
+appl_getinfo(short type, short *out1, short *out2, short *out3, short *out4);
+
+short
 appl_getinfo(short type, short *out1, short *out2, short *out3, short *out4)
 {
 	return(mt_appl_getinfo(type,out1, out2, out3, out4, aes_global));
 }
 
 /* for backward compatibility with gemlib 42 */
+#ifdef appl_xgetinfo
+#undef appl_xgetinfo
+#endif
+short 
+appl_xgetinfo(short type, short *out1, short *out2, short *out3, short *out4);
+
 short 
 appl_xgetinfo(short type, short *out1, short *out2, short *out3, short *out4)
 {
