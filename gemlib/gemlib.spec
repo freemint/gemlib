@@ -6,12 +6,12 @@
 
 Summary       : GEM libraries and header files
 Name          : gemlib
-Version       : 0.42.2
-Release       : 1
+Version       : 0.42.99
+Release       : 20030216
 Copyright     : Public Domain
 Group         : Development/Libraries
 
-Packager      : Xavier Joubert <xavier.joubert@free.fr>
+Packager      : Standa Opichal <opichals@seznam.cz>
 Vendor        : Sparemint
 URL           : http://wh58-508.st.uni-magdeburg.de/sparemint/
 
@@ -49,12 +49,23 @@ make
 [ "${RPM_BUILD_ROOT}" != "/" ] && rm -rf ${RPM_BUILD_ROOT}
 
 cd gemlib
+mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/include
+mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/lib
+install -m 644 libgem.a ${RPM_BUILD_ROOT}%{_prefix}/lib
+install -m 644 libgem16.a ${RPM_BUILD_ROOT}%{_prefix}/lib
+install -m 644 gem.h ${RPM_BUILD_ROOT}%{_prefix}/include
+install -m 644 gemx.h ${RPM_BUILD_ROOT}%{_prefix}/include
+install -m 644 mt_gem.h ${RPM_BUILD_ROOT}%{_prefix}/include
+install -m 644 mt_gemx.h ${RPM_BUILD_ROOT}%{_prefix}/include
+
 mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
 mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
-install -m 644 libgem.a ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
-install -m 644 libgem16.a ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
-install -m 644 gem.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
-install -m 644 gemx.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
+ln -s %{_prefix}/lib/libgem.a ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib/
+ln -s %{_prefix}/lib/libgem16.a ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib/
+ln -s %{_prefix}/include/gem.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include/
+ln -s %{_prefix}/include/gemx.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include/
+ln -s %{_prefix}/include/mt_gem.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include/
+ln -s %{_prefix}/include/mt_gemx.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include/
 
 
 %clean
@@ -64,11 +75,16 @@ install -m 644 gemx.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
 %files
 %defattr(-,root,root)
 %doc gemlib/ChangeLog*
+%{_prefix}/lib/lib*.a
+%{_prefix}/include/*.h
 %{_prefix}/GEM/lib/lib*.a
 %{_prefix}/GEM/include/*.h
 
 
 %changelog
+* Sun Feb 16 2003 Standa Opichal <opichals@seznam.cz>
+- updated to version 0.42.99, betaversion of new generation gemlib
+
 * Mon Jul 15 2002 Xavier Joubert <xavier.joubert@free.fr>
 - updated to version 0.42.2, modified version numbering
 

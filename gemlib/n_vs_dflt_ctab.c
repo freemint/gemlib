@@ -1,14 +1,31 @@
 /*
- *   NOTE: requires NVDI version 5.x or higher
+ *  $Id$
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
+/** 
+ *
+ *  @param handle Device handle
+ *
+ *  @return 
+ *
+ *  @since NVDI 5 ?
+ *
+ *
+ *
+ */
 
 short
 vs_dflt_ctab (short handle)
 {
+#if USE_LOCAL_VDIPB
+	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_intout[1]; 
+	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, 0L);
+#endif
+	
 	VDI_TRAP_ESC (vdi_params, handle, 205,2, 0,0);
 
 	return vdi_intout[0];

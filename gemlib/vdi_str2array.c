@@ -1,6 +1,17 @@
+/*
+ *  $Id$
+ */
 
-#include "gem.h"
+#include "mt_gem.h"
 
+/** 
+ *
+ *  @param src input string (standard null-terminated C-string)
+ *  @param des outpur string (VDI format, each char occupied 16 bits)
+ *
+ *  @return the len of the string
+ *
+ */
 
 short
 vdi_str2array (const char *src, short *des)

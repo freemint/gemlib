@@ -1,22 +1,60 @@
+/*
+ *  $Id$
+ */
+
 #include "gem_aesP.h"
 
+/** releases control to the operating system until
+ *	the mouse enters or leaves a specified area of the screen.
+ *
+ *  @param flag specifies the event to wait for as follows:
+ *             - \p MO_ENTER (0)   Wait for mouse to enter rectangle
+ *             - \p MO_LEAVE (1)   Wait for mouse to leave rectangle
+ *  @param x
+ *  @param y
+ *  @param w
+ *  @param h    The rectangle to watch
+ *
+ *  @param mx
+ *  @param my WORD pointers which will be filled in with the final
+ *                position of the mouse.
+ *  @param mbutton is a WORD pointer which will be filled in upon
+ *                return with the final state of the mouse button as defined
+ *                in mt_evnt_button().
+ *  @param kmeta is a WORD pointer which will be filled in upon
+ *                return with the final state of the keyboard shift keys as
+ *                defined in mt_evnt_button().
+ *  @param global_aes global AES array
+ *
+ *  @return should be reserved (and should always be 1). Actually it depends
+ *                on OS you are running, so it is not reserved any more.
+ *
+ *  @since All AES versions.
+ *
+ *  @sa mt_evnt_multi()
+ *
+ *  The mt_evnt_multi() function can be used to watch two mouse/rectangle
+ *  events as opposed to one.
+ *
+ */
 
 short
-evnt_mouse (short EnterExit, short InX, short InY, short InW, short InH,
-	    short *OutX, short *OutY, short *ButtonState, short *KeyState)
+mt_evnt_mouse(short flag, short x, short y, short w, short h,
+			  short *mx, short *my, short *mbutton, short *kmeta, short *global_aes)
 {
-	aes_intin[0] = EnterExit;
-	aes_intin[1] = InX;
-	aes_intin[2] = InY;
-	aes_intin[3] = InW;
-	aes_intin[4] = InH;
-	
-	AES_TRAP (aes_params, 22, 5,5,0,0);
-	
-	*OutX        = aes_intout[1];
-	*OutY        = aes_intout[2];
-	*ButtonState = aes_intout[3];
-	*KeyState    = aes_intout[4];
-	
+	AES_PARAMS(22,5,5,0,0);
+
+	aes_intin[0] = flag;
+	aes_intin[1] = x;
+	aes_intin[2] = y;
+	aes_intin[3] = w;
+	aes_intin[4] = h;
+
+	AES_TRAP(aes_params);
+
+	*mx = aes_intout[1];
+	*my = aes_intout[2];
+	*mbutton = aes_intout[3];
+	*kmeta = aes_intout[4];
 	return aes_intout[0];
 }

@@ -1,9 +1,33 @@
+/*
+ *  $Id$
+ */
+
 #include "gem_vdiP.h"
 
+/** reports back the current marker attributes
+ *
+ *  @param handle Device handle
+ *  @param attrib 
+ *         - attrib[0]           marker type
+ *         - attrib[1]           marker color
+ *         - attrib[2]           writing mode
+ *         - attrib[3]           marker height
+ *         - attrib[4]           marker width
+ *
+ *  @since all VDI versions
+ *
+ */
 
 void
 vqm_attributes (short handle, short attrib[])
 {
+#if USE_LOCAL_VDIPB
+	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_intout[3]; 
+	short vdi_ptsout[2]; 
+	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_ptsout );
+#endif
+	
 	VDI_TRAP_00 (vdi_params, handle, 36);
 
 	attrib[0] = vdi_intout[0];

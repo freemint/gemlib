@@ -1,7 +1,28 @@
-#include <macros.h>
-#include "gem.h"
+/*
+ *  $Id$
+ */
 
+#ifdef    __PUREC__
+ #define max(x,y)   	(((x)>(y))?(x):(y))
+ #define	min(x,y)   	(((x)<(y))?(x):(y))
+#else  /* __PUREC__ */
+ #include <macros.h>
+#endif /* __PUREC__ */
 
+#include "mt_gem.h"
+
+/** Compute the interesection of two rectangles
+ *
+ *  @param r1 the first rectangle
+ *  @param r2 the other rectangle. The intersection area will
+ *            be returned in \p r2.
+ *
+ *  @return 0 if theses rectangle don't have any common area, any
+ *          other value value if the intersection exist. Then, 
+ *          \p r2 will contain the common area.
+ *
+ */
+ 
 short
 rc_intersect (const GRECT * r1, GRECT * r2)
 {

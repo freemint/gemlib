@@ -1,14 +1,12 @@
 /*
- * gem_vdiP.h -- VDI trap interface
- *
- *    <AltF4@freemint.de>
+ *  $Id$
  */
 
 #ifndef _GEM_VDI_P_
 # define _GEM_VDI_P_
 
 # ifndef _GEMLIB_H_
-#  include "gem.h"
+#  include "mt_gem.h"
 # endif
 
 
@@ -16,6 +14,7 @@
 #define vdi_intin_ptr(n)     *((void**)(vdi_intin   +n))
 #define vdi_intout_long(n)   *((long*) (vdi_intout  +n))
 
+#define USE_LOCAL_VDIPB 1
 
 #if defined(__GNUC_INLINE__) && (__GNUC__ > 2 || __GNUC_MINOR__ > 5)
 
@@ -83,6 +82,14 @@ _vdi_trap_00 (VDIPB * vdipb, long cntrl_0_1, short handle)
 
 #define VDI_TRAP(vdipb, handle, opcode, cntrl_1, cntrl_3) \
 	VDI_TRAP_ESC(vdipb, handle, opcode, 0, cntrl_1, cntrl_3)
+
+#define VDI_PARAMS(a,b,c,d,e) \
+	VDIPB vdi_params;         \
+	vdi_params.control = a;   \
+	vdi_params.intin   = b;   \
+	vdi_params.ptsin   = c;   \
+	vdi_params.intout  = d;   \
+	vdi_params.ptsout  = e;
 
 
 # endif /* _GEM_VDI_P_ */

@@ -1,23 +1,64 @@
+/*
+ *  $Id$
+ */
+
 #include "gem_aesP.h"
 
+/** allows the user to move a box frame within
+ *  the constraints of a bounding rectangle.
+ *
+ *  @param  w
+ *  @param  h specify the initial width and height
+ *            of the box to draw.
+ *  @param sx
+ *  @param sy specify the starting x and y screen
+ *            coordinates.
+ *  @param bx
+ *  @param by
+ *  @param bw
+ *  @param bh give the coordinates of the bounding
+ *            rectangle.
+ *  @param rx
+ *  @param ry are WORD pointers which, on function exit,
+ *            will be filled in with the ending x and y
+ *            position of the box.
+ *  @param global_aes global AES array
+ *
+ *  @return 0 if an error occurred during
+ *          execution or greater than zero otherwise.
+ *
+ *  @since All AES versions.
+ *
+ *  @sa mt_graf_slidebox()
+ *
+ *  This call should be made only when the mouse button is
+ *  depressed. The call returns when the mouse button is
+ *  released.
+ *
+ *  It is most often used to give the user a visual
+ *  'clue' when an object is being moved on screen.
+ *
+ */
 
 short
-graf_dragbox (short Sw, short Sh, short Sx, short Sy,
-              short Bx, short By, short Bw, short Bh, short *Fw, short *Fh)
+mt_graf_dragbox(short  w, short  h, short sx, short sy,
+				short bx, short by, short bw, short bh, short *rx, short *ry, short *global_aes)
 {
-	aes_intin[0] = Sw;
-	aes_intin[1] = Sh;
-	aes_intin[2] = Sx;
-	aes_intin[3] = Sy;
-	aes_intin[4] = Bx;
-	aes_intin[5] = By;
-	aes_intin[6] = Bw;
-	aes_intin[7] = Bh;
-	
-	AES_TRAP (aes_params, 71, 8,3,0,0);
-	
-	*Fw = aes_intout[1];
-	*Fh = aes_intout[2];
-	
+	AES_PARAMS(71,8,3,0,0);
+
+	aes_intin[0] =  w;
+	aes_intin[1] =  h;
+	aes_intin[2] = sx;
+	aes_intin[3] = sy;
+	aes_intin[4] = bx;
+	aes_intin[5] = by;
+	aes_intin[6] = bw;
+	aes_intin[7] = bh;
+
+	AES_TRAP(aes_params);
+
+	*rx = aes_intout[1];
+	*ry = aes_intout[2];
+
 	return aes_intout[0];
 }
