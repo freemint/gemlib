@@ -10,8 +10,11 @@
  *  @param tree RSC-tree of object
  *  @param obj Object number
  *  @param bsel will be filled with a pointer to the start of selected region,
- *         or NULL if no region is selected.
- *  @param esel will be filled with a pointer to the character after the end of the selected region
+ *         or NULL if no region is selected. \p
+ *         [option CHECK_NULLPTR] bsel may be NULL
+ *  @param esel will be filled with a pointer to the character after the end
+ *         of the selected region \p
+ *         [option CHECK_NULLPTR] esel may be NULL
  *  @param global_aes global AES array
  *
  *  @return Unknown
@@ -36,6 +39,12 @@ mt_edit_get_sel( OBJECT *tree, short obj, char **bsel, char **esel, short *globa
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (bsel)
+#endif
 	*bsel = (char *)aes_addrout[0];
+#if CHECK_NULLPTR
+	if (esel)
+#endif
 	*esel = (char *)aes_addrout[1];
 }
