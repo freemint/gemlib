@@ -1,4 +1,8 @@
+/*
+ *   NOTE: requires NVDI version 3.x or higher
+ */
 
+#include "gem_vdiP.h"
 #include "gemx.h"
 
 
@@ -7,15 +11,9 @@ vst_kern (short handle, short tmode, short pmode, short *tracks, short *pairs)
 {
 	vdi_intin[0] = tmode;
 	vdi_intin[1] = pmode;
-	vdi_control[0] = 237;
-	vdi_control[1] = 0;
-	vdi_control[3] = 2;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	
+	VDI_TRAP (vdi_params, handle, 237, 0,2);
+	
 	*tracks = vdi_intout[0];
-	*pairs = vdi_intout[1];
+	*pairs  = vdi_intout[1];
 }
-
-/*
- * * NOTE: requires NVDI version 3.x or higher
- */

@@ -1,4 +1,8 @@
+/*
+ *   NOTE: requires NVDI version 2.x or higher
+ */
 
+#include "gem_vdiP.h"
 #include "gemx.h"
 
 
@@ -8,15 +12,8 @@ v_bez_qual (short handle, short percent, short *actual)
 	vdi_intin[0] = 32;
 	vdi_intin[1] = 1;
 	vdi_intin[2] = percent;
-	vdi_control[0] = 5;
-	vdi_control[1] = 0;
-	vdi_control[3] = 3;
-	vdi_control[5] = 99;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	
+	VDI_TRAP_ESC (vdi_params, handle, 5,99, 0,3);
+	
 	*actual = vdi_intout[0];
 }
-
-/*
- * * NOTE: requires NVDI version 2.x or higher
- */

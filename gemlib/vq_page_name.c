@@ -14,8 +14,8 @@ vq_page_name (short handle, short page_id, char *page_name,
 	
 	VDI_TRAP_ESC (vdi_params, handle, 5,38, 0,3);
 	
-	*page_width  = vdi_intout_ptr(1);
-	*page_height = vdi_intout_ptr(3);
+	*page_width  = vdi_intout_long(1);
+	*page_height = vdi_intout_long(3);
 	
 	return vdi_intout[0];
 }
