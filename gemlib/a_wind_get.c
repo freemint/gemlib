@@ -29,8 +29,8 @@
 <pre>
     Name         mode  Meaning
 
- 	WF_KIND        1   Gets the actual components (MOVER,
-	                   CLOSER,...) of the window in \p W1.
+ 	WF_KIND        1   \p W1 contains the actual window elements
+	                   with N.AES or MagiC.
  
  	WF_NAME        2   Gets the actual title of the window
 	                   and copies the title in the buffer 
@@ -76,13 +76,13 @@
 
     WF_HSLIDE      8   \p W1 is filled in with the current
                        position of the horizontal slider
-                       between 1 and 1000. A value of one
+                       between 0 and 1000. A value of one
                        indicates that the slider is in its
                        leftmost position.
 
     WF_VSLIDE      9   \p W1 is filled in with the current
                        position of the vertical slider between
-                       1 and 1000. A value of one indicates
+                       0 and 1000. A value of one indicates
                        that the slider is in its uppermost
                        position.
 
@@ -116,13 +116,13 @@
 
     WF_HSLSIZE    15   \p W1 contains the size of the current
                        slider relative to the size of the
-                       scroll bar as a value from 1 to 1000.
+                       scroll bar as a value from 0 to 1000.
                        A value of 1000 indicates that the
                        slider is at its maximum size.
 
     WF_VSLSIZE    16   \p W1 contains the size of the current
                        slider relative to the size of the
-                       scroll bar as a value from 1 to 1000.
+                       scroll bar as a value from 0 to 1000.
                        A value of 1000 indicates that the
                        slider is at its maximum size.
 
@@ -133,8 +133,8 @@
                        WORD is returned in \p W2. The length of
                        the buffer is returned as a LONG with
                        the upper WORD being in \p W3 and the
-                       lower WORD being in \p W4. Note that TOS
-                       1.02 returns 0 in w and h by mistake.
+                       lower WORD being in \p W4. Note that GEM
+                       1.2 returns 0 in w and h by mistake.
                        The menu/alert buffer is used by the
                        AES to save the screen area hidden by
                        menus and alert boxes. It is not
