@@ -181,7 +181,20 @@ WF_TOOLBAR        30   This mode attaches a toolbar to the
                        respectively. \p W3 and \p W4 are
                        unused. Set \p W1 and \p W2 to 0 to
                        remove a toolbar.
-                       WF_TOOLBAR is available as of AES 4.10.</pre>
+                       WF_TOOLBAR is available as of AES 4.10.
+					
+WF_WIDGETS        200  Sets the actual positions of the slider
+                       widgets (W_UPARROW, W_DNARROW, and so on)
+					   of the window with the handle 'wi_ghandle'.
+					   The parameters wi_gw1 and wi_gw2 are the
+					   vertical elements of type rightwidget, the
+                       parameters wi_gw3 and wi_gw4 are the
+					   horizontal elements of type bottomwidgets.
+					   wi_g1 is the top, wi_gw2 the bottom widget
+					   of the vertical slider, wi_g3 the left, 
+					   wi_g4 the right widget of the horizotal
+					   slider.					   
+					   </pre>
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.
