@@ -272,7 +272,7 @@
  *                         returned or 1 if it is.
  *                    - \a out4 is currently reserved.
  *
- *  <tr><td> extended functions     <td>  64    <td>
+ *  <tr><td> #AES_EXTENDED     <td>  64    <td>
  *     	              Extended functions
  *                    - \a out1 is 0 if mt_shel_write() with #AP_AESTERM
  *                         is not supported or 1 if it is.
@@ -284,7 +284,7 @@
  *                    - \a out4 is 0 if mt_form_error() doesn't support all
  *                         GEMDOS error codes, or 1 if it does.
  *
- *  <tr><td> Additional N.AES functions <td>  65    <td>
+ *  <tr><td> #AES_NAES <td>  65    <td>
  *                    Additional N.AES functions
  *                    - \a out1 is 1 if mt_appl_control() is available, or
  *                         0 otherwise.
