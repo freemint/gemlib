@@ -189,6 +189,41 @@
  *
  *         Since XaAES 963
  *					   					
+ * <tr><td> #WF_OPTS	<td>	41	<td>
+ *          This mode allows to configure the feature of window on
+ *          mouse wheel events
+ *          - \a WindowHandle may be 0 (=> all the windows of the calling
+ *            application are then concerned)
+ *			- \a W1 is the mode : 0 = clear, 1 = set option bits
+ *          - \a W2 is the high WORD of option bitmask
+ *          - \a W3 is the low WORD of option bitmask
+ *          - \a W4 shall be set to 0.
+ *
+ *          bits of option mask are defined as follow:
+ *          - #WO_WHEEL (0x00000001) : Setting this bit will enable extended mouse
+ *            wheel support. Then, the reaction of applications on mouse wheel turns
+ *            may be tuned by calling mt_wind_set() with #WF_WHEEL command.
+ *          - #WO_FULLREDRAW (0x00000002) : Setting this bit will make AES send
+ *            #WM_REDRAW messages to cover the whole work-area of the window when it is
+ *            FULLED. Default behaviour is to only send #WM_REDRAW messages for the areas
+ *            that need it, blitting the already visible parts.
+ *          - #WO_NOBLITW (0x00000004) : Setting this bit will make AES send #WM_REDRAW
+ *            messages to cover the whole work-area of the window when its WIDTH changes.
+ *            This is handy for apps like HighWire, Textprocessors ,etc, that need to reformat
+ *            when window width changes. Default behaviour is to send #WM_REDRAW messages
+ *            for the areas that need it.
+ *          - #WO_NOBLITH (0x00000008) : Setting this bit will make AES send #WM_REDRAW
+ *            messages to cover the whole work-area of the window when its HEIGHT changes.
+ *            Default behaviour is to send #WM_REDRAW messages for the areas that need it.
+ *          - #WO_SENDREPOS (0x00000010) : Setting this bit will make AES send a
+ *            #WM_REPOSED message when a windows X/WIDTH and/or Y/HEIGHT coordinate pair changes.
+ *            Such changes happen when the user resizes the window using upper/left borders.
+ *            Default behaviour is to first send a #WM_MOVED followed by a #WM_SIZED
+ *            message under these conditions, because older apps dont evaluate the
+ *            WIDTH/HEIGHT in WM_MOVED messages.
+ *          
+ *         Since XaAES kernel module compiled on November 8 2004 or later.
+ *					   					
  * <tr><td> #WF_WIDGETS  <td>      200 <td>
  *          Sets the actual positions of the slider widgets
  *          (#W_UPARROW, #W_DNARROW, and so on)

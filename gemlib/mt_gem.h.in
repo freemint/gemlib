@@ -513,6 +513,30 @@ typedef struct pEvntrec
  */
 #define WM_TOOLBAR		37
 
+/** Message received when the user resizes the window using the
+ *  left/upper parts of the window border.
+ *
+ * - msg[0] = #WM_REPOSED
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = x
+ * - msg[5] = y
+ * - msg[6] = w
+ * - msg[7] = h of the new window location
+ *  
+ *  See mt_wind_set() with command #WF_OPTS, bit #WO_SENDREPOS for
+ *  details about the availability of this message.
+ *
+ *  Use mt_wind_set() with the command #WF_CURRXYWH to change the position
+ *  of the window. 
+ *
+ *  Available only with XaAES kernel module compiled on
+ *  November 8 2004 or later.
+ *
+ */
+#define WM_REPOSED		38
+
 /** message received when the user has selected a desk accessory to open
  *
  * - msg[0] = #AC_OPEN
@@ -526,29 +550,6 @@ typedef struct pEvntrec
  *
  */
 #define AC_OPEN			40
-
-/** Message sent by XaAES when WO_SENDREPOS window option is set and the
- *  user resizes the window by dragging the upper/left parts of the window
- *  border, causing x/width and/or y/height coordinates to change.
- *  This more or less combines WM_MOVED/WM_SIZED messages.
- *
- *  Available only with XaAES kernel module compiled on
- *  November 8 2004 or later.
- *
- * - msg[0] = #WM_REPOSED
- * - msg[1] = AES application ID of the sender
- * - msg[2] = 0
- * - msg[3] = handle of the window 
- * - msg[4] = x
- * - msg[5] = y
- * - msg[6] = w
- * - msg[7] = h of the new window location
- *
- *  Use mt_wind_set() with the command #WF_CURRXYWH to change the position
- *  of the window. 
- *
- */
-#define WM_REPOSED		38
 
 /** message received by a desk accessory when the accessory
  *  should be closed.
@@ -1171,10 +1172,10 @@ typedef  struct
 #define BEVENT_INFO     0x0002    /**< ?????, see #WF_BEVENT */
 
 /* wind_set(WF_OPTS) bitmask flags*/
-#define WO_WHEEL	0x00000001
+#define WO_WHEEL		0x00000001
 #define WO_FULLREDRAW	0x00000002
-#define WO_NOBLITW	0x00000004
-#define WO_NOBLITH	0x00000008
+#define WO_NOBLITW		0x00000004
+#define WO_NOBLITH		0x00000008
 #define WO_SENDREPOS	0x00000010
 
 /* wind_set(WF_WHEEL) modes */
