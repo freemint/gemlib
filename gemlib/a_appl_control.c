@@ -53,7 +53,7 @@
  *	  of the menu bar can result in an violation and terminate the application!
  *	<tr><td> #APC_WIDGETS <td> This mode inquires or sets the 'default' positions of the
  *	  window widgets. \a ap_cout is a pointer to buffer of size of MINWINOB (=12)
- *	  short integers (16 bits). For inquiring the OBJECT order this buffer must be filled completly with -1.
+ *	  short integers (16 bits). For inquiring the ::OBJECT order this buffer must be filled completly with -1.
  *	  The last \c short must equal 0! If an error is returned the buffer is not large
  *	  enough for all objects and should be enlarged. In the buffer the objects are
  *	  contained in the following order: first the title bar from the left to the right,
