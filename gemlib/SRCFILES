@@ -2,6 +2,8 @@
 # the files that should go only into source distributions.
 
 HEADER = \
+	gem_aesP.h \
+	gem_vdiP.h \
 	gem.h \
 	gemx.h \
 	mt_gem.h \
