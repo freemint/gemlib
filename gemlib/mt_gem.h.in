@@ -163,7 +163,7 @@ typedef struct pEvntrec
 /** message received when a menu entry has been selected
  *
  * - msg[0] = #MN_SELECTED
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = title menu index
  * - msg[4] = item menu index
@@ -180,7 +180,7 @@ typedef struct pEvntrec
 /** message received when a portion of the screen has to be redrawn
  *
  * - msg[0] = #WM_REDRAW
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window to redraw
  * - msg[4] = x,
@@ -198,7 +198,7 @@ typedef struct pEvntrec
  *  by the user.
  *
  * - msg[0] = #WM_TOPPED
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = 
@@ -214,7 +214,7 @@ typedef struct pEvntrec
 /** message received when the user clicks on a window's close box.
  *
  * - msg[0] = #WM_CLOSED
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = 
@@ -230,7 +230,7 @@ typedef struct pEvntrec
 /** message received when the user clicks on a window's full box.
  *
  * - msg[0] = #WM_FULLED
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = 
@@ -249,7 +249,7 @@ typedef struct pEvntrec
 /** message received when the user clicks on one of the slider gadgets of a window.
  *
  * - msg[0] = #WM_ARROWED
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = one of the following operation code:
@@ -278,7 +278,7 @@ typedef struct pEvntrec
 /** message received when the user moves the horizontal slider of a window.
  *
  * - msg[0] = #WM_HSLID
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = new slider position from 0 to 1000.
@@ -293,7 +293,7 @@ typedef struct pEvntrec
 /** message received when the user moves the vertical slider of a window.
  *
  * - msg[0] = #WM_VSLID
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = new slider position from 0 to 1000.
@@ -308,7 +308,7 @@ typedef struct pEvntrec
 /** message received when the user drags the window sizing gadget.
  *
  * - msg[0] = #WM_SIZED
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = x
@@ -327,7 +327,7 @@ typedef struct pEvntrec
  *  window title bar.
  *
  * - msg[0] = #WM_MOVED
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = x
@@ -345,7 +345,7 @@ typedef struct pEvntrec
 /** message received when the user has topped a window
  *
  * - msg[0] = #WM_NEWTOP
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = 
@@ -360,7 +360,7 @@ typedef struct pEvntrec
  *  as the result of another window being topped.
  *
  * - msg[0] = #WM_UNTOPPED
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = 
@@ -370,6 +370,9 @@ typedef struct pEvntrec
  *
  *  The application need take no action. The message is for informational
  *  use only.
+ *
+ *  @since AES version 4.0.  The availability of this feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
  */
 #define WM_UNTOPPED		30
 
@@ -377,7 +380,7 @@ typedef struct pEvntrec
 *   AES.
  *
  * - msg[0] = #WM_ONTOP
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = 
@@ -387,6 +390,9 @@ typedef struct pEvntrec
  *
  *  The application need take no action. The message is for informational
  *  use only.
+ *
+ *  @since AES version 4.0.  The availability of this feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
  */
 #define WM_ONTOP		31
 
@@ -394,7 +400,7 @@ typedef struct pEvntrec
  *  of the window stack.
  *
  * - msg[0] = #WM_BOTTOM
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = 
@@ -407,6 +413,9 @@ typedef struct pEvntrec
  *
  *  Note: the way the user may send a window to the bottom depend on the AES and its
  *  configuration.
+ *
+ *  @since AES version 4.1.  The availability of this feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
  */
 #define WM_BOTTOM		33
 #define WM_BOTTOMED		WM_BOTTOM	/**< see #WM_BOTTOM */
@@ -414,7 +423,7 @@ typedef struct pEvntrec
 /** message received when the user clicks on the #SMALLER window gadget
  *
  * - msg[0] = #WM_ICONIFY
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = x
@@ -425,13 +434,16 @@ typedef struct pEvntrec
  *  The application should then iconify the window
  *  by calling mt_wind_set() with #WF_ICONIFY command.
  *
+ *  @since AES version 4.1.  The availability of this feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *
  */
 #define WM_ICONIFY		34
 
 /** message received when the user double-clicks on the iconified window
  *
  * - msg[0] = #WM_UNICONIFY
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = x
@@ -442,6 +454,9 @@ typedef struct pEvntrec
  *  The application should then uniconify the window
  *  by calling mt_wind_set() with #WF_UNICONIFY command.
  *
+ *  @since AES version 4.1.  The availability of this feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *
  */
 #define WM_UNICONIFY	35
 
@@ -449,7 +464,7 @@ typedef struct pEvntrec
  *  the CONTROL key is pressed.
  *
  * - msg[0] = #WM_ALLICONIFY
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = x
@@ -459,13 +474,16 @@ typedef struct pEvntrec
  *
  *  The application should then close all opened windows, and open a new iconified
  *  window at the position indicated which represents the application.
+ *
+ *  @since AES version 4.1.  The availability of this feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
  */
 #define WM_ALLICONIFY	36
 
 /** message received when the user clicks on a toolbar object
  *
  * - msg[0] = #WM_TOOLBAR
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window 
  * - msg[4] = index of the object clicked
@@ -473,13 +491,16 @@ typedef struct pEvntrec
  * - msg[6] = state of the keyboard shift keys (see mt_evnt_keybd())
  * - msg[7] = 
  *
+ *  @since AES version 4.1.  The availability of this feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *
  */
 #define WM_TOOLBAR		37
 
 /** message received when the user has selected a desk accessory to open
  *
  * - msg[0] = #AC_OPEN
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] =  
  * - msg[4] = AES application ID of the accessory to open
@@ -494,7 +515,7 @@ typedef struct pEvntrec
  *  should be closed.
  *
  * - msg[0] = #AC_CLOSE
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = AES application ID of the accessory to close.
  * - msg[4] = 
@@ -513,7 +534,7 @@ typedef struct pEvntrec
  *  terminate.
  *
  * - msg[0] = #AP_TERM
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = 
  * - msg[4] = 
@@ -534,6 +555,9 @@ typedef struct pEvntrec
  *
  *  Note: Desk accessory will always be sent #AC_CLOSE message, not
  *  #AP_TERM
+ *
+ *  @since AES version 4.0.  The availability of this feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
  */
 #define AP_TERM			50
 
@@ -564,7 +588,7 @@ typedef struct pEvntrec
  *  shutdown is complete and was successful.
  *
  * - msg[0] = #SHUT_COMPLETED
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = 
  * - msg[4] = 
@@ -572,6 +596,8 @@ typedef struct pEvntrec
  * - msg[6] = 
  * - msg[7] = 
  *
+ *  @since AES version 4.0.  The availability of this feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
  */
 #define SHUT_COMPLETED		60
 
@@ -579,7 +605,7 @@ typedef struct pEvntrec
  *  when the resolution change is complete.
  *
  * - msg[0] = #SHUT_COMPLETED
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = indicate the success of the resolution change:
  *            - 1 if the resolution change was succesful
@@ -589,6 +615,9 @@ typedef struct pEvntrec
  * - msg[6] = 
  * - msg[7] = 
  *
+ *
+ *  @since AES version 4.0.  The availability of this feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
  */
 #define RESCHG_COMPLETED	61
 
@@ -599,7 +628,7 @@ typedef struct pEvntrec
  *  drag and drop session.
  *
  * - msg[0] = #AP_DRAGDROP
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = handle of the window which had an object dropped on,
  *            or -1 if no specific window was targeted
@@ -618,7 +647,7 @@ typedef struct pEvntrec
  *  window.
  *
  * - msg[0] = #SH_WDRAW
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = drive number to update (0=A, 1=B, etc...) or -1
  *            to update all windows
@@ -639,13 +668,16 @@ typedef struct pEvntrec
  *  started returns.
  *
  * - msg[0] = #CH_EXIT
- * - msg[1] = AES application ID
+ * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = child's application identifier
  * - msg[4] = exit code of the child application
  * - msg[5] = 
  * - msg[6] = 
  * - msg[7] =
+ *
+ *  @since AES version 4.0.  The availability of this feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
  */
 #define CH_EXIT 			90
 
