@@ -24,12 +24,11 @@
 void
 vsl_ends (short handle, short begstyle, short endstyle)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[2];   
 	short vdi_intout[2]; 
+	
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy );
-#endif
 	
 	vdi_intin[0] = begstyle;
 	vdi_intin[1] = endstyle;
