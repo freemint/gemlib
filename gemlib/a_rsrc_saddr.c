@@ -7,7 +7,8 @@
 /** sets the address of a resource element.
  *
  *  @param Type specifies the type of resource element to set as
- *         defined under mt_rsrc_gaddr()
+ *         defined under mt_rsrc_gaddr()\n
+ *         Use only 7 to 16 here! Others destroy a part of the object tree.
  *  @param Index specifies the index of the element to modify (0 based)
  *  @param Address specifies the actual address that will be placed in
  *         the appropriate data structure.
