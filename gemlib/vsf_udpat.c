@@ -39,16 +39,9 @@
 void
 vsf_udpat (short handle, short pat[], short planes)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+	
 	VDI_PARAMS(vdi_control, pat, 0L, vdi_dummy, vdi_dummy );
-#else
-	vdi_params.intin = pat;
-#endif
 		
 	VDI_TRAP (vdi_params, handle, 112, 0, planes * 16);
-
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.intin = vdi_intin;
-#endif
 }
