@@ -3,7 +3,6 @@
  */
 
 #include "mt_gem.h"
-#include "gem.h"
 
 /** transform a PXY-array structure to a GRECT structure
  *

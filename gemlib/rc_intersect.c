@@ -4,7 +4,6 @@
 
 #include <macros.h>
 #include "mt_gem.h"
-#include "gem.h"
 
 /** Compute the interesection of two rectangles
  *

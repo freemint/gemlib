@@ -3,7 +3,6 @@
  */
 
 #include "mt_gem.h"
-#include "gem.h"
 
 /** transform VDI-string (each character is 16-bit wide, the string is not
  *  null-terminated and len is in another parameter) to standard C-string.

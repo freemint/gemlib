@@ -3,7 +3,6 @@
  */
 
 #include "mt_gem.h"
-#include "gem.h"
 
 /** return the length of a w-string
  *
