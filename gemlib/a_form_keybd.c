@@ -18,10 +18,12 @@
  *               exit to be the new object with edit focus unless the return
  *               key was pressed with a default object present in which case
  *               it equals the object index of the object that was the
- *               default.
+ *               default. \n
+ *             [option CHECK_NULLPTR] nextobject may be NULL
  *  @param nextchar is the value ready to be passed on to mt_objc_edit()
  *               if no processing was required or 0 if the key was processed
- *               and handled by the call.
+ *               and handled by the call. \n
+ *             [option CHECK_NULLPTR] nextchar may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 if a default EXIT object was
@@ -52,7 +54,13 @@ mt_form_keybd(OBJECT *tree, short object, short reserved, short key, short *next
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (nextobject)
+#endif
 	*nextobject = aes_intout[1];
+#if CHECK_NULLPTR
+	if (nextchar)
+#endif
 	*nextchar = aes_intout[2];
 
 	return aes_intout[0];

@@ -13,7 +13,8 @@
  *  @param cy
  *  @param cw
  *  @param ch is a clipping rectangle suitable for
- *            use in objc_draw() returned.
+ *            use in objc_draw() returned. \n
+ *             [option CHECK_NULLPTR] cx, cy, cw and/or ch may be NULL
  *  @param global_aes global AES array
  *
  *  @return is currently reserved. Currently it equals 1.
@@ -39,9 +40,21 @@ mt_form_center(OBJECT *tree, short *cx, short *cy, short *cw, short *ch, short *
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (cx)
+#endif
 	*cx = aes_intout[1];
+#if CHECK_NULLPTR
+	if (cy)
+#endif
 	*cy = aes_intout[2];
+#if CHECK_NULLPTR
+	if (cw)
+#endif
 	*cw = aes_intout[3];
+#if CHECK_NULLPTR
+	if (ch)
+#endif
 	*ch = aes_intout[4];
 
  	return aes_intout[0];
