@@ -9,10 +9,14 @@
  *  @param handle Device handle
  *  @param height requested character height. The height is specified as the 
  *         distance between baseline and the top of the character cell.
- *  @param charw selected character width
- *  @param charh selected character height
- *  @param cellw selected character cell width
- *  @param cellh selected character cell height
+ *  @param charw selected character width \n
+ *         [option CHECK_NULLPTR] charw may be NULL
+ *  @param charh selected character height \n
+ *         [option CHECK_NULLPTR] charh may be NULL
+ *  @param cellw selected character cell width \n
+ *         [option CHECK_NULLPTR] cellw may be NULL
+ *  @param cellh selected character cell height \n
+ *         [option CHECK_NULLPTR] cellh may be NULL
  *
  *  @return AFAIK, nothing... who know what VDI puts in vdi_intout[0] ?
  *
@@ -39,7 +43,9 @@ void
 vst_height (short handle, short height,
             short *charw, short *charh, short *cellw, short *cellh)
 {
+#if !(CHECK_NULLPTR)
 	short *ptr;
+#endif
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsin[2];   
@@ -52,9 +58,16 @@ vst_height (short handle, short height,
 
 	VDI_TRAP (vdi_params, handle, 12, 1,0);
 
+#if CHECK_NULLPTR
+	if (charw) *charw = vdi_ptsout[0];
+	if (charh) *charh = vdi_ptsout[1];
+	if (cellw) *cellw = vdi_ptsout[2];
+	if (cellh) *cellh = vdi_ptsout[3];
+#else
 	ptr = vdi_ptsout;
 	*charw = *(ptr ++);			 				 /* *charw = vdi_ptsout[0] */
 	*charh = *(ptr ++);			 				 /* *charh = vdi_ptsout[1] */
 	*cellw = *(ptr ++);			 				 /* *cellw = vdi_ptsout[2] */
 	*cellh = *(ptr);			 				 /* *cellh = vdi_ptsout[3] */
+#endif
 }
