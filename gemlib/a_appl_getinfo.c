@@ -252,7 +252,7 @@ AES_FORM       14    AES Form Support
  *
  *  @note
  *  If mt_appl_getinfo() is not implemented (gl_ap_version < 0X0401 and the
- *  application "?AGI\0\0\0\0" (Winx) is not found), the trap is not performed
+ *  application "?AGI" (Winx) is not found), the trap is not performed
  *  (may crash on some system).
  */
 
