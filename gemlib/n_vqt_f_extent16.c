@@ -1,8 +1,9 @@
+/*
+ *   NOTE: requires NVDI version 3.x or higher
+ */
 
 #include "gemx.h"
 
-
-short vdi_wstrlen (const short *wstr);
 
 void
 vqt_f_extent16 (short handle, const short *wstr, short extent[])
@@ -24,7 +25,3 @@ vqt_f_extent16 (short handle, const short *wstr, short extent[])
 	for (i = 0; i < 8; i++)
 		extent[i] = vdi_ptsout[i];
 }
-
-/*
- * * NOTE: requires NVDI version 3.x or higher
- */
