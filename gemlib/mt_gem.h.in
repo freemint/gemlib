@@ -60,6 +60,12 @@ __BEGIN_DECLS
 #define DESKTOP_HANDLE		0
 #define DESK			 	DESKTOP_HANDLE
 
+/* appl_control mode */
+#define APC_HIDE			10
+#define APC_SHOW			11
+#define APC_TOP 			12
+#define APC_HIDENOT 		13
+
 /* appl_getinfo modes */
 #define AES_LARGEFONT		0
 #define AES_SMALLFONT		1
