@@ -35,14 +35,7 @@ vst_arbpt32 (short handle, long point,
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[2]; 
 	short vdi_ptsout[4]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		(short*)&point,              /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		&vdi_intout[0],              /* vdi_intout  */
-		&vdi_ptsout[0]               /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, (short*)&point, 0L, vdi_intout, vdi_ptsout);
 #else
 	*(long*)&vdi_intin[0] = point;
 #endif

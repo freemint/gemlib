@@ -30,14 +30,7 @@ vst_setsize (short handle, short point,
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[2]; 
 	short vdi_ptsout[4]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&point,                      /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		&vdi_intout[0],              /* vdi_intout  */
-		&vdi_ptsout[0]               /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, &point, 0L, vdi_intout, vdi_ptsout);
 #else
 	vdi_intin[0] = point;
 #endif

@@ -38,14 +38,7 @@ vqt_xfntinfo (short handle, short flags, short id, short index, XFNT_INFO *info)
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[5];   
 	short vdi_intout[3]; /* vdi_intout[0..2] will be filled */
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&vdi_intin[0],               /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		&vdi_intout[0],              /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
 #endif
 	
 	info->size = sizeof (XFNT_INFO);
