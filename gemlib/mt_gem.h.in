@@ -789,50 +789,54 @@ typedef struct pEvntrec
 #define FSEL_OK			 1	/**< the fileselector has been closed by using the OK button, see mt_fsel_exinput()  */
 
 /* menu_attach modes */
-#define ME_INQUIRE		0	/**< TODO */
-#define ME_ATTACH 		1	/**< TODO */
-#define ME_REMOVE 		2	/**< TODO */
+#define ME_INQUIRE		0	/**< inquire information on a sub-menu attached, see mt_menu_attach() */
+#define ME_ATTACH 		1	/**< attach or change a sub-menu, see mt_menu_attach() */
+#define ME_REMOVE 		2	/**< remove a sub-menu. see mt_menu_attach() */
 
 /* menu_attach attributes */
-#define SCROLL_NO 		0	/**< TODO */
-#define SCROLL_YES		1	/**< TODO */
+#define SCROLL_NO 		0	/**< the menu will not scroll, see MENU::mn_scroll structure */
+#define SCROLL_YES		1	/**< menu may scroll if it is too high, see MENU::mn_scroll structure  */
 
 /* menu_bar modes */
-#define MENU_INQUIRE	-1	/**< TODO */
-#define MENU_REMOVE		0	/**< TODO */
-#define MENU_INSTALL	1	/**< TODO */
-#define MENU_GETMODE	3	   /**< Get the menu bar mode */
-#define MENU_SETMODE	4	   /**< Set the menu bar mode */
-#define MENU_UPDATE 	5	   /**< Update the system part of the menu bar */
-#define MENU_INSTL		100    /**< Install a menu without switching the top application (Magic) */
+#define MENU_INQUIRE	-1	/**< inquire the AES application ID of the process which own the displayed menu, see mt_menu_bar() */
+#define MENU_REMOVE		0	/**< remove a menu bar, see mt_menu_bar() */
+#define MENU_INSTALL	1	/**< install a menu bar, see mt_menu_bar() */
+#define MENU_GETMODE	3	   /**< Get the menu bar mode, see mt_menu_bar() */
+#define MENU_SETMODE	4	   /**< Set the menu bar mode, see mt_menu_bar() */
+#define MENU_UPDATE 	5	   /**< Update the system part of the menu bar, see mt_menu_bar() */
+#define MENU_INSTL		100    /**< Install a menu without switching the top application (Magic), see mt_menu_bar() */
 
 
 /* MENU_GETMODE and MENU_SETMODE bits */
-#define  MENU_HIDDEN	0x0001 /**< menu bar only visible when needed */
-#define  MENU_PULLDOWN  0x0002 /**< Pulldown-Menus */
-#define  MENU_SHADOWED  0x0004 /**< menu bar with shadows */
+#define  MENU_HIDDEN	0x0001 /**< menu bar only visible when needed, see #MENU_GETMODE or #MENU_SETMODE */
+#define  MENU_PULLDOWN  0x0002 /**< Pulldown-Menus, see #MENU_GETMODE or #MENU_SETMODE */
+#define  MENU_SHADOWED  0x0004 /**< menu bar with shadows, see #MENU_GETMODE or #MENU_SETMODE */
 
 /* menu_icheck modes */
-#define UNCHECK			0	/**< TODO */
-#define CHECK			1	/**< TODO */
+#define UNCHECK			0	/**< remove the check mark of a menu item, see mt_menu_icheck() */
+#define CHECK			1	/**< set a check mark of a menu item, see mt_menu_icheck() */
 
 /* menu_ienable modes */
-#define DISABLE			0	/**< TODO */
-#define ENABLE 			1	/**< TODO */
+#define DISABLE			0	/**< disable a menu item, see mt_menu_ienable() */
+#define ENABLE 			1	/**< enable a menu item, see mt_menu_ienable() */
 
 /* menu_istart modes */
-#define MIS_GETALIGN 		0	/**< TODO */
-#define MIS_SETALIGN 		1	/**< TODO */
+#define MIS_GETALIGN 		0	/**< get the alignment of a parent menu item with a sub-menu item, see mt_menu_istart() */
+#define MIS_SETALIGN 		1	/**< set the alignment of a parent menu item with a sub-menu item, see mt_menu_istart() */
 
 /* menu_popup modes */
-#define SCROLL_LISTBOX		-1	/**< TODO */
+#define SCROLL_LISTBOX		-1	/**< display a drop-down list (with slider) instead of popup menu, see MENU::mn_scroll */
 
 /* menu_register modes */
-#define REG_NEWNAME		-1	/**< TODO */
+#define REG_NEWNAME		-1	/**< register your application with a new name, see mt_menu_register() */
+
+/* menu_settings modes */
+#define MN_INQUIRE      0  /**< inquire the current menu settings, see mt_menu_settings() */
+#define MN_CHANGE       1  /**< set the menu settings, see mt_menu_settings() */
 
 /* menu_tnormal modes */
-#define HIGHLIGHT		0	/**< TODO */
-#define UNHIGHLIGHT		1	/**< TODO */
+#define HIGHLIGHT		0	/**< display the title in reverse mode, see mt_menu_tnormal() */
+#define UNHIGHLIGHT		1	/**< display the title in normal mode, see mt_menu_tnormal() */
 
 /** menu_settings uses a new structure for setting and inquiring the submenu
     delay values and the menu scroll height.*/
@@ -1553,11 +1557,13 @@ typedef struct _menu
 	short  mn_menu;     /**< Is an index to the parent object of the menu items. */
 	short  mn_item;     /**< Is the starting menu item */
 	short  mn_scroll;   /**< contains one of the following values:
-	                         - #SCROLL_NO (0), the menu will not scroll.
-                             - #SCROLL_YES (1), if the number of menu
+	                         - #SCROLL_NO , the menu will not scroll.
+                             - #SCROLL_YES , if the number of menu
                              items exceed the menu scroll height, arrows
                              will appear which allow the user to scroll
-                             selections.*/
+                             selections.
+							 - #SCROLL_LISTBOX to display a drop-down list
+							 instead of a popup menu, see mt_menu_popup() */
 	short  mn_keystate; /**< key state */
 } MENU;
 

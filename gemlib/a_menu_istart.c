@@ -8,14 +8,14 @@
  *  item to align vertically with the specified object in the
  *  sub-menu.
  *
- *  @param me_flag should be set to MIS_SETALIGN (1) to modify the
- *         alignment of a sub-menu and its parent menu item. If \p me_flag
- *         is set to MIS_GETALIGN (0), no modifications will be made,
+ *  @param me_flag should be set to #MIS_SETALIGN (1) to modify the
+ *         alignment of a sub-menu and its parent menu item. If \a me_flag
+ *         is set to #MIS_GETALIGN (0), no modifications will be made,
  *         however the sub-menu item index which is currently aligned
  *         with its parent menu item is returned.
  *  @param me_tree points to the object tree of the menu to alter
  *  @param me_imenu specifies the object within the submenu which will be
- *         aligned with menu item \p me_item
+ *         aligned with menu item \a me_item
  *  @param me_item see above
  *  @param global_aes global AES array
  *

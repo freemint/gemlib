@@ -9,8 +9,8 @@
  *  @param me_tree specifies the object tree of the menu
  *  @param me_item specifies the object index of the title to change
  *  @param me_normal should be set
- *         to HIGHLIGHT (0) to display the title in reverse
- *         (highlighted) or UNHIGHLIGHT (1) to display it normally
+ *         to #HIGHLIGHT (0) to display the title in reverse
+ *         (highlighted) or #UNHIGHLIGHT (1) to display it normally
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.
@@ -18,7 +18,7 @@
  *  @since  AES versions
  *
  *  This call is usually called by an application after
- *  a MN_SELECTED message is received and processed to return
+ *  a #MN_SELECTED message is received and processed to return
  *  the menu title to normal.
  *
  */

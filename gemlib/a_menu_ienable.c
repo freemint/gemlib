@@ -8,7 +8,7 @@
  *
  *  @param me_tree specifies the object tree of the menu to alter
  *  @param me_item is the object index of the menu item to modify
- *  @param me_enable should be set to DISABLE (0) to disable the item or ENABLE (1) to
+ *  @param me_enable should be set to #DISABLE (0) to disable the item or #ENABLE (1) to
  *         enable it.
  *  @param global_aes global AES array
  *

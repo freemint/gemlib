@@ -8,10 +8,10 @@
  *  scrollable menus
  *
  *  @param me_flag is one of the following value:
- *         - MN_INQUIRE (0) : current settings are read into
- *           the MN_SET structure pointed to by \p me_values.
- *         - MN_CHANGE (1) : current settings are set from the MN_SET
- *           structure pointed to by \p me_values.
+ *         - #MN_INQUIRE (0) : current settings are read into
+ *           the MN_SET structure pointed to by \a me_values.
+ *         - #MN_CHANGE (1) : current settings are set from the MN_SET
+ *           structure pointed to by \a me_values.
  *  @param me_values see above
  *  @param global_aes global AES array
  *
