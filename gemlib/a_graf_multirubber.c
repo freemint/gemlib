@@ -40,7 +40,7 @@
 short
 mt_graf_multirubber(short bx, short by, short mw, short mh, GRECT *rec, short *rw, short *rh, short *global_aes)
 {
-	AES_PARAMS(70,4,3,1,0);
+	AES_PARAMS(69,4,3,1,0);
 
 	aes_intin[0] = bx;
 	aes_intin[1] = by;
