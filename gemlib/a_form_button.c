@@ -16,7 +16,8 @@
  *  @param nextobj the next object to gain edit focus or 0 if
  *               there are no editable objects. If the top bit of \p nextobj is
  *               set, this indicates that a TOUCHEXIT object was
- *               double-clicked.
+ *               double-clicked. \n
+ *             [option CHECK_NULLPTR] nextobj may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 if it exits finding an EXIT or
@@ -49,6 +50,9 @@ mt_form_button(OBJECT *tree, short object, short clicks, short *nextobj, short *
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (nextobj)
+#endif
 	*nextobj = aes_intout[1];
 
 	return aes_intout[0];

@@ -24,7 +24,8 @@
  *         file contains the filename which the user selected.
  *  @param exit_but is a short pointer which upon function exit will
  *         contain FSEL_CANCEL (0) if the user selected CANCEL or
- *         FSEL_OK (1) if OK.
+ *         FSEL_OK (1) if OK. \n
+ *             [option CHECK_NULLPTR] exit_but may be NULL
  *  @param title should be a pointer to a character string up to 30
  *         characters long which contains the title to appear in the
  *         file selector (usually indicates which action the user is
@@ -61,6 +62,9 @@ mt_fsel_exinput (char *path, char *file, short *exit_but, const char *title, sho
 
 		AES_TRAP(aes_params);
 	
+#if CHECK_NULLPTR
+		if (exit_but)
+#endif
 		*exit_but = aes_intout[1];
 
 		return  aes_intout[0];
