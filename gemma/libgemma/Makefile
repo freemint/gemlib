@@ -23,7 +23,7 @@ all-here: libs
 GENFILES = .lib* libgem*.a
 
 
-libs: normal normal020 mt mt020
+libs: normal normal020
 
 normal:
 	$(MAKE) libgemma.a TARGET=""
