@@ -20,7 +20,7 @@ all-here: $(TARGET)
 
 # default overwrites
 INCLUDES += -I../include/
-GENERAL = 
+GENERAL += 
 
 # default definitions
 OBJS =  $(SOBJS:.s=.o) $(COBJS:.c=.o)

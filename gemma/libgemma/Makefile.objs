@@ -14,12 +14,13 @@ default: all
 include $(top_srcdir)/CONFIGVARS
 include $(top_srcdir)/RULES
 include $(top_srcdir)/PHONY
+include $(srcdir)/../VERSION
 
 all-here: objs
 
 # default overwrites
 INCLUDES = -I$(top_srcdir)/gemma/include/ -I$(top_srcdir)/gemlib/
-GENERAL = 
+GENERAL += 
 DEFINITIONS =
 
 ifeq ($(TARGET),020)

@@ -20,7 +20,7 @@ all-here: $(TARGET)
 
 # default overwrites
 INCLUDES += 
-GENERAL = -m68020-60
+GENERAL += -m68020-60
 
 # default definitions
 OBJS =  $(SOBJS:.s=.o) $(COBJS:.c=.o)
