@@ -1392,6 +1392,7 @@ short vswr_mode (VdiHdl , short mode);
 short vsf_color     (VdiHdl , short color_idx);
 short vsf_interior  (VdiHdl , short style);
 short vsf_perimeter (VdiHdl , short vis);
+short vsf_perimeter3(VdiHdl , short vis, short style);
 short vsf_style     (VdiHdl , short style);
 void  vsf_udpat     (VdiHdl , short pat[], short planes);
 
