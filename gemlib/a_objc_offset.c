@@ -31,6 +31,9 @@
  *  an object you are responsible for using these values to and
  *  the object's state to compensate for a correct clipping
  *  rectangle.
+ *
+ *  @note if you call the AES trap by yourself, note that some AES
+ *   writes to intout[3..6]!
  */
 
 short 
