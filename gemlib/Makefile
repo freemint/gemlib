@@ -34,7 +34,13 @@ mshort:
 	$(MAKE) libgem16.a TARGET="16"
 
 .PHONY: doc
-doc: Doxyfile
+
+ChangeLog:
+	cvs log -d "20021201<" . >ChangeLog.tmp
+	perl cvs2cl.pl --usermap users --stdin --stdout <ChangeLog.tmp >ChangeLog
+	rm -f ChangeLog.tmp
+	
+doc: Doxyfile ChangeLog
 	doxygen Doxyfile
 # 	udo -s -l -W -y doc/udo/index.u -o doc/stg/gemlib.stg
 # 	udo -h -l -W -y doc/udo/index.u -o doc/html/index.htm
