@@ -136,7 +136,7 @@ SWM_SHUTDOWN   4   Manipulate 'Shutdown' mode. Shutdown
 
 SWM_RESCHANGE  5   Change screen resolution. \p wisgr is the
                    work station ID (same as in AES
-                   aes_global[13]) of the new resolution. No
+                   global_aes[13]) of the new resolution. No
                    other parameters are utilized.
                    This mode is only recognized as of AES
                    version 4.0.
