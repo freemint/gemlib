@@ -934,6 +934,8 @@ void  vst_width	(VdiHdl, short width, short *char_width, short *char_height, sho
 short	vqt_char_index (short handle, short scr_index, short scr_mode, short dst_mode);
 short vst_map_mode   (short handle, short mode);
 
+#define vqt_is_char_available(handle,unicode) \
+	(vqt_char_index(handle,unicode,CHARIDX_UNICODE,CHARIDX_DIRECT)!=0xFFFF)
 
 /*
  * The following functions requires NVDI version 5.x or higher
