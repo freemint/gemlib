@@ -721,7 +721,8 @@ void	v_getoutline	(short handle, short ch, short *xyarray, char *bezarray, short
 void	vq_devinfo	(short handle, short device, short *dev_open, char *file_name, char *device_name);
 short	vq_ext_devinfo	(short handle, short device, short *dev_exists, char *file_path, char *file_name, char *name);
 
-void	vqt_advance	(short handle, short ch, long *advx, long *advy);
+void	vqt_advance	(short handle, short ch, short *advx, short *advy, short *xrem, short *yrem);
+void	vqt_advance32	(short handle, short ch, long *advx, long *advy);
 short	vqt_ext_name	(short handle, short __index, char *name, short *font_format, short *flags);
 void	vqt_f_extent	(short handle, const char *str, short extent[]);
 void	vqt_f_extent16	(short handle, const short *str, short extent[]);
