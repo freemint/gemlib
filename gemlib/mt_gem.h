@@ -1519,8 +1519,10 @@ void  vqt_get_table  (VdiHdl , short **map);
 short vqt_name       (VdiHdl , short element, char *name);
 short vqt_width      (VdiHdl , short chr, short *cw,
                                short *ldelta, short *rdelta);
-
+/** TODO */
 short vq_gdos  (void);
+
+/** TODO */
 long  vq_vgdos (void);
 /**@}*/
 
