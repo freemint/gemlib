@@ -189,7 +189,7 @@ typedef struct pEvntrec
 #define FERR_DELETEDIR		16
 #define FERR_NOFILES 		18
 
-/* fsel_(ex)input return values*/
+/* fsel_(ex)input return values */
 #define FSEL_CANCEL		 0
 #define FSEL_OK			 1
 
@@ -438,7 +438,7 @@ typedef struct _mn_set
 #define G_CICON			33
 
 /* extended object types, MagiC only */
-#define G_SWBUTTON		34	
+#define G_SWBUTTON		34
 #define G_POPUP			35
 #define G_WINTITLE		36
 #define G_EDIT			37
@@ -945,7 +945,7 @@ short	shel_read 	(char *Command, char *Tail);
 short	shel_wdef	(const char *lpcmd, const char *lpdir);
 short	shel_write	(short Exit, short Graphic, short Aes, void *Command, char *Tail);
 
-short	wind_calc 	(short Type, short Parts, short InX, short InY, short InW, short InH, short *OutX, short *OutY, short *OutW, short *OutH);	
+short	wind_calc 	(short Type, short Parts, short InX, short InY, short InW, short InH, short *OutX, short *OutY, short *OutW, short *OutH);
 short	wind_close 	(short WindowHandle);
 short	wind_create 	(short Parts, short Wx, short Wy, short Ww, short Wh); 
 short	wind_delete 	(short WindowHandle);
@@ -1124,8 +1124,9 @@ void aes (AESPB *pb);
 #define TA_TOP          	5
 
 /* vst_charmap modes */
-#define MAP_BITSTREAM		0
-#define MAP_ATARI		1
+#define MAP_BITSTREAM   0
+#define MAP_ATARI       1
+#define MAP_UNICODE     2 /* for vst_map_mode, NVDI 4 */
 
 /* vst_effects modes */
 #define TXT_NORMAL		0x0000
