@@ -22,10 +22,11 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <mint/dcntl.h>
-# include <mintbind.h>
+# include <mint/mintbind.h>
 
 # include "gemma.h"
 # include "dosproto.h"
+# include "proc.h"
 
 # define SMS_JUSTSEND	0
 # define SMS_REPLSEND	1
@@ -44,39 +45,43 @@ typedef struct
 } SMSBLK;
 
 INLINE long
-smswrite(SMSBLK *smsblk)
+smswrite(PROC_ARRAY *proc, SMSBLK *smsblk)
 {
 	long file, r;
 
-	file = r = Fopen(smsname, O_WRONLY|O_DENYNONE);
+	file = r = _open(proc, smsname, O_WRONLY|O_DENYNONE);
 	if (r < 0)
 		return r;
-	r = Fwrite(file, sizeof(SMSBLK), (void *)smsblk);
-	Fclose(file);
+	r = _write(proc, file, sizeof(SMSBLK), (void *)smsblk);
+	_close(proc, file);
 
 	return 0;
 }
 
-void
+static void
 sig_child(void)
 {
+	short pid = Pgetpid();
 	long p;
 	SMSBLK sms;
+	PROC_ARRAY *proc;
 
-	p = _wait3(1, 0L);
+	proc = pidtable[pid];
+
+	p = _wait3(proc, 1, 0L);
 	if (p == 0)
 		return;
 	bzero(&sms, sizeof(SMSBLK));
 
 	sms.command = (ushort)(SMS_JUSTSEND|SMS_PID2APID);
-	sms.destproc = (short)_sgetpid();
+	sms.destproc = pid;
 	sms.length = 16;
 	sms.msg[0] = CH_EXIT;
 	sms.msg[1] = 0;
 	sms.msg[2] = 0;
 	sms.msg[3] = (short)(p>>16);
 	sms.msg[4] = (short)p;
-	smswrite(&sms);
+	smswrite(proc, &sms);
 }
 
 INLINE long
@@ -87,7 +92,7 @@ getprgflags(PROC_ARRAY *proc)
 	file = r = _open(proc, selfname, O_RDONLY);
 	if (r < 0)
 		return (F_FASTLOAD | F_ALTLOAD | F_ALTALLOC);
-	r = _cntl(file, &flags, PGETFLAGS);
+	r = _cntl(proc, file, &flags, PGETFLAGS);
 	_close(proc, file);
 	if (r < 0)
 		return (F_FASTLOAD | F_ALTLOAD | F_ALTALLOC);
@@ -122,7 +127,7 @@ proc_exec(BASEPAGE *bp, long fn, short nargs, \
 	if ((nargs < 6) || !proc) proc = get_contrl(bp);
 
 	if (flags & 4)
-		_signal(SIGCHLD, sig_child);
+		_signal(proc, SIGCHLD, sig_child);
 
 	if (flags & 3)
 	{
@@ -131,25 +136,25 @@ proc_exec(BASEPAGE *bp, long fn, short nargs, \
 		{
 			if (flags & 1)
 			{
-				oldout = _dup(1);
-				_force(1, newout);
+				oldout = _dup(proc, 1);
+				_force(proc, 1, newout);
 			}
 			if (flags & 2)
 			{
-				olderr = _dup(2);
-				_force(2, newout);
+				olderr = _dup(proc, 2);
+				_force(proc, 2, newout);
 			}
 		}
 	}
 
-	r = (proc->kern.exec)(proc->kern.handle, 75L, (short)4, (long)mode, cmd, tail, env);
+	r = _pexec(proc, mode, cmd, tail, env);
 
 	if ((flags & 3) && (newout >= 0))
 	{
 		if (flags & 1)
-			_force(1, oldout);
+			_force(proc, 1, oldout);
 		if (flags & 2)
-			_force(2, olderr);
+			_force(proc, 2, olderr);
 		_close(proc, newout);
 	}
 
@@ -162,8 +167,7 @@ thread_fork(BASEPAGE *bp, long fn, short nargs, \
 {
 	PROC_ARRAY *proc = 0;
 	BASEPAGE *new;
-	long mode = 0, flags, size, oldsig = 0, pid;
-	short execmode;
+	long execmode, mode = 0, flags, size, oldsig = 0, pid;
 
 	if (nargs < 3) return -EINVAL;
 	if (nargs >= 5) mode = opt;
@@ -179,9 +183,9 @@ thread_fork(BASEPAGE *bp, long fn, short nargs, \
 
 	sema_request(sema_fork);
 
-	new = (BASEPAGE *)(proc->kern.exec)(proc->kern.handle, 75L, (short)4, (long)7, (void *)flags, "", 0L);
+	new = (BASEPAGE *)_pexec(proc, 7L, (void *)flags, "", 0L);
 	if ((long)new < 0)
-		new = (BASEPAGE *)(proc->kern.exec)(proc->kern.handle, 75L, (short)4, (long)5, 0L, "", 0L);
+		new = (BASEPAGE *)_pexec(proc, 5L, 0L, "", 0L); 
 	if ((long)new <= 0)
 	{
 		sema_release(sema_fork);
@@ -194,7 +198,7 @@ thread_fork(BASEPAGE *bp, long fn, short nargs, \
 	else
 		size = 0x00001f00L;
 	size += 0x00000100L;
-	_shrink(new, size);
+	_shrink(proc, new, size);
 
 	sema_release(sema_fork);
 
@@ -202,15 +206,15 @@ thread_fork(BASEPAGE *bp, long fn, short nargs, \
 	new->p_dbase = address;
 
 	if (mode & 1)
-		oldsig = _signal(SIGCHLD, sig_child);
+		oldsig = _signal(proc, SIGCHLD, sig_child);
 
-	pid = (proc->kern.exec)(proc->kern.handle, 75L, (short)4, (long)execmode, proctitle, new, 0L);
+	pid = _pexec(proc, execmode, proctitle, (char *)new, 0L);
 
-	_free((long)new->p_env);
-	_free((long)new);
+	_free(proc, (long)new->p_env);
+	_free(proc, (long)new);
 
 	if (oldsig && (pid < 0))
-		_signal(SIGCHLD, (void *)oldsig);
+		_signal(proc, SIGCHLD, (void *)oldsig);
 
 	return pid;
 }

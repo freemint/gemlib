@@ -19,8 +19,6 @@
 # include <errno.h>
 # include <string.h>
 # include <mintbind.h>
-# include <mint/ostruct.h>
-# include <sys/stat.h>
 
 # include "gemma.h"
 # include "dosproto.h"
@@ -91,27 +89,6 @@ u2d(const char *in, char *out)
 		strcpy(out, in);
 }
 
-long
-_cntl(short file, void *arg, short cmd)
-{
-	return Fcntl(file, arg, cmd);
-}
-
-long
-_stat(short flag, const char *name, void *out)
-{
-	char temp[1024];
-
-	u2d(name, temp);
-	return Fxattr(flag, temp, out);
-}
-
-long
-_delete(char *fspec)
-{
-	return Fdelete(fspec);
-}
-
 static long
 __alloc(long size, short mode)
 {
@@ -139,40 +116,10 @@ _rdalloc(long size)	/* alloc `size' bytes of globally readable memory */
 	return __alloc(size, 0x0043);
 }
 
-void
-_shrink(void *base, long newsize)
-{
-	(void)Mshrink(base, newsize);
-}
-
-void
-_free(long adr)
-{
-	(void)Mfree(adr);
-}
-
 long
 _getdrv(void)
 {
 	return Dgetdrv();
-}
-
-long
-_setdrv(long drv)
-{
-	return Dsetdrv(drv);
-}
-
-long
-_dfree(long *mem, short drv)
-{
-	return Dfree(mem, drv);
-}
-
-long
-_getpath(void *p, short drv)
-{
-	return Dgetpath(p, drv);
 }
 
 long
@@ -187,58 +134,19 @@ _setpath(const char *p)
 long
 _getcwd(void *p, short drv, short len)
 {
-	return Dgetcwd(p, drv, len);
-}
+	long r;
 
-short
-_dup(short file)
-{
-	return Fdup(file);
-}
+	r = Dgetcwd(p, drv, len);
+	if (r < 0)
+		r = Dgetpath(p, drv);
 
-void
-_force(short f1, short f2)
-{
-	(void)Fforce(f1, f2);
+	return r;
 }
 
 long
 _semaphore(short mode, long sema, long time)
 {
 	return Psemaphore(mode, sema, time);
-}
-
-long
-_kill(long pid, long sig)
-{
-# ifdef _HAVE_MINT_GEMDOS
-	return Pkill((short)pid, (short)sig);
-# else
-	if ((pid == 0) || (pid == 1))
-		return 0;
-	else
-		return -33;
-# endif
-}
-
-long
-_sgetppid(void)
-{
-# ifdef _HAVE_MINT_GEMDOS
-	return Pgetppid();
-# else
-	return 0;		/* fake parent pid 0 */
-# endif
-}
-
-long
-_sgetpid(void)
-{
-# ifdef _HAVE_MINT_GEMDOS
-	return Pgetpid();
-# else
-	return 1;		/* fake own pid 1 */
-# endif
 }
 
 long
@@ -249,18 +157,6 @@ _sgeteuid(void)
 # else
 	return 0;
 # endif
-}
-
-long
-_wait3(short flag, long *rus)
-{
-	return Pwait3(flag, rus);
-}
-
-long
-_signal(short sig, void *hnd)
-{
-	return Psignal(sig, hnd);
 }
 
 /* EOF */

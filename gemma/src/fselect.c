@@ -21,7 +21,8 @@
 # include "gemma.h"
 # include "dosproto.h"
 # include "gemproto.h"
-# include "user.h"
+# include "appl.h"
+# include "fselect.h"
 
 INLINE void
 fsel_init(PROC_ARRAY *proc, ushort flag)
@@ -42,8 +43,6 @@ fsel_init(PROC_ARRAY *proc, ushort flag)
 		*p++ = ':';
 
 		r = _getcwd(p, 0, sizeof(proc->fsel_path) - 2);
-		if (r < 0)
-			r = _getpath(p, 0);
 		if (r < 0)
 		{
 			*p++ = '\\';

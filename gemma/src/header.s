@@ -18,7 +18,7 @@
 
 	.long	0x70004afc	| magic value (clr.l d0, illegal)
 	.long	_slbname	| pointer to library's (file)name
-	.long	0x0109	| version number
+	.long	0x010a	| version number
 	.long	0	| flags, currently 0L
 	.long	_gemma_init	| called when the library's been loaded
 	.long	_gemma_exit	| called before the library is removed
@@ -81,7 +81,7 @@
 	.long	0
 	.long	0x070cffd6
 	.long	_sflags
-_slbname:	.asciz	"gemma.slb"
+_slbname:	.asciz	"gemma32.slb"
 
 EINVAL	=	-25
 EFAULT	=	-40
@@ -106,9 +106,9 @@ _windial_setjmp:
 L_base	=	60
 L_fn	=	L_base+4
 L_nargs	=	L_fn+4
-L_handle	=	L_nargs+2
+L_handle	=	L_nargs+4
 L_vec	=	L_handle+4
-L_addr	=	L_vec+2
+L_addr	=	L_vec+4
 
 	movem.l	d1-a6,-(sp)
 
@@ -118,34 +118,34 @@ L_addr	=	L_vec+2
 	moveq	#EFAULT,d0
 	bra.s	exit
 
-valid:	cmp.w	#4,L_nargs(sp)
+valid:	cmp.l	#4,L_nargs(sp)
 	bpl.s	ok
 	moveq	#EINVAL,d0
 	bra.s	exit
 
 ok:	lea	WB_EXTHANDLER(a5),a0
 	lea	WB_SCRATCH0(a5),a1
-	move.w	L_vec(sp),d0
+	move.l	L_vec(sp),d0
 	beq.s	set
 	lea	WB_KEYHANDLER(a5),a0
 	lea	WB_SCRATCH1(a5),a1
-	subq.w	#1,d0
+	subq.l	#1,d0
 	beq.s	set
 	lea	WB_BUTHANDLER(a5),a0
 	lea	WB_SCRATCH2(a5),a1
-	subq.w	#1,d0
+	subq.l	#1,d0
 	beq.s	set
 	lea	WB_RC1HANDLER(a5),a0
 	lea	WB_SCRATCH3(a5),a1
-	subq.w	#1,d0
+	subq.l	#1,d0
 	beq.s	set
 	lea	WB_RC2HANDLER(a5),a0
 	lea	WB_SCRATCH4(a5),a1
-	subq.w	#1,d0
+	subq.l	#1,d0
 	beq.s	set
 	lea	WB_TIMHANDLER(a5),a0
 	lea	WB_SCRATCH5(a5),a1
-	subq.w	#1,d0
+	subq.l	#1,d0
 	beq.s	set
 	moveq	#EINVAL,d0
 exit:	movem.l	(sp)+,d1-a6
@@ -177,12 +177,12 @@ _windial_longjmp:
 L_base	=	4
 L_fn	=	L_base+4
 L_nargs	=	L_fn+4
-L_handle	=	L_nargs+2
+L_handle	=	L_nargs+4
 L_vec	=	L_handle+4
 
 	move.l	L_handle(sp),a5
 
-	cmp.w	#2,L_nargs(sp)
+	cmp.l	#2,L_nargs(sp)
 	bpl.s	1f
 	moveq	#EINVAL,d0
 	bra.s	exit2
@@ -194,27 +194,27 @@ L_vec	=	L_handle+4
 
 0:	lea	WB_EXTHANDLER(a5),a0
 	lea	WB_SCRATCH0(a5),a1
-	move.w	L_vec(sp),d0
+	move.l	L_vec(sp),d0
 	beq.s	set2
 	lea	WB_KEYHANDLER(a5),a0
 	lea	WB_SCRATCH1(a5),a1
-	subq.w	#1,d0
+	subq.l	#1,d0
 	beq.s	set2
 	lea	WB_BUTHANDLER(a5),a0
 	lea	WB_SCRATCH2(a5),a1
-	subq.w	#1,d0
+	subq.l	#1,d0
 	beq.s	set2
 	lea	WB_RC1HANDLER(a5),a0
 	lea	WB_SCRATCH3(a5),a1
-	subq.w	#1,d0
+	subq.l	#1,d0
 	beq.s	set2
 	lea	WB_RC2HANDLER(a5),a0
 	lea	WB_SCRATCH4(a5),a1
-	subq.w	#1,d0
+	subq.l	#1,d0
 	beq.s	set2
 	lea	WB_TIMHANDLER(a5),a0
 	lea	WB_SCRATCH5(a5),a1
-	subq.w	#1,d0
+	subq.l	#1,d0
 	beq.s	set2
 
 	moveq	#EINVAL,d0

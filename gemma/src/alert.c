@@ -20,15 +20,14 @@
 
 # include "gemma.h"
 # include "gemproto.h"
-# include "user.h"
 
 # include "alert.h"
 
 void
 bin2asc(long number, char *out)
 {
-	char decout[10];
-	ushort x, quot, remd;
+	char decout[11];
+	ulong x, quot, remd;
 
 	if (number)
 	{
@@ -41,8 +40,8 @@ bin2asc(long number, char *out)
 
 		for (x = 0; number && (x < 10);)
 		{
-			quot = (ushort)(number / 10);
-			remd = (ushort)(number % 10);
+			quot = (ulong)(number / 10);
+			remd = (ulong)(number % 10);
 			number = (ulong)quot;
 			decout[x++] = remd | 0x30;
 		}
@@ -81,7 +80,7 @@ line_break(char *line, const short rmargin)
 	{
 		for (i = rmargin; i; i--)
 		{
-			if(line[i + q] == ' ')
+			if (line[i + q] == ' ')
 				break;
 		}
 		line[i + q] = '|';

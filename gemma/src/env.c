@@ -20,6 +20,8 @@
 # include <errno.h>
 
 # include "gemma.h"
+# include "dosproto.h"
+# include "env.h"
 
 long
 env_getargc(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)

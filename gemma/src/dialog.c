@@ -22,8 +22,64 @@
 # include "gemma.h"
 # include "dosproto.h"
 # include "gemproto.h"
-# include "user.h"
 # include "alert.h"
+# include "callout.h"
+# include "dialog.h"
+# include "misc.h"
+# include "rsrc.h"
+
+/* GEM Resource C Source */
+
+static ushort RSIB0MASK[] =
+{
+  0x0000, 0x0000, 0x0000, 0x0000, 
+  0x0000, 0x0000, 0x0000, 0x0000, 
+  0x0FFF, 0xFFF0, 0x0FFF, 0xFFF0, 
+  0x0C00, 0x0030, 0x0C00, 0x0030, 
+  0x0CFF, 0xFF30, 0x0CFF, 0xFF30, 
+  0x0CC0, 0x0330, 0x0CC0, 0x0330, 
+  0x0CCF, 0xF330, 0x0CCF, 0xF330, 
+  0x0CCC, 0x3330, 0x0CCC, 0x3330, 
+  0x0CCC, 0x3330, 0x0CCC, 0x3330, 
+  0x0CCF, 0xF330, 0x0CCF, 0xF330, 
+  0x0CC0, 0x0330, 0x0CC0, 0x0330, 
+  0x0CFF, 0xFF30, 0x0CFF, 0xFF30, 
+  0x0C00, 0x0030, 0x0C00, 0x0030, 
+  0x0FFF, 0xFFF0, 0x0FFF, 0xFFF0, 
+  0x0000, 0x0000, 0x0000, 0x0000, 
+  0x0000, 0x0000, 0x0000, 0x0000
+};
+
+static ushort RSIB0DATA[] =
+{
+  0x0000, 0x0000, 0x0000, 0x0000, 
+  0x0000, 0x0000, 0x0000, 0x0000, 
+  0x0FFF, 0xFFF0, 0x0FFF, 0xFFF0, 
+  0x0C00, 0x0030, 0x0C00, 0x0030, 
+  0x0CFF, 0xFF30, 0x0CFF, 0xFF30, 
+  0x0CC0, 0x0330, 0x0CC0, 0x0330, 
+  0x0CCF, 0xF330, 0x0CCF, 0xF330, 
+  0x0CCC, 0x3330, 0x0CCC, 0x3330, 
+  0x0CCC, 0x3330, 0x0CCC, 0x3330, 
+  0x0CCF, 0xF330, 0x0CCF, 0xF330, 
+  0x0CC0, 0x0330, 0x0CC0, 0x0330, 
+  0x0CFF, 0xFF30, 0x0CFF, 0xFF30, 
+  0x0C00, 0x0030, 0x0C00, 0x0030, 
+  0x0FFF, 0xFFF0, 0x0FFF, 0xFFF0, 
+  0x0000, 0x0000, 0x0000, 0x0000, 
+  0x0000, 0x0000, 0x0000, 0x0000
+};
+
+static ICONBLK rs_iconblk[1] =
+{
+	{ RSIB0MASK, RSIB0DATA, "", ' ', 0, 0, 0, 0, 32, 32, 0, 0, 0, 0 }
+};
+
+static OBJECT rs_object[2] =
+{
+	{ -1, 1, 1, G_BOX, OF_NONE, OS_NORMAL, {(long)0x00000000L }, 0x0000, 0x0000, 0x000a, 0x0004 } ,
+	{ 0, -1, -1, G_ICON, OF_LASTOB, OS_NORMAL, {(long)&rs_iconblk[0] }, 0x0300, 0x0800, 0x0004, 0x0002 }
+};
 
 /* Internal functions */
 
@@ -440,7 +496,7 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 		char *title, short gadgets, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
-	short m = 0, g;
+	short ap[4], m = 0, g;
 	long r;
 
 	if (nargs < 5) return -EINVAL;
@@ -477,10 +533,12 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 
 	bzero(wd, sizeof(WINDIAL));
 
+	wd->wb_autofree = m;		/* Set autofree mark */
+
 	DEBUGMSG("init handlers");
 
 	r = (long)ret;
-	wd->wb_exthandler = r;
+	wd->wb_exthandler = r;		/* doing it so produces shorter code (sigh) */
 	wd->wb_keyhandler = r;
 	wd->wb_buthandler = r;
 	wd->wb_rc1handler = r;
@@ -495,22 +553,46 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 
 	DEBUGMSG("init icon");
 
-	if (icon)
-	{
-		wd->wb_icon = icon;
-		r = rsrc_xgaddr(bp, 16L, 3, R_TREE, icon, proc);
-		if (r > 0)
-		{
-			short ap[4];
+	_appl_getinfo(proc, AES_WINDOW, ap);
 
-			TOUCH(r);
-			wd->wb_icontree = (OBJECT *)r;
-			_appl_getinfo(proc, 11, ap);
-			if (ap[2] & 1)
+	if (ap[2] & 1)
+	{
+		if (icon)
+		{
+			r = rsrc_xgaddr(bp, 16L, 3, R_TREE, icon, proc);
+			if (r > 0)
+			{
+				TOUCH(r);
+				wd->wb_icontree = (OBJECT *)r;
+				wd->wb_icon = icon;
 				wd->wb_gadgets |= SMALLER;
+			}
 		}
+# if 0
+		else
+		{
+			wd->default_tree.ob_next = rs_object[0].ob_next;
+			wd->default_tree.ob_head = rs_object[0].ob_head;
+			wd->default_tree.ob_tail = rs_object[0].ob_tail;
+			wd->default_tree.ob_type = rs_object[0].ob_type;
+			wd->default_tree.ob_flags = rs_object[0].ob_flags;
+			wd->default_tree.ob_state = rs_object[0].ob_state;
+			wd->default_tree.ob_spec.index = rs_object[0].ob_spec.index;
+			wd->default_tree.ob_x = rs_object[0].ob_x;
+			wd->default_tree.ob_y = rs_object[0].ob_y;
+			wd->default_tree.ob_width = rs_object[0].ob_width;
+			wd->default_tree.ob_height = rs_object[0].ob_height;
+
+			wd->wb_icon = 1;
+			wd->wb_icontree = &wd->default_tree;
+
+			_rsrc_obfix(proc, wd->wb_icontree, 0);
+			_rsrc_obfix(proc, wd->wb_icontree, 1);
+		}
+		wd->wb_gadgets |= SMALLER;
+# endif
 	}
-	if (!wd->wb_icontree)
+	else
 		wd->wb_gadgets &= ~SMALLER;
 
 	DEBUGMSG("init tree");
@@ -591,7 +673,7 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 	wd->wb_bmask = 0x0001;
 	wd->wb_bstate = 1;
 
-	wd->wb_autofree = m;
+	/* Mark the entire structure valid */
 	wd->wb_magic = WINDIAL_MAGIC;
 
 	if (proc->wchain != wd)
@@ -602,7 +684,7 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 	return (long)wd;
 
 fatal:	if (m)
-		_free((long)wd);
+		_free(proc, (long)wd);
 
 	DEBUGMSG("exit on error");
 
@@ -667,8 +749,11 @@ windial_close(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 
 		_wind_close(proc, wd->wb_handle);
 
-		_graf_shrinkbox(proc, wd->wb_center_x, wd->wb_center_y, 1, 1, &wd->wb_border_x);
-		_graf_movebox(proc, 16, 16, wd->wb_center_x, wd->wb_center_y, wd->wb_start_x, wd->wb_start_y);
+		if (!wd->wb_iconified)
+		{
+			_graf_shrinkbox(proc, wd->wb_center_x, wd->wb_center_y, 1, 1, &wd->wb_border_x);
+			_graf_movebox(proc, 16, 16, wd->wb_center_x, wd->wb_center_y, wd->wb_start_x, wd->wb_start_y);
+		}
 
 		wd->wb_ontop = 0;
 	}
@@ -709,7 +794,7 @@ windial_delete(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 	wd->wb_magic = 0;		/* invalidate the struct */
 
 	if (wd->wb_autofree)
-		_free((long)wd);
+		_free(proc, (long)wd);
 
 	DEBUGMSG("complete");
 

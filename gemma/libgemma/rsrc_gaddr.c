@@ -14,7 +14,7 @@ rsrc_gaddr(short type, short index, void **addr)
 
 	r = call_aes(gem, 112);
 
-	*addr = gem->addr_out[0];
+	*addr = (void *)gem->addr_out[0];
 
 	return r;
 }

@@ -23,7 +23,8 @@
 # include "gemma.h"
 # include "gemproto.h"
 # include "dosproto.h"
-# include "user.h"
+# include "callout.h"
+# include "rsrc.h"
 
 /* BUG: does not recognize the xrsrc extension of Interface
  */
@@ -142,7 +143,7 @@ rsrc_xload(BASEPAGE *bp, long fn, short nargs, char *name, PROC_ARRAY *p)
 
 	return 0;
 
-error:	_free((long)proc->rawrscaddr);
+error:	_free(proc, (long)proc->rawrscaddr);
 	proc->rawrscaddr = 0;
 
 	DEBUGMSG("exit on error");
@@ -173,7 +174,7 @@ rsrc_xalloc(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 	{
 		PROC_ARRAY *pproc;
 
-		ppid = _sgetppid();
+		ppid = _getppid(proc);
 		if (ppid < 0)
 			return -EACCES;
 		pproc = pidtable[ppid];
@@ -249,12 +250,12 @@ rsrc_xfree(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 
 	if (proc->rscaddr)
 	{
-		_free((long)proc->rscaddr);
+		_free(proc, (long)proc->rscaddr);
 		proc->rscaddr = 0;
 	}
 	if (proc->rawrscaddr)
 	{
-		_free((long)proc->rawrscaddr);
+		_free(proc, (long)proc->rawrscaddr);
 		proc->rawrscaddr = 0;
 	}
 	proc->rsclength = 0;

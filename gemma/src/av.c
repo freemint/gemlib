@@ -22,6 +22,7 @@
 # include "dosproto.h"
 # include "gemproto.h"
 # include "alert.h"
+# include "av.h"
 
 # define AV_PATH_UPDATE	0x4730
 # define AV_VIEW	0x4751
@@ -31,7 +32,7 @@ INLINE void
 _mrelease(PROC_ARRAY *proc, long adr)
 {
 	_evnt_timer(proc, sflags.release_delay);
-	_free(adr);
+	_free(proc, adr);
 }
 
 static long
@@ -302,7 +303,8 @@ open_url(BASEPAGE *bp, long fn, short nargs, char *url, PROC_ARRAY *p)
 	PROC_ARRAY *proc = 0;
 	short astrid, x;
 	long len;
-	char *cli = 0, cmd[128];
+	const char *cli = 0;
+	char cmd[128];
 
 	if (!nargs) return -EINVAL;
 	if (nargs >= 2) proc = p;
@@ -331,7 +333,7 @@ open_url(BASEPAGE *bp, long fn, short nargs, char *url, PROC_ARRAY *p)
 		len = strlen(services[x]);
 		if (!strncmp(url, services[x], len))
 		{
-			cli = (char *)clients[x];
+			cli = clients[x];
 			break;
 		}
 	}
@@ -339,7 +341,7 @@ open_url(BASEPAGE *bp, long fn, short nargs, char *url, PROC_ARRAY *p)
 	cli = getenv(proc, cli);
 	if (!cli)
 	{
-		cli = (char *)alt_clients[x];
+		cli = alt_clients[x];
 		cli = getenv(proc, cli);
 		if (!cli)
 			return -ESRCH;

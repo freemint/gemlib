@@ -23,7 +23,9 @@
 # include "gemma.h"
 # include "gemproto.h"
 # include "dosproto.h"
-# include "user.h"
+# include "appl.h"
+# include "callout.h"
+# include "rsrc.h"
 
 short whitebak;
 
@@ -137,10 +139,11 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 
 	DEBUGMSG("enter");
 
+	/* When appl_open() was already done, just return the apid */
 	if (proc->gem.global[0])
 		return proc->gem.global[2];
 
-	r = Slbopen("kernel.slb", 0L, 0x0100L, &proc->kern.handle, &proc->kern.exec);
+	r = Slbopen("kernel32.slb", 0L, 0x0100L, &proc->kern.handle, &proc->kern.exec);
 
 	if (r < 0)
 		return r;
@@ -157,9 +160,9 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 		goto error;
 	}
 
-	home = getenv(proc, "HOME=");
 	_domain(proc, 1);		/* ... obviously */
 
+	home = getenv(proc, "HOME=");
 	if (home && (flag & 4))
 		_setpath(home);
 
@@ -193,6 +196,32 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 			r = rsrc_xalloc(bp, 11L, 1, proc);
 			if (r < 0)
 				goto error;
+# if 0
+			{
+				char dout[128];
+				ulong lo, hi, gad;
+				ushort hdr;
+
+				bin2asc((long)proc->gem.global[5], dout);
+				_conws(dout);
+				_conws("\n");
+				bin2asc((long)proc->gem.global[6], dout);
+				_conws(dout);
+				_conws("\n");
+
+				hi = proc->gem.global[5];
+				lo = proc->gem.global[6];
+				gad = (hi << 16) + lo;
+				bin2asc(gad, dout);
+				_conws(dout);
+				_conws("\n");
+
+				hdr = *(ushort *)gad;
+				bin2asc((long)hdr, dout);
+				_conws(dout);
+				_conws("\n");
+			}
+# endif
 		}
 	}
 
@@ -213,7 +242,7 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 		}
 	}
 
-	_appl_getinfo(proc, 13, ap);
+	_appl_getinfo(proc, AES_OBJECT, ap);
 	if (ap[3] & 4)
 		whitebak = 1;
 
@@ -224,7 +253,17 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 	}
 
 	if (sflags.xfselect)
-		(void)Slbopen("fileselector.slb", 0L, 0x0100L, &proc->fsel.handle, &proc->fsel.exec);
+	{
+		char fullname[1024];
+
+		/* Search through the SLBPATH */
+		r = (proc->kern.exec)(proc->kern.handle, 515L, 3, "fileselector.slb", fullname, "SLBPATH=");
+
+		if (r == 0)
+			(void)Slbopen("fileselector.slb", 0L, 0x0100L, &proc->fsel.handle, &proc->fsel.exec);
+		else
+			sflags.xfselect = 0;
+	}
 
 	_graf_mouse(proc, ARROW, 0);
 

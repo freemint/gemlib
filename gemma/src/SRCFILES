@@ -3,12 +3,19 @@
 
 HEADER = \
 	alert.h \
+	appl.h \
+	av.h \
+	callout.h \
+	dialog.h \
 	dosproto.h \
 	emu.h \
+	env.h \
+	fselect.h \
 	gemma.h \
 	gemproto.h \
-	rsrc.h \
-	user.h
+	misc.h \
+	proc.h \
+	rsrc.h
 
 COBJS = \
 	alert.c \

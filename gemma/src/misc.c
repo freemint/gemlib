@@ -20,7 +20,43 @@
 # include "gemma.h"
 # include "dosproto.h"
 # include "gemproto.h"
-# include "user.h"
+# include "misc.h"
+# include "rsrc.h"
+
+long
+gem_control(BASEPAGE *bp, long fn, short nargs)
+{
+	return (long)get_contrl(bp);
+}
+
+long
+get_users(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
+{
+	PROC_ARRAY *proc = 0;
+	ushort x;
+	long users = 0, r;
+
+	if (nargs >= 1) proc = p;
+	if ((nargs < 1) || !proc) proc = get_contrl(bp);
+
+	sema_request(sema_users);
+
+	for (x = 0; x <= MAX_PID; x++)
+	{
+		if (pidtable[x])
+		{
+			r = _kill(proc, x, 0);	/* SIGNULL */
+			if (r < 0)
+				pidtable[x] = 0;
+			else
+				users++;
+		}
+	}
+
+	sema_release(sema_users);
+
+	return users;
+}
 
 long
 lib_control(BASEPAGE *bp, long fn, short nargs, \
@@ -60,9 +96,9 @@ lib_control(BASEPAGE *bp, long fn, short nargs, \
 		case	0x0002:	/* get version */
 		{
 			return (long)
-			"Gemma shared library version 1.09 pl 2, "
+			"Gemma shared library version 1.10, "
 			"compiled " __DATE__ ". "
-			"Copyright (c) 1999-2002 Draco/YC. "
+			"Copyright (c) 1999-2003 Draco/YC. "
 			"Dedicated with love to Magda.";		
 		}
 		case	0x0003: /* set gemma SLB pointer */

@@ -223,14 +223,28 @@ long
 emu_scrp_clear(PROC_ARRAY *proc)
 {
 	long r;
-	char path[1024];		/* should be enough */
+	char path[1024], fname[256], fpath[1024 + 256];	/* should be enough */
 
 	r = _scrp_read(proc, path);
 
 	if (r)
 	{
-		strcat(path, "\\*.*");
-		r = (_delete(path) < 0) ? 0 : 1;
+		long dh;
+
+		dh = r = _opendir(proc, path, 0);
+		if (r > 0)
+		{
+			while (_readdir(proc, sizeof(fname), dh, fname) >= 0)
+			{
+				strcpy(fpath, path);
+				strcat(fpath, "\\");
+				strcat(fpath, fname + 4);
+				r = _delete(proc, fpath);
+			}			
+			_closedir(proc, dh);
+		}
+
+		r = (r < 0) ? 0 : 1;			
 	}
 
 	return r;

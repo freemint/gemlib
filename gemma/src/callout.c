@@ -21,6 +21,7 @@
 # include "gemma.h"
 # include "dosproto.h"
 # include "gemproto.h"
+# include "callout.h"
 # include "emu.h"
 
 # ifdef DEBUG
@@ -369,7 +370,7 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 			{
 				short ap[4];
 
-				_appl_getinfo(proc, 4, ap);	/* this will re-enter call_aes() :-) */
+				_appl_getinfo(proc, AES_PROCESS, ap);	/* this will re-enter call_aes() :-) */
 				if (ap[1])
 					break;
 			}
@@ -434,21 +435,11 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 		case 46:	/* objc_edit() */
 		case 47:	/* objc_change() */
 		case 49:	/* objc_xfind() */
-		{
-			TOUCH(proc->gem.addr_in[0]);
-			break;
-		}
-
 		case 50:	/* form_do() */
 		case 52:	/* form_alert() */
 		case 54:	/* form_center() */
 		case 55:	/* form_keybd() */
 		case 56:	/* form_button() */
-		{
-			TOUCH(proc->gem.addr_in[0]);
-			break;
-		}
-
 		case 75:	/* graf_watchbox() */
 		case 76:	/* graf_slidebox() */
 		{
@@ -510,7 +501,7 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 		{
 			short ap[4];
 
-			_appl_getinfo(proc, 4, ap);
+			_appl_getinfo(proc, AES_PROCESS, ap);
 			if (ap[3])
 				TOUCH(proc->gem.addr_in[0]);
 			break;

@@ -17,7 +17,7 @@
 
 # include "gemma.h"
 # include "gemproto.h"
-# include "user.h"
+# include "callout.h"
 
 long
 _appl_control(PROC_ARRAY *proc, short opcode, void *out)
@@ -317,6 +317,15 @@ _rsrc_load(PROC_ARRAY *proc, char *name)
 }
 
 long
+_rsrc_obfix(PROC_ARRAY *proc, OBJECT *tree, short obj)
+{
+	proc->gem.int_in[0] = obj;
+	proc->gem.addr_in[0] = (long)tree;
+
+	return call_aes(proc->base, 1L, 2, proc, 114);
+}
+
+long
 _rsrc_rcfix(PROC_ARRAY *proc, char *buf)
 {
 	proc->gem.addr_in[0] = (long)buf;
@@ -343,7 +352,7 @@ _shel_help(PROC_ARRAY *proc, short mode, char *file, char *key)
 }
 
 long
-_shel_write(PROC_ARRAY *proc, short wd, short wg, short wc, char *cmd, char *tail)
+_shel_write(PROC_ARRAY *proc, short wd, short wg, short wc, const char *cmd, const char *tail)
 {
 	proc->gem.int_in[0] = wd;
 	proc->gem.int_in[1] = wg;

@@ -15,6 +15,7 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+# include <mintbind.h>
 # include <fcntl.h>
 # include <mint/dcntl.h>
 # include <errno.h>
@@ -22,52 +23,32 @@
 
 # include "gemma.h"
 # include "dosproto.h"
-# include "user.h"
+# include "misc.h"
+# include "rsrc.h"
 
 long gemma_init(void);
-long get_users(void);
+void gemma_exit(void);
+long gemma_open(BASEPAGE *bp);
+void gemma_close(BASEPAGE *bp);
 
 /* Global variables */
 
 PROC_ARRAY *pidtable[MAX_PID+1];
 const long sema_fork = (const long)gemma_init;
-
-static const char procpath[] = "u:\\proc";
-static const long sema_users = (const long)get_users;
+const long sema_users = (const long)get_users;
 
 # ifdef DEBUG
 void
 debug_print(char *function, char *string)
 {
-	_conws(function);
-	_conws("(): ");
-	_conws(string);
-	_conws("\n");
+	Cconws(function);
+	Cconws("(): ");
+	Cconws(string);
+	Cconws("\r\n");
 }
 # endif
 
 /* Utility routines */
-
-char *
-getenv(PROC_ARRAY *proc, const char *var)
-{
-	char *env = (char *)proc->base->p_env;
-	long len = strlen(var);
-
-	do {
-		if (strncmp(env, var, len) == 0)
-		{
-			env += len;
-
-			DEBUGMSG(env);
-
-			return env;
-		}
-		while(*env++);
-	} while(*env);
-
-	return 0;
-}
 
 INLINE long
 get_page_size(void)
@@ -76,15 +57,13 @@ get_page_size(void)
 	char d, cwd[512];
 	long r, meminfo[4];
 
-	drv = _getdrv();
-	d = procpath[0];
-	d &= 0x5f;
-	d -= 'A';
-	_setdrv((short)d);
-	r = _getcwd(cwd, 0, sizeof(cwd));
+	drv = Dgetdrv();
+	d = 'U' - 'A';
+	Dsetdrv((short)d);
+	r = Dgetcwd(cwd, 0, sizeof(cwd));
 	if (r < 0)
 	{
-		_setdrv(drv);
+		Dsetdrv(drv);
 		return sflags.pagesize;
 	}
 	if (!cwd[0])
@@ -92,15 +71,15 @@ get_page_size(void)
 		cwd[0] = '\\';
 		cwd[1] = 0;
 	}
-	r = _setpath(procpath);
+	r = Dsetpath("u:\\proc");
 	if (r < 0)
 	{
-		_setdrv(drv);
+		Dsetdrv(drv);
 		return sflags.pagesize;
 	}
-	r = _dfree((long *)meminfo, 0);
-	_setpath(cwd);
-	_setdrv(drv);
+	r = Dfree((long *)meminfo, 0);
+	Dsetpath(cwd);
+	Dsetdrv(drv);
 	if (r < 0)
 		return sflags.pagesize;
 	if (meminfo[3] < sflags.minpagesize)
@@ -109,17 +88,17 @@ get_page_size(void)
 	return meminfo[3];
 }
 
+/* Internal utilities */
+
 INLINE long
 _getpid(BASEPAGE *bp)
 {
 # ifdef _STORE_PID_ON_BP
 	return bp->p_undef[0];
 # else
-	return _sgetpid();
+	return Pgetpid();
 # endif
 }
-
-/* Internal utilities */
 
 OBJECT *
 obj2addr(PROC_ARRAY *proc, short type, ulong obj)
@@ -142,39 +121,6 @@ write_pidtable(short pid, PROC_ARRAY *value)
 	sema_request(sema_users);
 	pidtable[pid] = value;
 	sema_release(sema_users);
-}
-
-/* Misc user functions */
-
-long
-gem_control(BASEPAGE *bp, long fn, short nargs)
-{
-	return (long)get_contrl(bp);
-}
-
-long
-get_users(void)
-{
-	ushort x;
-	long users = 0, r;
-
-	sema_request(sema_users);
-
-	for (x = 0; x <= MAX_PID; x++)
-	{
-		if (pidtable[x])
-		{
-			r = _kill(x, 0);	/* SIGNULL */
-			if (r < 0)
-				pidtable[x] = 0;
-			else
-				users++;
-		}
-	}
-
-	sema_release(sema_users);
-
-	return users;
 }
 
 /* System routines */
@@ -215,11 +161,11 @@ long
 gemma_open(BASEPAGE *bp)
 {
 	PROC_ARRAY *proc;
-	long pid = _sgetpid();
+	long pid = Pgetpid();
 
 	if (pid > MAX_PID)
 	{
-		_conws("gemma.slb: cannot service so many processes!!\r\n");
+		Cconws("gemma.slb: cannot service so many processes!!\r\n");
 		return -EPROCLIM;
 	}
 
@@ -248,7 +194,7 @@ gemma_open(BASEPAGE *bp)
 	proc->gem.vdiparams[4] = (long)proc->gem.ptsout;
 
 	proc->base = bp;
-	proc->bvset = _setdrv(_getdrv());
+	proc->bvset = Dsetdrv(Dgetdrv());
 	
 	return 0;
 }
@@ -264,7 +210,7 @@ gemma_close(BASEPAGE *bp)
 		return;		/* huuh? */
 
 	write_pidtable(pid, 0);
-	_free((long)proc);
+	Mfree((long)proc);
 }
 
 /* EOF */

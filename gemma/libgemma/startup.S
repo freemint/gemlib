@@ -21,3 +21,5 @@ cp:
 	move.w	d0,-(sp)
 	move.w	#0x004c,-(sp)
 	trap	#1
+
+| EOF
