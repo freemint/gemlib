@@ -182,7 +182,9 @@ SWM_AESMSG     10  Send a message to the AES. \p cmd points to
                    message to send. No other parameters are
                    needed.
                    This mode is only recognized as of AES
-                   version 4.0.</pre>
+                   version 4.0.
+SWM_THRCREATE  20  (Magic 4.5 ? Doc wanted !!!)		  
+				   </pre>
 
  *  @param wisgr see above
  *  @param wiscr see above
