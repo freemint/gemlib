@@ -1,4 +1,6 @@
 /*
+ *  $Id$
+ *
  * gemx.h - main header file for new gem-lib extensions
  *
  * This lib contains all GEM extensions of MagiC and NVDI/FSM/Speedo
@@ -174,6 +176,12 @@ short		mt_fnts_update		(FNT_DIALOG *fnt_dialog, short button_flags, long id, lon
 /*
  * fslx_* file selection (MagiC only)
  */
+
+/** @addtogroup x_fslx
+ *  @{
+ */
+
+/** */
 typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, void *xattr);
 
 /* Sortiermodi */
@@ -191,12 +199,19 @@ typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, void *xattr);
 /* fslx_set_flags */
 #define SHOW8P3			1
 
-short	fslx_close		(void *fsd);
-void *	fslx_do			(char *title, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode, short flags, short *button, short *nfiles, char **pattern);
-short	fslx_evnt		(void *fsd, EVNT *events, char *path, char *fname, short *button, short *nfiles, short *sort_mode, char **pattern); 
-short	fslx_getnxtfile		(void *fsd, char *fname);
-void *	fslx_open		(char *title, short x, short y, short *handle, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short sort_mode, short flags);
-short	fslx_set_flags 		(short flags, short *oldval);
+short	fslx_close		(void *fsd, short *global);
+void *	fslx_do			(char *title, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode, short flags, short *button, short *nfiles, char **pattern, short *global);
+short	fslx_evnt		(void *fsd, EVNT *events, char *path, char *fname, short *button, short *nfiles, short *sort_mode, char **pattern, short *global); 
+short	fslx_getnxtfile	(void *fsd, char *fname, short *global);
+void *	fslx_open		(char *title, short x, short y, short *handle, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short sort_mode, short flags, short *global);
+short	fslx_set_flags 	(short flags, short *oldval, short *global);
+#define fslx_close(a)							mt_fslx_close(a,aes_global)
+#define fslx_do(a,b,c,d,e,f,g,h,i,j,k,l,m)		mt_fslx_do(a,b,c,d,e,f,g,h,i,j,k,l,m,aes_global)
+#define fslx_evnt(a,b,c,d,e,f,g,h)				mt_fslx_evnt(a,b,c,d,e,f,g,h,aes_global)
+#define fslx_getnxtfile(a,b)					mt_fslx_getnxtfile(a,b,aes_global)
+#define fslx_open(a,b,c,d,e,f,g,h,i,j,k,l,m)	mt_fslx_open(a,b,c,d,e,f,g,h,i,j,k,l,m,m,aes_global)
+#define fslx_set_flags(a,b)						mt_fslx_set_flags(a,b,aes_global)
+/**@}*/
 
 /*
  * pdlg_* printer configuration dialogs (WDIALOG only)
