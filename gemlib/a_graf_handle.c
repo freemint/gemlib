@@ -10,11 +10,13 @@
  *  @param wcell
  *  @param hcell are WORD pointers which on function exit
  *               will be filled in with the width and height, respectively,
- *               of the current system character set.
+ *               of the current system character set. \n
+ *             [option CHECK_NULLPTR] wcell and/or hcell may be NULL
  *  @param  wbox
  *  @param  hbox are WORD pointers which on function exit
  *               will be filled in with the width and height, respectively,
- *               of the minimum bounding box of a BOXCHAR character.
+ *               of the minimum bounding box of a BOXCHAR character. \n
+ *             [option CHECK_NULLPTR] wbox and/or hbox may be NULL
  *  @param global_aes global AES array
  *
  *  @return the VDI handle for the current physical workstation used
@@ -39,11 +41,18 @@ mt_graf_handle (short *wcell, short *hcell, short *wbox, short *hbox, short *glo
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (wcell) *wcell = aes_intout[1];
+	if (hcell) *hcell = aes_intout[2];
+	if (wbox)  *wbox  = aes_intout[3];
+	if (hbox)  *hbox  = aes_intout[4];
+#else
 	ptr = &aes_intout[1];
 	*wcell = *(ptr ++);									/* [1] */
 	*hcell = *(ptr ++);									/* [2] */
 	*wbox  = *(ptr ++);									/* [3] */
 	*hbox  = *(ptr);									/* [4] */
+#endif
 
 	return aes_intout[0];
 }

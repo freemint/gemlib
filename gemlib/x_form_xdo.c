@@ -9,7 +9,8 @@
  *
  *  @param tree 
  *  @param startob 
- *  @param lastcrsr 
+ *  @param lastcrsr  \n
+ *             [option CHECK_NULLPTR] lastcrsr may be NULL
  *  @param tabs 
  *  @param flydial 
  *  @param global_aes global AES array
@@ -35,6 +36,9 @@ mt_form_xdo(OBJECT *tree, short startob, short *lastcrsr, XDO_INF *tabs, void *f
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (lastcrsr)
+#endif
 	*lastcrsr = aes_intout[1];
 	
 	return aes_intout[0];

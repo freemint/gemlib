@@ -11,13 +11,16 @@
  *  @param mx
  *  @param my are WORD pointers, which, on function exit will
  *               be filled in with the current x and y coordinates of the
- *               mouse pointer.
+ *               mouse pointer. \n
+ *             [option CHECK_NULLPTR] mx and/or my may be NULL
  *  @param mbutton  is a WORD pointer, which, on function
  *               exit will be filled in with the current button state of the
- *               mouse as defined in mt_evnt_button().
+ *               mouse as defined in mt_evnt_button(). \n
+ *             [option CHECK_NULLPTR] mbutton may be NULL
  *  @param kmeta is a pointer to a WORD which upon return will
  *               contain the current status of the keyboard shift keys
- *               as defined in mt_evnt_button().
+ *               as defined in mt_evnt_button(). \n
+ *             [option CHECK_NULLPTR] kmeta may be NULL
  *
  *  @param global_aes global AES array
  *
@@ -38,11 +41,18 @@ mt_graf_mkstate (short *mx, short *my, short *mbutton, short *kmeta, short *glob
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (mx) 	 *mx	  = aes_intout[1];
+	if (my) 	 *my	  = aes_intout[2];
+	if (mbutton) *mbutton = aes_intout[3];
+	if (kmeta)	 *kmeta   = aes_intout[4];
+#else
 	ptr = &aes_intout[1];
 	*mx = *(ptr ++);									/* [1] */
 	*my = *(ptr ++);									/* [2] */
 	*mbutton = *(ptr ++);							    /* [3] */
 	*kmeta = *(ptr);									/* [4] */
+#endif
 
 	return aes_intout[0];
 }
