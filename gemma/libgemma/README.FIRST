@@ -1,4 +1,0 @@
-This is the statically linked part of the gemma32.slb which gateways
-the application to the shared object.
-
-EOF
