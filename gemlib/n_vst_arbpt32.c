@@ -11,10 +11,14 @@
  *
  *  @param handle Device handle
  *  @param point requested height in 1/65536 pts
- *  @param wchar selected character width
- *  @param hchar selected character height
- *  @param wcell selected character cell width
- *  @param hcell selected character cell height
+ *  @param wchar selected character width \n
+ *         [option CHECK_NULLPTR] wchar may be NULL
+ *  @param hchar selected character height \n
+ *         [option CHECK_NULLPTR] hchar may be NULL
+ *  @param wcell selected character cell width \n
+ *         [option CHECK_NULLPTR] wcell may be NULL
+ *  @param hcell selected character cell height \n
+ *         [option CHECK_NULLPTR] hcell may be NULL
  *
  *  @return selected height in 1/65536 pts
  *
@@ -42,9 +46,21 @@ vst_arbpt32 (short handle, long point,
 	
 	VDI_TRAP (vdi_params, handle, 246, 0,2);
 
+#if CHECK_NULLPTR
+	if (wchar)
+#endif
 	*wchar = vdi_ptsout[0];
+#if CHECK_NULLPTR
+	if (hchar)
+#endif
 	*hchar = vdi_ptsout[1];
+#if CHECK_NULLPTR
+	if (wcell)
+#endif
 	*wcell = vdi_ptsout[2];
+#if CHECK_NULLPTR
+	if (hcell)
+#endif
 	*hcell = vdi_ptsout[3];
 	
 	return vdi_intout_long(0);

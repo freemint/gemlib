@@ -16,7 +16,8 @@
  *         - 4: TrueType font
  *         - 8: Type 1 font
  *  @param font_name font name
- *  @param ret_name name of the selected font
+ *  @param ret_name name of the selected font \n
+ *         [option CHECK_NULLPTR] ret_name may be NULL
  *
  *  @return selected font id
  *
@@ -41,6 +42,9 @@ vst_name (short handle, short font_format, char *font_name, char *ret_name)
 	
 	VDI_TRAP (vdi_params, handle, 230, 0,n);
 	
+#if CHECK_NULLPTR
+	if (ret_name)
+#endif
 	vdi_array2str (vdi_intout+1, ret_name, vdi_control[4]-1);
 	
 	return vdi_intout[0];
