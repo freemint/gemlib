@@ -1,7 +1,7 @@
 /* tab 8 */
 
-# ifndef GEMMA_GEMMA_H
-# define GEMMA_GEMMA_H
+# ifndef SLB_GEMMA_H
+# define SLB_GEMMA_H
 
 # include <mt_gem.h>
 # include <mint/slb.h>
@@ -207,10 +207,12 @@ long open_url(char *url)
 }
 
 static inline
-short rc_intersect(const GRECT *src, GRECT *dest)
+short slb_rc_intersect(const GRECT *src, GRECT *dest)
 {
 	return (gemma.exec)(gemma.handle, (long)RC_INTERSECT, (short)2, src, dest);
 }
+
+# define rc_intersect(s,d) slb_rc_intersect(s,d)
 
 static inline
 long objc_xchange(WINDIAL *wd, short obj, short newst, short redraw)
@@ -286,7 +288,7 @@ long get_users(void)
 # define av_view(pathname) (gemma.exec)(gemma.handle, (long)AV_XVIEW, (short)1, (char *)pathname)
 # define av_help(fname) (gemma.exec)(gemma.handle, (long)AV_HELP, (short)1, (char *)fname)
 # define open_url(url) (gemma.exec)(gemma.handle, (long)NET_URL, (short)1, (char *)url)
-# define rc_intersect(src,dest) (gemma.exec)(gemma.handle, (long)RC_INTERSECT, (short)2, (RECT *)src, (RECT *)dest)
+# define slb_rc_intersect(src,dest) (gemma.exec)(gemma.handle, (long)RC_INTERSECT, (short)2, (RECT *)src, (RECT *)dest)
 # define objc_xchange(wd, obj, newst, redraw) (gemma.exec)(gemma.handle, (long)OB_XCHANGE, (short)4, (WINDIAL *)wd, (short)obj, (short)newst, (short)redraw)
 # define ftext_init(tree, obj) (gemma.exec)(gemma.handle, (long)FT_FIX, (short)2, (short)tree, (short)obj)
 # define file_select(title, mask, flag) (char *)(gemma.exec)(gemma.handle, (long)FSELINPUT, (short)3, (char *)title, (char *)mask, (short)flag)
