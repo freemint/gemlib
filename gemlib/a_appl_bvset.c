@@ -4,17 +4,16 @@
 
 #include "gem_aesP.h"
 
-/**
+/** tell PC-GEM which logical drives are connected to the system (for the file selector box).
  *
- *  @param bvdisk
- *  @param bvhard
+ *  @param bvdisk Bit vector with all connected disk drives. Bit 15 (the most
+ *         significant bit) denotes drive A:
+ *  @param bvhard Bit vector with all connected hard drives.
  *  @param global_aes global AES array
  *
- *  @return
+ *  @return Unknown
  *
- *  @since
- *
- *  @sa
+ *  @since only available on PC-GEM (as of version 2.0)
  *
  */
 
