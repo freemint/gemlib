@@ -182,6 +182,7 @@ _VDI_EXTENSIONS = \
 	n_v_delete_itab.c \
 	n_v_ftext.c \
 	n_v_ftext16.c \
+	n_v_ftext16n.c \
 	n_v_ftext_offset.c \
 	n_v_ftext_offset16.c \
 	n_v_get_ctab_id.c \
@@ -223,6 +224,7 @@ _VDI_EXTENSIONS = \
 	n_vqt_ext_name.c \
 	n_vqt_f_extent.c \
 	n_vqt_f_extent16.c \
+	n_vqt_f_extent16n.c \
 	n_vqt_fg_color.c \
 	n_vqt_fontheader.c \
 	n_vqt_name_and_id.c \
