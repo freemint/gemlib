@@ -13,7 +13,8 @@
  *			 of directories on DOS drives. It
  *			 corresponds to the switch "Show TOS
  *			 Files as '8+3'" in Magxdesk.
- *  @param oldval Previous value
+ *  @param oldval Previous value \n
+ *             [option CHECK_NULLPTR] oldval may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0, if error \n 1, if OK
@@ -35,6 +36,9 @@ mt_fslx_set_flags(short flags, short *oldval, short *global_aes)
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (oldval)
+#endif
 	*oldval = aes_intout[1];
 	
 	return aes_intout[0];

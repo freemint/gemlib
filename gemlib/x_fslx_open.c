@@ -12,7 +12,8 @@
  *  @param y Screen coordinates of the upper
  *			 left corner of the window. \n
  *			 For x=y=-1 the window will be centred.
- *  @param handle Window handle after successful opening
+ *  @param handle Window handle after successful opening \n
+ *             [option CHECK_NULLPTR] handle may be NULL
  *  @param path Complete path, starts with drive and ends with '\'
  *  @param pathlen Length of path buffer, i.e. maximum
  *		   pathlength + 1 (for EOS)
@@ -98,6 +99,9 @@ mt_fslx_open(char *title, short x, short y, short *handle, char *path, short pat
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (handle)
+#endif
 	*handle = aes_intout[0];
 	
 	return (void *)aes_addrout[0];
