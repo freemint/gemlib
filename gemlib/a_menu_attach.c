@@ -10,19 +10,19 @@
  *
  *  @param me_flag indicates the action the application desires as
  *         follows:
- *         - ME_INQUIRE (0)  Return information on a sub-menu attached
- *                           to the menu item designated by \p me_tree and
- *                           \p me_item in \p me_mdata.
- *         - ME_ATTACH (1)   Attach or change a sub-menu. \p me_mdata should
+ *         - #ME_INQUIRE (0)  Return information on a sub-menu attached
+ *                           to the menu item designated by \a me_tree and
+ *                           \a me_item in \a me_mdata.
+ *         - #ME_ATTACH (1)   Attach or change a sub-menu. \a me_mdata should
  *                           be initialized by the application.
- *                           \p me_tree and \p me_item should be the OBJECT pointer
+ *                           \a me_tree and \a me_item should be the OBJECT pointer
  *                           and index to the menu which is to have the
- *                           sub-menu attached. If \p me_mdata is NULLPTR, any
+ *                           sub-menu attached. If \a me_mdata is NULL, any
  *                           sub-menu attached will be removed.
- *         - ME_REMOVE (2)   Remove a sub-menu. \p me_tree and \p me_item should be
+ *         - #ME_REMOVE (2)   Remove a sub-menu. \a me_tree and \a me_item should be
  *                           the OBJECT pointer and index to the menu
  *                           item which a sub-menu was attached to.
- *                           \p me_mdata should be NULLPTR.
+ *                           \a me_mdata should be NULL.
  *  @param me_tree see above
  *  @param me_item see above
  *  @param me_mdata see above
@@ -40,16 +40,17 @@
  *	a bug which causes the AES to crash when changing or
  *	removing a sub-menu attachment.
  *	At present, if you wish to attach a scrolling menu, the
- *	menu items must be G_STRING's.
+ *	menu items must be #G_STRING's.
  *	The ob_x and ob_y fields of the root menu object should
- *	always be set to 0 prior to making the menu_attach() call.
+ *	always be set to 0 prior to making the mt_menu_attach() call.
  *	In addition, under AES 3.40, no more than one scrolling
  *	sub-menu should be contained in each tree.
  *
  *  If a menu bar having attachments is removed with
- *  mt_menu_bar( NULL, MENU_REMOVE ) those attachments
+ *  mt_menu_bar( NULL, #MENU_REMOVE ) those attachments
  *  are removed by the system and must be reattached with this
  *  call if the menu is redisplayed at a later time.
+ *
  *  Several recommendations regarding sub-menus should be
  *  adhered to:
  *  -# Menu items which will have sub-menus attached to them

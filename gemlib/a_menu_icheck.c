@@ -8,9 +8,9 @@
  *
  *  @param me_tree specifies the object tree of the current menu
  *  @param me_item should be the object index of a menu item
- *  @param me_check If \p me_check is UNCHECK (0), no checkmark will
- *         be displayed next to this item whereas if \p me_check 
- *		   is CHECK (1), a checkmark will be displayed.
+ *  @param me_check If \a me_check is #UNCHECK (0), no checkmark will
+ *         be displayed next to this item whereas if \a me_check 
+ *		   is #CHECK (1), a checkmark will be displayed.
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.

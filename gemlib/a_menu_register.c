@@ -23,19 +23,19 @@
  *  @note Applications other than desk accessories should not call
  *        this function unless they are running under MultiTOS.
  *
- *  @note If \p ap_id is set to REG_NEWNAME (-1) then the process name
- *        given in \p me_text will be used as the new process name. The
+ *  @note If \a ap_id is set to #REG_NEWNAME (-1) then the process name
+ *        given in \a me_text will be used as the new process name. The
  *        new process name should be exactly eight characters
  *        terminated with a NULL. Pad the string with space
  *        characters if necessary.
  *
  *  Desk accessories should store the return value as this is
- *  the value that will be included with future AC_OPEN
+ *  the value that will be included with future #AC_OPEN
  *  messages to identify the accessory.\n
  *  Applications running under MultiTOS may use this function
  *  to provide a more functional title for the 'Desk' menu than
  *  the program's filename.\n
- *  Calling mt_menu_register() with a parameter of REG_NEWNAME is
+ *  Calling mt_menu_register() with a parameter of #REG_NEWNAME is
  *  used to change the internal process name of the application
  *  returned by mt_appl_find() and mt_appl_search(). This is useful
  *  if you know another process will attempt to find your
