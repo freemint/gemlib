@@ -70,7 +70,7 @@ short	objc_xedit	(OBJECT *tree, short obj, short key, short *xpos, short subfn, 
  * fnts_* font selection (MagiC/WDIALOG only)
  */
 typedef void *FNT_DIALOG;
-typedef void (__CDECL *UTXT_FN)(short x, short y, short *clip_rect, long id, long pt, long ratio, char *string);
+typedef void __CDECL (*UTXT_FN)(short x, short y, short *clip_rect, long id, long pt, long ratio, char *string);
 
 typedef struct _fnts_item FNTS_ITEM;
 struct _fnts_item
@@ -137,7 +137,7 @@ short		fnts_update		(FNT_DIALOG *fnt_dialog, short button_flags, long id, long p
 /*
  * fslx_* file selection (MagiC only)
  */
-typedef short (__CDECL *XFSL_FILTER)(char *path, char *name, void *xattr);
+typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, void *xattr);
 
 /* Sortiermodi */
 #define SORTBYNAME		0
@@ -224,7 +224,7 @@ struct _prn_mode				/* Beschreibung eines Druckermodus */
 #define	PRN_QD_SUBS 	0x0004			/* Standard-Unterdialoge fÅr QuickDraw-Drucker */
 
 /* old_printer kann auch 0L sein */
-typedef long (__CDECL *PRN_SWITCH)(DRV_ENTRY *drivers, PRN_SETTINGS *settings, PRN_ENTRY *old_printer, PRN_ENTRY *new_printer);
+typedef long __CDECL (*PRN_SWITCH)(DRV_ENTRY *drivers, PRN_SETTINGS *settings, PRN_ENTRY *old_printer, PRN_ENTRY *new_printer);
 
 struct _prn_entry				/* GerÑtebeschreibung */
 {
@@ -312,9 +312,9 @@ struct _drv_entry
 #define	PDLG_BUT_CNCL	(PDLG_PREBUTTON + PDLG_PB_CANCEL)
 #define	PDLG_BUT_DEV	(PDLG_PREBUTTON + PDLG_PB_DEVICE)
 
-typedef long (__CDECL *PDLG_INIT)(PRN_SETTINGS *settings, PDLG_SUB *sub);
-typedef long (__CDECL *PDLG_HNDL)(PRN_SETTINGS *settings, PDLG_SUB *sub, short exit_obj);
-typedef long (__CDECL *PDLG_RESET)(PRN_SETTINGS *settings, PDLG_SUB *sub);
+typedef long __CDECL (*PDLG_INIT)(PRN_SETTINGS *settings, PDLG_SUB *sub);
+typedef long __CDECL (*PDLG_HNDL)(PRN_SETTINGS *settings, PDLG_SUB *sub, short exit_obj);
+typedef long __CDECL (*PDLG_RESET)(PRN_SETTINGS *settings, PDLG_SUB *sub);
 
 struct _pdlg_sub				/* Unterdialog fÅr GerÑteeinstellung */
 {
@@ -545,8 +545,8 @@ struct lbox_item
 
 };
 
-typedef void  (__CDECL *SLCT_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, void *user_data, short obj_index, short last_state);
-typedef short (__CDECL *SET_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, short obj_index, void *user_data, GRECT *rect, short first);
+typedef void  __CDECL (*SLCT_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, void *user_data, short obj_index, short last_state);
+typedef short __CDECL (*SET_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, short obj_index, void *user_data, GRECT *rect, short first);
 
 #define	LBOX_VERT		1	/* Listbox with vertical slider */
 #define	LBOX_AUTO		2	/* Auto-scrolling */
@@ -605,7 +605,7 @@ void		lbox_bscroll_to (LIST_BOX *box, short first, GRECT *box_rect,
  */
 
 typedef void * DIALOG;
-typedef short (__CDECL *HNDL_OBJ)(DIALOG *dialog, EVNT *events, short obj, short clicks, void *data);
+typedef short __CDECL (*HNDL_OBJ)(DIALOG *dialog, EVNT *events, short obj, short clicks, void *data);
 
 DIALOG *wdlg_create (HNDL_OBJ handle_exit, OBJECT *tree, void *user_data, short code, void *data, short flags);
 short	wdlg_open (DIALOG *dialog, char *title, short kind, short x, short y, short code, void *data);
@@ -711,38 +711,53 @@ typedef struct
 	short		pt_sizes[64];
 } XFNT_INFO;
 
-void	v_ftext		(short handle, short x, short y, const char *str) ;
-void	v_ftext16	(short handle, short x, short y, const short *wstr) ;
-void	v_ftext_offset	(short handle, short x, short y, const char *str, const short *offset);
-void	v_ftext_offset16(short handle, short x, short y, const short *wstr, const short *offset);
-void	v_getbitmap_info(short handle, short ch, long *advancex, long *advancey, long *xoffset, long *yoffset, short *width, short *height, short **bitmap);
-void	v_getoutline	(short handle, short ch, short *xyarray, char *bezarray, short maxverts, short *numverts);
+typedef unsigned short WCHAR; /* 16bit string, eg. for unicode */
 
-void	vq_devinfo	(short handle, short device, short *dev_open, char *file_name, char *device_name);
-short	vq_ext_devinfo	(short handle, short device, short *dev_exists, char *file_path, char *file_name, char *name);
+void	v_ftext         (VdiHdl, short x, short y, const char  *str);
+void	v_ftext16       (VdiHdl, short x, short y, const WCHAR *wstr);
+void	v_ftext16n      (VdiHdl, PXY pos, const WCHAR *wstr, short num);
+void	v_ftext_offset  (VdiHdl, short x, short y,
+                               const char  *str,  const short *offset);
+void	v_ftext_offset16(VdiHdl, short x, short y,
+                               const WCHAR *wstr, const short *offset);
+void	v_getbitmap_info(VdiHdl, short ch, long *advancex, long *advancey,
+                               long *xoffset, long *yoffset, short *width,
+                               short *height, short **bitmap);
+void	v_getoutline    (VdiHdl, short ch, short *xyarray, char *bezarray,
+                               short maxverts, short *numverts);
 
-void	vqt_advance	(short handle, short ch, short *advx, short *advy, short *xrem, short *yrem);
-void	vqt_advance32	(short handle, short ch, long *advx, long *advy);
-short	vqt_ext_name	(short handle, short __index, char *name, short *font_format, short *flags);
-void	vqt_f_extent	(short handle, const char *str, short extent[]);
-void	vqt_f_extent16	(short handle, const short *str, short extent[]);
-void	vqt_fontheader	(short handle, char *buffer, char *pathname);
-short	vqt_name_and_id	(short handle, short font_format, char *font_name, char *ret_name);
-void	vqt_pairkern	(short handle, short ch1, short ch2, long *x, long *y);
-void	vqt_real_extent	(short handle, short x, short y, char *string, short extent[]);
-void	vqt_trackkern	(short handle, long *x, long *y);
-short	vqt_xfntinfo	(short handle, short flags, short id, short __index, XFNT_INFO *info);
+void	vq_devinfo     (VdiHdl, short device, short *dev_open,
+                              char *file_name, char *device_name);
+short	vq_ext_devinfo (VdiHdl, short device, short *dev_exists,
+                              char *file_path, char *file_name, char *name);
 
-short vst_arbpt 	(short handle, short point, short *wchar, short *hchar, short *wcell, short *hcell);
-long  vst_arbpt32 	(short handle, long point, short *wchar, short *hchar, short *wcell, short *hcell);
-void  vst_charmap 	(short handle, short mode);
-void  vst_kern	(short handle, short tmode, short pmode, short *tracks, short *pairs);
-short vst_name 	(short handle, short font_format, char *font_name, char *ret_name);
-short vst_setsize 	(short handle, short point, short *wchar, short *hchar, short *wcell, short *hcell);
-long  vst_setsize32 	(short handle, long point, short *wchar, short *hchar, short *wcell, short *hcell);
-short vst_skew 	(short handle, short skew);
-void  vst_track_offset(short handle, long offset, short pairmode, short *tracks, short *pairs);
-void  vst_width	(short handle, short width, short *char_width, short *char_height, short *cell_width, short *cell_height);
+void	vqt_advance     (VdiHdl, short ch, short *advx, short *advy,
+                               short *xrem, short *yrem);
+void	vqt_advance32   (VdiHdl, short ch, long *advx, long *advy);
+short	vqt_ext_name    (VdiHdl, short __index,
+                               char *name, short *font_format, short *flags);
+void	vqt_f_extent    (VdiHdl, const char  *str, short extent[]);
+void	vqt_f_extent16  (VdiHdl, const WCHAR *str, short extent[]);
+void	vqt_f_extent16n (VdiHdl, const WCHAR *str, short num, short extent[]);
+void	vqt_fontheader  (VdiHdl, char *buffer, char *pathname);
+short	vqt_name_and_id (VdiHdl, short font_format,
+                               char *font_name, char *ret_name);
+void	vqt_pairkern    (VdiHdl, short ch1, short ch2, long *x, long *y);
+void	vqt_real_extent (VdiHdl, short x, short y, char *string, short extent[]);
+void	vqt_trackkern   (VdiHdl, long *x, long *y);
+short	vqt_xfntinfo    (VdiHdl, short flags, short id,
+                               short __index, XFNT_INFO *info);
+
+short vst_arbpt 	(VdiHdl, short point, short *wchar, short *hchar, short *wcell, short *hcell);
+long  vst_arbpt32 	(VdiHdl, long point, short *wchar, short *hchar, short *wcell, short *hcell);
+void  vst_charmap 	(VdiHdl, short mode);
+void  vst_kern	(VdiHdl, short tmode, short pmode, short *tracks, short *pairs);
+short vst_name 	(VdiHdl, short font_format, char *font_name, char *ret_name);
+short vst_setsize 	(VdiHdl, short point, short *wchar, short *hchar, short *wcell, short *hcell);
+long  vst_setsize32 	(VdiHdl, long point, short *wchar, short *hchar, short *wcell, short *hcell);
+short vst_skew 	(VdiHdl, short skew);
+void  vst_track_offset(VdiHdl, long offset, short pairmode, short *tracks, short *pairs);
+void  vst_width	(VdiHdl, short width, short *char_width, short *char_height, short *cell_width, short *cell_height);
 
 
 /*
