@@ -49,7 +49,7 @@ a_form_error.c			-- idem
 a_form_keybd.c			-- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
 a_fsel_exinput.c        -- add "const" keyword for title [gemlib->mgemlib]
                            little speed optimisation [mgemlib->gemlib]
-						   redirect call to fsel_input if TOS < 1.4
+						   redirect call to fsel_input if TOS < 1.4 [mgemlib->gemlib]
 a_fsel_input.c	        -- idem
 a_graf_dragbox.c		-- idem
 a_graf_growbox.c		-- idem
@@ -63,18 +63,18 @@ a_graf_rubbox.c			-- the mt_graf_rubberbox() is the actuall implementation
 a_graf_shrinkbox.c		-- idem
 a_graf_slidebox.c		-- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
 a_graf_watchbox.c		-- idem
-a_menu_attach.c
-a_menu_bar.c
-a_menu_click.c
-a_menu_icheck.c
-a_menu_ienable.c
-a_menu_istart.c
-a_menu_popup.c
-a_menu_register.c
-a_menu_settings.c
-a_menu_text.c
-a_menu_tnormal.c
-a_menu_unregister.c
+a_menu_attach.c		    -- idem
+a_menu_bar.c		    -- idem; replace "void*" by "OBJECT*" for 'tree' parameter.
+a_menu_click.c	        -- idem
+a_menu_icheck.c	        -- idem; replace "void*" by "OBJECT*" for 'tree' parameter.
+a_menu_ienable.c        -- idem; replace "void*" by "OBJECT*" for 'tree' parameter.
+a_menu_istart.c         -- idem
+a_menu_popup.c          -- idem
+a_menu_register.c       -- idem
+a_menu_settings.c       -- idem
+a_menu_text.c           -- idem; replace "void*" by "OBJECT*" for 'tree' parameter.
+a_menu_tnormal.c        -- idem; replace "void*" by "OBJECT*" for 'tree' parameter.
+a_menu_unregister.c     -- idem
 a_objc_add.c            -- use 'OBJECT' type instead of 'void' 
                            [gemlib->mgemlib]
 a_objc_change.c         -- use 'OBJECT' type instead of 'void' 
