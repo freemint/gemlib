@@ -122,14 +122,14 @@ appl_yield(void)
 	return(mt_appl_yield(aes_global));
 }
 
-#ifdef event_button
-#undef event_button
+#ifdef evnt_button
+#undef evnt_button
 #endif
 short
-event_button(short clicks, short mask, short state,
+evnt_button(short clicks, short mask, short state,
 				short *mx, short *my, short *mbutton, short *kmeta)
 {
-	return(mt_event_button(clicks,mask,state,
+	return(mt_evnt_button(clicks,mask,state,
 						   mx,my,mbutton,kmeta, aes_global));
 }
 
