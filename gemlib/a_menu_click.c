@@ -6,17 +6,20 @@
 
 /** 
  *
- *  @param click 
- *  @param setit 
+ *  @param click specifies if the AES shall manage menu as
+ *         - 0 : Drop down menu
+ *         - 1 : PullDown
+ *  @param setit is one of the following value:
+ *         - 0	=	Menu prompting query
+ *         - 1	=	Menu prompting set	
  *  @param global_aes global AES array
  *
- *  @return 
+ *  @return adjusted menu prompting (0 = drop down, 1 = Pulldown)
  *
- *  @since 
+ *  @since PC/GEM3, mt_appl_getinfo() with parameter #AES_PCGEM gives the
+ *         availability of this function.
  *
  *  @sa 
- *
- *
  *
  */
 
