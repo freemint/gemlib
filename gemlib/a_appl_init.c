@@ -2,9 +2,7 @@
  *  $Id$
  */
 
-#include <string.h>
 #include "gem_aesP.h"
-#include "gem.h" /* for global data */
 
 /** should be the first function called in any application that intends
  *  to use GEM calls.
@@ -63,9 +61,6 @@ mt_appl_init(short *global_aes)
 	AES_PARAMS(10,0,1,0,0);
 
 	AES_TRAP(aes_params);
-
-	gl_ap_version = global_aes[0];
-	gl_apid 	  = aes_intout[0];
 
 	return aes_intout[0];
 }
