@@ -1,39 +1,19 @@
+/*
+ *   special graphic funkcion
+ */
 
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
-v_trays (short handle, short input, short output, short *set_input, short *set_output)
+v_trays (short handle, short input, short output,
+         short *set_input, short *set_output)
 {
 	vdi_intin[0] = input;
 	vdi_intin[1] = output;
-	vdi_control[0] = 5;
-	vdi_control[1] = 0;
-	vdi_control[3] = 2;
-	vdi_control[5] = 29;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
-	*set_input = vdi_intout[0];
+	
+	VDI_TRAP_ESC (vdi_params, handle, 5,29, 0,2);
+	
+	*set_input  = vdi_intout[0];
 	*set_output = vdi_intout[1];
 }
-
-/*
- * * special graphic funkcion
- */
-
-short
-vq_calibrate (short handle, short *flag)
-{
-	vdi_control[0] = 5;
-	vdi_control[1] = 0;
-	vdi_control[3] = 1;
-	vdi_control[5] = 77;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
-	*flag = vdi_intout[0];
-	return vdi_control[4];
-}
-
-/*
- * * special graphic funkcion
- */

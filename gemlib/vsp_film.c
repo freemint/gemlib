@@ -1,5 +1,8 @@
+/*
+ *   polaroid function
+ */
 
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
@@ -7,14 +10,6 @@ vsp_film (short handle, short index, short lightness)
 {
 	vdi_intin[0] = index;
 	vdi_intin[1] = lightness;
-	vdi_control[0] = 5;
-	vdi_control[1] = 0;
-	vdi_control[3] = 2;
-	vdi_control[5] = 91;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	
+	VDI_TRAP_ESC (vdi_params, handle, 5,91, 0,2);
 }
-
-/*
- * * polaroid function
- */

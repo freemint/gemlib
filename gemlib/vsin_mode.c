@@ -1,5 +1,4 @@
-
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 short
@@ -7,11 +6,8 @@ vsin_mode (short handle, short dev, short mode)
 {
 	vdi_intin[0] = dev;
 	vdi_intin[1] = mode;
-	vdi_control[0] = 33;
-	vdi_control[1] = 0;
-	vdi_control[3] = 2;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	
+	VDI_TRAP (vdi_params, handle, 33, 0,2);
+	
 	return vdi_intout[0];
 }

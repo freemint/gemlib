@@ -1,18 +1,12 @@
+/*
+ *   text function
+ */
 
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
 v_curright (short handle)
 {
-	vdi_control[0] = 5;
-	vdi_control[1] = 0;
-	vdi_control[3] = 0;
-	vdi_control[5] = 6;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	VDI_TRAP_ESC (vdi_params, handle, 5,6, 0,0);
 }
-
-/*
- * * text function
- */
