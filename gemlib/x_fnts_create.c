@@ -44,7 +44,7 @@ FNT_DIALOG *
 mt_fnts_create(short vdi_handle, short no_fonts, short font_flags, short dialog_flags,
                char *sample, char *opt_button, short *global_aes)
 {
-	AES_PARAMS(180,4,0,4,1);
+	AES_PARAMS(180,4,0,2,1);
                     
 	aes_intin[0] = vdi_handle;
 	aes_intin[1] = no_fonts;
