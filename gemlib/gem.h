@@ -4,25 +4,27 @@
  */
 
 #ifndef _GEMLIB_H_
-#define _GEMLIB_H_
+# define _GEMLIB_H_
 
-#include <compiler.h>
+# include <compiler.h>
 
 
-#ifdef __GEMLIB_OLDBIND		/* Backward-compatibility */
-#undef _GEMLIB_H_		/* For old bindings, these header had to be multi-included. */
+# ifdef __GEMLIB_OLDBIND		/* Backward-compatibility */
+#  undef _GEMLIB_H_		/* For old bindings, these header had to be multi-included. */
 
-#ifndef __GEMLIB_HAVE_DEFS	/* first include via aesbind/vdibind/gemfast */
-#define __GEMLIB_HAVE_DEFS
-#else
-#undef __GEMLIB_DEFS
-#endif
+#  ifndef __GEMLIB_HAVE_DEFS	/* first include via aesbind/vdibind/gemfast */
+#   define __GEMLIB_HAVE_DEFS
+#  else
+#   undef __GEMLIB_DEFS
+#  endif
 
-#else				/* New include scheme: one header defines all */
-#define __GEMLIB_DEFS
-#define __GEMLIB_AES
-#define __GEMLIB_VDI
-#endif
+# else				/* New include scheme: one header defines all */
+#  define __GEMLIB_DEFS
+#  define __GEMLIB_AES
+#  ifndef _GEM_AES_P_
+#   define __GEMLIB_VDI
+#  endif
+# endif
 
 __BEGIN_DECLS
 
@@ -36,7 +38,7 @@ __BEGIN_DECLS
 #define __GEMLIB__		__GEMLIB_MAJOR__
 #define	__GEMLIB_MAJOR__     0
 #define	__GEMLIB_MINOR__    41
-#define __GEMLIB_REVISION__   0
+#define __GEMLIB_REVISION__   1
 #define __GEMLIB_BETATAG__   ""
 
 
@@ -873,7 +875,7 @@ short	graf_growbox	(short Sx, short Sy, short Sw, short Sh, short Fx, short Fy, 
 short	graf_handle	(short *Wchar, short *Hchar, short *Wbox, short *Hbox);
 short	graf_mbox	(short Sw, short Sh, short Sx, short Sy, short Dx, short Dy);
 short	graf_mkstate	(short *Mx, short *My, short *ButtonState, short *KeyState); 
-short	graf_mouse	(short Form, void *FormAddress);
+short	graf_mouse	(short Form, const MFORM *FormAddress);
 short	graf_rubbbox	(short Ix, short Iy, short Iw, short Ih, short *Fw, short *Fh);
 short	graf_shrinkbox	(short Fx, short Fy, short Fw, short Fh, short Sx, short Sy, short Sw, short Sh); 
 short	graf_slidebox	(OBJECT *, short Parent, short Object, short Direction); 
@@ -981,12 +983,6 @@ typedef struct
 	long        *addrout;
 } AESPB;
 
-extern short	aes_global[];
-extern short	aes_control[];
-extern short	aes_intin[];
-extern short	aes_intout[];
-extern long 	aes_addrin[];
-extern long	aes_addrout[];
 extern AESPB	aes_params;
 extern short	gl_apid, gl_ap_version;			/* initialized in appl_init */
 
