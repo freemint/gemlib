@@ -8,13 +8,13 @@
 
 void
 v_ftext_offset16 (short handle, short x, short y,
-                  const short *wstr, const short *offset)
+                  const WCHAR * wstr, const short * offset)
 {
 	const long * src = (const long*)offset;
 	long       * dst =       (long*)vdi_ptsin;
-	short     i, len = vdi_wstrlen (wstr);
+	short     i, len = vdi_wstrlen ((const short *)wstr);
 
-	vdi_params.intin = wstr;
+	vdi_params.intin = (const short *)wstr;
 
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;
