@@ -23,7 +23,7 @@ vqf_attributes (short handle, short attrib[])
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDI_PARAMS(vdi_control, 0L, 0L, attrib, 0L );
+	VDI_PARAMS(vdi_control, 0L, 0L, attrib, vdi_dummy );
 #else
 	vdi_params.intout = attrib;
 #endif

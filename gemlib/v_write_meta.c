@@ -25,7 +25,7 @@ v_write_meta (short handle, short numvdi_intin, short *avdi_intin,
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDI_PARAMS(vdi_control, avdi_intin, a_ptsin, 0L, 0L );
+	VDI_PARAMS(vdi_control, avdi_intin, a_ptsin, vdi_dummy, vdi_dummy );
 #else
 	vdi_params.intin = avdi_intin;
 	vdi_params.ptsin = a_ptsin;

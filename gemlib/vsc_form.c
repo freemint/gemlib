@@ -28,7 +28,7 @@ vsc_form (short handle, short form[])
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDI_PARAMS(vdi_control, form, 0L, 0L, 0L );
+	VDI_PARAMS(vdi_control, form, 0L, vdi_dummy, vdi_dummy );
 #else
 	vdi_params.intin = form;
 #endif

@@ -17,7 +17,7 @@ vs_clip_off (short handle)
 	short vdi_control[VDI_CNTRLMAX]; 
 	static short vdi_intin[1] = {0};   
 	static short vdi_ptsin[4] = {0,0,0,0};   
-	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, 0L, 0L );
+	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy );
 #else
 	vdi_intin[0] = 0;
 #endif

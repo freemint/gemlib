@@ -17,7 +17,7 @@ vs_clip_pxy (short handle, PXY pxy[])
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	static short vdi_intin[1] = {1};   
-	VDI_PARAMS(vdi_control, vdi_intin, (short*)&pxy, 0L, 0L );
+	VDI_PARAMS(vdi_control, vdi_intin, (short*)&pxy, vdi_dummy, vdi_dummy );
 #else
 	vdi_intin[0]         = 1;
 	((PXY*)vdi_ptsin)[0] = pxy[0];
