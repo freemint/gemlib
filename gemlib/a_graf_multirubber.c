@@ -47,7 +47,7 @@ mt_graf_multirubber(short bx, short by, short mw, short mh, GRECT *rec, short *r
 	aes_intin[2] = mw;
 	aes_intin[3] = mh;
 	
-	aes_addrin[0] = rec;
+	aes_addrin[0] = (long)rec;
 
 	AES_TRAP(aes_params);
 
