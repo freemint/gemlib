@@ -15,11 +15,10 @@
 static inline void
 _aes_trap (AESPB * aespb)
 {
-	__asm__ volatile ("
-		move.l %0, d1;    | &aespb
-		move.w  #200,d0;
-		trap    #2;
-		"
+	__asm__ volatile (
+		"move.l	%0,d1\n\t"	/* &aespb */
+		"move.w	#200,d0\n\t"
+		"trap	#2"
 		:
 		: "a"(aespb)
 		: "d0","d1","memory"
