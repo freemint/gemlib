@@ -26,26 +26,15 @@
 void
 vqt_real_extent (short handle, short x, short y, char *string, short extent[])
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_ptsin[2];   
-#endif
 	register short n = vdi_str2array (string, vdi_intin);
-#if USE_LOCAL_VDIPB
+
 	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, extent);
-#endif
-	
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.ptsout = extent;
-#endif
 
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;
 	
 	VDI_TRAP_ESC (vdi_params, handle, 240,4200, 1,n);
-	
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.ptsout = vdi_ptsout;
-#endif
 }

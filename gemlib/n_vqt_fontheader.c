@@ -50,13 +50,10 @@ FH_ORUPM   330      2     number of ORUs per em, e.g. 2048
 void
 vqt_fontheader (short handle, char *buffer, char *pathname)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[VDI_INTOUTMAX]; 
+
 	VDI_PARAMS(vdi_control, (short*)&buffer, 0L, vdi_intout, vdi_dummy);
-#else
-	vdi_intin_ptr(0) = buffer;
-#endif
 		
 	VDI_TRAP (vdi_params, handle, 232, 0,2);
 	
