@@ -18,8 +18,10 @@
  *         - 0: standard output (usually front)
  *         - 1: output 2
  *         - etc...
- *  @param set_input selected input tray
- *  @param set_output selected output tray
+ *  @param set_input selected input tray \n
+ *         [option CHECK_NULLPTR] set_input may be NULL
+ *  @param set_output selected output tray \n
+ *         [option CHECK_NULLPTR] set_output may be NULL
  *
  *  @since depends on the driver. If the driver doesn't supporte this
  *         function, \p set_input and \p set_output will contain 0.
@@ -46,12 +48,24 @@ v_trays (short handle, short input, short output,
 	
 	if (vdi_control[4]) /* function supported by the driver */
 	{
+#if CHECK_NULLPTR
+	if (set_input)
+#endif
 		*set_input  = vdi_intout[0];
+#if CHECK_NULLPTR
+	if (set_output)
+#endif
 		*set_output = vdi_intout[1];
 	}
 	else
 	{
+#if CHECK_NULLPTR
+	if (set_input)
+#endif
 		*set_input  = 0;
+#if CHECK_NULLPTR
+	if (set_output)
+#endif
 		*set_output = 0;
 	}
 }
