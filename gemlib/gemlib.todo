@@ -150,103 +150,141 @@ gem_vdiP.h
 gemlib.spec
 gemx.h
 globals.c
-n_v_bez.c
-n_v_bez_fill.c
-n_v_bez_off.c
-n_v_bez_on.c
-n_v_bez_qual.c
-n_v_clsbm.c
-n_v_color2nearest.c
-n_v_color2value.c
-n_v_create_ctab.c
-n_v_create_itab.c
-n_v_ctab_idx2value.c
-n_v_ctab_idx2vdi.c
-n_v_ctab_vdi2idx.c
-n_v_delete_ctab.c
-n_v_delete_itab.c
-n_v_ftext.c
-n_v_ftext16.c
-n_v_ftext16n.c
-n_v_ftext_offset.c
-n_v_ftext_offset16.c
-n_v_get_ctab_id.c
-n_v_get_outline.c
-n_v_getbitmap_info.c
-n_v_getoutline.c
-n_v_open_bm.c
-n_v_opnbm.c
-n_v_opnprn.c
-n_v_resize_bm.c
-n_v_setrgb.c
-n_v_value2color.c
-n_vq_ctab.c
-n_vq_ctab_entry.c
-n_vq_ctab_id.c
-n_vq_devinfo.c
-n_vq_dflt_ctab.c
-n_vq_ext_devinfo.c
-n_vq_hilite_color.c
-n_vq_margins.c
-n_vq_max_color.c
-n_vq_min_color.c
-n_vq_prn_scaling.c
-n_vq_px_format.c
-n_vq_scrninfo.c
-n_vq_weight_color.c
-n_vqf_bg_color.c
-n_vqf_fg_color.c
-n_vql_bg_color.c
-n_vql_fg_color.c
-n_vqm_bg_color.c
-n_vqm_fg_color.c
-n_vqr_bg_color.c
-n_vqr_fg_color.c
-n_vqt_advance.c
-n_vqt_advance32.c
-n_vqt_bg_color.c
-n_vqt_char_index.c
-n_vqt_ext_name.c
-n_vqt_f_extent.c
-n_vqt_f_extent16.c
-n_vqt_f_extent16n.c
-n_vqt_fg_color.c
-n_vqt_fontheader.c
-n_vqt_name_and_id.c
-n_vqt_pairkern.c
-n_vqt_real_extent.c
-n_vqt_trackkern.c
-n_vqt_xfntinfo.c
-n_vr_transfer_bits.c
-n_vs_ctab.c
-n_vs_ctab_entry.c
-n_vs_dflt_ctab.c
-n_vs_document_info.c
-n_vs_hilite_color.c
-n_vs_max_color.c
-n_vs_min_color.c
-n_vs_weight_color.c
-n_vsf_bg_color.c
-n_vsf_fg_color.c
-n_vsl_bg_color.c
-n_vsl_fg_color.c
-n_vsm_bg_color.c
-n_vsm_fg_color.c
-n_vsr_bg_color.c
-n_vsr_fg_color.c
-n_vst_arbpt.c
-n_vst_arbpt32.c
-n_vst_bg_color.c
-n_vst_charmap.c
-n_vst_fg_color.c
-n_vst_kern.c
-n_vst_map_mode.c
-n_vst_name.c
-n_vst_setsize.c
-n_vst_setsize32.c
-n_vst_skew.c
-n_vst_track_offset.c
-n_vst_width.c
+n_v_bez.c               -- add optimisations [gemlib->mgemlib]
+                           add vdi_intin and vdi_ptsin as parameters of _v_bez() because
+						   vdi_intin and vdi_ptsin are no more global varibales.
+n_v_bez_fill.c          -- only in gemlib (empty file)
+n_v_bez_off.c           -- idem
+n_v_bez_on.c            -- bug fix: control[1]=0 (no ptsin entry) [mgemlib->gemlib]
+                           modification: init vdi_intout[0] = 0, as suggested in NVDI dev doc.
+n_v_bez_qual.c          -- idem
+n_v_clsbm.c             -- idem
+n_v_color2nearest.c     -- idem
+n_v_color2value.c       -- idem
+n_v_create_ctab.c       -- idem
+n_v_create_itab.c       -- idem
+n_v_ctab_idx2value.c    -- idem
+n_v_ctab_idx2vdi.c      -- idem
+n_v_ctab_vdi2idx.c      -- idem
+n_v_delete_ctab.c       -- idem
+n_v_delete_itab.c       -- idem
+n_v_ftext.c             -- idem
+n_v_ftext16.c           -- prototype differs : mgemlib has a 5th parameters "wstrlen" which
+                           contains the string len. This is "near" the v_ftext16n function of
+						   gemlib.
+n_v_ftext16n.c          -- only in gemlib
+n_v_ftext_offset.c      -- add optimisations (move.l instead of move.w) [gemlib->mgemlib]
+                           mgemlib has a bug: vdi_control[1] is always 1, and vdi_control[3]
+						   is always 0 (because here, at for() loop exit, "i" value is 0) !
+n_v_ftext_offset16.c    -- prototype differs : mgemlib has a 5th parameters "wstrlen" 
+                           (before the parameter "offset") which contains the string len.
+n_v_get_ctab_id.c       -- idem 
+n_v_get_outline.c       -- idem 
+n_v_getbitmap_info.c    -- idem 
+n_v_getoutline.c        -- idem 
+n_v_open_bm.c           -- idem 
+n_v_opnbm.c             -- idem [nota: mgemlib have twice the line "*((MFDB **)(&vdi_control[7])) = bitmap;"]
+n_v_opnprn.c            -- fix little bug in gemlib (add ";" after the for() instruction)
+n_v_resize_bm.c         -- idem
+n_v_setrgb.c            -- idem
+n_v_value2color.c       -- idem
+n_vq_ctab.c             -- idem
+n_vq_ctab_entry.c       -- idem
+n_vq_ctab_id.c          -- idem
+n_vq_devinfo.c          -- this function is named "vqt_devinfo" in mgemlib.
+                           fix bug: add a null byte so that device_name is a C-string [gemlib->mgemlib]
+n_vq_dflt_ctab.c        -- idem
+n_vq_ext_devinfo.c      -- idem
+n_vq_hilite_color.c     -- idem
+n_vq_margins.c          -- idem
+n_vq_max_color.c        -- idem
+n_vq_min_color.c        -- idem
+n_vq_prn_scaling.c      -- idem
+n_vq_px_format.c        -- idem
+n_vq_scrninfo.c         -- idem
+n_vq_weight_color.c     -- idem
+n_vqf_bg_color.c        -- idem
+n_vqf_fg_color.c        -- idem
+n_vql_bg_color.c        -- idem
+n_vql_fg_color.c        -- idem
+n_vqm_bg_color.c        -- idem
+n_vqm_fg_color.c        -- idem
+n_vqr_bg_color.c        -- idem
+n_vqr_fg_color.c        -- idem
+n_vqt_advance.c 		-- mgemlib binding has bug. the mgemlib binding says the following:
+ 						   advx = vdi_ptsout[0,1]
+ 						   advy = vdi_ptsout[1,2]
+						   xrem = vdi_ptsout[2,3]
+						   etc...
+						   BTW, return values (advx...) are "short" value,they are not "long" value.
+						   i kept the gemlib binding [gemlib->mgemlib]
+n_vqt_advance32.c		-- idem
+n_vqt_bg_color.c		-- idem
+n_vqt_char_index.c	    -- idem
+n_vqt_ext_name.c		-- idem
+ 						   new: check control[4] to set flag and other stuffs, as describe in
+						   nvdi dev doc.
+n_vqt_f_extent.c		-- add optimisation [gemlib->mgemlib]
+n_vqt_f_extent16.c		-- prototype differs : this mgemlib function is named "vqt_f_extent16n"
+                           in gemlib... and mgemlib doesn't have any function named "vqt_f_extent16n".
+n_vqt_f_extent16n.c     -- only in gemlib... (see n_vqt_f_extent16 notes)
+n_vqt_fg_color.c        -- idem
+n_vqt_fontheader.c      -- idem
+n_vqt_name_and_id.c     -- idem
+                           fix bug: result string is in vdi_intout[1+], and
+						   not in vdi_intin[0+] !
+						   fix bug: font_name was copied to vdi_intin[0+]
+						   instead of vdi_intin[1+] 
+n_vqt_pairkern.c        -- idem
+                           fix bug: results are in vdi_intout[], there's nothing
+						   to read in vdi_ptsout[] !
+n_vqt_real_extent.c     -- gemlib binding says that control[5]=4200
+                           mgemlib binding says that control[5]=0
+						   ==> gemlib is right (from nvdi dev doc point of view)
+						   add optimisation [gemlib->mgemlib]
+n_vqt_trackkern.c       -- idem
+                           fix bug: results are in vdi_intout[], there's nothing
+						   to read in vdi_ptsout[] !
+n_vqt_xfntinfo.c        -- idem
+n_vr_transfer_bits.c    -- idem
+n_vs_ctab.c             -- idem
+n_vs_ctab_entry.c       -- idem
+n_vs_dflt_ctab.c        -- idem
+n_vs_document_info.c    -- idem
+n_vs_hilite_color.c     -- gemlib have extra vdi_control[] init (redundant
+                           with VDI_TRAP macro).
+n_vs_max_color.c        -- idem
+n_vs_min_color.c        -- idem
+n_vs_weight_color.c     -- idem
+n_vsf_bg_color.c        -- idem
+n_vsf_fg_color.c        -- idem
+n_vsl_bg_color.c        -- idem
+n_vsl_fg_color.c        -- idem
+n_vsm_bg_color.c        -- idem
+n_vsm_fg_color.c        -- idem
+n_vsr_bg_color.c        -- idem
+n_vsr_fg_color.c        -- idem
+n_vst_arbpt.c           -- idem
+n_vst_arbpt32.c         -- idem
+n_vst_bg_color.c        -- idem
+n_vst_charmap.c         -- prototype differs: gemlib says it's a void function,
+                           mgemlib return vdi_intout[0].
+						   nvdi dev doc says it's a void function, so i
+						   kept gemlib binding (void).
+n_vst_fg_color.c        -- idem
+n_vst_kern.c            -- idem
+n_vst_map_mode.c        -- only in gemlib
+n_vst_name.c            -- mgemlib: vdi_control[3] = vdi_str2array(...)
+                           gemlib: vdi_control[3] = 1 + vdi_str2array(...)
+						   ==> gemlib seems to be right.
+						   fix bug: ret_name is in vdi_intout[1..ctrl4-1] (both
+						   gemlib and mgemlib get ret_name in vdi_intout[0..ctrl4]
+n_vst_setsize.c         -- idem
+n_vst_setsize32.c       -- idem
+n_vst_skew.c            -- idem
+n_vst_track_offset.c    -- idem
+n_vst_width.c           -- mgemlib have init the unused "vdi_ptsin[1] = 0;"
+                           Is there a good reason for that ?
 pdlg_add_printers.c     -- idem
 pdlg_add_sub_dlgs.c     -- idem
 pdlg_close.c            -- idem
@@ -270,152 +308,188 @@ rc_copy.c               -- idem
 rc_equal.c              -- add optimisation [gemlib->mgemlib]
 rc_grect_to_array.c     -- add optimisation [gemlib->mgemlib]
 rc_intersect.c          -- idem
-v_alpha_text.c
-v_arc.c
-v_bar.c
-v_bit_image.c
-v_cellarray.c
-v_circle.c
-v_clear_disp_list.c
-v_clrwk.c
-v_clsvwk.c
-v_clswk.c
-v_contourfill.c
-v_copies.c
-v_curdown.c
-v_curhome.c
-v_curleft.c
-v_curright.c
-v_curtext.c
-v_curup.c
-v_dspcur.c
-v_eeol.c
-v_eeos.c
-v_ellarc.c
-v_ellipse.c
-v_ellpie.c
-v_enter_cur.c
-v_escape2000.c
-v_exit_cur.c
-v_fillarea.c
-v_flushcache.c
-v_form_adv.c
-v_get_pixel.c
-v_gtext.c
-v_gtext16.c
-v_gtext16n.c
-v_hardcopy.c
-v_hide_c.c
-v_justified.c
-v_loadcache.c
-v_meta_extents.c
-v_opnvwk.c
-v_opnwk.c
-v_orient.c
-v_output_window.c
-v_page_size.c
-v_pieslice.c
-v_pline.c
-v_pmarker.c
-v_rbox.c
-v_rfbox.c
-v_rmcur.c
-v_rvoff.c
-v_rvon.c
-v_savecache.c
-v_set_app_buff.c
-v_show_c.c
-v_trays.c
-v_updwk.c
-v_write_meta.c
-vdi_array2str.c
-vdi_str2array.c
-vdi_wstrlen.c
-vex_butv.c
-vex_curv.c
-vex_motv.c
-vex_timv.c
-vm_coords.c
-vm_filename.c
-vm_pagesize.c
-vq_calibrate.c
-vq_cellarray.c
-vq_chcells.c
-vq_color.c
-vq_curaddress.c
-vq_extnd.c
-vq_key_s.c
-vq_mouse.c
-vq_page_name.c
-vq_scan.c
-vq_tabstatus.c
-vq_tdimensions.c
-vq_tray_names.c
-vqf_attributes.c
-vqin_mode.c
-vql_attributes.c
-vqm_attributes.c
-vqt_attributes.c
-vqt_cachesize.c
-vqt_extent.c
-vqt_extent16.c
-vqt_extent16n.c
-vqt_fontinfo.c
-vqt_get_table.c
-vqt_name.c
-vqt_width.c
-vr_recfl.c
-vr_trnfm.c
-vro_cpyfm.c
-vrq_choice.c
-vrq_locator.c
-vrq_string.c
-vrq_valuator.c
-vrt_cpyfm.c
-vs_calibrate.c
-vs_clip.c
-vs_clip_off.c
-vs_clip_pxy.c
-vs_color.c
-vs_curaddress.c
-vs_palette.c
-vsc_expose.c
-vsc_form.c
-vsf_color.c
-vsf_interior.c
-vsf_perimeter.c
-vsf_style.c
-vsf_udpat.c
-vsin_mode.c
-vsl_color.c
-vsl_ends.c
-vsl_type.c
-vsl_udsty.c
-vsl_width.c
-vsm_choice.c
-vsm_color.c
-vsm_height.c
-vsm_locator.c
-vsm_string.c
-vsm_type.c
-vsm_valuator.c
-vsp_film.c
-vst_alignment.c
-vst_color.c
-vst_effects.c
-vst_error.c
-vst_font.c
-vst_height.c
-vst_load_fonts.c
-vst_point.c
-vst_rotation.c
-vst_scratch.c
-vst_unload_fonts.c
-vswr_mode.c
-vt_alignment.c
-vt_axis.c
-vt_origin.c
-vt_resolution.c
+v_alpha_text.c          -- idem
+v_arc.c                 -- mgemlib optimisation has bug:
+                           "*(ptr++)=*(ptr++)=0;" have to be replace by
+						   "*(ptr++)=0; *(ptr++)=0;"
+v_bar.c                 -- idem
+v_bit_image.c           -- idem
+v_cellarray.c           -- add optimisation [gemlib->mgemlib]
+v_circle.c              -- mgemlib optimisation has bug:
+                           "*(ptr++)=*(ptr++)=0;" have to be replace by
+						   "*(ptr++)=0; *(ptr++)=0;"
+v_clear_disp_list.c     -- idem
+v_clrwk.c               -- idem
+v_clsvwk.c              -- idem
+v_clswk.c               -- idem
+v_contourfill.c         -- idem
+v_copies.c              -- idem;
+                           now, this function return 1 if the driver doesn't support
+						   this function.
+v_curdown.c             -- idem
+v_curhome.c             -- idem
+v_curleft.c             -- idem
+v_curright.c            -- idem
+v_curtext.c             -- idem
+v_curup.c               -- idem
+v_dspcur.c              -- idem
+v_eeol.c                -- idem
+v_eeos.c                -- idem
+v_ellarc.c              -- idem
+v_ellipse.c             -- idem
+v_ellpie.c              -- idem
+v_enter_cur.c           -- idem
+v_escape2000.c          -- idem
+v_exit_cur.c            -- idem
+v_fillarea.c            -- idem
+v_flushcache.c          -- idem
+v_form_adv.c            -- idem
+v_get_pixel.c           -- idem
+v_gtext.c               -- idem
+v_gtext16.c             -- prototype differs : mgemlib has a 5th parameters "wstrlen" which
+                           contains the string len. This is "near" the v_get16n function of
+						   gemlib.
+v_gtext16n.c            -- only in gemlib.
+v_hardcopy.c            -- idem
+v_hide_c.c              -- idem
+v_justified.c           -- idem
+v_loadcache.c           -- idem
+v_meta_extents.c        -- idem
+v_opnvwk.c              -- initialise some default VDI wokstation parameter
+                           [mgemlib -> gemlib]
+v_opnwk.c               -- idem
+v_orient.c              -- idem
+                           now, this function return 1 if the driver doesn't support
+						   this function.
+v_output_window.c       -- idem
+v_page_size.c           -- idem
+                           now, this function return 0 if the driver doesn't support
+						   this function.
+v_pieslice.c            -- add little speed optimisation [mgemlib->gemlib]
+v_pline.c               -- idem
+v_pmarker.c             -- idem
+v_rbox.c                -- idem
+v_rfbox.c               -- idem
+v_rmcur.c               -- idem
+v_rvoff.c               -- idem
+v_rvon.c                -- idem
+v_savecache.c           -- idem
+v_set_app_buff.c        -- gemlib binding : vdi_intin[2] = size;
+                           mgemlib binding: vdi_intin[3] = size;
+						   ----> who's right ????
+v_show_c.c              -- idem
+v_trays.c               -- idem
+                           now, this function set set_input and set_output to 0
+						   if the driver doesn't support this function.
+v_updwk.c               -- idem
+v_write_meta.c          -- idem
+vdi_array2str.c         -- idem
+vdi_str2array.c         -- idem
+vdi_wstrlen.c           -- only in gemlib
+vex_butv.c              -- idem
+vex_curv.c              -- idem
+vex_motv.c              -- idem
+vex_timv.c              -- idem
+vm_coords.c             -- idem
+vm_filename.c           -- idem
+vm_pagesize.c           -- idem
+vq_calibrate.c          -- little optimisation (set intout=color) [gemlib->mgemlib]
+vq_cellarray.c          -- idem
+vq_chcells.c            -- idem
+vq_color.c              -- idem
+vq_curaddress.c         -- idem
+vq_extnd.c              -- idem
+vq_key_s.c              -- idem
+vq_mouse.c              -- idem
+vq_page_name.c          -- idem
+                           now, this function return -1
+						   if the driver doesn't support this function.
+vq_scan.c               -- idem
+vq_tabstatus.c          -- idem
+vq_tdimensions.c        -- idem
+vq_tray_names.c         -- idem
+                           now, this function set input and output to 0, and set
+						   tray names to '\0' if the driver doesn't support this function.
+vqf_attributes.c        -- gemlib gets attrib[] in vdi_intout[0..3] (8 bytes)
+                           mgemlib gets attrib[] in vdi_intout[0..4] (10 bytes)
+						   who's right ???
+						   maybe we'd better set vdi_params.vdi_intout=attrib before the trap?
+						   ==> done. BTW, attrib[] is 5 short wide. mgemlib was right.
+vqin_mode.c             -- idem
+vql_attributes.c        -- little speed optimisation [mgemlib->gemlib]
+vqm_attributes.c        -- gemlib gets attrib[] from vdi_intout[0..2] and vdi_ptsout[0..1]
+                           mgemlib gets attrib[] from vdi_intout[0..4] and vdi_ptsout[0..1]
+						   who's right ???
+						   ==> from my docs point of view, gemlib was right.
+vqt_attributes.c        -- idem
+vqt_cachesize.c         -- idem
+vqt_extent.c            -- add optimisation (set vdi_params.ptsout = extent) [gemlib->mgemlib]
+vqt_extent16.c          -- only in gemlib
+vqt_extent16n.c         -- only in gemlib
+vqt_fontinfo.c          -- idem
+vqt_get_table.c         -- idem
+vqt_name.c              -- idem
+vqt_width.c             -- idem
+vr_recfl.c              -- idem
+vr_trnfm.c              -- idem
+vro_cpyfm.c             -- idem
+vrq_choice.c            -- idem
+vrq_locator.c           -- idem
+vrq_string.c            -- little speed optimisation [gemlib->mgemlib]
+vrq_valuator.c          -- idem
+vrt_cpyfm.c             -- idem
+vs_calibrate.c          -- idem
+vs_clip.c               -- idem
+vs_clip_off.c           -- only in gemlib [gemlib->mgemlib]
+vs_clip_pxy.c           -- only in gemlib [gemlib->mgemlib]
+vs_color.c              -- add little speed optimisation [mgemlib->gemlib]
+vs_curaddress.c         -- idem
+vs_palette.c            -- idem
+vsc_expose.c            -- idem
+vsc_form.c              -- idem
+vsf_color.c             -- idem
+vsf_interior.c          -- idem
+vsf_perimeter.c         -- idem
+vsf_style.c             -- idem
+vsf_udpat.c             -- idem; (gemlib use "*16" and mgemlib use "<<4", i
+                           kept gemlib version).
+vsin_mode.c             -- idem
+vsl_color.c             -- idem
+vsl_ends.c              -- idem
+vsl_type.c              -- idem
+vsl_udsty.c             -- idem
+vsl_width.c             -- idem
+vsm_choice.c            -- idem
+vsm_color.c             -- idem
+vsm_height.c            -- idem; bug fixe: the return value is in ptsout[1],
+                           vdi_intout[0] doesn't contain anything here.
+						   BTW, ptsout[0] gives the "width" or the marker...
+						   we have to find a way to return this value.
+vsm_locator.c           -- idem
+vsm_string.c            -- add little speed optimisation [gemlib->mgemlib]
+vsm_type.c              -- idem
+vsm_valuator.c          -- idem
+vsp_film.c              -- idem
+vst_alignment.c         -- idem
+vst_color.c             -- idem
+vst_effects.c           -- idem
+vst_error.c             -- idem
+vst_font.c              -- idem
+vst_height.c            -- add little speed optimisation [mgemlib->gemlib]
+                           GEM/VDI and NVDI says that this is a void function,
+						   but gemlib says it's a "short" function with a returned
+						   value in intout[0]...
+						   ==> modify to "void" function.
+vst_load_fonts.c        -- idem
+vst_point.c             -- add little speed optimisation [mgemlib->gemlib]
+vst_rotation.c          -- idem
+vst_scratch.c           -- idem
+vst_unload_fonts.c      -- idem
+vswr_mode.c             -- idem
+vt_alignment.c          -- idem
+vt_axis.c               -- idem
+vt_origin.c             -- idem
+vt_resolution.c         -- idem
 x_edit_close.c          -- idem
 x_edit_create.c         -- function return (XEDITINFO*) intead of (void*)
                            [mgemlib->gemlib]
