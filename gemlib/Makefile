@@ -34,7 +34,7 @@ mshort:
 	$(MAKE) libgem16.a TARGET="16"
 
 .PHONY: doc
-doc: 
+doc: Doxyfile
 	doxygen Doxyfile
 # 	udo -s -l -W -y doc/udo/index.u -o doc/stg/gemlib.stg
 # 	udo -h -l -W -y doc/udo/index.u -o doc/html/index.htm
@@ -72,7 +72,7 @@ libgem$(TARGET).a: objs
 			do echo .lib$(TARGET)/$$file ; done)
 	$(RANLIB) $@
 
-objs: .lib$(TARGET)
+objs: .lib$(TARGET) mt_gem.h
 	cd .lib$(TARGET); $(MAKE)
 
 .lib$(TARGET):
