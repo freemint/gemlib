@@ -15,8 +15,8 @@
 
 # library filenames
 
-LIB_GCC           = lib/gcc/libgem.a
-LIB_GCC_MSHORT    = lib/gcc/libgem16.a
+LIB_GCC           = libgem.a
+LIB_GCC_MSHORT    = libgem16.a
 LIB_GCC281        = lib/gcc281/gem.olb
 LIB_GCC281_MSHORT = lib/gcc281/gem16.olb
 LIB_SOZOBON       = lib/sozobon/gem.a
