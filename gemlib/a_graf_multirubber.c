@@ -13,7 +13,7 @@
  *  @param mw
  *  @param mh specify the minimum width and height that
  *               the rectangle can be shrunk to.
- *  @param rect specify the "inside" box (??? TO BE CONFIRMED)
+ *  @param rec specify the "inside" box (??? TO BE CONFIRMED)
  *  @param rw
  *  @param rh are WORD pointers which will be filled in
  *               with the ending width and height of the box when the mouse
