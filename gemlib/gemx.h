@@ -33,29 +33,42 @@ typedef struct
 /*
  * Extensions to the form library (MagiC only)
  */
+
+/** @addtogroup a_form
+ *  @{
+ */
+
+/** */
 typedef struct
 {
-	char		scancode;
-	char		nclicks;
-	short		objnr;
+	char		scancode;  /**< */
+	char		nclicks;   /**< */
+	short		objnr;     /**< */
 } SCANX;
 
+/** */
 typedef struct
 {
-	SCANX		*unsh;		/* Tabellen fr UnShift-Kombinationen */
-	SCANX		*shift;		/* Tabellen fr Shift-Kombinationen */
-	SCANX		*ctrl;		/* Tabellen fr Control-Kombinationen */
-	SCANX		*alt; 		/* Tabellen fr Alternate-Kombinationen */
-	void		*resvd;		/* reserviert */
+	SCANX		*unsh;		/**< Tabellen fr UnShift-Kombinationen */
+	SCANX		*shift;		/**< Tabellen fr Shift-Kombinationen */
+	SCANX		*ctrl;		/**< Tabellen fr Control-Kombinationen */
+	SCANX		*alt; 		/**< Tabellen fr Alternate-Kombinationen */
+	void		*resvd;		/**< reserviert */
 } XDO_INF;
 
-short	form_popup 	(OBJECT *tree, short x, short y);
-short	form_wbutton	(OBJECT *fo_btree, short fo_bobject, short fo_bclicks, short *fo_bnxtobj, short whandle);
-short	form_wkeybd	(OBJECT *fo_ktree, short fo_kobject, short fo_kobnext, short fo_kchar, short *fo_knxtobject, short *fo_knxtchar, short whandle);
-short	form_xdial 	(short fo_diflag, short fo_dilittlx, short fo_dilittly, short fo_dilittlw, short fo_dilittlh, short fo_dibigx, short fo_dibigy, short fo_dibigw, short fo_dibigh, void **flydial);
-short	form_xdo	(OBJECT *tree, short startob, short *lastcrsr, XDO_INF *tabs, void *flydial); 
-short	form_xerr	(long errcode, char *errfile);
-
+short	mt_form_popup 	(OBJECT *tree, short x, short y, short * global);
+short	mt_form_wbutton	(OBJECT *fo_btree, short fo_bobject, short fo_bclicks, short *fo_bnxtobj, short whandle, short * global);
+short	mt_form_wkeybd	(OBJECT *fo_ktree, short fo_kobject, short fo_kobnext, short fo_kchar, short *fo_knxtobject, short *fo_knxtchar, short whandle, short * global);
+short	mt_form_xdial 	(short fo_diflag, short fo_dilittlx, short fo_dilittly, short fo_dilittlw, short fo_dilittlh, short fo_dibigx, short fo_dibigy, short fo_dibigw, short fo_dibigh, void **flydial, short * global);
+short	mt_form_xdo		(OBJECT *tree, short startob, short *lastcrsr, XDO_INF *tabs, void *flydial, short * global); 
+short	mt_form_xerr	(long errcode, char *errfile, short * global);
+#define form_popup(a,b,c)				mt_form_popup(a,b,c,aes_global)
+#define form_wbutton(a,b,c,d,e)			mt_form_wbutton(a,b,c,d,e,aes_global)
+#define form_wkeybd(a,b,c,d,e,f,g)		mt_form_wkeybd(a,b,c,d,e,f,g,aes_global)
+#define form_xdial(a,b,c,d,e,f,g,h,i,j)	mt_form_xdial(a,b,c,d,e,f,g,h,i,j,aes_global)
+#define form_xdo(a,b,c,d,e)				mt_form_xdo(a,b,c,d,e,aes_global)
+#define form_xerr(a,b)					mt_form_xerr(a,b,aes_global)
+/**@}*/
 
 /*
  * Extensions to the object library (MagiC only)
