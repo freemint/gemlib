@@ -11,18 +11,17 @@
  *
  *  @return \p area is returned.
  *
- *  @sa 
+ *  @sa grect_to_array() 
  *
  */
 
 GRECT *
 array_to_grect (const short *array, GRECT * area)
 {
-	long *p = (long*)area;
-	
-	p[0] = p[1] = *(const long*)array;
-	area->g_w -= array[0] -1;
-	area->g_h -= array[1] -1;
+	area->g_x = array[0];
+	area->g_y = array[1];
+	area->g_w = array[2]-array[0]+1;
+	area->g_w = array[3]-array[1]+1;
 	
 	return area;
 }
