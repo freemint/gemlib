@@ -109,7 +109,7 @@ void vqin_mode(int handle, int dev, int *mode)
 	*mode = vdi_intout[0];
 }
 
-void vql_attribute(int handle, int atrib[])
+void vql_attributes(int handle, int atrib[])
 {
 	vdi_control[0] = 35;
 	vdi_control[1] = 0;

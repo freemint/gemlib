@@ -616,3 +616,10 @@ gem.h
 	struct Mouse renamed to MOUSE
 
 ------------------------------- Patchlevel 38 -------------------------------
+
+gem.h
+	Add the extended object types of MagiC
+
+gem.h
+v_attrib.c
+	vql_attribute() renamed to vql_attributes()
