@@ -7,7 +7,7 @@
 /** is used to modify an object's coordinates so
  *  that it will appear in the center of the display screen.
  *
- *  @param tree points to a valid OBJECT structure which the
+ *  @param tree points to a valid #OBJECT structure which the
  *               application wishes to have centered.
  *  @param cx
  *  @param cy

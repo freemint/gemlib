@@ -6,7 +6,7 @@
 
 /** processes keyboard input for dialog box control.
  *
- *  @param tree points to a valid OBJECT tree containing the dialog
+ *  @param tree points to a valid #OBJECT tree containing the dialog
  *               you wish to process.
  *  @param object is the object index of the object
  *               which currently has edit focus (0 if none).
@@ -26,7 +26,7 @@
  *             [option CHECK_NULLPTR] nextchar may be NULL
  *  @param global_aes global AES array
  *
- *  @return 0 if a default EXIT object was
+ *  @return 0 if a default #OF_EXIT object was
  *          triggered by this call or 1 if the dialog should continue
  *          to be processed.
  *
