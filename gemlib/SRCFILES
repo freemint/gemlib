@@ -270,7 +270,6 @@ COBJS = \
 	a_appl_exit.c \
 	a_appl_find.c \
 	a_appl_getinfo.c \
-	a_appl_xgetinfo.c \
 	a_appl_init.c \
 	a_appl_read.c \
 	a_appl_search.c \
