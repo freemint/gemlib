@@ -7,7 +7,6 @@
 
 # ifndef _GEMLIB_H_
 #  include "mt_gem.h"
-#  include "gem.h"
 # endif
 
 
@@ -83,6 +82,14 @@ _vdi_trap_00 (VDIPB * vdipb, long cntrl_0_1, short handle)
 
 #define VDI_TRAP(vdipb, handle, opcode, cntrl_1, cntrl_3) \
 	VDI_TRAP_ESC(vdipb, handle, opcode, 0, cntrl_1, cntrl_3)
+
+#define VDI_PARAMS(a,b,c,d,e) \
+	VDIPB vdi_params;         \
+	vdi_params.control = a;   \
+	vdi_params.intin   = b;   \
+	vdi_params.ptsin   = c;   \
+	vdi_params.intout  = d;   \
+	vdi_params.ptsout  = e;
 
 
 # endif /* _GEM_VDI_P_ */
