@@ -43,7 +43,7 @@ __BEGIN_DECLS
 #define	__GEMLIB_MAJOR__     0
 #define	__GEMLIB_MINOR__    42
 #define __GEMLIB_REVISION__  99
-#define __GEMLIB_BETATAG__   "-20030208"
+#define __GEMLIB_BETATAG__   "-20030216"
 
 /* the other name of this release is MGEMLIB 42 */
 #define MGEMLIB				42
