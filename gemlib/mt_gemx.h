@@ -70,6 +70,16 @@ typedef struct
 	void		*resvd;		/**< reserviert */
 } XDO_INF;
 
+/** parameters for the init callback function (7th parameter of mt_xfrm_popup() )
+ */
+struct POPUP_INIT_args
+{
+	OBJECT *tree;		/**< TODO */
+	short scrollpos;	/**< TODO */
+	short nlines;		/**< TODO */
+	void *param;		/**< TODO */
+};
+
 short	mt_form_popup 	(OBJECT *tree, short x, short y, short * global);
 short	mt_form_wbutton	(OBJECT *fo_btree, short fo_bobject, short fo_bclicks, short *fo_bnxtobj, short whandle, short * global);
 short	mt_form_wkeybd	(OBJECT *fo_ktree, short fo_kobject, short fo_kobnext, short fo_kchar, short *fo_knxtobject, short *fo_knxtchar, short whandle, short * global);
@@ -78,7 +88,7 @@ short	mt_form_xdial_grect (short fo_diflag, const GRECT *fo_dilittl, const GRECT
 short	mt_form_xdo		(OBJECT *tree, short startob, short *lastcrsr, XDO_INF *tabs, void *flydial, short * global); 
 short	mt_form_xerr	(long errcode, char *errfile, short * global);
 short	mt_xfrm_popup 	(OBJECT *tree, short x, short y, short firstscrlob, short lastscrlob, short nlines,
-						 void __CDECL (*init)(OBJECT *tree, short scrollpos, short nlines, void *param),
+						 void __CDECL (*init)(struct POPUP_INIT_args),
 						 void *param, short *lastscrlpos, short * global);
 /**@}*/
 
@@ -107,8 +117,21 @@ short	mt_objc_xedit	(OBJECT *tree, short obj, short key, short *xpos, short subf
 /** opaque structure (internal management structure) */ 
 typedef void *FNT_DIALOG;
 
+/** parameters for UTXT_FN callback functions
+ */
+struct UTXT_FN_args
+{
+	short x;			/**< TODO */
+	short y;			/**< TODO */
+	short *clip_rect;	/**< TODO */
+	long id;			/**< TODO */
+	long pt;			/**< TODO */
+	long ratio;			/**< TODO */
+	char *string;		/**< TODO */
+};
+
 /** TODO */
-typedef void __CDECL (*UTXT_FN)(short x, short y, short *clip_rect, long id, long pt, long ratio, char *string);
+typedef void __CDECL (*UTXT_FN)(struct UTXT_FN_args);
 
 /** TODO */
 typedef struct _fnts_item FNTS_ITEM;
@@ -373,8 +396,17 @@ struct _drv_entry
 /** TODO */
 typedef long __CDECL (*PDLG_INIT)(PRN_SETTINGS *settings, PDLG_SUB *sub);
 
+/** parameters for PDLG_HNDL callback functions
+ */
+struct PDLG_HNDL_args
+{
+	PRN_SETTINGS *settings;	/**< TODO */
+	PDLG_SUB *sub;			/**< TODO */
+	short exit_obj; 		/**< TODO */
+};
+
 /** TODO */
-typedef long __CDECL (*PDLG_HNDL)(PRN_SETTINGS *settings, PDLG_SUB *sub, short exit_obj);
+typedef long __CDECL (*PDLG_HNDL)(struct PDLG_HNDL_args);
 
 /** TODO */
 typedef long __CDECL (*PDLG_RESET)(PRN_SETTINGS *settings, PDLG_SUB *sub);
@@ -638,8 +670,31 @@ struct lbox_item
 
 };
 
-typedef void  __CDECL (*SLCT_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, void *user_data, short obj_index, short last_state);		/**< TODO */
-typedef short __CDECL (*SET_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, short obj_index, void *user_data, GRECT *rect, short first);		/**< TODO */
+/** parameters for SLCT_ITEM callback function */
+struct SLCT_ITEM_args
+{
+	LIST_BOX *box;			/**< TODO */
+	OBJECT *tree;			/**< TODO */
+	struct lbox_item *item;	/**< TODO */
+	void *user_data;		/**< TODO */
+	short obj_index;		/**< TODO */
+	short last_state;		/**< TODO */
+};
+
+/** parameters for SET_ITEM callback function */
+struct SET_ITEM_args
+{
+	LIST_BOX *box;			/**< TODO */
+	OBJECT *tree;			/**< TODO */
+	struct lbox_item *item;	/**< TODO */
+	short obj_index;		/**< TODO */
+	void *user_data;		/**< TODO */
+	GRECT *rect;			/**< TODO */
+	short first;			/**< TODO */
+};
+
+typedef void  __CDECL (*SLCT_ITEM)(struct SLCT_ITEM_args);		/**< TODO */
+typedef short __CDECL (*SET_ITEM)(struct SET_ITEM_args);		/**< TODO */
 
 #define	LBOX_VERT		1	/**< Listbox with vertical slider */
 #define	LBOX_AUTO		2	/**< Auto-scrolling */
@@ -701,6 +756,16 @@ void		mt_lbox_bscroll_to (LIST_BOX *box, short first, GRECT *box_rect,
 /** an opaque structure. One should not access the 
     structure directly. The mt_wdlg_xx functions should be used! */
 typedef void * DIALOG;
+
+/** parameters of HNDL_OBJ callback functions */
+struct HNDL_OBJ_args 
+{
+	DIALOG *dialog;	/**< TODO */
+	EVNT *events;	/**< TODO */
+	short obj;		/**< TODO */
+	short clicks;	/**< TODO */
+	void *data;		/**< TODO */
+};
 
 /** service routine that is called, among others, by mt_wdlg_evnt().
  *
@@ -779,7 +844,7 @@ typedef void * DIALOG;
  *  The parameters are passed via the stack and the routine may alter 
  *  registers d0-d2/a0-a2.
  */
-typedef short __CDECL (*HNDL_OBJ)(DIALOG *dialog, EVNT *events, short obj, short clicks, void *data);
+typedef short __CDECL (*HNDL_OBJ)(struct HNDL_OBJ_args);
 
 DIALOG * mt_wdlg_create			(HNDL_OBJ handle_exit, OBJECT *tree, void *user_data, short code, void *data, short flags, short *global);
 short	 mt_wdlg_open			(DIALOG *dialog, char *title, short kind, short x, short y, short code, void *data, short *global);
