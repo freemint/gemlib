@@ -66,8 +66,9 @@ __BEGIN_DECLS
 /** @addtogroup a_fsel
  *  @{
  */
-#define fsel_exinput(a,b,c,d)	mt_fsel_exinput(a,b,c,d,aes_global)
-#define fsel_input(a,b,c)		mt_fsel_input(a,b,c,aes_global)
+#define fsel_exinput(a,b,c,d)		mt_fsel_exinput(a,b,c,d,aes_global)
+#define fsel_input(a,b,c)			mt_fsel_input(a,b,c,aes_global)
+#define fsel_boxinput(a,b,c,d,e)	mt_fsel_exinput(a,b,c,d,e,aes_global)
 /**@}*/
 
 /** @addtogroup a_graf
@@ -76,6 +77,7 @@ __BEGIN_DECLS
 #define graf_dragbox(a,b,c,d,e,f,g,h,i,j)	mt_graf_dragbox(a,b,c,d,e,f,g,h,i,j,aes_global)
 #define graf_growbox(a,b,c,d, e,f,g,h)		mt_graf_growbox(a,b,c,d,e,f,g,h,aes_global)
 #define graf_handle(a,b,c,d)				mt_graf_handle(a,b,c,d,aes_global)
+#define graf_xhandle(a,b,c,d,e)				mt_graf_xhandle(a,b,c,d,e,aes_global)
 #define graf_mbox(a,b,c,d,e,f)				mt_graf_mbox(a,b,c,d,e,f,aes_global)
 #define graf_mkstate(a,b,c,d)				mt_graf_mkstate(a,b,c,d,aes_global)
 #define graf_mouse(a,b)						mt_graf_mouse(a,b,aes_global)
@@ -83,6 +85,7 @@ __BEGIN_DECLS
 #define graf_shrinkbox(a,b,c,d,e,f,g,h)		mt_graf_shrinkbox(a,b,c,d,e,f,g,h,aes_global)
 #define graf_slidebox(a,b,c,d)				mt_graf_slidebox(a,b,c,d,aes_global)
 #define graf_watchbox(a,b,c,d)				mt_graf_watchbox(a,b,c,d,aes_global)
+#define graf_wwatchbox(a,b,c,d,e)			mt_graf_wwatchbox(a,b,c,d,e,aes_global)
 
 /* the old names */
 #define graf_movebox(a,b,c,d,e,f) mt_graf_mbox(a,b,c,d,e,f,aes_global)
@@ -116,6 +119,7 @@ __BEGIN_DECLS
 #define objc_draw(a,b,c,d,e,f,g)		mt_objc_draw(a,b,c,d,e,f,g,aes_global)
 #define objc_edit(a,b,c,d,e)			mt_objc_edit(a,b,c,d,e,aes_global)
 #define objc_find(a,b,c,d,e)			mt_objc_find(a,b,c,d,e,aes_global)
+#define objc_xfind(a,b,c,d,e)			mt_objc_xfind(a,b,c,d,e,aes_global)
 #define objc_offset(a,b,c,d)			mt_objc_offset(a,b,c,d,aes_global)
 #define objc_order(a,b,c)				mt_objc_order(a,b,c,aes_global)
 #define objc_sysvar(a,b,c,d,e,f)		mt_objc_sysvar(a,b,c,d,e,f,aes_global)
@@ -161,6 +165,7 @@ __BEGIN_DECLS
 #define wind_close(a) mt_wind_close(a,aes_global)
 #define wind_create(a,b,c,d,e) mt_wind_create(a,b,c,d,e,aes_global) 
 #define wind_delete(a) mt_wind_delete(a,aes_global)
+#define wind_draw(a,b) mt_wind_draw(a,b,aes_global)
 #define wind_find(a,b) mt_wind_find(a,b,aes_global)
 #define wind_get(a,b,c,d,e,f) mt_wind_get(a,b,c,d,e,f,aes_global) 
 #define wind_new() mt_wind_new(aes_global)
