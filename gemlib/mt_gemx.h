@@ -21,6 +21,7 @@ __BEGIN_DECLS
  * The AES extentsions of MagiC
  */
 
+/** TODO */
 typedef struct
 {
 	short		mwhich;		/**< Type of events */
@@ -42,15 +43,15 @@ typedef struct
  *  @{
  */
 
-/** */
+/** TODO */
 typedef struct
 {
-	char		scancode;  /**< */
-	char		nclicks;   /**< */
-	short		objnr;     /**< */
+	char		scancode;  /**< TODO */
+	char		nclicks;   /**< TODO */
+	short		objnr;     /**< TODO */
 } SCANX;
 
-/** */
+/** TODO */
 typedef struct
 {
 	SCANX		*unsh;		/**< Tabellen fr UnShift-Kombinationen */
@@ -93,10 +94,10 @@ short	mt_objc_xedit	(OBJECT *tree, short obj, short key, short *xpos, short subf
 /** opaque structure (internal management structure) */ 
 typedef void *FNT_DIALOG;
 
-/** */
+/** TODO */
 typedef void __CDECL (*UTXT_FN)(short x, short y, short *clip_rect, long id, long pt, long ratio, char *string);
 
-/** */
+/** TODO */
 typedef struct _fnts_item FNTS_ITEM;
 
 /** FNTS_ITEM data structure */
@@ -140,11 +141,11 @@ struct _fnts_item
 #define FNTS_BMARK		0x4000		/**< Button "Mark" selectable */
 
 /* Definition of <button> in mt_fnts_evnt() */
-#define FNTS_CANCEL		1		
-#define FNTS_OK			2		
-#define FNTS_SET		3		
-#define FNTS_MARK 		4		
-#define FNTS_OPT		5		
+#define FNTS_CANCEL		1			/**< TODO */
+#define FNTS_OK			2			/**< TODO */		
+#define FNTS_SET		3			/**< TODO */
+#define FNTS_MARK 		4			/**< TODO */
+#define FNTS_OPT		5			/**< TODO */
 
 short		mt_fnts_add			(FNT_DIALOG *fnt_dialog, FNTS_ITEM *user_fonts, short *global);
 short		mt_fnts_close		(FNT_DIALOG *fnt_dialog, short *x, short *y, short *global);
@@ -169,23 +170,23 @@ short		mt_fnts_update		(FNT_DIALOG *fnt_dialog, short button_flags, long id, lon
  *  @{
  */
 
-/** */
+/** TODO */
 typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, void *xattr);
 
 /* Sortiermodi */
-#define SORTBYNAME		0
-#define SORTBYDATE		1
-#define SORTBYSIZE		2
-#define SORTBYTYPE		3
-#define SORTBYNONE		4
+#define SORTBYNAME		0			/**< TODO */
+#define SORTBYDATE		1			/**< TODO */
+#define SORTBYSIZE		2			/**< TODO */
+#define SORTBYTYPE		3			/**< TODO */
+#define SORTBYNONE		4			/**< TODO */
 
 /* Flags fr Dateiauswahl */
-#define DOSMODE			1
-#define NFOLLOWSLKS		2
-#define GETMULTI		8
+#define DOSMODE			1			/**< TODO */
+#define NFOLLOWSLKS		2			/**< TODO */
+#define GETMULTI		8			/**< TODO */
 
 /* fslx_set_flags */
-#define SHOW8P3			1
+#define SHOW8P3			1			/**< TODO */
 
 short	mt_fslx_close		(void *fsd, short *global);
 void *	mt_fslx_do			(char *title, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode, short flags, short *button, short *nfiles, char **pattern, short *global);
@@ -203,17 +204,18 @@ short	mt_fslx_set_flags 	(short flags, short *oldval, short *global);
  *  @{
  */
 
+/** TODO */
 typedef void *PRN_DIALOG;
 
-typedef struct _prn_tray		PRN_TRAY;
-typedef struct _media_size		MEDIA_SIZE;
-typedef struct _media_type		MEDIA_TYPE;
-typedef struct _prn_mode		PRN_MODE;
-typedef struct _prn_entry		PRN_ENTRY;
-typedef struct _dither_mode 	DITHER_MODE;
-typedef struct _drv_entry		DRV_ENTRY;
-typedef struct _pdlg_sub		PDLG_SUB;
-typedef struct _prn_settings	PRN_SETTINGS;
+typedef struct _prn_tray		PRN_TRAY;			/**< TODO */
+typedef struct _media_size		MEDIA_SIZE;			/**< TODO */
+typedef struct _media_type		MEDIA_TYPE;			/**< TODO */
+typedef struct _prn_mode		PRN_MODE;			/**< TODO */
+typedef struct _prn_entry		PRN_ENTRY;			/**< TODO */
+typedef struct _dither_mode 	DITHER_MODE;		/**< TODO */
+typedef struct _drv_entry		DRV_ENTRY;			/**< TODO */
+typedef struct _pdlg_sub		PDLG_SUB;			/**< TODO */
+typedef struct _prn_settings	PRN_SETTINGS;		/**< TODO */
 
 /** Description of a feed/output tray */
 struct _prn_tray
@@ -261,7 +263,7 @@ struct _prn_mode
 #define	PRN_FSM_SUBS	0x0002			/**< Standard-Unterdialoge fr FSM-Drucker */
 #define	PRN_QD_SUBS 	0x0004			/**< Standard-Unterdialoge fr QuickDraw-Drucker */
 
-/* old_printer can also be 0L */
+/** old_printer can also be 0L */
 typedef long __CDECL (*PRN_SWITCH)(DRV_ENTRY *drivers, PRN_SETTINGS *settings, PRN_ENTRY *old_printer, PRN_ENTRY *new_printer);
 
 /** Device description */
@@ -275,8 +277,8 @@ struct _prn_entry
 	short 		driver_type;			/**< Driver type */
 	long		printer_id; 			/**< Printer ID */
 	long		printer_capabilities;	/**< Printer capabilities */
-	long		reserved1;
-	long		sub_flags;		/**<  */
+	long		reserved1;      /**< reserved */
+	long		sub_flags;		/**< TODO */
 	PDLG_SUB	*sub_dialogs;	/**< Pointer to the list of sub-dialogs for this printer */
 	PRN_SWITCH	setup_panel;	/**< Initialise sub-dialog at printer change  */
 	PRN_SWITCH	close_panel;	/**< Close sub-dialog at printer change */
@@ -287,10 +289,10 @@ struct _prn_entry
 	char		name[32];		/**< Name of the printer */
 };
 
-/** */
+/** TODO */
 struct _dither_mode
 {
-	DITHER_MODE	*next;
+	DITHER_MODE	*next;          /**< TODO */
 	long		length;			/**< Structure length */
 	long		format;			/**< Data format */
 	long		reserved;		/**< Reserved */
@@ -301,7 +303,7 @@ struct _dither_mode
 	char		name[32];		/**< Name of the dither process */
 };
 
-/** */
+/** TODO */
 typedef struct
 {
 	long		magic;			/**< 'pdnf' */
@@ -324,9 +326,10 @@ typedef struct
 	char		device[128];	/**< Printer driver output file */
 } DRV_INFO;
 
+/** TODO */
 struct _drv_entry
 {
-	 DRV_ENTRY	*next;
+	 DRV_ENTRY	*next; /**< TODO */
 };
 
 #define	PDLG_CHG_SUB	0x80000000L
@@ -487,7 +490,7 @@ struct _prn_settings
 	long		magic;			/**< 'pset' */
 	long		length;			/**< Structure length */
 	long		format;			/**< Structure type */
-	long		reserved;
+	long		reserved;		/**< TODO */
 
 	long		page_flags; 	/**< Flags, inc. even pages, odd pages */
 	short		first_page; 	/**< First page to be printed */
@@ -534,9 +537,9 @@ struct _prn_settings
 
 	char		device[128];	/**< File name to be printed  */
 
-	struct
+	struct	             		/**< Settings of the Mac printer driver */
 	{
-		char	inside[120];
+		char	inside[120];	/**< TODO */
 	} mac_settings;             /**< Settings of the Mac printer driver */
 };
 
@@ -590,7 +593,9 @@ short		   mt_pdlg_validate_settings    (PRN_DIALOG *prn_dialog, PRN_SETTINGS *se
  /** opaque structure */
 typedef void * LIST_BOX;
 
-typedef struct lbox_item LBOX_ITEM;
+typedef struct lbox_item LBOX_ITEM;		/**< TODO */
+
+/** TODO */
 struct lbox_item
 {
 	LBOX_ITEM	*next;		/**< Pointer to the next entry in the list */
@@ -602,8 +607,8 @@ struct lbox_item
 
 };
 
-typedef void  __CDECL (*SLCT_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, void *user_data, short obj_index, short last_state);
-typedef short __CDECL (*SET_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, short obj_index, void *user_data, GRECT *rect, short first);
+typedef void  __CDECL (*SLCT_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, void *user_data, short obj_index, short last_state);		/**< TODO */
+typedef short __CDECL (*SET_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, short obj_index, void *user_data, GRECT *rect, short first);		/**< TODO */
 
 #define	LBOX_VERT		1	/**< Listbox with vertical slider */
 #define	LBOX_AUTO		2	/**< Auto-scrolling */
@@ -648,10 +653,10 @@ void		mt_lbox_bscroll_to (LIST_BOX *box, short first, GRECT *box_rect,
    		    GRECT *slider_rect, short *global);
 
 /* #defines for listboxes with only one slider */
-#define	mt_lbox_get_visible			mt_lbox_get_avis
-#define	mt_lbox_get_first			mt_lbox_get_afirst
-#define	mt_lbox_set_slider			mt_lbox_set_asldr
-#define	mt_lbox_scroll_to			mt_lbox_ascroll_to
+#define	mt_lbox_get_visible			mt_lbox_get_avis	/**< another name for mt_lbox_get_visible */
+#define	mt_lbox_get_first			mt_lbox_get_afirst	/**< another name for mt_lbox_get_first */
+#define	mt_lbox_set_slider			mt_lbox_set_asldr	/**< another name for mt_lbox_set_slider */
+#define	mt_lbox_scroll_to			mt_lbox_ascroll_to	/**< another name for mt_lbox_scroll_to */
 /**@}*/
 
 /******************************************************************************
@@ -1020,64 +1025,70 @@ short vst_map_mode   (short handle, short mode);
 /* Farbtabellen																									*/
 /*----------------------------------------------------------------------------------------*/
 
+/** TODO */
 enum
 {
-	CSPACE_RGB		=	0x0001,
-	CSPACE_ARGB		=	0x0002,
-	CSPACE_CMYK		=	0x0004
+	CSPACE_RGB		=	0x0001,			/**< TODO */
+	CSPACE_ARGB		=	0x0002,			/**< TODO */
+	CSPACE_CMYK		=	0x0004			/**< TODO */
 };
 
+/** TODO */
 enum
 {
-	CSPACE_1COMPONENT	=	0x0001,
-	CSPACE_2COMPONENTS	=	0x0002,
-	CSPACE_3COMPONENTS	= 	0x0003,
-	CSPACE_4COMPONENTS	=	0x0004
+	CSPACE_1COMPONENT	=	0x0001,		/**< TODO */
+	CSPACE_2COMPONENTS	=	0x0002,		/**< TODO */
+	CSPACE_3COMPONENTS	= 	0x0003,		/**< TODO */
+	CSPACE_4COMPONENTS	=	0x0004		/**< TODO */
 };
 
+/** TODO */
 typedef struct
 {
-	unsigned short	reserved;
-	unsigned short	red;
-	unsigned short	green;
-	unsigned short	blue;
+	unsigned short	reserved;			/**< TODO */
+	unsigned short	red;				/**< TODO */
+	unsigned short	green;				/**< TODO */
+	unsigned short	blue;				/**< TODO */
 } COLOR_RGB;
 
+/** TODO */
 typedef struct
 {
-	unsigned short	cyan;
-	unsigned short	magenta;
-	unsigned short	yellow;
-	unsigned short	black;
+	unsigned short	cyan;				/**< TODO */
+	unsigned short	magenta;			/**< TODO */
+	unsigned short	yellow;				/**< TODO */
+	unsigned short	black;				/**< TODO */
 } COLOR_CMYK;
 
+/** TODO */
 typedef union
 {
-	COLOR_RGB	rgb;
-	COLOR_CMYK	cmyk;
+	COLOR_RGB	rgb;			/**< TODO */
+	COLOR_CMYK	cmyk;			/**< TODO */
 } COLOR_ENTRY;
 
+/** TODO */
 typedef struct
 {
-	long		magic;
-	long		length;
-	long		format;
-	long		reserved;
+	long		magic;				/**< TODO */
+	long		length;				/**< TODO */
+	long		format;				/**< TODO */
+	long		reserved;			/**< TODO */
 
-	long		map_id;
-	long		color_space;
-	long		flags;
-	long		no_colors;
+	long		map_id;				/**< TODO */
+	long		color_space;		/**< TODO */
+	long		flags;				/**< TODO */
+	long		no_colors;			/**< TODO */
 
-	long		reserved1;
-	long		reserved2;
-	long		reserved3;
-	long		reserved4;
+	long		reserved1;			/**< TODO */
+	long		reserved2;			/**< TODO */
+	long		reserved3;			/**< TODO */
+	long		reserved4;			/**< TODO */
 
 #ifdef __GNUC__
-	COLOR_ENTRY	colors[0];
+	COLOR_ENTRY	colors[0];			/**< TODO */
 #else
-	COLOR_ENTRY	colors[];
+	COLOR_ENTRY	colors[];			/**< TODO */
 #endif
 
 } COLOR_TAB;
@@ -1090,27 +1101,28 @@ typedef void INVERSE_CTAB;
 typedef INVERSE_CTAB *ITAB_REF;
 
 typedef struct _gcbitmap GCBITMAP;
+/** TODO */
 struct _gcbitmap
 {
-	long		magic;
-	long		length;
-	long		format;
-	long		reserved;
+	long		magic;			/**< TODO */
+	long		length;			/**< TODO */
+	long		format;			/**< TODO */
+	long		reserved;		/**< TODO */
 
-	unsigned char	*addr;
-	long		width;
-	long		bits;
-	unsigned long	px_format;
+	unsigned char	*addr;		/**< TODO */
+	long		width;			/**< TODO */
+	long		bits;			/**< TODO */
+	unsigned long	px_format;	/**< TODO */
 
-	long		xmin;
-	long		ymin;
-	long		xmax;
-	long		ymax;
+	long		xmin;			/**< TODO */
+	long		ymin;			/**< TODO */
+	long		xmax;			/**< TODO */
+	long		ymax;			/**< TODO */
 
-	CTAB_REF	*ctab;
-	ITAB_REF 	*itab;
-	long		reserved0;
-	long		reserved1;
+	CTAB_REF	*ctab;			/**< TODO */
+	ITAB_REF 	*itab;			/**< TODO */
+	long		reserved0;		/**< TODO */
+	long		reserved1;		/**< TODO */
 };
 
 /*----------------------------------------------------------------------------------------*/
@@ -1118,13 +1130,13 @@ struct _gcbitmap
 /*----------------------------------------------------------------------------------------*/
 
 /* Moduskonstanten */
-#define	T_NOT					4											/* Konstante fr Invertierung bei logischen Transfermodi */
-#define	T_COLORIZE			16											/* Konstante fr Einf„rbung */
+#define	T_NOT				4	/**< Konstante fr Invertierung bei logischen Transfermodi */
+#define	T_COLORIZE			16	/**< Konstante fr Einf„rbung */
 
 #define	T_LOGIC_MODE		0
 #define	T_DRAW_MODE			32
-#define	T_ARITH_MODE		64											/* Konstante fr Arithmetische Transfermodi */
-#define	T_DITHER_MODE		128										/* Konstante frs Dithern */
+#define	T_ARITH_MODE		64	/**< Konstante fr Arithmetische Transfermodi */
+#define	T_DITHER_MODE		128	/**< Konstante frs Dithern */
 
 /* logische Transfermodi */
 #define	T_LOGIC_COPY		T_LOGIC_MODE+0
@@ -1151,20 +1163,22 @@ struct _gcbitmap
 #define	T_SUB_OVER			T_ARITH_MODE+6
 #define	T_MIN					T_ARITH_MODE+7
 
-typedef struct																/* Rechteck fr 16-Bit-Koordinaten */
+/** TODO */
+typedef struct			/* Rechteck fr 16-Bit-Koordinaten */
 {
-	short	x1;
-	short	y1;
-	short	x2;
-	short	y2;
+	short	x1;			/**< TODO */
+	short	y1;			/**< TODO */
+	short	x2;			/**< TODO */
+	short	y2;			/**< TODO */
 } RECT16;
 
-typedef struct																/* Rechteck fr 32-Bit-Koordinaten */
+/** TODO */
+typedef struct			/* Rechteck fr 32-Bit-Koordinaten */
 {
-	long	x1;
-	long	y1;
-	long	x2;
-	long	y2;
+	long	x1;			/**< TODO */
+	long	y1;			/**< TODO */
+	long	x2;			/**< TODO */
+	long	y2;			/**< TODO */
 } RECT32;
 
 
