@@ -26,16 +26,11 @@ v_ftext (short handle, short x, short y, const char *str)
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_ptsin[2];   
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&vdi_intin[0],               /* vdi_intin   */
-		&vdi_ptsin[0],               /* vdi_ptsin   */
-		0L,                          /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
 #endif
 	register short n = vdi_str2array (str, vdi_intin);
+#if USE_LOCAL_VDIPB
+	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, 0L, 0L);
+#endif
 	
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;

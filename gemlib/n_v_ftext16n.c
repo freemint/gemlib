@@ -21,14 +21,7 @@ v_ftext16n (short handle, PXY pos, const WCHAR * wstr, short num)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		(const short *)wstr,         /* vdi_intin   */
-		(short*)&pos,                /* vdi_ptsin   */
-		0L,                          /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, (const short *)wstr, (short*)&pos, 0L, 0L);
 #else
 	vdi_params.intin = (const short *)wstr;
 	*(PXY*)vdi_ptsin = pos;

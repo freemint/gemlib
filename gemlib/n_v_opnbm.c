@@ -62,14 +62,7 @@ v_opnbm (short *work_in, MFDB *bitmap, short *handle, short *work_out)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&work_in[0],                 /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		&work_out[0],                /* vdi_intout  */
-		&work_out[45]                /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, work_in, 0L, &work_out[0], &work_out[45]);
 #else
 	vdi_params.intin  = &work_in[0];
 	vdi_params.intout = &work_out[0];

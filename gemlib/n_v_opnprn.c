@@ -25,18 +25,12 @@ v_opnprn (short aes_handle, PRN_SETTINGS *settings, short work_out[])
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[16];   
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&vdi_intin[0],               /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		&work_out[0],                /* vdi_intout  */
-		&work_out[45]                /* vdi_ptsout  */
-	};
+#endif
+	register short i;
+#if USE_LOCAL_VDIPB
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, &work_out[0], &work_out[45] );
 #endif
 	
-	register short i;
-
 	vdi_intin[0] = settings->driver_id;
 	for (i = 1; i < 10; vdi_intin[i++] = 1);
 	vdi_intin    [10] = 2;

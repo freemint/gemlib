@@ -59,14 +59,7 @@ v_bez (short handle, short count, short *xyarr, char *bezarr,
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_ptsin[VDI_PTSINMAX];   
 	short vdi_intout[6]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&vdi_intin[0],               /* vdi_intin   */
-		&vdi_ptsin[0],               /* vdi_ptsin   */
-		&vdi_intout[0],              /* vdi_intout  */
-		extent                       /* vdi_ptsout  */
-	};
+	VDI_PARAMS( vdi_control, vdi_intin, vdi_ptsin, vdi_intout, extent);
 #else
 	vdi_params.ptsout = extent;
 #endif
@@ -114,14 +107,7 @@ v_bez_fill (short handle, short count, short *xyarr, char *bezarr,
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_ptsin[VDI_PTSINMAX];   
 	short vdi_intout[6]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&vdi_intin[0],               /* vdi_intin   */
-		&vdi_ptsin[0],               /* vdi_ptsin   */
-		&vdi_intout[0],              /* vdi_intout  */
-		extent                       /* vdi_ptsout  */
-	};
+	VDI_PARAMS (vdi_control, vdi_intin, vdi_ptsin, vdi_intout, extent);
 #else
 	vdi_params.ptsout = extent;
 #endif

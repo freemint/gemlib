@@ -25,14 +25,7 @@ v_value2color (short handle, unsigned long value, COLOR_ENTRY * color)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[6]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		(short*)&value,              /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		&vdi_intout[0],              /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, (short*)&value, 0L, vdi_intout, 0L);
 #else
 	*(unsigned long *)&vdi_intin[0] = value;
 #endif
