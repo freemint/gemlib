@@ -22,16 +22,13 @@
 short
 vqt_name (short handle, short element, char *name)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[VDI_INTOUTMAX]; 
 	short len=33;
 	short *src;
 	char  *des;
+	
 	VDI_PARAMS(vdi_control, &element, 0L, vdi_intout, vdi_dummy );
-#else
-	vdi_intin[0] = element;
-#endif
 	
 	vdi_intout[33] = 0;
 	

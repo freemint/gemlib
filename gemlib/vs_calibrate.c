@@ -27,12 +27,11 @@
 short
 vs_calibrate (short handle, short flag, short *rgb)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[3];   
 	short vdi_intout[1]; 
+	
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy );
-#endif
 	
 	vdi_intin_ptr(0) = rgb;
 	vdi_intin    [2] = flag;

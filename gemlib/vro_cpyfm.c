@@ -56,20 +56,12 @@
 void
 vro_cpyfm (short handle, short mode, short pxy[], MFDB *src, MFDB *dst)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+	
 	VDI_PARAMS(vdi_control, &mode, pxy, vdi_dummy, vdi_dummy);
-#else
-	vdi_params.ptsin = pxy;
-	vdi_intin[0]     = mode;
-#endif
 	
 	vdi_control_ptr(7) = src;
 	vdi_control_ptr(9) = dst;
 	
 	VDI_TRAP (vdi_params, handle, 109, 4,1);
-
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.ptsin = vdi_ptsin;
-#endif
 }

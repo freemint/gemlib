@@ -22,13 +22,10 @@
 short
 vqp_filmname (short handle, short index, char * name)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[VDI_INTOUTMAX]; 
+
 	VDI_PARAMS(vdi_control, &index, 0L, vdi_intout, vdi_dummy );
-#else
-	vdi_intin[0] = index;
-#endif
 		
 	VDI_TRAP_ESC (vdi_params, handle, 5,92, 0,1);
 	

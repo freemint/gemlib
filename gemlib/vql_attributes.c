@@ -23,12 +23,11 @@ void
 vql_attributes (short handle, short attrib[])
 {
 	short *ptr;
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[5]; 
 	short vdi_ptsout[2]; 
+
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_ptsout );
-#endif
 	
 	VDI_TRAP_00 (vdi_params, handle, 35);
 	

@@ -37,12 +37,11 @@ void
 vqt_fontinfo (short handle, short *minade, short *maxade, short distances[],
               short *maxwidth, short effects[])
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[2]; 
 	short vdi_ptsout[10]; 
+	
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_ptsout );
-#endif
 	
 	VDI_TRAP_00 (vdi_params, handle, 131);
 
