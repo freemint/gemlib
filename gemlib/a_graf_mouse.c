@@ -52,15 +52,15 @@
                                   for the presence of
                                   this feature.
 
-               M_LAST       259   Restore the most       Changes the shape
-                                  recently saved mouse   as indicated.
+               M_RESTORE    259   Restore the most       Changes the shape
+                		          recently saved mouse   as indicated.
                                   form. Check
                                   appl_getinfo() for
                                   the presence of this
                                   feature.
 
-               M_RESTORE    260   Restore the mouse      Changes the shape
-                                  form to its last       as indicated.
+               M_LAST       260   Restore the mouse      Changes the shape
+               M_PREVIOUS         form to its last       as indicated.
                                   shape. Check
                                   appl_getinfo() for
                                   the presence of this
