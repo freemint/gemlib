@@ -171,9 +171,9 @@ static void
 draw_3d (PARMBLK *parmblk)
 {
 	short pxy[12];
-	int color = (int) parmblk->pb_parm;
+	short state = parmblk->pb_currstate;
+	short color = parmblk->pb_parm & 0xffff;
 	long flags = parmblk->pb_parm;
-	int state = parmblk->pb_currstate;
 
 	/* Farbfeld zeichnen */
 	if (color == T_COLPOP)	/* Eintrag im Farbpopup: Objektindex bestimmt die Farbe */
