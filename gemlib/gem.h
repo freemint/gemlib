@@ -989,9 +989,12 @@ short	rsrc_saddr	(short Type, short Index, void *Address);
 /** @addtogroup a_scrp
  *  @{
  */
-short	scrp_clear 	(void);
-short	scrp_read 	(char *Scrappath);
-short	scrp_write 	(const char *Scrappath);
+short	mt_scrp_clear 	(short *global_aes);
+short	mt_scrp_read 	(char *Scrappath, short *global_aes);
+short	mt_scrp_write 	(const char *Scrappath, short *global_aes);
+#define scrp_clear() mt_scrp_clear(aes_global)
+#define scrp_read(a) mt_scrp_read(a,aes_global)
+#define scrp_write(a) mt_scrp_write(a,aes_global)
 /**@}*/
 
 /** @addtogroup a_shel
