@@ -23,6 +23,8 @@ all-here: libs
 
 # default definitions
 GENFILES = .lib* libgem*.a
+GENFILES += mt_gem.h Doxyfile gemlib.spec
+GENFILES += html
 
 
 libs: normal mshort
