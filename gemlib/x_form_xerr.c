@@ -22,7 +22,7 @@
 short 
 mt_form_xerr(long errcode, char *errfile, short *global_aes)
 {
-	unsigned INT16 *i = (unsigned INT16 *)&errcode;
+	unsigned short *i = (unsigned short *)&errcode;
 	
 	AES_PARAMS(136,2,1,1,0);
                     
