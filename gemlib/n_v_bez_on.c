@@ -35,7 +35,8 @@ v_bez_on (short handle)
 	
 	vdi_intout[0] = 0;
 	
-	VDI_TRAP_ESC (vdi_params, handle, 11,13, 0,0);
+	/* nota: ctrl1=1 means v_bez "ON", it's not the nb of entries in ptsin[] */
+	VDI_TRAP_ESC (vdi_params, handle, 11,13, 1,0);
 
 	return vdi_intout[0];
 }
