@@ -62,6 +62,9 @@ gcc28116:
 sox:
 	mkdir -p lib/sozobon; make -f sox.mak
 
+pc:
+	mkdir -p lib/purec; make -f pc.mak
+
 zip:
 	make -f zip.mak ZIP=zip
 	
