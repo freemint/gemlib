@@ -160,7 +160,9 @@ void	exit_app	(int ret);
 void	hide_mouse	(void);
 short  	hide_mouse_if_needed (GRECT *rect);
 void	show_mouse	(void);
-short	appl_xgetinfo	(short type, short *out1, short *out2, short *out3, short *out4);
+#if ! (( __GEMLIB_MAJOR__ > 0 ) || ( __GEMLIB_MINOR__ > 42 ) || ( __GEMLIB_REVISION__ > 2 ))
+short	appl_xgetinfo (short type, short *out1, short *out2, short *out3, short *out4);
+#endif
 
 /*******************************************************************************
  * asciitable functions

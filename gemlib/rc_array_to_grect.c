@@ -1,5 +1,19 @@
-#include "gem.h"
+/*
+ *  $Id$
+ */
 
+#include "mt_gem.h"
+
+/** transform a PXY-array structure to a GRECT structure
+ *
+ *  @param array specify the area using a PXY-array
+ *  @param area will then contain the area in a GRECT structure
+ *
+ *  @return \p area is returned.
+ *
+ *  @sa 
+ *
+ */
 
 GRECT *
 array_to_grect (const short *array, GRECT * area)

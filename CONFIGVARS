@@ -47,6 +47,7 @@ RM    = rm -f
 TOUCH = touch
 MKDIR = mkdir
 SED   = sed
+TAR   = tar
 
 
 #

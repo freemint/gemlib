@@ -1,19 +1,29 @@
-#include "gemx.h"
-#include "gem_aesP.h"
+/*
+ *  $Id$
+ */
 
+#include "gem_aesP.h"
+#include "mt_gemx.h"
+
+/** releases the memory allocated for the list box.
+ *
+ *  @param box Pointer to the list box structure
+ *  @param global_aes global AES array
+ *
+ *  @return 1
+ *
+ *  @since mt_appl_getinfo(7) give informations on mt_lbox_xx() functions availability
+ *
+ */
 
 short
-lbox_delete (LIST_BOX *box)
+mt_lbox_delete( LIST_BOX *box, short *global_aes )
 {
-	aes_addrin[0] = (long) box;
-	
-	aes_control[0] = 173;
-	aes_control[1] = 0;
-	aes_control[2] = 1;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
-	
-	return aes_intout[0];
+	AES_PARAMS(173,0,1,1,0);
+
+	aes_addrin[0]	= (long)box;
+
+	AES_TRAP(aes_params);
+
+	return(aes_intout[0]);
 }

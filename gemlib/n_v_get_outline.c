@@ -1,15 +1,39 @@
 /*
- *   NOTE: requires NVDI version 5.x or higher
+ *  $Id$
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
+/** 
+ *
+ *  @param handle Device handle
+ *  @param index 
+ *  @param x_offset 
+ *  @param y_offset 
+ *  @param pts 
+ *  @param flags 
+ *  @param max_pts 
+ *
+ *  @return 
+ *
+ *  @since NVDI 5 ?
+ *
+ *
+ *
+ */
 
 short
 v_get_outline (short handle, short index, short x_offset, short y_offset,
                short *pts, char *flags, short max_pts)
 {
+#if USE_LOCAL_VDIPB
+	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_intin[8];   
+	short vdi_intout[1]; 
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
+#endif
+	
 	vdi_intin    [0] = index;
 	vdi_intin    [1] = max_pts;
 	vdi_intin_ptr(2) = pts;

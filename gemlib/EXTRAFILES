@@ -10,5 +10,4 @@ SRCFILES += \
 	Makefile.objs \
 	SRCFILES \
 	\
-	_ps_asm.s \
 	gemlib.spec

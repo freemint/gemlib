@@ -15,6 +15,4 @@ SRCFILES += \
 	inline.hrd \
 	inline.rsc \
 	 \
-	lib.pc \
-	lib.prj \
 	nkcc-pc.s

@@ -1,15 +1,38 @@
 /*
- *   NOTE: requires NVDI version 5.x or higher
+ *  $Id$
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
+/** 
+ *
+ *  @param base_handle Device handle
+ *  @param bitmap 
+ *  @param color_flags 
+ *  @param unit_flags 
+ *  @param pixel_width 
+ *  @param pixel_height 
+ *
+ *  @return 
+ *
+ *  @since NVDI 5 ?
+ *
+ *
+ *
+ */
 
 short
 v_open_bm (short base_handle, GCBITMAP * bitmap, short color_flags,
            short unit_flags, short pixel_width, short pixel_height)
 {
+#if USE_LOCAL_VDIPB
+	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_intin[4];   
+	short vdi_intout[1]; 
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
+#endif
+	
 	vdi_intin[0] = color_flags;
 	vdi_intin[1] = unit_flags;
 	vdi_intin[2] = pixel_width;

@@ -1,16 +1,34 @@
-#include "gemx.h"
+/*
+ *  $Id$
+ */
+
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
+/** Close file selector window or file selector dialog
+ *
+ *  @param fsd Descriptor that was passed at the 
+ *		   successful opening of a file selector window.
+ *  @param global_aes global AES array
+ *
+ *  @return 0 for error, else 1
+ *
+ *  @since mt_appl_getinfo(7) give informations on mt_fslx_xx() functions availability
+ *
+ *  The corresponding descriptor is cleared and the file selector window or 
+ *  dialog is closed.
+ *
+ *
+ */
 
-short
-fslx_close (void *fsd)
+short 
+mt_fslx_close(void *fsd, short *global_aes)
 {
-	aes_addrin[0] = (long) fsd;
-	aes_control[0] = 191;
-	aes_control[1] = 0;
-	aes_control[2] = 1;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	aes (&aes_params);
+	AES_PARAMS(191,0,1,1,0);
+
+	aes_addrin[0] = (long)fsd;
+
+	AES_TRAP(aes_params);
+
 	return aes_intout[0];
 }

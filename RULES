@@ -28,9 +28,11 @@ uninstall: uninstall-recursive
 
 DISTFILES = $(MISCFILES) $(SRCFILES)
 
-distdir = $(top_builddir)/freemint-$(VERSION)/$(subdir)
+distdir = $(top_builddir)/$(BUILDLIB)-$(VERSION)
 
 distdir: $(DISTFILES) distdir-local
+	-rm -rf $(distdir)
+	mkdir -p $(distdir)
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  test -d $$d/$$file \

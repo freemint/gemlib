@@ -2,8 +2,12 @@
 # the files that should go only into source distributions.
 
 HEADER = \
+	gem_aesP.h \
+	gem_vdiP.h \
 	gem.h \
-	gemx.h
+	gemx.h \
+	mt_gem.h \
+	mt_gemx.h
 
 
 _VDI_ATTRIB = \
@@ -270,7 +274,6 @@ COBJS = \
 	a_appl_exit.c \
 	a_appl_find.c \
 	a_appl_getinfo.c \
-	a_appl_xgetinfo.c \
 	a_appl_init.c \
 	a_appl_read.c \
 	a_appl_search.c \
@@ -360,6 +363,8 @@ COBJS = \
 	a_wind_set_grect.c \
 	a_wind_set_str.c \
 	a_wind_update.c \
+	\
+	a_glue.c \
 	\
 	rc_copy.c \
 	rc_equal.c \

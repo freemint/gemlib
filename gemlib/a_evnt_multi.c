@@ -1,42 +1,113 @@
+/*
+ *  $Id$
+ */
+
 #include "gem_aesP.h"
 
+/** suspends the application until a valid message that the
+ *  application is interested in occurs.
+ *
+ *  @param events is a bit mask which tells the function which events
+ *               your application is interested in. You should logically
+ *               'OR' any of the following values together:
+ *            - \p MU_KEYBD   (0x01) Wait for a user keypress.
+ *            - \p MU_BUTTON  (0x02) Wait for the specified mouse button
+ *                                   state.
+ *            - \p MU_M1      (0x04) Wait for a mouse/rectangle event as
+ *                                   specified.
+ *            - \p MU_M2      (0x08) Wait for a mouse/rectangle event as
+ *                                   specified.
+ *            - \p MU_MESAG   (0x10) Wait for a message.
+ *            - \p MU_TIMER   (0x20) Wait the specified amount of time.
+ *
+ *  @param bclicks
+ *  @param bmask
+ *  @param bstate see mt_evnt_button()
+ *  @param m1_leave
+ *  @param m1_x
+ *  @param m1_y
+ *  @param m1_w
+ *  @param m1_h see mt_evnt_mouse()
+ *  @param m2_leave
+ *  @param m2_x
+ *  @param m2_y
+ *  @param m2_w
+ *  @param m2_h see mt_evnt_mouse()
+ *  @param msg see mt_evnt_mesag()
+ *  @param interval see mt_evnt_timer()
+ *  @param mx
+ *  @param my
+ *  @param mbutton
+ *  @param kmeta see mt_evnt_button()
+ *  @param kreturn the return value of the mt_evnt_keybd()
+ *  @param mbclicks see mt_evnt_button()
+ *  @param global_aes global AES array
+ *
+ *  @return a bit mask of which events actually happened as in events.
+ *          This may be one or more events and your application should
+ *          be prepared to handle each.
+ *
+ *  @since All AES versions. Under TOS 1.0, calling this function
+ *         from a desk accessory with the MU_TIMER mask and \p interval
+ *         being equal to 0 could hang the system.
+ *
+ *  @sa mt_evnt_button(), mt_evnt_keybd(), mt_evnt_mesag(),
+ *      mt_evnt_mouse(), mt_evnt_timer()
+ *
+ *  This call combines the functionality of mt_evnt_button(), mt_evnt_keybd(),
+ *  mt_evnt_mesag(), mt_evnt_mouse(), and mt_evnt_timer() into one call.
+ *  This call is usually the cornerstone of all GEM
+ *  applications that must process system events.
+ *
+ *  The only facet of mt_evnt_multi() which has changed from AES
+ *  version 4.0 is that which relates to mt_evnt_mesag(). For
+ *  further information you should consult that section.
+ *
+ */
 
 short
-evnt_multi (short Type, short Clicks, short WhichButton, short WhichState,
-	    short EnterExit1, short In1X, short In1Y, short In1W, short In1H,
-	    short EnterExit2, short In2X, short In2Y, short In2W, short In2H,
-	    short MesagBuf[], unsigned long Interval,
-	    short *OutX, short *OutY, short *ButtonState, short *KeyState, short *Key,
-	    short *ReturnCount)
+mt_evnt_multi (short events, short bclicks, short bmask, short bstate,
+			   short m1_leave, short m1_x, short m1_y, short m1_w, short m1_h,
+			   short m2_leave, short m2_x, short m2_y, short m2_w, short m2_h,
+			   short msg[], unsigned long interval,
+			   short *mx, short *my,
+			   short *mbutton, short *kmeta, short *kreturn, short *mbclicks,
+			   short *global_aes)
 {
-	unsigned short *i = (unsigned short *) &Interval;
+	short *ptr;
+	unsigned short *i = (unsigned short *)&interval;
 
-	aes_intin[0]  = Type;
-	aes_intin[1]  = Clicks;
-	aes_intin[2]  = WhichButton;
-	aes_intin[3]  = WhichState;
-	aes_intin[4]  = EnterExit1;
-	aes_intin[5]  = In1X;
-	aes_intin[6]  = In1Y;
-	aes_intin[7]  = In1W;
-	aes_intin[8]  = In1H;
-	aes_intin[9]  = EnterExit2;
-	aes_intin[10] = In2X;
-	aes_intin[11] = In2Y;
-	aes_intin[12] = In2W;
-	aes_intin[13] = In2H;
-	aes_intin[14] = i[1];
-	aes_intin[15] = i[0];
-	aes_addrin[0] = (long)MesagBuf;
+	AES_PARAMS(25,16,7,1,0);
 
-	AES_TRAP (aes_params, 25, 16,7,1,0);
+	ptr = aes_intin;
+	*(ptr ++) = events;									/* [0] */
+	*(ptr ++) = bclicks;
+	*(ptr ++) = bmask;
+	*(ptr ++) = bstate;
+	*(ptr ++) = m1_leave;
+	*(ptr ++) = m1_x;
+	*(ptr ++) = m1_y;
+	*(ptr ++) = m1_w;
+	*(ptr ++) = m1_h;
+	*(ptr ++) = m2_leave;
+	*(ptr ++) = m2_x;
+	*(ptr ++) = m2_y;
+	*(ptr ++) = m2_w;
+	*(ptr ++) = m2_h;
+	*(ptr ++) = i[1];
+	*(ptr) = i[0];										/* [15] */
 
-	*OutX        = aes_intout[1];
-	*OutY        = aes_intout[2];
-	*ButtonState = aes_intout[3];
-	*KeyState    = aes_intout[4];
-	*Key         = aes_intout[5];
-	*ReturnCount = aes_intout[6];
+	aes_addrin[0] = (long)msg;
 
-	return aes_intout[0];
+	AES_TRAP(aes_params);
+
+	ptr = &aes_intout[1];
+	*mx = *(ptr ++);									/* [1] */
+	*my = *(ptr ++);									/* [2] */
+	*mbutton = *(ptr ++);						    	/* [3] */
+	*kmeta = *(ptr ++);								/* [4] */
+	*kreturn = *(ptr ++);									/* [5] */
+	*mbclicks = *(ptr);								    /* [6] */
+
+	return (aes_intout[0]);
 }
