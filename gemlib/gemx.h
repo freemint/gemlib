@@ -640,35 +640,60 @@ void	wdlg_redraw (DIALOG *dialog, GRECT *rect, short obj, short depth);
 #define  HNDL_UNTP   -11         /* Dialog-window is not active */
 
 
-/******************************************************************************
- * Editor extensions for Magic
+/* 
+ *    Editor extensions for Magic
  */
 
-void *	edit_create 	(void);
-void	edit_delete	(void *xi);
-short	edit_open	(OBJECT *tree, short obj);
-void	edit_close	(OBJECT *tree, short obj);
-short	edit_cursor	(OBJECT *tree, short obj, short whdl, short show);
-short	edit_evnt	(OBJECT *tree, short obj, short whdl,	EVNT *ev, long *errc);
-short	edit_get_buf	(OBJECT *tree, short obj, char **buf, long *buflen, long *txtlen);
-short	edit_get_format	(OBJECT *tree, short obj, short *tabwidth, short *autowrap);
-short	edit_get_colour	(OBJECT *tree, short obj, short *tcolour, short *bcolour);
-short	edit_get_cursor	(OBJECT *tree, short obj, char **cursorpos);
-short	edit_get_font	(OBJECT *tree, short obj, short *fontID, short *fontH, short *fontPix, short *mono);
-void	edit_set_buf	(OBJECT *tree, short obj, char *buf, long buflen);
-void	edit_set_format	(OBJECT *tree, short obj, short tabwidth, short autowrap);
-void	edit_set_font	(OBJECT *tree, short obj, short fontID, short fontH, short fontPix, short mono);
-void	edit_set_colour	(OBJECT *tree, short obj, short tcolour, short bcolour);
-void	edit_set_cursor	(OBJECT *tree, short obj, char *cursorpos);
-short	edit_resized	(OBJECT *tree, short obj, short *oldrh, short *newrh);
-short	edit_get_dirty	(OBJECT *tree, short obj);
-void	edit_set_dirty	(OBJECT *tree, short obj, short dirty);
-void	edit_get_sel	(OBJECT *tree, short obj, char **bsel, char **esel);
-void	edit_get_pos	(OBJECT *tree, short obj, short *xscroll, long *yscroll, char **cyscroll, char **cursorpos, short *cx, short *cy);
-void	edit_set_pos	(OBJECT *tree, short obj, short xscroll, long yscroll, char *cyscroll, char *cursorpos, short cx, short cy);
-short	edit_scroll	(OBJECT *tree, short obj, short whdl, long yscroll, short xscroll);
-void	edit_get_scrollinfo (OBJECT *tree, short obj, long *nlines, long *yscroll, short *yvis, short *yval, short *ncols, short *xscroll, short *xvis);
-
+/** @addtogroup x_edit
+ *  @{
+ */
+typedef void XEDITINFO; /**< opaque data structure use by mt_edit_create() and mt_edit_delete() */
+XEDITINFO *	mt_edit_create 	(short *global);
+void	mt_edit_delete 		(XEDITINFO *xi, short *global);
+short	mt_edit_open		(OBJECT *tree, short obj, short *global);
+void	mt_edit_close		(OBJECT *tree, short obj, short *global);
+short	mt_edit_cursor 		(OBJECT *tree, short obj, short whdl, short show, short *global);
+short	mt_edit_evnt		(OBJECT *tree, short obj, short whdl,	EVNT *ev, long *errc, short *global);
+short	mt_edit_get_buf		(OBJECT *tree, short obj, char **buf, long *buflen, long *txtlen, short *global);
+short	mt_edit_get_format	(OBJECT *tree, short obj, short *tabwidth, short *autowrap, short *global);
+short	mt_edit_get_colour	(OBJECT *tree, short obj, short *tcolour, short *bcolour, short *global);
+short	mt_edit_get_cursor	(OBJECT *tree, short obj, char **cursorpos, short *global);
+short	mt_edit_get_font	(OBJECT *tree, short obj, short *fontID, short *fontH, short *fontPix, short *mono, short *global);
+void	mt_edit_set_buf		(OBJECT *tree, short obj, char *buf, long buflen, short *global);
+void	mt_edit_set_format	(OBJECT *tree, short obj, short tabwidth, short autowrap, short *global);
+void	mt_edit_set_font	(OBJECT *tree, short obj, short fontID, short fontH, short fontPix, short mono, short *global);
+void	mt_edit_set_colour	(OBJECT *tree, short obj, short tcolour, short bcolour, short *global);
+void	mt_edit_set_cursor	(OBJECT *tree, short obj, char *cursorpos, short *global);
+short	mt_edit_resized		(OBJECT *tree, short obj, short *oldrh, short *newrh, short *global);
+short	mt_edit_get_dirty	(OBJECT *tree, short obj, short *global);
+void	mt_edit_set_dirty	(OBJECT *tree, short obj, short dirty, short *global);
+void	mt_edit_get_sel		(OBJECT *tree, short obj, char **bsel, char **esel, short *global);
+void	mt_edit_get_pos		(OBJECT *tree, short obj, short *xscroll, long *yscroll, char **cyscroll, char **cursorpos, short *cx, short *cy, short *global);
+void	mt_edit_set_pos		(OBJECT *tree, short obj, short xscroll, long yscroll, char *cyscroll, char *cursorpos, short cx, short cy, short *global);
+short	mt_edit_scroll		(OBJECT *tree, short obj, short whdl, long yscroll, short xscroll, short *global);
+void	mt_edit_get_scrollinfo (OBJECT *tree, short obj, long *nlines, long *yscroll, short *yvis, short *yval, short *ncols, short *xscroll, short *xvis, short *global);
+#define edit_create()  mt_edit_create(aes_global)
+#define edit_open(a,b) mt_edit_open(a,b,aes_global)
+#define edit_close(a,b) mt_edit_close(a,b,aes_global)
+#define edit_delete(a) mt_edit_delete(a,aes_global)
+#define edit_cursor(a,b,c,d) mt_edit_cursor(a,b,c,d,aes_global)
+#define edit_evnt(a,b,c,d,e) mt_edit_evnt(a,b,c,d,e,aes_global)
+#define edit_get_buf(a,b,c,d,e) mt_edit_get_buf(a,b,c,d,e,aes_global)
+#define edit_set_buf(a,b,c,d) mt_edit_set_buf(a,b,c,d,aes_global)
+#define edit_set_format(a,b,c,d) mt_edit_set_format(a,b,c,d,aes_global)
+#define edit_get_format(a,b,c,d) mt_edit_get_format(a,b,c,d,aes_global)
+#define edit_set_font(a,b,c,d,e,f) mt_edit_set_font(a,b,c,d,e,f,aes_global)
+#define edit_get_font(a,b,c,d,e,f) mt_edit_get_font(a,b,c,d,e,f,aes_global)
+#define edit_set_colour(a,b,c,d) mt_edit_set_colour(a,b,c,d,aes_global)
+#define edit_resized(a,b,c,d) mt_edit_resized(a,b,c,d,aes_global)
+#define edit_get_dirty(a,b) mt_edit_get_dirty(a,b,aes_global)
+#define edit_set_dirty(a,b,c) mt_edit_set_dirty(a,b,c,aes_global)
+#define edit_get_sel(a,b,c,d) mt_edit_get_sel(a,b,c,d,aes_global)
+#define edit_get_pos(a,b,c,d,e,f,g,h) mt_edit_get_pos(a,b,c,d,e,f,g,h,aes_global)
+#define edit_set_pos(a,b,c,d,e,f,g,h) mt_edit_set_pos(a,b,c,d,e,f,g,h,aes_global)
+#define edit_get_scrollinfo(a,b,c,d,e,f,g,h,i) mt_edit_get_scrollinfo(a,b,c,d,e,f,g,h,i,aes_global)
+#define edit_scroll(a,b,c,d,e) mt_edit_scroll(a,b,c,d,e,aes_global)
+/**@}*/
 
 /*******************************************************************************
  * The VDI extentsions of NVDI/FSM/Speedo
