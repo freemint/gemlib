@@ -18,6 +18,9 @@ RANLIB = m68k-atari-mint-ranlib
 STRIP = m68k-atari-mint-strip
 FLAGS = m68k-atari-mint-flags
 
+# hypertext compiler
+HCP = echo
+
 else
 
 CC = gcc -pipe
@@ -28,6 +31,9 @@ AR = ar
 RANLIB = ranlib
 STRIP = strip
 FLAGS = flags
+
+# hypertext compiler
+HCP = hcp
 
 endif
 

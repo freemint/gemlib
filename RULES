@@ -5,7 +5,7 @@ include $(srcdir)/SRCFILES
 include $(srcdir)/EXTRAFILES
 include $(srcdir)/MISCFILES
 
-all: all-recursive all-here
+all: all-here all-recursive
 
 clean: clean-recursive
 	rm -f *.o lib*.a *.tmp
