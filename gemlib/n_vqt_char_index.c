@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** converts \p src_index according to the encodings \p src_mode 
  *  and \p dst_mode. If it is not possible to convert an index, \p dst_index will 

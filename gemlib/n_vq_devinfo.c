@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 #include <string.h>
 
 /** reports back, if a driver exists and if he has been opened.

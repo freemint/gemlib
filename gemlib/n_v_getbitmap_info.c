@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** This function returns a pointer to a character's bitmap and provides information 
  *  about the character placement and its size.

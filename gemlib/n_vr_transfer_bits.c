@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 #include <stddef.h>
 
 /** 

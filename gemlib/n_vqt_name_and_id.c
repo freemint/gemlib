@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** This function searches the font specified by \p font_name and \p font_format. 
  *  Missing or extra spaces in the font name are ignored. If the font cannot be 

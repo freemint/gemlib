@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** specifies the  quality and accuracy of the bezier curves. You can 
  *  select the quality in a range between 0 and 100 per cent. 

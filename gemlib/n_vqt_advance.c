@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** This call returns the advance vector of a character which can be used to place 
  *  the next one (the advance width is not the width of the character bitmap!).

@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** This function exists only for compatibility reasons. It switches off the 
  *  special treatment of v_bez()/v_bez_fill().

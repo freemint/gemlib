@@ -3,7 +3,7 @@
  */
 
 #include "gem_aesP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** removes the printers installed with mt_pdlg_add_printers() from the binding.
  *

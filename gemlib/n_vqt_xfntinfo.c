@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** This function returns extended font information specified by \p flags in a
  *  XFNT_INFO structure. If the index is a nonzero value vqt_xfntinfo() searches 

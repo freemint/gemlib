@@ -3,7 +3,7 @@
  */
 
 #include "gem_aesP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** 
  *

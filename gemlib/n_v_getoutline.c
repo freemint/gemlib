@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** This function generates a bezier curve of the specified character, which can be 
  *  used to call v_bez() or v_bez_fill().

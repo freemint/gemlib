@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** After calling v_bez_on(), you can call v_bez()/v_bez_fill() without a 
  *  sub-opcode in contrl[5]. This function exists only for compatibility reasons 

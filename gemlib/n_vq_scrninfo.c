@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** returns extended information about the bitmap 
  *  format of the device (the device-specific format).

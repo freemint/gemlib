@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** This function is only available if you use NVDI.
  *  It returns the bounding box (eventually a quadrilateral, not a rectangle) for 

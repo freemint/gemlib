@@ -3,7 +3,7 @@
  */
 
 #include "gem_aesP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** evaluates the passed EVNT structure and calls mt_wdlg_evnt() internally.
  *

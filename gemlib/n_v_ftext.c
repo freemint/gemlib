@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** This text function uses track and pair kerning and works with an internal 
  *  resolution of 1/65536 pixels to maintain accurate character placement.

@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** This function can be used to set the track and pair kerning mode. Most Speedo 
  *  fonts have 3 kerning tracks. Ordinary TrueType fonts do not have any kerning 

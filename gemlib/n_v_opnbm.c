@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** This function creates an offscreen bitmap on which can draw with VDI functions.
  *  You can pass a pointer to a bitmap or otherwise the VDI will allocate the memory 

@@ -3,7 +3,7 @@
  */
 
 #include "gem_aesP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** is the counterpart to mt_pdlg_open()/mt_pdlg_evnt()/mt_pdlg_close(). This 
  *  function opens a modal dialog and only returns to the caller when one of 

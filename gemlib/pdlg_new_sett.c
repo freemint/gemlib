@@ -3,7 +3,7 @@
  */
 
 #include "gem_aesP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** Memory for printer settings is allocated, the structure is initialised 
  *  and returned

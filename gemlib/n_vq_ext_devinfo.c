@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** Similar to vq_devinfo() the function vq_ext_devinfo() returns information 
  *  about the driver.

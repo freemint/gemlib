@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** copies the header of a speedo font file into \p buffer and 
  *  returns a pointer to the TDF file. The buffer should have a size of 1 Kb, 

@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** closes an offscreen bitmap. If the VDI has allocated the memory
  *  for the bitmap, this call frees the memory.

@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** Similar to vst_point() this function sets the character height in points, but 
  *  you are able to change the size in steps of 1/65536 points. If you request a 

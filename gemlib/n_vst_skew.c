@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** This function sets the skew of vector font characters in steps of 1/10 degrees. 
  *  The skewing angle is independent from vst_effects() and must be in a range 

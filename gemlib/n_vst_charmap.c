@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** switches from ASCII-mapping to direct mapping, which means that you 
  *  can access all characters of a font (e.g. if the user wants to select a special 

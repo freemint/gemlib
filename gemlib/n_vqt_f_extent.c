@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** As well as vqt_extent() this function adds the character widths of a string, but 
  *  this function takes track and pair kerning into account and works with a resolution 

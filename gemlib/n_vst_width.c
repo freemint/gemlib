@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** This function sets the character width in pixels. The next call of vst_height(), 
  *  vst_point() or vst_arbpt32() resets the width.

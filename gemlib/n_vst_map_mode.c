@@ -3,7 +3,7 @@
  */
 
 #include "gem_vdiP.h"
-#include "gemx.h"
+#include "mt_gemx.h"
 
 /** vst_charmap()-like function which is able to use Unicode for mapping
  *  characters.
