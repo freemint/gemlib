@@ -218,7 +218,7 @@ short	mt_fslx_set_flags 	(short flags, short *oldval, short *global);
 #define fslx_do(a,b,c,d,e,f,g,h,i,j,k,l,m)		mt_fslx_do(a,b,c,d,e,f,g,h,i,j,k,l,m,aes_global)
 #define fslx_evnt(a,b,c,d,e,f,g,h)				mt_fslx_evnt(a,b,c,d,e,f,g,h,aes_global)
 #define fslx_getnxtfile(a,b)					mt_fslx_getnxtfile(a,b,aes_global)
-#define fslx_open(a,b,c,d,e,f,g,h,i,j,k,l,m)	mt_fslx_open(a,b,c,d,e,f,g,h,i,j,k,l,m,m,aes_global)
+#define fslx_open(a,b,c,d,e,f,g,h,i,j,k,l,m)	mt_fslx_open(a,b,c,d,e,f,g,h,i,j,k,l,m,aes_global)
 #define fslx_set_flags(a,b)						mt_fslx_set_flags(a,b,aes_global)
 /**@}*/
 
