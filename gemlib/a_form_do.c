@@ -8,15 +8,15 @@
  *  the calling application.
  *
  *  @param tree is a pointer to a valid object tree which contains
- *             a dialog with at least one EXIT or TOUCHEXIT button or
+ *             a dialog with at least one #OF_EXIT or #OF_TOUCHEXIT button or
  *             object.
  *  @param startobj is the object index into tree which specifies the
  *             desired initial location of the edit cursor (the object
- *             must be flagged as EDITABLE). If the form has no text
+ *             must be flagged as #OF_EDITABLE). If the form has no text
  *             editable fields, you should use 0.
  *  @param global_aes global AES array
  *
- *  @return the object index of the EXIT or TOUCHEXIT
+ *  @return the object index of the #OF_EXIT or #OF_TOUCHEXIT
  *             button which was selected. If the object was double
  *             clicked, the top bit will be set. This means that to
  *             obtain the actual object number you should mask it
@@ -26,7 +26,7 @@
  *
  *  It suspends program control,
  *  handles all radio buttons, selectable objects, etc...
- *  until an object with the TOUCHEXIT or EXIT flag is selected.
+ *  until an object with the #OF_TOUCHEXIT or #OF_EXIT flag is selected.
  *
  */
 
