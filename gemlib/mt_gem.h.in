@@ -757,16 +757,16 @@ typedef struct pEvntrec
 #define FMD_FINISH			3	/**< releases the screen space for a dialog, see mt_form_dial() */
 
 /* form_error modes */
-#define FERR_FILENOTFOUND	 2	/**< TODO */
-#define FERR_PATHNOTFOUND	 3	/**< TODO */
-#define FERR_NOHANDLES		 4	/**< TODO */
-#define FERR_ACCESSDENIED	 5	/**< TODO */
-#define FERR_LOWMEM			 8	/**< TODO */
-#define FERR_BADENVIRON 	10	/**< TODO */
-#define FERR_BADFORMAT		11	/**< TODO */
-#define FERR_BADDRIVE		15	/**< TODO */
-#define FERR_DELETEDIR		16	/**< TODO */
-#define FERR_NOFILES 		18	/**< TODO */
+#define FERR_FILENOTFOUND	 2	/**< File Not Found (GEMDOS error -33), see mt_form_error() */
+#define FERR_PATHNOTFOUND	 3	/**< Path Not Found (GEMDOS error -34), see mt_form_error() */
+#define FERR_NOHANDLES		 4	/**< No More File Handles (GEMDOS error -35), see mt_form_error() */
+#define FERR_ACCESSDENIED	 5	/**< Access Denied (GEMDOS error -36), see mt_form_error() */
+#define FERR_LOWMEM			 8	/**< Insufficient Memory (GEMDOS error -39), see mt_form_error() */
+#define FERR_BADENVIRON 	10	/**< Invalid Environment (GEMDOS error -41), see mt_form_error() */
+#define FERR_BADFORMAT		11	/**< Invalid Format (GEMDOS error -42) */
+#define FERR_BADDRIVE		15	/**< Invalid Drive Specification (GEMDOS error -46), see mt_form_error() */
+#define FERR_DELETEDIR		16	/**< Attempt To Delete Working Directory (GEMDOS error -47), see mt_form_error() */
+#define FERR_NOFILES 		18	/**< No More Files (GEMDOS error -49), see mt_form_error() */
 
 /* fsel_(ex)input return values */
 #define FSEL_CANCEL		 0	/**< TODO */
