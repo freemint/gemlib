@@ -34,10 +34,10 @@ __BEGIN_DECLS
 /* Major and minor version number of the GEMLib package.  Use these macros 
    to test for features in specific releases.  */
 #define __GEMLIB__		__GEMLIB_MAJOR__
-#define	__GEMLIB_MAJOR__	0
-#define	__GEMLIB_MINOR__	40
-#define __GEMLIB_REVISION__	0
-#define __GEMLIB_BETATAG__     ""
+#define	__GEMLIB_MAJOR__     0
+#define	__GEMLIB_MINOR__    41
+#define __GEMLIB_REVISION__   0
+#define __GEMLIB_BETATAG__   ""
 
 
 #ifdef __GEMLIB_DEFS
@@ -855,14 +855,15 @@ short 	evnt_multi 	(short Type, short Clicks, short WhichButton, short WhichStat
 			 short *ButtonState, short *KeyState, short *Key, short *ReturnCount);
 short	evnt_timer 	(unsigned long Interval);
 
-short	form_alert	(short DefButton, const char *Str);
-short	form_button	(OBJECT *, short Bobject, short Bclicks, short *Bnxtobj);
-short	form_center	(OBJECT *, short *Cx, short *Cy, short *Cw, short *Ch);
-short 	form_dial	(short Flag, short Sx, short Sy, short Sw, short Sh, short Bx, short By, short Bw, short Bh);
-short	form_do		(OBJECT *, short StartObj);
-short 	form_error	(short ErrorCode);
-short	form_keybd	(OBJECT *, short Kobject, short Kobnext, short Kchar,
-			 short *Knxtobject, short *Knxtchar);
+short form_alert  (short DefButton, const char *Str);
+short form_button (OBJECT *, short Bobject, short Bclicks, short *Bnxtobj);
+short form_center (OBJECT *, short *Cx, short *Cy, short *Cw, short *Ch);
+short form_dial   (short Flag, short Sx, short Sy, short Sw, short Sh,
+                               short Bx, short By, short Bw, short Bh);
+short form_do     (OBJECT *, short StartObj);
+short form_error  (short ErrorCode);
+short form_keybd  (OBJECT *, short Kobject, short Kobnext, short Kchar,
+                             short *Knxtobject, short *Knxtchar);
 
 short 	fsel_exinput	(char *Path, char *File, short *ExitButton, const char *title);
 short 	fsel_input	(char *Path, char *File, short *ExitButton);
@@ -944,18 +945,18 @@ short	wind_update 	(short Code);
 /*
  * Some useful extensions
  */
-short	wind_calc_grect	(short Type, short Parts, GRECT *In, GRECT *Out);  
-short	wind_create_grect (short Parts, GRECT *r); 
-void	wind_get_grect	(short WindowHandle, short What, GRECT *r);
-short	wind_open_grect	(short WindowHandle, GRECT *r);
-void	wind_set_grect	(short WindowHandle, short What, GRECT *r);
-void	wind_set_str	(short WindowHandle, short What, char *str);
+short	wind_calc_grect   (short Type, short Parts, const GRECT *In, GRECT *Out);  
+short	wind_create_grect (short Parts, const GRECT *r); 
+short wind_get_grect    (short WindowHandle, short What, GRECT *r);
+short	wind_open_grect	(short WindowHandle, const GRECT *r);
+short wind_set_grect    (short WindowHandle, short What, const GRECT *r);
+short wind_set_str      (short WindowHandle, short What, const char *str);
 
-short	rc_copy 	(GRECT *src, GRECT *dst);
-short	rc_equal 	(GRECT *src, GRECT *dst);
-short 	rc_intersect 	(GRECT *r1, GRECT *r2);
-short *	grect_to_array	(GRECT *area, short *array);
-void	array_to_grect	(short *array, GRECT *area);
+short	rc_copy      (const GRECT *src, GRECT *dst);
+short	rc_equal     (const GRECT *r1,  const GRECT *r2);
+short rc_intersect (const GRECT *src, GRECT *dst);
+GRECT * array_to_grect (const short *array, GRECT *area);
+short * grect_to_array (const GRECT *area, short *array);
 
 
 /*
