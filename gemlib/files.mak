@@ -363,6 +363,7 @@ OBJ = \
  vsf_color.o	\
  vsf_interior.o	\
  vsf_perimeter.o	\
+ vsf_perimeter3.o	\
  vsf_style.o	\
  vsf_udpat.o	\
  vsin_mode.o	\
