@@ -7,6 +7,21 @@
 #define appl_init _appl_init  /* to disable the appl_init inline function from gem.h */
 #include "gem.h"
 
+/*
+ *  The aim of this file is to allow the linking of gemlib with libraries that have been
+ *  compiled with an old version of gemlib ( release < 0.42.99 ).
+ *
+ *  With new version of gemlib ( release >= 0.42.99), all AES xxx() functions are transformed to
+ *  mt_xxx() functions thanks to macros in gem.h.
+ *
+ *  Libraries compiled with old ( < 0.42.99) version of gemlib may requiere to be linked with
+ *  non-mt functions. That's the only purpose of this glue file.
+ *
+ *  => new AES functions (added since release 0.42.99) shall not appear in this file, because
+ *     they didn't exist on gemlib < 0.42.99, and so, old-not-up-to-date libraries don't
+ *     ask for the symbol name without "mt_" in the link stage.
+ */
+
 #ifdef appl_bvset
 #undef appl_bvset
 #endif
@@ -878,15 +893,6 @@ short
 wind_set_grect(short WindowHandle, short What, const GRECT *r)
 {
 	return(mt_wind_set_grect(WindowHandle, What, r, aes_global));
-}
-
-#ifdef wind_xset_grect
-#undef wind_xset_grect
-#endif
-short
-wind_xset_grect(short WindowHandle, short What, const GRECT *s, const GRECT *r)
-{
-	return(mt_wind_xset_grect(WindowHandle, What, s, r, aes_global));
 }
 
 #ifdef wind_set_str
