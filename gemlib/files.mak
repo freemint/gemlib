@@ -142,11 +142,13 @@ OBJ = \
  n_v_color2nearest.o	\
  n_v_color2value.o	\
  n_v_create_ctab.o	\
+ n_v_create_driver_info.o \
  n_v_create_itab.o	\
  n_v_ctab_idx2value.o	\
  n_v_ctab_idx2vdi.o	\
  n_v_ctab_vdi2idx.o	\
  n_v_delete_ctab.o	\
+ n_v_delete_driver_info.o \
  n_v_delete_itab.o	\
  n_v_ftext.o	\
  n_v_ftext16.o	\
@@ -160,9 +162,11 @@ OBJ = \
  n_v_open_bm.o	\
  n_v_opnbm.o	\
  n_v_opnprn.o	\
+ n_v_read_default_settings.o \
  n_v_resize_bm.o	\
  n_v_setrgb.o	\
  n_v_value2color.o	\
+ n_v_write_default_settings.o \
  n_vq_ctab.o	\
  n_vq_ctab_entry.o	\
  n_vq_ctab_id.o	\

@@ -24,12 +24,11 @@ short v_write_default_settings( short handle, PRN_SETTINGS *settings )
 	short vdi_intin[2]; 
 	short vdi_intout[1]; 
 
-	vdi_control[5] = 1;																/* Subfunction */
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
+
 	*(PRN_SETTINGS **) &vdi_intin[0] = settings;
 	
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
-	
-	VDI_TRAP (vdi_params, handle, 182, 0,2);
+	VDI_TRAP_ESC (vdi_params, handle, 182, 1, 0, 2);
 
 	if ( vdi_control[4] >= 1 )
 		return vdi_intout[0];

@@ -24,10 +24,9 @@ short v_read_default_settings( short handle, PRN_SETTINGS *settings )
 	short vdi_intin[2]; 
 	short vdi_intout[1]; 
 
-	vdi_control[5] = 0;																/* Subfunction */
-	*(PRN_SETTINGS **) &vdi_intin[0] = settings;
-	
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
+
+	*(PRN_SETTINGS **) &vdi_intin[0] = settings;
 	
 	VDI_TRAP (vdi_params, handle, 182, 0,2);
 
