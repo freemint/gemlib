@@ -25,7 +25,7 @@
  *  @param index font index or 0 (use id)
  *  @param info pointer to the XFNT_INFO structure
  *
- *  @return font id
+ *  @return font id or 0 on failure
  *
  *  @since NVDI 3.02
  *
@@ -45,12 +45,16 @@ vqt_xfntinfo (short handle, short flags, short id, short index, XFNT_INFO *info)
 	vdi_intin    [1] = id;
 	vdi_intin    [2] = index;
 	vdi_intin_ptr(3) = info;
+
+	/* set the 0 as return value in case NVDI is not present */
+	vdi_intout[1]    = 0;
 	
 	VDI_TRAP (vdi_params, handle, 229, 0,5);
 	
 	info->format	= vdi_intout[0];
-	info->id		= vdi_intout[1];
-	info->index		= vdi_intout[2];
+	info->id	= vdi_intout[1];
+	info->index	= vdi_intout[2];
 	
 	return vdi_intout[1];
 }
+

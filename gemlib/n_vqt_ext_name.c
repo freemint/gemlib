@@ -21,7 +21,7 @@
  *         - 0: proportional font
  *         - 1: monospaced font
  *
- *  @return font id
+ *  @return font id or 0 on failure
  *
  *  @since NVDI 3.00
  *
@@ -41,6 +41,9 @@ vqt_ext_name (short handle, short index,
 	
 	vdi_intin[0] = index;
 	vdi_intin[1] = 0;
+
+	/* set the 0 as return value in case NVDI is not present */
+	vdi_intout[0] = 0;
 
 	VDI_TRAP_ESC (vdi_params, handle, 130,1, 0,2);
 
