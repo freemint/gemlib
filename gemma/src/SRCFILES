@@ -1,0 +1,32 @@
+# This file gets included by the Makefile in this directory to determine
+# the files that should go only into source distributions.
+
+HEADER = \
+	alert.h \
+	gemma.h \
+	gemproto.h \
+	rsrc.h \
+	user.h \
+	xattr.h
+
+COBJS = \
+	alert.c \
+	appl.c \
+	av.c \
+	ctrl_list.c \
+	dialog.c \
+	env.c \
+	errlist.c \
+	fselect.c \
+	gemma.c \
+	gemproto.c \
+	misc.c \
+	proc.c \
+	rsrc.c \
+	sflags.c \
+	version.c
+
+SOBJS = \
+	header.s
+
+SRCFILES = $(HEADER) $(COBJS) $(SOBJS)

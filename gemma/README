@@ -1,0 +1,22 @@
+This is the gemma GEM library. It is not yet completely finished, 
+though most of the functions should be already functioning. The 
+unfinished part is mostly the multidialog support (the library can 
+actually handle only one opened dialog box per application).
+
+Take this as a public alpha release.
+
+The source is preconfigured for 68020+ machines. To build plain 68000
+binaries edit the file named `config', then just say `make'. Notice that
+statically linked libraries associated with the SLB are always built in
+two versions (i.e. separately for 68000 and 68020).
+
+Once everything is built, the example program `przyklad.app' in the
+directory usage should be ready to run (under GEM). When it works, that
+means that the library is built and loaded properly, so follow the
+installation instructions written inside the hypertext document.
+
+If you want to develop programs which cooperate with the SLB, you will
+also have to copy the contents of the directories include/ and lib/ into
+your /usr/include and /usr/lib directories.
+
+EOF
