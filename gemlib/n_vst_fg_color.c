@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vst_fg_color (int handle, long color_space, COLOR_ENTRY * fg_color)
+short
+vst_fg_color (short handle, long color_space, COLOR_ENTRY * fg_color)
 {
 	*(long *) &vdi_intin[0] = color_space;
 	*(COLOR_ENTRY *) & vdi_intin[2] = *fg_color;

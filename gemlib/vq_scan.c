@@ -3,8 +3,8 @@
 
 
 void
-vq_scan (int handle, int *g_slice, int *g_page, int *a_slice, int *a_page,
-	 int *div_fac)
+vq_scan (short handle, short *g_slice, short *g_page, short *a_slice, short *a_page,
+	 short *div_fac)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

@@ -3,7 +3,7 @@
 
 
 void
-vt_alignment (int handle, int dx, int dy)
+vt_alignment (short handle, short dx, short dy)
 {
 	vdi_intin[0] = dx;
 	vdi_intin[1] = dy;

@@ -3,7 +3,7 @@
 
 
 void
-v_hide_c (int handle)
+v_hide_c (short handle)
 {
 	vdi_control[0] = 123;
 	vdi_control[1] = 0;

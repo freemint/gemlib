@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vqt_char_index (int handle, int scr_index, int scr_mode, int dst_mode)
+short
+vqt_char_index (short handle, short scr_index, short scr_mode, short dst_mode)
 {
 	vdi_intin[0] = scr_index;
 	vdi_intin[1] = scr_mode;

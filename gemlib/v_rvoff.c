@@ -3,7 +3,7 @@
 
 
 void
-v_rvoff (int handle)
+v_rvoff (short handle)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-form_popup (OBJECT * tree, int x, int y)
+short
+form_popup (OBJECT * tree, short x, short y)
 {
 	aes_intin[0] = x;
 	aes_intin[1] = y;

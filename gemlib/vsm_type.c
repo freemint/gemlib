@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vsm_type (int handle, int symbol)
+short
+vsm_type (short handle, short symbol)
 {
 	vdi_intin[0] = symbol;
 	vdi_control[0] = 18;

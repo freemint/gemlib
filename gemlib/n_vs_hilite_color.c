@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vs_hilite_color (int handle, long color_space, COLOR_ENTRY * hilite_color)
+short
+vs_hilite_color (short handle, long color_space, COLOR_ENTRY * hilite_color)
 {
 	*(long *) &vdi_intin[0] = color_space;
 	*(COLOR_ENTRY *) & vdi_intin[2] = *hilite_color;

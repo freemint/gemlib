@@ -3,7 +3,7 @@
 
 
 void
-v_bez_qual (int handle, int percent, int *actual)
+v_bez_qual (short handle, short percent, short *actual)
 {
 	vdi_intin[0] = 32;
 	vdi_intin[1] = 1;

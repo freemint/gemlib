@@ -3,8 +3,8 @@
 
 
 void
-vq_tray_names (int handle, const char *input_name, const char *output_name,
-	       int *input, int *output)
+vq_tray_names (short handle, const char *input_name, const char *output_name,
+	       short *input, short *output)
 {
 	*((const char **) (&vdi_intin[0])) = input_name;
 	*((const char **) (&vdi_intin[2])) = output_name;
@@ -22,10 +22,10 @@ vq_tray_names (int handle, const char *input_name, const char *output_name,
  * * special graphic funkcion
  */
 
-int
-vs_calibrate (int handle, int flag, int *rgb)
+short
+vs_calibrate (short handle, short flag, short *rgb)
 {
-	*((int **) (&vdi_intin[0])) = rgb;
+	*((short **) (&vdi_intin[0])) = rgb;
 	vdi_intin[2] = flag;
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

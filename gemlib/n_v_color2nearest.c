@@ -3,7 +3,7 @@
 
 
 long
-v_color2nearest (int handle, long color_space, COLOR_ENTRY * color,
+v_color2nearest (short handle, long color_space, COLOR_ENTRY * color,
 		 COLOR_ENTRY * nearest_color)
 {
 	*(long *) &vdi_intin[0] = color_space;

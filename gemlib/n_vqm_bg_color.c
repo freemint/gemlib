@@ -3,7 +3,7 @@
 
 
 long
-vqm_bg_color (int handle, COLOR_ENTRY * fg_color)
+vqm_bg_color (short handle, COLOR_ENTRY * fg_color)
 {
 	vdi_control[0] = 203;
 	vdi_control[1] = 0;

@@ -2,9 +2,9 @@
 #include "gem.h"
 
 
-int
-vst_height (int handle, int height, int *charw, int *charh, int *cellw,
-	    int *cellh)
+short
+vst_height (short handle, short height, short *charw, short *charh, short *cellw,
+	    short *cellh)
 {
 	vdi_ptsin[0] = 0;
 	vdi_ptsin[1] = height;

@@ -3,7 +3,7 @@
 
 
 void
-vt_origin (int handle, int xorigin, int yorigin)
+vt_origin (short handle, short xorigin, short yorigin)
 {
 	vdi_intin[0] = xorigin;
 	vdi_intin[1] = yorigin;

@@ -3,7 +3,7 @@
 
 
 void
-vs_curaddress (int handle, int row, int col)
+vs_curaddress (short handle, short row, short col)
 {
 	vdi_intin[0] = row;
 	vdi_intin[1] = col;

@@ -3,7 +3,7 @@
 
 
 void
-vq_key_s (int handle, int *state)
+vq_key_s (short handle, short *state)
 {
 	vdi_control[0] = 128;
 	vdi_control[1] = 0;

@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-v_page_size (int handle, int page_id)
+short
+v_page_size (short handle, short page_id)
 {
 	vdi_intin[0] = page_id;
 	vdi_control[0] = 5;

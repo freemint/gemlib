@@ -10,9 +10,8 @@
 
 #include <gem.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+__BEGIN_DECLS
+
 
 /*******************************************************************************
  * The AES extentsions of MagiC
@@ -50,21 +49,21 @@ typedef struct
 	void		*resvd;		/* reserviert */
 } XDO_INF;
 
-int form_popup 		(OBJECT *tree, int x, int y);
-int form_wbutton	(OBJECT *fo_btree, int fo_bobject, int fo_bclicks, int *fo_bnxtobj, int whandle);
-int form_wkeybd		(OBJECT *fo_ktree, int fo_kobject, int fo_kobnext, int fo_kchar, int *fo_knxtobject, int *fo_knxtchar, int whandle);
-int form_xdial 		(int fo_diflag, int fo_dilittlx, int fo_dilittly, int fo_dilittlw, int fo_dilittlh, int fo_dibigx, int fo_dibigy, int fo_dibigw, int fo_dibigh, void **flydial);
-int form_xdo		(OBJECT *tree, int startob, int *lastcrsr, XDO_INF *tabs, void *flydial); 
-int form_xerr		(long errcode, char *errfile);
+short	form_popup 	(OBJECT *tree, short x, short y);
+short	form_wbutton	(OBJECT *fo_btree, short fo_bobject, short fo_bclicks, short *fo_bnxtobj, short whandle);
+short	form_wkeybd	(OBJECT *fo_ktree, short fo_kobject, short fo_kobnext, short fo_kchar, short *fo_knxtobject, short *fo_knxtchar, short whandle);
+short	form_xdial 	(short fo_diflag, short fo_dilittlx, short fo_dilittly, short fo_dilittlw, short fo_dilittlh, short fo_dibigx, short fo_dibigy, short fo_dibigw, short fo_dibigh, void **flydial);
+short	form_xdo	(OBJECT *tree, short startob, short *lastcrsr, XDO_INF *tabs, void *flydial); 
+short	form_xerr	(long errcode, char *errfile);
 
 
 /*
  * Extensions to the object library (MagiC only)
  */
-void objc_wchange	(OBJECT *tree, int obj, int new_state, GRECT *clip, int whandle);
-void objc_wdraw		(OBJECT *tree, int start, int depth, GRECT *clip, int whandle);
-int  objc_wedit		(OBJECT *tree, int obj, int key, int *idx, int kind, int whandle);
-int  objc_xedit		(OBJECT *tree, int obj, int key, int *xpos, int subfn, GRECT *r);
+void	objc_wchange	(OBJECT *tree, short obj, short new_state, GRECT *clip, short whandle);
+void	objc_wdraw	(OBJECT *tree, short start, short depth, GRECT *clip, short whandle);
+short	objc_wedit	(OBJECT *tree, short obj, short key, short *idx, short kind, short whandle);
+short	objc_xedit	(OBJECT *tree, short obj, short key, short *xpos, short subfn, GRECT *r);
 
 
 /*
@@ -120,25 +119,25 @@ struct _fnts_item
 #define FNTS_MARK 		4		/* "markieren" wurde betÑtigt */
 #define FNTS_OPT		5		/* der applikationseigene Button wurde ausgewÑhlt */
 
-int		fnts_add		(FNT_DIALOG *fnt_dialog, FNTS_ITEM *user_fonts);
-int		fnts_close		(FNT_DIALOG *fnt_dialog, int *x, int *y);
-FNT_DIALOG *	fnts_create		(int vdi_handle, int no_fonts, int font_flags, int dialog_flags, char *sample, char *opt_button);
-int		fnts_delete		(FNT_DIALOG *fnt_dialog, int vdi_handle);
-int		fnts_do			(FNT_DIALOG *fnt_dialog, int button_flags, long id_in, long pt_in, long ratio_in, int *check_boxes, long *id, long *pt, long *ratio);
-int		fnts_evnt		(FNT_DIALOG *fnt_dialog, EVNT *events, int *button, int *check_boxes, long *id, long *pt, long *ratio);
-int		fnts_get_info		(FNT_DIALOG *fnt_dialog, long id, int *mono, int *outline);
-int		fnts_get_name		(FNT_DIALOG *fnt_dialog, long id, char *full_name, char *family_name, char *style_name);
-int		fnts_get_no_styles	(FNT_DIALOG *fnt_dialog, long id);
-long		fnts_get_style		(FNT_DIALOG *fnt_dialog, long id, int index);
-int		fnts_open		(FNT_DIALOG *fnt_dialog, int button_flags, int x, int y, long id, long pt, long ratio);
+short		fnts_add		(FNT_DIALOG *fnt_dialog, FNTS_ITEM *user_fonts);
+short		fnts_close		(FNT_DIALOG *fnt_dialog, short *x, short *y);
+FNT_DIALOG *	fnts_create		(short vdi_handle, short no_fonts, short font_flags, short dialog_flags, char *sample, char *opt_button);
+short		fnts_delete		(FNT_DIALOG *fnt_dialog, short vdi_handle);
+short		fnts_do			(FNT_DIALOG *fnt_dialog, short button_flags, long id_in, long pt_in, long ratio_in, short *check_boxes, long *id, long *pt, long *ratio);
+short		fnts_evnt		(FNT_DIALOG *fnt_dialog, EVNT *events, short *button, short *check_boxes, long *id, long *pt, long *ratio);
+short		fnts_get_info		(FNT_DIALOG *fnt_dialog, long id, short *mono, short *outline);
+short		fnts_get_name		(FNT_DIALOG *fnt_dialog, long id, char *full_name, char *family_name, char *style_name);
+short		fnts_get_no_styles	(FNT_DIALOG *fnt_dialog, long id);
+long		fnts_get_style		(FNT_DIALOG *fnt_dialog, long id, short index);
+short		fnts_open		(FNT_DIALOG *fnt_dialog, short button_flags, short x, short y, long id, long pt, long ratio);
 void		fnts_remove		(FNT_DIALOG *fnt_dialog);
-int		fnts_update		(FNT_DIALOG *fnt_dialog, int button_flags, long id, long pt, long ratio);
+short		fnts_update		(FNT_DIALOG *fnt_dialog, short button_flags, long id, long pt, long ratio);
 
 
 /*
  * fslx_* file selection (MagiC only)
  */
-typedef int (__CDECL *XFSL_FILTER)(char *path, char *name, void *xattr);
+typedef short (__CDECL *XFSL_FILTER)(char *path, char *name, void *xattr);
 
 /* Sortiermodi */
 #define SORTBYNAME		0
@@ -155,12 +154,12 @@ typedef int (__CDECL *XFSL_FILTER)(char *path, char *name, void *xattr);
 /* fslx_set_flags */
 #define SHOW8P3			1
 
-int	fslx_close		(void *fsd);
-void *	fslx_do			(char *title, char *path, int pathlen, char *fname, int fnamelen, char *patterns, XFSL_FILTER filter, char *paths, int *sort_mode, int flags, int *button, int *nfiles, char **pattern);
-int	fslx_evnt		(void *fsd, EVNT *events, char *path, char *fname, int *button, int *nfiles, int *sort_mode, char **pattern); 
-int	fslx_getnxtfile		(void *fsd, char *fname);
-void *	fslx_open		(char *title, int x, int y, int *handle, char *path, int pathlen, char *fname, int fnamelen, char *patterns, XFSL_FILTER filter, char *paths, int sort_mode, int flags);
-int	fslx_set_flags 		(int flags, int *oldval);
+short	fslx_close		(void *fsd);
+void *	fslx_do			(char *title, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode, short flags, short *button, short *nfiles, char **pattern);
+short	fslx_evnt		(void *fsd, EVNT *events, char *path, char *fname, short *button, short *nfiles, short *sort_mode, char **pattern); 
+short	fslx_getnxtfile		(void *fsd, char *fname);
+void *	fslx_open		(char *title, short x, short y, short *handle, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short sort_mode, short flags);
+short	fslx_set_flags 		(short flags, short *oldval);
 
 /*
  * pdlg_* printer configuration dialogs (WDIALOG only)
@@ -508,24 +507,24 @@ struct _prn_settings
 #define	PDLG_CANCEL 1				/* "Abbruch" wurde angewÑhlt */
 #define	PDLG_OK		2			/* "OK" wurde gedrÅckt */
 
-int		pdlg_add_printers 		(PRN_DIALOG *prn_dialog, DRV_INFO *drv_info);
-int		pdlg_add_sub_dialogs 		(PRN_DIALOG *prn_dialog, PDLG_SUB *sub_dialogs);
-int		pdlg_close			(PRN_DIALOG *prn_dialog, int *x, int *y);
-PRN_DIALOG *	pdlg_create			(int dialog_flags);
-int		pdlg_delete 			(PRN_DIALOG *prn_dialog);
-int		pdlg_dflt_settings		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
-int		pdlg_do				(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, char *document_name, int option_flags);
-int		pdlg_evnt			(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, EVNT *events, int *button);
-int		pdlg_free_settings		(PRN_SETTINGS *settings);
+short		pdlg_add_printers 		(PRN_DIALOG *prn_dialog, DRV_INFO *drv_info);
+short		pdlg_add_sub_dialogs 		(PRN_DIALOG *prn_dialog, PDLG_SUB *sub_dialogs);
+short		pdlg_close			(PRN_DIALOG *prn_dialog, short *x, short *y);
+PRN_DIALOG *	pdlg_create			(short dialog_flags);
+short		pdlg_delete 			(PRN_DIALOG *prn_dialog);
+short		pdlg_dflt_settings		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
+short		pdlg_do				(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, char *document_name, short option_flags);
+short		pdlg_evnt			(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, EVNT *events, short *button);
+short		pdlg_free_settings		(PRN_SETTINGS *settings);
 long		pdlg_get_setsize		(void);
 PRN_SETTINGS *	pdlg_new_settings		(PRN_DIALOG *prn_dialog);
-int		pdlg_open			(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, char *document_name, int option_flags, int x, int y);
-int		pdlg_remove_printers 		(PRN_DIALOG *prn_dialog);
-int		pdlg_remove_sub_dialogs 	(PRN_DIALOG *prn_dialog);
-int		pdlg_save_default_settings	(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
-int		pdlg_update 			(PRN_DIALOG *prn_dialog, char *document_name);
-int		pdlg_use_settings 		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
-int		pdlg_validate_settings		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
+short		pdlg_open			(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, char *document_name, short option_flags, short x, short y);
+short		pdlg_remove_printers 		(PRN_DIALOG *prn_dialog);
+short		pdlg_remove_sub_dialogs 	(PRN_DIALOG *prn_dialog);
+short		pdlg_save_default_settings	(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
+short		pdlg_update 			(PRN_DIALOG *prn_dialog, char *document_name);
+short		pdlg_use_settings 		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
+short		pdlg_validate_settings		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
 
 
 
@@ -537,19 +536,19 @@ int		pdlg_validate_settings		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
 /*
  * The following functions requires EdDI version 1.x or higher
  */
-void	v_clsbm		(int handle);
-void	v_opnbm		(int *work_in, MFDB *bitmap, int *handle, int *work_out);
-void	vq_scrninfo	(int handle, int *work_out);
+void	v_clsbm		(short handle);
+void	v_opnbm		(short *work_in, MFDB *bitmap, short *handle, short *work_out);
+void	vq_scrninfo	(short handle, short *work_out);
 
 
 /*
  * The following functions requires NVDI version 2.x or higher
  */
-int	v_bez_on	(int handle);
-void	v_bez_off	(int handle);
-void	v_bez		(int handle, int count, int *xyarr, char *bezarr, int *extent, int *totpts, int *totmoves);
-void	v_bez_fill	(int handle, int count, int *xyarr, char *bezarr, int *extent, int *totpts, int *totmoves);
-void 	v_bez_qual	(int handle, int percent, int *actual);
+short	v_bez_on	(short handle);
+void	v_bez_off	(short handle);
+void	v_bez		(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
+void	v_bez_fill	(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
+void 	v_bez_qual	(short handle, short percent, short *actual);
 
 
 /*
@@ -571,38 +570,38 @@ typedef struct
 	short		pt_sizes[64];
 } XFNT_INFO;
 
-void	v_ftext			(int handle, int x, int y, char *str) ;
-void	v_ftext_offset		(int handle, int x, int y, char *str, int *offset);
-void	v_getbitmap_info	(int handle, int ch, long *advancex, long *advancey, long *xoffset, long *yoffset, int *width, int *height, short **bitmap);
-void	v_getoutline		(int handle, int ch, int *xyarray, char *bezarray, int maxverts, int *numverts);
+void	v_ftext		(short handle, short x, short y, char *str) ;
+void	v_ftext_offset	(short handle, short x, short y, char *str, short *offset);
+void	v_getbitmap_info(short handle, short ch, long *advancex, long *advancey, long *xoffset, long *yoffset, short *width, short *height, short **bitmap);
+void	v_getoutline	(short handle, short ch, short *xyarray, char *bezarray, short maxverts, short *numverts);
 
-void	vq_devinfo		(int handle, int device, int *dev_open, char *file_name, char *device_name);
-int	vq_ext_devinfo	 	(int handle, int device, int *dev_exists, char *file_path, char *file_name, char *name);
+void	vq_devinfo	(short handle, short device, short *dev_open, char *file_name, char *device_name);
+short	vq_ext_devinfo	(short handle, short device, short *dev_exists, char *file_path, char *file_name, char *name);
 
-void	vqt_advance		(int handle, int ch, long *advx, long *advy);
-int	vqt_ext_name	 	(int handle, int index, char *name, int *font_format, int *flags);
-void	vqt_f_extent		(int handle, char *str, int extent[]);
-void	vqt_fontheader		(int handle, char *buffer, char *pathname);
-int	vqt_name_and_id		(int handle, int font_format, char *font_name, char *ret_name);
-void	vqt_pairkern		(int handle, int ch1, int ch2, long *x, long *y);
-void	vqt_real_extent		(int handle, int x, int y, char *string, int extent[]);
-void	vqt_trackkern		(int handle, long *x, long *y);
-int	vqt_xfntinfo		(int handle, int flags, int id, int index, XFNT_INFO *info);
+void	vqt_advance	(short handle, short ch, long *advx, long *advy);
+short	vqt_ext_name	(short handle, short index, char *name, short *font_format, short *flags);
+void	vqt_f_extent	(short handle, char *str, short extent[]);
+void	vqt_fontheader	(short handle, char *buffer, char *pathname);
+short	vqt_name_and_id	(short handle, short font_format, char *font_name, char *ret_name);
+void	vqt_pairkern	(short handle, short ch1, short ch2, long *x, long *y);
+void	vqt_real_extent	(short handle, short x, short y, char *string, short extent[]);
+void	vqt_trackkern	(short handle, long *x, long *y);
+short	vqt_xfntinfo	(short handle, short flags, short id, short index, XFNT_INFO *info);
 
-long 	vst_arbpt 		(int handle, long point, int *wchar, int *hchar, int *wcell, int *hcell);
-int 	vst_charmap 		(int handle, int mode);
-void 	vst_kern		(int handle, int tmode, int pmode, int *tracks, int *pairs);
-int 	vst_name 		(int handle, int font_format, char *font_name, char *ret_name);
-long 	vst_setsize 		(int handle, long point, int *wchar, int *hchar, int *wcell, int *hcell);
-int 	vst_skew 		(int handle, int skew);
-void 	vst_track_offset	(int handle, long offset, int pairmode, int *tracks, int *pairs);
-void 	vst_width		(int handle, int width, int *char_width, int *char_height, int *cell_width, int *cell_height);
+long 	vst_arbpt 	(short handle, long point, short *wchar, short *hchar, short *wcell, short *hcell);
+short 	vst_charmap 	(short handle, short mode);
+void 	vst_kern	(short handle, short tmode, short pmode, short *tracks, short *pairs);
+short 	vst_name 	(short handle, short font_format, char *font_name, char *ret_name);
+long 	vst_setsize 	(short handle, long point, short *wchar, short *hchar, short *wcell, short *hcell);
+short 	vst_skew 	(short handle, short skew);
+void 	vst_track_offset(short handle, long offset, short pairmode, short *tracks, short *pairs);
+void 	vst_width	(short handle, short width, short *char_width, short *char_height, short *cell_width, short *cell_height);
 
 
 /*
  * The following functions requires NVDI version 4.x or higher
  */
-int	vqt_char_index		(int handle, int scr_index, int scr_mode, int dst_mode);
+short	vqt_char_index		(short handle, short scr_index, short scr_mode, short dst_mode);
 
 
 /*
@@ -687,66 +686,64 @@ struct _gcbitmap
 };
 
 
-long		v_color2nearest		(int handle, long color_space, COLOR_ENTRY *color, COLOR_ENTRY *nearest_color);
-unsigned long	v_color2value		(int handle, long color_space, COLOR_ENTRY *color);
-COLOR_TAB *	v_create_ctab		(int handle, long color_space, unsigned long px_format);
-ITAB_REF	v_create_itab		(int handle, COLOR_TAB *ctab, int bits );
-unsigned long	v_ctab_idx2value	(int handle, int index );
-int		v_ctab_idx2vdi		(int handle, int index);
-int		v_ctab_vdi2idx		(int handle, int vdi_index);
-int		v_delete_ctab		(int handle, COLOR_TAB *ctab);
-int		v_delete_itab		(int handle, ITAB_REF itab);
-long		v_get_ctab_id		(int handle);
-int		v_get_outline		(int handle, int index, int x_offset, int y_offset, short *pts, char *flags, int max_pts);
-int		v_opnprn		(int aes_handle, PRN_SETTINGS *settings, int work_out[]);
-int		v_open_bm		(int base_handle, GCBITMAP *bitmap, int color_flags, int unit_flags, int pixel_width, int pixel_height);
-int		v_resize_bm		(int handle, int width, int height, long b_width, unsigned char *addr);
-void		v_setrgb		(int handle, int type, int r, int g, int b);
-long		v_value2color		(int handle, unsigned long value, COLOR_ENTRY *color);
-int		vq_ctab			(int handle, long ctab_length, COLOR_TAB *ctab);
-long		vq_ctab_entry		(int handle, int index, COLOR_ENTRY *color);
-long		vq_ctab_id		(int handle);
-int		vq_dflt_ctab		(int handle, long ctab_length, COLOR_TAB *ctab);
-long		vq_hilite_color		(int handle, COLOR_ENTRY *hilite_color);
-int		vq_margins		(int handle, int *top_margin, int *bottom_margin, int *left_margin, int *right_margin, int *hdpi, int *vdpi);
-long		vq_max_color		(int handle, COLOR_ENTRY *hilite_color);
-long		vq_min_color		(int handle, COLOR_ENTRY *hilite_color);
-long		vq_prn_scaling		(int handle);
-long		vq_px_format		(int handle, unsigned long *px_format);
-long		vq_weight_color		(int handle, COLOR_ENTRY *hilite_color);
-long		vqf_bg_color		(int handle, COLOR_ENTRY *fg_color);
-long		vqf_fg_color		(int handle, COLOR_ENTRY *fg_color);
-long		vql_bg_color		(int handle, COLOR_ENTRY *fg_color);
-long		vql_fg_color		(int handle, COLOR_ENTRY *fg_color);
-long		vqm_bg_color		(int handle, COLOR_ENTRY *fg_color);
-long		vqm_fg_color		(int handle, COLOR_ENTRY *fg_color);
-long		vqr_bg_color		(int handle, COLOR_ENTRY *fg_color);
-long		vqr_fg_color		(int handle, COLOR_ENTRY *fg_color);
-long		vqt_bg_color		(int handle, COLOR_ENTRY *fg_color);
-long		vqt_fg_color		(int handle, COLOR_ENTRY *fg_color);
-void		vr_transfer_bits	(int handle, GCBITMAP *src_bm, GCBITMAP *dst_bm, int *src_rect, int *dst_rect, int mode);
-int		vs_ctab			(int handle, COLOR_TAB *ctab);
-int		vs_ctab_entry		(int handle, int index, long color_space, COLOR_ENTRY *color);
-int		vs_dflt_ctab		(int handle);
-int		vs_document_info	(int vdi_handle, int type, char *s, int wchar);
-int		vs_hilite_color		(int handle, long color_space, COLOR_ENTRY *hilite_color);
-int		vs_max_color		(int handle, long color_space, COLOR_ENTRY *min_color);
-int		vs_min_color		(int handle, long color_space, COLOR_ENTRY *min_color);
-int		vs_weight_color		(int handle, long color_space, COLOR_ENTRY *weight_color);
-int		vsf_bg_color		(int handle, long color_space, COLOR_ENTRY *bg_color);
-int		vsf_fg_color		(int handle, long color_space, COLOR_ENTRY *fg_color);
-int		vsl_bg_color		(int handle, long color_space, COLOR_ENTRY *bg_color);
-int		vsl_fg_color		(int handle, long color_space, COLOR_ENTRY *fg_color);
-int		vsm_bg_color		(int handle, long color_space, COLOR_ENTRY *bg_color);
-int		vsm_fg_color		(int handle, long color_space, COLOR_ENTRY *fg_color);
-int		vsr_bg_color		(int handle, long color_space, COLOR_ENTRY *bg_color);
-int		vsr_fg_color		(int handle, long color_space, COLOR_ENTRY *fg_color);
-int		vst_bg_color		(int handle, long color_space, COLOR_ENTRY *bg_color);
-int		vst_fg_color		(int handle, long color_space, COLOR_ENTRY *fg_color);
+long		v_color2nearest		(short handle, long color_space, COLOR_ENTRY *color, COLOR_ENTRY *nearest_color);
+unsigned long	v_color2value		(short handle, long color_space, COLOR_ENTRY *color);
+COLOR_TAB *	v_create_ctab		(short handle, long color_space, unsigned long px_format);
+ITAB_REF	v_create_itab		(short handle, COLOR_TAB *ctab, short bits );
+unsigned long	v_ctab_idx2value	(short handle, short index );
+short		v_ctab_idx2vdi		(short handle, short index);
+short		v_ctab_vdi2idx		(short handle, short vdi_index);
+short		v_delete_ctab		(short handle, COLOR_TAB *ctab);
+short		v_delete_itab		(short handle, ITAB_REF itab);
+long		v_get_ctab_id		(short handle);
+short		v_get_outline		(short handle, short index, short x_offset, short y_offset, short *pts, char *flags, short max_pts);
+short		v_opnprn		(short aes_handle, PRN_SETTINGS *settings, short work_out[]);
+short		v_open_bm		(short base_handle, GCBITMAP *bitmap, short color_flags, short unit_flags, short pixel_width, short pixel_height);
+short		v_resize_bm		(short handle, short width, short height, long b_width, unsigned char *addr);
+void		v_setrgb		(short handle, short type, short r, short g, short b);
+long		v_value2color		(short handle, unsigned long value, COLOR_ENTRY *color);
+short		vq_ctab			(short handle, long ctab_length, COLOR_TAB *ctab);
+long		vq_ctab_entry		(short handle, short index, COLOR_ENTRY *color);
+long		vq_ctab_id		(short handle);
+short		vq_dflt_ctab		(short handle, long ctab_length, COLOR_TAB *ctab);
+long		vq_hilite_color		(short handle, COLOR_ENTRY *hilite_color);
+short		vq_margins		(short handle, short *top_margin, short *bottom_margin, short *left_margin, short *right_margin, short *hdpi, short *vdpi);
+long		vq_max_color		(short handle, COLOR_ENTRY *hilite_color);
+long		vq_min_color		(short handle, COLOR_ENTRY *hilite_color);
+long		vq_prn_scaling		(short handle);
+long		vq_px_format		(short handle, unsigned long *px_format);
+long		vq_weight_color		(short handle, COLOR_ENTRY *hilite_color);
+long		vqf_bg_color		(short handle, COLOR_ENTRY *fg_color);
+long		vqf_fg_color		(short handle, COLOR_ENTRY *fg_color);
+long		vql_bg_color		(short handle, COLOR_ENTRY *fg_color);
+long		vql_fg_color		(short handle, COLOR_ENTRY *fg_color);
+long		vqm_bg_color		(short handle, COLOR_ENTRY *fg_color);
+long		vqm_fg_color		(short handle, COLOR_ENTRY *fg_color);
+long		vqr_bg_color		(short handle, COLOR_ENTRY *fg_color);
+long		vqr_fg_color		(short handle, COLOR_ENTRY *fg_color);
+long		vqt_bg_color		(short handle, COLOR_ENTRY *fg_color);
+long		vqt_fg_color		(short handle, COLOR_ENTRY *fg_color);
+void		vr_transfer_bits	(short handle, GCBITMAP *src_bm, GCBITMAP *dst_bm, short *src_rect, short *dst_rect, short mode);
+short		vs_ctab			(short handle, COLOR_TAB *ctab);
+short		vs_ctab_entry		(short handle, short index, long color_space, COLOR_ENTRY *color);
+short		vs_dflt_ctab		(short handle);
+short		vs_document_info	(short vdi_handle, short type, char *s, short wchar);
+short		vs_hilite_color		(short handle, long color_space, COLOR_ENTRY *hilite_color);
+short		vs_max_color		(short handle, long color_space, COLOR_ENTRY *min_color);
+short		vs_min_color		(short handle, long color_space, COLOR_ENTRY *min_color);
+short		vs_weight_color		(short handle, long color_space, COLOR_ENTRY *weight_color);
+short		vsf_bg_color		(short handle, long color_space, COLOR_ENTRY *bg_color);
+short		vsf_fg_color		(short handle, long color_space, COLOR_ENTRY *fg_color);
+short		vsl_bg_color		(short handle, long color_space, COLOR_ENTRY *bg_color);
+short		vsl_fg_color		(short handle, long color_space, COLOR_ENTRY *fg_color);
+short		vsm_bg_color		(short handle, long color_space, COLOR_ENTRY *bg_color);
+short		vsm_fg_color		(short handle, long color_space, COLOR_ENTRY *fg_color);
+short		vsr_bg_color		(short handle, long color_space, COLOR_ENTRY *bg_color);
+short		vsr_fg_color		(short handle, long color_space, COLOR_ENTRY *fg_color);
+short		vst_bg_color		(short handle, long color_space, COLOR_ENTRY *bg_color);
+short		vst_fg_color		(short handle, long color_space, COLOR_ENTRY *fg_color);
 
 
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
 
-#endif
+#endif /* _GEMLIB_X_H_ */

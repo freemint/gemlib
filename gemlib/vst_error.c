@@ -3,7 +3,7 @@
 
 
 void
-vst_error (int handle, int mode, short *errorvar)
+vst_error (short handle, short mode, short *errorvar)
 {
 	vdi_intin[0] = mode;
 	*(short **) &vdi_intin[1] = (short *) &errorvar;

@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vqt_xfntinfo (int handle, int flags, int id, int index, XFNT_INFO * info)
+short
+vqt_xfntinfo (short handle, short flags, short id, short index, XFNT_INFO * info)
 {
 	info->size = (long) sizeof (XFNT_INFO);
 	vdi_intin[0] = flags;

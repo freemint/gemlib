@@ -3,11 +3,11 @@
 
 
 void
-v_fillarea (int handle, int count, int pxyarray[])
+v_fillarea (short handle, short count, short pxyarray[])
 {
 	register short i;
 	register short *pts = &vdi_ptsin[0];
-	register int *pxy = &pxyarray[0];
+	register short *pxy = &pxyarray[0];
 
 	for (i = count; i != 0; i--)
 	{

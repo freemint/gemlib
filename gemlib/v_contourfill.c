@@ -3,7 +3,7 @@
 
 
 void
-v_contourfill (int handle, int x, int y, int index)
+v_contourfill (short handle, short x, short y, short index)
 {
 	vdi_intin[0] = index;
 	vdi_ptsin[0] = x;

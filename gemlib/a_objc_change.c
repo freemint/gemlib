@@ -14,12 +14,16 @@ objc_change (OBJECT *Tree, short Object, short Res,
 	aes_intin[5] = Ch;
 	aes_intin[6] = NewState;
 	aes_intin[7] = Redraw;
+	
 	aes_addrin[0] = (long) Tree;
+	
 	aes_control[0] = 47;
 	aes_control[1] = 8;
 	aes_control[2] = 1;
 	aes_control[3] = 1;
 	aes_control[4] = 0;
+	
 	aes (&aes_params);
+	
 	return aes_intout[0];
 }

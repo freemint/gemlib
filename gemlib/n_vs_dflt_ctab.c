@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vs_dflt_ctab (int handle)
+short
+vs_dflt_ctab (short handle)
 {
 	vdi_control[0] = 205;
 	vdi_control[1] = 0;

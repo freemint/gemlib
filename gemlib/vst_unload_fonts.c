@@ -3,7 +3,7 @@
 
 
 void
-vst_unload_fonts (int handle, int select)
+vst_unload_fonts (short handle, short select)
 {
 	vdi_intin[0] = select;
 	vdi_control[0] = 120;

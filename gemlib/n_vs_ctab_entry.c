@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vs_ctab_entry (int handle, int index, long color_space, COLOR_ENTRY * color)
+short
+vs_ctab_entry (short handle, short index, long color_space, COLOR_ENTRY * color)
 {
 	vdi_intin[0] = index;
 	*(long *) &vdi_intin[1] = color_space;

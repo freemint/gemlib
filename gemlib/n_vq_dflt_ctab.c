@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vq_dflt_ctab (int handle, long ctab_length, COLOR_TAB * ctab)
+short
+vq_dflt_ctab (short handle, long ctab_length, COLOR_TAB * ctab)
 {
 	*(long *) &vdi_intin[0] = ctab_length;
 	vdi_params.intout = (short *) ctab;

@@ -3,7 +3,7 @@
 
 
 void
-vqt_get_table (int handle, short **map)
+vqt_get_table (short handle, short **map)
 {
 	vdi_control[0] = 254;
 	vdi_control[1] = 0;

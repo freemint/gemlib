@@ -3,7 +3,7 @@
 
 
 void
-v_curtext (int handle, const char *str)
+v_curtext (short handle, const char *str)
 {
 	short i;
 

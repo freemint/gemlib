@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vsin_mode (int handle, int dev, int mode)
+short
+vsin_mode (short handle, short dev, short mode)
 {
 	vdi_intin[0] = dev;
 	vdi_intin[1] = mode;

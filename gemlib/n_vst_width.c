@@ -3,8 +3,8 @@
 
 
 void
-vst_width (int handle, int width, int *char_width, int *char_height,
-	   int *cell_width, int *cell_height)
+vst_width (short handle, short width, short *char_width, short *char_height,
+	   short *cell_width, short *cell_height)
 {
 	vdi_ptsin[0] = width;
 	vdi_control[0] = 231;

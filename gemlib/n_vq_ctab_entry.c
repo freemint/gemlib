@@ -3,7 +3,7 @@
 
 
 long
-vq_ctab_entry (int handle, int index, COLOR_ENTRY * color)
+vq_ctab_entry (short handle, short index, COLOR_ENTRY * color)
 {
 	vdi_intin[0] = index;
 

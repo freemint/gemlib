@@ -3,7 +3,7 @@
 
 
 long
-fnts_get_style (FNT_DIALOG * fnt_dialog, long id, int index)
+fnts_get_style (FNT_DIALOG * fnt_dialog, long id, short index)
 {
 	unsigned short *i;
 

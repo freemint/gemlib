@@ -3,7 +3,7 @@
 
 
 void
-vt_resolution (int handle, int xres, int yres, int *xset, int *yset)
+vt_resolution (short handle, short xres, short yres, short *xset, short *yset)
 {
 	vdi_intin[0] = xres;
 	vdi_intin[1] = yres;

@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-v_delete_ctab (int handle, COLOR_TAB * ctab)
+short
+v_delete_ctab (short handle, COLOR_TAB * ctab)
 {
 	*(COLOR_TAB **) & vdi_intin[0] = ctab;
 

@@ -3,7 +3,7 @@
 
 
 void
-vqt_cachesize (int handle, int which_cache, long *size)
+vqt_cachesize (short handle, short which_cache, long *size)
 {
 	vdi_intin[0] = which_cache;
 	vdi_control[0] = 255;

@@ -3,7 +3,7 @@
 
 
 void
-vqt_fontheader (int handle, char *buffer, char *pathname)
+vqt_fontheader (short handle, char *buffer, char *pathname)
 {
 	*((char **) (&vdi_intin[0])) = buffer;
 	vdi_control[0] = 232;
@@ -19,8 +19,8 @@ vqt_fontheader (int handle, char *buffer, char *pathname)
  * * NOTE: requires NVDI version 3.x or higher
  */
 
-int
-vqt_name_and_id (int handle, int font_format, char *font_name, char *ret_name)
+short
+vqt_name_and_id (short handle, short font_format, char *font_name, char *ret_name)
 {
 	short i;
 

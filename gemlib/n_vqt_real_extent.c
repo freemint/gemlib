@@ -3,7 +3,7 @@
 
 
 void
-vqt_real_extent (int handle, int x, int y, char *string, int extent[])
+vqt_real_extent (short handle, short x, short y, char *string, short extent[])
 {
 	short i;
 

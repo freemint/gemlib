@@ -3,7 +3,7 @@
 
 
 void
-vq_mouse (int handle, int *pstatus, int *x, int *y)
+vq_mouse (short handle, short *pstatus, short *x, short *y)
 {
 	vdi_control[0] = 124;
 	vdi_control[1] = 0;

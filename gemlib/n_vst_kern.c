@@ -3,7 +3,7 @@
 
 
 void
-vst_kern (int handle, int tmode, int pmode, int *tracks, int *pairs)
+vst_kern (short handle, short tmode, short pmode, short *tracks, short *pairs)
 {
 	vdi_intin[0] = tmode;
 	vdi_intin[1] = pmode;

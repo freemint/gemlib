@@ -2,9 +2,9 @@
 #include "gem.h"
 
 
-int
-vst_point (int handle, int point, int *charw, int *charh, int *cellw,
-	   int *cellh)
+short
+vst_point (short handle, short point, short *charw, short *charh, short *cellw,
+	   short *cellh)
 {
 	vdi_intin[0] = point;
 	vdi_control[0] = 107;

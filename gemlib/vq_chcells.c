@@ -3,7 +3,7 @@
 
 
 void
-vq_chcells (int handle, int *n_rows, int *n_cols)
+vq_chcells (short handle, short *n_rows, short *n_cols)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vswr_mode (int handle, int mode)
+short
+vswr_mode (short handle, short mode)
 {
 	vdi_intin[0] = mode;
 

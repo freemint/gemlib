@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-v_bez_on (int handle)
+short
+v_bez_on (short handle)
 {
 	vdi_control[0] = 11;
 	vdi_control[1] = 1;

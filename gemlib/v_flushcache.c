@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-v_flushcache (int handle)
+short
+v_flushcache (short handle)
 {
 	vdi_control[0] = 251;
 	vdi_control[1] = 0;

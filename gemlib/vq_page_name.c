@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vq_page_name (int handle, int page_id, const char *page_name,
+short
+vq_page_name (short handle, short page_id, const char *page_name,
 	      long *page_width, long *page_height)
 {
 	vdi_intin[0] = page_id;

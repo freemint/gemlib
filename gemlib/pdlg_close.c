@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-pdlg_close (PRN_DIALOG * prn_dialog, int *x, int *y)
+short
+pdlg_close (PRN_DIALOG * prn_dialog, short *x, short *y)
 {
 	aes_intout[1] = -1;
 	aes_intout[2] = -1;

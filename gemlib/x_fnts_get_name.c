@@ -2,7 +2,7 @@
 #include "gemx.h"
 
 
-int
+short
 fnts_get_name (FNT_DIALOG * fnt_dialog, long id, char *full_name,
 	       char *family_name, char *style_name)
 {

@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-v_ctab_vdi2idx (int handle, int vdi_index)
+short
+v_ctab_vdi2idx (short handle, short vdi_index)
 {
 	vdi_intin[0] = vdi_index;
 

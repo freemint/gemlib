@@ -2,9 +2,9 @@
 #include "gemx.h"
 
 
-int
-fslx_evnt (void *fsd, EVNT * events, char *path, char *fname, int *button,
-	   int *nfiles, int *sort_mode, char **pattern)
+short
+fslx_evnt (void *fsd, EVNT * events, char *path, char *fname, short *button,
+	   short *nfiles, short *sort_mode, char **pattern)
 {
 	aes_addrin[0] = (long) fsd;
 	aes_addrin[1] = (long) events;

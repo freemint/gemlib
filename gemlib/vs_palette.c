@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vs_palette (int handle, int palette)
+short
+vs_palette (short handle, short palette)
 {
 	vdi_intin[0] = palette;
 	vdi_control[0] = 5;

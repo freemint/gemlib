@@ -3,9 +3,9 @@
 
 
 void
-vs_clip (int handle, int clip_flag, int pxyarray[])
+vs_clip (short handle, short clip_flag, short pxyarray[])
 {
-	register int i;
+	register short i;
 
 	vdi_intin[0] = clip_flag;
 	for (i = 0; i < 4; i++)

@@ -3,7 +3,7 @@
 
 
 void
-vrq_choice (int handle, int cin, int *cout)
+vrq_choice (short handle, short cin, short *cout)
 {
 	vdi_intin[0] = cin;
 	vdi_control[0] = 30;

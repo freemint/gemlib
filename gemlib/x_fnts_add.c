@@ -2,7 +2,7 @@
 #include "gemx.h"
 
 
-int
+short
 fnts_add (FNT_DIALOG * fnt_dialog, FNTS_ITEM * user_fonts)
 {
 	aes_intin[0] = 0;

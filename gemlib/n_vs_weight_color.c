@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vs_weight_color (int handle, long color_space, COLOR_ENTRY * weight_color)
+short
+vs_weight_color (short handle, long color_space, COLOR_ENTRY * weight_color)
 {
 	*(long *) &vdi_intin[0] = color_space;
 	*(COLOR_ENTRY *) & vdi_intin[2] = *weight_color;

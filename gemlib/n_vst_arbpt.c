@@ -3,8 +3,8 @@
 
 
 long
-vst_arbpt (int handle, long point, int *wchar, int *hchar, int *wcell,
-	   int *hcell)
+vst_arbpt (short handle, long point, short *wchar, short *hchar, short *wcell,
+	   short *hcell)
 {
 	*((long *) (&vdi_intin[0])) = point;
 	vdi_control[0] = 246;

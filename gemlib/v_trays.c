@@ -3,7 +3,7 @@
 
 
 void
-v_trays (int handle, int input, int output, int *set_input, int *set_output)
+v_trays (short handle, short input, short output, short *set_input, short *set_output)
 {
 	vdi_intin[0] = input;
 	vdi_intin[1] = output;
@@ -21,8 +21,8 @@ v_trays (int handle, int input, int output, int *set_input, int *set_output)
  * * special graphic funkcion
  */
 
-int
-vq_calibrate (int handle, int *flag)
+short
+vq_calibrate (short handle, short *flag)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

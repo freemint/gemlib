@@ -3,8 +3,8 @@
 
 
 void
-vq_cellarray (int handle, int pxyarray[], int row_len, int nrows,
-	      int *el_used, int *rows_used, int *status, int color[])
+vq_cellarray (short handle, short pxyarray[], short row_len, short nrows,
+	      short *el_used, short *rows_used, short *status, short color[])
 {
 	short i;
 

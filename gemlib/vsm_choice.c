@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vsm_choice (int handle, int *choice)
+short
+vsm_choice (short handle, short *choice)
 {
 	vdi_control[0] = 30;
 	vdi_control[1] = 0;

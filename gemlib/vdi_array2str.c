@@ -2,7 +2,7 @@
 
 
 void
-vdi_array2str (const short *src, char *des, int len)
+vdi_array2str (const short *src, char *des, short len)
 {
 	while (len > 0)
 	{

@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vq_color (int handle, int index, int flag, int rgb[])
+short
+vq_color (short handle, short index, short flag, short rgb[])
 {
 	vdi_intin[0] = index;
 	vdi_intin[1] = flag;

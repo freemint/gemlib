@@ -9,30 +9,35 @@
 #include <compiler.h>
 
 
-#ifdef __GEMLIB_OLDBIND			/* Backward-compatibility */
-#undef _GEMLIB_H_					/* For old bindings, these header had to be multi-included. */
+#ifdef __GEMLIB_OLDBIND		/* Backward-compatibility */
+#undef _GEMLIB_H_		/* For old bindings, these header had to be multi-included. */
 
-#ifndef __GEMLIB_HAVE_DEFS		/* first include via aesbind/vdibind/gemfast */
+#ifndef __GEMLIB_HAVE_DEFS	/* first include via aesbind/vdibind/gemfast */
 #define __GEMLIB_HAVE_DEFS
 #else
 #undef __GEMLIB_DEFS
 #endif
 
-#else									/* New include scheme: one header defines all */
+#else				/* New include scheme: one header defines all */
 #define __GEMLIB_DEFS
 #define __GEMLIB_AES
 #define __GEMLIB_VDI
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+__BEGIN_DECLS
 
 
 /*******************************************************************************
  * The version of the gem-lib
  */
-#define GEMLIB_PATCHLEVEL	"38"
+
+/* Major and minor version number of the GEMLib package.  Use these macros 
+   to test for features in specific releases.  */
+#define __GEMLIB__		__GEMLIB_MAJOR__
+#define	__GEMLIB_MAJOR__	0
+#define	__GEMLIB_MINOR__	40
+#define __GEMLIB_REVISION__	0
+#define __GEMLIB_BETATAG__     ""
 
 
 #ifdef __GEMLIB_DEFS
@@ -43,7 +48,7 @@ extern "C" {
 
 #define NIL 			0
 #define DESKTOP_HANDLE		0
-#define DESK			  	DESKTOP_HANDLE
+#define DESK			 	DESKTOP_HANDLE
 
 		/* appl_getinfo modes */
 #define AES_LARGEFONT		0
@@ -55,8 +60,8 @@ extern "C" {
 #define AES_INQUIRE		6
 #define AES_MOUSE 		8
 #define AES_MENU		9
-#define AES_SHELL 		  10
-#define AES_WINDOW		  11
+#define AES_SHELL 		10
+#define AES_WINDOW		11
 
 		/* appl_getinfo return values */
 #define SYSTEM_FONT		0
@@ -234,7 +239,7 @@ typedef struct _mn_set
 /* shel_get modes */
 #define SHEL_BUFSIZE (-1)
 
-		/* shel_write modes */
+/* shel_write modes */
 #define SWM_LAUNCH		0
 #define SWM_LAUNCHNOW		1
 #define SWM_LAUNCHACC		3
@@ -245,7 +250,7 @@ typedef struct _mn_set
 #define SWM_NEWMSG		9
 #define SWM_AESMSG		10
 
-		/* shel_write flags */
+/* shel_write flags */
 #define SW_PSETLIMIT		0x0100
 #define SW_PRENICE		0x0200
 #define SW_DEFDIR 		0x0400
@@ -255,7 +260,7 @@ typedef struct _mn_set
 #define SD_PARTIAL		1
 #define SD_COMPLETE		2
 
-		/* rsrc_gaddr structure types */
+/* rsrc_gaddr structure types */
 #define R_TREE			0
 #define R_OBJECT		1
 #define R_TEDINFO 		2
@@ -276,7 +281,7 @@ typedef struct _mn_set
 
 
 
-		/* Window Attributes */
+/* Window Attributes */
 #define NAME			0x0001
 #define CLOSER 			0x0002
 #define FULLER 			0x0004
@@ -292,11 +297,11 @@ typedef struct _mn_set
 #define BACKDROP		0x2000
 #define SMALLER			0x4000
 
-		/* wind_create flags */
+/* wind_create flags */
 #define WC_BORDER 	 	0
 #define WC_WORK		 	1
 
-		/* wind_get flags */
+/* wind_get flags */
 #define WF_KIND			  1
 #define WF_NAME			  2
 #define WF_INFO			  3
@@ -328,7 +333,7 @@ typedef struct _mn_set
 #define WF_WINX			 22360
 #define WF_WINXCFG		 22361
 
-		/* window elements	*/
+/* window elements */
 #define W_BOX			0
 #define W_TITLE			1
 #define W_CLOSER		2
@@ -350,7 +355,7 @@ typedef struct _mn_set
 #define W_HELEV			18
 #define W_SMALLER		19
 
-		/* arrow message */
+/* arrow message */
 #define WA_UPPAGE 		0
 #define WA_DNPAGE 		1
 #define WA_UPLINE 		2
@@ -360,13 +365,13 @@ typedef struct _mn_set
 #define WA_LFLINE 		6
 #define WA_RTLINE 		7
 
-		/* wind_update flags */
+/* wind_update flags */
 #define END_UPDATE		0
 #define BEG_UPDATE		1
 #define END_MCTRL		2
 #define BEG_MCTRL		3
 
-		/* graf_mouse mouse types */
+/* graf_mouse mouse types */
 #define ARROW			 0
 #define TEXT_CRSR 		 1
 #define BEE 			 2
@@ -433,7 +438,7 @@ typedef struct _mn_set
 #define IBM			3
 #define SMALL			5
 
-		/* object types */
+/* object types */
 #define G_BOX			20
 #define G_TEXT			21
 #define G_BOXTEXT		22
@@ -457,6 +462,67 @@ typedef struct _mn_set
 #define G_EDIT			37
 #define G_SHORTCUT		38
 
+
+/* object flags */
+#define OF_NONE		 	0x0000
+#define OF_SELECTABLE		0x0001
+#define OF_DEFAULT		0x0002
+#define OF_EXIT			0x0004
+#define OF_EDITABLE		0x0008
+#define OF_RBUTTON		0x0010
+#define OF_LASTOB		0x0020
+#define OF_TOUCHEXIT		0x0040
+#define OF_HIDETREE		0x0080
+#define OF_INDIRECT		0x0100
+#define OF_FL3DIND		0x0200	/* bit 9 */
+#define OF_FL3DBAK		0x0400	/* bit 10 */
+#define OF_FL3DACT		0x0600
+#define OF_SUBMENU		0x0800	/* bit 11 */
+#define OF_FLAG11		OF_SUBMENU
+#define OF_FLAG12		0x1000
+#define OF_FLAG13		0x2000
+#define OF_FLAG14		0x4000
+#define OF_FLAG15		0x8000
+
+/* Object states */
+#define OS_NORMAL		0x0000
+#define OS_SELECTED		0x0001
+#define OS_CROSSED		0x0002
+#define OS_CHECKED		0x0004
+#define OS_DISABLED		0x0008
+#define OS_OUTLINED		0x0010
+#define OS_SHADOWED		0x0020
+#define OS_WHITEBAK		0x0040
+#define OS_DRAW3D		0x0080
+#define OS_STATE08		0x0100
+#define OS_STATE09		0x0200
+#define OS_STATE10		0x0400
+#define OS_STATE11		0x0800
+#define OS_STATE12		0x1000
+#define OS_STATE13		0x2000
+#define OS_STATE14		0x4000
+#define OS_STATE15		0x8000
+
+/* Object colors - default pall. */
+#define OC_WHITE		0
+#define OC_BLACK		1
+#define OC_RED			2
+#define OC_GREEN		3
+#define OC_BLUE			4
+#define OC_CYAN			5
+#define OC_YELLOW		6
+#define OC_MAGENTA		7
+#define OC_LWHITE		8
+#define OC_LBLACK		9
+#define OC_LRED			10
+#define OC_LGREEN		11
+#define OC_LBLUE		12
+#define OC_LCYAN		13
+#define OC_LYELLOW		14
+#define OC_LMAGENTA		15
+
+
+#ifdef __GEMLIB_OLDNAMES
 
 /* object flags */
 #define NONE		 	0x0000
@@ -516,6 +582,9 @@ typedef struct _mn_set
 #define LYELLOW			14
 #define LMAGENTA		15
 
+#endif
+
+
 /* editable text field definitions */
 #define EDSTART			0
 #define EDINIT 			1
@@ -565,14 +634,14 @@ typedef struct mouse_form
 	short		mf_fg;
 	short		mf_mask[16];
 	short		mf_data[16];
-}MFORM;
+} MFORM;
 
 typedef struct graphic_rectangle
 {
-	int 		g_x;
-	int 		g_y;
-	int 		g_w;
-	int 		g_h;
+	short 		g_x;
+	short 		g_y;
+	short 		g_w;
+	short 		g_h;
 } GRECT;
 
 typedef struct objc_colorword 
@@ -615,7 +684,7 @@ typedef struct icon_block
 	short		ib_ytext;
 	short		ib_wtext;
 	short		ib_htext;
-}ICONBLK;
+} ICONBLK;
 
 typedef struct bit_block
 {
@@ -625,7 +694,7 @@ typedef struct bit_block
 	short		bi_x; 		/* source x in bit form */
 	short		bi_y; 		/* source y in bit form */
 	short		bi_color;	/* fg color of blt */
-}BITBLK;
+} BITBLK;
 
 typedef struct cicon_data
 {
@@ -635,23 +704,23 @@ typedef struct cicon_data
 	short 		*sel_data;
 	short 		*sel_mask;
 	struct cicon_data *next_res;
-}CICON;
+} CICON;
 
 typedef struct cicon_blk
 {
 	ICONBLK		monoblk;
 	CICON 		*mainlist;
-}CICONBLK;
+} CICONBLK;
 
 typedef struct
 {
-	 unsigned int	character   :  8;
-	 signed	int	framesize   :  8;
-	 unsigned int	framecol    :  4;
-	 unsigned int	textcol	    :  4;
-	 unsigned int	textmode    :  1;
-	 unsigned int	fillpattern :  3;
-	 unsigned int	interiorcol :  4;
+	 unsigned	character   :  8;
+	 signed		framesize   :  8;
+	 unsigned	framecol    :  4;
+	 unsigned	textcol	    :  4;
+	 unsigned	textmode    :  1;
+	 unsigned	fillpattern :  3;
+	 unsigned	interiorcol :  4;
 } BFOBSPEC;
 
 struct user_block;	/* forward declaration */
@@ -697,7 +766,7 @@ typedef struct parm_block
 
 typedef struct user_block
 {
-	int __CDECL (*ub_code)(PARMBLK *parmblock);
+	short __CDECL (*ub_code)(PARMBLK *parmblock);
 	long ub_parm;
 } USERBLK;
 
@@ -735,19 +804,19 @@ typedef struct _menu
 
 typedef struct
 {
-	int 		m_out;
-	int 		m_x;
-	int 		m_y;
-	int 		m_w;
-	int		m_h;
+	short 		m_out;
+	short 		m_x;
+	short 		m_y;
+	short 		m_w;
+	short		m_h;
 } MOBLK;
 
 typedef struct mouse_event_type
 {
-	int		*x;
-	int		*y;
-	int		*b;
-	int		*k;
+	short		*x;
+	short		*y;
+	short		*b;
+	short		*k;
 } MOUSE;
 
 #endif 
@@ -758,135 +827,138 @@ typedef struct mouse_event_type
  * The AES bindings from old aesbind.h
  */
 	 
-int	appl_bvset   (int bvdisk, int bvhard);
-int	appl_control (int ap_cid, int ap_cwhat, void *ap_cout);
-int	appl_exit    (void);
-int	appl_find    (const char *Name);
-int	appl_getinfo (int type, int *out1, int *out2, int *out3, int *out4);
-int	appl_init    (void);
-int	appl_read    (int ApId, int Length, void *ApPbuff);
-int	appl_search  (int mode, char *fname, int *type, int *ap_id);
-int	appl_tplay   (void *Mem, int Num, int Scale);
-int	appl_trecord (void *Mem, int Count);
-int	appl_write   (int ApId, int Length, void *ApPbuff);
-int 	appl_yield   (void);
+short	appl_bvset	(short bvdisk, short bvhard);
+short	appl_control	(short ap_cid, short ap_cwhat, void *ap_cout);
+short	appl_exit	(void);
+short	appl_find	(const char *Name);
+short	appl_getinfo	(short type, short *out1, short *out2, short *out3, short *out4);
+short	appl_init	(void);
+short	appl_read	(short ApId, short Length, void *ApPbuff);
+short	appl_search	(short mode, char *fname, short *type, short *ap_id);
+short	appl_tplay	(void *Mem, short Num, short Scale);
+short	appl_trecord	(void *Mem, short Count);
+short	appl_write	(short ApId, short Length, void *ApPbuff);
+short 	appl_yield	(void);
 
-int	evnt_button 	(int Clicks, int WhichButton,	int WhichState, int *Mx, int *My, int *ButtonState, int *KeyState); 
-int	evnt_dclick 	(int ToSet, int SetGet);
-int	evnt_keybd 	(void);
-int	evnt_mesag 	(int MesagBuf[]);
-int	evnt_mouse 	(int EnterExit, int InX, int InY, int InW, int InH, int *OutX, int *OutY, int *ButtonState, int *KeyState); 
-int 	evnt_multi 	(int Type, int Clicks, int WhichButton, int WhichState, 
-											int EnterExit1, int In1X, int In1Y, int In1W, int In1H, 
-											int EnterExit2, int In2X, int In2Y, int In2W, int In2H,
-											int MesagBuf[], unsigned long Interval, int *OutX, int *OutY,
-											int *ButtonState, int *KeyState, int *Key, int *ReturnCount);
-int	evnt_timer 	(unsigned long Interval);
+short	evnt_button 	(short Clicks, short WhichButton, short WhichState, short *Mx, short *My, short *ButtonState, short *KeyState); 
+short	evnt_dclick 	(short ToSet, short SetGet);
+short	evnt_keybd 	(void);
+short	evnt_mesag 	(short MesagBuf[]);
+short	evnt_mouse 	(short EnterExit, short InX, short InY, short InW, short InH, short *OutX, short *OutY, short *ButtonState, short *KeyState); 
+short 	evnt_multi 	(short Type, short Clicks, short WhichButton, short WhichState, 
+			 short EnterExit1, short In1X, short In1Y, short In1W, short In1H,
+			 short EnterExit2, short In2X, short In2Y, short In2W, short In2H,
+			 short MesagBuf[], unsigned long Interval, short *OutX, short *OutY,
+			 short *ButtonState, short *KeyState, short *Key, short *ReturnCount);
+short	evnt_timer 	(unsigned long Interval);
 
-int 	form_alert  (int DefButton, const char *Str);
-short form_button (OBJECT *, short Bobject, short Bclicks, short *Bnxtobj);
-short form_center (OBJECT *, int *Cx, int *Cy, int *Cw, int *Ch);
-int 	form_dial   (int Flag, int Sx, int Sy, int Sw, int Sh, int Bx, int By, int Bw, int Bh);
-short form_do     (OBJECT *, short StartObj);
-int 	form_error  (int ErrorCode);
-short form_keybd  (OBJECT *, short Kobject, short Kobnext, short Kchar,
-                   short *Knxtobject, short *Knxtchar);
+short	form_alert	(short DefButton, const char *Str);
+short	form_button	(OBJECT *, short Bobject, short Bclicks, short *Bnxtobj);
+short	form_center	(OBJECT *, short *Cx, short *Cy, short *Cw, short *Ch);
+short 	form_dial	(short Flag, short Sx, short Sy, short Sw, short Sh, short Bx, short By, short Bw, short Bh);
+short	form_do		(OBJECT *, short StartObj);
+short 	form_error	(short ErrorCode);
+short	form_keybd	(OBJECT *, short Kobject, short Kobnext, short Kchar,
+			 short *Knxtobject, short *Knxtchar);
 
-int 	fsel_exinput (char *Path, char *File, int *ExitButton, const char *title);
-int 	fsel_input   (char *Path, char *File, int *ExitButton);
+short 	fsel_exinput	(char *Path, char *File, short *ExitButton, const char *title);
+short 	fsel_input	(char *Path, char *File, short *ExitButton);
 
-int    graf_dragbox   (int Sw, int Sh, int Sx, int Sy, int Bx, int By, int Bw, int Bh, int *Fw, int *Fh); 
-int    graf_growbox   (int Sx, int Sy, int Sw, int Sh, int Fx, int Fy, int Fw, int Fh); 
-int    graf_handle    (int *Wchar, int *Hchar, int *Wbox, int *Hbox);
-int    graf_mbox      (int Sw, int Sh, int Sx, int Sy, int Dx, int Dy);
+short	graf_dragbox	(short Sw, short Sh, short Sx, short Sy, short Bx, short By, short Bw, short Bh, short *Fw, short *Fh); 
+short	graf_growbox	(short Sx, short Sy, short Sw, short Sh, short Fx, short Fy, short Fw, short Fh); 
+short	graf_handle	(short *Wchar, short *Hchar, short *Wbox, short *Hbox);
+short	graf_mbox	(short Sw, short Sh, short Sx, short Sy, short Dx, short Dy);
+short	graf_mkstate	(short *Mx, short *My, short *ButtonState, short *KeyState); 
+short	graf_mouse	(short Form, void *FormAddress);
+short	graf_rubbbox	(short Ix, short Iy, short Iw, short Ih, short *Fw, short *Fh);
+short	graf_shrinkbox	(short Fx, short Fy, short Fw, short Fh, short Sx, short Sy, short Sw, short Sh); 
+short	graf_slidebox	(OBJECT *, short Parent, short Object, short Direction); 
+short	graf_watchbox	(OBJECT *, short Object, short InState, short OutState);
+
+/* the old names */
 #define graf_movebox(a,b,c,d,e,f) graf_mbox(a,b,c,d,e,f)
-int    graf_mkstate   (int *Mx, int *My, int *ButtonState, int *KeyState); 
-int    graf_mouse     (int Form, void *FormAddress);
-int    graf_rubbbox   (int Ix, int Iy, int Iw, int Ih, int *Fw, int *Fh);
 #define graf_rubberbox(a,b,c,d,e,f) graf_rubbbox(a,b,c,d,e,f)
-int    graf_shrinkbox (int Fx, int Fy, int Fw, int Fh, int Sx, int Sy, int Sw, int Sh); 
-short  graf_slidebox  (OBJECT *, short Parent, short Object, short Direction); 
-short  graf_watchbox  (OBJECT *, short Object, short InState, short OutState);
 
-int 	menu_attach 	(int me_flag, OBJECT *me_tree, int me_item, MENU *me_mdata);
-int 	menu_bar 	(void *Tree, int ShowFlag);
-int	menu_click	(int click, int setit);
-int 	menu_icheck 	(void *Tree, int Item, int CheckFlag);
-int 	menu_ienable	(void *Tree, int Item, int EnableFlag);
-int 	menu_istart 	(int me_flag, OBJECT *me_tree, int me_imenu, int me_item);
-int 	menu_popup 	(MENU *me_menu, int me_xpos, int me_ypos, MENU *me_mdata);
-int 	menu_register 	(int ApId, char *MenuText);
-int 	menu_settings 	(int me_flag, MN_SET *me_values);
-int 	menu_text 	(void *Tree, int Item, char *Text);
-int 	menu_tnormal 	(void *Tree, int Item, int NormalFlag);
-int	menu_unregister	(int id);
+short 	menu_attach 	(short me_flag, OBJECT *me_tree, short me_item, MENU *me_mdata);
+short 	menu_bar 	(void *Tree, short ShowFlag);
+short	menu_click	(short click, short setit);
+short 	menu_icheck 	(void *Tree, short Item, short CheckFlag);
+short 	menu_ienable	(void *Tree, short Item, short EnableFlag);
+short 	menu_istart 	(short me_flag, OBJECT *me_tree, short me_imenu, short me_item);
+short 	menu_popup 	(MENU *me_menu, short me_xpos, short me_ypos, MENU *me_mdata);
+short 	menu_register 	(short ApId, char *MenuText);
+short 	menu_settings 	(short me_flag, MN_SET *me_values);
+short 	menu_text 	(void *Tree, short Item, char *Text);
+short 	menu_tnormal 	(void *Tree, short Item, short NormalFlag);
+short	menu_unregister	(short id);
 
-short objc_add    (OBJECT *, short Parent, short Child);
-short objc_change (OBJECT *, short Object, short Res,
-                             short Cx, short Cy, short Cw, short Ch,
-                             short NewState,short Redraw);
-short objc_delete (OBJECT *, short Object);
-short objc_draw   (OBJECT *, short Start, short Depth,
-                             short Cx, short Cy, short Cw, short Ch);
-short objc_edit   (OBJECT *, short Object, short Char, short *Index, short Kind); 
-short objc_find   (OBJECT *, short Start, short Depth, short Mx, short My);
-short objc_offset (OBJECT *, short Object, short *X, short *Y);
-short objc_order  (OBJECT *, short Object, short NewPos);
-int   objc_sysvar (int mode, int which, int in1, int in2, int *out1, int *out2);
+short	objc_add	(OBJECT *, short Parent, short Child);
+short	objc_change	(OBJECT *, short Object, short Res,
+			 short Cx, short Cy, short Cw, short Ch,
+			 short NewState,short Redraw);
+short	objc_delete	(OBJECT *, short Object);
+short	objc_draw	(OBJECT *, short Start, short Depth,
+			 short Cx, short Cy, short Cw, short Ch);
+short	objc_edit	(OBJECT *, short Object, short Char, short *Index, short Kind); 
+short	objc_find	(OBJECT *, short Start, short Depth, short Mx, short My);
+short	objc_offset	(OBJECT *, short Object, short *X, short *Y);
+short	objc_order	(OBJECT *, short Object, short NewPos);
+short	objc_sysvar	(short mode, short which, short in1, short in2, short *out1, short *out2);
 
-int   rsrc_free  (void);
-int   rsrc_gaddr (int Type, int Index, void *Address);
-int   rsrc_load  (const char *Name);
-short rsrc_obfix (OBJECT *, short Index);
-int   rsrc_rcfix (void *rc_header);
-int   rsrc_saddr (int Type, int Index, void *Address);
+short	rsrc_free	(void);
+short	rsrc_gaddr	(short Type, short Index, void *Address);
+short	rsrc_load	(const char *Name);
+short	rsrc_obfix	(OBJECT *, short Index);
+short	rsrc_rcfix	(void *rc_header);
+short	rsrc_saddr	(short Type, short Index, void *Address);
 
-int	scrp_clear 	(void);
-int	scrp_read 	(char *Scrappath);
-int	scrp_write 	(const char *Scrappath);
+short	scrp_clear 	(void);
+short	scrp_read 	(char *Scrappath);
+short	scrp_write 	(const char *Scrappath);
 
-int	shel_envrn 	(char **result, const char *param);
-int	shel_find 	(char *buf);
-int 	shel_get 	(char *Buf, int Len);
-int	shel_help	(int sh_hmode, const char *sh_hfile, const char *sh_hkey);
-int 	shel_put	(const char *Buf, int Len);
-int	shel_rdef	(char *lpcmd, char *lpdir);
-int	shel_read 	(char *Command, char *Tail);
-int	shel_wdef	(const char *lpcmd, const char *lpdir);
-int	shel_write	(int Exit, int Graphic, int Aes, void *Command, char *Tail);
+short	shel_envrn 	(char **result, const char *param);
+short	shel_find 	(char *buf);
+short 	shel_get 	(char *Buf, short Len);
+short	shel_help	(short sh_hmode, const char *sh_hfile, const char *sh_hkey);
+short 	shel_put	(const char *Buf, short Len);
+short	shel_rdef	(char *lpcmd, char *lpdir);
+short	shel_read 	(char *Command, char *Tail);
+short	shel_wdef	(const char *lpcmd, const char *lpdir);
+short	shel_write	(short Exit, short Graphic, short Aes, void *Command, char *Tail);
 
-int	wind_calc 	(int Type, int Parts, int InX, int InY, int InW, int InH, int *OutX, int *OutY, int *OutW, int *OutH);	
-int	wind_close 	(int WindowHandle);
-int	wind_create 	(int Parts, int Wx, int Wy, int Ww, int Wh); 
-int	wind_delete 	(int WindowHandle);
-int	wind_find 	(int X, int Y);
-int	wind_get 	(int WindowHandle, int What, int *W1, int *W2, int *W3, int *W4); 
+short	wind_calc 	(short Type, short Parts, short InX, short InY, short InW, short InH, short *OutX, short *OutY, short *OutW, short *OutH);	
+short	wind_close 	(short WindowHandle);
+short	wind_create 	(short Parts, short Wx, short Wy, short Ww, short Wh); 
+short	wind_delete 	(short WindowHandle);
+short	wind_find 	(short X, short Y);
+short	wind_get 	(short WindowHandle, short What, short *W1, short *W2, short *W3, short *W4);
 void	wind_new 	(void);
-int	wind_open 	(int WindowHandle, int Wx, int Wy, int Ww, int Wh);
-int	wind_set 	(int WindowHandle, int What, int W1, int W2, int W3, int W4);
-int	wind_update 	(int Code);
+short	wind_open 	(short WindowHandle, short Wx, short Wy, short Ww, short Wh);
+short	wind_set 	(short WindowHandle, short What, short W1, short W2, short W3, short W4);
+short	wind_update 	(short Code);
 
 
 /*
- * Some usefull extensions.
+ * Some useful extensions
  */
-int	wind_calc_grect	(int Type, int Parts, GRECT *In, GRECT *Out);  
-int	wind_create_grect (int Parts, GRECT *r); 
-void	wind_get_grect	(int WindowHandle, int What, GRECT *r);
-int	wind_open_grect	(int WindowHandle, GRECT *r);
-void	wind_set_grect	(int WindowHandle, int What, GRECT *r);
-void	wind_set_str	(int WindowHandle, int What, char *str);
+short	wind_calc_grect	(short Type, short Parts, GRECT *In, GRECT *Out);  
+short	wind_create_grect (short Parts, GRECT *r); 
+void	wind_get_grect	(short WindowHandle, short What, GRECT *r);
+short	wind_open_grect	(short WindowHandle, GRECT *r);
+void	wind_set_grect	(short WindowHandle, short What, GRECT *r);
+void	wind_set_str	(short WindowHandle, short What, char *str);
 
-int	rc_copy 	(GRECT *src, GRECT *dst);
-int	rc_equal 	(GRECT *src, GRECT *dst);
-int 	rc_intersect 	(GRECT *r1, GRECT *r2);
-int *	grect_to_array	(GRECT *area, int *array);
-void	array_to_grect	(int *array, GRECT *area);
+short	rc_copy 	(GRECT *src, GRECT *dst);
+short	rc_equal 	(GRECT *src, GRECT *dst);
+short 	rc_intersect 	(GRECT *r1, GRECT *r2);
+short *	grect_to_array	(GRECT *area, short *array);
+void	array_to_grect	(short *array, GRECT *area);
 
 
 /*
  * aes trap interface
-*/
+ */
+
 /* Array sizes in aes control block */
 #define AES_CTRLMAX		5
 #define AES_GLOBMAX		16
@@ -912,7 +984,7 @@ extern short	aes_intout[];
 extern long 	aes_addrin[];
 extern long	aes_addrout[];
 extern AESPB	aes_params;
-extern int	gl_apid, gl_ap_version;			/* initialized in appl_init */
+extern short	gl_apid, gl_ap_version;			/* initialized in appl_init */
 
 void aes (AESPB *pb);
 
@@ -1038,11 +1110,15 @@ void aes (AESPB *pb);
 #define CACHE_FULL		11
 #define MISC_ERROR		(-1)
 
-/* vst_kern modes */
+/* vst_kern tmodes */
 #define TRACK_NONE		0
 #define TRACK_NORMAL 		1
 #define TRACK_TIGHT		2
 #define TRACK_VERYTIGHT		3
+
+/* vst_kern pmodes */
+#define PAIR_OFF		0
+#define PAIR_ON			1
 
 /* vst_scratch modes */
 #define SCRATCH_BOTH		0
@@ -1061,7 +1137,7 @@ typedef struct memory_form
 	void	*fd_addr;
 	short 	fd_w;		/* Form Width in Pixels */
 	short 	fd_h; 		/* Form Height in Pixels */
-	short 	fd_wdwidth;	/* Form Width in shorts(fd_w/sizeof(int) */
+	short 	fd_wdwidth;	/* Form Width in shorts(fd_w/sizeof(short) */
 	short 	fd_stand;	/* Form format 0= device spec 1=standard */
 	short 	fd_nplanes;	/* Number of memory planes */
 	short 	fd_r1;		/* Reserved */
@@ -1080,189 +1156,189 @@ typedef struct memory_form
 /*
  * attribute functions 
  */
-void	vs_color		(int handle, int color_idx, int rgb[]);
-int 	vswr_mode		(int handle, int mode);
+void	vs_color		(short handle, short color_idx, short rgb[]);
+short 	vswr_mode		(short handle, short mode);
 
-int 	vsf_color 		(int handle, int color_idx);
-int 	vsf_interior 		(int handle, int style);
-int 	vsf_perimeter 		(int handle, int vis);
-int 	vsf_style 		(int handle, int style);
-void	vsf_udpat 		(int handle, int pat[], int planes);
+short 	vsf_color 		(short handle, short color_idx);
+short 	vsf_interior 		(short handle, short style);
+short 	vsf_perimeter 		(short handle, short vis);
+short 	vsf_style 		(short handle, short style);
+void	vsf_udpat 		(short handle, short pat[], short planes);
 
-int 	vsl_color 		(int handle, int color_idx);
-void	vsl_ends 		(int handle, int begstyle, int endstyle);
-int 	vsl_type 		(int handle, int style);
-void	vsl_udsty 		(int handle, int pat);
-int 	vsl_width 		(int handle, int width);
+short 	vsl_color 		(short handle, short color_idx);
+void	vsl_ends 		(short handle, short begstyle, short endstyle);
+short 	vsl_type 		(short handle, short style);
+void	vsl_udsty 		(short handle, short pat);
+short 	vsl_width 		(short handle, short width);
 
-int 	vsm_color 		(int handle, int color_idx);
-int 	vsm_height 		(int handle, int height);
-int 	vsm_type 		(int handle, int symbol);
+short 	vsm_color 		(short handle, short color_idx);
+short 	vsm_height 		(short handle, short height);
+short 	vsm_type 		(short handle, short symbol);
 
-void	vst_alignment 		(int handle, int hin, int vin, int *hout, int *vout);
-int 	vst_color	 	(int handle, int color_idx);
-int 	vst_effects		(int handle, int effects);
-void	vst_error		(int handle, int mode, short *errorvar);
-int 	vst_font 		(int handle, int font);
-int 	vst_height 		(int handle, int height,	int *charw, int *charh, int *cellw, int *cellh);
-int 	vst_point 		(int handle, int point, int *charw, int *charh, int *cellw, int *cellh);
-int 	vst_rotation 		(int handle, int ang);
-void	vst_scratch 		(int handle, int mode);
+void	vst_alignment 		(short handle, short hin, short vin, short *hout, short *vout);
+short 	vst_color	 	(short handle, short color_idx);
+short 	vst_effects		(short handle, short effects);
+void	vst_error		(short handle, short mode, short *errorvar);
+short 	vst_font 		(short handle, short font);
+short 	vst_height 		(short handle, short height,	short *charw, short *charh, short *cellw, short *cellh);
+short 	vst_point 		(short handle, short point, short *charw, short *charh, short *cellw, short *cellh);
+short 	vst_rotation 		(short handle, short ang);
+void	vst_scratch 		(short handle, short mode);
 
 /*
  * control functions
  */
-void	v_clrwk			(int handle);
-void	v_clsvwk		(int handle);
-void	v_clswk			(int handle);
-int	v_flushcache		(int handle);
-int	v_loadcache		(int handle, const char *filename, int mode);
-void	v_opnvwk		(int work_in[], int *handle, int work_out[]);
-void	v_opnwk			(int work_in[], int *handle, int work_out[]);
-int	v_savecache		(int handle, const char *filename);
-void	v_set_app_buff		(int handle, void *buf_p, int size);
-void	v_updwk			(int handle);
-void	vs_clip			(int handle, int clip_flag, int pxyarray[]);
-int	vst_load_fonts		(int handle, int select);
-void	vst_unload_fonts	(int handle, int select);
+void	v_clrwk			(short handle);
+void	v_clsvwk		(short handle);
+void	v_clswk			(short handle);
+short	v_flushcache		(short handle);
+short	v_loadcache		(short handle, const char *filename, short mode);
+void	v_opnvwk		(short work_in[], short *handle, short work_out[]);
+void	v_opnwk			(short work_in[], short *handle, short work_out[]);
+short	v_savecache		(short handle, const char *filename);
+void	v_set_app_buff		(short handle, void *buf_p, short size);
+void	v_updwk			(short handle);
+void	vs_clip			(short handle, short clip_flag, short pxyarray[]);
+short	vst_load_fonts		(short handle, short select);
+void	vst_unload_fonts	(short handle, short select);
 
 /*
  * escape functions
  */
-void	v_bit_image		(int handle, const char *filename, int aspect, int x_scale, int y_scale, int h_align, int v_align, int *pxyarray);
-void	v_clear_disp_list	(int handle);
-int	v_copies		(int handle, int count);
-void	v_dspcur		(int handle, int x, int y);
-void	v_form_adv		(int handle);
-void	v_hardcopy		(int handle);
-int	v_orient		(int handle, int orientation);
-void	v_output_window		(int handle, int *pxyarray);
-int	v_page_size		(int handle, int page_id);
-void	v_rmcur			(int handle);
-void	v_trays			(int handle, int input, int output, int *set_input, int *set_output);
-int	vq_calibrate		(int handle, int *flag);
-int	vq_page_name		(int handle, int page_id, const char *page_name, long *page_width, long *page_height);
-void	vq_scan			(int handle, int *g_slice, int *g_page, int *a_slice, int *a_page, int *div_fac);
-int	vq_tabstatus		(int handle);
-void	vq_tray_names		(int handle, const char *input_name, const char *output_name, int *input, int *output);
-int	vs_calibrate		(int handle, int flag, int *rgb);
-int	vs_palette		(int handle, int palette);
+void	v_bit_image		(short handle, const char *filename, short aspect, short x_scale, short y_scale, short h_align, short v_align, short *pxyarray);
+void	v_clear_disp_list	(short handle);
+short	v_copies		(short handle, short count);
+void	v_dspcur		(short handle, short x, short y);
+void	v_form_adv		(short handle);
+void	v_hardcopy		(short handle);
+short	v_orient		(short handle, short orientation);
+void	v_output_window		(short handle, short *pxyarray);
+short	v_page_size		(short handle, short page_id);
+void	v_rmcur			(short handle);
+void	v_trays			(short handle, short input, short output, short *set_input, short *set_output);
+short	vq_calibrate		(short handle, short *flag);
+short	vq_page_name		(short handle, short page_id, const char *page_name, long *page_width, long *page_height);
+void	vq_scan			(short handle, short *g_slice, short *g_page, short *a_slice, short *a_page, short *div_fac);
+short	vq_tabstatus		(short handle);
+void	vq_tray_names		(short handle, const char *input_name, const char *output_name, short *input, short *output);
+short	vs_calibrate		(short handle, short flag, short *rgb);
+short	vs_palette		(short handle, short palette);
 
-void	vq_tdimensions		(int handle, int *xdimension, int *ydimension);
-void	vt_alignment		(int handle, int dx, int dy);
-void	vt_axis			(int handle, int xres, int yres, int *xset, int *yset);
-void	vt_origin		(int handle, int xorigin, int yorigin);
-void	vt_resolution		(int handle, int xres, int yres, int *xset, int *yset);
+void	vq_tdimensions		(short handle, short *xdimension, short *ydimension);
+void	vt_alignment		(short handle, short dx, short dy);
+void	vt_axis			(short handle, short xres, short yres, short *xset, short *yset);
+void	vt_origin		(short handle, short xorigin, short yorigin);
+void	vt_resolution		(short handle, short xres, short yres, short *xset, short *yset);
 
-void	v_meta_extents		(int handle, int min_x, int min_y, int max_x, int max_y);
-void	v_write_meta		(int handle, int numvdi_intin, int *avdi_intin, int num_ptsin, int *a_ptsin);
-void	vm_coords		(int handle, int llx, int lly, int urx, int ury);
-void	vm_filename		(int handle, const char *filename);
-void	vm_pagesize		(int handle, int pgwidth, int pgheight);
+void	v_meta_extents		(short handle, short min_x, short min_y, short max_x, short max_y);
+void	v_write_meta		(short handle, short numvdi_intin, short *avdi_intin, short num_ptsin, short *a_ptsin);
+void	vm_coords		(short handle, short llx, short lly, short urx, short ury);
+void	vm_filename		(short handle, const char *filename);
+void	vm_pagesize		(short handle, short pgwidth, short pgheight);
 
-void	vsc_expose		(int handle, int state);
-void	vsp_film		(int handle, int color_idx, int lightness);
+void	vsc_expose		(short handle, short state);
+void	vsp_film		(short handle, short color_idx, short lightness);
 
-void	v_escape2000		(int handle, int times);
+void	v_escape2000		(short handle, short times);
 
-void	v_alpha_text		(int handle, const char *str);
-void	v_curdown		(int handle);
-void	v_curhome		(int handle);
-void	v_curleft		(int handle);
-void	v_curright		(int handle);
-void	v_curtext		(int handle, const char *str);
-void	v_curup			(int handle);
-void	v_eeol			(int handle);
-void	v_eeos			(int handle);
-void	v_enter_cur		(int handle);
-void	v_exit_cur		(int handle);
-void	v_rvoff			(int handle);
-void	v_rvon			(int handle);
-void	vq_chcells		(int handle, int *n_rows, int *n_cols);
-void	vq_curaddress		(int handle, int *cur_row, int *cur_col);
-void	vs_curaddress		(int handle, int row, int col);
+void	v_alpha_text		(short handle, const char *str);
+void	v_curdown		(short handle);
+void	v_curhome		(short handle);
+void	v_curleft		(short handle);
+void	v_curright		(short handle);
+void	v_curtext		(short handle, const char *str);
+void	v_curup			(short handle);
+void	v_eeol			(short handle);
+void	v_eeos			(short handle);
+void	v_enter_cur		(short handle);
+void	v_exit_cur		(short handle);
+void	v_rvoff			(short handle);
+void	v_rvon			(short handle);
+void	vq_chcells		(short handle, short *n_rows, short *n_cols);
+void	vq_curaddress		(short handle, short *cur_row, short *cur_col);
+void	vs_curaddress		(short handle, short row, short col);
 	
 
 /*
  * inquiry functions
  */
-void	vq_cellarray		(int handle, int pxyarray[], int row_len, int nrows, int *el_used, int *rows_used, int *status, int color[]);
-int	vq_color		(int handle, int color_idx, int flag, int rgb[]);
-void	vq_extnd		(int handle, int flag, int work_out[]);
-void	vqf_attributes		(int handle, int atrib[]);
-void	vqin_mode		(int handle, int dev, int *mode);
-void	vql_attributes		(int handle, int atrib[]);
-void	vqm_attributes		(int handle, int atrib[]);
-void	vqt_attributes		(int handle, int atrib[]);
-void	vqt_cachesize		(int handle, int which_cache, long *size);
-void	vqt_extent		(int handle, const char *str, int extent[]);
-void	vqt_fontinfo		(int handle, int *minade, int *maxade, int distances[], int *maxwidth, int effects[]);
-void	vqt_get_table		(int handle, short **map);
-int	vqt_name		(int handle, int element, char *name);
-int	vqt_width		(int handle, int chr, int *cw, int *ldelta, int *rdelta);
+void	vq_cellarray		(short handle, short pxyarray[], short row_len, short nrows, short *el_used, short *rows_used, short *status, short color[]);
+short	vq_color		(short handle, short color_idx, short flag, short rgb[]);
+void	vq_extnd		(short handle, short flag, short work_out[]);
+void	vqf_attributes		(short handle, short atrib[]);
+void	vqin_mode		(short handle, short dev, short *mode);
+void	vql_attributes		(short handle, short atrib[]);
+void	vqm_attributes		(short handle, short atrib[]);
+void	vqt_attributes		(short handle, short atrib[]);
+void	vqt_cachesize		(short handle, short which_cache, long *size);
+void	vqt_extent		(short handle, const char *str, short extent[]);
+void	vqt_fontinfo		(short handle, short *minade, short *maxade, short distances[], short *maxwidth, short effects[]);
+void	vqt_get_table		(short handle, short **map);
+short	vqt_name		(short handle, short element, char *name);
+short	vqt_width		(short handle, short chr, short *cw, short *ldelta, short *rdelta);
 
-int	vq_gdos 		(void);
+short	vq_gdos 		(void);
 long	vq_vgdos 		(void);
 
 
 /*
  * input function
  */
-void	v_hide_c		(int handle);
-void	v_show_c		(int handle, int reset);
-void	vex_butv		(int handle, void *pusrcode, void **psavcode);
-void	vex_curv		(int handle, void *pusrcode, void **psavcode);
-void	vex_motv		(int handle, void *pusrcode, void **psavcode);
-void	vex_timv		(int handle, void *time_addr, void **otime_addr, int *time_conv);
-void	vq_key_s		(int handle, int *state);
-void	vq_mouse		(int handle, int *pstatus, int *x, int *y);
-void	vrq_choice		(int handle, int cin, int *cout);
-void	vrq_locator		(int handle, int x, int y, int *xout, int *yout, int *term);
-void	vrq_string		(int handle, int len, int echo, int echoxy[], char *str);
-void	vrq_valuator		(int handle, int in, int *out, int *term);
-void	vsc_form		(int handle, int form[]);
-int	vsin_mode		(int handle, int dev, int mode);
-int	vsm_choice		(int handle, int *choice);
-int	vsm_locator		(int handle, int x, int y, int *xout, int *yout, int *term);
-int	vsm_string		(int handle, int len, int echo, int echoxy[], char *str);
-void	vsm_valuator		(int handle, int in, int *out, int *term, int *status);
+void	v_hide_c		(short handle);
+void	v_show_c		(short handle, short reset);
+void	vex_butv		(short handle, void *pusrcode, void **psavcode);
+void	vex_curv		(short handle, void *pusrcode, void **psavcode);
+void	vex_motv		(short handle, void *pusrcode, void **psavcode);
+void	vex_timv		(short handle, void *time_addr, void **otime_addr, short *time_conv);
+void	vq_key_s		(short handle, short *state);
+void	vq_mouse		(short handle, short *pstatus, short *x, short *y);
+void	vrq_choice		(short handle, short cin, short *cout);
+void	vrq_locator		(short handle, short x, short y, short *xout, short *yout, short *term);
+void	vrq_string		(short handle, short len, short echo, short echoxy[], char *str);
+void	vrq_valuator		(short handle, short in, short *out, short *term);
+void	vsc_form		(short handle, short form[]);
+short	vsin_mode		(short handle, short dev, short mode);
+short	vsm_choice		(short handle, short *choice);
+short	vsm_locator		(short handle, short x, short y, short *xout, short *yout, short *term);
+short	vsm_string		(short handle, short len, short echo, short echoxy[], char *str);
+void	vsm_valuator		(short handle, short in, short *out, short *term, short *status);
 
 
 /*
  * output functions
  */
-void	v_arc			(int handle, int x, int y, int radius, int begang, int endang);
-void	v_bar			(int handle, int pxyarray[]);
-void	v_cellarray		(int handle, int pxyarray[], int row_length, int elements, int nrows, int write_mode, int colarray[]);
-void	v_circle		(int handle, int x, int y, int radius);
-void	v_contourfill		(int handle, int x, int y, int color_idx);
-void	v_ellarc		(int handle, int x, int y, int xrad, int yrad, int begang, int endang);
-void	v_ellipse		(int handle, int x, int y, int xrad, int yrad);
-void	v_ellpie		(int handle, int x, int y, int xrad, int yrad, int begang, int endang);
-void	v_fillarea		(int handle, int count, int pxyarray[]);
-void	v_gtext			(int handle, int x, int y, const char *str) ;
-void	v_justified		(int handle, int x, int y, const char *str, int len, int word_space, int char_space);
-void	v_pieslice		(int handle, int x, int y, int radius, int begang, int endang);
-void	v_pline			(int handle, int count, int pxyarray[]);
-void	v_pmarker		(int handle, int count, int pxyarray[]);
-void	v_rbox			(int handle, int pxyarray[]);
-void	v_rfbox			(int handle, int pxyarray[]);
-void	vr_recfl		(int handle, int pxyarray[]);
+void	v_arc			(short handle, short x, short y, short radius, short begang, short endang);
+void	v_bar			(short handle, short pxyarray[]);
+void	v_cellarray		(short handle, short pxyarray[], short row_length, short elements, short nrows, short write_mode, short colarray[]);
+void	v_circle		(short handle, short x, short y, short radius);
+void	v_contourfill		(short handle, short x, short y, short color_idx);
+void	v_ellarc		(short handle, short x, short y, short xrad, short yrad, short begang, short endang);
+void	v_ellipse		(short handle, short x, short y, short xrad, short yrad);
+void	v_ellpie		(short handle, short x, short y, short xrad, short yrad, short begang, short endang);
+void	v_fillarea		(short handle, short count, short pxyarray[]);
+void	v_gtext			(short handle, short x, short y, const char *str) ;
+void	v_justified		(short handle, short x, short y, const char *str, short len, short word_space, short char_space);
+void	v_pieslice		(short handle, short x, short y, short radius, short begang, short endang);
+void	v_pline			(short handle, short count, short pxyarray[]);
+void	v_pmarker		(short handle, short count, short pxyarray[]);
+void	v_rbox			(short handle, short pxyarray[]);
+void	v_rfbox			(short handle, short pxyarray[]);
+void	vr_recfl		(short handle, short pxyarray[]);
 
 /*
  * raster functions
  */
-void	v_get_pixel		(int handle, int x, int y, int *pel, int *color_idx);
-void	vr_trnfm		(int handle, MFDB *src, MFDB *dst);
-void	vro_cpyfm		(int handle, int mode, int pxyarray[], MFDB *src, MFDB *dst);
-void	vrt_cpyfm		(int handle, int mode, int pxyarray[], MFDB *src, MFDB *dst, int color[]);
+void	v_get_pixel		(short handle, short x, short y, short *pel, short *color_idx);
+void	vr_trnfm		(short handle, MFDB *src, MFDB *dst);
+void	vro_cpyfm		(short handle, short mode, short pxyarray[], MFDB *src, MFDB *dst);
+void	vrt_cpyfm		(short handle, short mode, short pxyarray[], MFDB *src, MFDB *dst, short color[]);
 
 
 /*
  * Some usefull extensions.
  */
-void	vdi_array2str		(const short *src, char  *des, int len);
-int	vdi_str2array		(const char  *src, short *des);
+void	vdi_array2str		(const short *src, char  *des, short len);
+short	vdi_str2array		(const char  *src, short *des);
 
 
 /*
@@ -1297,8 +1373,6 @@ void vdi (VDIPB *pb);
 #endif /* VDI */
 
 
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
 
-#endif
+#endif /* _GEMLIB_H_ */

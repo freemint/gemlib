@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vsf_interior (int handle, int style)
+short
+vsf_interior (short handle, short style)
 {
 	vdi_intin[0] = style;
 	vdi_control[0] = 23;

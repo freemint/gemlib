@@ -2,10 +2,10 @@
 #include "gemx.h"
 
 
-int
-vs_document_info (int vdi_handle, int type, char *s, int wchar)
+short
+vs_document_info (short vdi_handle, short type, char *s, short wchar)
 {
-	int cnt;
+	short cnt;
 
 	vdi_intout[0] = 0;
 	vdi_intin[0] = type;

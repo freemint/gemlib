@@ -2,7 +2,7 @@
 #include "gemx.h"
 
 
-int
+short
 pdlg_free_settings (PRN_SETTINGS * settings)
 {
 	aes_intin[0] = 6;

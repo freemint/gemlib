@@ -3,7 +3,7 @@
 
 
 PRN_DIALOG *
-pdlg_create (int dialog_flags)
+pdlg_create (short dialog_flags)
 {
 	aes_intin[0] = dialog_flags;
 	aes_control[0] = 200;

@@ -3,7 +3,7 @@
 
 
 void
-v_setrgb (int handle, int type, int r, int g, int b)
+v_setrgb (short handle, short type, short r, short g, short b)
 {
 	vdi_intin[0] = r;
 	vdi_intin[1] = g;

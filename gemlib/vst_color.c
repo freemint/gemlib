@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vst_color (int handle, int index)
+short
+vst_color (short handle, short index)
 {
 	vdi_intin[0] = index;
 	vdi_control[0] = 22;

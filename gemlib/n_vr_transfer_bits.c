@@ -3,8 +3,8 @@
 
 
 void
-vr_transfer_bits (int handle, GCBITMAP * src_bm, GCBITMAP * dst_bm,
-		  int *src_rect, int *dst_rect, int mode)
+vr_transfer_bits (short handle, GCBITMAP * src_bm, GCBITMAP * dst_bm,
+		  short *src_rect, short *dst_rect, short mode)
 {
 	vdi_intin[0] = mode;
 	vdi_intin[1] = 0;

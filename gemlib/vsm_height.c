@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vsm_height (int handle, int height)
+short
+vsm_height (short handle, short height)
 {
 	vdi_ptsin[0] = 0;
 	vdi_ptsin[1] = height;

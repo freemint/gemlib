@@ -2,7 +2,7 @@
 #include "gemx.h"
 
 
-int
+short
 form_xerr (long errcode, char *errfile)
 {
 	unsigned short *i = (unsigned short *) &errcode;

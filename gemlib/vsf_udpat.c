@@ -3,9 +3,9 @@
 
 
 void
-vsf_udpat (int handle, int pat[], int planes)
+vsf_udpat (short handle, short pat[], short planes)
 {
-	register int i, j;
+	register short i, j;
 
 	j = planes << 4;
 	for (i = 0; i < j; i++)

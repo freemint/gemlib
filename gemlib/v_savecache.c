@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-v_savecache (int handle, const char *filename)
+short
+v_savecache (short handle, const char *filename)
 {
 	short i;
 

@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-fnts_delete (FNT_DIALOG * fnt_dialog, int vdi_handle)
+short
+fnts_delete (FNT_DIALOG * fnt_dialog, short vdi_handle)
 {
 	aes_intin[0] = vdi_handle;
 	aes_addrin[0] = (long) fnt_dialog;

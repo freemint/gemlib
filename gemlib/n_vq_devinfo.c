@@ -3,7 +3,7 @@
 
 
 void
-vq_devinfo (int handle, int device, int *dev_open, char *file_name,
+vq_devinfo (short handle, short device, short *dev_open, char *file_name,
 	    char *device_name)
 {
 	short len, i;
@@ -32,8 +32,8 @@ vq_devinfo (int handle, int device, int *dev_open, char *file_name,
  * * NOTE: requires NVDI version 3.x or higher
  */
 
-int
-vq_ext_devinfo (int handle, int device, int *dev_exists,
+short
+vq_ext_devinfo (short handle, short device, short *dev_exists,
 		char *file_path, char *file_name, char *name)
 {
 	vdi_intin[0] = device;

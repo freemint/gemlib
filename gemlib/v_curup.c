@@ -3,7 +3,7 @@
 
 
 void
-v_curup (int handle)
+v_curup (short handle)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

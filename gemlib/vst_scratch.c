@@ -3,7 +3,7 @@
 
 
 void
-vst_scratch (int handle, int mode)
+vst_scratch (short handle, short mode)
 {
 	vdi_intin[0] = mode;
 	vdi_control[0] = 244;

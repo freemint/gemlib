@@ -2,9 +2,9 @@
 #include "gemx.h"
 
 
-int
-v_open_bm (int base_handle, GCBITMAP * bitmap, int color_flags,
-	   int unit_flags, int pixel_width, int pixel_height)
+short
+v_open_bm (short base_handle, GCBITMAP * bitmap, short color_flags,
+	   short unit_flags, short pixel_width, short pixel_height)
 {
 	vdi_intin[0] = color_flags;
 	vdi_intin[1] = unit_flags;

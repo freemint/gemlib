@@ -2,9 +2,9 @@
 #include "gemx.h"
 
 
-int
-vq_margins (int handle, int *top_margin, int *bottom_margin, int *left_margin,
-	    int *right_margin, int *hdpi, int *vdpi)
+short
+vq_margins (short handle, short *top_margin, short *bottom_margin, short *left_margin,
+	    short *right_margin, short *hdpi, short *vdpi)
 {
 	vdi_intout[0] = 0;
 

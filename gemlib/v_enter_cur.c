@@ -3,7 +3,7 @@
 
 
 void
-v_enter_cur (int handle)
+v_enter_cur (short handle)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

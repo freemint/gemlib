@@ -3,7 +3,7 @@
 
 
 void
-v_alpha_text (int handle, const char *str)
+v_alpha_text (short handle, const char *str)
 {
 	short n;
 

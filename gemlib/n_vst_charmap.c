@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vst_charmap (int handle, int mode)
+short
+vst_charmap (short handle, short mode)
 {
 	vdi_intin[0] = mode;
 	vdi_intin[1] = 1;

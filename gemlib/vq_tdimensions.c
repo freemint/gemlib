@@ -3,7 +3,7 @@
 
 
 void
-vq_tdimensions (int handle, int *xdimension, int *ydimension)
+vq_tdimensions (short handle, short *xdimension, short *ydimension)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

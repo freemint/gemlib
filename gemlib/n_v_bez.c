@@ -3,8 +3,8 @@
 
 
 static inline void
-_v_bez (int ctrl0, int handle, int count, int *xyarr, char *bezarr,
-	int *extent, int *totpts, int *totmoves)
+_v_bez (short ctrl0, short handle, short count, short *xyarr, char *bezarr,
+	short *extent, short *totpts, short *totmoves)
 {
 	short *end;
 	char *pbd = bezarr;
@@ -45,15 +45,15 @@ _v_bez (int ctrl0, int handle, int count, int *xyarr, char *bezarr,
  */
 
 void
-v_bez (int handle, int count, int *xyarr, char *bezarr, int *extent,
-       int *totpts, int *totmoves)
+v_bez (short handle, short count, short *xyarr, char *bezarr, short *extent,
+       short *totpts, short *totmoves)
 {
 	_v_bez (6, handle, count, xyarr, bezarr, extent, totpts, totmoves);
 }
 
 void
-v_bez_fill (int handle, int count, int *xyarr, char *bezarr, int *extent,
-	    int *totpts, int *totmoves)
+v_bez_fill (short handle, short count, short *xyarr, char *bezarr, short *extent,
+	    short *totpts, short *totmoves)
 {
 	_v_bez (9, handle, count, xyarr, bezarr, extent, totpts, totmoves);
 }

@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vst_effects (int handle, int effects)
+short
+vst_effects (short handle, short effects)
 {
 	vdi_intin[0] = effects;
 	vdi_control[0] = 106;

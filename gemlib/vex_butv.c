@@ -3,7 +3,7 @@
 
 
 void
-vex_butv (int handle, void *new, void **old)
+vex_butv (short handle, void *new, void **old)
 {
 	*((void **) (&vdi_control[7])) = new;
 	vdi_control[0] = 125;

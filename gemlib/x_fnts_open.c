@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-fnts_open (FNT_DIALOG * fnt_dialog, int button_flags, int x, int y, long id,
+short
+fnts_open (FNT_DIALOG * fnt_dialog, short button_flags, short x, short y, long id,
 	   long pt, long ratio)
 {
 	unsigned short *i;

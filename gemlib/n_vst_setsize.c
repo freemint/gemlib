@@ -3,8 +3,8 @@
 
 
 long
-vst_setsize (int handle, long point, int *wchar, int *hchar, int *wcell,
-	     int *hcell)
+vst_setsize (short handle, long point, short *wchar, short *hchar, short *wcell,
+	     short *hcell)
 {
 	*((long *) (&vdi_intin[0])) = point;
 	vdi_control[0] = 252;

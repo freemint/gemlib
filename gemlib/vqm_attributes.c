@@ -3,7 +3,7 @@
 
 
 void
-vqm_attributes (int handle, int atrib[])
+vqm_attributes (short handle, short atrib[])
 {
 	vdi_control[0] = 36;
 	vdi_control[1] = 0;

@@ -3,7 +3,7 @@
 
 
 void
-vm_filename (int handle, const char *filename)
+vm_filename (short handle, const char *filename)
 {
 	short n;
 

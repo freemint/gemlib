@@ -3,7 +3,7 @@
 
 
 void
-v_clsbm (int handle)
+v_clsbm (short handle)
 {
 	vdi_control[0] = 101;
 	vdi_control[1] = 0;

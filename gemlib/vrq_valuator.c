@@ -3,7 +3,7 @@
 
 
 void
-vrq_valuator (int handle, int in, int *out, int *term)
+vrq_valuator (short handle, short in, short *out, short *term)
 {
 	vdi_intin[0] = in;
 	vdi_control[0] = 29;

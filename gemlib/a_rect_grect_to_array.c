@@ -2,10 +2,10 @@
 #include "gem.h"
 
 
-int *
-grect_to_array (GRECT * area, int *array)
+short *
+grect_to_array (GRECT * area, short *array)
 {
-	int *ip = array;
+	short *ip = array;
 
 	*ip = area->g_x;
 	ip[2] = *ip;
@@ -15,5 +15,6 @@ grect_to_array (GRECT * area, int *array)
 	ip++;
 	*ip++ += area->g_w - 1;
 	*ip += area->g_h - 1;
-	return (array);
+	
+	return array;
 }

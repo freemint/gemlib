@@ -3,7 +3,7 @@
 
 
 void
-vex_timv (int handle, void *time_addr, void **otime_addr, int *time_conv)
+vex_timv (short handle, void *time_addr, void **otime_addr, short *time_conv)
 {
 	*((void **) (&vdi_control[7])) = time_addr;
 	vdi_control[0] = 118;

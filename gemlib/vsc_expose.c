@@ -3,7 +3,7 @@
 
 
 void
-vsc_expose (int handle, int state)
+vsc_expose (short handle, short state)
 {
 	vdi_intin[0] = state;
 	vdi_control[0] = 5;

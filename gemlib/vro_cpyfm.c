@@ -3,7 +3,7 @@
 
 
 void
-vro_cpyfm (int handle, int mode, int pxyarray[], MFDB * src, MFDB * dst)
+vro_cpyfm (short handle, short mode, short pxyarray[], MFDB * src, MFDB * dst)
 {
 	register short i;
 

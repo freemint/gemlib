@@ -2,9 +2,9 @@
 #include "gemx.h"
 
 
-int
-fnts_evnt (FNT_DIALOG * fnt_dialog, EVNT * events, int *button,
-	   int *check_boxes, long *id, long *pt, long *ratio)
+short
+fnts_evnt (FNT_DIALOG * fnt_dialog, EVNT * events, short *button,
+	   short *check_boxes, long *id, long *pt, long *ratio)
 {
 	aes_addrin[0] = (long) fnt_dialog;
 	aes_addrin[1] = (long) events;

@@ -3,7 +3,7 @@
 
 
 long
-vq_prn_scaling (int handle)
+vq_prn_scaling (short handle)
 {
 	vdi_intin[0] = -1;
 	vdi_intin[1] = -1;
