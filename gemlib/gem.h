@@ -7,6 +7,9 @@
 
 # include <compiler.h>
 
+#ifndef INT16  /* keep compatibility with Mgemlib */
+#define INT16 short
+#endif
 
 # ifdef __GEMLIB_OLDBIND		/* Backward-compatibility */
 #  undef _GEMLIB_H_		/* For old bindings, these header had to be multi-included. */
@@ -40,7 +43,7 @@ __BEGIN_DECLS
 #define	__GEMLIB_MAJOR__     0
 #define	__GEMLIB_MINOR__    42
 #define __GEMLIB_REVISION__  99
-#define __GEMLIB_BETATAG__   "-20021228"
+#define __GEMLIB_BETATAG__   "-20030111"
 
 /* the other name of this release is MGEMLIB 42 */
 #define MGEMLIB				42
