@@ -1129,7 +1129,7 @@ typedef struct
 	long		reserved3;			/**< TODO */
 	long		reserved4;			/**< TODO */
 
-#ifdef __GNUC__
+#if defined(__GNUC__) || defined (__LATTICE__)
 	COLOR_ENTRY	colors[0];			/**< TODO */
 #else
 	COLOR_ENTRY	colors[];			/**< TODO */
