@@ -25,7 +25,7 @@ vq_chcells (short handle, short *n_rows, short *n_cols)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[2]; 
-	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, 0L );
+	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_dummy );
 #endif
 	
 	VDI_TRAP_ESC (vdi_params, handle, 5,1, 0,0);

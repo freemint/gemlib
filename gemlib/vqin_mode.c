@@ -19,7 +19,7 @@ vqin_mode (short handle, short dev, short *mode)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDI_PARAMS(vdi_control, &dev, 0L, mode, 0L );
+	VDI_PARAMS(vdi_control, &dev, 0L, mode, vdi_dummy );
 #else
 	vdi_intin[0] = dev;
 #endif

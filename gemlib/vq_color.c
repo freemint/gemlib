@@ -35,7 +35,7 @@ vq_color (short handle, short index, short flag, short rgb[])
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[2];   
 	short vdi_intout[4]; 
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L );
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy );
 #endif
 	
 	vdi_intin[0] = index;

@@ -30,7 +30,7 @@ vqt_extent (short handle, const char *str, short extent[])
 #endif
 	register short n = vdi_str2array (str, vdi_intin);
 #if USE_LOCAL_VDIPB
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, 0L, extent );
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_dummy, extent );
 #endif
 
 #if !(USE_LOCAL_VDIPB)

@@ -41,7 +41,7 @@ vrt_cpyfm (short handle, short mode, short pxy[], MFDB *src, MFDB *dst,
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[3];   
-	VDI_PARAMS(vdi_control, vdi_intin, pxy, 0L, 0L );
+	VDI_PARAMS(vdi_control, vdi_intin, pxy, vdi_dummy, vdi_dummy );
 #else
 	vdi_params.ptsin = pxy;
 #endif

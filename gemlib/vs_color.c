@@ -42,7 +42,7 @@ vs_color (short handle, short index, short rgb[])
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[4];   
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, 0L, 0L );
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_dummy, vdi_dummy );
 #endif
 	
 	ptr = vdi_intin;

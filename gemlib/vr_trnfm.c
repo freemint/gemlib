@@ -21,7 +21,7 @@ vr_trnfm (short handle, MFDB * src, MFDB * dst)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDI_PARAMS(vdi_control, 0L, 0L, 0L, 0L );
+	VDI_PARAMS(vdi_control, 0L, 0L, vdi_dummy, vdi_dummy );
 #endif
 	
 	vdi_control_ptr(7) = src;

@@ -32,7 +32,7 @@ vm_filename (short handle, const char *filename)
 #endif
 	register short n = vdi_str2array (filename, vdi_intin);
 #if USE_LOCAL_VDIPB
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, 0L, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_dummy, vdi_dummy);
 #endif
 	
 	VDI_TRAP_ESC (vdi_params, handle, 5,100, 0,n);
