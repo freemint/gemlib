@@ -17,15 +17,11 @@
 void
 vqt_cachesize (short handle, short which_cache, long *size)
 {
-#if USE_LOCAL_VDIPB
-	/* todo (doc wanted) */
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intout[VDI_INTOUTMAX]; 
-	short vdi_ptsout[VDI_PTSOUTMAX]; 
+	short vdi_intout[VDI_INTOUTMAX]; /* todo (doc wanted) */
+	short vdi_ptsout[VDI_PTSOUTMAX]; /* todo (doc wanted) */
+
 	VDI_PARAMS(vdi_control, &which_cache, 0L, vdi_intout, vdi_ptsout );
-#else
-	vdi_intin[0] = which_cache;
-#endif
 	
 	VDI_TRAP (vdi_params, handle, 255, 0,1);
 	

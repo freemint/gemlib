@@ -23,12 +23,11 @@ void
 vrq_locator (short handle, short x, short y,
              short *xout, short *yout, short *term)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsin[2];   
 	short vdi_ptsout[2]; 
+	
 	VDI_PARAMS(vdi_control, 0L, vdi_ptsin, term, vdi_ptsout );
-#endif
 	
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;
@@ -37,7 +36,4 @@ vrq_locator (short handle, short x, short y,
 	
 	*xout = vdi_ptsout[0];
 	*yout = vdi_ptsout[1];
-#if !(USE_LOCAL_VDIPB)
-	*term = vdi_intout[0];
-#endif
 }

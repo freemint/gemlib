@@ -38,13 +38,10 @@ void
 vrt_cpyfm (short handle, short mode, short pxy[], MFDB *src, MFDB *dst,
            short color[])
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[3];   
+
 	VDI_PARAMS(vdi_control, vdi_intin, pxy, vdi_dummy, vdi_dummy );
-#else
-	vdi_params.ptsin = pxy;
-#endif
 	
 	vdi_intin[0]            = mode;
 	*((long*)&vdi_intin[1]) = *(long*)color;
@@ -52,8 +49,4 @@ vrt_cpyfm (short handle, short mode, short pxy[], MFDB *src, MFDB *dst,
 	vdi_control_ptr(9)      = dst;
 
 	VDI_TRAP (vdi_params, handle, 121, 4,3);
-
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.ptsin = vdi_ptsin;
-#endif
 }

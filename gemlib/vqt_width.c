@@ -33,14 +33,11 @@
 short
 vqt_width (short handle, short chr, short *cw, short *ldelta, short *rdelta)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[1]; 
 	short vdi_ptsout[6]; 
+	
 	VDI_PARAMS(vdi_control, &chr, 0L, vdi_intout, vdi_ptsout );
-#else
-	vdi_intin[0] = chr;
-#endif
 	
 	VDI_TRAP (vdi_params, handle, 117, 0,1);
 
