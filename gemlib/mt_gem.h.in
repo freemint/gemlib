@@ -784,6 +784,7 @@ typedef  struct
 #define BACKGRCOL 		5
 #define AD3DVAL			6
 #define MX_ENABLE3D		10      /* MagiC 3.0   */
+#define MENUCOL			11      /* MagiC 6     */
 
 /** Mouse Form Definition Block */
 typedef struct mouse_form
@@ -791,8 +792,8 @@ typedef struct mouse_form
 	short		mf_xhot;		/**< TODO */
 	short		mf_yhot;		/**< TODO */
 	short		mf_nplanes;		/**< TODO */
-	short		mf_bg;			/**< TODO */
 	short		mf_fg;			/**< TODO */
+	short		mf_bg;			/**< TODO */
 	short		mf_mask[16];	/**< TODO */
 	short		mf_data[16];	/**< TODO */
 } MFORM;
