@@ -30,7 +30,7 @@ a_appl_search.c 	    -- idem
 a_appl_tplay.c		    -- idem
 a_appl_trecord.c	    -- idem
 a_appl_write.c		    -- idem
-a_appl_xgetinfo.c
+a_appl_xgetinfo.c       -- removed (it's the same as the new merged a_appl_getinfo)
 a_appl_yield.c		    -- idem
 a_evnt_button.c			-- idem
 a_evnt_dclick.c			-- idem
@@ -73,15 +73,23 @@ a_menu_settings.c
 a_menu_text.c
 a_menu_tnormal.c
 a_menu_unregister.c
-a_objc_add.c
-a_objc_change.c
-a_objc_delete.c
-a_objc_draw.c
-a_objc_edit.c
-a_objc_find.c
-a_objc_offset.c
-a_objc_order.c
-a_objc_sysvar.c
+a_objc_add.c            -- use 'OBJECT' type instead of 'void' 
+                           [gemlib->mgemlib]
+a_objc_change.c         -- use 'OBJECT' type instead of 'void' 
+                           [gemlib->mgemlib]
+a_objc_delete.c         -- use 'OBJECT' type instead of 'void' 
+                           [gemlib->mgemlib]
+a_objc_draw.c           -- use 'OBJECT' type instead of 'void' 
+                           [gemlib->mgemlib]
+a_objc_edit.c           -- use 'OBJECT' type instead of 'void' 
+                           [gemlib->mgemlib]
+a_objc_find.c           -- use 'OBJECT' type instead of 'void' 
+                           [gemlib->mgemlib]
+a_objc_offset.c         -- use 'OBJECT' type instead of 'void' 
+                           [gemlib->mgemlib]
+a_objc_order.c          -- use 'OBJECT' type instead of 'void' 
+                           [gemlib->mgemlib]
+a_objc_sysvar.c         -- idem
 a_rsrc_free.c           -- idem
 a_rsrc_gaddr.c          -- idem
 a_rsrc_load.c		    -- add "const" keyword [gemlib->mgemlib]
