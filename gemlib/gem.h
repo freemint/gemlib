@@ -1052,7 +1052,7 @@ void aes (AESPB *pb);
 #define SLM_NOPAPER		0x04
 
 /* VDI Memory Form Definition Block */
-typedef struct
+typedef struct memory_form
 {
 	void	*fd_addr;
 	short 	fd_w;		/* Form Width in Pixels */
