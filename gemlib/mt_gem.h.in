@@ -527,6 +527,29 @@ typedef struct pEvntrec
  */
 #define AC_OPEN			40
 
+/** Message sent by XaAES when WO_SENDREPOS window option is set and the
+ *  user resizes the window by dragging the upper/left parts of the window
+ *  border, causing x/width and/or y/height coordinates to change.
+ *  This more or less combines WM_MOVED/WM_SIZED messages.
+ *
+ *  Available only with XaAES kernel module compiled on
+ *  November 8 2004 or later.
+ *
+ * - msg[0] = #WM_REPOSED
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = x
+ * - msg[5] = y
+ * - msg[6] = w
+ * - msg[7] = h of the new window location
+ *
+ *  Use mt_wind_set() with the command #WF_CURRXYWH to change the position
+ *  of the window. 
+ *
+ */
+#define WM_REPOSED		38
+
 /** message received by a desk accessory when the accessory
  *  should be closed.
  *
@@ -1023,7 +1046,7 @@ typedef  struct
 /* shel_write: mode SWM_NEWMSG, parameter 'wisgr' */
 #define NM_APTERM		0x0001	/**< the application understands #AP_TERM messages, see #SWM_NEWMSG */
 
-/* Werte fr Modus SWM_AESMSG (fr shel_write) */
+/* Werte fr Modus SWM_AESMSG (fr shel_write) */
 #define AP_AESTERM		52     /* Mode 10: N.AES komplett terminieren. */	/**< TODO */
 
 /* extended shel_write() modes */
@@ -1144,6 +1167,21 @@ typedef  struct
 /* wind_set(WF_BEVENT) */
 #define BEVENT_WORK     0x0001    /**< window not topped when click on the work area, see #WF_BEVENT */
 #define BEVENT_INFO     0x0002    /**< ?????, see #WF_BEVENT */
+
+/* wind_set(WF_OPTIONS) bitmask flags*/
+#define WO_WHEEL	0x00000001
+#define WO_FULLREDRAW	0x00000002
+#define WO_NOBLITW	0x00000004
+#define WO_NOBLITH	0x00000008
+#define WO_MOVEREPOS	0x00000010
+
+/* wind_set(WF_WHEEL) modes */
+#define WHL_REALWHEEL	0	/* */
+#define WHL_AROWWHEEL	1
+#define WHL_SLDRWHEEL	2
+#define MAX_WHLMODE	2
+#define DEF_WHLMODE	WHL_AROWWHEEL
+
 
 /* window elements */
 #define W_BOX			0	/**< widget index of ???, see #WF_COLOR */
