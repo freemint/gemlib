@@ -19,7 +19,7 @@
  *         - (1)  landscape
  *
  *  @since depends on the driver. If the driver doesn't support this fonction,
- *         1 will be returned whatever orientation is.
+ *         0 will be returned whatever orientation is.
  *
  *
  *  If there is not enough memory to change the orientation, v_orient returns -1.
@@ -45,5 +45,5 @@ v_orient (short handle, short orientation)
 		return vdi_intout[0];
 	
 	/* function not supported by the driver */
-	return 1;
+	return 0;
 }
