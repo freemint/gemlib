@@ -239,7 +239,6 @@ library for more functionality, when present. The server is
 available on the web under the following addresses:
 
 http://draco.atari.org
-http://piwo.bl.pg.gda.pl/~draco/falcon.html
 http://wh58-508.st.uni-magdeburg.de/~draco/atari.html
 
 Also installing the Assemsoft's StringServer is recommended. The
@@ -1311,6 +1310,9 @@ TODO:
 - add font selection support
 - support the xrsrc
 - emulate drawing WHITEBAK objects where not directly supported
+
+Further changelog is available in the CVS repository history at 
+http://wh58-508.st.uni-magdeburg.de
 
 Version 1.09 pl 2
 
