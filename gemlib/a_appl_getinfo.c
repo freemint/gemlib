@@ -259,25 +259,17 @@ AES_FORM       14    AES Form Support
 short
 mt_appl_getinfo (short type, short *out1, short *out2, short *out3, short *out4, short *global_aes)
 {
-	static int first = 1;
-	static int is_appl_getinfo_avaible = 0;
+	static int has_agi = -1; /* do the check only once */
 
 	AES_PARAMS(130,1,5,0,0);
 
-	if (first) {
-		if (gl_ap_version >= 0x0401)
-			is_appl_getinfo_avaible = 1;
-		else {
-			if (mt_appl_find ("?AGI\0\0\0\0", global_aes) != -1)
-				is_appl_getinfo_avaible = 1;
-			else
-				is_appl_getinfo_avaible = 0;
-		}
-		first = 0;
+	if (has_agi < 0) {
+		has_agi = gl_ap_version >= 0x400 || 
+		          mt_appl_find("?AGI\0\0\0\0") >= 0;
 	}
-
-	if (is_appl_getinfo_avaible == 0)
-		return (1);		/* appl_getinfo() not implemented */
+	if (!has_agi) {
+		return 0;
+	}
 
 	aes_intin[0] = type;
 
@@ -296,6 +288,13 @@ mt_appl_getinfo (short type, short *out1, short *out2, short *out3, short *out4,
 #endif
 short
 appl_getinfo(short type, short *out1, short *out2, short *out3, short *out4)
+{
+	return(mt_appl_getinfo(type,out1, out2, out3, out4, aes_global));
+}
+
+/* for backward compatibility with gemlib 42 */
+short 
+appl_xgetinfo(short type, short *out1, short *out2, short *out3, short *out4)
 {
 	return(mt_appl_getinfo(type,out1, out2, out3, out4, aes_global));
 }
