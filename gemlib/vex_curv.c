@@ -29,14 +29,7 @@ vex_curv (short handle, void *new, void **old)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		0L,                          /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		0L,                          /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, 0L, 0L, 0L, 0L);
 #endif
 	
 	vdi_control_ptr(7) = new;

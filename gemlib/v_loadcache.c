@@ -29,16 +29,11 @@ v_loadcache (short handle, const char *filename, short mode)
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_intout[VDI_INTOUTMAX]; 
 	short vdi_ptsout[VDI_PTSOUTMAX]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&vdi_intin[0],               /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		&vdi_intout[0],              /* vdi_intout  */
-		&vdi_ptsout[0]               /* vdi_ptsout  */
-	};
 #endif
 	register short n = 1 + vdi_str2array (filename, vdi_intin + 1);
+#if USE_LOCAL_VDIPB
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_ptsout );
+#endif
 	
 	vdi_intin[0] = mode;
 
