@@ -1,25 +1,19 @@
+/*
+ *   NOTE: requires NVDI version 3.x or higher
+ */
 
+#include "gem_vdiP.h"
 #include "gemx.h"
 
 
 void
 vqt_f_extent (short handle, const char *str, short extent[])
 {
-	register short i;
+	register short n = vdi_str2array (str, vdi_intin);
+	
+	vdi_params.ptsout = extent;
 
-	i = vdi_str2array (str, vdi_intin);
-	vdi_control[0] = 240;
-	vdi_control[1] = 0;
-	vdi_control[3] = i;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
+	VDI_TRAP (vdi_params, handle, 240, 0,n);
 
-	vdi (&vdi_params);
-
-	for (i = 0; i < 8; i++)
-		extent[i] = vdi_ptsout[i];
+	vdi_params.ptsout = vdi_ptsout;
 }
-
-/*
- * * NOTE: requires NVDI version 3.x or higher
- */

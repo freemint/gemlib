@@ -1,18 +1,13 @@
+/*
+ *   NOTE: requires NVDI version 2.10 or higher
+ */
 
+#include "gem_vdiP.h"
 #include "gemx.h"
 
 
 void
 v_bez_off (short handle)
 {
-	vdi_control[0] = 11;
-	vdi_control[1] = 0;
-	vdi_control[3] = 0;
-	vdi_control[5] = 13;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	VDI_TRAP_ESC (vdi_params, handle, 11,13, 0,0);
 }
-
-/*
- * * NOTE: requires NVDI version 2.x or higher
- */

@@ -1,24 +1,19 @@
+/*
+ *   NOTE: requires EdDI version 1.x or higher
+ */
 
+#include "gem_vdiP.h"
 #include "gemx.h"
 
 
 void
 vq_scrninfo (short handle, short *work_out)
 {
-	vdi_params.intout = &work_out[0];
+	vdi_params.intout = work_out;
 
 	vdi_intin[0] = 2;
-	vdi_control[0] = 102;
-	vdi_control[1] = 0;
-	vdi_control[3] = 1;
-	vdi_control[5] = 1;
-	vdi_control[6] = handle;
+	
+	VDI_TRAP_ESC (vdi_params, handle, 102,1, 0,1);
 
-	vdi (&vdi_params);
-
-	vdi_params.intout = &vdi_intout[0];
+	vdi_params.intout = vdi_intout;
 }
-
-/*
- * * NOTE: requires EdDI version 1.x or higher
- */

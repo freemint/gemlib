@@ -1,20 +1,15 @@
+/*
+ *   NOTE: requires NVDI version 5.x or higher
+ */
 
+#include "gem_vdiP.h"
 #include "gemx.h"
 
 
 long
 v_get_ctab_id (short handle)
 {
-	vdi_control[0] = 206;
-	vdi_control[1] = 0;
-	vdi_control[3] = 0;
-	vdi_control[5] = 6;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	VDI_TRAP_ESC (vdi_params, handle, 206,6, 0,0);
 
-	return (*(long *) &vdi_intout[0]);
+	return vdi_intout_long(0);
 }
-
-/*
- * * NOTE: requires NVDI version 5.x or higher
- */

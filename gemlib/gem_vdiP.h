@@ -12,7 +12,7 @@
 
 #define vdi_control_ptr(n)   *((void**)(vdi_control +n))
 #define vdi_intin_ptr(n)     *((void**)(vdi_intin   +n))
-#define vdi_intout_ptr(n)    *((void**)(vdi_intout  +n))
+#define vdi_intout_long(n)   *((long*) (vdi_intout  +n))
 
 
 #if defined(__GNUC_INLINE__) && (__GNUC__ > 2 || __GNUC_MINOR__ > 5)
