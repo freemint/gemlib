@@ -8,14 +8,14 @@
  *
  *  @param result points to a character pointer which will be filled in
  *         with the address of the first character in the environment
- *         string following the string given by \p param. If the string
- *         given by \p param is not found, value will be filled in with
+ *         string following the string given by \a param. If the string
+ *         given by \a param is not found, value will be filled in with
  *         NULL. For instance, suppose the current environment looked
- *         like this:  PATH=C:\\;D:\\;E:\\ \n
- *         A call made to mt_shel_envrn() with \p param pointing to the
- *         string 'PATH=' would set the pointer pointed to by value to
- *         the string 'C:\\;D:\\;E:\\' above.
- *  @param param 
+ *         like this:  <tt> PATH=C:\\;D:\\;E:\\ </tt> \n
+ *         A call made to mt_shel_envrn() with \a param pointing to the
+ *         string \c 'PATH=' would set the pointer pointed to by value to
+ *         the string <tt> 'C:\\;D:\\;E:\\' </tt> above.
+ *  @param param see above
  *  @param global_aes global AES array
  *
  *  @return currently always returns 1.
@@ -23,7 +23,7 @@
  *  @since All AES versions.
  *
  *  AES versions prior to 1.4 only accepted semi-colons as
- *  separators between multiple 'PATH='arguments. Newer
+ *  separators between multiple \c 'PATH=' arguments. Newer
  *  versions accept commas as well.
  *
  *  The character string pointed to by name should include the

@@ -4,18 +4,21 @@
 
 #include "gem_aesP.h"
 
-/** 
+/** "Shell write default" - default program set
  *
  *  @param lpcmd
  *  @param lpdir
  *  @param global_aes global AES array
  *
- *  @return 
+ *  @return The return value is not at present well-known.
  *
- *  @since 
+ *  @since The presence of this function can be determined by mt_appl_getinfo() with mode
+ *        #AES_PCGEM. Under MagiC-PC, this function is available since release 2.0
  *
- *  @sa 
- *
+ *  @sa mt_shel_rdef()
+ *  
+ *  The function makes it possible to specify the application which
+ *  is to be the default program (normally the Desktop).
  */
 
 short 
