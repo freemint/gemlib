@@ -34,8 +34,8 @@ _aes_trap (AESPB * aespb)
 #endif
 
 
-#define AES_PARAMS( controlArray ) \
-	static short    aes_control[AES_CTRLMAX]=controlArray;    \
+#define AES_PARAMS(a,b,c,d,e) \
+	static short    aes_control[AES_CTRLMAX]={a,b,c,d,e};    \
 	short			aes_intin[AES_INTINMAX],                  \
 					aes_intout[AES_INTOUTMAX];                \
 	long			aes_addrin[AES_ADDRINMAX],                \
