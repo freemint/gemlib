@@ -21,7 +21,7 @@
  *
  *  Selectable objects of this dialog don't need to have the #OF_SELECTABLE
  *  flag set. If an object don't have to be selectable, then set the
- *  flag #OF_DISABLED.
+ *  flag #OS_DISABLED.
  *
  *  The object type of the root object (index 0) shall be either #G_BOX or
  *  #G_IBOX.
