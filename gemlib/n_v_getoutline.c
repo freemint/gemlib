@@ -3,12 +3,12 @@
 
 
 void
-v_getoutline (int handle, int ch, int *xyarray, char *bezarray, int maxverts,
-	      int *numverts)
+v_getoutline (short handle, short ch, short *xyarray, char *bezarray, short maxverts,
+	      short *numverts)
 {
 	vdi_intin[0] = ch;
 	vdi_intin[1] = maxverts;
-	*((int **) (&vdi_intin[2])) = xyarray;
+	*((short **) (&vdi_intin[2])) = xyarray;
 	*((char **) (&vdi_intin[4])) = bezarray;
 	vdi_control[0] = 243;
 	vdi_control[1] = 0;

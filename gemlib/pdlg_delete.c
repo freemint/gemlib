@@ -2,7 +2,7 @@
 #include "gemx.h"
 
 
-int
+short
 pdlg_delete (PRN_DIALOG * prn_dialog)
 {
 	aes_addrin[0] = (long) prn_dialog;

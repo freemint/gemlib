@@ -3,7 +3,7 @@
 
 
 void
-vqt_extent (int handle, const char *str, int extent[])
+vqt_extent (short handle, const char *str, short extent[])
 {
 	short i;
 

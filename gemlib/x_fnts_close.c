@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-fnts_close (FNT_DIALOG * fnt_dialog, int *x, int *y)
+short
+fnts_close (FNT_DIALOG * fnt_dialog, short *x, short *y)
 {
 	aes_addrin[0] = (long) fnt_dialog;
 	aes_intout[1] = -1;	/* ab 6: Position kommt zurÅck */

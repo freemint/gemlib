@@ -3,7 +3,7 @@
 
 
 void
-v_ftext (int handle, int x, int y, char *str)
+v_ftext (short handle, short x, short y, char *str)
 {
 	short i;
 

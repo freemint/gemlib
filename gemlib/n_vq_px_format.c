@@ -3,7 +3,7 @@
 
 
 long
-vq_px_format (int handle, unsigned long *px_format)
+vq_px_format (short handle, unsigned long *px_format)
 {
 	vdi (&vdi_params);
 	vdi_control[0] = 204;

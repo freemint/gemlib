@@ -2,7 +2,7 @@
 #include "gemx.h"
 
 
-int
+short
 fslx_close (void *fsd)
 {
 	aes_addrin[0] = (long) fsd;

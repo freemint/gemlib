@@ -3,7 +3,7 @@
 
 
 unsigned long
-v_ctab_idx2value (int handle, int index)
+v_ctab_idx2value (short handle, short index)
 {
 	vdi_intin[0] = index;
 

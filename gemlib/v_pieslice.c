@@ -3,7 +3,7 @@
 
 
 void
-v_pieslice (int handle, int x, int y, int radius, int begang, int endang)
+v_pieslice (short handle, short x, short y, short radius, short begang, short endang)
 {
 	vdi_intin[0] = begang;
 	vdi_intin[1] = endang;

@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-v_loadcache (int handle, const char *filename, int mode)
+short
+v_loadcache (short handle, const char *filename, short mode)
 {
 	short i;
 

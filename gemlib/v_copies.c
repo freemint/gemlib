@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-v_copies (int handle, int count)
+short
+v_copies (short handle, short count)
 {
 	vdi_intin[0] = count;
 	vdi_control[0] = 5;

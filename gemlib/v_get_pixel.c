@@ -3,7 +3,7 @@
 
 
 void
-v_get_pixel (int handle, int x, int y, int *pel, int *index)
+v_get_pixel (short handle, short x, short y, short *pel, short *index)
 {
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;

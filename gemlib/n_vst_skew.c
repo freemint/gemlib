@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vst_skew (int handle, int skew)
+short
+vst_skew (short handle, short skew)
 {
 	vdi_intin[0] = skew;
 	vdi_control[0] = 253;

@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vst_load_fonts (int handle, int select)
+short
+vst_load_fonts (short handle, short select)
 {
 	vdi_intin[0] = select;
 	vdi_control[0] = 119;

@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vst_name (int handle, int font_format, char *font_name, char *ret_name)
+short
+vst_name (short handle, short font_format, char *font_name, char *ret_name)
 {
 	short i;
 

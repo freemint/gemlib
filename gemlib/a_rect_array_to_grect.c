@@ -3,7 +3,7 @@
 
 
 void
-array_to_grect (int *array, GRECT * area)
+array_to_grect (short *array, GRECT * area)
 {
 	area->g_x = array[0];
 	area->g_y = array[1];

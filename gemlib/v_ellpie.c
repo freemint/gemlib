@@ -3,8 +3,8 @@
 
 
 void
-v_ellpie (int handle, int x, int y, int xrad, int yrad, int begang,
-	  int endang)
+v_ellpie (short handle, short x, short y, short xrad, short yrad, short begang,
+	  short endang)
 {
 	vdi_intin[0] = begang;
 	vdi_intin[1] = endang;

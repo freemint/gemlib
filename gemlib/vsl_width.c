@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vsl_width (int handle, int width)
+short
+vsl_width (short handle, short width)
 {
 	vdi_ptsin[0] = width;
 	vdi_ptsin[1] = 0;

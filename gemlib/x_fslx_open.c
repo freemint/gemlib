@@ -3,9 +3,9 @@
 
 
 void *
-fslx_open (char *title, int x, int y, int *handle, char *path, int pathlen,
-	   char *fname, int fnamelen, char *patterns, XFSL_FILTER filter,
-	   char *paths, int sort_mode, int flags)
+fslx_open (char *title, short x, short y, short *handle, char *path, short pathlen,
+	   char *fname, short fnamelen, char *patterns, XFSL_FILTER filter,
+	   char *paths, short sort_mode, short flags)
 {
 	aes_intin[0] = x;
 	aes_intin[1] = y;

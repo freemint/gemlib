@@ -3,7 +3,7 @@
 
 
 void
-v_output_window (int handle, int *pxyarray)
+v_output_window (short handle, short *pxyarray)
 {
 	vdi_ptsin[0] = pxyarray[0];
 	vdi_ptsin[1] = pxyarray[1];

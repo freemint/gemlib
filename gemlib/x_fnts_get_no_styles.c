@@ -2,7 +2,7 @@
 #include "gemx.h"
 
 
-int
+short
 fnts_get_no_styles (FNT_DIALOG * fnt_dialog, long id)
 {
 	unsigned short *i;

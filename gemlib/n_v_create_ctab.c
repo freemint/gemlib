@@ -3,7 +3,7 @@
 
 
 COLOR_TAB *
-v_create_ctab (int handle, long color_space, unsigned long px_format)
+v_create_ctab (short handle, long color_space, unsigned long px_format)
 {
 	*(long *) &vdi_intin[0] = color_space;
 	*(unsigned long *) &vdi_intin[2] = px_format;

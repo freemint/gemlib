@@ -197,9 +197,7 @@ COBJS = \
 	a_wind_set_str.c \
 	a_wind_update.c \
 	\
-	globals_aes.c \
-	globals_ident.c \
-	globals_vdi.c \
+	globals.c \
 	\
 	$(_VDI_ATTRIB)  $(_VDI_CONTRL) $(_VDI_ESCAPE) $(_VDI_INPUT) \
 	$(_VDI_INQUIRE) $(_VDI_OUTPUT) $(_VDI_RASTER) \

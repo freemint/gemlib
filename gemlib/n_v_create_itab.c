@@ -3,7 +3,7 @@
 
 
 ITAB_REF
-v_create_itab (int handle, COLOR_TAB * ctab, int bits)
+v_create_itab (short handle, COLOR_TAB * ctab, short bits)
 {
 	*(COLOR_TAB **) & vdi_intin[0] = ctab;
 	vdi_intin[2] = bits;

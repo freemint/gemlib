@@ -2,9 +2,9 @@
 #include "gemx.h"
 
 
-int
-fnts_do (FNT_DIALOG * fnt_dialog, int button_flags, long id_in, long pt_in,
-	 long ratio_in, int *check_boxes, long *id, long *pt, long *ratio)
+short
+fnts_do (FNT_DIALOG * fnt_dialog, short button_flags, long id_in, long pt_in,
+	 long ratio_in, short *check_boxes, long *id, long *pt, long *ratio)
 {
 	unsigned short *i;
 

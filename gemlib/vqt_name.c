@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vqt_name (int handle, int element, char *name)
+short
+vqt_name (short handle, short element, char *name)
 {
 	vdi_intin[0] = element;
 	vdi_control[0] = 130;

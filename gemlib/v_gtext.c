@@ -3,7 +3,7 @@
 
 
 void
-v_gtext (int handle, int x, int y, const char *str)
+v_gtext (short handle, short x, short y, const char *str)
 {
 	short i;
 

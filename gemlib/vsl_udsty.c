@@ -3,7 +3,7 @@
 
 
 void
-vsl_udsty (int handle, int pat)
+vsl_udsty (short handle, short pat)
 {
 	vdi_intin[0] = pat;
 	vdi_control[0] = 113;

@@ -3,7 +3,7 @@
 
 
 FNT_DIALOG *
-fnts_create (int vdi_handle, int no_fonts, int font_flags, int dialog_flags,
+fnts_create (short vdi_handle, short no_fonts, short font_flags, short dialog_flags,
 	     char *sample, char *opt_button)
 {
 	aes_intin[0] = vdi_handle;

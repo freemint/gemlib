@@ -3,7 +3,7 @@
 
 
 void
-v_clear_disp_list (int handle)
+v_clear_disp_list (short handle)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

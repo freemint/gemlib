@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vqt_width (int handle, int chr, int *cw, int *ldelta, int *rdelta)
+short
+vqt_width (short handle, short chr, short *cw, short *ldelta, short *rdelta)
 {
 	vdi_intin[0] = chr;
 	vdi_control[0] = 117;

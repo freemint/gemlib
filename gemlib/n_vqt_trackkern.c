@@ -3,7 +3,7 @@
 
 
 void
-vqt_trackkern (int handle, long *x, long *y)
+vqt_trackkern (short handle, long *x, long *y)
 {
 	vdi_control[0] = 234;
 	vdi_control[1] = 0;

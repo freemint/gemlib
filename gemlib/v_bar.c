@@ -3,9 +3,9 @@
 
 
 void
-v_bar (int handle, int pxyarray[])
+v_bar (short handle, short pxyarray[])
 {
-	register int i;
+	register short i;
 
 	for (i = 0; i < 4; i++)
 		vdi_ptsin[i] = pxyarray[i];

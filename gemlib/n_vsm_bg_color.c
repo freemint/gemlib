@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vsm_bg_color (int handle, long color_space, COLOR_ENTRY * bg_color)
+short
+vsm_bg_color (short handle, long color_space, COLOR_ENTRY * bg_color)
 {
 	*(long *) &vdi_intin[0] = color_space;
 	*(COLOR_ENTRY *) & vdi_intin[2] = *bg_color;

@@ -2,9 +2,9 @@
 #include "gemx.h"
 
 
-int
-form_wbutton (OBJECT * fo_btree, int fo_bobject, int fo_bclicks,
-	      int *fo_bnxtobj, int whandle)
+short
+form_wbutton (OBJECT * fo_btree, short fo_bobject, short fo_bclicks,
+	      short *fo_bnxtobj, short whandle)
 {
 	aes_intin[0] = fo_bobject;
 	aes_intin[1] = fo_bclicks;

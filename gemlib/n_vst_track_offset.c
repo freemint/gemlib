@@ -3,8 +3,8 @@
 
 
 void
-vst_track_offset (int handle, long offset, int pairmode, int *tracks,
-		  int *pairs)
+vst_track_offset (short handle, long offset, short pairmode, short *tracks,
+		  short *pairs)
 {
 	vdi_intin[0] = 255;
 	vdi_intin[1] = pairmode;

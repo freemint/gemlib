@@ -3,7 +3,7 @@
 
 
 void
-vrq_string (int handle, int len, int echo, int echoxy[], char *str)
+vrq_string (short handle, short len, short echo, short echoxy[], char *str)
 {
 	vdi_intin[0] = len;
 	vdi_intin[1] = echo;

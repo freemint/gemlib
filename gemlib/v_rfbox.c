@@ -3,9 +3,9 @@
 
 
 void
-v_rfbox (int handle, int pxyarray[])
+v_rfbox (short handle, short pxyarray[])
 {
-	register int i;
+	register short i;
 
 	for (i = 0; i < 4; i++)
 		vdi_ptsin[i] = pxyarray[i];

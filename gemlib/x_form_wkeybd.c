@@ -2,9 +2,9 @@
 #include "gemx.h"
 
 
-int
-form_wkeybd (OBJECT * fo_ktree, int fo_kobject, int fo_kobnext, int fo_kchar,
-	     int *fo_knxtobject, int *fo_knxtchar, int whandle)
+short
+form_wkeybd (OBJECT * fo_ktree, short fo_kobject, short fo_kobnext, short fo_kchar,
+	     short *fo_knxtobject, short *fo_knxtchar, short whandle)
 {
 	aes_intin[0] = fo_kobject;
 	aes_intin[1] = fo_kchar;

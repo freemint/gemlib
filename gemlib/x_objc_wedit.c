@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-objc_wedit (OBJECT * tree, int obj, int key, int *idx, int kind, int whandle)
+short
+objc_wedit (OBJECT * tree, short obj, short key, short *idx, short kind, short whandle)
 {
 	aes_intin[0] = obj;
 	aes_intin[1] = key;

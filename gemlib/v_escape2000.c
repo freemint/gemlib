@@ -3,7 +3,7 @@
 
 
 void
-v_escape2000 (int handle, int times)
+v_escape2000 (short handle, short times)
 {
 	vdi_intin[0] = times;
 	vdi_control[0] = 5;

@@ -2,7 +2,7 @@
 #include "gemx.h"
 
 
-int
+short
 pdlg_update (PRN_DIALOG * prn_dialog, char *document_name)
 {
 	aes_intin[0] = 2;

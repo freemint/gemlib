@@ -3,8 +3,8 @@
 
 
 void
-v_justified (int handle, int x, int y, const char *str, int len,
-	     int word_space, int char_space)
+v_justified (short handle, short x, short y, const char *str, short len,
+	     short word_space, short char_space)
 {
 	short i;
 

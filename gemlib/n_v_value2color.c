@@ -3,7 +3,7 @@
 
 
 long
-v_value2color (int handle, unsigned long value, COLOR_ENTRY * color)
+v_value2color (short handle, unsigned long value, COLOR_ENTRY * color)
 {
 	*(unsigned long *) &vdi_intin[0] = value;
 	vdi_control[0] = 204;

@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-fslx_set_flags (int flags, int *oldval)
+short
+fslx_set_flags (short flags, short *oldval)
 {
 	aes_intin[0] = 0;
 	aes_intin[1] = flags;

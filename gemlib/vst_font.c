@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vst_font (int handle, int font)
+short
+vst_font (short handle, short font)
 {
 	vdi_intin[0] = font;
 	vdi_control[0] = 21;

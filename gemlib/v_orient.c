@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-v_orient (int handle, int orientation)
+short
+v_orient (short handle, short orientation)
 {
 	vdi_intin[0] = orientation;
 	vdi_control[0] = 5;

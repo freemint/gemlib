@@ -3,7 +3,7 @@
 
 
 void
-vqt_pairkern (int handle, int ch1, int ch2, long *x, long *y)
+vqt_pairkern (short handle, short ch1, short ch2, long *x, long *y)
 {
 	vdi_intin[0] = ch1;
 	vdi_intin[1] = ch2;

@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vs_ctab (int handle, COLOR_TAB * ctab)
+short
+vs_ctab (short handle, COLOR_TAB * ctab)
 {
 	vdi_params.intin = (short *) ctab;
 

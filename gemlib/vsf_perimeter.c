@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vsf_perimeter (int handle, int vis)
+short
+vsf_perimeter (short handle, short vis)
 {
 	vdi_intin[0] = vis;
 	vdi_control[0] = 104;

@@ -3,7 +3,7 @@
 
 
 void
-v_show_c (int handle, int reset)
+v_show_c (short handle, short reset)
 {
 	vdi_intin[0] = reset;
 	vdi_control[0] = 122;

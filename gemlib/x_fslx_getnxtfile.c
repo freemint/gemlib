@@ -2,7 +2,7 @@
 #include "gemx.h"
 
 
-int
+short
 fslx_getnxtfile (void *fsd, char *fname)
 {
 	aes_addrin[0] = (long) fsd;

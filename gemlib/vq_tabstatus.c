@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vq_tabstatus (int handle)
+short
+vq_tabstatus (short handle)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

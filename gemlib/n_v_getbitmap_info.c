@@ -3,8 +3,8 @@
 
 
 void
-v_getbitmap_info (int handle, int ch, long *advancex, long *advancey,
-		  long *xoffset, long *yoffset, int *width, int *height,
+v_getbitmap_info (short handle, short ch, long *advancex, long *advancey,
+		  long *xoffset, long *yoffset, short *width, short *height,
 		  short **bitmap)
 {
 	vdi_intin[0] = ch;

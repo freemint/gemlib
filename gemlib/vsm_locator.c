@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vsm_locator (int handle, int x, int y, int *xout, int *yout, int *term)
+short
+vsm_locator (short handle, short x, short y, short *xout, short *yout, short *term)
 {
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;

@@ -3,7 +3,7 @@
 
 
 void
-v_ftext_offset (int handle, int x, int y, char *str, int *offset)
+v_ftext_offset (short handle, short x, short y, char *str, short *offset)
 {
 	short *ptr = vdi_intin;
 	short i;

@@ -3,7 +3,7 @@
 
 
 void
-v_meta_extents (int handle, int min_x, int min_y, int max_x, int max_y)
+v_meta_extents (short handle, short min_x, short min_y, short max_x, short max_y)
 {
 	vdi_ptsin[0] = min_x;
 	vdi_ptsin[1] = min_y;

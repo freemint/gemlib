@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-v_delete_itab (int handle, ITAB_REF itab)
+short
+v_delete_itab (short handle, ITAB_REF itab)
 {
 	*(ITAB_REF *) & vdi_intin[0] = itab;
 

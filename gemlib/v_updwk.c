@@ -3,7 +3,7 @@
 
 
 void
-v_updwk (int handle)
+v_updwk (short handle)
 {
 	vdi_control[0] = 4;
 	vdi_control[1] = 0;

@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-fnts_update (FNT_DIALOG * fnt_dialog, int button_flags, long id, long pt,
+short
+fnts_update (FNT_DIALOG * fnt_dialog, short button_flags, long id, long pt,
 	     long ratio)
 {
 	unsigned short *i;

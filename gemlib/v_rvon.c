@@ -3,7 +3,7 @@
 
 
 void
-v_rvon (int handle)
+v_rvon (short handle)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

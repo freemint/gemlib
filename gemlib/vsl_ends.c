@@ -3,7 +3,7 @@
 
 
 void
-vsl_ends (int handle, int begstyle, int endstyle)
+vsl_ends (short handle, short begstyle, short endstyle)
 {
 	vdi_intin[0] = begstyle;
 	vdi_intin[1] = endstyle;

@@ -2,9 +2,9 @@
 #include "gemx.h"
 
 
-int
+short
 pdlg_evnt (PRN_DIALOG * prn_dialog, PRN_SETTINGS * settings, EVNT * events,
-	   int *button)
+	   short *button)
 {
 	aes_addrin[0] = (long) prn_dialog;
 	aes_addrin[1] = (long) settings;

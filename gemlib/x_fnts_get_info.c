@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-fnts_get_info (FNT_DIALOG * fnt_dialog, long id, int *mono, int *outline)
+short
+fnts_get_info (FNT_DIALOG * fnt_dialog, long id, short *mono, short *outline)
 {
 	unsigned short *i;
 

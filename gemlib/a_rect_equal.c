@@ -2,7 +2,7 @@
 #include "gem.h"
 
 
-int
+short
 rc_equal (GRECT * p1, GRECT * p2)
 {
 	return ((p1->g_x == p2->g_x) &&

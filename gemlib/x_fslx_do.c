@@ -3,9 +3,9 @@
 
 
 void *
-fslx_do (char *title, char *path, int pathlen, char *fname, int fnamelen,
-	 char *patterns, XFSL_FILTER filter, char *paths, int *sort_mode,
-	 int flags, int *button, int *nfiles, char **pattern)
+fslx_do (char *title, char *path, short pathlen, char *fname, short fnamelen,
+	 char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode,
+	 short flags, short *button, short *nfiles, char **pattern)
 {
 	aes_intin[0] = pathlen;
 	aes_intin[1] = fnamelen;

@@ -3,7 +3,7 @@
 
 
 void
-vq_curaddress (int handle, int *cur_row, int *cur_col)
+vq_curaddress (short handle, short *cur_row, short *cur_col)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

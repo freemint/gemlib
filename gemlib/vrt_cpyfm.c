@@ -3,8 +3,8 @@
 
 
 void
-vrt_cpyfm (int handle, int mode, int pxyarray[], MFDB * src, MFDB * dst,
-	   int color[])
+vrt_cpyfm (short handle, short mode, short pxyarray[], MFDB * src, MFDB * dst,
+	   short color[])
 {
 	register short i;
 

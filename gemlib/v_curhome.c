@@ -3,7 +3,7 @@
 
 
 void
-v_curhome (int handle)
+v_curhome (short handle)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

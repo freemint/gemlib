@@ -3,7 +3,7 @@
 
 
 void
-vsp_film (int handle, int index, int lightness)
+vsp_film (short handle, short index, short lightness)
 {
 	vdi_intin[0] = index;
 	vdi_intin[1] = lightness;

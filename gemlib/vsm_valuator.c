@@ -3,7 +3,7 @@
 
 
 void
-vsm_valuator (int handle, int in, int *out, int *term, int *status)
+vsm_valuator (short handle, short in, short *out, short *term, short *status)
 {
 	vdi_intin[0] = in;
 	vdi_control[0] = 29;

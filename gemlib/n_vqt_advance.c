@@ -3,7 +3,7 @@
 
 
 void
-vqt_advance (int handle, int ch, long *advx, long *advy)
+vqt_advance (short handle, short ch, long *advx, long *advy)
 {
 	vdi_intin[0] = ch;
 	vdi_control[0] = 247;
@@ -20,8 +20,8 @@ vqt_advance (int handle, int ch, long *advx, long *advy)
  * * NOTE: requires NVDI version 3.x or higher
  */
 
-int
-vqt_ext_name (int handle, int index, char *name, int *font_format, int *flags)
+short
+vqt_ext_name (short handle, short index, char *name, short *font_format, short *flags)
 {
 	vdi_intin[0] = index;
 	vdi_intin[1] = 0;

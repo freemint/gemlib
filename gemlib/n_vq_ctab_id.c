@@ -3,7 +3,7 @@
 
 
 long
-vq_ctab_id (int handle)
+vq_ctab_id (short handle)
 {
 	vdi_control[0] = 206;
 	vdi_control[1] = 0;

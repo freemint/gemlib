@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-form_xdo (OBJECT * tree, int startob, int *lastcrsr, XDO_INF * tabs,
+short
+form_xdo (OBJECT * tree, short startob, short *lastcrsr, XDO_INF * tabs,
 	  void *flydial)
 {
 	aes_intin[0] = startob;

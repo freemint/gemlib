@@ -3,7 +3,7 @@
 
 
 void
-v_clswk (int handle)
+v_clswk (short handle)
 {
 	vdi_control[0] = 2;
 	vdi_control[1] = 0;

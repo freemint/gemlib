@@ -3,7 +3,7 @@
 
 
 void
-vqin_mode (int handle, int dev, int *mode)
+vqin_mode (short handle, short dev, short *mode)
 {
 	vdi_intin[0] = dev;
 	vdi_control[0] = 115;

@@ -3,8 +3,8 @@
 
 
 void
-v_cellarray (int handle, int pxyarray[], int row_length, int elements,
-	     int nrows, int write_mode, int colarray[])
+v_cellarray (short handle, short pxyarray[], short row_length, short elements,
+	     short nrows, short write_mode, short colarray[])
 {
 	short *wptr, *end;
 

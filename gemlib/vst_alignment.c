@@ -3,7 +3,7 @@
 
 
 void
-vst_alignment (int handle, int hin, int vin, int *hout, int *vout)
+vst_alignment (short handle, short hin, short vin, short *hout, short *vout)
 {
 	vdi_intin[0] = hin;
 	vdi_intin[1] = vin;

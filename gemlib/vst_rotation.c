@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vst_rotation (int handle, int ang)
+short
+vst_rotation (short handle, short ang)
 {
 	vdi_intin[0] = ang;
 	vdi_control[0] = 13;

@@ -3,7 +3,7 @@
 
 
 void
-v_ellipse (int handle, int x, int y, int xrad, int yrad)
+v_ellipse (short handle, short x, short y, short xrad, short yrad)
 {
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;

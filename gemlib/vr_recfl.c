@@ -3,9 +3,9 @@
 
 
 void
-vr_recfl (int handle, int pxyarray[])
+vr_recfl (short handle, short pxyarray[])
 {
-	register int i;
+	register short i;
 
 	for (i = 0; i < 4; i++)
 		vdi_ptsin[i] = pxyarray[i];

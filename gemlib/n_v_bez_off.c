@@ -3,7 +3,7 @@
 
 
 void
-v_bez_off (int handle)
+v_bez_off (short handle)
 {
 	vdi_control[0] = 11;
 	vdi_control[1] = 0;

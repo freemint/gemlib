@@ -3,7 +3,7 @@
 
 
 void
-vm_pagesize (int handle, int pgwidth, int pgheight)
+vm_pagesize (short handle, short pgwidth, short pgheight)
 {
 	vdi_intin[0] = 0;
 	vdi_intin[1] = pgwidth;

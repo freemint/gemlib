@@ -2,10 +2,10 @@
 #include "gemx.h"
 
 
-int
-form_xdial (int fo_diflag, int fo_dilittlx, int fo_dilittly, int fo_dilittlw,
-	    int fo_dilittlh, int fo_dibigx, int fo_dibigy, int fo_dibigw,
-	    int fo_dibigh, void **flydial)
+short
+form_xdial (short fo_diflag, short fo_dilittlx, short fo_dilittly, short fo_dilittlw,
+	    short fo_dilittlh, short fo_dibigx, short fo_dibigy, short fo_dibigw,
+	    short fo_dibigh, void **flydial)
 {
 	aes_intin[0] = fo_diflag;
 	aes_intin[1] = fo_dilittlx;

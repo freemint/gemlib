@@ -2,7 +2,7 @@
 #include "gem.h"
 
 
-int
+short
 rc_copy (GRECT * src, GRECT * dst)
 {
 	*dst = *src;

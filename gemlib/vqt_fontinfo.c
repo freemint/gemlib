@@ -3,8 +3,8 @@
 
 
 void
-vqt_fontinfo (int handle, int *minade, int *maxade, int distances[],
-	      int *maxwidth, int effects[])
+vqt_fontinfo (short handle, short *minade, short *maxade, short distances[],
+	      short *maxwidth, short effects[])
 {
 	vdi_control[0] = 131;
 	vdi_control[1] = 0;

@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-v_resize_bm (int handle, int width, int height, long byte_width,
+short
+v_resize_bm (short handle, short width, short height, long byte_width,
 	     unsigned char *addr)
 {
 	vdi_intin[0] = width;

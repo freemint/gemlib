@@ -2,7 +2,7 @@
 #include "gemx.h"
 
 
-int
+short
 pdlg_remove_sub_dialogs (PRN_DIALOG * prn_dialog)
 {
 	aes_intin[0] = 4;

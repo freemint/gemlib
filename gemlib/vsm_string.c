@@ -2,8 +2,8 @@
 #include "gem.h"
 
 
-int
-vsm_string (int handle, int len, int echo, int echoxy[], char *str)
+short
+vsm_string (short handle, short len, short echo, short echoxy[], char *str)
 {
 	vdi_intin[0] = len;
 	vdi_intin[1] = echo;

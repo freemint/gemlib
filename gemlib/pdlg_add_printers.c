@@ -2,7 +2,7 @@
 #include "gemx.h"
 
 
-int
+short
 pdlg_add_printers (PRN_DIALOG * prn_dialog, DRV_INFO * drv_info)
 {
 	aes_intin[0] = 0;

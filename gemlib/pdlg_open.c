@@ -2,9 +2,9 @@
 #include "gemx.h"
 
 
-int
+short
 pdlg_open (PRN_DIALOG * prn_dialog, PRN_SETTINGS * settings,
-	   char *document_name, int option_flags, int x, int y)
+	   char *document_name, short option_flags, short x, short y)
 {
 	aes_intin[0] = option_flags;
 	aes_intin[1] = x;

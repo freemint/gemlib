@@ -3,7 +3,7 @@
 
 
 void
-v_circle (int handle, int x, int y, int radius)
+v_circle (short handle, short x, short y, short radius)
 {
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;

@@ -3,7 +3,7 @@
 
 
 long
-vq_weight_color (int handle, COLOR_ENTRY * hilite_color)
+vq_weight_color (short handle, COLOR_ENTRY * hilite_color)
 {
 	vdi_control[0] = 209;
 	vdi_control[1] = 0;

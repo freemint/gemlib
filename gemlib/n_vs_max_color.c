@@ -2,8 +2,8 @@
 #include "gemx.h"
 
 
-int
-vs_max_color (int handle, long color_space, COLOR_ENTRY * min_color)
+short
+vs_max_color (short handle, long color_space, COLOR_ENTRY * min_color)
 {
 	*(long *) &vdi_intin[0] = color_space;
 	*(COLOR_ENTRY *) & vdi_intin[2] = *min_color;

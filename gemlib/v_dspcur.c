@@ -3,7 +3,7 @@
 
 
 void
-v_dspcur (int handle, int x, int y)
+v_dspcur (short handle, short x, short y)
 {
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;

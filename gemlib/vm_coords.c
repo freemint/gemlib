@@ -3,7 +3,7 @@
 
 
 void
-vm_coords (int handle, int llx, int lly, int urx, int ury)
+vm_coords (short handle, short llx, short lly, short urx, short ury)
 {
 	vdi_intin[0] = 1;
 	vdi_intin[1] = llx;

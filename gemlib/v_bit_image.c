@@ -3,8 +3,8 @@
 
 
 void
-v_bit_image (int handle, const char *filename, int aspect, int x_scale,
-	     int y_scale, int h_align, int v_align, int *pxyarray)
+v_bit_image (short handle, const char *filename, short aspect, short x_scale,
+	     short y_scale, short h_align, short v_align, short *pxyarray)
 {
 	short n;
 

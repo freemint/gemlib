@@ -3,7 +3,7 @@
 
 
 void
-v_rmcur (int handle)
+v_rmcur (short handle)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;

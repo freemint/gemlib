@@ -3,7 +3,7 @@
 
 
 void
-v_eeos (int handle)
+v_eeos (short handle)
 {
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;
