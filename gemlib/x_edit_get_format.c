@@ -9,10 +9,13 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param tabwidth will be filled by the tabulator width.
+ *  @param tabwidth will be filled by the tabulator width.\p
+ *         [option CHECK_NULLPTR] tabwidth may be NULL
  *  @param autowrap will be filled by the autowrap information:
  *         - \p autowrap > 0: Pixel width for auto line wrap (generally == object width)
- *         - \p autowrap = 0: No wrapping, but horiz. scrolling
+ *         - \p autowrap = 0: No wrapping, but horiz. scrolling\p
+ *         .
+ *         [option CHECK_NULLPTR] autowrap may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 for error, else 1
@@ -38,7 +41,13 @@ mt_edit_get_format( OBJECT *tree, short obj,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (tabwidth)
+#endif
 	*tabwidth = aes_intout[1];
+#if CHECK_NULLPTR
+	if (autowrap)
+#endif
 	*autowrap = aes_intout[2];
 
 	return(aes_intout[0]);

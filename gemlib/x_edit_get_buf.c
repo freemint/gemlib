@@ -9,10 +9,13 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param buf this pointer will be filled with the address of buffer
- *  @param buflen this pointer will be filled with the buffer length
+ *  @param buf this pointer will be filled with the address of buffer\p
+ *         [option CHECK_NULLPTR] buf may be NULL
+ *  @param buflen this pointer will be filled with the buffer length\p
+ *         [option CHECK_NULLPTR] buflen may be NULL
  *  @param txtlen this pointer will be filled with the current
- *         text length without EOS
+ *         text length without EOS\p
+ *         [option CHECK_NULLPTR] txtlen may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 for error, else 1
@@ -38,8 +41,17 @@ mt_edit_get_buf( OBJECT *tree, short obj, char **buf, long *buflen,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (buf)
+#endif
 	*buf = (char *)aes_addrout[0];
+#if CHECK_NULLPTR
+	if (buflen)
+#endif
 	*buflen = *((long *) (aes_intout+1));
+#if CHECK_NULLPTR
+	if (txtlen)
+#endif
 	*txtlen = *((long *) (aes_intout+3));
 
 	return(aes_intout[0]);
