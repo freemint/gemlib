@@ -53,6 +53,7 @@ OBJ = \
  a_form_alert.o	\
  a_form_button.o	\
  a_form_center.o	\
+ a_form_center_grect.o	\
  a_form_dial.o	\
  a_form_do.o	\
  a_form_error.o	\
@@ -62,6 +63,7 @@ OBJ = \
  a_glue.o	\
  a_graf_dragbox.o	\
  a_graf_growbox.o	\
+ a_graf_growbox_grect.o	\
  a_graf_handle.o	\
  a_graf_mbox.o	\
  a_graf_mkstate.o	\
@@ -69,6 +71,7 @@ OBJ = \
  a_graf_multirubber.o	\
  a_graf_rubbox.o	\
  a_graf_shrinkbox.o	\
+ a_graf_shrinkbox_grect.o	\
  a_graf_slidebox.o	\
  a_graf_watchbox.o	\
  a_menu_attach.o	\
@@ -87,6 +90,7 @@ OBJ = \
  a_objc_change.o	\
  a_objc_delete.o	\
  a_objc_draw.o	\
+ a_objc_draw_grect.o	\
  a_objc_edit.o	\
  a_objc_find.o	\
  a_objc_offset.o	\
@@ -444,6 +448,7 @@ OBJ = \
  x_form_wbutton.o	\
  x_form_wkeybd.o	\
  x_form_xdial.o	\
+ x_form_xdial_grect.o	\
  x_form_xdo.o	\
  x_form_xerr.o	\
  x_fslx_close.o	\

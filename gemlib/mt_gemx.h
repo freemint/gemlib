@@ -65,6 +65,7 @@ short	mt_form_popup 	(OBJECT *tree, short x, short y, short * global);
 short	mt_form_wbutton	(OBJECT *fo_btree, short fo_bobject, short fo_bclicks, short *fo_bnxtobj, short whandle, short * global);
 short	mt_form_wkeybd	(OBJECT *fo_ktree, short fo_kobject, short fo_kobnext, short fo_kchar, short *fo_knxtobject, short *fo_knxtchar, short whandle, short * global);
 short	mt_form_xdial 	(short fo_diflag, short fo_dilittlx, short fo_dilittly, short fo_dilittlw, short fo_dilittlh, short fo_dibigx, short fo_dibigy, short fo_dibigw, short fo_dibigh, void **flydial, short * global);
+short	mt_form_xdial_grect (short fo_diflag, const GRECT *fo_dilittl, const GRECT *fo_dibig, void **flydial, short * global);
 short	mt_form_xdo		(OBJECT *tree, short startob, short *lastcrsr, XDO_INF *tabs, void *flydial, short * global); 
 short	mt_form_xerr	(long errcode, char *errfile, short * global);
 short	mt_xfrm_popup 	(OBJECT *tree, short x, short y, short firstscrlob, short lastscrlob, short nlines,

@@ -28,6 +28,7 @@ __BEGIN_DECLS
 #define form_wbutton(a,b,c,d,e)			mt_form_wbutton(a,b,c,d,e,aes_global)
 #define form_wkeybd(a,b,c,d,e,f,g)		mt_form_wkeybd(a,b,c,d,e,f,g,aes_global)
 #define form_xdial(a,b,c,d,e,f,g,h,i,j)	mt_form_xdial(a,b,c,d,e,f,g,h,i,j,aes_global)
+#define form_xdial_grect(a,b,c,d)		mt_form_xdial_grect(a,b,c,d,aes_global)
 #define form_xdo(a,b,c,d,e)				mt_form_xdo(a,b,c,d,e,aes_global)
 #define form_xerr(a,b)					mt_form_xerr(a,b,aes_global)
 #define xfrm_popup(a,b,c,d,e,f,g,h,i)	mt_xfrm_popup(a,b,c,d,e,f,g,h,i,aes_global)
