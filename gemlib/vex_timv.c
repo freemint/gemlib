@@ -23,17 +23,13 @@
 void
 vex_timv (short handle, void *time_addr, void **otime_addr, short *time_conv)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+
 	VDI_PARAMS(vdi_control, 0L, 0L, time_conv, vdi_dummy );
-#endif
 	
 	vdi_control_ptr(7) = time_addr;
 	
 	VDI_TRAP_00 (vdi_params, handle, 118);
 	
 	*otime_addr = vdi_control_ptr(9);
-#if !(USE_LOCAL_VDIPB)
-	*time_conv  = vdi_intout[0];
-#endif
 }

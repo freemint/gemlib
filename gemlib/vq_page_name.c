@@ -28,12 +28,11 @@ short
 vq_page_name (short handle, short page_id, char *page_name,
               long *page_width, long *page_height)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[3];   
 	short vdi_intout[5]; 
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
-#endif
 	
 	vdi_intin    [0] = page_id;
 	vdi_intin_ptr(1) = page_name;

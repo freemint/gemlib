@@ -23,10 +23,9 @@
 void
 vex_motv (short handle, void *new, void **old)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_dummy, vdi_dummy );
-#endif
 	
 	vdi_control_ptr(7) = new;
 	

@@ -30,11 +30,10 @@ void
 vq_scan (short handle, short *g_slice, short *g_page,
          short *a_slice, short *a_page, short *div_fac)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[5]; 
+
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_dummy );
-#endif
 	
 	VDI_TRAP_ESC (vdi_params, handle, 5,24, 0,0);
 	

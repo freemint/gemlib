@@ -23,18 +23,9 @@ void
 v_write_meta (short handle, short numvdi_intin, short *avdi_intin,
               short num_ptsin, short *a_ptsin)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+
 	VDI_PARAMS(vdi_control, avdi_intin, a_ptsin, vdi_dummy, vdi_dummy );
-#else
-	vdi_params.intin = avdi_intin;
-	vdi_params.ptsin = a_ptsin;
-#endif
 	
 	VDI_TRAP_ESC (vdi_params, handle, 5,99, num_ptsin,numvdi_intin);
-
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.intin = vdi_intin;
-	vdi_params.ptsin = vdi_ptsin;
-#endif
 }
