@@ -753,7 +753,7 @@ typedef struct mouse_event_type
 extern int	appl_bvset 		(int bvdisk, int bvhard);
 extern int	appl_control	(int ap_cid, int ap_cwhat, void *ap_cout);
 extern int	appl_exit 		(void);
-extern int	appl_find 		(char *Name);
+extern int	appl_find 		(const char *Name);
 extern int	appl_getinfo 	(int type, int *out1, int *out2, int *out3, int *out4);
 extern int	appl_init 		(void);
 extern int	appl_read 		(int ApId, int Length, void *ApPbuff);
@@ -775,7 +775,7 @@ extern int 	evnt_multi 		(int Type, int Clicks, int WhichButton, int WhichState,
 											int *ButtonState, int *KeyState, int *Key, int *ReturnCount);
 extern int	evnt_timer 		(unsigned long Interval);
 
-extern int 	form_alert 		(int DefButton, char *Str);
+extern int 	form_alert 		(int DefButton, const char *Str);
 extern int 	form_button 	(void *Btree, int Bobject, int Bclicks, int *Bnxtobj);
 extern int 	form_center 	(void *Tree, int *Cx, int *Cy, int *Cw, int *Ch);
 extern int 	form_dial 		(int Flag, int Sx, int Sy, int Sw, int Sh, int Bx, int By, int Bw, int Bh);
@@ -783,7 +783,7 @@ extern int 	form_do 			(void *Tree, int StartObj);
 extern int 	form_error 		(int ErrorCode);
 extern int 	form_keybd 		(void *Ktree, int Kobject, int Kobnext, int Kchar, int *Knxtobject, int *Knxtchar);
 
-extern int 	fsel_exinput 	(char *Path, char *File, int *ExitButton, char *title);
+extern int 	fsel_exinput 	(char *Path, char *File, int *ExitButton, const char *title);
 extern int 	fsel_input 		(char *Path, char *File, int *ExitButton);
 
 extern int 	graf_dragbox 	(int Sw, int Sh, int Sx, int Sy, int Bx, int By, int Bw, int Bh, int *Fw, int *Fh); 
@@ -824,23 +824,23 @@ extern int	objc_sysvar 	(int mode, int which, int in1, int in2, int *out1, int *
 
 extern int	rsrc_free 		(void);
 extern int	rsrc_gaddr 		(int Type, int Index, void *Address);
-extern int	rsrc_load 		(char *Name);
+extern int	rsrc_load 		(const char *Name);
 extern int	rsrc_obfix 		(void *Tree, int Index);
 extern int	rsrc_rcfix 		(void *rc_header);
 extern int	rsrc_saddr 		(int Type, int Index, void *Address);
 
 extern int	scrp_clear 		(void);
 extern int	scrp_read 		(char *Scrappath);
-extern int	scrp_write 		(char *Scrappath);
+extern int	scrp_write 		(const char *Scrappath);
 
-extern int	shel_envrn 		(char **result, char *param);
+extern int	shel_envrn 		(char **result, const char *param);
 extern int	shel_find 		(char *buf);
 extern int 	shel_get 		(char *Buf, int Len);
-extern int	shel_help		(int sh_hmode, char *sh_hfile, char *sh_hkey);
-extern int 	shel_put	 		(char *Buf, int Len);
+extern int	shel_help		(int sh_hmode, const char *sh_hfile, const char *sh_hkey);
+extern int 	shel_put	 		(const char *Buf, int Len);
 extern int	shel_rdef		(char *lpcmd, char *lpdir);
 extern int	shel_read 		(char *Command, char *Tail);
-extern int	shel_wdef		(char *lpcmd, char *lpdir);
+extern int	shel_wdef		(const char *lpcmd, const char *lpdir);
 extern int	shel_write		(int Exit, int Graphic, int Aes, void *Command, char *Tail);
 
 extern int	wind_calc 		(int Type, int Parts, int InX, int InY, int InW, int InH, int *OutX, int *OutY, int *OutW, int *OutH);	
@@ -1100,10 +1100,10 @@ extern void	v_clrwk				(int handle);
 extern void	v_clsvwk				(int handle);
 extern void	v_clswk				(int handle);
 extern int	v_flushcache		(int handle);
-extern int	v_loadcache			(int handle, char *filename, int mode);
+extern int	v_loadcache			(int handle, const char *filename, int mode);
 extern void	v_opnvwk				(int work_in[], int *handle, int work_out[]);
 extern void	v_opnwk				(int work_in[], int *handle, int work_out[]);
-extern int	v_savecache			(int handle, char *filename);
+extern int	v_savecache			(int handle, const char *filename);
 extern void	v_set_app_buff		(int handle, void *buf_p, int size);
 extern void	v_updwk				(int handle);
 extern void	vs_clip				(int handle, int clip_flag, int pxyarray[]);
@@ -1113,7 +1113,7 @@ extern void	vst_unload_fonts	(int handle, int select);
 /*
  * escape functions
 */
-extern void	v_bit_image			(int handle, char *filename, int aspect, int x_scale, int y_scale, int h_align, int v_align, int *pxyarray);
+extern void	v_bit_image			(int handle, const char *filename, int aspect, int x_scale, int y_scale, int h_align, int v_align, int *pxyarray);
 extern void	v_clear_disp_list	(int handle);
 extern int	v_copies				(int handle, int count);
 extern void	v_dspcur				(int handle, int x, int y);
@@ -1125,10 +1125,10 @@ extern int	v_page_size			(int handle, int page_id);
 extern void	v_rmcur				(int handle);
 extern void	v_trays				(int handle, int input, int output, int *set_input, int *set_output);
 extern int	vq_calibrate		(int handle, int *flag);
-extern int	vq_page_name		(int handle, int page_id, char *page_name, long *page_width, long *page_height);
+extern int	vq_page_name		(int handle, int page_id, const char *page_name, long *page_width, long *page_height);
 extern void	vq_scan				(int handle, int *g_slice, int *g_page, int *a_slice, int *a_page, int *div_fac);
 extern int	vq_tabstatus		(int handle);
-extern void	vq_tray_names		(int handle, char *input_name, char *output_name, int *input, int *output);
+extern void	vq_tray_names		(int handle, const char *input_name, const char *output_name, int *input, int *output);
 extern int	vs_calibrate		(int handle, int flag, int *rgb);
 extern int	vs_palette			(int handle, int palette);
 
@@ -1141,7 +1141,7 @@ extern void	vt_resolution		(int handle, int xres, int yres, int *xset, int *yset
 extern void	v_meta_extents		(int handle, int min_x, int min_y, int max_x, int max_y);
 extern void	v_write_meta		(int handle, int numvdi_intin, int *avdi_intin, int num_ptsin, int *a_ptsin);
 extern void	vm_coords			(int handle, int llx, int lly, int urx, int ury);
-extern void	vm_filename			(int handle, char *filename);
+extern void	vm_filename			(int handle, const char *filename);
 extern void	vm_pagesize			(int handle, int pgwidth, int pgheight);
 
 extern void	vsc_expose			(int handle, int state);
@@ -1149,12 +1149,12 @@ extern void	vsp_film				(int handle, int index, int lightness);
 
 extern void	v_escape2000		(int handle, int times);
 
-extern void	v_alpha_text		(int handle, char *str);
+extern void	v_alpha_text		(int handle, const char *str);
 extern void	v_curdown			(int handle);
 extern void	v_curhome			(int handle);
 extern void	v_curleft			(int handle);
 extern void	v_curright			(int handle);
-extern void	v_curtext			(int handle, char *str);
+extern void	v_curtext			(int handle, const char *str);
 extern void	v_curup				(int handle);
 extern void	v_eeol				(int handle);
 extern void	v_eeos				(int handle);
@@ -1179,7 +1179,7 @@ extern void	vql_attributes		(int handle, int atrib[]);
 extern void	vqm_attributes		(int handle, int atrib[]);
 extern void	vqt_attributes		(int handle, int atrib[]);
 extern void	vqt_cachesize		(int handle, int which_cache, long *size);
-extern void	vqt_extent			(int handle, char *str, int extent[]);
+extern void	vqt_extent			(int handle, const char *str, int extent[]);
 extern void	vqt_fontinfo		(int handle, int *minade, int *maxade, int distances[], int *maxwidth, int effects[]);
 extern void	vqt_get_table		(int handle, short **map);
 extern int	vqt_name				(int handle, int element, char *name);
@@ -1224,8 +1224,8 @@ extern void	v_ellarc				(int handle, int x, int y, int xrad, int yrad, int began
 extern void	v_ellipse			(int handle, int x, int y, int xrad, int yrad);
 extern void	v_ellpie				(int handle, int x, int y, int xrad, int yrad, int begang, int endang);
 extern void	v_fillarea			(int handle, int count, int pxyarray[]);
-extern void	v_gtext				(int handle, int x, int y, char *str) ;
-extern void	v_justified			(int handle, int x, int y, char *str, int len, int word_space, int char_space);
+extern void	v_gtext				(int handle, int x, int y, const char *str) ;
+extern void	v_justified			(int handle, int x, int y, const char *str, int len, int word_space, int char_space);
 extern void	v_pieslice			(int handle, int x, int y, int radius, int begang, int endang);
 extern void	v_pline				(int handle, int count, int pxyarray[]);
 extern void	v_pmarker			(int handle, int count, int pxyarray[]);
@@ -1245,8 +1245,8 @@ extern void	vrt_cpyfm			(int handle, int mode, int pxyarray[], MFDB *src, MFDB *
 /*
  * Some usefull extensions.
 */
-extern void	vdi_array2str		(short *src, char *des, int len);
-extern int	vdi_str2array		(char *src, short *des);
+extern void	vdi_array2str		(const short *src, char  *des, int len);
+extern int	vdi_str2array		(const char  *src, short *des);
 
 
 /*
