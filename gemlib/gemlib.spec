@@ -49,9 +49,12 @@ make
 [ "${RPM_BUILD_ROOT}" != "/" ] && rm -rf ${RPM_BUILD_ROOT}
 
 cd gemlib
-mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/GEM/{include,lib}
-install -m 644 lib{gem,gem16}.a ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
-install -m 644 {gem,gemx}.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
+mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
+mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
+install -m 644 libgem.a ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
+install -m 644 libgem16.a ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
+install -m 644 gem.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
+install -m 644 gemx.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
 
 
 %clean
