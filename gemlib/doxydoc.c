@@ -164,5 +164,62 @@
 /**@}*/
 
 /** @defgroup VDI VDI  Function Reference
- *  todo (any contribution is welcome)...
+ *  @{
  */
+
+/** @defgroup v_attr VDI attribute functions
+ *
+ *  @brief attribute functions
+ *
+ *  todo: add description here
+ */
+
+/** @defgroup v_ctrl VDI control functions
+ *
+ *  @brief control functions
+ *
+ *  todo: add description here
+ */
+
+/** @defgroup v_escp VDI escape functions
+ *
+ *  @brief escapes functions
+ *
+ *  todo: add description here
+ */
+
+/** @defgroup v_inqr VDI inquiry functions
+ *
+ *  @brief inquiry functions
+ *
+ *  todo: add description here
+ */
+
+/** @defgroup v_inpt VDI input functions
+ *
+ *  @brief input functions
+ *
+ *  todo: add description here
+ */
+
+/** @defgroup v_outp VDI output functions
+ *
+ *  @brief output functions
+ *
+ *  todo: add description here
+ */
+
+/** @defgroup v_rstr VDI raster functions
+ *
+ *  @brief raster functions
+ *
+ *  todo: add description here
+ */
+
+/** @defgroup v_util VDI utility functions
+ *
+ *  @brief some usefull utilities function. This library doesn't contain
+ *         any VDI call.
+ */
+
+/**@}*/
