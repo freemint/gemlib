@@ -930,8 +930,10 @@ short mt_form_keybd  (OBJECT *, short Kobject, short Kobnext, short Kchar,
 /** @addtogroup a_fsel
  *  @{
  */
-short 	fsel_exinput	(char *Path, char *File, short *ExitButton, const char *title);
-short 	fsel_input	(char *Path, char *File, short *ExitButton);
+short 	mt_fsel_exinput	(char *Path, char *File, short *ExitButton, const char *title, short *global);
+short 	mt_fsel_input	(char *Path, char *File, short *ExitButton, short *global);
+#define fsel_exinput(a,b,c,d)	mt_fsel_exinput(a,b,c,d,aes_global)
+#define fsel_input(a,b,c)		mt_fsel_input(a,b,c,aes_global)
 /**@}*/
 
 /** @addtogroup a_graf
