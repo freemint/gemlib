@@ -1033,6 +1033,17 @@ short vst_map_mode   (short handle, short mode);
 /*
  * The following functions requires NVDI version 5.x or higher
  */
+ 
+/*----------------------------------------------------------------------------------------*/
+/* Function witch use for the printer dialog from WDialog											*/
+/*----------------------------------------------------------------------------------------*/
+
+DRV_INFO *v_create_driver_info( short handle, short driver_id );
+short v_delete_driver_info( short handle, DRV_INFO *drv_info );
+short v_read_default_settings( short handle, PRN_SETTINGS *settings );
+short v_write_default_settings( short handle, PRN_SETTINGS *settings );
+
+
 /*----------------------------------------------------------------------------------------*/
 /* Konstanten fÅr Pixelformate																				*/
 /*----------------------------------------------------------------------------------------*/
