@@ -185,11 +185,13 @@ _VDI_EXTENSIONS = \
 	n_v_color2nearest.c \
 	n_v_color2value.c \
 	n_v_create_ctab.c \
+	n_v_create_driver_info.c \
 	n_v_create_itab.c \
 	n_v_ctab_idx2value.c \
 	n_v_ctab_idx2vdi.c \
 	n_v_ctab_vdi2idx.c \
 	n_v_delete_ctab.c \
+	n_v_delete_driver_info.c \
 	n_v_delete_itab.c \
 	n_v_ftext.c \
 	n_v_ftext16.c \
@@ -203,9 +205,11 @@ _VDI_EXTENSIONS = \
 	n_v_open_bm.c \
 	n_v_opnbm.c \
 	n_v_opnprn.c \
+	n_v_read_default_settings.c \
 	n_v_resize_bm.c \
 	n_v_setrgb.c \
 	n_v_value2color.c \
+	n_v_write_default_settings.c \
 	n_vq_ctab.c \
 	n_vq_ctab_entry.c \
 	n_vq_ctab_id.c \
