@@ -3,7 +3,7 @@
 #
 
 SHELL = /bin/sh
-SUBDIRS = configtool documentation libgemma libslb src test
+SUBDIRS = libgemma documentation libslb src configtool test
 
 srcdir = .
 top_srcdir = ..

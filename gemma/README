@@ -1,4 +1,5 @@
-To build everything do `gmake install'.
+To build everything do `gmake install'. Notice that you have first to have built the
+gemlib (for the mt_gem.h header).
 
 The include files will be installed in /usr/include/slb
 The static modules will be installed in /usr/lib
