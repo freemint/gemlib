@@ -23,12 +23,11 @@ short
 v_resize_bm (short handle, short width, short height, long byte_width,
              unsigned char *addr)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[6];   
 	short vdi_intout[1]; 
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
-#endif
 	
 	vdi_intin         [0] = width;
 	vdi_intin         [1] = height;

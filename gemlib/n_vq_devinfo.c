@@ -38,19 +38,12 @@ short
 vq_devinfo (short handle, short device,
             short *dev_exists, char *file_name, char *device_name)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[VDI_INTOUTMAX]; 
 	short vdi_ptsout[VDI_PTSOUTMAX]; 
-#endif
 	register short len;
-#if USE_LOCAL_VDIPB
+
 	VDI_PARAMS(vdi_control, &device, 0L, vdi_intout, vdi_ptsout);
-#endif
-	
-#if !(USE_LOCAL_VDIPB)
-	vdi_intin[0] = device;
-#endif
 
 	VDI_TRAP (vdi_params, handle, 248, 0,1);
 

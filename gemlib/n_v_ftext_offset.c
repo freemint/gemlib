@@ -28,22 +28,20 @@ void
 v_ftext_offset (short handle, short x, short y,
                 const char *str, const short *offset)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_ptsin[VDI_PTSINMAX];   
-#endif
 	const long * src = (const long*)offset;
 	long       * dst =       (long*)vdi_ptsin;
 	short     i, len = vdi_str2array (str, vdi_intin);
-#if USE_LOCAL_VDIPB
+
 	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy);
-#endif
 	
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;
 	for (i = 0; i < len; i++) {
 		*(++dst) = *(src++);
 	}
+
 	VDI_TRAP (vdi_params, handle, 241, (len +1),len);
 }

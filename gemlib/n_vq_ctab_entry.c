@@ -23,13 +23,10 @@
 long
 vq_ctab_entry (short handle, short index, COLOR_ENTRY * color)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[6]; 
+
 	VDI_PARAMS(vdi_control, &index, 0L, vdi_intout, vdi_dummy);
-#else
-	vdi_intin[0] = index;
-#endif
 
 	VDI_TRAP_ESC (vdi_params, handle, 206,1, 0,1);
 
