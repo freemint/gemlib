@@ -1,5 +1,5 @@
-# include <mint/mintbind.h>
-# include <gemma/gemma.h>
+# include <mintbind.h>
+# include "../include/gemma/gemma.h"
 
 GEM_ARRAY *gem;
 
