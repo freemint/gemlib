@@ -2,7 +2,9 @@
  *  $Id$
  */
 
-/**@file*/
+/**@file
+ * main GEMlib header
+ */
 
 #ifndef _MT_GEMLIB_H_
 # define _MT_GEMLIB_H_
@@ -279,8 +281,8 @@ typedef struct pEvntrec
  *  amount than with the row or column messages.
  *
  *  If the application manage itself wheel event on a particular window (see
- *  mt_wind_set()  with #WF_WHEEL parameter), then on mouse wheel events, the window
- *  receives the following message:
+ *  mt_wind_set()  with #WF_WHEEL parameter and #WHL_ARROWWHEEL mode), then on mouse
+ *  wheel events, the window receives the following message:
  *
  * - msg[0] = #WM_ARROWED
  * - msg[1] = AES application ID of the sender
@@ -787,6 +789,39 @@ typedef struct pEvntrec
 #define SMC_HIDEOTHERS	7    /* MagiC 3.1	*/   /**< TODO */
 #define SMC_HIDEACT		8    /* MagiC 3.1	*/   /**< TODO */
 
+/** Message received when an event occurs on mouse wheel.
+ *
+ * - msg[0] = #WM_WHEEL
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = x-position of the mouse
+ * - msg[5] = y-position of the mouse
+ * - msg[6] = keyboard shift status
+ * - msg[7] = wheel info
+ *
+ * 'wheel info' consists of the following data;
+ * - bits 0-7    - Wheel amount
+ * - bits 8-11   - orient
+ * - bits 12-15  - Wheel ID
+ *
+ * 'orient' is a bitmask where bit 0 indicates direction, and
+ * bit 1 indicates orientation;
+ *  - bit 0  :  0 = up or left; 1 = down or right
+ *  - bit 1  :  0 = vertical (bit 0 indicates UP/DOWN); 1 = horizontal (bit 0 indicates LEFT/RIGHT)
+ *
+ * 'wheel ID' contains the wheel number. 0 is wheel #1, etc..
+ * 'wheel amount' holds the number of wheel-turns.
+ *  
+ *  See mt_wind_set() with command #WF_WHEEL for
+ *  details about the availability of this message.
+ *
+ *  Available only with XaAES kernel module compiled on
+ *  November 8 2004 or later.
+ *
+ */
+#define WM_WHEEL		345
+
 /* evnt_mouse modes */
 #define MO_ENTER		0	/**< Wait for mouse to enter rectangle, see mt_evnt_mouse() */
 #define MO_LEAVE		1	/**< Wait for mouse to leave rectangle, see mt_evnt_mouse() */
@@ -1174,20 +1209,19 @@ typedef  struct
 #define BEVENT_WORK     0x0001    /**< window not topped when click on the work area, see #WF_BEVENT */
 #define BEVENT_INFO     0x0002    /**< ?????, see #WF_BEVENT */
 
-/* wind_set(WF_OPTS) bitmask flags*/
-#define WO_WHEEL		0x00000001
-#define WO_FULLREDRAW	0x00000002
-#define WO_NOBLITW		0x00000004
-#define WO_NOBLITH		0x00000008
-#define WO_SENDREPOS	0x00000010
+/* wind_set(WF_OPTS) bitmask flags */
+#define WO0_WHEEL		0x0001  /**< see mt_wind_set() with #WF_OPTS mode */
+#define WO0_FULLREDRAW	0x0002  /**< see mt_wind_set() with #WF_OPTS mode */
+#define WO0_NOBLITW		0x0004  /**< see mt_wind_set() with #WF_OPTS mode */
+#define WO0_NOBLITH		0x0008  /**< see mt_wind_set() with #WF_OPTS mode */
+#define WO0_SENDREPOS	0x0010  /**< see mt_wind_set() with #WF_OPTS mode */
+#define WO1_NONE        0x0000  /**< see mt_wind_set() with #WF_OPTS mode */
+#define WO2_NONE        0x0000  /**< see mt_wind_set() with #WF_OPTS mode */
 
 /* wind_set(WF_WHEEL) modes */
-#define WHL_REALWHEEL	0	/* */
-#define WHL_AROWWHEEL	1
-#define WHL_SLDRWHEEL	2
-#define MAX_WHLMODE	2
-#define DEF_WHLMODE	WHL_AROWWHEEL
-
+#define WHL_REALWHEEL	0	/**< AES will send #WM_WHEEL messages */
+#define WHL_ARROWWHEEL	1   /**< AES will send #WM_ARROWED messages */
+#define WHL_SLDRWHEEL	2   /**< AES will convert mouse wheel events to slider events */
 
 /* window elements */
 #define W_BOX			0	/**< widget index of ???, see #WF_COLOR */
@@ -1222,7 +1256,7 @@ typedef  struct
 #define WA_RTPAGE 		5	/**< Page Right,   see #WM_ARROWED  */
 #define WA_LFLINE 		6	/**< Column Left,  see #WM_ARROWED  */
 #define WA_RTLINE 		7	/**< Column Right, see #WM_ARROWED  */
-#define WA_WHEEL		8	/**< XaAES TODO,   see #WM_ARROWED  */
+#define WA_WHEEL		8	/**< deprecated (introduced in XaAES release 0.964)  */
 
 /* wind_update flags */
 #define END_UPDATE		0	/**< release the screen lock, see mt_wind_update() */
