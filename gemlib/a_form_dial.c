@@ -9,39 +9,36 @@
  *  grow/shrink box effects.
  *
  *  @param mode specifies the action to take and the meaning of
- *               remaining parameters as follows:<pre>
-               FMD_START   0   This mode reserves the screen space for
-                               a dialog. x2, y2, w2, and h2, contain the
-                               coordinates of the dialog to be used
-                               (usually obtained through form_center()).
-
-               FMD_GROW    1   This mode draws an expanding box from the
-                               coordinates specified in x1, y1, w1, and h1
-                               to the coordinates specified in x2, y2, w2,
-                               and h2. This call is optional and is not
-                               required to display a dialog.
-
-               FMD_SHRINK  2   This mode draws a shrinking box from the
-                               coordinates specified in x2, y2, w2, and h2
-                               to the coordinates specified in x1, y1, w1,
-                               and h1. This call is optional and is not
-                               required to display a dialog.
-
-               FMD_FINISH  3   This mode releases the screen space for
-                               a dialog (previously reserved with mode 0).
-                               x2, y2, w2, and h2 contain the coordinates
-                               of the space to release. One of the
-                               side-effects of this call is a WM_REDRAW
-                               message sent to any window which the dialog
-                               was covering.</pre>
+ *               remaining parameters as follows:
+ *               - #FMD_START :  This mode reserves the screen space for
+ *                               a dialog. \a x2, \a y2, \a w2, and \a h2, contain the
+ *                               coordinates of the dialog to be used
+ *                               (usually obtained through mt_form_center()).
+ *               - #FMD_GROW     This mode draws an expanding box from the
+ *                               coordinates specified in \a x1, \a y1, \a w1, and \a h1
+ *                               to the coordinates specified in \a x2, \a y2, \a w2,
+ *                               and \a h2. This call is optional and is not
+ *                               required to display a dialog.
+ *               - #FMD_SHRINK   This mode draws a shrinking box from the
+ *                               coordinates specified in \a x2, \a y2, \a w2, and \a h2
+ *                               to the coordinates specified in \a x1, \a y1, \a w1,
+ *                               and \a h1. This call is optional and is not
+ *                               required to display a dialog.
+ *               - #FMD_FINISH   This mode releases the screen space for
+ *                               a dialog (previously reserved with mode #FMD_START).
+ *                               \a x2, \a y2, \a w2, and \a h2 contain the coordinates
+ *                               of the space to release. One of the
+ *                               side-effects of this call is a #WM_REDRAW
+ *                               message sent to any window which the dialog
+ *                               was covering.
  *  @param x1
  *  @param y1
  *  @param w1
- *  @param h1 the first rectangle (usage depends on \p mode)
+ *  @param h1 the first rectangle (usage depends on \a mode)
  *  @param x2
  *  @param y2
  *  @param w2
- *  @param h2 the second rectangle (usage depends on \p mode)
+ *  @param h2 the second rectangle (usage depends on \a mode)
  *  @param global_aes global AES array
  *
  *  @return non-zero if succeeded.
@@ -50,7 +47,7 @@
  *
  *  @sa mt_graf_growbox(), mt_graf_shrinkbox()
  *
- *  The AES does not currently make use of mode FMD_START.
+ *  The AES does not currently make use of mode #FMD_START.
  *  The call should, however, still be executed for upward
  *  compatibility.
  *

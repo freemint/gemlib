@@ -751,10 +751,10 @@ typedef struct pEvntrec
 #define FA_DISK     "[5]"	/**< display Disk icon, see mt_form_alert() */
 
 /* form_dial opcodes */
-#define FMD_START 			0	/**< TODO */
-#define FMD_GROW			1	/**< TODO */
-#define FMD_SHRINK			2	/**< TODO */
-#define FMD_FINISH			3	/**< TODO */
+#define FMD_START 			0	/**< reserves the screen space for a dialog, see mt_form_dial() */
+#define FMD_GROW			1	/**< draws an expanding box, see mt_form_dial() */
+#define FMD_SHRINK			2	/**< draws a shrinking box, see mt_form_dial()  */
+#define FMD_FINISH			3	/**< releases the screen space for a dialog, see mt_form_dial() */
 
 /* form_error modes */
 #define FERR_FILENOTFOUND	 2	/**< TODO */
