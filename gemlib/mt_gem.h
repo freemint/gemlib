@@ -56,25 +56,25 @@ __BEGIN_DECLS
  * The AES specific stuff from old gemfast.h
  */
 
-#define NIL 			0
+#define NIL 				0
 #define DESKTOP_HANDLE		0
 #define DESK			 	DESKTOP_HANDLE
 
 /* appl_getinfo modes */
 #define AES_LARGEFONT		0
 #define AES_SMALLFONT		1
-#define AES_SYSTEM		2
+#define AES_SYSTEM			2
 #define AES_LANGUAGE 		3
-#define AES_PROCESS		4
-#define AES_PCGEM 		5
-#define AES_INQUIRE		6
-#define AES_MOUSE 		8
-#define AES_MENU		9
-#define AES_SHELL 		10
-#define AES_WINDOW		11
+#define AES_PROCESS 		4
+#define AES_PCGEM			5
+#define AES_INQUIRE 		6
+#define AES_MOUSE			8
+#define AES_MENU			9
+#define AES_SHELL			10
+#define AES_WINDOW			11
 
 /* appl_getinfo return values */
-#define SYSTEM_FONT		0
+#define SYSTEM_FONT			0
 #define OUTLINE_FONT 		1
 
 #define AESLANG_ENGLISH		0
@@ -85,17 +85,17 @@ __BEGIN_DECLS
 #define AESLANG_SWEDISH 	6
 
 /* appl_read modes */
-#define APR_NOWAIT		-1
+#define APR_NOWAIT			-1
 
 /* appl_search modes */
-#define APP_FIRST 		0
-#define APP_NEXT		1
+#define APP_FIRST 			0
+#define APP_NEXT			1
 
 /* appl_search return values*/
-#define APP_SYSTEM		0x01
+#define APP_SYSTEM			0x01
 #define APP_APPLICATION		0x02
 #define APP_ACCESSORY		0x04
-#define APP_SHELL 		0x08
+#define APP_SHELL 			0x08
 
 /* appl_trecord types */
 #define APPEVNT_TIMER	 	0
@@ -112,8 +112,8 @@ typedef struct pEvntrec
 
 /* evnt_button flags */
 #define LEFT_BUTTON		0x0001
-#define RIGHT_BUTTON 		0x0002
-#define MIDDLE_BUTTON		0x0004
+#define RIGHT_BUTTON 	0x0002
+#define MIDDLE_BUTTON	0x0004
 
 #define K_RSHIFT		0x0001
 #define K_LSHIFT		0x0002
@@ -140,8 +140,8 @@ typedef struct pEvntrec
 #define WM_ONTOP		31
 #define WM_BOTTOM		33
 #define WM_ICONIFY		34
-#define WM_UNICONIFY		35
-#define WM_ALLICONIFY		36
+#define WM_UNICONIFY	35
+#define WM_ALLICONIFY	36
 #define WM_TOOLBAR		37
 #define AC_OPEN			40
 #define AC_CLOSE		41
@@ -161,26 +161,26 @@ typedef struct pEvntrec
 #define SHUT_COMPLETED		60
 #define RESCHG_COMPLETED	61
 #define RESCH_COMPLETED		61
-#define AP_DRAGDROP		63
-#define SH_WDRAW		72
-#define SC_CHANGED		80
-#define PRN_CHANGED		82
-#define FNT_CHANGED		83
-#define THR_EXIT		88
-#define PA_EXIT			89
-#define CH_EXIT			90
-#define WM_M_BDROPPED	100		/* KAOS 1.4  */
-#define SM_M_SPECIAL	101		/* MAG!X     */
-#define SM_M_RES2		102		/* MAG!X     */
-#define SM_M_RES3		103		/* MAG!X     */
-#define SM_M_RES4		104		/* MAG!X     */
-#define SM_M_RES5		105		/* MAG!X     */
-#define SM_M_RES6		106		/* MAG!X     */
-#define SM_M_RES7		107		/* MAG!X     */
-#define SM_M_RES8		108		/* MAG!X     */
-#define SM_M_RES9		109		/* MAG!X     */
-#define WM_SHADED	   	22360	/* [WM_SHADED apid 0 win 0 0 0 0] */
-#define WM_UNSHADED	   	22361	/* [WM_UNSHADED apid 0 win 0 0 0 0] */
+#define AP_DRAGDROP 		63
+#define SH_WDRAW			72
+#define SC_CHANGED			80
+#define PRN_CHANGED 		82
+#define FNT_CHANGED 		83
+#define THR_EXIT			88
+#define PA_EXIT 			89
+#define CH_EXIT 			90
+#define WM_M_BDROPPED		100		/* KAOS 1.4  */
+#define SM_M_SPECIAL		101		/* MAG!X     */
+#define SM_M_RES2			102		/* MAG!X     */
+#define SM_M_RES3			103		/* MAG!X     */
+#define SM_M_RES4			104		/* MAG!X     */
+#define SM_M_RES5			105		/* MAG!X     */
+#define SM_M_RES6			106		/* MAG!X     */
+#define SM_M_RES7			107		/* MAG!X     */
+#define SM_M_RES8			108		/* MAG!X     */
+#define SM_M_RES9			109		/* MAG!X     */
+#define WM_SHADED			22360	/* [WM_SHADED apid 0 win 0 0 0 0] */
+#define WM_UNSHADED 		22361	/* [WM_UNSHADED apid 0 win 0 0 0 0] */
 
 /* subcodes for SM_M_SPECIAL message for the SCREENMGR 
 	used:
@@ -211,26 +211,29 @@ typedef struct pEvntrec
 #define MO_LEAVE		1
 
 /* evnt_multi flags */
-#define MU_KEYBD		0x0001
-#define MU_BUTTON		0x0002
-#define MU_M1			0x0004
-#define MU_M2			0x0008
-#define MU_MESAG		0x0010
-#define MU_TIMER		0x0020
-#define MU_MX			0x0100   /* XaAES */
+#define MU_KEYBD			0x0001
+#define MU_BUTTON			0x0002
+#define MU_M1				0x0004
+#define MU_M2				0x0008
+#define MU_MESAG			0x0010
+#define MU_TIMER			0x0020
+#define MU_WHEEL			0x0040		/* XaAES */
+#define MU_MX				0x0080		/* XaAES */
+#define MU_NORM_KEYBD		0x0100		/* XaAES */
+#define MU_DYNAMIC_KEYBD	0x0200	/* XaAES */
 
 /* form_dial opcodes */
-#define FMD_START 		0
-#define FMD_GROW		1
-#define FMD_SHRINK		2
-#define FMD_FINISH		3
+#define FMD_START 			0
+#define FMD_GROW			1
+#define FMD_SHRINK			2
+#define FMD_FINISH			3
 
 /* form_error modes */
 #define FERR_FILENOTFOUND	 2
 #define FERR_PATHNOTFOUND	 3
 #define FERR_NOHANDLES		 4
 #define FERR_ACCESSDENIED	 5
-#define FERR_LOWMEM		 8
+#define FERR_LOWMEM			 8
 #define FERR_BADENVIRON 	10
 #define FERR_BADFORMAT		11
 #define FERR_BADDRIVE		15
@@ -252,8 +255,8 @@ typedef struct pEvntrec
 
 /* menu_bar modes */
 #define MENU_REMOVE		0
-#define MENU_INSTALL		1
-#define MENU_INQUIRE		-1
+#define MENU_INSTALL	1
+#define MENU_INQUIRE	-1
 
 /* menu_icheck modes */
 #define UNCHECK			0
@@ -292,18 +295,18 @@ typedef struct _mn_set
 #define SHEL_BUFSIZE (-1)
 
 /* shel_write modes */
-#define SWM_LAUNCH		0
+#define SWM_LAUNCH			0
 #define SWM_LAUNCHNOW		1
 #define SWM_LAUNCHACC		3
 #define SWM_SHUTDOWN		4
 #define SWM_REZCHANGE		5
 #define SWM_BROADCAST		7
-#define SWM_ENVIRON		8
-#define SWM_NEWMSG		9
-#define SWM_AESMSG		10
+#define SWM_ENVIRON			8
+#define SWM_NEWMSG			9
+#define SWM_AESMSG			10
 
 /* shel_write flags */
-#define SW_PSETLIMIT		0x0100
+#define SW_PSETLIMIT	0x0100
 #define SW_PRENICE		0x0200
 #define SW_DEFDIR 		0x0400
 #define SW_ENVIRON		0x0800
@@ -346,7 +349,8 @@ typedef struct _mn_set
 #define LFARROW			0x0200
 #define RTARROW			0x0400
 #define HSLIDE 			0x0800
-#define HOTCLOSEBOX		0x1000      /* GEM 2.x     */
+#define HOTCLOSEBOX		0x1000      /* GEM 2.x (deprecated) */
+#define MENUBAR			0x1000		/* XaAES */
 #define BACKDROP		0x2000
 #define SMALLER			0x4000
 #define ICONIFIER		SMALLER
@@ -366,7 +370,7 @@ typedef struct _mn_set
 #define WF_HSLIDE 		  8
 #define WF_VSLIDE 		  9
 #define WF_TOP 			 10
-#define WF_FIRSTXYWH 	 	 11
+#define WF_FIRSTXYWH 	 11
 #define WF_NEXTXYWH		 12
 #define WF_RESVD		 13
 #define WF_NEWDESK		 14
@@ -379,22 +383,25 @@ typedef struct _mn_set
 #define WF_BEVENT 		 24
 #define WF_BOTTOM 		 25
 #define WF_ICONIFY		 26
-#define WF_UNICONIFY 		 27
-#define WF_UNICONIFYXYWH	 28
+#define WF_UNICONIFY 	 27
+#define WF_UNICONIFYXYWH 28
 #define WF_TOOLBAR		 30
 #define WF_FTOOLBAR		 31
 #define WF_NTOOLBAR		 32
+#define WF_MENU			 33		 /* XaAEES */
+#define WF_WHEEL		 40		 /* XaAES */
 #define WF_M_BACKDROP	100      /* KAOS 1.4    */
 #define WF_M_OWNER		101      /* KAOS 1.4    */
 #define WF_M_WINDLIST	102      /* KAOS 1.4    */
 #define WF_MINXYWH		103      /* MagiC 6     */
 #define WF_INFOXYWH		104      /* MagiC 6.10  */
-#define WF_WINX			 22360
-#define WF_WINXCFG		 22361
-#define WF_SHADE      22365      /* WINX 2.3 */
-#define WF_STACK	  22366      /* WINX 2.3 */
-#define WF_TOPALL	  22367      /* WINX 2.3 */
-#define WF_BOTTOMALL  22368		 /* WINX 2.3 */
+#define WF_WINX			22360
+#define WF_WINXCFG		22361
+#define WF_SHADE	    22365      /* WINX 2.3 */
+#define WF_STACK		22366      /* WINX 2.3 */
+#define WF_TOPALL		22367      /* WINX 2.3 */
+#define WF_BOTTOMALL	22368	   /* WINX 2.3 */
+#define WF_XAAES		0x5841	   /* XaAES: 'XA' */
 
 /* wind_set(WF_BEVENT) */
 #define BEVENT_WORK     0x0001    /* AES 4.0  */
@@ -432,6 +439,7 @@ typedef struct _mn_set
 #define WA_RTPAGE 		5
 #define WA_LFLINE 		6
 #define WA_RTLINE 		7
+#define WA_WHEEL		8	/* XaAES */
 
 /* wind_update flags */
 #define END_UPDATE		0
