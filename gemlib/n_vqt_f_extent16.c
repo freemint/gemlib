@@ -7,11 +7,11 @@
 
 
 void
-vqt_f_extent16 (short handle, const short *wstr, short extent[])
+vqt_f_extent16 (short handle, const WCHAR * wstr, short extent[])
 {
-	register short n = vdi_wstrlen (wstr);
+	register short n = vdi_wstrlen ((const short *)wstr);
 
-	vdi_params.intin  = wstr;
+	vdi_params.intin  = (const short *)wstr;
 	vdi_params.ptsout = extent;
 
 	VDI_TRAP (vdi_params, handle, 240, 0,n);
