@@ -48,7 +48,7 @@
 short
 mt_fsel_exinput (char *path, char *file, short *exit_but, const char *title, short *global_aes)
 {
-	if((((gl_ap_version>>8)==1)&&((gl_ap_version&0xFF)>=40))||((gl_ap_version>>8)>1))
+	if((((global_aes[0]>>8)==1)&&((global_aes[0]&0xFF)>=40))||((global_aes[0]>>8)>1))
 	{
 		long *ptr_l;
 		
