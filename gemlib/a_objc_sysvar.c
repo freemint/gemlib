@@ -18,7 +18,7 @@
  *  @param out1 will be filled by the 1st value when reading value, unused otherwise.
  *  @param out2 will be filled by the 2st value when reading value, unused otherwise. \p
  *          Here is the meanings of the two input/output values referred to as
- *          \p val1 and \p val2 are as follows:\p
+ *          \p val1 and \p val2 are as follows:
  *          - LK3DIND (1) :   If \p val1 is 1, the text of indicator objects
  *                            does move when selected, otherwise, if 0,
  *                            it does not.
