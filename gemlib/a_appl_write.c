@@ -10,7 +10,7 @@
  *         you wish to send the message.
  *  @param length specifies the number of bytes present in the message.
  *  @param ap_pbuff is a pointer to a memory buffer with at least
- *         \p length bytes available
+ *         \a length bytes available
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or greater than 0 if the message was
@@ -21,7 +21,7 @@
  *  @sa mt_appl_read(), mt_shel_write()
  *
  *  As of AES version 1.40, desk accessories may send
- *  MN_SELECTED messages to the desktop to trigger desktop
+ *  #MN_SELECTED messages to the desktop to trigger desktop
  *  functions.
  *
  *  As of AES version 4.00 you can use mt_shel_write(7,...) to

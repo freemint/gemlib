@@ -13,7 +13,7 @@
  *
  *  @sa mt_evnt_timer()
  *
- *  @note Use mt_evnt_timer(1,0) on other AES implementations.
+ *  @note Use mt_evnt_timer() with \a interval = 1L on other AES implementations.
  *  
  */
 
