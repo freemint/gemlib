@@ -448,6 +448,14 @@ typedef struct _mn_set
 #define G_TITLE	 32
 #define G_CICON	 33
 
+/* extended object types, MagiC only */
+#define G_SWBUTTON 34	
+#define G_POPUP	 35
+#define G_WINTITLE 36
+#define G_EDIT		 37
+#define G_SHORTCUT 38
+
+
 /* object flags */
 #define NONE		 0x0000
 #define SELECTABLE 0x0001
@@ -516,6 +524,9 @@ typedef struct _mn_set
 #define ED_INIT		EDINIT
 #define ED_CHAR		EDCHAR
 #define ED_END 		EDEND
+
+#define ED_CRSR		100		/* MagiC only */
+#define ED_DRAW		103		/* MagiC only */
 
 /* editable text justification */
 #define TE_LEFT		0
@@ -1164,7 +1175,7 @@ extern int	vq_color				(int handle, int index, int flag, int rgb[]);
 extern void	vq_extnd				(int handle, int flag, int work_out[]);
 extern void	vqf_attributes		(int handle, int atrib[]);
 extern void	vqin_mode			(int handle, int dev, int *mode);
-extern void	vql_attribute		(int handle, int atrib[]);
+extern void	vql_attributes		(int handle, int atrib[]);
 extern void	vqm_attributes		(int handle, int atrib[]);
 extern void	vqt_attributes		(int handle, int atrib[]);
 extern void	vqt_cachesize		(int handle, int which_cache, long *size);
