@@ -321,42 +321,44 @@ typedef struct _mn_set
 /* shel_get modes */
 #define SHEL_BUFSIZE (-1)
 
-/* Struktur fr erweiterte Start-Daten (fr shel_write) */
+/** Struktur fr erweiterte Start-Daten (fr shel_write) */
 typedef struct
 {
-	char *newcmd;
-	long psetlimit;
-	long prenice;
-	char *defdir;
-	char *env;
+	char *newcmd;		/**< TODO */
+	long psetlimit;		/**< TODO */
+	long prenice;		/**< TODO */
+	char *defdir;		/**< TODO */
+	char *env;			/**< TODO */
 } SHELW;
 
-/* Andere Definition dafr (aus MagiC-Doku) */
+/** Andere Definition dafr (aus MagiC-Doku) */
 typedef struct
 {
-	char	*command;
-	long	limit;
-	long	nice;
-	char	*defdir;
-	char	*env;
+	char	*command;	/**< TODO */
+	long	limit;		/**< TODO */
+	long	nice;		/**< TODO */
+	char	*defdir;	/**< TODO */
+	char	*env;		/**< TODO */
 } XSHW_COMMAND;
 
+/** TODO */
 typedef struct
 {
-	long			__CDECL (*proc)(void *par);
-	void			*user_stack;
-	unsigned long	stacksize;
-	short			mode;		/* immer auf 0 setzen!  */
-	long			res1;		/* immer auf 0L setzen! */
+	long			__CDECL (*proc)(void *par);	/**< TODO */
+	void			*user_stack;				/**< TODO */
+	unsigned long	stacksize;					/**< TODO */
+	short			mode;						/**< immer auf 0 setzen!  */
+	long			res1;						/**< immer auf 0L setzen! */
 } THREADINFO;
 
+/** TODO */
 typedef  struct
 {
-	int   dummy;		/* a null  word 			 */ 
-	long  magic;		/* 'SHEL', if it's a Shell   */ 
-	int   isfirst;		/* first call of the Shell   */ 
-	long  lasterr;		/* last error  				 */ 
-	int   wasgr;		/* Program was a grafic app. */ 
+	int   dummy;		/**< a null  word 			   */ 
+	long  magic;		/**< 'SHEL', if it's a Shell   */ 
+	int   isfirst;		/**< first call of the Shell   */ 
+	long  lasterr;		/**< last error  			   */ 
+	int   wasgr;		/**< Program was a grafic app. */ 
 } SHELTAIL;
 
 
@@ -1663,6 +1665,7 @@ void v_rvon        (VdiHdl );
 void vq_chcells    (VdiHdl , short *n_rows, short *n_cols);
 void vq_curaddress (VdiHdl , short *cur_row, short *cur_col);
 void vs_curaddress (VdiHdl , short row, short col);
+/* alternative name for vs_curaddress */
 #define v_curaddress vs_curaddress
 /**@}*/
  
