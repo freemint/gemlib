@@ -978,12 +978,18 @@ short	objc_sysvar	(short mode, short which, short in1, short in2, short *out1, s
 /** @addtogroup a_rsrc
  *  @{
  */
-short	rsrc_free	(void);
-short	rsrc_gaddr	(short Type, short Index, void *Address);
-short	rsrc_load	(const char *Name);
-short	rsrc_obfix	(OBJECT *, short Index);
-short	rsrc_rcfix	(void *rc_header);
-short	rsrc_saddr	(short Type, short Index, void *Address);
+short	mt_rsrc_free	(short *global_aes);
+short	mt_rsrc_gaddr	(short Type, short Index, void *Address, short *global_aes);
+short	mt_rsrc_load	(const char *Name, short *global_aes);
+short	mt_rsrc_obfix	(OBJECT *, short Index, short *global_aes);
+short	mt_rsrc_rcfix	(void *rc_header, short *global_aes);
+short	mt_rsrc_saddr	(short Type, short Index, void *Address, short *global_aes);
+#define rsrc_free() mt_rsrc_free(aes_global)
+#define rsrc_gaddr(a,b,c) mt_rsrc_gaddr(a,b,c,aes_global)
+#define rsrc_load(a) mt_rsrc_load(a,aes_global)
+#define rsrc_obfix(a,b) mt_rsrc_obfix(a,b,aes_global)
+#define rsrc_rcfix(a) mt_rsrc_rcfix(a,aes_global)
+#define rsrc_saddr(a,b,c) mt_rsrc_saddr(a,b,c,aes_global)
 /**@}*/
 
 /** @addtogroup a_scrp
