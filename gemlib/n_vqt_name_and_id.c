@@ -18,7 +18,7 @@
  *  @param font_name font name
  *  @param ret_name font name
  *
- *  @return font id or 0
+ *  @return font id or 0 on failure
  *
  *  @since NVDI 3.02
  *
@@ -37,6 +37,11 @@ vqt_name_and_id (short handle, short font_format, char *font_name, char *ret_nam
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 	
 	vdi_intin[0]     = font_format;
+
+	/* set the 0 as return value in case NVDI is not present */
+	vdi_intout[0] = 0;
+	/* set the length to 0 for the same case */
+	vdi_control[4] = 0;
 	
 	VDI_TRAP_ESC (vdi_params, handle, 230,100, 0,n);
 	

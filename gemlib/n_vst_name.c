@@ -19,7 +19,7 @@
  *  @param ret_name name of the selected font \n
  *         [option CHECK_NULLPTR] ret_name may be NULL
  *
- *  @return selected font id
+ *  @return selected font id or 0 on failure
  *
  *  @since NVDI 3.02
  *
@@ -36,8 +36,13 @@ vst_name (short handle, short font_format, char *font_name, char *ret_name)
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 
 	vdi_intin[0] = font_format;
-	
-	VDI_TRAP (vdi_params, handle, 230, 0,n);
+
+	/* set the 0 as return value in case NVDI is not present */
+	vdi_intout[0] = 0;
+	/* set the length to 0 for the same case */
+	vdi_control[4] = 0;
+
+ 	VDI_TRAP (vdi_params, handle, 230, 0,n);
 	
 #if CHECK_NULLPTR
 	if (ret_name)
