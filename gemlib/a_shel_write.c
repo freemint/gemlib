@@ -49,7 +49,7 @@
  *  <tr><td> #SWM_LAUNCHNOW <td> 1 <td>
  *			 Launch a GEM or TOS application based on
  *			 the value of \a wisgr.
- *			 - \a wisgr may be:
+ *           - \a wisgr may be:
  *			   - #TOSAPP : the application will be launched as
  *			     a TOS application
  *			   - #GEMAPP, the application will be
@@ -154,7 +154,7 @@
  *
  *  <tr><td> #SWM_REZCHANGE <td> 5 <td>
  *			 Change screen resolution.
- *			 - \a wisgr is the work station ID of the new resolution.
+ *           - \a wisgr is the work station ID of the new resolution.
  *           - No other parameters are utilized.
  *
  *			 This mode is only recognized as of AES
