@@ -312,6 +312,7 @@ OBJ = \
  vex_curv.o	\
  vex_motv.o	\
  vex_timv.o	\
+ vex_wheelv.o	\
  vm_coords.o	\
  vm_filename.o	\
  vm_pagesize.o	\
