@@ -805,12 +805,14 @@ short	mt_edit_evnt		(OBJECT *tree, short obj, short whdl,	EVNT *ev, long *errc, 
 short	mt_edit_get_buf		(OBJECT *tree, short obj, char **buf, long *buflen, long *txtlen, short *global);
 short	mt_edit_get_format	(OBJECT *tree, short obj, short *tabwidth, short *autowrap, short *global);
 short	mt_edit_get_colour	(OBJECT *tree, short obj, short *tcolour, short *bcolour, short *global);
+#define mt_edit_get_color	mt_edit_get_colour
 short	mt_edit_get_cursor	(OBJECT *tree, short obj, char **cursorpos, short *global);
 short	mt_edit_get_font	(OBJECT *tree, short obj, short *fontID, short *fontH, short *fontPix, short *mono, short *global);
 void	mt_edit_set_buf		(OBJECT *tree, short obj, char *buf, long buflen, short *global);
 void	mt_edit_set_format	(OBJECT *tree, short obj, short tabwidth, short autowrap, short *global);
 void	mt_edit_set_font	(OBJECT *tree, short obj, short fontID, short fontH, short fontPix, short mono, short *global);
 void	mt_edit_set_colour	(OBJECT *tree, short obj, short tcolour, short bcolour, short *global);
+#define mt_edit_set_color	mt_edit_set_colour
 void	mt_edit_set_cursor	(OBJECT *tree, short obj, char *cursorpos, short *global);
 short	mt_edit_resized		(OBJECT *tree, short obj, short *oldrh, short *newrh, short *global);
 short	mt_edit_get_dirty	(OBJECT *tree, short obj, short *global);
