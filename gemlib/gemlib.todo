@@ -47,8 +47,10 @@ a_form_dial.c			-- idem
 a_form_do.c				-- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
 a_form_error.c			-- idem
 a_form_keybd.c			-- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
-a_fsel_exinput.c
-a_fsel_input.c
+a_fsel_exinput.c        -- add "const" keyword for title [gemlib->mgemlib]
+                           little speed optimisation [mgemlib->gemlib]
+						   redirect call to fsel_input if TOS < 1.4
+a_fsel_input.c	        -- idem
 a_graf_dragbox.c		-- idem
 a_graf_growbox.c		-- idem
 a_graf_handle.c			-- idem
