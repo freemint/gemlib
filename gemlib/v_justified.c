@@ -28,15 +28,12 @@ void
 v_justified (short handle, short x, short y,
              const char *str, short len, short word_space, short char_space)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_ptsin[4];   
-#endif
 	register short n = 2 + vdi_str2array (str, vdi_intin + 2);
-#if USE_LOCAL_VDIPB
+
 	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy );
-#endif
 
 	vdi_intin[0] = word_space;
 	vdi_intin[1] = char_space;
