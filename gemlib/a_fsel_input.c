@@ -7,10 +7,9 @@
 /** displays the system file selector and allows
  *  the user to select a valid GEMDOS path and file.
  *
- *  @param path 
- *  @param file 
- *  @param exit_button All parameters are consistent with fsel_exinput() with the
- *                  notable lack of title. \n
+ *  @param path see mt_fsel_exinput()
+ *  @param file see mt_fsel_exinput()
+ *  @param exit_button see mt_fsel_exinput() \n
  *             [option CHECK_NULLPTR] exit_button may be NULL
  *  @param global_aes global AES array
  *
@@ -18,7 +17,7 @@
  *
  *  @since All AES versions
  *
- *  @sa fsel_exinput
+ *  @sa mt_fsel_exinput()
  *
  */
 

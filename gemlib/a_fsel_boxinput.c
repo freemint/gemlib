@@ -4,23 +4,27 @@
 
 #include "gem_aesP.h"
 
-/** displays the xxx file selector and allows
+/** displays the extended file selector and allows
  *  the user to select a valid GEMDOS path and file.
  *
- *  @param path 
- *  @param file 
- *  @param exit_button All parameters are consistent with fsel_exinput() with the
- *                  notable lack of title. \n
- *             [option CHECK_NULLPTR] exit_button may be NULL
- *  @param label title for the fileselector
- *  @param callback (TODO: doc wanted!)
+ *  @param path see mt_fsel_exinput()
+ *  @param file  see mt_fsel_exinput()
+ *  @param exit_button  see mt_fsel_exinput()\n
+ *         [option CHECK_NULLPTR] \a exit_button may be NULL
+ *  @param label  see mt_fsel_exinput()
+ *  @param callback is a pointer to a callback function. This callback function will
+ *         be called by BoxKite when it received an AES message for the main application.
+ *         It does not only concern the Message #WM_REDRAW and #WM_MOVED.
+ *         Other messages are ignored. 
  *  @param global_aes global AES array
  *
- *  @return ?
+ *  @return 0 if an error occured and 1 otherwise.
  *
- *  @since the cookie HBFS give the availabity of this function.
+ *  @since this extended call is available if BoxKite is installed (since version 1.71).
+ *         The Cookie HBFS can be checked to test the availability
+ *         of this function.
  *
- *  @sa fsel_input fsel_exinput
+ *  @sa mt_fsel_input() mt_fsel_exinput()
  *
  */
 
