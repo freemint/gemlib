@@ -13,12 +13,12 @@
  *               - 2
  *               - 3
  *               - 4     Fastest
- *  @param sflag If is \p EDC_INQUIRE (0) then \p value is ignored and the current
- *               double-click rate is returned. If is \p EDC_SET (1) then the \p value
- *               is used to set a new doble-click rate value.
+ *  @param sflag If \a sflag is #EDC_INQUIRE then \a value is ignored and the current
+ *               double-click rate is returned. If \a sflag is #EDC_SET then the \a value
+ *               is used to set a new double-click rate value.
  *  @param global_aes global AES array
  *
- *  @return the newly set or current double-click rate based on flag.
+ *  @return the newly set or current double-click rate based on \a sflag.
  *
  *  @since All AES versions.
  *

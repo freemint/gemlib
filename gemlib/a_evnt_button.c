@@ -10,12 +10,12 @@
  *  @param clicks specifies the number of mouse-clicks that must occur
  *             before returning
  *  @param mask specifies the mouse buttons to wait for as follows:
- *               - \p LEFT_BUTTON   (0x01)  Left mouse button
- *               - \p RIGHT_BUTTON  (0x02)  Right mouse button
- *               - \p MIDDLE_BUTTON (0x04)  Middle button (this button would be
+ *               - \p #LEFT_BUTTON   (0x01)  Left mouse button
+ *               - \p #RIGHT_BUTTON  (0x02)  Right mouse button
+ *               - \p #MIDDLE_BUTTON (0x04)  Middle button (this button would be
  *                                            the first button to the left of the
  *                                            rightmost button on the device).
- *               - \p -             (0x08)  Other buttons (0x08 is the mask for
+ *               - \p (unamed) (0x08)  Other buttons (0x08 is the mask for
  *                                            the button to the immediate left of
  *                                            the middle button. Masks continue
  *                                            leftwards).
@@ -28,22 +28,22 @@
  *             - 0x08   etc...
  *  @param mx is a pointer to a WORD which upon return will contain the
  *             x-position of the mouse pointer at the time of the event. \n
- *             [option CHECK_NULLPTR] mx may be NULL
+ *             [option CHECK_NULLPTR] \a mx may be NULL
  *  @param my is a pointer to a WORD which upon return will contain the
  *             y-position of the mouse pointer at the time of the event. \n
- *             [option CHECK_NULLPTR] my may be NULL
+ *             [option CHECK_NULLPTR] \a my may be NULL
  *  @param mbutton is a pointer to a WORD which upon return will
  *             contain the mouse button state as defined in state. \n
- *             [option CHECK_NULLPTR] mbutton may be NULL
+ *             [option CHECK_NULLPTR] \a mbutton may be NULL
  *  @param kmeta is a pointer to a WORD which upon return will
  *             contain the current status of the keyboard shift keys.
  *             The value is a bit-mask defined as follows:
- *             - \p K_RSHIFT         (0x01)     Right Shift
- *             - \p K_LSHIFT         (0x02)     Left Shift
- *             - \p K_CTRL           (0x04)     Control
- *             - \p K_ALT            (0x08)     Alternate
+ *             - \p #K_RSHIFT         (0x01)     Right Shift
+ *             - \p #K_LSHIFT         (0x02)     Left Shift
+ *             - \p #K_CTRL           (0x04)     Control
+ *             - \p #K_ALT            (0x08)     Alternate
  *             .
- *             [option CHECK_NULLPTR] kmeta may be NULL
+ *             [option CHECK_NULLPTR] \a kmeta may be NULL
  *  @param global_aes global AES array
  *
  *  @return a WORD indicating the number of times the mouse
