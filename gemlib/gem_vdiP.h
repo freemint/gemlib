@@ -14,8 +14,6 @@
 #define vdi_intin_ptr(n)     *((void**)(vdi_intin   +n))
 #define vdi_intout_long(n)   *((long*) (vdi_intout  +n))
 
-#define USE_LOCAL_VDIPB 1
-
 #if defined(__GNUC_INLINE__) && (__GNUC__ > 2 || __GNUC_MINOR__ > 5)
 
 static inline void
@@ -91,9 +89,29 @@ _vdi_trap_00 (VDIPB * vdipb, long cntrl_0_1, short handle)
 	vdi_params.intout  = d;   \
 	vdi_params.ptsout  = e;
 
+
+/* special feature for VDI bindings: VDIPB data are locally created in each binding,
+ * in order to make this library thread safe. 
+ */
+#define USE_LOCAL_VDIPB 1
+
 /* special feature for VDI bindings: pointer in parameters (for return values)
  * could be NULL (nice idea by Martin Elsasser against dummy variables) 
  */
 #define CHECK_NULLPTR 1
+
+/* special feature for VDI bindings: set VDIPB::intout and VDIPB::ptsout to
+ * vdi_dummy array intead of NULL against crashes if some crazy VDI drivers
+ * tries to write something in ptsout/intout.
+ */ 
+#define USE_VDI_DUMMY 1
+
+#if USE_VDI_DUMMY
+	/* use dummy array vdi_dummy[] from vdi_dummy.c */
+	extern short vdi_dummy[];
+#else
+	/* replace vdi_dummy in VDIPB by NULL pointer */
+	#define vdi_dummy 0L
+#endif
 
 # endif /* _GEM_VDI_P_ */
