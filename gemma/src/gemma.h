@@ -15,7 +15,7 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-# include <basepage.h>
+# include <mint/basepage.h>
 # include <mint/slb.h>
 
 # include "../../gemlib/gem.h"
