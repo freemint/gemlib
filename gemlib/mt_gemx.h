@@ -35,6 +35,15 @@ typedef struct
 	short		msg[16]; 	/**< Message-buffer */
 } EVNT;
 
+
+/** @addtogroup a_evnt
+ *  @{
+ */
+void mt_EVNT_multi( short evtypes, short nclicks, short bmask, short bstate,
+                    const MOBLK *m1, const MOBLK *m2, unsigned long ms, EVNT *event, short *global_aes );
+
+/**@}*/
+
 /*
  * Extensions to the form library (MagiC only)
  */
@@ -77,7 +86,7 @@ short	mt_xfrm_popup 	(OBJECT *tree, short x, short y, short firstscrlob, short l
  * Extensions to the object library (MagiC only)
  */
 
-/** @addtogroup a_form
+/** @addtogroup a_objc
  *  @{
  */
 void	mt_objc_wchange	(OBJECT *tree, short obj, short new_state, GRECT *clip, short whandle, short * global);

@@ -431,6 +431,7 @@ OBJ = \
  x_edit_set_font.o	\
  x_edit_set_format.o	\
  x_edit_set_pos.o	\
+ x_evnt_multi.o \
  x_fnts_add.o	\
  x_fnts_close.o	\
  x_fnts_create.o	\
