@@ -1,4 +1,4 @@
-/* Alert module prototypes */
+/* Proc module prototypes */
 
 /*  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,8 +15,7 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-long _alert(PROC_ARRAY *p, short button, char *msg);
-long windial_alert(BASEPAGE *bp, long fn, short nargs, short button, long object, PROC_ARRAY *p);
-long windial_error(BASEPAGE *bp, long fn, short nargs, long error, char *msg, PROC_ARRAY *p);
+long proc_exec(BASEPAGE *bp, long fn, short nargs, short mode, long flags, char *cmd, char *tail, char *env, PROC_ARRAY *p);
+long thread_fork(BASEPAGE *bp, long fn, short nargs, void *startup, void *address, char *proctitle, long stacksize, long opt, PROC_ARRAY *p);
 
 /* EOF */

@@ -15,8 +15,10 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-long rsrc_xgaddr(BASEPAGE *bp, long fn, short nargs, \
-		short type, short obj, PROC_ARRAY *p);
+long rsrc_xgaddr(BASEPAGE *bp, long fn, short nargs, short type, short obj, PROC_ARRAY *p);
+long rsrc_xload(BASEPAGE *bp, long fn, short nargs, char *name, PROC_ARRAY *p);
+long rsrc_xalloc(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p);
+long rsrc_xfree(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p);
 
 /* EOF */
 

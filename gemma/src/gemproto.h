@@ -15,7 +15,7 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-static inline
+INLINE
 void gemsys(long sysopcode, long *params)
 {
 	__asm__ volatile("
@@ -26,10 +26,6 @@ void gemsys(long sysopcode, long *params)
 		: "g"(sysopcode), "a"(params)
 		: "d0", "d1");
 }
-
-# if 0
-# define gemsys(a, b)	asm( "move.l %0,d0; move.l %1,d1; trap #2" ::"r"(a),"r"(b):"d0","d1" );
-# endif
 
 /* AES */
 
@@ -64,11 +60,12 @@ long _objc_edit(PROC_ARRAY *proc, OBJECT *tree, short startob, short key, short 
 long _objc_find(PROC_ARRAY *proc, OBJECT *tree, short ob, short depth, short mx, short my);
 long _objc_offset(PROC_ARRAY *proc, OBJECT *tree, short obj);
 long _rsrc_rcfix(PROC_ARRAY *proc, char *buf);
+long _rsrc_obfix(PROC_ARRAY *proc, OBJECT *tree, short ob);
 long _rsrc_load(PROC_ARRAY *proc, char *name);
 # define _rsrc_free(p) call_aes(p->base, 1L, 2, p, 111)
 long _scrp_read(PROC_ARRAY *proc, char *path);
 long _shel_help(PROC_ARRAY *proc, short mode, char *file, char *key);
-long _shel_write(PROC_ARRAY *proc, short msg, short wg, short ws, char *name, char *env);
+long _shel_write(PROC_ARRAY *proc, short msg, short wg, short ws, const char *name, const char *env);
 long _wind_get(PROC_ARRAY *proc, short w, short fn);
 long _wind_set(PROC_ARRAY *proc, short w, short fn);
 long _wind_calc(PROC_ARRAY *proc, short fn, short gd, short *xywh);

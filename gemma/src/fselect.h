@@ -1,4 +1,4 @@
-/* Alert module prototypes */
+/* File selector module prototypes */
 
 /*  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,8 +15,6 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-long _alert(PROC_ARRAY *p, short button, char *msg);
-long windial_alert(BASEPAGE *bp, long fn, short nargs, short button, long object, PROC_ARRAY *p);
-long windial_error(BASEPAGE *bp, long fn, short nargs, long error, char *msg, PROC_ARRAY *p);
+long file_select(BASEPAGE *bp, long fn, short nargs, char *title, char *mask, ushort flag, PROC_ARRAY *p);
 
 /* EOF */

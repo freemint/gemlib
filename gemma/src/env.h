@@ -1,4 +1,4 @@
-/* Alert module prototypes */
+/* Env module prototypes */
 
 /*  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,8 +15,9 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-long _alert(PROC_ARRAY *p, short button, char *msg);
-long windial_alert(BASEPAGE *bp, long fn, short nargs, short button, long object, PROC_ARRAY *p);
-long windial_error(BASEPAGE *bp, long fn, short nargs, long error, char *msg, PROC_ARRAY *p);
+long env_getargc(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p);
+long env_getargv(BASEPAGE *bp, long fn, short nargs, long count, PROC_ARRAY *p);
+long env_get(BASEPAGE *bp, long fn, ushort nargs, char *var, PROC_ARRAY *p);
+long env_eval(BASEPAGE *bp, long fn, short nargs, char *var, char *outbuf, long maxlen, PROC_ARRAY *p);
 
 /* EOF */

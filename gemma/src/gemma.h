@@ -19,7 +19,7 @@
 # include <mint/slb.h>
 
 # include "../../gemlib/gem.h"
-# include "../include/gemma/struct.h"
+# include "../include/slb/gemma-struct.h"
 
 # include "../config.h"
 
@@ -143,9 +143,9 @@ extern short menu_height;		/* in appl.c */
 # define WINDIAL_MAGIC	25091973L
 
 # ifdef DEBUG
-#  define DEBUGMSG(p)				\
-{						\
-	if (sflags.debug && proc->debug)	\
+#  define DEBUGMSG(p)					\
+{							\
+	if (sflags.debug && proc->debug)		\
 		debug_print(__FUNCTION__,p);	\
 }
 # else
@@ -170,8 +170,9 @@ extern short menu_height;		/* in appl.c */
 void debug_print(char *fn, char *string);
 # endif
 
+const long sema_users;
+
 void bin2asc(long number, char *out);			/* in bodajze alert.c */
-char *getenv(PROC_ARRAY *proc, const char *var);
 OBJECT *obj2addr(PROC_ARRAY *proc, short type, ulong obj);
 PROC_ARRAY *get_contrl(BASEPAGE *bp);
 
