@@ -843,19 +843,19 @@ typedef struct {
 /*******************************************************************************
  * The AES bindings from old aesbind.h
  */
-	 
+
 /** @defgroup AES AES bindings
  *  @{
  */
- 
+
 short	mt_appl_bvset  (short bvdisk, short bvhard, short *global_aes);
 short	mt_appl_control (short ap_cid, short ap_cwhat, void *ap_cout, short *global_aes);
 short	mt_appl_exit    (short *global_aes);
 short	mt_appl_find    (const char *Name, short *global_aes);
 short	mt_appl_getinfo (short type,
-                    short *out1, short *out2, short *out3, short *out4, short *global_aes);
+						 short *out1, short *out2, short *out3, short *out4, short *global_aes);
 short	appl_xgetinfo(short type,
-                    short *out1, short *out2, short *out3, short *out4);
+					  short *out1, short *out2, short *out3, short *out4);
 short	mt_appl_init    (short *global_aes);
 short	mt_appl_read    (short ApId, short Length, void *ApPbuff, short *global_aes);
 short	mt_appl_search  (short mode, char *fname, short *type, short *ap_id, short *global_aes);
@@ -874,22 +874,31 @@ short	mt_appl_yield   (short *global_aes);
 #define appl_tplay(a,b,c) mt_appl_tplay(a,b,c,aes_global)
 #define appl_trecord(a,b) mt_appl_trecord(a,b,aes_global)
 #define appl_write(a,b,c) mt_appl_write(a,b,c,aes_global)
-#define appl_yield() mt_appl_yield(aes_global)  
+#define appl_yield() mt_appl_yield(aes_global)
 
-short	evnt_button (short Clicks, short WhichButton, short WhichState,
-                   short *Mx, short *My, short *ButtonState, short *KeyState); 
-short	evnt_dclick (short ToSet, short SetGet);
-short	evnt_keybd  (void);
-short	evnt_mesag  (short MesagBuf[]);
-short	evnt_mouse  (short EnterExit, short InX, short InY, short InW, short InH, short *OutX, short *OutY, short *ButtonState, short *KeyState); 
-short evnt_multi  (short Type, short Clicks, short WhichButton, short WhichState, 
-			 short EnterExit1, short In1X, short In1Y, short In1W, short In1H,
-			 short EnterExit2, short In2X, short In2Y, short In2W, short In2H,
-			 short MesagBuf[], unsigned long Interval, short *OutX, short *OutY,
-			 short *ButtonState, short *KeyState, short *Key, short *ReturnCount);
-short evnt_multi_fast (const EVMULT_IN * em_i,
-                       short MesagBuf[], EVMULT_OUT * em_o);
-short	evnt_timer  (unsigned long Interval);
+short	mt_evnt_button (short Clicks, short WhichButton, short WhichState,
+						short *Mx, short *My, short *ButtonState, short *KeyState, short *global_aes);
+short	mt_evnt_dclick (short ToSet, short SetGet, short *global_aes);
+short	mt_evnt_keybd  (short *global_aes);
+short	mt_evnt_mesag  (short MesagBuf[], short *global_aes);
+short	mt_evnt_mouse  (short EnterExit, short InX, short InY, short InW, short InH,
+						short *OutX, short *OutY, short *ButtonState, short *KeyState, short *global_aes);
+short   mt_evnt_multi  (short Type, short Clicks, short WhichButton, short WhichState,
+						short EnterExit1, short In1X, short In1Y, short In1W, short In1H,
+						short EnterExit2, short In2X, short In2Y, short In2W, short In2H,
+						short MesagBuf[], unsigned long Interval, short *OutX, short *OutY,
+						short *ButtonState, short *KeyState, short *Key, short *ReturnCount, short *global_aes);
+short   mt_evnt_multi_fast (const EVMULT_IN * em_i,
+							short MesagBuf[], EVMULT_OUT * em_o, short *global_aes);
+short	mt_evnt_timer  (unsigned long Interval, short *global_aes);
+#define event_button(a,b,c,d,e,f,g) mt_event_button(a,b,c,d,e,f,g,aes_global)
+#define event_dclick(a,b) mt_event_dclick(a,b,aes_global)
+#define event_keybd() mt_event_keybd(aes_global)
+#define event_mesag(a) mt_event_mesag(a,aes_global)
+#define event_mouse(a,b,c,d,e,f,g,h,i) mt_event_mouse(a,b,c,d,e,f,g,h,i,aes_global)
+#define event_multi(a,b,c,d, e,f,g,h,i, j,k,l,m,n, o,p,q,r, s,t,u,v) mt_event_multi(a,b,c,d, e,f,g,h,i, j,k,l,m,n, o,p,q,r, s,t,u,v,aes_global)
+#define event_multi_fast(a,b,c) mt_event_multi_fast(a,b,c,aes_global)
+#define event_timer(a) mt_event_timer(a,aes_global)
 
 short form_alert  (short DefButton, const char *Str);
 short form_button (OBJECT *, short Bobject, short Bclicks, short *Bnxtobj);
