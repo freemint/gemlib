@@ -24,12 +24,11 @@ short
 vq_tray_names (short handle, char *input_name, char *output_name,
                short *input, short *output)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[4];   
 	short vdi_intout[2]; 
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy );
-#endif
 	
 	vdi_intin_ptr(0) = input_name;
 	vdi_intin_ptr(2) = output_name;

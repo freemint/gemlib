@@ -118,19 +118,9 @@
 void
 vq_extnd (short handle, short flag, short work_out[])
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+
 	VDI_PARAMS(vdi_control, &flag, 0L, &work_out[0], &work_out[45] );
-#else
-	vdi_params.intout = &work_out[0];
-	vdi_params.ptsout = &work_out[45];
-	vdi_intin[0] = flag;
-#endif
 	
 	VDI_TRAP (vdi_params, handle, 102, 0,1);
-
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.intout = vdi_intout;
-	vdi_params.ptsout = vdi_ptsout;
-#endif
 }

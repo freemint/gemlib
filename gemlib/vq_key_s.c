@@ -24,14 +24,9 @@
 void
 vq_key_s (short handle, short *state)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+
 	VDI_PARAMS(vdi_control, 0L, 0L, state, vdi_dummy );
-#endif
 	
 	VDI_TRAP_00 (vdi_params, handle, 128);
-	
-#if !(USE_LOCAL_VDIPB)
-	*state = vdi_intout[0];
-#endif
 }
