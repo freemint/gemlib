@@ -168,7 +168,37 @@
  *			 version 4.0.
  *
  *  <tr><td> #SWM_THRCREATE <td> 20 <td>
- *           (Magic 4.5 ? Doc wanted !!!)		  
+ *           The application produces a new Thread
+ *           - \a wisgr	can be:
+ *             - 0 = Start program in the VT52 window of the application, if one is opened.	
+ *             - 1 = open no new window	
+ *             - 2 = open new VT52-Fenster	
+ *           - \a wiscr shall be set to 0 	
+ *           - \a cmd Pointer on #THREADINFO structure.	
+ *           - \a tail Parameter of the type (void *) for the Thread function (see THREADINFO::proc).
+ *           - the application ID of the new thread is returned.
+ *
+ *  <tr><td> SWM_??? <td> 21 <td>
+ *           This mode allows a thread to terminated itself.
+ *           - \a wisgr, \a wiscr and \a tail shall be set to 0
+ *           - \a cmd shall be set to the error code which will be returned to the parent process
+ *
+ *           Normally implementing of this function is not necessary, since the thread
+ *           is automatically terminated with the end of its procedure (i.e. with the CPU
+ *           instruction RTS).
+ *
+ *          Important: If the thread accomplished a Pexec() call, then first the current
+ *          process must be terminated by Pterm, before the thread can be terminated.
+ *
+ *  <tr><td> SWM_??? <td> 22 <td>
+ *          This mode allows the main program to terminate a thread.
+ *          - \a wiscr contains the application ID of the thread
+ *          - \a wisgr, \a tail and \a cmd shall be set to 0
+ *
+ *          Normally this function is not necessary, since with main program terminates,
+ *          then all associated Threads are terminated as well.
+ *          The function was successfully implemented, if as result the value 1 is returned the delivery.  To consider is however that if the Thread implemented in the meantime a Pexec only this program by Pterm (EBREAK) is terminated;  the Thread is only then terminated if the Aufrufer received THR_EXIT (*).
+ *
  *	</table>
  *
  *  The parameter \a wodex have extended bits, only supported
@@ -181,11 +211,15 @@
  *   - #SW_PRENICE   
  *   - #SW_DEFDIR    
  *   - #SW_ENVIRON   
+ *   - #SW_UID (XaAES/oAESis only extension)
+ *   - #SW_GID (XaAES/oAESis only extension)
+ *   - #SHW_XMDFLAGS (MagiC6 only extension)
  *
  *	If the upper byte is empty, extended mode is not entered and 
  *  \a cmd specifies the filename (to search for the file
  *	with mt_shel_find() ) or the complete file specification. Otherwise,
- *  if any extended bits are set, \a cmd points to a #SHELW structure.
+ *  if any extended bits are set, \a cmd points to a #SHELW structure (or #XSHW_COMMAND
+ *  structure if you use MagiC6 extension).
  *
  *  @since All AES versions. In AES versions 4.0 and above,
  *         mt_appl_getinfo() with parameter #AES_SHELL can be used to determine the highest legal
