@@ -19,8 +19,11 @@
  *	       - APP_APPLICATION   (0x02)   Application
  *	       - APP_ACCESSORY     (0x04)   Accessory
  *	       - APP_SHELL         (0x08)
+ *         .
+ *         [option CHECK_NULLPTR] type may be NULL
  *  @param ap_id is a pointer to a word into which will be placed the
- *	       processes' application identifier.
+ *	       processes' application identifier.\p
+ *         [option CHECK_NULLPTR] ap_id may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 if no more applications exist or 1
@@ -46,7 +49,13 @@ mt_appl_search(short mode, char *fname, short *type, short *ap_id, short *global
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (type)
+#endif
 	*type  = aes_intout[1];
+#if CHECK_NULLPTR
+	if (ap_id)
+#endif
 	*ap_id = aes_intout[2];
 
 	return aes_intout[0];
