@@ -29,7 +29,7 @@
  */
 
 short
-mt_fsel_boxinput (char *path, char *file, short *exit_button, const char *label, void * callback, short *global_aes)
+mt_fsel_boxinput (char *path, char *file, short *exit_button, const char *label, FSEL_CALLBACK callback, short *global_aes)
 {
 	AES_PARAMS(91,0,2,4,0);
 

@@ -1645,9 +1645,13 @@ short mt_form_keybd  (OBJECT *, short Kobject, short Kobnext, short Kchar,
 /** @addtogroup a_fsel
  *  @{
  */
+ 
+/** callback function used by BoxKite file selector. See mt_fsel_boxinput() */
+typedef void __CDECL (* FSEL_CALLBACK)( short *msg);
+
 short 	mt_fsel_exinput	(char *path, char *file, short *exit_button, const char *title, short *global);
 short 	mt_fsel_input	(char *path, char *file, short *exit_button, short *global);
-short 	mt_fsel_boxinput(char *path, char *file, short *exit_button, const char *title, void *callback, short *global);
+short 	mt_fsel_boxinput(char *path, char *file, short *exit_button, const char *title, FSEL_CALLBACK callback, short *global);
 /**@}*/
 
 /** @addtogroup a_graf
