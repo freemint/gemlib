@@ -208,12 +208,12 @@ typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, void *xattr);
 /* fslx_set_flags */
 #define SHOW8P3			1
 
-short	fslx_close		(void *fsd, short *global);
-void *	fslx_do			(char *title, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode, short flags, short *button, short *nfiles, char **pattern, short *global);
-short	fslx_evnt		(void *fsd, EVNT *events, char *path, char *fname, short *button, short *nfiles, short *sort_mode, char **pattern, short *global); 
-short	fslx_getnxtfile	(void *fsd, char *fname, short *global);
-void *	fslx_open		(char *title, short x, short y, short *handle, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short sort_mode, short flags, short *global);
-short	fslx_set_flags 	(short flags, short *oldval, short *global);
+short	mt_fslx_close		(void *fsd, short *global);
+void *	mt_fslx_do			(char *title, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode, short flags, short *button, short *nfiles, char **pattern, short *global);
+short	mt_fslx_evnt		(void *fsd, EVNT *events, char *path, char *fname, short *button, short *nfiles, short *sort_mode, char **pattern, short *global); 
+short	mt_fslx_getnxtfile	(void *fsd, char *fname, short *global);
+void *	mt_fslx_open		(char *title, short x, short y, short *handle, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short sort_mode, short flags, short *global);
+short	mt_fslx_set_flags 	(short flags, short *oldval, short *global);
 #define fslx_close(a)							mt_fslx_close(a,aes_global)
 #define fslx_do(a,b,c,d,e,f,g,h,i,j,k,l,m)		mt_fslx_do(a,b,c,d,e,f,g,h,i,j,k,l,m,aes_global)
 #define fslx_evnt(a,b,c,d,e,f,g,h)				mt_fslx_evnt(a,b,c,d,e,f,g,h,aes_global)
@@ -948,23 +948,29 @@ void 	v_bez_qual	(short handle, short percent, short *actual);
 /*
  * The following functions requires NVDI version 3.x or higher
  */
+
+/** structure to store information about a font */
 typedef struct
 {
-	long		size;
-	short		format;
-	short		id;
-	short		index;
-	char		font_name[50];
-	char		family_name[50];
-	char		style_name[50];
-	char		file_name1[200];
-	char		file_name2[200];
-	char		file_name3[200];
-	short		pt_cnt;
-	short		pt_sizes[64];
+	long		size;				/**< length of the structure, initialize this entry before
+	                                     calling vqt_xfntinfo() */
+	short		format;				/**< font format, e.g. 4 for TrueType */
+	short		id;					/**< font ID, e.g. 6059 */
+	short		index;				/**< index */
+	char		font_name[50];		/**< font name, e.g. "Century 725 Italic BT" */
+	char		family_name[50];	/**< name of the font family, e.g. "Century725 BT" */
+	char		style_name[50];		/**< name of the font style, e.g. "Italic" */
+	char		file_name1[200];	/**< name of the first font file,
+	                                     e.g. "C:\\FONTS\\TT1059M_.TTF" */
+	char		file_name2[200];	/**< name of the 2nd font file */
+	char		file_name3[200];	/**< name of the 3rd font file */
+	short		pt_cnt;				/**< number of available point sizes (vst_point()),
+	                                     e.g. 10 */
+	short		pt_sizes[64];		/**< available point sizes,
+                                         e.g. { 8, 9, 10, 11, 12, 14, 18, 24, 36, 48 } */
 } XFNT_INFO;
 
-typedef unsigned short WCHAR; /* 16bit string, eg. for unicode */
+typedef unsigned short WCHAR; /**< 16bit string, eg. for unicode */
 
 void	v_ftext         (VdiHdl, short x, short y, const char  *str);
 void	v_ftext16       (VdiHdl, short x, short y, const WCHAR *wstr);
