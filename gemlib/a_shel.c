@@ -8,7 +8,7 @@
 #include "gem.h"
 
 
-int shel_envrn(char **result, char *param)
+int shel_envrn(char **result, const char *param)
 {
 	aes_addrin[0] = (long)result;
 	aes_addrin[1] = (long)param;
@@ -49,7 +49,7 @@ int shel_get(char *Buf, int Len)
 }
 
 
-int shel_help(int sh_hmode, char *sh_hfile, char *sh_hkey)
+int shel_help(int sh_hmode, const char *sh_hfile, const char *sh_hkey)
 {
 	aes_intin[0] = sh_hmode;
 	aes_addrin[0] = (long)sh_hfile;
@@ -64,7 +64,7 @@ int shel_help(int sh_hmode, char *sh_hfile, char *sh_hkey)
 }
 
 
-int shel_put(char *Buf, int Len)
+int shel_put(const char *Buf, int Len)
 {
 	aes_intin[0] = Len;
 	aes_addrin[0] = (long)Buf;
@@ -105,7 +105,7 @@ int shel_read(char *Command, char *Tail)
 	return aes_intout[0];
 }
 
-int shel_wdef(char *lpcmd, char *lpdir)
+int shel_wdef(const char *lpcmd, const char *lpdir)
 {
 	aes_addrin[0] = (long)lpcmd;
 	aes_addrin[1] = (long)lpdir;

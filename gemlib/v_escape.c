@@ -17,7 +17,7 @@
 /*
  * special graphic funkcions
 */
-void v_bit_image(int handle, char *filename, int aspect, int x_scale,
+void v_bit_image(int handle, const char *filename, int aspect, int x_scale,
 						int y_scale, int h_align, int v_align,	int *pxyarray)
 {
 	short n;
@@ -169,10 +169,10 @@ int vq_calibrate (int handle, int *flag)
 	return vdi_control[4];
 } 
 
-int vq_page_name(int handle, int page_id, char *page_name, long *page_width, long *page_height)
+int vq_page_name(int handle, int page_id, const char *page_name, long *page_width, long *page_height)
 {
 	vdi_intin[0] = page_id;
-	*((char **)(&vdi_intin[1])) = page_name;
+	*((const char **)(&vdi_intin[1])) = page_name;
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;
 	vdi_control[3] = 3;
@@ -210,10 +210,10 @@ int vq_tabstatus(int handle)
 	return vdi_intout[0];
 }
 
-void vq_tray_names(int handle, char *input_name, char *output_name, int *input, int *output)
+void vq_tray_names(int handle, const char *input_name, const char *output_name, int *input, int *output)
 {
-	*((char **)(&vdi_intin[0])) = input_name;
-	*((char **)(&vdi_intin[2])) = output_name;
+	*((const char **)(&vdi_intin[0])) = input_name;
+	*((const char **)(&vdi_intin[2])) = output_name;
 	vdi_control[0] = 5;
 	vdi_control[1] = 0;
 	vdi_control[3] = 4;
@@ -377,7 +377,7 @@ void vm_coords(int handle, int llx, int lly, int urx, int ury)
 	vdi(&vdi_params);
 }
 
-void vm_filename(int handle, char *filename)
+void vm_filename(int handle, const char *filename)
 {
 	short n;
 
@@ -450,7 +450,7 @@ void v_escape2000(int handle, int times)
 /*
  * text functions
 */
-void v_alpha_text(int handle, char *str)
+void v_alpha_text(int handle, const char *str)
 {
 	short	n;
 	
@@ -503,7 +503,7 @@ void v_curright(int handle)
 	vdi(&vdi_params);
 }
 
-void v_curtext(int handle, char *str)
+void v_curtext(int handle, const char *str)
 {
 	short	i;
 	

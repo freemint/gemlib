@@ -188,7 +188,7 @@ void vqt_cachesize(int handle, int which_cache, long *size)
 	*size = *((long *)(&vdi_intout[0]));
 }
 
-void vqt_extent(int handle, char *str, int extent[])
+void vqt_extent(int handle, const char *str, int extent[])
 {
 	short	i;
 	

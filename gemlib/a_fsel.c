@@ -8,7 +8,7 @@
 #include "gem.h"
 
 
-int fsel_exinput(char *path, char *file, int *exit_but, char *title)
+int fsel_exinput(char *path, char *file, int *exit_but, const char *title)
 {
    aes_addrin[0] = (long)path;  
    aes_addrin[1] = (long)file;  

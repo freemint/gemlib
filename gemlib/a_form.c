@@ -9,7 +9,7 @@
 #include "gem.h"
 
 
-int form_alert(int DefButton, char *Str)
+int form_alert(int DefButton, const char *Str)
 {
 	aes_intin[0] = DefButton;
 	aes_addrin[0] = (long)Str;

@@ -2,7 +2,7 @@
  * Some usefull extensions.
 */
 
-void vdi_array2str(short *src, char *des, int len)
+void vdi_array2str(const short *src, char *des, int len)
 {
 	while (len > 0)
 	{
@@ -12,7 +12,7 @@ void vdi_array2str(short *src, char *des, int len)
 	*des++ = 0;
 }
 
-int vdi_str2array(char *src, short *des)
+int vdi_str2array(const char *src, short *des)
 {
 	int				len;
 	unsigned char	*c;
