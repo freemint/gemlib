@@ -29,14 +29,7 @@ vqt_advance32 (short handle, short ch, long *advx, long *advy)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsout[8]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&ch,                         /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		0L,                          /* vdi_intout  */
-		&vdi_ptsout[0]               /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, &ch, 0L, 0L, vdi_ptsout);
 #else
 	vdi_intin[0] = ch;
 #endif

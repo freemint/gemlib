@@ -24,14 +24,7 @@ vq_prn_scaling (short handle)
 	short vdi_control[VDI_CNTRLMAX]; 
 	static short vdi_intin[2] = {-1,-1};   
 	short vdi_intout[2]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&vdi_intin[0],               /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		&vdi_intout[0],              /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
 #else
 	vdi_intin[0] = -1;
 	vdi_intin[1] = -1;

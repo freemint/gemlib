@@ -24,14 +24,7 @@ vq_dflt_ctab (short handle, long ctab_length, COLOR_TAB * ctab)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		(short*)&ctab_length,        /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		(short*)ctab,                /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, (short*)&ctab_length, 0L, (short*)ctab, 0L);
 #else
 	*(long*)&vdi_intin[0] = ctab_length;
 	vdi_params.intout = (short*)ctab;
