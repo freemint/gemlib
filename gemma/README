@@ -1,13 +1,18 @@
-Take this as a public alpha release.
+To build everything do `gmake install'.
 
-The source is preconfigured for 68020+ machines. To build plain 68000
-binaries edit the file named `config', then just say `make'. Notice that
-statically linked libraries associated with the SLB are always built in
-two versions (i.e. separately for 68000 and 68020).
+The include files will be installed in /usr/include/slb
+The static modules will be installed in /usr/lib
+The shared objects will be istalled in /usr/local/lib/slb
 
-Once eveything is built, you may say `make install' and `make libinstall'
-to install everything. Before that make sure the env. variables $GNULIB
-and $GNUINC point to your /usr/lib and /usr/include respectively, and
-$SLBPATH points to a folder where SLB libraries reside.
+To get all this to work you also have to set the SLBPATH variable to point to that last
+dorectory (e.g. setenv SLBPATH /usr/local/lib/slb in your mint.cnf file).
+
+To check if everything is installed properly, run the test/test.app program. It should
+open a movable window and there should be a possibility to open another one that can be
+moved independently.
+
+Since this version the library does not need -mshort anymore. To avoid conflicts with
+previous versions I had to change the names of the shared objects, so that these would not be 
+loaded by older software. This is why there's 'gemma32' and 'kernel32' now. 
 
 EOF

@@ -1,9 +1,9 @@
 #
-# Makefile for gemma, a minimal GEM library
+# Makefile for gemma, a GEM library
 #
 
 SHELL = /bin/sh
-SUBDIRS = documentation libgemma libslb src
+SUBDIRS = configtool documentation libgemma libslb src test
 
 srcdir = .
 top_srcdir = ..
@@ -23,14 +23,21 @@ all-here:
 
 
 install:
-	install -m 644 include/gemma/struct.h ${PREFIX}/include/gemma
-	install -m 644 include/gemma/gemma.h ${PREFIX}/include/gemma
+	mkdir -p ${PREFIX}/include/slb
+	mkdir -p ${PREFIX}/local/lib/slb
+	install -m 644 include/slb/gemma.h ${PREFIX}/include/slb
+	install -m 644 include/slb/gemma-struct.h ${PREFIX}/include/slb
+	install -m 644 include/slb/kernel.h ${PREFIX}/include/slb
 	install -m 644 libgemma/libgemma.a ${PREFIX}/lib
 	install -m 644 libgemma/libgemma020.a ${PREFIX}/lib/m68020-60
+	install -m 755 src/gemma32.slb ${PREFIX}/local/lib/slb
+	install -m 755 kernel32.slb ${PREFIX}/local/lib/slb
 
 uninstall:
-	rm -f ${PREFIX}/include/gemma/struct.h
-	rm -f ${PREFIX}/include/gemma/gemma.h
+	rm -f ${PREFIX}/include/slb/gemma-struct.h
+	rm -f ${PREFIX}/include/slb/gemma.h
+	rm -f ${PREFIX}/include/slb/kernel.h
 	rm -f ${PREFIX}/lib/libgemma.a
 	rm -f ${PREFIX}/lib/m68020-60/libgemma020.a
-
+	rm -f ${PREFIX}/local/lib/slb/gemma32.slb
+	rm -f ${PREFIX}/local/lib/slb/kernel32.slb
