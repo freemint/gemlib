@@ -31,12 +31,11 @@ short
 vq_ext_devinfo (short handle, short device,
                 short *dev_exists, char *file_path, char *file_name, char *name)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[7];   
 	short vdi_intout[2]; 
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
-#endif
 	
 	vdi_intin    [0] = device;
 	vdi_intin_ptr(1) = file_path;

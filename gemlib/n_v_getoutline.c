@@ -32,11 +32,10 @@ void
 v_getoutline (short handle, short ch, short *xyarray, char *bezarray,
               short maxverts, short *numverts)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[6];   
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, numverts, vdi_dummy);
-#endif
 	
 	vdi_intin    [0] = ch;
 	vdi_intin    [1] = maxverts;
@@ -44,8 +43,4 @@ v_getoutline (short handle, short ch, short *xyarray, char *bezarray,
 	vdi_intin_ptr(4) = bezarray;
 	
 	VDI_TRAP (vdi_params, handle, 243, 0,6);
-	
-#if !(USE_LOCAL_VDIPB)
-	*numverts = vdi_intout[0];
-#endif
 }

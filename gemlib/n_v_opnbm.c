@@ -60,23 +60,13 @@
 void
 v_opnbm (short *work_in, MFDB *bitmap, short *handle, short *work_out)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+
 	VDI_PARAMS(vdi_control, work_in, 0L, &work_out[0], &work_out[45]);
-#else
-	vdi_params.intin  = &work_in[0];
-	vdi_params.intout = &work_out[0];
-	vdi_params.ptsout = &work_out[45];
-#endif
 	
 	vdi_control_ptr(7) = bitmap;
-	VDI_TRAP_ESC (vdi_params, *handle, 100,1, 0,20);
 
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.intin  = vdi_intin;
-	vdi_params.intout = vdi_intout;
-	vdi_params.ptsout = vdi_ptsout;
-#endif
+	VDI_TRAP_ESC (vdi_params, *handle, 100,1, 0,20);
 	
 	*handle = vdi_control[6];
 }

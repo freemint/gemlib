@@ -49,13 +49,10 @@ v_getbitmap_info (short handle, short ch, long *advancex, long *advancey,
                   long *xoffset, long *yoffset, short *width, short *height,
                   short **bitmap)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[12]; 
+
 	VDI_PARAMS(vdi_control, &ch, 0L, vdi_intout, vdi_dummy );
-#else
-	vdi_intin[0] = ch;
-#endif
 		
 	VDI_TRAP (vdi_params, handle, 239, 0,1);
 	
