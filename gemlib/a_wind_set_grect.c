@@ -12,6 +12,9 @@
  *  @param global_aes global AES array
  *
  *  see mt_wind_set() documentation for more details
+ *  
+ *  the fields x, y, w and h of \a r are respectively sent in place of the 
+ *  parameters \a w1, \a w2, \a w3 and \a w4 of mt_wind_set().
  */
 
 short 

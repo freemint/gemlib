@@ -1055,41 +1055,41 @@ typedef  struct
 
 /* wind_get flags */
 #define WF_KIND			  1	/**< TODO */
-#define WF_NAME			  2	/**< TODO */
-#define WF_INFO			  3	/**< TODO */
+#define WF_NAME			  2	/**< title name of the window, see mt_wind_set() */
+#define WF_INFO			  3	/**< info line of the window, see mt_wind_set() */
 #define WF_WORKXYWH		  4	/**< TODO */
-#define WF_CURRXYWH		  5	/**< TODO */
+#define WF_CURRXYWH		  5	/**< current dimensions of the window (external area), see mt_wind_set()  */
 #define WF_PREVXYWH		  6	/**< TODO */
 #define WF_FULLXYWH		  7	/**< TODO */
-#define WF_HSLIDE 		  8	/**< TODO */
-#define WF_VSLIDE 		  9	/**< TODO */
-#define WF_TOP 			 10	/**< TODO */
+#define WF_HSLIDE 		  8	/**< position of the horizontal slider, see mt_wind_set() */
+#define WF_VSLIDE 		  9	/**< position of the vertical slider, see mt_wind_set()*/
+#define WF_TOP 			 10	/**< top window, see mt_wind_set() */
 #define WF_FIRSTXYWH 	 11	/**< TODO */
 #define WF_NEXTXYWH		 12	/**< TODO */
 #define WF_RESVD		 13	/**< TODO */
-#define WF_NEWDESK		 14	/**< TODO */
-#define WF_HSLSIZE		 15	/**< TODO */
-#define WF_VSLSIZE		 16	/**< TODO */
+#define WF_NEWDESK		 14	/**< OBJECT tree installed as desktop, see mt_wind_set() */
+#define WF_HSLSIZE		 15	/**< size of the horizontal slider, see mt_wind_set() */
+#define WF_VSLSIZE		 16	/**< size of the vertical slider, see mt_wind_set() */
 #define WF_SCREEN 		 17	/**< TODO */
-#define WF_COLOR		 18	/**< TODO */
-#define WF_DCOLOR 		 19	/**< TODO */
+#define WF_COLOR		 18	/**< current color of widget, see mt_wind_set() */
+#define WF_DCOLOR 		 19	/**< default color of widget, see mt_wind_set() */
 #define WF_OWNER		 20	/**< TODO */
-#define WF_BEVENT 		 24	/**< TODO */
-#define WF_BOTTOM 		 25	/**< TODO */
-#define WF_ICONIFY		 26	/**< TODO */
-#define WF_UNICONIFY 	 27	/**< TODO */
-#define WF_UNICONIFYXYWH 28	/**< TODO */
-#define WF_TOOLBAR		 30	/**< TODO */
+#define WF_BEVENT 		 24	/**< window feature on mouse button event, see mt_wind_set() */
+#define WF_BOTTOM 		 25	/**< bottom window, see mt_wind_set() */
+#define WF_ICONIFY		 26	/**< iconification of the window, see mt_wind_set() */
+#define WF_UNICONIFY 	 27	/**< un-iconification of the window, see mt_wind_set() */
+#define WF_UNICONIFYXYWH 28	/**< window coordinates when uniconified , see mt_wind_set() */
+#define WF_TOOLBAR		 30	/**< tool bar attached to a window, see mt_wind_set() */
 #define WF_FTOOLBAR		 31	/**< TODO */
 #define WF_NTOOLBAR		 32	/**< TODO */
 #define WF_MENU			 33		 /* XaAEES */	/**< TODO */
-#define WF_WHEEL		 40		 /* XaAES */	/**< TODO */
+#define WF_WHEEL		 40	/**< window feature on mouse wheel event, see mt_wind_set() */
 #define WF_M_BACKDROP	100      /* KAOS 1.4    */	/**< TODO */
 #define WF_M_OWNER		101      /* KAOS 1.4    */	/**< TODO */
 #define WF_M_WINDLIST	102      /* KAOS 1.4    */	/**< TODO */
 #define WF_MINXYWH		103      /* MagiC 6     */	/**< TODO */
 #define WF_INFOXYWH		104      /* MagiC 6.10  */	/**< TODO */
-#define WF_WIDGETS		200		 /* NAES */	/**< TODO */
+#define WF_WIDGETS		200		/**< actual positions of the slider widgets, see mt_wind_set() */
 #define WF_WINX			22360	/**< TODO */
 #define WF_WINXCFG		22361	/**< TODO */
 #define WF_SHADE	    22365      /* WINX 2.3 */	/**< TODO */
@@ -1099,32 +1099,32 @@ typedef  struct
 #define WF_XAAES		0x5841	   /* XaAES: 'XA' */	/**< TODO */
 
 /* wind_set(WF_BEVENT) */
-#define BEVENT_WORK     0x0001    /* AES 4.0  */	/**< TODO */
-#define BEVENT_INFO     0x0002    /* MagiC 6  */	/**< TODO */
+#define BEVENT_WORK     0x0001    /**< window not topped when click on the work area, see #WF_BEVENT */
+#define BEVENT_INFO     0x0002    /**< ?????, see #WF_BEVENT */
 
 /* window elements */
-#define W_BOX			0	/**< TODO */
-#define W_TITLE			1	/**< TODO */
-#define W_CLOSER		2	/**< TODO */
-#define W_NAME 			3	/**< TODO */
-#define W_FULLER		4	/**< TODO */
-#define W_INFO 			5	/**< TODO */
-#define W_DATA 			6	/**< TODO */
-#define W_WORK 			7	/**< TODO */
-#define W_SIZER			8	/**< TODO */
-#define W_VBAR 			9	/**< TODO */
-#define W_UPARROW		10	/**< TODO */
-#define W_DNARROW		11	/**< TODO */
-#define W_VSLIDE		12	/**< TODO */
-#define W_VELEV			13	/**< TODO */
-#define W_HBAR			14	/**< TODO */
-#define W_LFARROW		15	/**< TODO */
-#define W_RTARROW		16	/**< TODO */
-#define W_HSLIDE		17	/**< TODO */
-#define W_HELEV			18	/**< TODO */
-#define W_SMALLER		19	/**< TODO */
-#define W_BOTTOMER		20      /* MagiC 3     */	/**< TODO */
-#define W_HIDER			30	/**< TODO */
+#define W_BOX			0	/**< widget index of ???, see #WF_COLOR */
+#define W_TITLE			1	/**< widget index of ???, see #WF_COLOR */
+#define W_CLOSER		2	/**< widget index of ???, see #WF_COLOR */
+#define W_NAME 			3	/**< widget index of ???, see #WF_COLOR */
+#define W_FULLER		4	/**< widget index of ???, see #WF_COLOR */
+#define W_INFO 			5	/**< widget index of ???, see #WF_COLOR */
+#define W_DATA 			6	/**< widget index of ???, see #WF_COLOR */
+#define W_WORK 			7	/**< widget index of ???, see #WF_COLOR */
+#define W_SIZER			8	/**< widget index of ???, see #WF_COLOR */
+#define W_VBAR 			9	/**< widget index of ???, see #WF_COLOR */
+#define W_UPARROW		10	/**< widget index of ???, see #WF_COLOR */
+#define W_DNARROW		11	/**< widget index of ???, see #WF_COLOR */
+#define W_VSLIDE		12	/**< widget index of ???, see #WF_COLOR */
+#define W_VELEV			13	/**< widget index of ???, see #WF_COLOR */
+#define W_HBAR			14	/**< widget index of ???, see #WF_COLOR */
+#define W_LFARROW		15	/**< widget index of ???, see #WF_COLOR */
+#define W_RTARROW		16	/**< widget index of ???, see #WF_COLOR */
+#define W_HSLIDE		17	/**< widget index of ???, see #WF_COLOR */
+#define W_HELEV			18	/**< widget index of ???, see #WF_COLOR */
+#define W_SMALLER		19	/**< widget index of ???, see #WF_COLOR */
+#define W_BOTTOMER		20  /**< widget index of ???, see #WF_COLOR */
+#define W_HIDER			30	/**< widget index of ???, see #WF_COLOR */
 
 /* arrow message */
 #define WA_UPPAGE 		0	/**< Page Up,      see #WM_ARROWED  */
@@ -1138,10 +1138,11 @@ typedef  struct
 #define WA_WHEEL		8	/**< XaAES TODOn   see #WM_ARROWED  */
 
 /* wind_update flags */
-#define END_UPDATE		0	/**< TODO */
-#define BEG_UPDATE		1	/**< TODO */
-#define END_MCTRL		2	/**< TODO */
-#define BEG_MCTRL		3	/**< TODO */
+#define END_UPDATE		0	/**< release the screen lock, see mt_wind_update() */
+#define BEG_UPDATE		1	/**< lock the screen, see mt_wind_update() */
+#define END_MCTRL		2	/**< release the mouse control to the AES, see mt_wind_update() */
+#define BEG_MCTRL		3	/**< mouse button message only sent to the application, see mt_wind_update() */
+#define NO_BLOCK		0x100  /**< prevent the application from blocking, see mt_wind_update()*/
 
 /* graf_mouse mouse types */
 #define ARROW			 0	/**< see mt_graf_mouse() */

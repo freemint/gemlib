@@ -11,7 +11,12 @@
  *  @param str a string
  *  @param global_aes global AES array
  *
- *  see mt_wind_set() documentation for more details
+ *  see mt_wind_set() documentation for more details.
+ *
+ *  the \a str pointer (32 bits) is sent in place of the two first parameters
+ *  \a w1 (most significant word of \a str) and \a w2 (less significant word
+ *  of \a str) of mt_wind_set(). Parameters \a w3 and \a w4 of mt_wind_set() are
+ *  undefined.
  */
 
 short 
