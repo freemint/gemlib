@@ -107,9 +107,9 @@ typedef WORD (cdecl *SET_ITEM)( LIST_BOX *box, OBJECT *tree,
  *  - \p rect       is the pointer to the GRECT for the object redraw or 0L
  *  - \p first      contains the number of the first visible item for Slider B
  * 
- *  For a list box that only contains text strings, <set> is typically a 
+ *  For a list box that only contains text strings, \p set is typically a 
  *  function that copies a string pointed to by the LBOX_ITEM structure 
- *  into the object <index>.
+ *  into the object \p index.
  *  
  *  \p rect is 0L when a redraw of the dialog box is executed or when 
  *  mt_lbox_update() has been called.
@@ -135,7 +135,7 @@ typedef WORD (cdecl *SET_ITEM)( LIST_BOX *box, OBJECT *tree,
  *  redrawn or moved. If the list box has only one slider, \p first is 
  *  always 0.
  *  
- *  <items> points to the first item in a list from LBOX_ITEM. The structure 
+ *  \p items points to the first item in a list from LBOX_ITEM. The structure 
  *  used for the items must contain a pointer to its successor (next) as its 
  *  first element and a word for the condition (selected) as the second:
  *  

@@ -34,7 +34,7 @@
  *
  *  @since all VDI versions (extended since NVDI 4.10)
  *
- *  If the screen (or the device specified by <handle>) is the source or destination 
+ *  If the screen (or the device specified by \p handle) is the source or destination 
  *  of a raster operation, the MFDB structure element fd_addr should be zero!
  *  
  *  The clipping rectangle for the destination raster is enabled only if fd_addr of 

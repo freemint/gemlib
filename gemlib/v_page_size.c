@@ -21,7 +21,7 @@
  *         - 20: PAGE_BROAD, Broad sheet size
  *
  *  @return (-1) : error (not enough memory) =>  close the driver \n
- *          else <page_size>
+ *          else \p page_size
  *
  *  @since depends on the driver. If the driver doesn't support this function,
  *         0 will be returned.

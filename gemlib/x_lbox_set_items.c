@@ -16,7 +16,7 @@
  *  This function sets a new list with list box entries. The old list must 
  *  first be freed with mt_lbox_free_items().
  *
- *  The pointer <items> can also be 0L if the list box is empty 
+ *  The pointer \p items can also be 0L if the list box is empty 
  *  and contains no entries.
  */
 
