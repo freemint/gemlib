@@ -8,9 +8,8 @@
  *  the user an opportunity to choose a complete GEMDOS path
  *  specification.
  *
- *  @param path should be a pointer to a character buffer at least 128
- *		   bytes long (applications wishing to access CD-ROM's  should
- *		   allocate at least 200 bytes). On input the buffer should
+ *  @param path should be a pointer to a character buffer at least 260
+ *		   bytes long. On input the buffer should
  *		   contain a complete GEMDOS path specification including
  *		   a drive specifier, path string, and wildcard mask as
  *		   follows: 'drive:\\path\\mask'. The mask can be any valid
@@ -18,14 +17,15 @@
  *         On function exit, \p path contains final path of the selected
  *         file (you will have to strip the mask)
  *  @param file should point to a character buffer 13 bytes long (12
- *         character filename plus NULL). On input its contents will
+ *         character filename plus NULL), or 260 bytes long if the application
+ *         runs in MiNT domain (see Pdomain GEMDOS call). On input its contents will
  *         be placed on the filename line of the selector (usually
  *         this value can simply be a empty string). On function exit,
  *         file contains the filename which the user selected.
  *  @param exit_but is a short pointer which upon function exit will
  *         contain FSEL_CANCEL (0) if the user selected CANCEL or
  *         FSEL_OK (1) if OK. \n
- *             [option CHECK_NULLPTR] exit_but may be NULL
+ *         [option CHECK_NULLPTR] exit_but may be NULL
  *  @param title should be a pointer to a character string up to 30
  *         characters long which contains the title to appear in the
  *         file selector (usually indicates which action the user is
@@ -49,7 +49,7 @@
 short
 mt_fsel_exinput (char *path, char *file, short *exit_but, const char *title, short *global_aes)
 {
-	if((((global_aes[0]>>8)==1)&&((global_aes[0]&0xFF)>=40))||((global_aes[0]>>8)>1))
+	if ( ((global_aes[0] >= 0x140) &&  (global_aes[0] < 0x200)) || (global_aes[0]>=0x300) )
 	{
 		long *ptr_l;
 		
