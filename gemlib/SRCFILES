@@ -8,19 +8,44 @@ HEADER = \
 
 _VDI_ATTRIB = \
 	vs_color.c \
-	vsf_color.c  vsf_interior.c vsf_perimeter.c vsf_style.c vsf_udpat.c \
-	vsl_color.c  vsl_ends.c     vsl_type.c      vsl_udsty.c vsl_width.c \
-	vsm_color.c  vsm_height.c   vsm_type.c      vst_alignment.c \
-	vst_color.c  vst_effects.c  vst_error.c     vst_font.c  vst_height.c \
-	vst_point.c  vst_rotation.c vst_scratch.c \
+	vsf_color.c \
+	vsf_interior.c \
+	vsf_perimeter.c \
+	vsf_style.c \
+	vsf_udpat.c \
+	vsl_color.c \
+	vsl_ends.c \
+	vsl_type.c \
+	vsl_udsty.c \
+	vsl_width.c \
+	vsm_color.c \
+	vsm_height.c \
+	vsm_type.c \
+	vst_alignment.c \
+	vst_color.c \
+	vst_effects.c \
+	vst_error.c \
+	vst_font.c \
+	vst_height.c \
+	vst_point.c \
+	vst_rotation.c \
+	vst_scratch.c \
 	vswr_mode.c
 
 _VDI_CONTRL = \
-	v_opnwk.c  v_opnvwk.c  v_clsvwk.c  v_clswk.c  v_clrwk.c  v_updwk.c \
-	v_flushcache.c v_loadcache.c v_savecache.c \
+	v_opnwk.c \
+	v_opnvwk.c \
+	v_clsvwk.c \
+	v_clswk.c \
+	v_clrwk.c \
+	v_updwk.c \
+	v_flushcache.c \
+	v_loadcache.c \
+	v_savecache.c \
 	v_set_app_buff.c \
 	vs_clip.c \
-	vst_load_fonts.c vst_unload_fonts.c
+	vst_load_fonts.c \
+	vst_unload_fonts.c
 
 _VDI_ESCAPE = \
 	v_alpha_text.c \
@@ -53,6 +78,7 @@ _VDI_ESCAPE = \
 	vm_coords.c \
 	vm_filename.c \
 	vm_pagesize.c \
+	vq_calibrate.c \
 	vq_chcells.c \
 	vq_curaddress.c \
 	vq_page_name.c \
@@ -70,31 +96,160 @@ _VDI_ESCAPE = \
 	vt_resolution.c
 
 _VDI_INPUT = \
-	v_hide_c.c   v_show_c.c \
-	vex_butv.c   vex_curv.c    vex_motv.c   vex_timv.c \
-	vq_key_s.c   vq_mouse.c \
-	vrq_choice.c vrq_locator.c vrq_string.c vrq_valuator.c \
+	v_hide_c.c \
+	v_show_c.c \
+	vex_butv.c \
+	vex_curv.c \
+	vex_motv.c \
+	vex_timv.c \
+	vq_key_s.c \
+	vq_mouse.c \
+	vrq_choice.c \
+	vrq_locator.c \
+	vrq_string.c \
+	vrq_valuator.c \
 	vsc_form.c \
 	vsin_mode.c \
-	vsm_choice.c vsm_locator.c vsm_string.c vsm_valuator.c
+	vsm_choice.c \
+	vsm_locator.c \
+	vsm_string.c \
+	vsm_valuator.c
 
 _VDI_INQUIRE = \
-	vq_cellarray.c vq_color.c vq_extnd.c \
+	vq_cellarray.c \
+	vq_color.c \
+	vq_extnd.c \
 	vqf_attributes.c \
 	vqin_mode.c \
 	vql_attributes.c \
 	vqm_attributes.c \
-	vqt_attributes.c vqt_cachesize.c vqt_extent.c vqt_fontinfo.c \
-	vqt_get_table.c  vqt_name.c      vqt_width.c
+	vqt_attributes.c \
+	vqt_cachesize.c \
+	vqt_extent.c \
+	vqt_fontinfo.c \
+	vqt_get_table.c \
+	vqt_name.c \
+	vqt_width.c
 
 _VDI_OUTPUT = \
-	v_arc.c       v_bar.c      v_cellarray.c v_circle.c   v_contourfill.c \
-	v_ellarc.c    v_ellipse.c  v_ellpie.c    v_fillarea.c v_gtext.c \
-	v_justified.c v_pieslice.c v_pline.c     v_pmarker.c  v_rbox.c \
-	v_rfbox.c     vr_recfl.c
+	v_arc.c \
+	v_bar.c \
+	v_cellarray.c \
+	v_circle.c \
+	v_contourfill.c \
+	v_ellarc.c \
+	v_ellipse.c \
+	v_ellpie.c \
+	v_fillarea.c \
+	v_gtext.c \
+	v_gtext16.c \
+	v_justified.c \
+	v_pieslice.c \
+	v_pline.c \
+	v_pmarker.c \
+	v_rbox.c \
+	v_rfbox.c \
+	vr_recfl.c
 
 _VDI_RASTER = \
-	v_get_pixel.c vr_trnfm.c vro_cpyfm.c vrt_cpyfm.c
+	v_get_pixel.c \
+	vr_trnfm.c \
+	vro_cpyfm.c \
+	vrt_cpyfm.c
+
+_VDI_EXTENSIONS = \
+	n_v_bez.c \
+	n_v_bez_fill.c \
+	n_v_bez_off.c \
+	n_v_bez_on.c \
+	n_v_bez_qual.c \
+	n_v_clsbm.c \
+	n_v_color2nearest.c \
+	n_v_color2value.c \
+	n_v_create_ctab.c \
+	n_v_create_itab.c \
+	n_v_ctab_idx2value.c \
+	n_v_ctab_idx2vdi.c \
+	n_v_ctab_vdi2idx.c \
+	n_v_delete_ctab.c \
+	n_v_delete_itab.c \
+	n_v_ftext.c \
+	n_v_ftext16.c \
+	n_v_ftext_offset.c \
+	n_v_ftext_offset16.c \
+	n_v_get_ctab_id.c \
+	n_v_get_outline.c \
+	n_v_getbitmap_info.c \
+	n_v_getoutline.c \
+	n_v_open_bm.c \
+	n_v_opnbm.c \
+	n_v_opnprn.c \
+	n_v_resize_bm.c \
+	n_v_setrgb.c \
+	n_v_value2color.c \
+	n_vq_ctab.c \
+	n_vq_ctab_entry.c \
+	n_vq_ctab_id.c \
+	n_vq_devinfo.c \
+	n_vq_dflt_ctab.c \
+	n_vq_ext_devinfo.c \
+	n_vq_hilite_color.c \
+	n_vq_margins.c \
+	n_vq_max_color.c \
+	n_vq_min_color.c \
+	n_vq_prn_scaling.c \
+	n_vq_px_format.c \
+	n_vq_scrninfo.c \
+	n_vq_weight_color.c \
+	n_vqf_bg_color.c \
+	n_vqf_fg_color.c \
+	n_vql_bg_color.c \
+	n_vql_fg_color.c \
+	n_vqm_bg_color.c \
+	n_vqm_fg_color.c \
+	n_vqr_bg_color.c \
+	n_vqr_fg_color.c \
+	n_vqt_advance.c \
+	n_vqt_bg_color.c \
+	n_vqt_char_index.c \
+	n_vqt_ext_name.c \
+	n_vqt_f_extent.c \
+	n_vqt_f_extent16.c \
+	n_vqt_fg_color.c \
+	n_vqt_fontheader.c \
+	n_vqt_pairkern.c \
+	n_vqt_real_extent.c \
+	n_vqt_trackkern.c \
+	n_vqt_xfntinfo.c \
+	n_vr_transfer_bits.c \
+	n_vs_ctab.c \
+	n_vs_ctab_entry.c \
+	n_vs_dflt_ctab.c \
+	n_vs_document_info.c \
+	n_vs_hilite_color.c \
+	n_vs_max_color.c \
+	n_vs_min_color.c \
+	n_vs_weight_color.c \
+	n_vsf_bg_color.c \
+	n_vsf_fg_color.c \
+	n_vsl_bg_color.c \
+	n_vsl_fg_color.c \
+	n_vsm_bg_color.c \
+	n_vsm_fg_color.c \
+	n_vsr_bg_color.c \
+	n_vsr_fg_color.c \
+	n_vst_arbpt.c \
+	n_vst_arbpt32.c \
+	n_vst_bg_color.c \
+	n_vst_charmap.c \
+	n_vst_fg_color.c \
+	n_vst_kern.c \
+	n_vst_name.c \
+	n_vst_setsize.c \
+	n_vst_setsize32.c \
+	n_vst_skew.c \
+	n_vst_track_offset.c \
+	n_vst_width.c
 
 
 COBJS = \
@@ -199,9 +354,43 @@ COBJS = \
 	\
 	globals.c \
 	\
-	$(_VDI_ATTRIB)  $(_VDI_CONTRL) $(_VDI_ESCAPE) $(_VDI_INPUT) \
-	$(_VDI_INQUIRE) $(_VDI_OUTPUT) $(_VDI_RASTER) \
-	vdi_array2str.c vdi_str2array.c \
+	vdi_array2str.c \
+	vdi_str2array.c \
+	vdi_wstrlen.c \
+	\
+	$(_VDI_ATTRIB) \
+	$(_VDI_CONTRL) \
+	$(_VDI_ESCAPE) \
+	$(_VDI_INPUT) \
+	$(_VDI_INQUIRE) \
+	$(_VDI_OUTPUT) \
+	$(_VDI_RASTER) \
+	$(_VDI_EXTENSIONS) \
+	\
+	x_edit_close.c \
+	x_edit_create.c \
+	x_edit_cursor.c \
+	x_edit_delete.c \
+	x_edit_evnt.c \
+	x_edit_get_buf.c \
+	x_edit_get_colour.c \
+	x_edit_get_cursor.c \
+	x_edit_get_dirty.c \
+	x_edit_get_font.c \
+	x_edit_get_format.c \
+	x_edit_get_pos.c \
+	x_edit_get_scrollinfo.c \
+	x_edit_get_sel.c \
+	x_edit_open.c \
+	x_edit_resized.c \
+	x_edit_scroll.c \
+	x_edit_set_buf.c \
+	x_edit_set_colour.c \
+	x_edit_set_cursor.c \
+	x_edit_set_dirty.c \
+	x_edit_set_font.c \
+	x_edit_set_format.c \
+	x_edit_set_pos.c \
 	\
 	x_fnts_add.c \
 	x_fnts_close.c \
@@ -231,93 +420,31 @@ COBJS = \
 	x_fslx_open.c \
 	x_fslx_set_flags.c \
 	\
-	x_lbox.c \
-	\
-	n_v_bez.c \
-	n_v_bez_fill.c \
-	n_v_bez_off.c \
-	n_v_bez_on.c \
-	n_v_bez_qual.c \
-	n_v_clsbm.c \
-	n_v_color2nearest.c \
-	n_v_color2value.c \
-	n_v_create_ctab.c \
-	n_v_create_itab.c \
-	n_v_ctab_idx2value.c \
-	n_v_ctab_idx2vdi.c \
-	n_v_ctab_vdi2idx.c \
-	n_v_delete_ctab.c \
-	n_v_delete_itab.c \
-	n_v_ftext.c \
-	n_v_ftext_offset.c \
-	n_v_get_ctab_id.c \
-	n_v_get_outline.c \
-	n_v_getbitmap_info.c \
-	n_v_getoutline.c \
-	n_v_open_bm.c \
-	n_v_opnbm.c \
-	n_v_opnprn.c \
-	n_v_resize_bm.c \
-	n_v_setrgb.c \
-	n_v_value2color.c \
-	n_vq_ctab.c \
-	n_vq_ctab_entry.c \
-	n_vq_ctab_id.c \
-	n_vq_devinfo.c \
-	n_vq_dflt_ctab.c \
-	n_vq_hilite_color.c \
-	n_vq_margins.c \
-	n_vq_max_color.c \
-	n_vq_min_color.c \
-	n_vq_prn_scaling.c \
-	n_vq_px_format.c \
-	n_vq_scrninfo.c \
-	n_vq_weight_color.c \
-	n_vqf_bg_color.c \
-	n_vqf_fg_color.c \
-	n_vql_bg_color.c \
-	n_vql_fg_color.c \
-	n_vqm_bg_color.c \
-	n_vqm_fg_color.c \
-	n_vqr_bg_color.c \
-	n_vqr_fg_color.c \
-	n_vqt_advance.c \
-	n_vqt_bg_color.c \
-	n_vqt_char_index.c \
-	n_vqt_f_extent.c \
-	n_vqt_fg_color.c \
-	n_vqt_fontheader.c \
-	n_vqt_pairkern.c \
-	n_vqt_real_extent.c \
-	n_vqt_trackkern.c \
-	n_vqt_xfntinfo.c \
-	n_vr_transfer_bits.c \
-	n_vs_ctab.c \
-	n_vs_ctab_entry.c \
-	n_vs_dflt_ctab.c \
-	n_vs_document_info.c \
-	n_vs_hilite_color.c \
-	n_vs_max_color.c \
-	n_vs_min_color.c \
-	n_vs_weight_color.c \
-	n_vsf_bg_color.c \
-	n_vsf_fg_color.c \
-	n_vsl_bg_color.c \
-	n_vsl_fg_color.c \
-	n_vsm_bg_color.c \
-	n_vsm_fg_color.c \
-	n_vsr_bg_color.c \
-	n_vsr_fg_color.c \
-	n_vst_arbpt.c \
-	n_vst_bg_color.c \
-	n_vst_charmap.c \
-	n_vst_fg_color.c \
-	n_vst_kern.c \
-	n_vst_name.c \
-	n_vst_setsize.c \
-	n_vst_skew.c \
-	n_vst_track_offset.c \
-	n_vst_width.c \
+	x_lbox_ascroll_to.c \
+	x_lbox_bscroll_to.c \
+	x_lbox_cnt_items.c \
+	x_lbox_create.c \
+	x_lbox_delete.c \
+	x_lbox_do.c \
+	x_lbox_free_items.c \
+	x_lbox_free_list.c \
+	x_lbox_get_afirst.c \
+	x_lbox_get_bentries.c \
+	x_lbox_get_bfirst.c \
+	x_lbox_get_bvis.c \
+	x_lbox_get_idx.c \
+	x_lbox_get_item.c \
+	x_lbox_get_items.c \
+	x_lbox_get_slct_idx.c \
+	x_lbox_get_slct_item.c \
+	x_lbox_get_tree.c \
+	x_lbox_get_udata.c \
+	x_lbox_get_visible.c \
+	x_lbox_set_asldr.c \
+	x_lbox_set_bentries.c \
+	x_lbox_set_bsldr.c \
+	x_lbox_set_items.c \
+	x_lbox_update.c \
 	\
 	x_objc_wchange.c \
 	x_objc_wdraw.c \
@@ -343,12 +470,28 @@ COBJS = \
 	pdlg_use_sett.c \
 	pdlg_validate_sett.c \
 	\
-	x_wdlg.c
+	x_wdlg_close.c \
+	x_wdlg_create.c \
+	x_wdlg_delete.c \
+	x_wdlg_evnt.c \
+	x_wdlg_get_edit.c \
+	x_wdlg_get_handle.c \
+	x_wdlg_get_tree.c \
+	x_wdlg_get_udata.c \
+	x_wdlg_open.c \
+	x_wdlg_redraw.c \
+	x_wdlg_set_edit.c \
+	x_wdlg_set_iconify.c \
+	x_wdlg_set_size.c \
+	x_wdlg_set_tree.c \
+	x_wdlg_set_uniconify.c
+
 
 SOBJS = \
 	_gc_asm_aes.S \
 	_gc_asm_vdi.S \
 	_gc_asm_vq_gdos.S \
 	_gc_asm_vq_vgdos.S
+
 
 SRCFILES = $(HEADER) $(COBJS) $(SOBJS)
