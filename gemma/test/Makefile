@@ -1,27 +1,37 @@
 #
-# 15/10/1999 Draco (draco@atari.org)
+# Makefile for gemma, a minimal GEM library
 #
+TARGET = test.app
 
-CPU= -m68020-60
-CC= gcc
-RM= rm -f
-DEFS=
-LIB= -lgemma -lslb
-CFLAGS= -Wall -O2 $(CPU) -mshort -fomit-frame-pointer $(DEFS)
-LFLAGS= -s $(CPU) -mshort -nostartfiles
-OBJ= startup.o test.o
-TARGET= test.app
+SHELL = /bin/sh
+SUBDIRS = 
 
-all: $(TARGET)
+srcdir = .
+top_srcdir = ../..
+subdir = src
 
-$(TARGET): $(OBJ)
-	$(CC) $(LFLAGS) $(OBJ) $(LIB) -o $@
+default: all
 
-startup.o: startup.S
-	$(CC) $(CFLAGS) -c startup.S -o $@
+include $(top_srcdir)/CONFIGVARS
+include $(top_srcdir)/RULES
+include $(top_srcdir)/PHONY
 
-clean:
-	$(RM) *.o
+all-here: $(TARGET)
 
-veryclean:
-	$(RM) *.o $(TARGET)
+# default overwrites
+INCLUDES += -I../include/
+GENERAL = 
+
+# default definitions
+OBJS =  $(SOBJS:.s=.o) $(COBJS:.c=.o)
+LDFLAGS = -nostartfiles -nostdlib
+LIBS = -lgemma -lgcc
+GENFILES = $(TARGET)
+
+
+$(TARGET): $(OBJS)
+	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS)
+	$(STRIP) $@
+
+
+include $(top_srcdir)/DEPENDENCIES

@@ -17,20 +17,12 @@
  */
 
 # include <string.h>
-# include "../include/mint/slb.h"
-# include "../include/gemma/gemma.h"
+# include <slb/gemma.h>
 
 # include "test.h"
 
-# ifndef ulong
-#  define ulong unsigned long
-# endif
-# ifndef ushort
-#  define ushort unsigned short
-# endif
-# ifndef uchar
-#  define uchar unsigned char
-# endif
+# define ulong unsigned long
+# define ushort unsigned short
 
 static void
 deselect(WINDIAL *wd, short obj)
@@ -41,7 +33,7 @@ deselect(WINDIAL *wd, short obj)
 		objc_xchange(wd, obj, ob[obj].ob_state & ~OS_SELECTED, 1);
 }
 
-long
+static long
 newkey(WINDIAL *wd, short vec, short ks, short kc)
 {
 	if ((kc & 0x007f) == 0x0011)
@@ -49,7 +41,7 @@ newkey(WINDIAL *wd, short vec, short ks, short kc)
 	return 0;
 }
 
-long
+static long
 newmsg(WINDIAL *wd, short vec, short *msg)
 {
 	if (msg[0] == AP_TERM)
@@ -70,9 +62,6 @@ do_windows()
 
 	current = win_1;
 	ob = win_1->wb_treeptr;
-
-	/* Link them to one list */
-	windial_link(win_1, win_2);
 
 	/* Open the first one */
 	windial_open(win_1);
@@ -148,8 +137,6 @@ do_windows()
 		}
 	}
 exit:
-	windial_close(win_1);
-	windial_close(win_2);
 	windial_delete(win_1);
 	windial_delete(win_2);
 
