@@ -23,7 +23,7 @@
  *
  *  @return 0 if an error occurred or non-zero otherwise.
  *
- *  @since All AES versions.
+ *  @since mt_appl_getinfo() with mode #AES_OBJECT gives the availability of this function.
  *
  *  <table>
  *  <tr><td>\a which <td> \a in1 / \a out1 <td> \a in2 / \a out2
@@ -55,8 +55,9 @@
  *                               effects.
  *                               This setting may only be read, not
  *                               modified.
- *  <tr><td>#MX_ENABLE3D (10) <td> TO BE COMPLETED (TODO)
- *                            <td> TO BE COMPLETED (TODO)
+ *  <tr><td>#MX_ENABLE3D (10) <td> If 1, the 3D look is enabled. Set to 0 to disable
+ *                                 the 3D-look.\n (Since MagiC 3)
+ *                            <td> set to 0 to disable the 3D look \n (Since MagiC 3)
  *  <tr><td>#MENUCOL (11)  <td>  TO BE COMPLETED (TODO)
  *                         <td>  TO BE COMPLETED (TODO)
  *  </table>

@@ -21,6 +21,7 @@
  *
  *  @since All AES versions.
  *
+ *  @sa mt_objc_xfind()
  *
  *
  */

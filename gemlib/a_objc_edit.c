@@ -33,7 +33,7 @@
  *
  *  @since All AES versions.
  *
- *  @sa mt_form_keybd()
+ *  @sa mt_objc_xedit(), mt_form_keybd()
  *
  *  This function is usually used in conjunction with
  *  mt_form_keybd() in a custom mt_form_do() handler.
