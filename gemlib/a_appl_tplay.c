@@ -6,16 +6,15 @@
 
 /** plays back events originally recorded with mt_appl_trecord().
  *
- *  @param Mem is a pointer to an array of EVNTREC structures (see
+ *  @param mem is a pointer to an array of EVNTREC structures (see
  *         appl_trecord())
- *  @param Num indicates the number of EVNTREC's to play back.
- *  @param Scale indicates on a scale of 1 to 10000 how fast the AES
- *         will attempt to play back your recording as follows:<pre>
-Value   Playback Speed
- 100    recorded speed
- 200    twice recorded speed
-  50    half of the recorded speed</pre>
- *         Other values will respond accordingly.
+ *  @param num indicates the number of EVNTREC's to play back.
+ *  @param scale indicates on a scale of 1 to 10000 how fast the AES
+ *         will attempt to play back your recording as follows:
+ *         - 100 : recorded speed
+ *         - 200 : twice recorded speed
+ *         - 50  : half of the recorded speed
+ *         - Other values will respond accordingly.
  *  @param global_aes global AES array
  *
  *  @return always returns 1 meaning no error occurred.
@@ -30,13 +29,13 @@ Value   Playback Speed
  */
 
 short
-mt_appl_tplay(void *Mem, short Num, short Scale, short *global_aes)
+mt_appl_tplay(void *mem, short num, short scale, short *global_aes)
 {
 	AES_PARAMS(14,2,1,1,0);
 
-	aes_intin[0]  = Num;
-	aes_intin[1]  = Scale;
-	aes_addrin[0] = (long)Mem;
+	aes_intin[0]  = num;
+	aes_intin[1]  = scale;
+	aes_addrin[0] = (long)mem;
 
 	AES_TRAP(aes_params);
 
@@ -47,8 +46,8 @@ mt_appl_tplay(void *Mem, short Num, short Scale, short *global_aes)
 #undef appl_tplay
 #endif
 short
-appl_tplay(void *Mem, short Num, short Scale)
+appl_tplay(void *mem, short num, short scale)
 {
-	return(mt_appl_tplay(Mem, Num, Scale, aes_global));
+	return(mt_appl_tplay(mem, num, scale, aes_global));
 }
 

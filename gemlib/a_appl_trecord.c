@@ -6,32 +6,24 @@
 
 /** records AES events for later playback.
  *
- *  @param Mem points to an array of \p Count EVNTREC structures
- *  @param Count dimension of the array of EVNTREC structures into which
- *         the AES will record events as indicated here:<pre>
-typedef struct pEvntrec
-{
-	WORD ap_event;
-	LONG ap_value;
-} EVNTREC;</pre>
+ *  @param mem points to an array of \p Count EVNTREC structures
+ *  @param count dimension of the array of EVNTREC structures into which
+ *         the AES will record events as indicated here: \n
+ *         typedef struct pEvntrec \n
+ *         { \n
+ *         	WORD ap_event; \n
+ *         	LONG ap_value; \n
+ *         } EVNTREC; \n
  *         ap_event defines the required interpretation of ap_value
- *         as follows:<pre>
-Name		 ap_event Event 	ap_value
-
-APPEVNT_TIMER	 0    Timer 	Elapsed Time (in
-								milliseconds)
-
-APPEVNT_BUTTON   1    Button	low word  = state
-											(1 = down)
-								high word = # of clicks
-
-APPEVNT_MOUSE	 2    Mouse 	low word  = X pos
-								high word = Y pos
-
-APPEVNT_KEYBOARD 3    Keyboard  bits 0-7:	ASCII code
-								bits 8-15:  scan code
-								bits 16-31: shift key
-								state</pre>
+ *         as follows:
+ *         - ap_event : APPEVNT_TIMER (0) \n
+ *           ap_value : Elapsed Time (in milliseconds)
+ *         - ap_event : APPEVNT_BUTTON (1) \n
+ *           ap_value : low word  = state (1 = down), high word = # of clicks
+ *         - ap_event : APPEVNT_MOUSE (2) \n
+ *           ap_value : low word  = X pos, high word = Y pos
+ *         - ap_event : APPEVNT_KEYBOARD (3) \n
+ *           ap_value : bits 0-7 = ASCII code, bits 8-15 = scan code, bits 16-31 = shift key
  *  @param global_aes global AES array
  *
  *  @return addreturns the number of events actually recorded.
@@ -46,12 +38,12 @@ APPEVNT_KEYBOARD 3    Keyboard  bits 0-7:	ASCII code
  */
 
 short
-mt_appl_trecord(void *Mem, short Count, short *global_aes)
+mt_appl_trecord(void *mem, short count, short *global_aes)
 {
 	AES_PARAMS(15,1,1,1,0);
 
-	aes_intin[0]  = Count;
-	aes_addrin[0] = (long)Mem;
+	aes_intin[0]  = count;
+	aes_addrin[0] = (long)mem;
 
 	AES_TRAP(aes_params);
 
@@ -62,8 +54,8 @@ mt_appl_trecord(void *Mem, short Count, short *global_aes)
 #undef appl_trecord
 #endif
 short
-appl_trecord(void *Mem, short Count)
+appl_trecord(void *mem, short count)
 {
-	return(mt_appl_trecord(Mem, Count, aes_global));
+	return(mt_appl_trecord(mem, count, aes_global));
 }
 
