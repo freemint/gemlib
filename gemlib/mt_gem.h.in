@@ -876,11 +876,20 @@ typedef struct
 	 */
 	char *defdir;
 	/** points to a valid environment string for the process
+	 *  only used if the extended mode #SW_ENVIRON is set
 	 */
 	char *env;
+	/** New child's UID (user id)
+	 *  only used if the extended mode #SW_UID is set
+	 */
+	short uid;
+	/* New child's GID (group id)
+	 * only used if the extended mode #SW_GID is set
+	 */
+	short gid;
 } SHELW;
 
-/** same as ::SHELW */
+/** similar to ::SHELW, with MagiC 6 only specificity, and without XaAES/oAESis extensions */
 typedef struct
 {
 	char	*command;	/**< see SHELW::newcmd */
@@ -888,6 +897,7 @@ typedef struct
 	long	nice;		/**< see SHELW::prenice */
 	char	*defdir;	/**< see SHELW::defdir */
 	char	*env;		/**< see SHELW::env */
+	long	flags;		/**< since MagiC 6.  only used if the extended mode #SHW_XMDFLAGS is set*/
 } XSHW_COMMAND;
 
 /** TODO */
@@ -903,11 +913,11 @@ typedef struct
 /** TODO */
 typedef  struct
 {
-	int   dummy;		/**< a null  word 			   */ 
-	long  magic;		/**< 'SHEL', if it's a Shell   */ 
-	int   isfirst;		/**< first call of the Shell   */ 
-	long  lasterr;		/**< last error  			   */ 
-	int   wasgr;		/**< Program was a grafic app. */ 
+	short   dummy;		/**< a null  word 			   */ 
+	long    magic;		/**< 'SHEL', if it's a Shell   */ 
+	short   isfirst;	/**< first call of the Shell   */ 
+	long    lasterr;	/**< last error  			   */ 
+	short   wasgr;		/**< Program was a grafic app. */ 
 } SHELTAIL;
 
 
@@ -929,7 +939,7 @@ typedef  struct
  */
 #define SWM_NEWMSG			9	
 #define SWM_AESMSG			10	/**< Send a message to the AES, see mt_shel_write() */
-#define SWM_THRCREATE		20	/**< TODO */
+#define SWM_THRCREATE		20	/**< MagiC 4.5 */
 
 /* other names for shel_write modes */
 #define SHW_NOEXEC			SWM_LAUNCH		/**< alias */
@@ -973,17 +983,24 @@ typedef  struct
 /* Werte fr Modus SWM_AESMSG (fr shel_write) */
 #define AP_AESTERM		52     /* Mode 10: N.AES komplett terminieren. */	/**< TODO */
 
-/* extended shel_write() modes and parameter structure */
-#define SHW_XMDLIMIT	256	/**< TODO */
-#define SHW_XMDNICE		512	/**< TODO */
-#define SHW_XMDDEFDIR	1024	/**< TODO */
-#define SHW_XMDENV		2048	/**< TODO */
-
-/* shel_write flags */
+/* extended shel_write() modes */
 #define SW_PSETLIMIT	0x0100	/**< Initial Psetlimit() */
 #define SW_PRENICE		0x0200	/**< Initial Prenice() */
 #define SW_DEFDIR 		0x0400	/**< Default Directory */
 #define SW_ENVIRON		0x0800	/**< Environment */
+
+/* XaAES/oAESis extensions for shel_write() extended modes*/
+#define SW_UID			0x1000	/**< Set user id of launched child */
+#define	SW_GID			0x2000	/**< Set group id of launched child */
+
+/* MagiC 6 extensions for shel_write() extended modes*/
+#define SHW_XMDFLAGS	0x1000
+
+/* other names... */
+#define SHW_XMDLIMIT	SW_PSETLIMIT	/**< alias */
+#define SHW_XMDNICE		SW_PRENICE		/**< alias */
+#define SHW_XMDDEFDIR	SW_DEFDIR		/**< alias */
+#define SHW_XMDENV		SW_ENVIRON		/**< alias */
 
 /* rsrc_gaddr structure types */
 #define R_TREE			0	/**< Object tree, see mt_rsrc_gaddr() */
