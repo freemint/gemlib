@@ -414,30 +414,32 @@ vt_alignment.c
 vt_axis.c
 vt_origin.c
 vt_resolution.c
-x_edit_close.c
-x_edit_create.c
-x_edit_cursor.c
-x_edit_delete.c
-x_edit_evnt.c
-x_edit_get_buf.c
-x_edit_get_colour.c
-x_edit_get_cursor.c
-x_edit_get_dirty.c
-x_edit_get_font.c
-x_edit_get_format.c
-x_edit_get_pos.c
-x_edit_get_scrollinfo.c
-x_edit_get_sel.c
-x_edit_open.c
-x_edit_resized.c
-x_edit_scroll.c
-x_edit_set_buf.c
-x_edit_set_colour.c
-x_edit_set_cursor.c
-x_edit_set_dirty.c
-x_edit_set_font.c
-x_edit_set_format.c
-x_edit_set_pos.c
+x_edit_close.c          -- idem
+x_edit_create.c         -- function return (XEDITINFO*) intead of (void*)
+                           [mgemlib->gemlib]
+x_edit_cursor.c         -- idem
+x_edit_delete.c         -- use (XEDITINFO*) intead of (void*)
+                           [mgemlib->gemlib]
+x_edit_evnt.c           -- idem
+x_edit_get_buf.c        -- idem
+x_edit_get_colour.c     -- idem
+x_edit_get_cursor.c     -- idem
+x_edit_get_dirty.c      -- idem
+x_edit_get_font.c       -- idem
+x_edit_get_format.c     -- idem
+x_edit_get_pos.c        -- idem
+x_edit_get_scrollinfo.c -- idem
+x_edit_get_sel.c        -- idem
+x_edit_open.c           -- idem
+x_edit_resized.c        -- idem
+x_edit_scroll.c         -- idem
+x_edit_set_buf.c        -- idem
+x_edit_set_colour.c     -- idem
+x_edit_set_cursor.c     -- idem
+x_edit_set_dirty.c      -- idem
+x_edit_set_font.c       -- idem
+x_edit_set_format.c     -- idem
+x_edit_set_pos.c        -- idem
 x_fnts_add.c
 x_fnts_close.c
 x_fnts_create.c
