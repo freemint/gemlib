@@ -23,12 +23,11 @@
 short
 vsm_height (short handle, short height)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsin[2];   
 	short vdi_ptsout[2]; 
+	
 	VDI_PARAMS(vdi_control, 0L, vdi_ptsin, vdi_dummy, vdi_ptsout );
-#endif
 	
 	vdi_ptsin[0] = 0;
 	vdi_ptsin[1] = height;

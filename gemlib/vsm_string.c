@@ -26,13 +26,12 @@
 short
 vsm_string (short handle, short len, short echo, short echoxy[], char *str)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[2];   
 	short vdi_ptsin[2];   
 	short vdi_intout[VDI_INTOUTMAX]; 
+	
 	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_intout, vdi_dummy );
-#endif
 	
 	vdi_intin[0]      = len;
 	vdi_intin[1]      = echo;

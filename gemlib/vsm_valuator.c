@@ -34,13 +34,10 @@
 void
 vsm_valuator (short handle, short in, short *out, short *term, short *status)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[2]; 
+	
 	VDI_PARAMS(vdi_control, &in, 0L, vdi_intout, vdi_dummy );
-#else
-	vdi_intin[0] = in;
-#endif
 	
 	VDI_TRAP (vdi_params, handle, 29, 0,1);
 	
