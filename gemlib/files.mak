@@ -20,10 +20,11 @@ LIB_PATH = lib/gcc lib/gcc281 lib/sozobon lib/purec
 # library filenames
 
 LIB_GCC           = lib/gcc/libgem.a
+LIB_GCC_MSHORT    = lib/gcc/libgem16.a
 LIB_GCC281        = lib/gcc281/gem.olb
 LIB_GCC281_MSHORT = lib/gcc281/gem16.olb
 LIB_SOZOBON       = lib/sozobon/gem.a
-LIB_PUREC         = lib/purec/gemlib.lib
+LIB_PUREC         = lib/purec/gem.lib
 
 # sources
 
@@ -497,7 +498,7 @@ FILES_SRC =	\
 # headers
 
 FILES_INC = \
- include/gem.h include/gemx.h include/mt_gem.h include/mt_gemx.h
+ gem.h gemx.h mt_gem.h mt_gemx.h
 
 # binaries (lib)
 
