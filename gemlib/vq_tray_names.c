@@ -11,6 +11,8 @@
  *  @param output_name pointer to the name of the output tray or NULL
  *  @param input number of the input tray
  *  @param output number of the output tray
+ *  @return 0 if the driver doesn't supporte this function, any positive
+ *          value (2) otherwise
  *
  *  @since depends on the driver. If the driver doesn't support this
  *         function, input and output are set to 0, and the tray name
@@ -18,7 +20,7 @@
  *
  */
 
-void
+short
 vq_tray_names (short handle, char *input_name, char *output_name,
                short *input, short *output)
 {
@@ -45,4 +47,6 @@ vq_tray_names (short handle, char *input_name, char *output_name,
 		if (input_name) *input_name=0;
 		if (output_name) *output_name=0;
 	}
+	
+	return vdi_control[4];
 }
