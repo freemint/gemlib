@@ -255,9 +255,16 @@ AES_FORM       14    AES Form Support
  *  documentation on these functions.
  *
  *  @note
- *  If mt_appl_getinfo() is not implemented (gl_ap_version < 0X0401 and the
- *  application "?AGI" (Winx) is not found), the trap is not performed
+ *  If mt_appl_getinfo() is not implemented (gl_ap_version < 0X0400 and the
+ *  application "?AGI" (Winx, Magic>2) is not found), the trap is not performed
  *  (may crash on some system).
+ *
+ *  @note
+ *  MagiC 2 have this AES call implemented, but "?AGI" is here since MagiC3 only...
+ *  so this call will not work as expected with Magic2. One way is to check the magx cookie
+ *  but i don't want to create dependencies between gemlib and any standard libc. So ATM, mt_appl_getinfo
+ *  is not executed on Magic2. Is it a real problem ?
+ *  
  */
 
 short
