@@ -19,7 +19,7 @@ all-here: objs
 
 # default overwrites
 INCLUDES = -I$(top_srcdir)/gemma/include/gemma/
-GENERAL = -mshort
+GENERAL += -mshort
 DEFINITIONS =
 
 ifeq ($(TARGET),020)

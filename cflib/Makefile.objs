@@ -21,7 +21,7 @@ all-here: objs
 DEFINITIONS = -fwritable-strings
 
 ifeq ($(TARGET),16)
-GENERAL = -mshort
+GENERAL += -mshort
 endif
 
 # default definitions
