@@ -80,12 +80,13 @@ a_objc_find.c
 a_objc_offset.c
 a_objc_order.c
 a_objc_sysvar.c
-a_rsrc_free.c
-a_rsrc_gaddr.c
-a_rsrc_load.c
-a_rsrc_obfix.c
-a_rsrc_rcfix.c
-a_rsrc_saddr.c
+a_rsrc_free.c           -- idem
+a_rsrc_gaddr.c          -- idem
+a_rsrc_load.c		    -- add "const" keyword [gemlib->mgemlib]
+a_rsrc_obfix.c          -- use 'OBJECT' type instead of 'void' 
+                           [gemlib->mgemlib]
+a_rsrc_rcfix.c          -- idem
+a_rsrc_saddr.c          -- idem
 a_scrp_clear.c	        -- idem
 a_scrp_read.c	        -- idem
 a_scrp_write.c		    -- add "const" keyword [gemlib->mgemlib]
