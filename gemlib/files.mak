@@ -497,7 +497,7 @@ FILES_SRC =	\
 # headers
 
 FILES_INC = \
- include/gem.h include/gemx.h
+ include/gem.h include/gemx.h include/mt_gem.h include/mt_gemx.h
 
 # binaries (lib)
 

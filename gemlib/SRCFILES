@@ -3,7 +3,9 @@
 
 HEADER = \
 	gem.h \
-	gemx.h
+	gemx.h \
+	mt_gem.h \
+	mt_gemx.h
 
 
 _VDI_ATTRIB = \

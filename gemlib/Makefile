@@ -62,7 +62,7 @@ all-compilers:
 	make -f gcc.mak; rm -f *.o; 
 	make -f gcc281.mak; rm -f *.o; 
 	make -f gcc281-16.mak; rm -f *.o; 
-	cp gem.h gemx.h include; make -f zip.mak
+	cp gem.h gemx.h mt_gem.h mt_gemx.h include; make -f zip.mak
 
 libgem$(TARGET).a: objs
 	$(RM) $@
@@ -80,9 +80,9 @@ objs: .lib$(TARGET)
 
 install:
 	install -m 644 -o root -g wheel lib{gem,gem16}.a $(PREFIX)/lib
-	install -m 644 -o root -g wheel {gem,gemx}.h $(PREFIX)/include
+	install -m 644 -o root -g wheel {gem,gemx,mt_gem,mt_gemx}.h $(PREFIX)/include
 
 uninstall:
 	rm -f $(PREFIX)/lib/lib{gem,gem16}.a
-	rm -f $(PREFIX)/include/{gem,gemx}.h
+	rm -f $(PREFIX)/include/{gem,gemx,mt_gem,mt_gemx}.h
 
