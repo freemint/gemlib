@@ -22,14 +22,7 @@ v_contourfill (short handle, short x, short y, short index)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsin[2];   
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&index,               /* vdi_intin   */
-		&vdi_ptsin[0],               /* vdi_ptsin   */
-		0L, 						 /* vdi_intout  */
-		0L							 /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, &index, vdi_ptsin, 0L, 0L);
 #else
 	vdi_intin[0] = index;
 #endif

@@ -40,16 +40,11 @@ v_bit_image (short handle, const char *filename, short aspect, short x_scale,
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[VDI_INTINMAX];   
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&vdi_intin[0],               /* vdi_intin   */
-		pxy, 						 /* vdi_ptsin	*/
-		0L, 						 /* vdi_intout  */
-		0L							 /* vdi_ptsout  */
-	};
 #endif
 	register short n = 5 + vdi_str2array (filename, vdi_intin + 5);
+#if USE_LOCAL_VDIPB
+	VDI_PARAMS(vdi_control, vdi_intin, pxy, 0L, 0L);
+#endif
 
 #if !(USE_LOCAL_VDIPB)
 	vdi_params.ptsin = pxy;
