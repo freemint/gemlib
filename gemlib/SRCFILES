@@ -306,6 +306,7 @@ COBJS = \
 	a_graf_mbox.c \
 	a_graf_mkstate.c \
 	a_graf_mouse.c \
+	a_graf_multirubber.c \
 	a_graf_rubbox.c \
 	a_graf_shrinkbox.c \
 	a_graf_slidebox.c \

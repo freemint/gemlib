@@ -82,6 +82,7 @@ __BEGIN_DECLS
 #define graf_mkstate(a,b,c,d)				mt_graf_mkstate(a,b,c,d,aes_global)
 #define graf_mouse(a,b)						mt_graf_mouse(a,b,aes_global)
 #define graf_rubberbox(a,b,c,d,e,f)			mt_graf_rubberbox(a,b,c,d,e,f,aes_global)
+#define graf_multirubber(a,b,c,d,e,f,g)		mt_graf_multirubber(a,b,c,d,e,f,g,aes_global)
 #define graf_shrinkbox(a,b,c,d,e,f,g,h)		mt_graf_shrinkbox(a,b,c,d,e,f,g,h,aes_global)
 #define graf_slidebox(a,b,c,d)				mt_graf_slidebox(a,b,c,d,aes_global)
 #define graf_watchbox(a,b,c,d)				mt_graf_watchbox(a,b,c,d,aes_global)
