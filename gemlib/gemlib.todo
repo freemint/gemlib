@@ -459,12 +459,12 @@ x_form_wkeybd.c         -- idem
 x_form_xdial.c          -- idem
 x_form_xdo.c            -- idem
 x_form_xerr.c           -- idem
-x_fslx_close.c
-x_fslx_do.c
-x_fslx_evnt.c
-x_fslx_getnxtfile.c
-x_fslx_open.c
-x_fslx_set_flags.c
+x_fslx_close.c          -- idem
+x_fslx_do.c             -- idem
+x_fslx_evnt.c           -- idem
+x_fslx_getnxtfile.c     -- idem
+x_fslx_open.c           -- idem
+x_fslx_set_flags.c      -- idem
 x_lbox_ascroll_to.c
 x_lbox_bscroll_to.c
 x_lbox_cnt_items.c
