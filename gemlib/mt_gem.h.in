@@ -1134,7 +1134,7 @@ typedef  struct
 #define WF_TOP 			 10 	/**< get/set top window, see mt_wind_get() and mt_wind_set() */
 #define WF_FIRSTXYWH 	 11 	/**< get     the first rectangle in the list of rectangles for this window, see mt_wind_get() */
 #define WF_NEXTXYWH		 12 	/**< get     the next rectangle in the list of rectangles for this window, see mt_wind_get() */
-#define WF_RESVD		 13 	/**<         reserved */
+#define WF_FIRSTAREAXYWH 13 	/**< get     the first rectangle in the list of rectangles for this window, see mt_wind_xget()*/
 #define WF_NEWDESK		 14 	/**< get/set OBJECT tree installed as desktop, see mt_wind_get() and mt_wind_set() */
 #define WF_HSLSIZE		 15 	/**< get/set size of the horizontal slider, see mt_wind_get() and mt_wind_set() */
 #define WF_VSLSIZE		 16 	/**< get/set size of the vertical slider, see mt_wind_get() and mt_wind_set() */

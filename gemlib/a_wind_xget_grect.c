@@ -11,9 +11,9 @@
  *  @param What specifies the information to return and the values
  *         placed into \a r.
  *  @param clip additional information about the request. For now, this
- *         information is only taken into account by MyAES for command
- *         #WF_FIRSTXYWH. In that case, \a clip is a clipping area, and the
- *         AES may optimize the list of rectangles returned by #WF_FIRSTXYWH
+ *         information is only taken into account for command
+ *         #WF_FIRSTAREAXYWH. In that case, \a clip is a clipping area, and the
+ *         AES may optimize the list of rectangles returned by #WF_FIRSTAREAXYWH
  *         and #WF_NEXTXYWH.
  *  @param r value returned, see mt_wind_get()
  *  @param global_aes global AES array
