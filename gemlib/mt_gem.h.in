@@ -64,7 +64,7 @@ __BEGIN_DECLS
 #define APC_HIDE			10
 #define APC_SHOW			11
 #define APC_TOP 			12
-#define APC_HIDENOT 		13
+#define APC_HIDENOT 			13
 #define APC_INFO			14
 #define APC_MENU			15
 #define APC_WIDGETS			16
@@ -107,6 +107,7 @@ __BEGIN_DECLS
 /* appl_search modes */
 #define APP_FIRST 			0
 #define APP_NEXT			1
+#define APP_DESK			2
 
 /* appl_search return values*/
 #define APP_SYSTEM			0x01
@@ -1116,9 +1117,9 @@ short mt_form_keybd  (OBJECT *, short Kobject, short Kobnext, short Kchar,
 /** @addtogroup a_fsel
  *  @{
  */
-short 	mt_fsel_exinput	(char *Path, char *File, short *ExitButton, const char *title, short *global);
-short 	mt_fsel_input	(char *Path, char *File, short *ExitButton, short *global);
-short 	mt_fsel_boxinput(char *Path, char *File, short *ExitButton, const char *title, void *callback, short *global);
+short 	mt_fsel_exinput	(char *path, char *file, short *exit_button, const char *title, short *global);
+short 	mt_fsel_input	(char *path, char *file, short *exit_button, short *global);
+short 	mt_fsel_boxinput(char *path, char *file, short *exit_button, const char *title, void *callback, short *global);
 /**@}*/
 
 /** @addtogroup a_graf
