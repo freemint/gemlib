@@ -40,7 +40,7 @@ __BEGIN_DECLS
 #define __GEMLIB__		__GEMLIB_MAJOR__
 #define	__GEMLIB_MAJOR__     0
 #define	__GEMLIB_MINOR__    42
-#define __GEMLIB_REVISION__   1
+#define __GEMLIB_REVISION__   2
 #define __GEMLIB_BETATAG__   ""
 
 
@@ -842,18 +842,21 @@ typedef struct {
  * The AES bindings from old aesbind.h
  */
 	 
-short	appl_bvset	(short bvdisk, short bvhard);
-short	appl_control	(short ap_cid, short ap_cwhat, void *ap_cout);
-short	appl_exit	(void);
-short	appl_find	(const char *Name);
-short	appl_getinfo	(short type, short *out1, short *out2, short *out3, short *out4);
-short	appl_init	(void);
-short	appl_read	(short ApId, short Length, void *ApPbuff);
-short	appl_search	(short mode, char *fname, short *type, short *ap_id);
-short	appl_tplay	(void *Mem, short Num, short Scale);
-short	appl_trecord	(void *Mem, short Count);
-short	appl_write	(short ApId, short Length, void *ApPbuff);
-short 	appl_yield	(void);
+short	appl_bvset   (short bvdisk, short bvhard);
+short	appl_control (short ap_cid, short ap_cwhat, void *ap_cout);
+short	appl_exit    (void);
+short	appl_find    (const char *Name);
+short	appl_getinfo (short type,
+                    short *out1, short *out2, short *out3, short *out4);
+short	appl_xgetinfo(short type,
+                    short *out1, short *out2, short *out3, short *out4);
+short	appl_init    (void);
+short	appl_read    (short ApId, short Length, void *ApPbuff);
+short	appl_search  (short mode, char *fname, short *type, short *ap_id);
+short	appl_tplay   (void *Mem, short Num, short Scale);
+short	appl_trecord (void *Mem, short Count);
+short	appl_write   (short ApId, short Length, void *ApPbuff);
+short appl_yield   (void);
 
 short	evnt_button (short Clicks, short WhichButton, short WhichState,
                    short *Mx, short *My, short *ButtonState, short *KeyState); 
