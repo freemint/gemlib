@@ -40,7 +40,7 @@ a_evnt_mouse.c			-- idem
 a_evnt_multi.c			-- idem
 a_evnt_multi_fast.c		-- idem
 a_evnt_timer.c			-- idem
-a_form_alert.c          -- idem
+a_form_alert.c          -- add "const" keyword [gemlib->mgemlib]
 a_form_button.c         -- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
 a_form_center.c         -- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
 a_form_dial.c			-- idem
@@ -54,8 +54,10 @@ a_graf_growbox.c		-- idem
 a_graf_handle.c			-- idem
 a_graf_mbox.c			-- idem
 a_graf_mkstate.c		-- idem
-a_graf_mouse.c			-- const MFORM * -> void* [gemlib->mgemlib] ... why???
-a_graf_rubbox.c			-- idem
+a_graf_mouse.c			-- use 'const MFORM' instead of 'void' [gemlib->mgemlib]
+a_graf_rubbox.c			-- the mt_graf_rubberbox() is the actuall implementation
+						   renamed from graf_rubbbox() [mgemlib->gemlib]
+						   Althouth the file is a_graf_rubbox.c (only double 'b')
 a_graf_shrinkbox.c		-- idem
 a_graf_slidebox.c		-- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
 a_graf_watchbox.c		-- idem

@@ -10,7 +10,9 @@
  *  @param default_button contains the number of the exit button which is to
  *               be made default (1-3)
  *  @param alert_string contains a formatted string
- *               as follows: "[#][Alert Text][Buttons]".
+ *               as follows:
+ *                              "[#][Alert Text][Buttons]".
+ *               \n\n
  *               # specifies the icon to display in the alert as follows:
  *               - 0       No Icon
  *               - 1       Exclamation Icon
@@ -18,9 +20,11 @@
  *               - 3       Stop Icon
  *               - 4       Info Icon
  *               - 5       Disk Icon
+ *               \n\n
  *               'Alert Text' is a text string of as many as 5 lines composed
  *               of up to 30 characters each. Each line is separated by a '|'
  *               character.
+ *               \n\n
  *               'Buttons' is a text string to define as many as 3 buttons
  *               up to 10 characters each. If only one button is used, its
  *               text may be as long as 30 characters. Again, each button is
@@ -49,7 +53,7 @@
  */
 
 short
-mt_form_alert(short default_button, char *alert_string, short *global_aes)
+mt_form_alert(short default_button, const char *alert_string, short *global_aes)
 {
 	AES_PARAMS(52,1,1,1,0);
 
@@ -65,7 +69,7 @@ mt_form_alert(short default_button, char *alert_string, short *global_aes)
 #undef form_alert
 #endif
 short
-form_alert(short default_button, char *alert_string)
+form_alert(short default_button, const char *alert_string)
 {
 	return (mt_form_alert(default_button,alert_string, aes_global));
 }

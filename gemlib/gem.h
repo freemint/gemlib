@@ -910,15 +910,22 @@ short	mt_evnt_timer  (unsigned long Interval, short *global_aes);
 /** @addtogroup a_form
  *  @{
  */
-short form_alert  (short DefButton, const char *Str);
-short form_button (OBJECT *, short Bobject, short Bclicks, short *Bnxtobj);
-short form_center (OBJECT *, short *Cx, short *Cy, short *Cw, short *Ch);
-short form_dial   (short Flag, short Sx, short Sy, short Sw, short Sh,
-                               short Bx, short By, short Bw, short Bh);
-short form_do     (OBJECT *, short StartObj);
-short form_error  (short ErrorCode);
-short form_keybd  (OBJECT *, short Kobject, short Kobnext, short Kchar,
-                             short *Knxtobject, short *Knxtchar);
+short mt_form_alert  (short DefButton, const char *Str, short *global_aes);
+short mt_form_button (OBJECT *, short Bobject, short Bclicks, short *Bnxtobj, short *global_aes);
+short mt_form_center (OBJECT *, short *Cx, short *Cy, short *Cw, short *Ch, short *global_aes);
+short mt_form_dial   (short Flag, short Sx, short Sy, short Sw, short Sh,
+                               short Bx, short By, short Bw, short Bh, short *global_aes);
+short mt_form_do     (OBJECT *, short StartObj, short *global_aes);
+short mt_form_error  (short ErrorCode, short *global_aes);
+short mt_form_keybd  (OBJECT *, short Kobject, short Kobnext, short Kchar,
+                             short *Knxtobject, short *Knxtchar, short *global_aes);
+#define form_alert(a,b) mt_form_alert(a,b,aes_global)
+#define form_button(a,b,c,d) mt_form_button(a,b,c,d,aes_global)
+#define form_center(a, b,c,d,e) mt_form_center(a,b,c,d,e,aes_global)
+#define form_dial(a, b,c,d,e, f,g,h,i) mt_form_dial(a,b,c,d,e,f,g,h,i,aes_global)
+#define form_do(a,b) mt_form_do(a,b,aes_global)
+#define form_error(a) mt_form_error(a,aes_global)
+#define form_keybd(a, b,c,d,e,f) mt_form_keybd(a,b,c,d,e,f,aes_global)
 /**@}*/
 
 /** @addtogroup a_fsel
@@ -931,20 +938,30 @@ short 	fsel_input	(char *Path, char *File, short *ExitButton);
 /** @addtogroup a_graf
  *  @{
  */
-short	graf_dragbox	(short Sw, short Sh, short Sx, short Sy, short Bx, short By, short Bw, short Bh, short *Fw, short *Fh); 
-short	graf_growbox	(short Sx, short Sy, short Sw, short Sh, short Fx, short Fy, short Fw, short Fh); 
-short	graf_handle	(short *Wchar, short *Hchar, short *Wbox, short *Hbox);
-short	graf_mbox	(short Sw, short Sh, short Sx, short Sy, short Dx, short Dy);
-short	graf_mkstate	(short *Mx, short *My, short *ButtonState, short *KeyState); 
-short	graf_mouse	(short Form, const MFORM *FormAddress);
-short	graf_rubbbox	(short Ix, short Iy, short Iw, short Ih, short *Fw, short *Fh);
-short	graf_shrinkbox	(short Fx, short Fy, short Fw, short Fh, short Sx, short Sy, short Sw, short Sh); 
-short	graf_slidebox	(OBJECT *, short Parent, short Object, short Direction); 
-short	graf_watchbox	(OBJECT *, short Object, short InState, short OutState);
+short	mt_graf_dragbox	(short Sw, short Sh, short Sx, short Sy, short Bx, short By, short Bw, short Bh, short *Fw, short *Fh, short *global_aes);
+short	mt_graf_growbox	(short Sx, short Sy, short Sw, short Sh, short Fx, short Fy, short Fw, short Fh, short *global_aes);
+short	mt_graf_handle	(short *Wchar, short *Hchar, short *Wbox, short *Hbox, short *global_aes);
+short	mt_graf_mbox	(short Sw, short Sh, short Sx, short Sy, short Dx, short Dy, short *global_aes);
+short	mt_graf_mkstate	(short *Mx, short *My, short *ButtonState, short *KeyState, short *global_aes);
+short	mt_graf_mouse	(short Form, const MFORM *FormAddress, short *global_aes);
+short	mt_graf_rubberbox	(short Ix, short Iy, short Iw, short Ih, short *Fw, short *Fh, short *global_aes);
+short	mt_graf_shrinkbox	(short Fx, short Fy, short Fw, short Fh, short Sx, short Sy, short Sw, short Sh, short *global_aes);
+short	mt_graf_slidebox	(OBJECT *, short Parent, short Object, short Direction, short *global_aes);
+short	mt_graf_watchbox	(OBJECT *, short Object, short InState, short OutState, short *global_aes);
+
+#define graf_dragbox(a,b,c,d, e,f,g,h, i,j) mt_graf_dragbox(a,b,c,d,e,f,g,h,i,jaes_global)
+#define graf_growbox(a,b,c,d, e,f,g,h) mt_graf_growbox(a,b,c,d,e,f,g,h,aes_global)
+#define graf_handle(a,b,c,d) mt_graf_handle(a,b,c,d,aes_global)
+#define graf_mbox(a,b,c,d,e,f) mt_graf_mbox(a,b,c,d,e,f,aes_global)
+#define graf_mouse(a,b) mt_graf_mouse(a,b,aes_global)
+#define graf_rubberbox(a,b,c,d,e,f) mt_graf_rubberbox(a,b,c,d,e,f,aes_global)
+#define graf_shrinkbox(a,b,c,d, e,f,g,h) mt_graf_shrinkbox(a,b,c,d,e,f,g,h,aes_global)
+#define graf_slidebox(a,b,c,d,e) mt_graf_slidebox(a,b,c,d,e,aes_global)
+#define graf_watchbox(a,b,c,d,e) mt_graf_watchbox(a,b,c,d,e,aes_global)
 
 /* the old names */
-#define graf_movebox(a,b,c,d,e,f) graf_mbox(a,b,c,d,e,f)
-#define graf_rubberbox(a,b,c,d,e,f) graf_rubbbox(a,b,c,d,e,f)
+#define graf_movebox(a,b,c,d,e,f) mt_graf_mbox(a,b,c,d,e,f,aes_global)
+#define graf_rubbbox(a,b,c,d,e,f) mt_graf_rubberbox(a,b,c,d,e,f,aes_global)
 /**@}*/
 
 /** @addtogroup a_menu

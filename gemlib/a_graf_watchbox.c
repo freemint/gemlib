@@ -36,7 +36,7 @@
  */
 
 short
-mt_graf_watchbox(void *tree, short object, short in_state, short out_state, short *global_aes)
+mt_graf_watchbox(OBJECT *tree, short object, short in_state, short out_state, short *global_aes)
 {
 	AES_PARAMS(75,4,1,1,0);
 
@@ -55,7 +55,7 @@ mt_graf_watchbox(void *tree, short object, short in_state, short out_state, shor
 #undef graf_watchbox
 #endif
 short
-graf_watchbox(void *tree, short object, short in_state, short out_state)
+graf_watchbox(OBJECT *tree, short object, short in_state, short out_state)
 {
 	return(mt_graf_watchbox(tree, object, in_state, out_state, aes_global));
 }

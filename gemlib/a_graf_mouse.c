@@ -120,7 +120,7 @@
  */
 
 short
-mt_graf_mouse (short shape, void *shape_addr, short *global_aes)
+mt_graf_mouse (short shape, const MFORM *shape_addr, short *global_aes)
 {
 	AES_PARAMS(78,1,1,1,0);
 
@@ -136,7 +136,7 @@ mt_graf_mouse (short shape, void *shape_addr, short *global_aes)
 #undef graf_mouse
 #endif
 short
-graf_mouse(short shape, void *shape_addr)
+graf_mouse(short shape, const MFORM *shape_addr)
 {
 	return(mt_graf_mouse( shape, shape_addr, aes_global));
 }
