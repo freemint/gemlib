@@ -13,7 +13,7 @@
  *         [option CHECK_NULLPTR] tabwidth may be NULL
  *  @param autowrap will be filled by the autowrap information:
  *         - \p autowrap > 0: Pixel width for auto line wrap (generally == object width)
- *         - \p autowrap = 0: No wrapping, but horiz. scrolling\p
+ *         - \p autowrap = 0: No wrapping, but horiz. scrolling
  *         .
  *         [option CHECK_NULLPTR] autowrap may be NULL
  *  @param global_aes global AES array
