@@ -497,19 +497,20 @@ x_objc_wchange.c        -- idem
 x_objc_wdraw.c          -- idem
 x_objc_wedit.c          -- idem
 x_objc_xedit.c          -- idem
-x_wdlg_close.c
-x_wdlg_create.c
-x_wdlg_delete.c
-x_wdlg_evnt.c
-x_wdlg_get_edit.c
-x_wdlg_get_handle.c
-x_wdlg_get_tree.c
-x_wdlg_get_udata.c
-x_wdlg_open.c
-x_wdlg_redraw.c
-x_wdlg_set_edit.c
-x_wdlg_set_iconify.c
-x_wdlg_set_size.c
-x_wdlg_set_tree.c
-x_wdlg_set_uniconify.c
+x_wdlg_close.c          -- idem
+x_wdlg_create.c         -- idem
+x_wdlg_delete.c         -- idem
+x_wdlg_evnt.c           -- idem
+x_wdlg_get_edit.c       -- idem; change binding (init aes_intout[1]=-1
+                           for old WDIALOG version, as specified in WDIALOG.TXT)
+x_wdlg_get_handle.c     -- idem
+x_wdlg_get_tree.c       -- idem
+x_wdlg_get_udata.c      -- idem
+x_wdlg_open.c           -- idem
+x_wdlg_redraw.c         -- idem
+x_wdlg_set_edit.c       -- idem
+x_wdlg_set_iconify.c    -- idem
+x_wdlg_set_size.c       -- idem
+x_wdlg_set_tree.c       -- idem
+x_wdlg_set_uniconify.c  -- idem
 
