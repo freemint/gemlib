@@ -31,7 +31,7 @@ vsf_interior (short handle, short style)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[1]; 
-	VDI_PARAMS(vdi_control, &style, 0L, vdi_intout, 0L );
+	VDI_PARAMS(vdi_control, &style, 0L, vdi_intout, vdi_dummy );
 #else
 	vdi_intin[0] = style;
 #endif

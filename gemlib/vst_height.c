@@ -50,7 +50,7 @@ vst_height (short handle, short height,
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsin[2];   
 	short vdi_ptsout[4]; 
-	VDI_PARAMS(vdi_control, 0L, vdi_ptsin, 0L, vdi_ptsout );
+	VDI_PARAMS(vdi_control, 0L, vdi_ptsin, vdi_dummy, vdi_ptsout );
 #endif
 	
 	vdi_ptsin[0] = 0;
