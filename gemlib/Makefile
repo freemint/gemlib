@@ -118,10 +118,18 @@ mt_gem.h: mt_gem.h.in VERSION
 #	$(MOVEIFCHANGE) $(srcdir)/mt_gem.tmp $(srcdir)/mt_gem.h
 
 install:
-	install -m 644 lib{gem,gem16}.a $(PREFIX)/lib
-	install -m 644 {gem,gemx,mt_gem,mt_gemx}.h $(PREFIX)/include
+	install -m 644 libgem.a $(PREFIX)/lib
+	install -m 644 libgem16.a $(PREFIX)/lib
+	install -m 644 gem.h $(PREFIX)/include
+	install -m 644 gemx.h $(PREFIX)/include
+	install -m 644 mt_gem.h $(PREFIX)/include
+	install -m 644 mt_gemx.h $(PREFIX)/include
 
 uninstall:
-	rm -f $(PREFIX)/lib/lib{gem,gem16}.a
-	rm -f $(PREFIX)/include/{gem,gemx,mt_gem,mt_gemx}.h
+	rm -f $(PREFIX)/lib/libgem.a
+	rm -f $(PREFIX)/lib/libgem16.a
+	rm -f $(PREFIX)/include/gem.h
+	rm -f $(PREFIX)/include/gemx.h
+	rm -f $(PREFIX)/include/mt_gem.h
+	rm -f $(PREFIX)/include/mt_gemx.h
 
