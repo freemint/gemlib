@@ -16,6 +16,9 @@
  *
  *  @since all VDI versions
  *
+ *  @note The TOS 4.04 (other versions were not investigated)
+ *        requires the intout array to be set. Otherwise it
+ *        crashes.
  */
 
 void
