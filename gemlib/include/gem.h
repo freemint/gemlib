@@ -467,7 +467,7 @@ typedef struct _mn_set
 #define FLAG12		 0x1000
 #define FLAG13		 0x2000
 #define FLAG14		 0x4000
-#define FLAG15		 0x5000
+#define FLAG15		 0x8000
 
 /* Object states */
 #define NORMAL 	 0x0000
