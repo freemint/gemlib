@@ -1,58 +1,168 @@
 /* Miscellaneous user functions */
 
-# include <macros.h>
+/*  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
 # include <errno.h>
 
+# include "dosproto.h"
 # include "gemma.h"
 # include "gemproto.h"
 # include "user.h"
 
 long
-__rc_intersect(GRECT *r1, GRECT *r2)
+lib_control(BASEPAGE *bp, long fn, short nargs, \
+		short function, long enable, PROC_ARRAY *p)
 {
-	short tx, ty, tw, th, ret;
+	PROC_ARRAY *proc = 0;
+	short val;
 
-	tx = max(r2->g_x, r1->g_x);
-	tw = min(r2->g_x + r2->g_w, r1->g_x + r1->g_w) - tx;
-	ret = (0 < tw);
-	if (ret)
+	if (nargs < 2) return -EINVAL;
+	if (nargs >= 3) proc = p;
+	if ((nargs < 3) || !proc) proc = get_contrl(bp);
+
+	if (enable < 0)
+		val = -1;
+	else
+		val = enable ? 1 : 0;
+
+	/* Only root may manipulate global settings */
+	if ((val != -1) && (function & 0x4000) && _sgeteuid())
+		return -EPERM;
+
+	switch (function)
 	{
-		ty = max (r2->g_y, r1->g_y);
-		th = min (r2->g_y + r2->g_h, r1->g_y + r1->g_h) - ty;
-		ret = (0 < th);
-		if (ret)
+		/* $0000-$3fff are local for process */
+		case	0x0000:	/* debugging */
 		{
-			r2->g_x = tx;
-			r2->g_y = ty;
-			r2->g_w = tw;
-			r2->g_h = th;
+			if (val == -1)
+				return (long)proc->debug;
+			proc->debug = val;
+			break;
 		}
+		case	0x0001:	/* get kern */
+		{
+			return (long)&proc->kern;
+			break;
+		}
+		case	0x0002:	/* get version */
+		{
+			return (long)
+			"Gemma shared library version 1.09 pl 1, "
+			"compiled " __DATE__ ". "
+			"Copyright (c) 1999-2002 Draco/YC. "
+			"Dedicated with love to Magda.";		
+		}
+		case	0x0003: /* set gemma SLB pointer */
+		{
+			if (enable > 0)
+				proc->ego = (SLB *)enable;
+			else
+				return -EACCES;
+			break;
+		} 
+
+		/* $4000-$7fff are global */
+		case	0x4000:	/* sflags manipulation */
+		{
+			if (val == -1)
+				return sflags.button_delay;
+			sflags.button_delay = enable;
+			break;
+		}
+		case	0x4001:
+		{
+			if (val == -1)
+				return sflags.release_delay;
+			sflags.release_delay = enable;
+			break;
+		}
+		case	0x4002:
+		{
+			if (val == -1)
+				return sflags.access_check;
+			sflags.access_check = (long)val;
+			break;
+		}
+		case	0x4003:
+		{
+			if (val == -1)
+				return sflags.zoomboxes;
+			sflags.zoomboxes = (long)val;
+			break;
+		}
+		case	0x4004:
+		{
+			if (val == -1)
+				return sflags.moveboxes;
+			sflags.moveboxes = (long)val;
+			break;
+		}
+		case	0x4005:
+		{
+			if (val == -1)
+				return sflags.screen_comp;
+			sflags.screen_comp = (long)val;
+			break;
+		}
+		case	0x4006:
+		{
+			if (val == -1)
+				return sflags.system_alerts;
+			sflags.system_alerts = (long)val;
+			break;
+		}
+		case	0x4007:
+		{
+			if (val == -1)
+				return sflags.blocking_alerts;
+			sflags.blocking_alerts = (long)val;
+			break;
+		}
+		case	0x4008:
+		{
+			if (val == -1)
+				return sflags.debug;
+			sflags.debug = (long)val;
+			break;
+		}
+		case	0x4009:
+		{
+			if (val == -1)
+				return sflags.xfselect;
+			sflags.xfselect = (long)val;
+			break;
+		}
+		default:
+			return -EBADARG;
 	}
 
-	return ret;
+	return 0;
 }
 
-long
-_rc_intersect(BASEPAGE *bp, long fn, short nargs, \
-		GRECT *rc1, GRECT *rc2)
+const char *
+get_version(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 {
-	return __rc_intersect(rc1, rc2);
-}
+	PROC_ARRAY *proc = 0;
 
-long
-get_users(void)
-{
-	extern long users;	/* in gemma.c */
+	if (nargs >= 1)
+		proc = p;
+	else
+		proc = get_contrl(bp);
 
-	return users;
-}
-
-char *
-get_version(void)
-{
-	extern const char Version[];	/* in version.c */
-
-	return (char *)Version;
+	return (const char *)lib_control(bp, fn, 3, 0x0002, 0L, proc);
 }
 
 long
@@ -67,12 +177,12 @@ ftext_fix(BASEPAGE *bp, long fn, short nargs, \
 
 	if (nargs < 2) return -EINVAL;
 	if (nargs >= 3) proc = p;
-	if ((nargs < 3) || ((long)proc == 0)) proc = get_contrl(bp);
+	if ((nargs < 3) || !proc) proc = get_contrl(bp);
 
 	if (!proc->gem.global[0])
 		return -EACCES;
 
-	r = rsrc_xgaddr(bp, fn, 3, R_TREE, tree, proc);
+	r = rsrc_xgaddr(bp, 16L, 3, R_TREE, tree, proc);
 	if (r <= 0)
 		return -EINVAL;
 
@@ -81,51 +191,15 @@ ftext_fix(BASEPAGE *bp, long fn, short nargs, \
 
 	ted->te_txtlen = ted->te_tmplen;
 
-	if (aes40(proc))
+	_appl_getinfo(proc, AES_LARGEFONT, ap);
+	if (ap[2])
 	{
-		r = _appl_getinfo(proc, AES_LARGEFONT, ap);
-		if (ap[2])
-		{
-			ted->te_font = GDOS_BITM;
-			ted->te_fontid = 1;
-			ted->te_fontsize = 10;
-		}
+		ted->te_font = GDOS_BITM;
+		ted->te_fontid = 1;
+		ted->te_fontsize = 10;
 	}
 
 	return 0;
-}
-
-long
-gem_control(BASEPAGE *bp, long fn, short nargs)
-{
-	return (long)get_contrl(bp);
-}
-
-long
-call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
-{
-	if (nargs < 2) return -EINVAL;
-	if (opcode > MAX_AES_OP) return -ENOSYS;
-	if ((long)proc == 0) proc = get_contrl(bp);
-
-	/* Fixes section */
-	switch(opcode)
-	{
-		case 12:	/* appl_write(), round length up to 16 byte boundary */
-		{
-			short r;
-
-			r = proc->gem.int_in[1];
-			if (r & 0x000f)
-			{
-				r += 0xf;
-				r &= ~0xf;
-				proc->gem.int_in[1] = r;
-			}
-		}
-	}
-
-	return _aes(proc, opcode);
 }
 
 long
@@ -133,10 +207,11 @@ objc_xchange(BASEPAGE *bp, long fn, short nargs, \
 		WINDIAL *wd, short obj, short newstate, short redraw, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
+	OBJECT *tree;
 
 	if (nargs < 4) return -EINVAL;
 	if (nargs >= 5) proc = p;
-	if ((nargs < 5) || ((long)proc == 0)) proc = get_contrl(bp);
+	if ((nargs < 5) || !proc) proc = get_contrl(bp);
 
 	if (!proc->gem.global[0])
 		return -EACCES;
@@ -144,11 +219,38 @@ objc_xchange(BASEPAGE *bp, long fn, short nargs, \
 		return -EFAULT;
 
 	if (wd->wb_iconified)
-		_objc_change(proc, wd->wb_icontree, obj, &wd->wb_work_x, newstate, redraw);
+	{
+		tree = wd->wb_icontree;
+		if (redraw && obj)
+			redraw = 0;
+	}
 	else
-		_objc_change(proc, wd->wb_treeptr, obj, &wd->wb_work_x, newstate, redraw);
+		tree = wd->wb_treeptr;
+
+	if (redraw && ((wd->wb_ontop & 0x0002) == 0))
+		redraw = 0;
+
+	_objc_change(proc, tree, obj, &wd->wb_work_x, newstate, redraw);
 
 	return 0;
+}
+
+long
+objc_xdraw(BASEPAGE *bp, long fn, short nargs, \
+		WINDIAL *wd, short obj, PROC_ARRAY *p)
+{
+	PROC_ARRAY *proc = 0;
+
+	if (nargs < 2) return -EINVAL;
+	if (nargs >= 3) proc = p;
+	if ((nargs < 3) || !proc) proc = get_contrl(bp);
+
+	if (!proc->gem.global[0])
+		return -EACCES;
+	if (wd->wb_magic != WINDIAL_MAGIC)
+		return -EFAULT;
+
+	return _objc_draw(proc, wd->wb_treeptr, obj, 7, &wd->wb_work_x);
 }
 
 long
@@ -160,7 +262,7 @@ menu_xpop(BASEPAGE *bp, long fn, short nargs, \
 
 	if (nargs < 3) return -EINVAL;
 	if (nargs >= 4) proc = p;
-	if ((nargs < 4) || ((long)proc == 0)) proc = get_contrl(bp);
+	if ((nargs < 4) || !proc) proc = get_contrl(bp);
 
 	if (!proc->gem.global[0])
 		return -EACCES;
@@ -173,15 +275,15 @@ menu_xpop(BASEPAGE *bp, long fn, short nargs, \
 	x = proc->gem.int_out[1];
 	y = proc->gem.int_out[2];
 
-	TOUCH(menu);			/* access test */
-
 	if (!_menu_popup(proc, menu, x, y, menu))
 		return 0;
 
 	ot = wd->wb_treeptr[obj].ob_type;
-	if ((ot == G_BUTTON) || (ot == G_STRING) || (ot == G_TITLE)) {
+	if ((ot == G_BUTTON) || (ot == G_STRING) || (ot == G_TITLE))
+	{
 		ot = menu->mn_tree[menu->mn_item].ob_type;
-		if ((ot == G_BUTTON) || (ot == G_STRING) || (ot == G_TITLE)) {
+		if ((ot == G_BUTTON) || (ot == G_STRING) || (ot == G_TITLE))
+		{
 			wd->wb_treeptr[obj].ob_spec.free_string = \
 				menu->mn_tree[menu->mn_item].ob_spec.free_string;
 			_objc_draw(proc, wd->wb_treeptr, obj, 1, &wd->wb_work_x);

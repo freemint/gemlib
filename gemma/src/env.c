@@ -1,18 +1,101 @@
 /* Environment functions
  */
 
+/*  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
 # include <string.h>
 # include <errno.h>
 
 # include "gemma.h"
 
 long
+env_getargc(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
+{
+	PROC_ARRAY *proc = 0;
+	char *argv;
+	long r = 0;
+
+	if (nargs) proc = p;
+	if (!proc) proc = get_contrl(bp);
+
+	argv = getenv(proc, "ARGV=");
+
+	if (argv)
+	{
+		for(;;)
+		{
+			while(*argv++);
+			if (*argv)
+				r++;
+			else
+				break;
+		}
+	}
+
+	return r;
+}
+
+long
+env_getargv(BASEPAGE *bp, long fn, short nargs, long count, PROC_ARRAY *p)
+{
+	PROC_ARRAY *proc = 0;
+	long max, r = 0;
+	char *argv;
+
+	UNUSED(p);
+
+	if (!nargs) return -EINVAL;
+	if (nargs > 1) proc = p;
+	else if (nargs < 2 || !proc) proc = get_contrl(bp);
+
+	max = env_getargc(bp, fn, 1, proc);
+	if (!max)
+		return 0;
+	if (count >= max)
+		return 0;
+
+	argv = getenv(proc, "ARGV=");
+
+	if (argv)
+	{
+		for(;;)
+		{
+			while(*argv++);
+			if (r == count)
+				return (long)argv;
+			if (*argv)
+				r++;
+		}
+		
+	}
+
+	return 0;
+}
+
+
+long
 env_get(BASEPAGE *bp, long fn, ushort nargs, char *var, PROC_ARRAY *p)
 {
-	UNUSED(p); UNUSED(fn);
+	PROC_ARRAY *proc = 0;
+
+	if (nargs > 1) proc = p;
+	else if (nargs < 2 || !proc) proc = get_contrl(bp);
 
 	if (nargs)
-		return (long)getenv(bp, var);
+		return (long)getenv(proc, var);
 	else
 		return -EINVAL;
 }
@@ -30,10 +113,10 @@ env_eval(BASEPAGE *bp, long fn, short nargs, \
 
 	if (maxlen <= 0)
 		return -ERANGE;
-	if (proc->env_refs > 63)
+	if (proc->env_refs > MAX_RECURSION)
 		return -E2BIG;
 
-	env = getenv(bp, var);
+	env = getenv(proc, var);
 	if (!env)
 		return 0;
 

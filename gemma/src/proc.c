@@ -1,46 +1,57 @@
 /* Process & thread functions
  */
 
+/*  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
 # include <st-out.h>
 # include <string.h>
 # include <signal.h>
 # include <fcntl.h>
-# include <mintbind.h>
 # include <errno.h>
 # include <mint/dcntl.h>
 
+# include "dosproto.h"
 # include "gemma.h"
-# include "xattr.h"
 
 # define SMS_JUSTSEND	0
 # define SMS_REPLSEND	1
 # define SMS_PID2APID	0x8000
 
-extern const long sema_fork;
 static const char selfname[] = "u:\\proc\\.-1";
 static const char smsname[] = "u:\\pipe\\sms";
 
-typedef struct smsblk SMSBLK;
-
-struct smsblk
+typedef struct
 {
-	unsigned short command;
+	ushort command;
 	short destproc;
 	short length;
 	short res[5];
 	short msg[8];
-};
+} SMSBLK;
 
-static inline long
+INLINE long
 smswrite(SMSBLK *smsblk)
 {
 	long file, r;
 
-	file = r = Fopen(smsname, O_WRONLY|O_DENYNONE);
+	file = r = _open(smsname, O_WRONLY|O_DENYNONE);
 	if (r < 0)
 		return r;
-	r = Fwrite(file, sizeof(SMSBLK), (void *)smsblk);
-	(void)Fclose(file);
+	r = _write(file, sizeof(SMSBLK), (void *)smsblk);
+	_close(file);
 
 	return 0;
 }
@@ -51,13 +62,13 @@ sig_child(void)
 	long p;
 	SMSBLK sms;
 
-	p = Pwait3(1, 0L);
+	p = _wait3(1, 0L);
 	if (p == 0)
 		return;
 	bzero(&sms, sizeof(SMSBLK));
 
-	sms.command = (unsigned short)(SMS_JUSTSEND|SMS_PID2APID);
-	sms.destproc = (short)Pgetpid();
+	sms.command = (ushort)(SMS_JUSTSEND|SMS_PID2APID);
+	sms.destproc = (short)_sgetpid();
 	sms.length = 16;
 	sms.msg[0] = CH_EXIT;
 	sms.msg[1] = 0;
@@ -67,16 +78,16 @@ sig_child(void)
 	smswrite(&sms);
 }
 
-static inline long
+INLINE long
 getprgflags(void)
 {
 	long file, r, flags;
 
-	file = r = Fopen(selfname, O_RDONLY);
+	file = r = _open(selfname, O_RDONLY);
 	if (r < 0)
 		return (F_FASTLOAD | F_ALTLOAD | F_ALTALLOC);
-	r = Fcntl(file, &flags, PGETFLAGS);
-	(void)Fclose(file);
+	r = _cntl(file, &flags, PGETFLAGS);
+	_close(file);
 	if (r < 0)
 		return (F_FASTLOAD | F_ALTLOAD | F_ALTALLOC);
 
@@ -87,24 +98,34 @@ getprgflags(void)
  * is the list of folders to search by.
  */
 
-static inline char *
-fsearch(char *path, char *file)
+static void
+fsearch(char *path, char *file, char *filespec)
 {
 	struct xattr xa;
-	char cpath[1024], *tok = 0, *sav;
+	char *tok;
 	long r;
 
 	do {
-		tok = strtok_r(path, ";,", &sav);
-		if (!tok)
-			return 0;
-		strcpy(cpath, tok);
-		strcat(cpath, "\\");
-		strcat(cpath, file);
-		r = Fxattr(0, cpath, &xa);
-	} while(r);
+		tok = filespec;
+		*tok = 0;
+		while(*path)
+		{
+			if ((*path == ',') || (*path == ';'))
+			{
+				*tok = 0;
+				path++;
+				break;
+			}
+			*tok++ = *path++;
+		}
+		strcat(filespec, "/");
+		strcat(filespec, file);
+		r = _stat(0, filespec, &xa);
+	}
+	while(r && *path);
 
-	return tok;
+	if (r)
+		filespec[0] = 0;
 }
 
 /* Return the size of the environment pointed to by `env' */
@@ -143,10 +164,33 @@ setvar(char *env, char *var)
 	env[len] = 0;
 }
 
-/* Like Pexec(), but constructs ARGV command line,
- * and searches through $PATH.
+/* Special getenv() to search for the old ARGV= string and kill it
+ */
+
+INLINE char *
+getargv(char *env)
+{
+	do {
+		if (strncmp(env, "ARGV=", sizeof("ARGV=")) == 0)
+			return env;
+		while(*env++);
+	} while(*env);
+
+	return 0;
+}
+
+/* Like Pexec(), but:
  *
- * `flags' is reserved.
+ * - searches through $PATH
+ * - runs scripts
+ * - accepts command tail as C string of any length (limited by free mem)
+ * - constructs ARGV out of it.
+ *
+ * `flags' is a bitfield:
+ * 0 - redirect stdout to /dev/null
+ * 1 - redirect stderr to /dev/null
+ * 2 - register SIGCHLD handler
+ *
  */
 
 long
@@ -154,15 +198,14 @@ proc_exec(BASEPAGE *bp, long fn, short nargs, \
 		short mode, long flags, char *cmd, char *tail, char *env, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
-	char *path, *file = cmd, *newcmd, *newenv = env;
-	char cmdline[128], *filespec;
-	short load = 0, script = 0;
-	long r, envbuf = -1, fsbuf = -1;
-	struct xattr xa;
+	char *newcmd = tail, *newenv = env;
+	char cmdline[128], filespec[2048], temp[2048];
+	short load = 0, oldout = 0, newout = -1, olderr = 0;
+	long r, newtail = -1, envbuf = -1;
 
 	if (nargs < 5) return -EINVAL;
 	if (nargs >= 6) proc = p;
-	if ((nargs < 6) || (proc == 0)) proc = get_contrl(bp);
+	if ((nargs < 6) || !proc) proc = get_contrl(bp);
 
 /* 0, filename, command tail, env
  * 3, filename, command tail, env
@@ -171,6 +214,7 @@ proc_exec(BASEPAGE *bp, long fn, short nargs, \
  * 100, filename, command tail, env
  * 200, filename, command tail, env
  */
+
 	switch(mode)
 	{
 		case 0:
@@ -178,98 +222,176 @@ proc_exec(BASEPAGE *bp, long fn, short nargs, \
 		case 100:
 		case 200:
 			load = 1;
-		case 5:			/* fall sru */
+		case 5:
 		case 7:
 			break;
 		default:		/* 4, 6, 104, 106, 204, 206, ... */
-			return Pexec(mode, cmd, tail, env);
+			goto exec;
 	}
+
+	temp[0] = 0;
 
 	if (load)
 	{
 		long x;
-		short handle, id;
+		short handle;
+		char *path;
+		struct xattr xa;
 
-		fsbuf = _malloc(DEF_PAGE_SIZE);
-		if (fsbuf < 0)
-			return fsbuf;
-		filespec = (char *)fsbuf;
-
-		r = strlen(file);
-		if (r)
+		if ((*cmd == '/') || (*cmd == '\\'))
 		{
-			for (x = 0; x < r; x++)
-			{
-				if (file[x] == '/')
-					file[x] = '\\';
-			}
+			strcpy(temp, "u:");
+			strncpy(temp + 2, cmd, sizeof(temp) - 2);
 		}
+		else
+			strncpy(temp, cmd, sizeof(temp));
+
+		for (x = 0; x < sizeof(temp); x++)
+		{
+			if (temp[x] == '\\')
+				temp[x] = '/';
+			if (!temp[x])
+				break;
+		}
+
+		cmd = temp;
 
 		filespec[0] = 0;
-		if (!strchr(file, '\\'))
+		if (!strchr(cmd, '/'))
 		{
-			if (Fxattr(0, file, &xa) < 0)
+			if (_stat(0, cmd, &xa) < 0)
 			{
-				char *full = 0;
-
-				path = getenv(proc->base, "PATH=");
+				path = getenv(proc, "PATH=");
 				if (path)
-					full = fsearch(path, file);
-				if (full)
-				{
-					strcpy(filespec, full);
-					strcat(filespec, "\\");
-				}
-
+					fsearch(path, cmd, filespec);
 			}
 		}
-		strcat(filespec, file);
-		file = filespec;
+		if (!filespec[0])
+			strncpy(filespec, cmd, sizeof(filespec));
 
-		handle = Fopen(file, O_RDONLY);
+		cmd = filespec;
+		temp[0] = 0;
+
+		handle = _open(cmd, O_RDONLY);
 		if (handle < 0)
 			return (long)handle;
-		r = Fread(handle, sizeof(short), &id);
-		Fclose(handle);
+		r = _read(handle, sizeof(cmdline), cmdline);
+		_close(handle);
 		if (r < 2)
 			r = -EFTYPE;
 		if (r < 0)
 			return r;
-		if (id == 0x2321)	/* `#!' */
-			script++;
+		if (*(short *)cmdline == 0x2321)	/* `#!' */
+		{
+			char temp2[2048];		/* > 6k of stack!! :< */
+
+			if (cmd[1] == ':')
+				strncpy(temp, cmd + 2, sizeof(temp));
+			else
+				strncpy(temp, cmd, sizeof(temp));
+
+			*cmd = 0;
+			if (cmdline[2] == '/')
+				strcpy(cmd, "u:");
+
+			for (x = 0; x < sizeof(cmdline); x++)
+			{
+				if (cmdline[x] == '\n')
+					cmdline[x] = 0;
+				if (!cmdline[x])
+					break;
+			}
+			strcat(cmd, cmdline + 2);
+			temp2[0] = 0;
+			if (!strchr(cmd, '/'))
+			{
+				if (_stat(0, cmd, &xa) < 0)
+				{
+					path = getenv(proc, "PATH=");
+					if (path)
+						fsearch(path, cmd, temp2);
+				}
+			}
+			if (temp2[0])
+			{
+				x = 0;
+				while((x < sizeof(temp2)) && temp2[x])
+				{
+					if (temp2[x] == '\\')
+						temp2[x] = '/';
+					x++;
+				}
+				strncpy(cmd, temp2, sizeof(temp2));
+			}
+		}
 	}
 
-	cmdline[0] = 0;
+	/* If a script was specified to execute, the `cmd' points to the
+	 * shell executable which will run the script. The pathname to
+	 * the script itself is held in `temp'. If `temp' is empty, this
+	 * means that the `cmd' specifies a binary to launch directly.
+	 */
+
+	if (temp[0])
+	{
+		r = strlen(temp);
+		if (tail)
+			r += strlen(tail);
+		r += 0x1fff;
+		r &= ~0x1fff;
+		newtail = _alloc(r);
+		if (newtail < 0)
+			return newtail;
+		strcpy((char *)newtail, temp);
+		if (tail && strlen(tail))
+		{
+			strcat((char *)newtail, " ");
+			strcat((char *)newtail, tail);
+		}
+		tail = (char *)newtail;
+	}
+
 	newcmd = cmdline;
 
 	if (tail)
 	{
 		long x, envsize = 0;
+		char *t;
 
 		r = strlen(tail);
 		if (r)
 		{
 			strncpy(newcmd + 1, tail, 127);
-			if (r > 127)
+
+			if (r > 126)
 				newcmd[0] = 127;
 			else
 				newcmd[0] = (char)r;
+
 			if ((long)env > 0)
 				envsize = getenvsize(env);
 			if (!env)
-				envsize = getenvsize(proc->base->p_env);
+				envsize = getenvsize(bp->p_env);
 			envsize += DEF_PAGE_SIZE;	/* should be enough for ARGV string */
 			envsize = LROUND(envsize);
-			envbuf = _malloc(envsize);
+			envbuf = _alloc(envsize);
 			if (envbuf < 0)
+			{
+				if (newtail != -1)
+					_free(newtail);
 				return envbuf;
+			}
 			newenv = (char *)envbuf;
 			bzero(newenv, envsize);
 			if ((long)env > 0)
 				memcpy(newenv, env, getenvsize(env));
 			if (!env)
-				memcpy(newenv, proc->base->p_env, getenvsize(proc->base->p_env));
-			setvar(newenv, "ARGV=9XII2000");	/* 9 December 2000, i.e. today ;) */
+				memcpy(newenv, bp->p_env, getenvsize(bp->p_env));
+			t = getargv(newenv);
+			if (t)
+				*t = 0;
+			setvar(newenv, "ARGV=");
+			setvar(newenv, cmd);
 			x = 0;
 			while (tail[x])
 			{
@@ -309,38 +431,79 @@ proc_exec(BASEPAGE *bp, long fn, short nargs, \
 				tmp[i] = 0;
 				setvar(newenv, tmp);
 			}
+			r = getenvsize(newenv);
+			if (r < envsize)
+				_shrink(newenv, r);
 		}
 	}
 
-	r = Pexec(mode, file, newcmd, newenv);
+exec:
+	if (flags & 4)
+		_signal(SIGCHLD, sig_child);
 
-	if (fsbuf != -1)
-		_mfree(fsbuf);
+	if (flags & 3)
+	{
+		newout = _open("u:/dev/null", O_WRONLY);
+		if (newout >= 0)
+		{
+			if (flags & 1)
+			{
+				oldout = _dup(1);
+				_force(1, newout);
+			}
+			if (flags & 2)
+			{
+				olderr = _dup(2);
+				_force(2, newout);
+			}
+		}
+	}
+
+	r = _exec(mode, cmd, newcmd, newenv);
+
+	if ((flags & 3) && (newout >= 0))
+	{
+		if (flags & 1)
+			_force(1, oldout);
+		if (flags & 2)
+			_force(2, olderr);
+		_close(newout);
+	}
+
+	if (newtail != -1)
+		_free(newtail);
 	if (envbuf != -1)
-		_mfree(envbuf);
+		_free(envbuf);
 
 	return r;
 }
 
 long
 thread_fork(BASEPAGE *bp, long fn, short nargs, \
-		void *startup, void *address, char *proctitle, long stacksize, PROC_ARRAY *p)
+		void *startup, void *address, char *proctitle, long stacksize, long opt, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
 	BASEPAGE *new;
-	long flags, size, oldsig, pid;
+	long mode = 0, flags, size, oldsig = 0, pid;
+	short execmode;
 
 	if (nargs < 3) return -EINVAL;
-	if (nargs >= 5) proc = p;
-	if ((nargs < 5) || (proc == 0)) proc = get_contrl(bp);
+	if (nargs >= 5) mode = opt;
+	if (nargs >= 6) proc = p;
+	if ((nargs < 6) || !proc) proc = get_contrl(bp);
+
+	if (fn == 13)
+		execmode = 104;		/* just go, sharing mode */
+	else
+		execmode = 204;		/* overlay, then go */
 
 	flags = getprgflags();
 
 	sema_request(sema_fork);
 
-	new = (BASEPAGE *)Pexec(7, flags, "", 0);
+	new = (BASEPAGE *)_exec(7, (void *)flags, "", 0);
 	if ((long)new < 0)
-		new = (BASEPAGE *)Pexec(5, 0, "", 0);
+		new = (BASEPAGE *)_exec(5, 0, "", 0);
 	if ((long)new <= 0)
 	{
 		sema_release(sema_fork);
@@ -353,22 +516,23 @@ thread_fork(BASEPAGE *bp, long fn, short nargs, \
 	else
 		size = 0x00001f00L;
 	size += 0x00000100L;
-	Mshrink((long)new, size);
+	_shrink(new, size);
 
 	sema_release(sema_fork);
 
 	new->p_tbase = startup;
 	new->p_dbase = address;
 
-	oldsig = Psignal(SIGCHLD, sig_child);
+	if (mode & 1)
+		oldsig = _signal(SIGCHLD, sig_child);
 
-	pid = Pexec(104, proctitle, new, 0);
+	pid = _exec(execmode, proctitle, new, 0);
 
-	_mfree((long)new->p_env);
-	_mfree((long)new);
+	_free((long)new->p_env);
+	_free((long)new);
 
-	if (pid < 0)
-		Psignal(SIGCHLD, oldsig);
+	if (oldsig && (pid < 0))
+		_signal(SIGCHLD, (void *)oldsig);
 
 	return pid;
 }

@@ -1,19 +1,42 @@
 /* Constant definitions for gemma.c & other modules */
 
-# include <mint/basepage.h>
-# include <gem.h>
-# include "gemma/struct.h"
+/*  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
 
-# define VDISYS	115L
-# define AESSYS	200L
+# include <basepage.h>
+# include "/usr/GEM/include/gem.h"
+# include <gemma/struct.h>
+# include <mint/slb.h>
 
-# define MAX_LINE	25	/* for alerts, real max is 40 */
-# define MAX_PID	999
-# define MAX_AES_OP	199
-# define DEF_PAGE_SIZE	8192
-# define MIN_PAGE_SIZE	1024
+# include "../config.h"
 
-# define WINDIAL_MAGIC	25091973L
+# ifndef APP_DESK
+#  define APP_DESK	2
+# endif
+
+# ifndef AES_MESSAGE
+#  define AES_MESSAGE	12
+# endif
+
+# ifndef AES_OBJECT
+#  define AES_OBJECT	13
+# endif
+
+# ifndef AES_FORM
+#  define AES_FORM	14
+# endif
 
 # ifndef ulong
 #  define ulong unsigned long
@@ -25,76 +48,130 @@
 #  define uchar unsigned char
 # endif
 
-struct gemma_flags {
+struct xattr
+{
+	ushort	mode;
+	long	index;
+	ushort	dev;
+	ushort	rdev;		/* "real" device */
+	ushort	nlink;
+	ushort	uid;
+	ushort	gid;
+	long	size;
+	long	blksize;
+	long	nblocks;
+	ushort	mtime, mdate;
+	ushort	atime, adate;
+	ushort	ctime, cdate;
+	short	attr;
+	short	reserved2;
+	long	reserved3[2];
+};
+
+struct gemma_flags
+{
+	long magic;
 	long parameters;
 	long max_pid;
 	long pagesize;
 	long minpagesize;
-	long access_check;
-	long res1;
-	long button_delay;
-	long release_delay;
 	long maxaesop;
 	const long *ctrl;
+	long button_delay;
+	long release_delay;
+	long access_check;
 	long zoomboxes;
 	long moveboxes;
 	long screen_comp;
 	long system_alerts;
 	long blocking_alerts;
+	long debug;
+	long xfselect;
+	long reserved;
 };
 
-struct gproc {
-	GEM_ARRAY gem;
-	char *rawrscaddr;		/* from here user doesn't know */
-	char *rscaddr;
-	long rsclength;
-	char *rscname;			/* for broken systems */
-	short fsel_init_done;
-	char fsel_path[1024];
-	char fsel_file[256];
-	char fsel_outname[1024];
-	short env_refs;
-	BASEPAGE *base;
-	WINDIAL window;
-};
+typedef struct
+{
+	GEM_ARRAY gem;			/* user-visible part of this structure */
+	BASEPAGE *base;			/* process basepage address */
+	SLB *ego;			/* a pointer to the library itself */
+	SLB kern;			/* The kernel library structure */
+	SLB fsel;			/* The fileselector library structure */
+	WINDIAL *wchain;		/* the begin of the window chain */
+	char *rawrscaddr;		/* address for the raw RSC buffer */
+	char *rscaddr;			/* address for the RSC buffer */
+	long rsclength;			/* RSC file length (rounded up to longword) */
+	char *rscname;			/* RSC filename for broken systems */
+	ulong bvset;			/* A value passed from appl_bvset() */
+	short env_refs;			/* counter for recursions in env_eval() */
+	ushort debug;			/* debugging enable flag */
+	ushort alert;			/* an alert box is being displayed */
+	ushort cb_fsel;			/* flag for call-backs from fileselector.slb */
+	short fontw;			/* returned by graf_handle() */
+	short fonth;
+	short cellw;
+	short cellh;
+	WINDIAL window;			/* window 0, integrated here to save some RAM */
+	short fsel_init_done;		/* is 1 when fselector was called at least once */
+	char fsel_path[1024];		/* retains last selected path */
+	char fsel_file[256];		/* retains last selected filename */
+	char fsel_outname[1024];	/* the complete filename returned */
+} PROC_ARRAY;
 
-typedef struct gproc PROC_ARRAY;
-extern struct gemma_flags sflags;
+/* Global data structures */
+
+extern struct gemma_flags sflags;	/* in callout.c */
+extern short whitebak;			/* in gemma.c */
+extern const long sema_fork;		/* in gemma.c */
+extern PROC_ARRAY *pidtable[];		/* in gemma.c */
+extern short menu_height;		/* in appl.c */
 
 /* Common macros & function prototypes */
 
+# ifdef __GNUC__
+#  define INLINE	static inline
+#  define UNUSED(p)
+# else
+#  define INLINE	static
+#  define UNUSED(p)	(void)p
+# endif
+
+# define VDISYS	115L
+# define AESSYS	200L
+# define MAX_AES_OP	159
+# define WINDIAL_MAGIC	25091973L
+
 # ifdef DEBUG
-#  define DEBUGMSG(p)	debug_print(p)
+#  define DEBUGMSG(p)				\
+{						\
+	if (sflags.debug && proc->debug)	\
+		debug_print(__FUNCTION__,p);	\
+}
 # else
 #  define DEBUGMSG(p)
 # endif
 
-# define UNUSED(p)	(void)p
-# define LMASK		(sizeof(long) - 1)
-# define LROUND(x)	((x + LMASK) & ~LMASK)
-# define TOUCH(p)	\
-{\
+# ifdef _ROBUST_AES
+#  define TOUCH(p)
+# else
+#  define TOUCH(p)				\
+{						\
 	if (sflags.access_check)		\
 		(void)*(volatile char *)p;	\
 }
-
-# define aes40(p) (p->gem.global[0] >= 0x0400)
-# define bell()	Cconout(7)
-# define _malloc(s) __malloc(s, 0x0003)
-# define _malloc_read(s) __malloc(s, 0x0043)
-# define sema_create(s) Psemaphore(0, s, 0L)
-# define sema_destroy(s) Psemaphore(1, s, 0L)
-# define sema_request(s) Psemaphore(2, s, -1L)
-# define sema_release(s) Psemaphore(3, s, 0L)
-
-# ifdef DEBUG
-void debug_print(char *string);
 # endif
 
-char *getenv(BASEPAGE *bp, const char *var);
+# define LMASK		(sizeof(long) - 1)
+# define LROUND(x)	((x + LMASK) & ~LMASK)
+# define aes40(p) 	(p->gem.global[0] >= 0x0400)
+
+# ifdef DEBUG
+void debug_print(char *fn, char *string);
+# endif
+
+void bin2asc(long number, char *out);			/* in bodajze alert.c */
+char *getenv(PROC_ARRAY *proc, const char *var);
 OBJECT *obj2addr(PROC_ARRAY *proc, short type, ulong obj);
 PROC_ARRAY *get_contrl(BASEPAGE *bp);
-long __malloc(long size, short mode);
-void _mfree(long adr);
 
 /* EOF */

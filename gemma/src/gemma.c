@@ -1,54 +1,57 @@
 /* Main module */
 
+/*  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
 # include <fcntl.h>
-# include <mintbind.h>
 # include <mint/dcntl.h>
 # include <errno.h>
 # include <string.h>
 
+# include "dosproto.h"
 # include "gemma.h"
 # include "user.h"
 
 long gemma_init(void);
+long get_users(void);
 
 /* Global variables */
 
 PROC_ARRAY *pidtable[MAX_PID+1];
-long users;			/* number of processes using the lib */
-short whitebak;
+const long sema_fork = (const long)gemma_init;
 
 static const char procpath[] = "u:\\proc";
-const long sema_fork = (const long)gemma_init;
+static const long sema_users = (const long)get_users;
 
 # ifdef DEBUG
 void
-debug_print(char *string)
+debug_print(char *function, char *string)
 {
-	char msg[128], c;
-	short x, y = 0;
-
-	for (x = 0; x < 128; x++)
-	{
-		c = string[x];
-		if (c == '\n')
-		{
-			msg[y] = '\r';
-			y++;
-		}
-		msg[y++] = c;
-		if (!c)
-			break;
-	}
-	Cconws(msg);
+	_conws(function);
+	_conws("(): ");
+	_conws(string);
+	_conws("\n");
 }
 # endif
 
 /* Utility routines */
 
 char *
-getenv(BASEPAGE *bp, const char *var)
+getenv(PROC_ARRAY *proc, const char *var)
 {
-	char *env = (char *)bp->p_env;
+	char *env = (char *)proc->base->p_env;
 	long len = strlen(var);
 
 	do {
@@ -56,9 +59,7 @@ getenv(BASEPAGE *bp, const char *var)
 		{
 			env += len;
 
-			DEBUGMSG("getenv: -> ");
 			DEBUGMSG(env);
-			DEBUGMSG("\n");
 
 			return env;
 		}
@@ -68,22 +69,22 @@ getenv(BASEPAGE *bp, const char *var)
 	return 0;
 }
 
-static inline long
+INLINE long
 get_page_size(void)
 {
 	short drv;
 	char d, cwd[512];
 	long r, meminfo[4];
 
-	drv = Dgetdrv();
+	drv = _getdrv();
 	d = procpath[0];
 	d &= 0x5f;
 	d -= 'A';
-	Dsetdrv((short)d);
-	r = Dgetcwd(cwd, 0, sizeof(cwd));
+	_setdrv((short)d);
+	r = _getcwd(cwd, 0, sizeof(cwd));
 	if (r < 0)
 	{
-		Dsetdrv(drv);
+		_setdrv(drv);
 		return sflags.pagesize;
 	}
 	if (!cwd[0])
@@ -91,15 +92,15 @@ get_page_size(void)
 		cwd[0] = '\\';
 		cwd[1] = 0;
 	}
-	r = Dsetpath(procpath);
+	r = _setpath(procpath);
 	if (r < 0)
 	{
-		Dsetdrv(drv);
+		_setdrv(drv);
 		return sflags.pagesize;
 	}
-	r = Dfree((long *)meminfo, 0);
-	Dsetpath(cwd);
-	Dsetdrv(drv);
+	r = _dfree((long *)meminfo, 0);
+	_setpath(cwd);
+	_setdrv(drv);
 	if (r < 0)
 		return sflags.pagesize;
 	if (meminfo[3] < sflags.minpagesize)
@@ -108,43 +109,72 @@ get_page_size(void)
 	return meminfo[3];
 }
 
-long
-__malloc(long size, short mode)
-{
-	long r;
-
-	sema_request(sema_fork);
-	r = Mxalloc(size, mode);
-	if (r < 0)
-		r = Malloc(size);	/* No Mxalloc()? Incredible... */
-	sema_release(sema_fork);
-	if (!r)
-		r = -ENOMEM;
-	return r;
-}
-
-void
-_mfree(long adr)
-{
-	Mfree(adr);
-}
-
-static long
+INLINE long
 _getpid(BASEPAGE *bp)
 {
-	PROC_ARRAY *proc;
-	long p = Pgetpid();
+# ifdef _STORE_PID_ON_BP
+	return bp->p_undef[0];
+# else
+	return _sgetpid();
+# endif
+}
 
-	if (p < 0)
+/* Internal utilities */
+
+OBJECT *
+obj2addr(PROC_ARRAY *proc, short type, ulong obj)
+{
+	if (obj > 65535UL)
+		return (OBJECT *)obj;
+
+	return (OBJECT *)rsrc_xgaddr(proc->base, 0L, 3, type, (short)obj, proc);
+}
+
+PROC_ARRAY *
+get_contrl(BASEPAGE *bp)
+{
+	return pidtable[_getpid(bp)];
+}
+
+static void
+write_pidtable(short pid, PROC_ARRAY *value)
+{
+	sema_request(sema_users);
+	pidtable[pid] = value;
+	sema_release(sema_users);
+}
+
+/* Misc user functions */
+
+long
+gem_control(BASEPAGE *bp, long fn, short nargs)
+{
+	return (long)get_contrl(bp);
+}
+
+long
+get_users(void)
+{
+	ushort x;
+	long users = 0, r;
+
+	sema_request(sema_users);
+
+	for (x = 0; x <= MAX_PID; x++)
 	{
-		for (p = 0; p <= MAX_PID; p++)
+		if (pidtable[x])
 		{
-			proc = pidtable[p];
-			if (proc->base == bp)
-				return p;
+			r = _kill(x, 0);	/* SIGNULL */
+			if (r < 0)
+				pidtable[x] = 0;
+			else
+				users++;
 		}
 	}
-	return p;
+
+	sema_release(sema_users);
+
+	return users;
 }
 
 /* System routines */
@@ -154,6 +184,9 @@ gemma_init(void)
 {
 	long r;
 
+	r = sema_create(sema_users);
+	if (r >= 0)
+		sema_release(sema_users);
 	r = sema_create(sema_fork);
 	sflags.pagesize = get_page_size();
 	if (r < 0)
@@ -166,6 +199,9 @@ gemma_exit(void)
 {
 	long r;
 
+	r = sema_request(sema_users);
+	if (r >= 0)
+		sema_destroy(sema_users);
 	r = sema_request(sema_fork);
 	if (r < 0)
 		return;
@@ -179,32 +215,23 @@ long
 gemma_open(BASEPAGE *bp)
 {
 	PROC_ARRAY *proc;
-	long pid = Pgetpid();
-
-	sema_request(sema_fork);
-
-	if (pid < 0)
-	{
-		for (pid = 1; pid <= MAX_PID; pid++)
-		{
-			if (!pidtable[pid])
-				goto found;
-		}
-		pid = MAX_PID + 1;
-	}
-found:
-	sema_release(sema_fork);
+	long pid = _sgetpid();
 
 	if (pid > MAX_PID)
 	{
-		Cconws("gemma.slb: cannot service so many processes!!\r\n");
+		_conws("gemma.slb: cannot service so many processes!!\r\n");
 		return -EPROCLIM;
 	}
 
-	proc = (PROC_ARRAY *)_malloc(sizeof(PROC_ARRAY));
+# ifdef _STORE_PID_ON_BP
+	bp->p_undef[0] = pid;
+# endif
+
+	proc = (PROC_ARRAY *)_alloc(sizeof(PROC_ARRAY));
 	if ((long)proc < 0)
 		return (long)proc;
-	pidtable[pid] = proc;
+
+	write_pidtable(pid, proc);
 	bzero(proc, sizeof(PROC_ARRAY));
 
 	proc->gem.aesparams[0] = (long)proc->gem.control;
@@ -221,10 +248,9 @@ found:
 	proc->gem.vdiparams[4] = (long)proc->gem.ptsout;
 
 	proc->base = bp;
-
-	users++;
-
-	return 0;		/* uff */
+	proc->bvset = _setdrv(_getdrv());
+	
+	return 0;
 }
 
 void
@@ -233,29 +259,12 @@ gemma_close(BASEPAGE *bp)
 	long pid = _getpid(bp);
 	PROC_ARRAY *proc;
 
-	users--;
 	proc = pidtable[pid];
-	if ((long)proc == 0)
+	if (!proc)
 		return;		/* huuh? */
-	pidtable[pid] = 0;
-	_mfree((long)proc);
-}
 
-/* Internal utilities */
-
-OBJECT *
-obj2addr(PROC_ARRAY *proc, short type, ulong obj)
-{
-	if (obj > 65536UL)
-		return (OBJECT *)obj;
-
-	return (OBJECT *)rsrc_xgaddr(proc->base, 0L, 3, type, (short)obj, proc);
-}
-
-PROC_ARRAY *
-get_contrl(BASEPAGE *bp)
-{
-	return pidtable[_getpid(bp)];
+	write_pidtable(pid, 0);
+	_free((long)proc);
 }
 
 /* EOF */

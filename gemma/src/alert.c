@@ -1,5 +1,20 @@
 /* Alert functions */
 
+/*  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
 # include <errno.h>
 # include <string.h>
 
@@ -7,45 +22,38 @@
 # include "gemproto.h"
 # include "user.h"
 
-struct error {
-	short code;
-	char *text;
-};
-
-extern struct error errorlist[];
-static char begin_error[] = "[0][";
-
 void
 bin2asc(long number, char *out)
 {
 	char decout[10];
-	unsigned short x, quot, remd;
+	ushort x, quot, remd;
 
-	if (number == 0)
+	if (number)
 	{
-		strcpy(out, "0");
-		return;
+		if (number < 0)
+		{
+			*out++ = '-';
+			number = ~number;
+			number++;
+		}
+
+		for (x = 0; number && (x < 10);)
+		{
+			quot = (ushort)(number / 10);
+			remd = (ushort)(number % 10);
+			number = (ulong)quot;
+			decout[x++] = remd | 0x30;
+		}
+		while(x > 0)
+			*out++ = decout[--x];
 	}
-	else if (number < 0)
-	{
-		strcpy(out, "-");
-		number = ~number;
-		number++;
-		out++;
-	}
-	for (x = 0; number && (x < 10);)
-	{
-		quot = (unsigned short)(number / 10);
-		remd = (unsigned short)(number % 10);
-		number = (unsigned long)quot;
-		decout[x++] = remd | 0x30;
-	}
-	while(x > 0)
-		*out++ = decout[--x];
+	else
+		*out++ = '0';
+
 	*out = 0;
 }
 
-static void
+INLINE void
 line_break(char *line, const short rmargin)
 {
 	short i, left, ms = 0, q = 0;
@@ -78,8 +86,6 @@ line_break(char *line, const short rmargin)
 		left -= i;
 		q += i;
 	}
-
-	return;
 }
 
 long
@@ -110,24 +116,21 @@ _alert(PROC_ARRAY *proc, short button, char *msg)
 }
 
 long
-windial_alert(BASEPAGE *bp, long fn, short nargs, \
-		short button, long object, PROC_ARRAY *p)
+windial_alert(BASEPAGE *bp, long fn, short nargs, short button, long object, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
 	long r, obj;
 
 	if (nargs < 2) return -EINVAL;
-	if (nargs >= 3) proc = p;
-	if (nargs < 3 || (long)proc == 0) proc = get_contrl(bp);
+	if (nargs == 3) proc = p;
+	if ((nargs < 3) || !proc) proc = get_contrl(bp);
 
 	if (!proc->gem.global[0])
 		return -EACCES;
 
 	obj = object;
-	if (nargs < 3)
-		obj >>= 16;
 
-	r = (long)obj2addr(proc, R_STRING, (unsigned long)obj);
+	r = (long)obj2addr(proc, R_STRING, (ulong)obj);
 	if (r > 0)
 		r = _alert(proc, button, (char *)r);
 
@@ -135,33 +138,37 @@ windial_alert(BASEPAGE *bp, long fn, short nargs, \
 }
 
 long
-windial_error(BASEPAGE *bp, long fn, short nargs, \
-		long error, char *message, PROC_ARRAY *p)
+windial_error(BASEPAGE *bp, long fn, short nargs, long error, char *message, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
 	char msgbuf[256], *m;
 
 	if (nargs < 1) return -EINVAL;
-	if (nargs >= 3) proc = p;
-	if (nargs < 3 || (long)proc == 0) proc = get_contrl(bp);
+	if (nargs == 3) proc = p;
+	if ((nargs < 3) || !proc) proc = get_contrl(bp);
 
 	if (!proc->gem.global[0])
 		return -EACCES;
 
 	if (error > 0)
 	{
-		(void)_alert(proc, 1, "[1][windial_error():|value out of range for apid %a!][ Cancel ]");
+		_alert(proc, 1, "[1][windial_error():|value out of range for apid %a!][ Cancel ]");
 		return -EBADARG;
 	}
-	if (!error && aes40(proc))
-		begin_error[1] = '4';			/* use new icon */
-	else
-		begin_error[1] = '3';
 
-	strcpy(msgbuf, begin_error);
+	strcpy(msgbuf, "[1][");
+
+	if (!error)
+	{
+		if (proc->gem.global[0] >= 0x0410)
+			msgbuf[1] = '4';			/* use new icon */
+		else
+			msgbuf[1] = '0';
+	}
+
 	if (nargs > 1 && (long)message > 0)
 	{
-		m = (char *)obj2addr(proc, R_STRING, (unsigned long)message);
+		m = (char *)obj2addr(proc, R_STRING, (ulong)message);
 		if ((long)m > 0)
 		{
 			char trans[256];
@@ -178,53 +185,32 @@ windial_error(BASEPAGE *bp, long fn, short nargs, \
 	}
 
 	if (error)
-	{
-		short count, found = 0;
-
-		for(count = 0; count < 32767; count++)
-		{
-			if (!errorlist[count].code)
-				break;
-			if (error == (long)errorlist[count].code)
-			{
-				found = count;
-				break;
-			}
-		}
-		if (found)
-		{
-			char trans[256], *ex;
-
-			ex = errorlist[found].text;
-			if (strlen(ex) > MAX_LINE)
-			{
-				strcpy(trans, ex);
-				line_break(trans, MAX_LINE);
-				ex = trans;
-			}
-			strcat(msgbuf, ex);
-		}
-		else
-			strcat(msgbuf, "Unknown error");
-	}
+		m = "Unknown error";
 	else
-		strcat(msgbuf, "No errors");
+		m = "No errors";
 
+	if (proc->kern.exec)
+		m = (char *)(proc->kern.exec)(proc->kern.handle, 512L, (short)1, error);
+
+	strcat(msgbuf, m);
+	
 	if (error)
 	{
 		char *d;
 
-		strcat(msgbuf,"|Status: ");
+		strcat(msgbuf, "|Status: ");
 		d = msgbuf + strlen(msgbuf);
 		bin2asc(error, d);
+		m = "][ Cancel ]";
 	}
-
-	if (error)
-		strcat(msgbuf, "][ Cancel ]");
 	else
-		strcat(msgbuf, "][ OK ]");
+		m = "][ OK ]";
 
-	(void)_alert(proc, 1, msgbuf);
+	strcat(msgbuf, m);
+
+	DEBUGMSG(msgbuf);
+
+	_alert(proc, 1, msgbuf);
 
 	return 0;
 }
