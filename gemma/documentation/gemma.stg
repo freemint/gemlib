@@ -1311,8 +1311,19 @@ TODO:
 - support the xrsrc
 - emulate drawing WHITEBAK objects where not directly supported
 
-Further changelog is available in the CVS repository history at 
-http://wh58-508.st.uni-magdeburg.de
+Version 1.10
+
+- various changes applied to compile without -mshort
+- appl_open() now checks, whether the fileselector.slb is present
+  before loading it. When the slb is not found, its flag gets
+  unchecked.
+- restructurizing of the local includes; fixed most compile time
+  warnings at the occasion.
+- wind_close() now only draws zoom/moveboxes for non-iconified
+  windows.
+- libgemma.a now defines struct for the kernel32.slb library and
+  automatically assigns it a value - no need to separately define
+  it inside the program.
 
 Version 1.09 pl 2
 
