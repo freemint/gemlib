@@ -198,7 +198,7 @@ get_version(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 	else
 		proc = get_contrl(bp);
 
-	return (const char *)lib_control(bp, fn, 3, 0x0002, 0L, proc);
+	return (const char *)lib_control(bp, LIB_CTRL, 3, 0x0002, 0L, proc);
 }
 
 long
@@ -218,7 +218,7 @@ ftext_fix(BASEPAGE *bp, long fn, short nargs, \
 	if (!proc->gem.global[0])
 		return -EACCES;
 
-	r = rsrc_xgaddr(bp, 16L, 3, R_TREE, tree, proc);
+	r = rsrc_xgaddr(bp, RSRC_XGADDR, 3, R_TREE, tree, proc);
 	if (r <= 0)
 		return -EINVAL;
 

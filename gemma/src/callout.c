@@ -328,7 +328,7 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 		{
 			for (x = 0; x < 4; x++)
 				proc->gem.int_out[x] = 0;
-# ifndef _HAVE_APPL_GETINFO
+# ifdef _EMULATE_APPL_GETINFO
 			if (!aes40(proc))
 				return emu_appl_getinfo(proc);
 # endif

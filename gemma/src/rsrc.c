@@ -33,7 +33,7 @@ long
 rsrc_xload(BASEPAGE *bp, long fn, short nargs, char *name, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
-	long r, len, file;
+	long r, len;
 	short ap[4];
 
 	if (nargs < 1) return -EINVAL;
@@ -60,9 +60,10 @@ rsrc_xload(BASEPAGE *bp, long fn, short nargs, char *name, PROC_ARRAY *p)
 	proc->rsclength = LROUND(len);
 
 	_appl_getinfo(proc, AES_PROCESS, ap);
+
 	if (ap[3])
 	{
-		ushort *wrsc;
+		ushort *wrsc, mode;
 		ulong *lrsc;
 
 		DEBUGMSG("custom load");
@@ -72,18 +73,11 @@ rsrc_xload(BASEPAGE *bp, long fn, short nargs, char *name, PROC_ARRAY *p)
 			goto fault;
 		wrsc = (ushort *)proc->rawrscaddr = (char *)r;
 
-		DEBUGMSG("open()");
+		DEBUGMSG("loading into buffer");
 
-		r = file = _open(proc, name, O_RDONLY|O_DENYW);
-		if (file < 0)
-			r = file = _open(proc, name, O_RDONLY);
-		if (file < 0)
+		r = _floadbuf(proc, name, proc->rawrscaddr, len, &mode);
+		if (r < 0)
 			goto error;
-
-		DEBUGMSG("read()");
-
-		r = _read(proc, file, len, wrsc);
-		_close(proc, file);
 
 		DEBUGMSG("loaded OK");
 
@@ -283,7 +277,7 @@ rsrc_xgaddr(BASEPAGE *bp, long fn, short nargs, \
 	proc->gem.int_in[0] = type;
 	proc->gem.int_in[1] = obj;
 
-	if (!call_aes(bp, 1L, 2, proc, 112))
+	if (!call_aes(bp, CALL_AES, 2, proc, 112))
 		return -EFAULT;
 
 	DEBUGMSG("complete");

@@ -19,6 +19,8 @@
 # include <string.h>
 # include <slb/gemma.h>
 
+# include <mintbind.h>
+
 # include "test.h"
 
 # define ulong unsigned long
@@ -164,8 +166,14 @@ main(void)
 		return r;
 
 # if 0
-	(gemma.exec)(gemma.handle, 34L, 2, 0, 1);	/* enable debug support */
-	(gemma.exec)(gemma.handle, 34L, 2, 0, 0);	/* disable debug support */
+	{
+		SLB *g = get_gemma_p();
+
+		(g->exec)(g->handle, 34L, 2, 0, 1);	/* enable debug support */
+# if 0
+		(g->exec)(g->handle, 34L, 2, 0, 0);	/* disable debug support */
+# endif
+	}
 # endif
 
 	do_windows();

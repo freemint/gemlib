@@ -26,7 +26,7 @@ _appl_control(PROC_ARRAY *proc, short opcode, void *out)
 	proc->gem.int_in[1] = opcode;
 	proc->gem.addr_in[0] = (long)out;
 
-	return call_aes(proc->base, 1L, 2, proc, 129);
+	return call_aes(proc->base, CALL_AES, 2, proc, 129);
 }
 
 long
@@ -34,7 +34,7 @@ _appl_find(PROC_ARRAY *proc, char *name)
 {
 	proc->gem.addr_in[0] = (long)name;
 
-	return call_aes(proc->base, 1L, 2, proc, 13);
+	return call_aes(proc->base, CALL_AES, 2, proc, 13);
 }
 
 long
@@ -45,7 +45,7 @@ _appl_search(PROC_ARRAY *proc, short mode, char *fname, short *type, short *apid
 	proc->gem.int_in[0] = mode;
 	proc->gem.addr_in[0] = (long)fname;
 
-	r = call_aes(proc->base, 1L, 2, proc, 18);
+	r = call_aes(proc->base, CALL_AES, 2, proc, 18);
 
 	*type = proc->gem.int_out[1];
 	*apid = proc->gem.int_out[2];
@@ -60,7 +60,7 @@ _appl_getinfo(PROC_ARRAY *proc, short fn, short *out)
 
 	proc->gem.int_in[0] = fn;
 
-	r = call_aes(proc->base, 1L, 2, proc, 130);
+	r = call_aes(proc->base, CALL_AES, 2, proc, 130);
 
 	out[0] = proc->gem.int_out[1];
 	out[1] = proc->gem.int_out[2];
@@ -77,7 +77,7 @@ _appl_write(PROC_ARRAY *proc, short id, short len, short *buf)
 	proc->gem.int_in[1] = len;
 	proc->gem.addr_in[0] = (long)buf;
 
-	return call_aes(proc->base, 1L, 2, proc, 12);
+	return call_aes(proc->base, CALL_AES, 2, proc, 12);
 }
 
 long
@@ -105,7 +105,7 @@ _evnt_multi(PROC_ARRAY *proc, short fl, short cl, short mask, short state, \
 
 	proc->gem.addr_in[0] = (long)msg;
 
-	return call_aes(proc->base, 1L, 2, proc, 25);
+	return call_aes(proc->base, CALL_AES, 2, proc, 25);
 }
 
 long
@@ -114,7 +114,7 @@ _evnt_timer(PROC_ARRAY *proc, ulong timer)
 	proc->gem.int_in[0] = (short)timer;
 	proc->gem.int_in[1] = timer>>16;
 
-	return call_aes(proc->base, 1L, 2, proc, 24);
+	return call_aes(proc->base, CALL_AES, 2, proc, 24);
 }
 
 long
@@ -124,7 +124,7 @@ _fsel_exinput(PROC_ARRAY *proc, char *path, char *name, char *title)
 	proc->gem.addr_in[1] = (long)name;
 	proc->gem.addr_in[2] = (long)title;
 
-	return call_aes(proc->base, 1L, 2, proc, 91);
+	return call_aes(proc->base, CALL_AES, 2, proc, 91);
 }
 
 long
@@ -133,7 +133,7 @@ _form_alert(PROC_ARRAY *proc, short button, char *msg)
 	proc->gem.int_in[0] = button;
 	proc->gem.addr_in[0] = (long)msg;
 
-	return call_aes(proc->base, 1L, 2, proc, 52);
+	return call_aes(proc->base, CALL_AES, 2, proc, 52);
 }
 
 long
@@ -143,7 +143,7 @@ _form_button(PROC_ARRAY *proc, OBJECT *tree, short obj, short clk)
 	proc->gem.int_in[1] = clk;
 	proc->gem.addr_in[0] = (long)tree;
 
-	return call_aes(proc->base, 1L, 2, proc, 56);
+	return call_aes(proc->base, CALL_AES, 2, proc, 56);
 }
 
 long
@@ -159,7 +159,7 @@ _form_dial(PROC_ARRAY *proc, short flag, short *dxywh, short *cxywh)
 	proc->gem.int_in[7] = cxywh[2];
 	proc->gem.int_in[8] = cxywh[3];
 
-	return call_aes(proc->base, 1L, 2, proc, 51);
+	return call_aes(proc->base, CALL_AES, 2, proc, 51);
 }
 
 long
@@ -170,7 +170,7 @@ _form_keybd(PROC_ARRAY *proc, OBJECT *tree, short obj, short nobj, short tch)
 	proc->gem.int_in[2] = nobj;
 	proc->gem.addr_in[0] = (long)tree;
 
-	return call_aes(proc->base, 1L, 2, proc, 55);
+	return call_aes(proc->base, CALL_AES, 2, proc, 55);
 }
 
 long
@@ -183,7 +183,7 @@ _graf_movebox(PROC_ARRAY *proc, short w, short h, short x, short y, short dx, sh
 	proc->gem.int_in[4] = dx;
 	proc->gem.int_in[5] = dy;
 
-	return call_aes(proc->base, 1L, 2, proc, 72);
+	return call_aes(proc->base, CALL_AES, 2, proc, 72);
 }
 
 long
@@ -198,7 +198,7 @@ _graf_growbox(PROC_ARRAY *proc, short x, short y, short w, short h, short *xywh)
 	proc->gem.int_in[6] = xywh[2];
 	proc->gem.int_in[7] = xywh[3];
 
-	return call_aes(proc->base, 1L, 2, proc, 73);
+	return call_aes(proc->base, CALL_AES, 2, proc, 73);
 }
 
 long
@@ -213,7 +213,7 @@ _graf_shrinkbox(PROC_ARRAY *proc, short x, short y, short w, short h, short *xyw
 	proc->gem.int_in[6] = xywh[2];
 	proc->gem.int_in[7] = xywh[3];
 
-	return call_aes(proc->base, 1L, 2, proc, 74);
+	return call_aes(proc->base, CALL_AES, 2, proc, 74);
 }
 
 long
@@ -222,7 +222,7 @@ _graf_mouse(PROC_ARRAY *proc, short num, void *addr)
 	proc->gem.int_in[0] = num;
 	proc->gem.addr_in[0] = (long)addr;
 
-	return call_aes(proc->base, 1L, 2, proc, 78);
+	return call_aes(proc->base, CALL_AES, 2, proc, 78);
 }
 
 long
@@ -233,7 +233,7 @@ _menu_popup(PROC_ARRAY *proc, MENU *m1, short x, short y, MENU *m2)
 	proc->gem.int_in[0] = x;
 	proc->gem.int_in[1] = y;
 
-	return call_aes(proc->base, 1L, 2, proc, 36);
+	return call_aes(proc->base, CALL_AES, 2, proc, 36);
 }
 
 long
@@ -242,7 +242,7 @@ _menu_register(PROC_ARRAY *proc, short id, char *name)
 	proc->gem.int_in[0] = id;
 	proc->gem.addr_in[0] = (long)name;
 
-	return call_aes(proc->base, 1L, 2, proc, 35);
+	return call_aes(proc->base, CALL_AES, 2, proc, 35);
 }
 
 long
@@ -254,7 +254,7 @@ _objc_edit(PROC_ARRAY *proc, OBJECT *tree, short edob, short edchar, short idx, 
 	proc->gem.int_in[3] = mode;
 	proc->gem.addr_in[0] = (long)tree;
 
-	return call_aes(proc->base, 1L, 2, proc, 46);
+	return call_aes(proc->base, CALL_AES, 2, proc, 46);
 }
 
 long
@@ -270,7 +270,7 @@ _objc_change(PROC_ARRAY *proc, OBJECT *tree, short ob, short *xywh, short nw, sh
 	proc->gem.int_in[6] = nw;
 	proc->gem.int_in[7] = rd;
 
-	return call_aes(proc->base, 1L, 2, proc, 47);
+	return call_aes(proc->base, CALL_AES, 2, proc, 47);
 }
 
 long
@@ -282,7 +282,7 @@ _objc_find(PROC_ARRAY *proc, OBJECT *tree, short ob, short depth, short mx, shor
 	proc->gem.int_in[2] = mx;
 	proc->gem.int_in[3] = my;
 
-	return call_aes(proc->base, 1L, 2, proc, 43);
+	return call_aes(proc->base, CALL_AES, 2, proc, 43);
 }
 
 long
@@ -296,7 +296,7 @@ _objc_draw(PROC_ARRAY *proc, OBJECT *tree, short ob, short dp, short *xywh)
 	proc->gem.int_in[4] = xywh[2];
 	proc->gem.int_in[5] = xywh[3];
 
-	return call_aes(proc->base, 1L, 2, proc, 42);
+	return call_aes(proc->base, CALL_AES, 2, proc, 42);
 }
 
 long
@@ -305,7 +305,7 @@ _objc_offset(PROC_ARRAY *proc, OBJECT *tree, short obj)
 	proc->gem.int_in[0] = obj;
 	proc->gem.addr_in[0] = (long)tree;
 
-	return call_aes(proc->base, 1L, 2, proc, 44);
+	return call_aes(proc->base, CALL_AES, 2, proc, 44);
 }
 
 long
@@ -313,7 +313,7 @@ _rsrc_load(PROC_ARRAY *proc, char *name)
 {
 	proc->gem.addr_in[0] = (long)name;
 
-	return call_aes(proc->base, 1L, 2, proc, 110);
+	return call_aes(proc->base, CALL_AES, 2, proc, 110);
 }
 
 long
@@ -322,7 +322,7 @@ _rsrc_obfix(PROC_ARRAY *proc, OBJECT *tree, short obj)
 	proc->gem.int_in[0] = obj;
 	proc->gem.addr_in[0] = (long)tree;
 
-	return call_aes(proc->base, 1L, 2, proc, 114);
+	return call_aes(proc->base, CALL_AES, 2, proc, 114);
 }
 
 long
@@ -330,7 +330,7 @@ _rsrc_rcfix(PROC_ARRAY *proc, char *buf)
 {
 	proc->gem.addr_in[0] = (long)buf;
 
-	return call_aes(proc->base, 1L, 2, proc, 115);
+	return call_aes(proc->base, CALL_AES, 2, proc, 115);
 }
 
 long
@@ -338,7 +338,7 @@ _scrp_read(PROC_ARRAY *proc, char *path)
 {
 	proc->gem.addr_in[0] = (long)path;
 
-	return call_aes(proc->base, 1L, 2, proc, 80);
+	return call_aes(proc->base, CALL_AES, 2, proc, 80);
 }
 
 long
@@ -348,7 +348,7 @@ _shel_help(PROC_ARRAY *proc, short mode, char *file, char *key)
 	proc->gem.addr_in[0] = (long)file;
 	proc->gem.addr_in[1] = (long)key;
 
-	return call_aes(proc->base, 1L, 2, proc, 128);
+	return call_aes(proc->base, CALL_AES, 2, proc, 128);
 }
 
 long
@@ -361,7 +361,7 @@ _shel_write(PROC_ARRAY *proc, short wd, short wg, short wc, const char *cmd, con
 	proc->gem.addr_in[0] = (long)cmd;
 	proc->gem.addr_in[1] = (long)tail;
 
-	return call_aes(proc->base, 1L, 2, proc, 121);
+	return call_aes(proc->base, CALL_AES, 2, proc, 121);
 }
 
 long
@@ -370,7 +370,7 @@ _wind_get(PROC_ARRAY *proc, short w, short fn)
 	proc->gem.int_in[0] = w;
 	proc->gem.int_in[1] = fn;
 
-	return call_aes(proc->base, 1L, 2, proc, 104);
+	return call_aes(proc->base, CALL_AES, 2, proc, 104);
 }
 
 long
@@ -379,7 +379,7 @@ _wind_set(PROC_ARRAY *proc, short w, short fn)
 	proc->gem.int_in[0] = w;
 	proc->gem.int_in[1] = fn;
 
-	return call_aes(proc->base, 1L, 2, proc, 105);
+	return call_aes(proc->base, CALL_AES, 2, proc, 105);
 }
 
 long
@@ -392,7 +392,7 @@ _wind_calc(PROC_ARRAY *proc, short type, short gadgets, short *xywh)
 	proc->gem.int_in[4] = xywh[2];
 	proc->gem.int_in[5] = xywh[3];
 
-	return call_aes(proc->base, 1L, 2, proc, 108);
+	return call_aes(proc->base, CALL_AES, 2, proc, 108);
 }
 
 long
@@ -404,7 +404,7 @@ _wind_create(PROC_ARRAY *proc, short gadgets, short *xywh)
 	proc->gem.int_in[3] = xywh[2];
 	proc->gem.int_in[4] = xywh[3];
 
-	return call_aes(proc->base, 1L, 2, proc, 100);
+	return call_aes(proc->base, CALL_AES, 2, proc, 100);
 }
 
 long
@@ -416,7 +416,7 @@ _wind_open(PROC_ARRAY *proc, short handle, short *xywh)
 	proc->gem.int_in[3] = xywh[2];
 	proc->gem.int_in[4] = xywh[3];
 
-	return call_aes(proc->base, 1L, 2, proc, 101);
+	return call_aes(proc->base, CALL_AES, 2, proc, 101);
 }
 
 long
@@ -424,7 +424,7 @@ _wind_close(PROC_ARRAY *proc, short handle)
 {
 	proc->gem.int_in[0] = handle;
 
-	return call_aes(proc->base, 1L, 2, proc, 102);
+	return call_aes(proc->base, CALL_AES, 2, proc, 102);
 }
 
 long
@@ -432,7 +432,7 @@ _wind_delete(PROC_ARRAY *proc, short handle)
 {
 	proc->gem.int_in[0] = handle;
 
-	return call_aes(proc->base, 1L, 2, proc, 103);
+	return call_aes(proc->base, CALL_AES, 2, proc, 103);
 }
 
 long
@@ -441,7 +441,7 @@ _wind_find(PROC_ARRAY *proc, short mx, short my)
 	proc->gem.int_in[0] = mx;
 	proc->gem.int_in[1] = my;
 
-	return call_aes(proc->base, 1L, 2, proc, 106);
+	return call_aes(proc->base, CALL_AES, 2, proc, 106);
 }
 
 long
@@ -449,7 +449,7 @@ _wind_update(PROC_ARRAY *proc, short mode)
 {
 	proc->gem.int_in[0] = mode;
 
-	return call_aes(proc->base, 1L, 2, proc, 107);
+	return call_aes(proc->base, CALL_AES, 2, proc, 107);
 }
 
 /* EOF */

@@ -17,20 +17,30 @@
 	.globl	__startup
 
 __startup:
-	move.l	0x04(sp),a2
-	move.l	0x0010(a2),a3
-	move.l	0x0024(a2),a0
-	lea	0x0008(a0),a0
-	lea	0x0008(a2),a1
-	moveq	#0x05,d0
-cp:
-	move.l	(a0)+,(a1)+
-	dbra.w	d0,cp
+	move.l	0x04(sp),a0		|basepage address
+
+	move.l	0x002c(a0),-(sp)	|release own environment
+	move.w	#0x0049,-(sp)
+	trap	#1
+	addq.l	#6,sp
+
+	move.l	0x04(sp),a0		|basepage address
+	move.l	0x0010(a0),a1		|p_dbase
+
+	lea	0x000c(a0),a2
+	move.l	#256,(a2)+		|p_tlen
+	clr.l	(a2)+			|p_dbase
+	clr.l	(a2)+			|p_dlen
+	clr.l	(a2)+			|p_bbase
+	clr.l	(a2)+			|p_blen
+	
+	move.l	0x0024(a0),a2		|p_parent
+	move.l	0x2c(a2),0x2c(a0)	|copy the environment pointer
 
 	move.l	0x04(sp),-(sp)
-	move.w	#0x0001,-(sp)
-	jsr	(a3)
-	addq.l	#0x06,sp
+	move.l	#0x00000001,-(sp)
+	jsr	(a1)
+	addq.l	#0x08,sp
 
 	move.w	d0,-(sp)
 	move.w	#0x004c,-(sp)

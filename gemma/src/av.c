@@ -28,7 +28,7 @@
 # define AV_VIEW	0x4751
 # define VA_START	0x4711
 
-INLINE void
+static void
 _mrelease(PROC_ARRAY *proc, long adr)
 {
 	_evnt_timer(proc, sflags.release_delay);

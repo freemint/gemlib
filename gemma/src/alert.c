@@ -54,7 +54,7 @@ bin2asc(long number, char *out)
 	*out = 0;
 }
 
-INLINE void
+static void
 line_break(char *line, const short rmargin)
 {
 	short i, left, ms = 0, q = 0;

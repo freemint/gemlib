@@ -44,7 +44,7 @@ typedef struct
 	short msg[8];
 } SMSBLK;
 
-INLINE long
+static long
 smswrite(PROC_ARRAY *proc, SMSBLK *smsblk)
 {
 	long file, r;
@@ -84,18 +84,28 @@ sig_child(void)
 	smswrite(proc, &sms);
 }
 
-INLINE long
+static long
 getprgflags(PROC_ARRAY *proc)
 {
 	long file, r, flags;
 
+	DEBUGMSG("enter")
+
 	file = r = _open(proc, selfname, O_RDONLY);
 	if (r < 0)
+	{
+		DEBUGMSG("opening failed, return");
 		return (F_FASTLOAD | F_ALTLOAD | F_ALTALLOC);
+	}
 	r = _cntl(proc, file, &flags, PGETFLAGS);
 	_close(proc, file);
 	if (r < 0)
+	{
+		DEBUGMSG("Fcntl() failed, return");
 		return (F_FASTLOAD | F_ALTLOAD | F_ALTALLOC);
+	}
+
+	DEBUGMSG("return OK");
 
 	return flags;
 }
@@ -174,47 +184,82 @@ thread_fork(BASEPAGE *bp, long fn, short nargs, \
 	if (nargs >= 6) proc = p;
 	if ((nargs < 6) || !proc) proc = get_contrl(bp);
 
+	DEBUGMSG("enter");
+
 	if (fn == 13)
 		execmode = 104;		/* just go, sharing mode */
 	else
 		execmode = 204;		/* overlay, then go */
 
+# if 1
 	flags = getprgflags(proc);
+# else
+	flags = (F_FASTLOAD | F_ALTLOAD | F_ALTALLOC);
+# endif
+
+	DEBUGMSG("request semaphore");
 
 	sema_request(sema_fork);
 
+	DEBUGMSG("calling Pexec(7)");
+
 	new = (BASEPAGE *)_pexec(proc, 7L, (void *)flags, "", 0L);
 	if ((long)new < 0)
+	{
+		DEBUGMSG("calling Pexec(5)");
 		new = (BASEPAGE *)_pexec(proc, 5L, 0L, "", 0L); 
+	}
+
 	if ((long)new <= 0)
 	{
+		DEBUGMSG("unable to create basepage");
+
 		sema_release(sema_fork);
 		if (!(long)new)
 			return -ENOMEM;
 		return (long)new;
 	}
+
+	DEBUGMSG("shrinking basepage");
+
 	if (nargs >= 4)
 		size = stacksize;
 	else
 		size = 0x00001f00L;
-	size += 0x00000100L;
-	_shrink(proc, new, size);
+
+	_shrink(proc, new, size + 256L);
+
+	DEBUGMSG("release semaphore");
 
 	sema_release(sema_fork);
 
+	new->p_hitpa = (char *)((long)new + size);
 	new->p_tbase = startup;
 	new->p_dbase = address;
 
 	if (mode & 1)
+	{
+		DEBUGMSG("setup SIGCHLD");
 		oldsig = _signal(proc, SIGCHLD, sig_child);
+	}
+
+	DEBUGMSG("executing thread");
 
 	pid = _pexec(proc, execmode, proctitle, (char *)new, 0L);
+
+	DEBUGMSG("freeing its memory");
 
 	_free(proc, (long)new->p_env);
 	_free(proc, (long)new);
 
 	if (oldsig && (pid < 0))
+	{
+		DEBUGMSG("cancelling SIGCHLD");
+
 		_signal(proc, SIGCHLD, (void *)oldsig);
+	}
+
+	DEBUGMSG("complete");
 
 	return pid;
 }

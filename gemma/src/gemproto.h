@@ -15,8 +15,8 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-INLINE
-void gemsys(long sysopcode, long *params)
+INLINE void
+gemsys(long sysopcode, long *params)
 {
 	__asm__ volatile("
 		move.l	%0,d0;

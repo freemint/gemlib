@@ -174,7 +174,7 @@ objcedit(PROC_ARRAY *proc, WINDIAL *wd, short mode)
 	_objc_edit(proc, wd->wb_treeptr, wd->wb_startob, R_TREE, wd->wb_edindex, mode);
 }
 
-INLINE long
+static long
 mclick(PROC_ARRAY *proc, WINDIAL *wd)
 {
 	long r;
@@ -208,7 +208,7 @@ mclick(PROC_ARRAY *proc, WINDIAL *wd)
 	return 0;
 }
 
-INLINE long
+static long
 kstroke(PROC_ARRAY *proc, WINDIAL *wd, short key)
 {
 	long r;
@@ -245,7 +245,7 @@ kstroke(PROC_ARRAY *proc, WINDIAL *wd, short key)
 						if ((o[so].ob_state & OS_WHITEBAK) && (o[so].ob_flags & OF_RBUTTON))
 						{
 							newst = o[so].ob_state & ~OS_SELECTED;
-							objc_xchange(proc->base, 15L, 5, wd, so, newst, 1, proc);
+							objc_xchange(proc->base, OB_XCHANGE, 5, wd, so, newst, 1, proc);
 						}
 						if (o[so].ob_head != -1)
 							so = o[so].ob_head;
@@ -606,7 +606,7 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 	DEBUGMSG("init tree");
 
 	wd->wb_box = obj;
-	r = rsrc_xgaddr(bp, 16L, 3, R_TREE, obj, proc);
+	r = rsrc_xgaddr(bp, RSRC_XGADDR, 3, R_TREE, obj, proc);
 	if (r <= 0)
 	{
 		_alert(proc, 1, "*[1][windial_create():|cannot find root object|requested by apid %a!][ Cancel ]\n");

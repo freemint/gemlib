@@ -50,7 +50,8 @@ debug_print(char *function, char *string)
 
 /* Utility routines */
 
-INLINE long
+# if 0
+static long
 get_page_size(void)
 {
 	short drv;
@@ -87,18 +88,9 @@ get_page_size(void)
 
 	return meminfo[3];
 }
+# endif
 
 /* Internal utilities */
-
-INLINE long
-_getpid(BASEPAGE *bp)
-{
-# ifdef _STORE_PID_ON_BP
-	return bp->p_undef[0];
-# else
-	return Pgetpid();
-# endif
-}
 
 OBJECT *
 obj2addr(PROC_ARRAY *proc, short type, ulong obj)
@@ -106,13 +98,13 @@ obj2addr(PROC_ARRAY *proc, short type, ulong obj)
 	if (obj > 65535UL)
 		return (OBJECT *)obj;
 
-	return (OBJECT *)rsrc_xgaddr(proc->base, 0L, 3, type, (short)obj, proc);
+	return (OBJECT *)rsrc_xgaddr(proc->base, RSRC_XGADDR, 3, type, (short)obj, proc);
 }
 
 PROC_ARRAY *
 get_contrl(BASEPAGE *bp)
 {
-	return pidtable[_getpid(bp)];
+	return pidtable[Pgetpid()];
 }
 
 static void
@@ -130,11 +122,13 @@ gemma_init(void)
 {
 	long r;
 
+# if 0
+	sflags.pagesize = get_page_size();
+# endif
 	r = sema_create(sema_users);
 	if (r >= 0)
 		sema_release(sema_users);
 	r = sema_create(sema_fork);
-	sflags.pagesize = get_page_size();
 	if (r < 0)
 		return 0;
 	return sema_release(sema_fork);
@@ -152,7 +146,6 @@ gemma_exit(void)
 	if (r < 0)
 		return;
 	sema_destroy(sema_fork);
-	return;
 }
 
 /* Process intialization and closing */
@@ -169,10 +162,6 @@ gemma_open(BASEPAGE *bp)
 		return -EPROCLIM;
 	}
 
-# ifdef _STORE_PID_ON_BP
-	bp->p_undef[0] = pid;
-# endif
-
 	proc = (PROC_ARRAY *)_alloc(sizeof(PROC_ARRAY));
 	if ((long)proc < 0)
 		return (long)proc;
@@ -180,18 +169,18 @@ gemma_open(BASEPAGE *bp)
 	write_pidtable(pid, proc);
 	bzero(proc, sizeof(PROC_ARRAY));
 
-	proc->gem.aesparams[0] = (long)proc->gem.control;
-	proc->gem.aesparams[1] = (long)proc->gem.global;
-	proc->gem.aesparams[2] = (long)proc->gem.int_in;
-	proc->gem.aesparams[3] = (long)proc->gem.int_out;
-	proc->gem.aesparams[4] = (long)proc->gem.addr_in;
-	proc->gem.aesparams[5] = (long)proc->gem.addr_out;
+	proc->gem.aesparams[0] = (long)&proc->gem.control[0];
+	proc->gem.aesparams[1] = (long)&proc->gem.global[0];
+	proc->gem.aesparams[2] = (long)&proc->gem.int_in[0];
+	proc->gem.aesparams[3] = (long)&proc->gem.int_out[0];
+	proc->gem.aesparams[4] = (long)&proc->gem.addr_in[0];
+	proc->gem.aesparams[5] = (long)&proc->gem.addr_out[0];
 
-	proc->gem.vdiparams[0] = (long)proc->gem.contrl;
-	proc->gem.vdiparams[1] = (long)proc->gem.intin;
-	proc->gem.vdiparams[2] = (long)proc->gem.ptsin;
-	proc->gem.vdiparams[3] = (long)proc->gem.intout;
-	proc->gem.vdiparams[4] = (long)proc->gem.ptsout;
+	proc->gem.vdiparams[0] = (long)&proc->gem.contrl[0];
+	proc->gem.vdiparams[1] = (long)&proc->gem.intin[0];
+	proc->gem.vdiparams[2] = (long)&proc->gem.ptsin[0];
+	proc->gem.vdiparams[3] = (long)&proc->gem.intout[0];
+	proc->gem.vdiparams[4] = (long)&proc->gem.ptsout[0];
 
 	proc->base = bp;
 	proc->bvset = Dsetdrv(Dgetdrv());
@@ -202,7 +191,7 @@ gemma_open(BASEPAGE *bp)
 void
 gemma_close(BASEPAGE *bp)
 {
-	long pid = _getpid(bp);
+	long pid = Pgetpid();
 	PROC_ARRAY *proc;
 
 	proc = pidtable[pid];

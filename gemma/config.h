@@ -27,18 +27,6 @@
  */
 # define _HAVE_MINT_GEMDOS
 
-/* Define this if you want the PID to be stored on the process'
- * basepage instead of being retrieved from Pgetpid() again and
- * again. The PID is stored on the bp->p_undef[0] and read from
- * there once necessary. This makes library faster, but is also
- * a bit risky if the program itself uses the same location for
- * something else (it should not).
- *
- * Tip: better undefine this if you are running under TOS.
- *
- */
-# define _STORE_PID_ON_BP
-
 /* Some AES versions completely trust all the pointers programs pass
  * in the parameter arrays and, when such a pointer is invalid, the
  * AES usually dies in flames then (together with all the system).
@@ -63,17 +51,17 @@
  */
 # undef _HAVE_FSEL_EXINPUT
 
-/* This switch, when defined, allows to use the real appl_getinfo()
- * call even on AES versions below 4.0; activating this, when the
+/* This switch, when undefined, allows to use the real appl_getinfo()
+ * call even on AES versions below 4.0; deactivating this, when the
  * appl_getinfo() is not supported (e.g. on AES 3.40 of Falcon030) may
  * produce unpleasant results. When your AES is 4.0 or up, this makes
  * no difference.
- * In other words: when this is undefined, and AES is below 4.0, the
+ * In other words: when this is defined, and AES is below 4.0, the
  * appl_getinfo() call will be emulated by the library. If you want to
  * avoid emulation, and call the real function instead (e.g. on MagiC),
- * define the switch.
+ * undefine the switch.
  */
-# undef _HAVE_APPL_GETINFO
+# define _EMULATE_APPL_GETINFO
 
 /* Define this if the AES supports the form_popup() call (e.g. N.AES
  * does, the Atari AES 4.10 does not). It will be emulated otherwise.

@@ -35,7 +35,7 @@ _kbshift(long wh)
 /* These below are only used in appl_getinfo() emulation code
  */
 
-# ifndef _HAVE_APPL_GETINFO
+# ifdef _EMULATE_APPL_GETINFO
 
 long
 _getexc(long vec)

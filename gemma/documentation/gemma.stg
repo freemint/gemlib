@@ -8,39 +8,41 @@
 @title "The GEM application support library"
 @line 1 70 0
 
-@{B}	      GEMMA, the GEM application support library@{b}
+@{B}          GEMMA, the GEM application support library@{b}
 
 @line 1 70 0
 
-	License
+        License
 
-	Why to use shared libraries?
+        Why to use shared libraries?
 
-	I.   Installation
+        I.    Installation
 
-	II.  Function description
+        II.   Function description
 
-	     1. Static library interface
-	     2. Application control functions
-	     3. Resource file related functions
-	     4. Environment functions
-	     5. Windowed dialog management
-	     6. External event handlers
-	     7. Alert functions
-	     8. Process management
-	     9. AV protocol support
-	    10. Invoking standard applications
-	    11. Other support
+              1. Static library interface
+              2. Application control functions
+              3. Resource file related functions
+              4. Environment functions
+              5. Windowed dialog management
+              6. External event handlers
+              7. Alert functions
+              8. Process management
+              9. AV protocol support
+             10. Invoking standard applications
+             11. Other support
 
-	III. Library functions listed by opcode
+        III.  Library functions listed by opcode
 
-	IV.  Programming
+        IV.   Programming
 
-	V.   Emulation
+        V.    Incompatibilities
 
-	VI.  Accompanied libraries
+        VI.   Emulation
 
-	VII. CHANGES
+        VII.  Accompanied libraries
+
+        VIII. CHANGES
 
 @line 1 70 0
 
@@ -100,6 +102,21 @@ affects all programs which use the library.
 
 @endnode
 
+@node "Incompatibilities"
+Incompatibilities
+@line 1 70 0
+
+This is a list of differences between the established SLB standard
+and the behaviour of the gemma.slb:
+
+- the library is compiled without -mshort, and this means that all
+  stacked arguments must be 32-bit.
+- the third argument of every library call is simply the number of
+  the remaining arguments, and NOT the size of the arguments in
+  words.
+
+@endnode
+
 @node "Programming"
 Programming
 @line 1 70 0
@@ -126,6 +143,8 @@ I. Headers and static modules
   After the libraries are compiled, you copy the contents of the
   lib/ subdirectory to your /usr/lib.
 
+  See Incompatibilities
+
 @{B}libslb.a@{b}
 This module is responsible for the actual opening an SLB. It
 provides a function called _slbload() which opens the named SLB and
@@ -144,7 +163,7 @@ is done by the appl_open() you call at the begin of your program.
 
 II. Other info
 
-- there is NO support for -mshort programs. 
+- there is NO support for -mshort programs.
 - you should provide at least 16k room on the stack in your program
   for the correct execution of the SLB functions.
 
@@ -299,43 +318,43 @@ efforts.
 
 Opcode:       40
 Function:     execute an appropriate network client handing the
-	      parameter off to it. The `url' must be a NULL
-	      terminated string formatted in the normal form of the
-	      Universal Resource Locator, e.g.:
-	      http://draco.atari.org. The library recognizes the
-	      required protocol reading the first part of the URL
-	      (i.e. the 'http:' in example above) and then executes
-	      an application associated with the protocol by an
-	      appropriate environment variable. The variable must
-	      contain a valid pathname to the program in question.
+              parameter off to it. The `url' must be a NULL
+              terminated string formatted in the normal form of the
+              Universal Resource Locator, e.g.:
+              http://draco.atari.org. The library recognizes the
+              required protocol reading the first part of the URL
+              (i.e. the 'http:' in example above) and then executes
+              an application associated with the protocol by an
+              appropriate environment variable. The variable must
+              contain a valid pathname to the program in question.
 
-	      Protocol	Variable	Should point to
-	      --------	--------	---------------
-	      http:	GEMWWW= 	a web browser application
-	      file:	GEMWWW= 	a web browser application
-	      ftp:	GEMFTP= 	an FTP client
-	      mail:	GEMMAIL=	an SMTP (mail) client
-	      news:	GEMNEWS=	a net news client
-	      nntp:	GEMNEWS=	a net news client
-	      telnet:	GEMTELNET=	a telnet client
-	      gopher:	GEMGOPHER=	a gopher client
+              Protocol  Variable        Should point to
+              --------  --------        ---------------
+              http:     GEMWWW=         a web browser application
+              file:     GEMWWW=         a web browser application
+              ftp:      GEMFTP=         an FTP client
+              mail:     GEMMAIL=        an SMTP (mail) client
+              news:     GEMNEWS=        a net news client
+              nntp:     GEMNEWS=        a net news client
+              telnet:   GEMTELNET=      a telnet client
+              gopher:   GEMGOPHER=      a gopher client
 
-	      Variables should be defined in your n_aes.cnf file
-	      the following way:
+              Variables should be defined in your n_aes.cnf file
+              the following way:
 
-	      export GEMWWW=u:\d\net\cab\cab.app
+              export GEMWWW=u:\d\net\cab\cab.app
 
-	      The application, if found, is started in parallel
-	      with the calling program.
+              The application, if found, is started in parallel
+              with the calling program.
 
-	      Alternatively if the Assemsoft's StringServer is
-	      installed and up, the `url' string is passed to it
-	      and evaluated as it is determined by the server
-	      configuration.
+              Alternatively if the Assemsoft's StringServer is
+              installed and up, the `url' string is passed to it
+              and evaluated as it is determined by the server
+              configuration.
 
 Return value: 0 on success or GEMDOS error code otherwise. Status
-	      -305 returned by this function means that an unknown
-	      protocol identifier has been used.
+              -305 returned by this function means that an unknown
+              protocol identifier has been used.
 
 @line 1 70 0
 
@@ -367,13 +386,13 @@ is twice as big the time than recommended.
 
 Opcode:       30
 Function:     tell the desktop to refresh the contents of a
-	      directory window for `drive', if one is open. The
-	      argument is a standard drive code, i.e. 0 for A:, 1
-	      for B:, 2 for C: and so on. The value of -1 tells
-	      the shell to update all windows.
+              directory window for `drive', if one is open. The
+              argument is a standard drive code, i.e. 0 for A:, 1
+              for B:, 2 for C: and so on. The value of -1 tells
+              the shell to update all windows.
 
 Comments:     under AES 4.0 and up the function will work also when
-	      no AV server is available.
+              no AV server is available.
 
 Return value: 0 on success or GEMDOS error code otherwise.
 
@@ -381,52 +400,52 @@ Return value: 0 on success or GEMDOS error code otherwise.
 
 Opcode:       31
 Function:     displays the file specified by the `pathname' in an
-	      external viewer, if such one is installed. The
-	      argument can be given in one of three forms:
+              external viewer, if such one is installed. The
+              argument can be given in one of three forms:
 
-	      1) as a single filename: foobar.txt
-	      2) as a relative path: foo\bar.txt
-	      3) as a path with leading slash: \foo\bar.txt
-	      4) as an absolute pathname: c:\foo\bar.txt
+              1) as a single filename: foobar.txt
+              2) as a relative path: foo\bar.txt
+              3) as a path with leading slash: \foo\bar.txt
+              4) as an absolute pathname: c:\foo\bar.txt
 
-	      The first two instances are treated as pathnames
-	      relative to the current working directory of the
-	      calling program. The third instance is converted to
-	      an absolute path starting at drive U: (i.e. it will
-	      be U:\foo\bar.txt). The fourth one is obvious.
-	      Wildcards like '..' are NOT evaluated.
+              The first two instances are treated as pathnames
+              relative to the current working directory of the
+              calling program. The third instance is converted to
+              an absolute path starting at drive U: (i.e. it will
+              be U:\foo\bar.txt). The fourth one is obvious.
+              Wildcards like '..' are NOT evaluated.
 
-	      Most of the dark work is done by the desktop, i.e. it
-	      must determine the data type and decide which
-	      application to run as a viewer. Because of that, for
-	      this function to properly work, the desktop and the
-	      AV server must be installed properly.
+              Most of the dark work is done by the desktop, i.e. it
+              must determine the data type and decide which
+              application to run as a viewer. Because of that, for
+              this function to properly work, the desktop and the
+              AV server must be installed properly.
 
 Return value: mostly 0, but also can be a negative GEMDOS error
-	      code, like ENOENT when there is no running AV server.
+              code, like ENOENT when there is no running AV server.
 
 @{B}long av_help(char *filename)@{b}
 
 Opcode:       32
 Function:     tries to open the file, whose name has been given as
-	      a parameter in currently installed help system. When
-	      N.AES' shel_help() call is available, the parameter
-	      is passed to it. If shel_help() is not available, it
-	      is assumed that the help system is ST Guide and
-	      attempts to communicate with it are made, the
-	      following way:
+              a parameter in currently installed help system. When
+              N.AES' shel_help() call is available, the parameter
+              is passed to it. If shel_help() is not available, it
+              is assumed that the help system is ST Guide and
+              attempts to communicate with it are made, the
+              following way:
 
-	      1) if an AV server is installed, the `filename' is
-		 passed to it by a VA_START message.
-	      2) if no AV server is found, but ST Guide is running,
-		 the VA_START message is sent directly to it.
-	      3) if neither action seems possible, the variable
-		 STGUIDE= is searched for, and if it is found, the
-		 program, whose path is held by the variable, is
-		 started up with `filename' given as a parameter.
+              1) if an AV server is installed, the `filename' is
+                 passed to it by a VA_START message.
+              2) if no AV server is found, but ST Guide is running,
+                 the VA_START message is sent directly to it.
+              3) if neither action seems possible, the variable
+                 STGUIDE= is searched for, and if it is found, the
+                 program, whose path is held by the variable, is
+                 started up with `filename' given as a parameter.
 
-	      When all this fails, the library displays an error
-	      message to the user.
+              When all this fails, the library displays an error
+              message to the user.
 
 Return value: 0 or a GEMDOS error code.
 
@@ -434,12 +453,12 @@ Return value: 0 or a GEMDOS error code.
 
 Opcode:       33
 Function:     send command `cmd' to the AV server. The `msg' is the
-	      pointer to the command argument (usually a string)
-	      and the `len' - its length in bytes.
-	      The `msg' pointer does not have to point to global or
-	      readable memory (the library copies it over anyway).
+              pointer to the command argument (usually a string)
+              and the `len' - its length in bytes.
+              The `msg' pointer does not have to point to global or
+              readable memory (the library copies it over anyway).
 Comments:     This function is also used by other AV related
-	      functions of the library to send commands.
+              functions of the library to send commands.
 Return value: 0 or a GEMDOS error code (e.g. ENOMEM).
 
 @line 1 70 0
@@ -457,54 +476,54 @@ useful while writing a GEM application.
 
 Opcode:       9
 Function:     calculates a 'result rectangle' out of two given as
-	      arguments. The structure GRECT is defined in gemma.h.
-	      The function is used (also internally) to decide
-	      whether a portion of the screen should be redrawn, if
-	      WM_REDRAW message was received. The `source'
-	      rectangle is the one returned by the AES from the
-	      window's rectangle list, whereas the `destination'
-	      one is the rectangle specified by the screen manager
-	      in the WM_REDRAW message.
+              arguments. The structure GRECT is defined in gemma.h.
+              The function is used (also internally) to decide
+              whether a portion of the screen should be redrawn, if
+              WM_REDRAW message was received. The `source'
+              rectangle is the one returned by the AES from the
+              window's rectangle list, whereas the `destination'
+              one is the rectangle specified by the screen manager
+              in the WM_REDRAW message.
 Return value: returns 1, if the rectangles intersect, or 0
-	      otherwise.
+              otherwise.
 
 @{B}long objc_xchange(WD *window, short obj, short newst, \
-			  short redraw)@{b}
+                          short redraw)@{b}
 Opcode:       15
 Function:     the same as the AES' objc_change() call, but the
-	      clipping is made automatically.
+              clipping is made automatically.
 Return value: 0
 
 @{B}long objc_xdraw(WD *window, short obj@{b}
 Opcode:       35
 Function:     the same as the AES' objc_draw() call, but the
-	      clipping is automatically made to the work area of
-	      the `window', and maximum depth is assumed.
+              clipping is automatically made to the work area of
+              the `window', and maximum depth is assumed.
 Comments:     This function was previously available as an
-	      alternative binding for objc_draw() and has been
-	      moved into the library as of version 1.08.
+              alternative binding for objc_draw() and has been
+              moved into the library as of version 1.08.
 Return value: 0
 
 @{B}char *file_select(char *title, char *mask, ushort flag)@{b}
 
 Opcode:       38
 Function:     invokes the system file selector. `title' is the
-	      string to be taken as the title of the file selector
-	      window. `mask' is the default file mask.
+              string to be taken as the title of the file selector
+              window. `mask' is the default file mask.
 
-	      When $HOME is defined, the file selector opens by
-	      default in the directory pointed by that variable, or
-	      in the application's default directory otherwise. The
-	      last selection is preserved in the memory until the
-	      next call to this function (unless `flag' has its
-	      highest bit set).
+              When $HOME is defined, the file selector opens by
+              default in the directory pointed by that variable, or
+              in the application's default directory otherwise. The
+              last selection is preserved in the memory until the
+              next call to this function (unless `flag' has its
+              highest bit set).
 
 Caveats:      the library will run into problems, when the file to
-	      select has a filename longer than 256 characters, or
-	      the complete path is longer than 1024 bytes.
+              select has a filename longer than 256 characters, or
+              the complete path is longer than 1024 bytes.
 
 Return value: a pointer to the pathname selected, if the user
-	      clicked OK, or NULL otherwise.
+              clicked OK, or NULL otherwise.
 
 @{B}char *get_version(void)@{b}
 
@@ -528,83 +547,86 @@ Process management
 @line 1 70 0
 
 @{B}long thread_fork(void *startup, void *address, \
-		     char *ptitle, long stacksize)@{b}
+                     char *ptitle, long stacksize, long opt)@{b}
 Opcode:       13
 Function:     spawn a subroutine pointed to by `address' as a
-	      separate process (thread). The parameter `ptitle' is
-	      optional and defines the name (displayed by ps) for
-	      the new process. If this argument is NULL, the parent
-	      process' name will be used.
-	      The parameter `stacksize' defines the stack size for
-	      the new process.
-	      The parameter `startup' points to the thread startup
-	      code. Because of memory protection reasons, this is
-	      normally embedded in the statically linked part of
-	      the library. This startup code combined with the
-	      library call is used to provide a binding that does
-	      not require the `startup' parameter.
+              separate process (thread). The parameter `ptitle' is
+              optional and defines the name (displayed by ps) for
+              the new process. If this argument is NULL, the parent
+              process' name will be used.
+              The parameter `stacksize' defines the stack size for
+              the new process.
+              The parameter `flag', if bit 0 of it is set, prevents
+              the function from registering the SIGCHLD handler
+              (see below).
+              The parameter `startup' points to the thread startup
+              code. Because of memory protection reasons, this is
+              normally embedded in the statically linked part of
+              the library. This startup code combined with the
+              library call is used to provide a binding that does
+              not require the `startup' parameter.
 
-	      The function automatically registers a signal handler
-	      for SIGCHLD. This handler reads the result code upon
-	      child termination and sends a special CH_EXIT message
-	      to the main application via SMS server, if installed.
-	      If the SMS server is not installed, this action
-	      silently fails.
+              The function automatically registers a signal handler
+              for SIGCHLD. This handler reads the result code upon
+              child termination and sends a special CH_EXIT message
+              to the main application via SMS server, if installed.
+              If the SMS server is not installed, this action
+              silently fails.
 
-	      The thread is created using Pexec(7) and started with
-	      Pexec(104). Program flags for Pexec(7) are
-	      automatically copied from the parent process' PROC
-	      structure. Pexec(7) and subsequent Mshrink() call are
-	      done under the scope of a semaphore, so that if
-	      preemption occurs in the process, and another program
-	      enters the thread_fork() procedure, it will be put to
-	      sleep until the memory is shrunk and the semaphore is
-	      released, so that the function wouldn't fail because
-	      of a temporary lack of memory resources.
+              The thread is created using Pexec(7) and started with
+              Pexec(104). Program flags for Pexec(7) are
+              automatically copied from the parent process' PROC
+              structure. Pexec(7) and subsequent Mshrink() call are
+              done under the scope of a semaphore, so that if
+              preemption occurs in the process, and another program
+              enters the thread_fork() procedure, it will be put to
+              sleep until the memory is shrunk and the semaphore is
+              released, so that the function wouldn't fail because
+              of a temporary lack of memory resources.
 
 Return value: positive process ID (pid) of the thread or a negative
-	      GEMDOS error code otherwise.
+              GEMDOS error code otherwise.
 
 @{B}long proc_exec(short mode, long flags, char *file, \
-			char *cmd, char *env)@{b}
+                        char *cmd, char *env)@{b}
 Opcode:       41
 Function:     Create a new process according to the parameters.
-	      The function operates like the Pexec(mode) in GEMDOS,
-	      except:
+              The function operates like the Pexec(mode) in GEMDOS,
+              except:
 
-	      1) for mode value of 0, 3, 100 and 200 the `file'
-		 argument specifies the name of an executable file
-		 to load. If no path is included, and the file is
-		 not found in the current directory, it will be
-		 searched in all the folders specified by the $PATH
-		 environment variable.
-	      2) the file specified may be a shell script; in order
-		 to execute it the library will invoke the shell as
-		 specified in the script. If the script does not
-		 contain the full path to the proper interpreter,
-		 and only the file name is specified, $PATH
-		 searching will be performed before doing anything
-		 further.
-	      3) the `cmd' argument is a pointer to the argument
-		 list, which should be passed to the newly created
-		 process. Unlike for Pexec(), this must be
-		 a normal, NULL terminated C string containing
-		 subsequent arguments separated with spaces
-		 (arguments which contain spaces themselves should
-		 be enclosed in quotes). This string is NOT limited
-		 in length to 126 bytes.
-	      4) in order to be able to pass long argument list the
-		 library constructs the ARGV= list in the
-		 environment of the process to be created.
+              1) for mode value of 0, 3, 100 and 200 the `file'
+                 argument specifies the name of an executable file
+                 to load. If no path is included, and the file is
+                 not found in the current directory, it will be
+                 searched in all the folders specified by the $PATH
+                 environment variable.
+              2) the file specified may be a shell script; in order
+                 to execute it the library will invoke the shell as
+                 specified in the script. If the script does not
+                 contain the full path to the proper interpreter,
+                 and only the file name is specified, $PATH
+                 searching will be performed before doing anything
+                 further.
+              3) the `cmd' argument is a pointer to the argument
+                 list, which should be passed to the newly created
+                 process. Unlike for Pexec(), this must be
+                 a normal, NULL terminated C string containing
+                 subsequent arguments separated with spaces
+                 (arguments which contain spaces themselves should
+                 be enclosed in quotes). This string is NOT limited
+                 in length to 126 bytes.
+              4) in order to be able to pass long argument list the
+                 library constructs the ARGV= list in the
+                 environment of the process to be created.
 
-	      For all other modes (4, 6, 104, 106, 204, 206, ...)
-	      all arguments (except `flags') should conform to the
-	      values defined by the appropriate system
-	      documentation.
+              For all other modes (4, 6, 104, 106, 204, 206, ...)
+              all arguments (except `flags') should conform to the
+              values defined by the appropriate system
+              documentation.
 
-	      If the bit 0 of the `flags' argument is set to 1, the
-	      new process will be executed with its standard output
-	      stream redirected to NULL.
+              If the bit 0 of the `flags' argument is set to 1, the
+              new process will be executed with its standard output
+              stream redirected to NULL.
 
 Return value: like in P_exec().
 
@@ -623,31 +645,31 @@ nonmodal type in future versions of the library.
 
 Opcode:       14
 Function:     display an alert box. `string' may be an RSC index of
-	      a free string to be displayed as an alert box. The
-	      string SHOULD be formatted as for an alert box (e.g.
-	      exactly like the Interface program does when
-	      formatting alert trees).
+              a free string to be displayed as an alert box. The
+              string SHOULD be formatted as for an alert box (e.g.
+              exactly like the Interface program does when
+              formatting alert trees).
 Return value: the number of the button clicked.
 
 @{B}void windial_error(long error, char *message)@{b}
 
 Opcode:        18
 Function:      display an "error" alert box with a text appropriate
-	       for the `error' parameter value (e.g. when `error'
-	       is -2, the message will say "Resource busy"). The
-	       `error' value should be negative, exactly as
-	       returned by GEMDOS. These messages are provided by
-	       separate library called `kernel32.slb'.
+               for the `error' parameter value (e.g. when `error'
+               is -2, the message will say "Resource busy"). The
+               `error' value should be negative, exactly as
+               returned by GEMDOS. These messages are provided by
+               separate library called `kernel32.slb'.
 
-	       The second argument is optional and ignored when its
-	       value is -1. Otherwise it is treated as a pointer
-	       to a free string, which will be displayed in
-	       addition to the normal error message. The string
-	       should not be formatted as for an alertbox (the
-	       library does all necessary formatting) and should
-	       not exceed 40 characters in length. When it is
-	       necessary to split the message into two lines, you
-	       should use the "|" character for line break.
+               The second argument is optional and ignored when its
+               value is -1. Otherwise it is treated as a pointer
+               to a free string, which will be displayed in
+               addition to the normal error message. The string
+               should not be formatted as for an alertbox (the
+               library does all necessary formatting) and should
+               not exceed 40 characters in length. When it is
+               necessary to split the message into two lines, you
+               should use the "|" character for line break.
 
 @line 1 70 0
 
@@ -665,53 +687,54 @@ library bindings.
 
 Opcode:       0
 Function:     return a pointer to the application control array.
-	      The array is defined as follows:
+              The array is defined as follows:
 
-	      typedef struct {
-		long  aesparams[6];
-		short control[16];
-		short global[16];
-		short int_in[16];
-		short int_out[16];
-		long  addr_in[16];
-		long  addr_out[16];
-		long  vdiparams[5];
-		short contrl[12];
-		short intin[128];
-		short ptsin[128];
-		short intout[128];
-		short ptsout[128];
-		short vwk_handle;
-		long  vwk_colors;
-	      } GEM_ARRAY;
+              typedef struct {
+                long  aesparams[6];
+                short control[16];
+                short global[16];
+                short int_in[16];
+                short int_out[16];
+                long  addr_in[16];
+                long  addr_out[16];
+                long  vdiparams[5];
+                short contrl[12];
+                short intin[128];
+                short ptsin[128];
+                short intout[128];
+                short ptsout[128];
+                short vwk_handle;
+                long  vwk_colors;
+                long long vwk_xcolors;
+              } GEM_ARRAY;
 
-	      The global[0] contains the AES version number encoded
-	      on four decimal digits: 0x0410 = 4.10. This number is
-	      internally used by the library to decide whether the
-	      appl_getinfo() call is available or not. It is
-	      assumed that if the AES version is below 4.0, the
-	      appl_getinfo() is not available (see Atari specs).
+              The global[0] contains the AES version number encoded
+              on four decimal digits: 0x0410 = 4.10. This number is
+              internally used by the library to decide whether the
+              appl_getinfo() call is available or not. It is
+              assumed that if the AES version is below 4.0, the
+              appl_getinfo() is not available (see Atari specs).
 
-	      The library is basically designed to work in a
-	      multitasking system and with AES version >= 4.0. It
-	      was not tested with old AESes.
+              The library is basically designed to work in a
+              multitasking system and with AES version >= 4.0. It
+              was not tested with old AESes.
 
-	      The field `vwk_handle' contains the current VDI
-	      handle for the virtual workstation open in a result
-	      of the appl_open() call. The `vwk_colors' field
-	      contains the number of colors displayable at one
-	      time. This number is not necessarily a precise one,
-	      specifically for true colour displays it will contain
-	      a value of 65536 (0x00010000).
+              The field `vwk_handle' contains the current VDI
+              handle for the virtual workstation open in a result
+              of the appl_open() call. The `vwk_colors' field
+              contains the number of colors displayable at one
+              time. For > 24-bit per pixel displays this field will
+              contain 16777216L, whereas the exact value will be
+              indicated by the 64-bit field vwk_xcolors.
 
-	      Since this function makes GEMDOS calls, it has been
-	      separated from the call_aes() to reduce GEM call
-	      overhead.
+              Since this function makes GEMDOS calls, it has been
+              separated from the call_aes() to reduce GEM call
+              overhead.
 
 Caveats:      The GEM_ARRAY structure contains more (undocumented)
-	      fields used internally by the library. These contain
-	      library internal data and are subject to change without
-	      notice.
+              fields used internally by the library. These contain
+              library internal data and are subject to change without
+              notice.
 
 Return value: a pointer to the application control array.
 
@@ -720,13 +743,13 @@ Return value: a pointer to the application control array.
 
 Opcode:       1
 Function:     call an AES function. The `control' parameter is
-	      identical with the pointer returned by the
-	      gem_control() function above.
+              identical with the pointer returned by the
+              gem_control() function above.
 Caveats:      all AES calls the program does should be done via
-	      this function. Otherwise the library may not work
-	      correctly.
+              this function. Otherwise the library may not work
+              correctly.
 Return value: int_out[0] or ENOSYS, if the `function_number'
-	      parameter is out of the defined range.
+              parameter is out of the defined range.
 
 @line 1 70 0
 
@@ -740,54 +763,54 @@ Application control functions
 
 Opcode:       17
 Function:     First the application is switched into MiNT domain
-	      and registered in the AES with appl_init() call. When
-	      the parameter `thread' is zero, and the parameter
-	      `rscfile' is nonzero, it is treated as a pointer to a
-	      valid GEMDOS pathname of the GEM resource file to be
-	      loaded. When the parameter `thread' is nonzero, the
-	      `rscfile' pointer is ignored, and a previously loaded
-	      (by the parent process) resource file is utilized. It
-	      will only work, if the parent process has really
-	      loaded an RSC file via either appl_open() or
-	      rsrc_xload() call, and if the child shares the memory
-	      with him.
+              and registered in the AES with appl_init() call. When
+              the parameter `thread' is zero, and the parameter
+              `rscfile' is nonzero, it is treated as a pointer to a
+              valid GEMDOS pathname of the GEM resource file to be
+              loaded. When the parameter `thread' is nonzero, the
+              `rscfile' pointer is ignored, and a previously loaded
+              (by the parent process) resource file is utilized. It
+              will only work, if the parent process has really
+              loaded an RSC file via either appl_open() or
+              rsrc_xload() call, and if the child shares the memory
+              with him.
 
-	      If an error occurs while loading the RSC, the
-	      application registration gets cancelled by a call to
-	      appl_exit().
+              If an error occurs while loading the RSC, the
+              application registration gets cancelled by a call to
+              appl_exit().
 
-	      The parameter `pname' is the application's name for
-	      the "Desk" menu. If this is -1, the parameter is
-	      ignored. If its value is below 65536, it is
-	      understood as a resource index of a free string in
-	      the resource file just loaded. Contrary, if it is
-	      greater than 65535, it is understood as an address of
-	      a free string which should be taken as the
-	      application's name.
+              The parameter `pname' is the application's name for
+              the "Desk" menu. If this is -1, the parameter is
+              ignored. If its value is below 65536, it is
+              understood as a resource index of a free string in
+              the resource file just loaded. Contrary, if it is
+              greater than 65535, it is understood as an address of
+              a free string which should be taken as the
+              application's name.
 
-	      When the action above succeeds, the AES is
-	      additionally told the application recognizes the
-	      AP_TERM message and a basic VDI virtual workstation
-	      is open.
+              When the action above succeeds, the AES is
+              additionally told the application recognizes the
+              AP_TERM message and a basic VDI virtual workstation
+              is open.
 
 Return value: AES application ID on success, or a negative error
-	      code otherwise.
+              code otherwise.
 
 @{B}long appl_top(void)@{b}
 
 Opcode:       25
 Function:     Top the application, if possible.
 Return value: 0 on success or a negative error code otherwise
-	      (currently this is ENOSYS standing for "invalid AES
-	      function call").
+              (currently this is ENOSYS standing for "invalid AES
+              function call").
 
 @{B}long appl_close(void)@{b}
 
 Opcode:       39
 Function:     Closes the virtual workstation that was open by
-	      appl_open(), releases the resource file (if loaded)
-	      by a call to rsrc_xfree() and leaves the GEM with
-	      appl_exit().
+              appl_open(), releases the resource file (if loaded)
+              by a call to rsrc_xfree() and leaves the GEM with
+              appl_exit().
 Return value: currently always 0 (success).
 
 @line 1 70 0
@@ -803,25 +826,25 @@ Resource file related functions
 Opcode:       10
 Function:     Cache the specified GEM resource file in the memory.
 Caveats:      This is a custom library call, you cannot use
-	      rsrc_load() instead.
+              rsrc_load() instead.
 Return value: 0 on success or a negative error code otherwise.
 
 @{B}long rsrc_xalloc(void)@{b}
 
 Opcode:       11
 Function:     Fixup the raw RSC file previously cached by the
-	      rsrc_xload() call.
+              rsrc_xload() call.
 Caveats:      This is a custom library call, you cannot use
-	      rsrc_rcfix() instead.
+              rsrc_rcfix() instead.
 Return value: 0 on success or a negative error code otherwise.
 
 @{B}long rsrc_xfree(void)@{b}
 
 Opcode:       12
 Function:     Release the RSC file previously loaded with
-	      appl_open() or rsrc_xalloc().
+              appl_open() or rsrc_xalloc().
 Caveats:      This is a custom library call, you cannot use
-	      rsrc_free() instead.
+              rsrc_free() instead.
 Return value: 0 on success or a negative error code otherwise.
 
 @line 1 70 0
@@ -836,75 +859,75 @@ Environment functions
 
 Opcode:       21
 Function:     Finds the specified variable in the application
-	      environment string. The variable name (pointed to by
-	      the argument) must be a NULL terminated string ended
-	      with the "=" character. For example, to find the
-	      value of the $HOME, the function call should look as
-	      follows:
+              environment string. The variable name (pointed to by
+              the argument) must be a NULL terminated string ended
+              with the "=" character. For example, to find the
+              value of the $HOME, the function call should look as
+              follows:
 
-		char *home;
+                char *home;
 
-		home = env_get("HOME=");
+                home = env_get("HOME=");
 
-	      The returned value specifies the variable litterally
-	      as it is defined in the environment, no conversion or
-	      evaluation is made.
+              The returned value specifies the variable litterally
+              as it is defined in the environment, no conversion or
+              evaluation is made.
 Return value: a pointer to the variable value or NULL, if the
-	      specified variable does not exist.
+              specified variable does not exist.
 
 @{B}char *env_eval(const char *variable)@{b}
 
 Opcode:       22
 Function:     This is similar to the env_get(), except that the
-	      variable, if found, is additionally processed as
-	      indicated by the $UNIXMODE variable.
+              variable, if found, is additionally processed as
+              indicated by the $UNIXMODE variable.
 
-	      Furthermore, each variable is evaluated, so that a
-	      part of it (or an entire variable) can be defined by
-	      another one. For example, for a definition like:
+              Furthermore, each variable is evaluated, so that a
+              part of it (or an entire variable) can be defined by
+              another one. For example, for a definition like:
 
-		setenv HOME u:\root
-		setenv MYDIR $HOME
+                setenv HOME u:\root
+                setenv MYDIR $HOME
 
-	      the $MYDIR will be evaluated and returned as
-	      `u:\root'. Similarly, if you define
+              the $MYDIR will be evaluated and returned as
+              `u:\root'. Similarly, if you define
 
-		setenv HOME u:\root
-		setenv MYDIR $HOME
-		setenv DEFAULTS $MYDIR\defaults
-		setenv CONFIGFILE $DEFAULTS\config.inf
+                setenv HOME u:\root
+                setenv MYDIR $HOME
+                setenv DEFAULTS $MYDIR\defaults
+                setenv CONFIGFILE $DEFAULTS\config.inf
 
-	      the env_eval("CONFIGFILE=") will return
-	      `u:\root\defaults\config.inf', whereas env_get()
-	      only returns `$DEFAULTS\config.inf' in this case.
+              the env_eval("CONFIGFILE=") will return
+              `u:\root\defaults\config.inf', whereas env_get()
+              only returns `$DEFAULTS\config.inf' in this case.
 Caveats:      - the recursion depth is limited to 64 levels.
-	      - the maximum recursion depth requires about 16k free
-		stack space, and you should provide at least this
-		much in case there is a circular reference between
-		variables.
-	      - variables $PCONVERT and $UNIXMODE cannot be defined
-		indirectly, because their values are used as
-		arguments for the evaluation (references to other
-		variables found in these two are ignored).
-	      - the variable $SLBPATH cannot be defined this way,
-		because it is evaluated by the kernel and the code
-		dealing with that is not so intelligent, for the
-		sake of speed.
+              - the maximum recursion depth requires about 16k free
+                stack space, and you should provide at least this
+                much in case there is a circular reference between
+                variables.
+              - variables $PCONVERT and $UNIXMODE cannot be defined
+                indirectly, because their values are used as
+                arguments for the evaluation (references to other
+                variables found in these two are ignored).
+              - the variable $SLBPATH cannot be defined this way,
+                because it is evaluated by the kernel and the code
+                dealing with that is not so intelligent, for the
+                sake of speed.
 Return value: a pointer to the result string on success or NULL on
-	      failure.
+              failure.
 
 @{B}long env_getargc(void)@{b}
 
 Opcode:       23
 Function:     returns the number of ARGV arguments. The old MS-DOS
-	      style command line is not supported.
+              style command line is not supported.
 
 @{B}char *env_getargv(long argc)@{b}
 
 Opcode:       24
 Function:     returns a pointer to the ARGV argument number `argc',
-	      or NULL, if there is no such argument. The old MS-DOS
-	      style command line is not supported.
+              or NULL, if there is no such argument. The old MS-DOS
+              style command line is not supported.
 
 @line 1 70 0
 
@@ -927,54 +950,54 @@ supplied along with the library.
 
 Opcode:       2
 Function:     returns the minimum size of the WD structure for a
-	      single windowed dialog box. Your program should
-	      provide at least this much for each window it needs
-	      to create. It is guaranteed that the number returned
-	      by this function is the same for all dialog boxes the
-	      program needs to create - it only can be different
-	      across different versions of the lib.
-	      
-	      This function is only necessary, when you want to
-	      allocate all structures on your own. But you can let
-	      the library to automatically do that as well. See
-	      below.
+              single windowed dialog box. Your program should
+              provide at least this much for each window it needs
+              to create. It is guaranteed that the number returned
+              by this function is the same for all dialog boxes the
+              program needs to create - it only can be different
+              across different versions of the lib.
+
+              This function is only necessary, when you want to
+              allocate all structures on your own. But you can let
+              the library to automatically do that as well. See
+              below.
 
 @{B}long windial_create(WD *window, short box, short icon, \
-			 short ftext, char *title)@{b}
+                         short ftext, char *title)@{b}
 
 Opcode:       3
 Function:     initializes the window structure in the memory buffer
-	      pointed to by the `window' parameter. If the `window'
-	      is NULL, the function will first allocate the needed
-	      memory buffer (freed later by the windial_delete()
-	      function), though it is not an optimal choice.
+              pointed to by the `window' parameter. If the `window'
+              is NULL, the function will first allocate the needed
+              memory buffer (freed later by the windial_delete()
+              function), though it is not an optimal choice.
 
-	      `box' is the resource index of the dialog box object
-	      tree. This parameter is obligatory.
+              `box' is the resource index of the dialog box object
+              tree. This parameter is obligatory.
 
-	      `icon' is the resource index of the icon object tree.
-	      If this parameter is 0, the dialog box won't have the
-	      iconifier gadget and no iconification will be
-	      possible.
+              `icon' is the resource index of the icon object tree.
+              If this parameter is 0, the dialog box won't have the
+              iconifier gadget and no iconification will be
+              possible.
 
-	      `ftext' is the resource index of the first editable
-	      textfield found in the object `box'. If there are no
-	      editable textfields in the box, the parameter should
-	      be 0.
+              `ftext' is the resource index of the first editable
+              textfield found in the object `box'. If there are no
+              editable textfields in the box, the parameter should
+              be 0.
 
-	      `title' is a pointer to a free string which will be
-	      used as the window's title displayed on its title
-	      bar. When no title is required, the pointer should
-	      point to an empty string (""), but also may be -1.
-	      When this parameter's value is below 65536, it is
-	      understood as a resource index of the RSC file loaded.
+              `title' is a pointer to a free string which will be
+              used as the window's title displayed on its title
+              bar. When no title is required, the pointer should
+              point to an empty string (""), but also may be -1.
+              When this parameter's value is below 65536, it is
+              understood as a resource index of the RSC file loaded.
 
-	      Exactly like the AES function wind_create(), this one
-	      does not display any window. After a successful
-	      return, the structure WD initialized by the function
-	      can be manipulated so that the subsequent
-	      windial_open() call will display the window e.g. in
-	      an arbitrary location rather than the default one.
+              Exactly like the AES function wind_create(), this one
+              does not display any window. After a successful
+              return, the structure WD initialized by the function
+              can be manipulated so that the subsequent
+              windial_open() call will display the window e.g. in
+              an arbitrary location rather than the default one.
 
               Windows created by subsequent windial_create() calls
               are automatically linked to the list of caller's
@@ -982,51 +1005,51 @@ Function:     initializes the window structure in the memory buffer
               are normally necessary.
 
 Return value: returns a pointer to the WD structure, or 0 if the
-	      function failed.
+              function failed.
 
 @{B}long windial_xcreate(WD *window, short box, short icon, \
-			short ftext, char *title, short gadgets)@{b}
+                        short ftext, char *title, short gadgets)@{b}
 
 Opcode:       3
 Function:     Exactly like windial_create(), but the additional
-	      parameter defines window gadgets to be enabled.
+              parameter defines window gadgets to be enabled.
 Caveats:      This is just an alternative binding to the same
-	      function as for wind_create().
+              function as for wind_create().
 
 @{B}long windial_open(WD *window)@{b}
 
 Opcode:       4
 Function:     opens the windowed dialog box as defined by the
-	      parameter.
+              parameter.
 Return value: currently 0 (success).
 
 @{B}long windial_formdo(WD *window)@{b}
 
 Opcode:       5
 Function:     similarly to the AES' form_do(), the function is
-	      monitoring the user interaction with the dialog box,
-	      or dialog boxes, if multiple are displayed at a time.
-	      Window events, like move, iconify, uniconify, full,
-	      top, untop etc. and also editable textfields, are
-	      handled automatically inside the library without
-	      arranging the main application.
+              monitoring the user interaction with the dialog box,
+              or dialog boxes, if multiple are displayed at a time.
+              Window events, like move, iconify, uniconify, full,
+              top, untop etc. and also editable textfields, are
+              handled automatically inside the library without
+              arranging the main application.
 Return value: the returned longword contains the resource index of
-	      the object clicked in the low word and the resource
-	      index of the object tree where the object belongs to
-	      in the high word. If the user clicked the closer
-	      gadget, a value of -1 is returned for the object
-	      index.
-	      When your program only displays one dialog at a time,
-	      the high word can be safely ignored.
+              the object clicked in the low word and the resource
+              index of the object tree where the object belongs to
+              in the high word. If the user clicked the closer
+              gadget, a value of -1 is returned for the object
+              index.
+              When your program only displays one dialog at a time,
+              the high word can be safely ignored.
 Caveat:       if windial_setjmp() was used to define an alternative
-	      event handler, this function may never return.
+              event handler, this function may never return.
 
 @{B}long windial_close(WD *window)@{b}
 
 Opcode:       6
 Function:     closes the specified window. The window's structure
-	      in the memory is not released so that it can be
-	      reopened by windial_open().
+              in the memory is not released so that it can be
+              reopened by windial_open().
 Return value: currently 0 (success).
 
 @{B}long windial_close_all()@{b}
@@ -1041,13 +1064,13 @@ Return value: currently 0 (success).
 
 Opcode:       7
 Function:     deletes the specified window. The window's structure
-	      in the memory is released so that it cannot be
-	      reopened by windial_open() without a previous call to
-	      windial_create().
+              in the memory is released so that it cannot be
+              reopened by windial_open() without a previous call to
+              windial_create().
 
-	      If the window is still visible on the screen upon calling
-	      this function, a call to windial_close() is made
-	      automatically.
+              If the window is still visible on the screen upon calling
+              this function, a call to windial_close() is made
+              automatically.
 
 Return value: currently 0 (success).
 
@@ -1071,7 +1094,7 @@ Return value: currently 0 (success).
 
 Opcode:       8
 Function:     performs the window positioning at the centre of the
-	      screen.
+              screen.
 Return value: currently 0.
 
 @{B}long windial_link(WD *from, WD *to)@{b}
@@ -1080,7 +1103,7 @@ Opcode:       20
 Function:     link the 'from' window to the linked list, a member
               of which is the 'to' window.
 
-	      NOTE:
+              NOTE:
               Windows created by subsequent windial_create() calls
               are automatically linked to the list of caller's
               windows, so that no separate calls to windial_link()
@@ -1092,13 +1115,13 @@ Return value: 0 on success or a negative error code otherwise.
 
 Opcode:       27
 Function:     unlinks the specified window from the linked list
-	      created by windial_link(). The window's structure is
-	      simultaneously invalidated, so that it cannot be
-	      linked back. For this reason it is more advisable to
-	      use windial_delete(), which performs unlinking
-	      automatically.
+              created by windial_link(). The window's structure is
+              simultaneously invalidated, so that it cannot be
+              linked back. For this reason it is more advisable to
+              use windial_delete(), which performs unlinking
+              automatically.
 Return value: currently 0. In case of an error the function
-	      silently fails.
+              silently fails.
 
 @line 1 70 0
 
@@ -1115,92 +1138,92 @@ operation of the event handlers provided by the library.
 
 Opcode:       26
 Function:     registers an external handler for events which are
-	      not handled internally by the library. This is mainly
-	      intended for the AP_TERM and VA_START messages, but in fact
-	      any type of the standard GEM events can be intercepted this
-	      way. Each window can have own separate subset of such
-	      handlers (or can have none).
-	      The `vec' parameter contains the "vector number" for
-	      the required type of events. Currently these vectors
-	      are defined as follows:
+              not handled internally by the library. This is mainly
+              intended for the AP_TERM and VA_START messages, but in fact
+              any type of the standard GEM events can be intercepted this
+              way. Each window can have own separate subset of such
+              handlers (or can have none).
+              The `vec' parameter contains the "vector number" for
+              the required type of events. Currently these vectors
+              are defined as follows:
 
-	      Vec	Handling
-	      ---	--------
-	       0	AES messages
-	       1	keyboard events
-	       2	mouse button events
-	       3	mouse rectangle events
-	       4	alternative mouse rectangle events
-	       5	timer events
+              Vec       Handling
+              ---       --------
+               0        AES messages
+               1        keyboard events
+               2        mouse button events
+               3        mouse rectangle events
+               4        alternative mouse rectangle events
+               5        timer events
 
-	      Of that number, handlers 0 to 2 are local for each
-	      window (i.e. each window can have different handler),
-	      whereas handlers 3-5 are global for all windows.
-	      The parameter `adr' is the new value of the vector
-	      `vec', i.e. the entry point for the new handler.
+              Of that number, handlers 0 to 2 are local for each
+              window (i.e. each window can have different handler),
+              whereas handlers 3-5 are global for all windows.
+              The parameter `adr' is the new value of the vector
+              `vec', i.e. the entry point for the new handler.
 
-	      The point defined by this argument *** MUST *** find
-	      itself in the same stack context as the initial call
-	      to the windial_setjmp() was, or else stack corruption
-	      may occur.
+              The point defined by this argument *** MUST *** find
+              itself in the same stack context as the initial call
+              to the windial_setjmp() was, or else stack corruption
+              may occur.
 
-	      The handler setup by this function is called before
-	      (if at all) the associated event is handled by the
-	      library routines, and accepts stacked arguments:
+              The handler setup by this function is called before
+              (if at all) the associated event is handled by the
+              library routines, and accepts stacked arguments:
 
-	      Vec	Handler prototype
-	      ---	-----------------
-	       0	long newmsg(WD *wd, short vec, (void *)msg)
-	       1	long newkey(WD *wd, short vec, short ks, \
-							short kc)
-	       2	(not yet defined)
-	       3	(not yet defined)
-	       4	(not yet defined)
-	       5	long newtmr(WD *wd, short vec, long timer)
+              Vec       Handler prototype
+              ---       -----------------
+               0        long newmsg(WD *wd, short vec, (void *)msg)
+               1        long newkey(WD *wd, short vec, short ks, \
+                                                        short kc)
+               2        (not yet defined)
+               3        (not yet defined)
+               4        (not yet defined)
+               5        long newtmr(WD *wd, short vec, long timer)
 
-	      Where `wd' is a pointer to the structure of the
-	      window, that generated the event (undefined for
-	      handlers 2-5), `vec' is the vector number, `msg' is
-	      a pointer to the AES message buffer, `ks' is a word
-	      containing the state of the keyboard shift keys, `kc'
-	      is the keycode and `timer' is the start value of the
-	      evnt_timer().
+              Where `wd' is a pointer to the structure of the
+              window, that generated the event (undefined for
+              handlers 2-5), `vec' is the vector number, `msg' is
+              a pointer to the AES message buffer, `ks' is a word
+              containing the state of the keyboard shift keys, `kc'
+              is the keycode and `timer' is the start value of the
+              evnt_timer().
 
-	      The handler once entered and has done what was
-	      supposed necessary, may behave three ways. First, it
-	      can just return with a long value of 0 in the d0
-	      register, which means it wishes the event to be
-	      further processed by the library routines. In an
-	      opposite case, when no further processing is
-	      required, a long value of -1 should be returned.
+              The handler once entered and has done what was
+              supposed necessary, may behave three ways. First, it
+              can just return with a long value of 0 in the d0
+              register, which means it wishes the event to be
+              further processed by the library routines. In an
+              opposite case, when no further processing is
+              required, a long value of -1 should be returned.
 
-	      The keyboard handler has an additional function here:
-	      if the returned value is greater than a zero, it is
-	      interpreted as the new keycode. After return to the
-	      library, its routines do further processing using the
-	      code returned.
+              The keyboard handler has an additional function here:
+              if the returned value is greater than a zero, it is
+              interpreted as the new keycode. After return to the
+              library, its routines do further processing using the
+              code returned.
 
-	      Eventually, the windial_longjmp() may be called, which
-	      performs an exit from the event loop and jumps back
-	      here to return to the program exactly at the same
-	      point where the windial_setjmp() was originally
-	      called.
+              Eventually, the windial_longjmp() may be called, which
+              performs an exit from the event loop and jumps back
+              here to return to the program exactly at the same
+              point where the windial_setjmp() was originally
+              called.
 
 Return value: 0 on success or EINVAL when invalid argument was
-	      specified (particularly `vec' is out of range) while
-	      setting the jump. While returning from
-	      windial_longjmp() this function returns 1.
+              specified (particularly `vec' is out of range) while
+              setting the jump. While returning from
+              windial_longjmp() this function returns 1.
 
 @{B}void windial_longjmp(WD *window, short vec)@{b}
 
 Opcode:       28
 Function:     returns from the event handler (see above), restores
-	      the stack context to the state recorded by the
-	      windial_setjmp() call, then jumps back to the
-	      windial_setjmp() function.
-	      The function of this call is similar to the operation
-	      made by the sigreturn() and longjmp() when returning
-	      from kernel signal handlers.
+              the stack context to the state recorded by the
+              windial_setjmp() call, then jumps back to the
+              windial_setjmp() function.
+              The function of this call is similar to the operation
+              made by the sigreturn() and longjmp() when returning
+              from kernel signal handlers.
 Return value: this function never returns.
 
 @line 1 70 0
@@ -1211,62 +1234,62 @@ Return value: this function never returns.
 Library functions listed by opcode
 @line 1 70 0
 
-Opcode		Function prototype
-------		------------------
-  0		GEM_ARRAY *gem_control(void)
-  1		long call_aes(GEM_ARRAY *ctrl, short opcode)
-  2		long windial_size(void)
-  3		long windial_create(WD *window, short box, short icon, \
-				    short ftext, char *title)
-  4		long windial_open(WD *window)
-  5		long windial_formdo(WD *window)
-  6		long windial_close(WD *window)
-  7		long windial_delete(WD *window)
-  8		long windial_center(WD *window)
-  9		long rc_intersect(GRECT *src, GRECT *dest)
-  10		long rsrc_xload(char *filename)
-  11		long rsrc_xalloc(void)
-  12		long rsrc_xfree(void)
-  13		long thread_fork(void *stub, void *func, char *ptitle, \
-				 long stksize)
-  14		long windial_alert(short button, char *string)
-  15		long objc_xchange(WD *window, short obj, short newst, \
-				    short redraw)
-  16		void *rsrc_xgaddr(short type, short object)
-  17		long appl_open(char *filename, short thread, char *pname)
-  18		long windial_error(long error, char *usermsg)
+Opcode          Function prototype
+------          ------------------
+  0             GEM_ARRAY *gem_control(void)
+  1             long call_aes(GEM_ARRAY *ctrl, short opcode)
+  2             long windial_size(void)
+  3             long windial_create(WD *window, short box, short icon, \
+                                    short ftext, char *title)
+  4             long windial_open(WD *window)
+  5             long windial_formdo(WD *window)
+  6             long windial_close(WD *window)
+  7             long windial_delete(WD *window)
+  8             long windial_center(WD *window)
+  9             long rc_intersect(GRECT *src, GRECT *dest)
+  10            long rsrc_xload(char *filename)
+  11            long rsrc_xalloc(void)
+  12            long rsrc_xfree(void)
+  13            long thread_fork(void *stub, void *func, char *ptitle, \
+                                 long stksize)
+  14            long windial_alert(short button, char *string)
+  15            long objc_xchange(WD *window, short obj, short newst, \
+                                    short redraw)
+  16            void *rsrc_xgaddr(short type, short object)
+  17            long appl_open(char *filename, short thread, char *pname)
+  18            long windial_error(long error, char *usermsg)
 
   19            (reserved)
 
-  20		long windial_link(WD *from, WD *to)
-  21		char *env_get(char *var)
-  22		char *env_eval(char *var)
-  23		long env_getargc(void)
-  24		char *env_getargv(short argc)
-  25		long appl_top(void)
-  26		long windial_setjmp(WD *window, short vec, void *adr, \
-					void *link)
-  27		long windial_unlink(WD *window)
-  28		void windial_longjmp(WD *window, short vec)
-  29		void ftext_init(short tree, short obj)
-  30		long av_dir_update(short drive)
-  31		long av_view(char *pathname)
-  32		long av_help(char *filename)
-  33		long va_send(short cmd, char *msg, long len)
-  34		long lib_control(short fn, long value)
-  35		long objc_xdraw(WD *window, short object)
-  36		long thread_overlay(void *stub, void *func, \
-					char *ptitle, long stksize)
-  37		long menu_xpop(WD *window, short obj, MENU *menu)
-  38		char *file_select(char *title, short flag)
-  39		long appl_close(void)
-  40		long open_url(char *url)
-  41		long proc_exec(short mode, long flags, \
-				char *file, char *cmd, char *env)
-  42		char *get_version(void)
-  43		long get_users(void)
-  44		long windial_close_all(void)
-  45		long windial_delete_all(void)
+  20            long windial_link(WD *from, WD *to)
+  21            char *env_get(char *var)
+  22            char *env_eval(char *var)
+  23            long env_getargc(void)
+  24            char *env_getargv(short argc)
+  25            long appl_top(void)
+  26            long windial_setjmp(WD *window, short vec, void *adr, \
+                                        void *link)
+  27            long windial_unlink(WD *window)
+  28            void windial_longjmp(WD *window, short vec)
+  29            void ftext_init(short tree, short obj)
+  30            long av_dir_update(short drive)
+  31            long av_view(char *pathname)
+  32            long av_help(char *filename)
+  33            long va_send(short cmd, char *msg, long len)
+  34            long lib_control(short fn, long value)
+  35            long objc_xdraw(WD *window, short object)
+  36            long thread_overlay(void *stub, void *func, \
+                                        char *ptitle, long stksize)
+  37            long menu_xpop(WD *window, short obj, MENU *menu)
+  38            char *file_select(char *title, short flag)
+  39            long appl_close(void)
+  40            long open_url(char *url)
+  41            long proc_exec(short mode, long flags, \
+                                char *file, char *cmd, char *env)
+  42            char *get_version(void)
+  43            long get_users(void)
+  44            long windial_close_all(void)
+  45            long windial_delete_all(void)
 
 @line 1 70 0
 
@@ -1299,7 +1322,7 @@ b) fileselector.slb
    The prototype of the function called (no. 0) is:
 
    long fsel(BASEPAGE *bp, long fn, short nargs, \
-		GEM_ARRAY *gem, SLB *gemma, ulong bvset)
+                GEM_ARRAY *gem, SLB *gemma, ulong bvset)
 
    The `gemma' argument is a pointer to the SLB structure for the
    gemma.slb library. Thus, the function fsel() can call-back gemma's
@@ -1410,29 +1433,29 @@ Version 1.10
 
 Version 1.09 pl 2
 
-- windial_create() now automatically links subsequently created 
+- windial_create() now automatically links subsequently created
   windows in one chain, when at least one exists.
 - windial_link() returns 0, not `newhandle'
 - some DOS functions redirected to kernel.slb
 - appl_open(), when fails, now closes the kernel.slb
-- appl_close() doesn't check if kernel.slb is loaded before closing 
+- appl_close() doesn't check if kernel.slb is loaded before closing
   it (because kernel.slb is always exspected to be loaded)
 - improved trap #2 interface.
 - minor changes in the config tool program.
-- most of the code for proc_exec() now uses kernel.slb (this makes 
+- most of the code for proc_exec() now uses kernel.slb (this makes
   gemma.slb smaller).
 - function prototypes made as static inline functions for gcc.
 
 Version 1.09 pl 1
 
-- argh, multiple dialog boxes weren't handled correctly, when moved 
+- argh, multiple dialog boxes weren't handled correctly, when moved
   etc., hopefully fixed now.
 - a window may be now opened, and also closed, only once.
-- the first automatically allocated window (which in fact has 
-  its static buffer in the process array structure) cannot be now 
+- the first automatically allocated window (which in fact has
+  its static buffer in the process array structure) cannot be now
   unlinked from the window chain.
-- when windial_delete() is called for a window, which is still 
-  visible on the screen, windial_close() is first called 
+- when windial_delete() is called for a window, which is still
+  visible on the screen, windial_close() is first called
   automatically.
 - objc_xchange() shouldn't now redraw objects inside closed windows.
 

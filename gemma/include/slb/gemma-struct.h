@@ -39,6 +39,7 @@
 # define AV_XVIEW	0x1f
 # define AV_HELP	0x20
 # define VA_SEND	0x21
+# define LIB_CTRL	0x22
 # define OB_XDRAW	0x23
 # define TOVL		0x24
 # define MN_XPOP	0x25
@@ -51,27 +52,30 @@
 # define WD_CLALL	0x2c
 # define WD_DELALL	0x2d
 
-typedef struct {
-	long 	aesparams[6];
-	short	control[16];
-	short	global[16];
-	short	int_in[16];
-	short	int_out[16];
-	long	addr_in[16];
-	long	addr_out[16];
-	long	vdiparams[5];
-	short	contrl[12];
-	short	intin[128];
-	short	ptsin[128];
-	short	intout[128];
-	short	ptsout[128];
-	short	vwk_handle;
-	long	vwk_colors;
+typedef struct
+{
+	long 			aesparams[6];
+	short			control[16];
+	short			global[16];
+	short			int_in[16];
+	short			int_out[16];
+	long			addr_in[16];
+	long			addr_out[16];
+	long			vdiparams[5];
+	short			contrl[12];
+	short			intin[128];
+	short			ptsin[128];
+	short			intout[128];
+	short			ptsout[128];
+	short			vwk_handle;
+	unsigned long		vwk_colors;
+	unsigned long long	vwk_xcolors;
 } GEM_ARRAY;
 
 typedef struct windial WINDIAL;
 
-struct windial {
+struct windial
+{
 	OBJECT 	*wb_treeptr;
 	char	*wb_title;
 	OBJECT	*wb_icontree;

@@ -103,6 +103,7 @@ pid_remove(long pid)
 	sema_release(sema_appl_open);
 }
 
+# if 0
 /* Handler for SIGCHLD */
 static void
 child_died(long sig)
@@ -119,6 +120,7 @@ child_died(long sig)
 		}
 	}
 }
+# endif
 
 /* User functions */
 
@@ -199,7 +201,9 @@ appl_open(char *file, short thread, char *pname)
 			return -1;
 		}
 
+# if 0
 		Psignal(SIGCHLD, child_died);
+# endif
 	}
 	else
 		Slbclose((long)temp.handle);

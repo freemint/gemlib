@@ -20,6 +20,14 @@ extern SLB *get_gemma_p(void) __attribute__((__const__));
 /* SLB macros */
 
 static inline
+GEM_ARRAY *gem_contrl(void)
+{
+	SLB *gemma_p = get_gemma_p();
+
+	return (GEM_ARRAY *)(gemma_p->exec)(gemma_p->handle, (long)GEM_CTRL, (short)0);
+}
+
+static inline
 long appl_top(void)
 {
 	SLB *gemma_p = get_gemma_p();

@@ -26,6 +26,12 @@ short _kbshift(long wh);
 short _getrez(void);
 
 INLINE
+long _floadbuf(PROC_ARRAY *proc, const char *name, char *buf, long len, short *mode)
+{
+	return (proc->kern.exec)(proc->kern.handle, 0x020bL, (short)4, name, buf, len, mode);
+}
+
+INLINE
 long _pexec(PROC_ARRAY *proc, long mode, char *cmd, char *tail, char *env)
 {
 	return (proc->kern.exec)(proc->kern.handle, 75L, (short)4, (long)mode, (long)cmd, (long)tail, (long)env);

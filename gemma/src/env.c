@@ -63,7 +63,7 @@ env_getargv(BASEPAGE *bp, long fn, short nargs, long count, PROC_ARRAY *p)
 	if (nargs > 1) proc = p;
 	else if (nargs < 2 || !proc) proc = get_contrl(bp);
 
-	max = env_getargc(bp, fn, 1, proc);
+	max = env_getargc(bp, ENV_GETARGC, 1, proc);
 	if (!max)
 		return 0;
 	if (count >= max)

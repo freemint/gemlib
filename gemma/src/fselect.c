@@ -24,7 +24,7 @@
 # include "appl.h"
 # include "fselect.h"
 
-INLINE void
+static void
 fsel_init(PROC_ARRAY *proc, ushort flag)
 {
 	char *home;
@@ -107,7 +107,7 @@ file_select(BASEPAGE *bp, long fn, short nargs, \
 
 	r = _fsel_exinput(proc, proc->fsel_path, proc->fsel_file, tit);
 
-	appl_top(bp, 25L, 0, proc);
+	appl_top(bp, AP_TOP, 0, proc);
 
 	if (r)
 	{

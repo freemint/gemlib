@@ -22,12 +22,12 @@
 __dummy:	.long	0x11111918
 
 	.data
-	.comm	__stack,0x1000
+	.comm	__stack,0x4000
 
 	.text
 	movel	sp@(0x04),a0	| basepage address
 
-	lea	pc@(__stack+0x1000-0x0040.w),sp
+	lea	pc@(__stack+0x4000-0x0040.w),sp
 
 	movel	a0@(0x0018),d0		| address of the BSS segment
 	addl	a0@(0x001c),d0		| size of the BSS segment

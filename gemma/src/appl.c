@@ -29,7 +29,30 @@
 
 short whitebak;
 
-INLINE void
+static const long long poweroftwo[] =
+{
+	0x0000000000000002, 0x0000000000000004, 0x0000000000000008, 0x0000000000000010,
+	0x0000000000000020, 0x0000000000000040, 0x0000000000000080, 0x0000000000000100,
+	0x0000000000000200, 0x0000000000000400, 0x0000000000000800, 0x0000000000001000,
+	0x0000000000002000, 0x0000000000004000, 0x0000000000008000, 0x0000000000010000,
+	0x0000000000020000, 0x0000000000040000, 0x0000000000080000, 0x0000000000100000,
+	0x0000000000200000, 0x0000000000400000, 0x0000000000800000, 0x0000000001000000,
+	0x0000000002000000, 0x0000000004000000, 0x0000000008000000, 0x0000000010000000,
+	0x0000000020000000, 0x0000000040000000, 0x0000000080000000, 0x0000000100000000
+};
+
+static long long
+pwr2(unsigned short what)
+{
+	if (!what)
+		what = 1;
+	else if (what > 32)
+		what = 32;
+
+	return poweroftwo[what-1];
+}
+
+static void
 _v_opnvwk(PROC_ARRAY *proc)
 {
 	proc->gem.contrl[0] = 100;
@@ -39,7 +62,20 @@ _v_opnvwk(PROC_ARRAY *proc)
 	gemsys(VDISYS, proc->gem.vdiparams);
 }
 
-INLINE void
+static void
+_vq_extnd(PROC_ARRAY *proc)
+{
+	proc->gem.contrl[0] = 102;
+	proc->gem.contrl[1] = 0;
+	proc->gem.contrl[3] = 1;
+	proc->gem.contrl[6] = proc->gem.vwk_handle;
+
+	proc->gem.intin[0] = 1;		/* VQ_EXTENDED */
+
+	gemsys(VDISYS, proc->gem.vdiparams);
+}
+
+static void
 _v_clsvwk(PROC_ARRAY *proc)
 {
 	proc->gem.contrl[0] = 101;
@@ -49,7 +85,7 @@ _v_clsvwk(PROC_ARRAY *proc)
 	gemsys(VDISYS, proc->gem.vdiparams);
 }
 
-INLINE void
+static void
 open_vdi(PROC_ARRAY *proc)
 {
 	short x;
@@ -68,12 +104,21 @@ open_vdi(PROC_ARRAY *proc)
 	if (proc->gem.contrl[6])
 	{
 		proc->gem.vwk_handle = proc->gem.contrl[6];
-		proc->gem.vwk_colors = proc->gem.intout[13] ? \
-					(long)proc->gem.intout[13] : 65536L;
+		_vq_extnd(proc);
+		if (proc->gem.intout[4] <= 24)
+		{
+			proc->gem.vwk_colors = pwr2(proc->gem.intout[4]);
+			proc->gem.vwk_xcolors = (unsigned long long)proc->gem.vwk_colors;
+		}
+		else
+		{
+			proc->gem.vwk_colors = 16777216L;
+			proc->gem.vwk_xcolors = pwr2(proc->gem.intout[4]);
+		}
 	}
 }
 
-INLINE void
+static void
 close_vdi(PROC_ARRAY *proc)
 {
 	if (proc->gem.vwk_handle >= 0)
@@ -105,7 +150,7 @@ appl_close(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 	close_vdi(proc);
 
 	if (proc->rsclength)
-		rsrc_xfree(bp, 12L, 1, proc);
+		rsrc_xfree(bp, RSRC_XFREE, 1, proc);
 
 	_appl_exit(proc);
 
@@ -170,7 +215,7 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 
 	if (flag & 1)
 	{
-		r = rsrc_xalloc(bp, 11L, 1, proc);
+		r = rsrc_xalloc(bp, RSRC_XALLOC, 1, proc);
 		if (r < 0)
 			goto error;
 	}
@@ -190,10 +235,10 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 					name = rscname;
 			}
 
-			r = rsrc_xload(bp, 10L, 2, name, proc);
+			r = rsrc_xload(bp, RSRC_XLOAD, 2, name, proc);
 			if (r < 0)
 				goto error;
-			r = rsrc_xalloc(bp, 11L, 1, proc);
+			r = rsrc_xalloc(bp, RSRC_XALLOC, 1, proc);
 			if (r < 0)
 				goto error;
 # if 0

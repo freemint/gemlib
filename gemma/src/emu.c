@@ -24,7 +24,7 @@
 # include "gemproto.h"
 # include "emu.h"
 
-# ifndef _HAVE_APPL_GETINFO
+# ifdef _EMULATE_APPL_GETINFO
 
 # define COOKIE_P	0x05a0L
 # define COOKIE__AKP	0x5f414b50L
@@ -33,7 +33,7 @@
  * When not determinable, assume English.
  */
 
-INLINE short
+static short
 getakp(void)
 {
 	long *cjar;
