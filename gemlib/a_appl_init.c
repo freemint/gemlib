@@ -16,8 +16,7 @@
  *			GEM applications may not make any AES or VDI calls unless
  *			appl_init() succeeds.
  *			Besides the return value, the AES fills in the
- *			application's global array (to reference the global array
- *			see your programming languages' manual).
+ *			application's global array as following:
 <pre>
        Name       global[x] Meaning
 
@@ -59,6 +58,11 @@ short
 mt_appl_init(short *global_aes)
 {
 	AES_PARAMS(10,0,1,0,0);
+	
+	/* clear some variable that may be used to check if an AES is loaded */
+	global_aes[0] = 0;  /* AES version number */
+	global_aes[2] = -1;  /* AES application ID */
+	aes_intout[0] = -1;  /* AES application ID */
 
 	AES_TRAP(aes_params);
 
