@@ -45,7 +45,7 @@ mt_EVNT_multi( short evtypes, short nclicks, short bmask, short bstate,
 
 	*(long*)(&aes_intin[14]) = ms;
 
-	aes_addrin[0] = event->msg;
+	aes_addrin[0] = (long)event->msg;
 
 	AES_TRAP(aes_params);
 
