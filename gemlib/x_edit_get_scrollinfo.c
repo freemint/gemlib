@@ -41,7 +41,7 @@ mt_edit_get_scrollinfo( OBJECT *tree, short obj, long *nlines, long *yscroll,
                         short *yvis, short *yval,short *ncols, short *xscroll, short *xvis,
 					    short *global_aes )
 {
-	AES_PARAMS(216,2,6,1,0);
+	AES_PARAMS(216,2,10,1,0);
 
 	aes_intin[0]  = obj;
 	aes_intin[1]  = 9;
