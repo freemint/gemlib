@@ -1107,6 +1107,7 @@ short	mt_evnt_timer  (unsigned long Interval, short *global_aes);
 short mt_form_alert  (short DefButton, const char *Str, short *global_aes);
 short mt_form_button (OBJECT *, short Bobject, short Bclicks, short *Bnxtobj, short *global_aes);
 short mt_form_center (OBJECT *, short *Cx, short *Cy, short *Cw, short *Ch, short *global_aes);
+short mt_form_center_grect (OBJECT *, GRECT *r, short *global_aes);
 short mt_form_dial   (short Flag, short Sx, short Sy, short Sw, short Sh,
                                short Bx, short By, short Bw, short Bh, short *global_aes);
 short mt_form_do     (OBJECT *, short StartObj, short *global_aes);
@@ -1128,6 +1129,7 @@ short 	mt_fsel_boxinput(char *path, char *file, short *exit_button, const char *
  */
 short	mt_graf_dragbox	(short Sw, short Sh, short Sx, short Sy, short Bx, short By, short Bw, short Bh, short *Fw, short *Fh, short *global_aes);
 short	mt_graf_growbox	(short Sx, short Sy, short Sw, short Sh, short Fx, short Fy, short Fw, short Fh, short *global_aes);
+short	mt_graf_growbox_grect	(const GRECT *in, const GRECT *out, short *global_aes);
 short	mt_graf_handle	(short *Wchar, short *Hchar, short *Wbox, short *Hbox, short *global_aes);
 short	mt_graf_xhandle	(short *Wchar, short *Hchar, short *Wbox, short *Hbox, short * device, short *global_aes);
 short	mt_graf_mbox	(short Sw, short Sh, short Sx, short Sy, short Dx, short Dy, short *global_aes);
@@ -1136,6 +1138,7 @@ short	mt_graf_mouse	(short Form, const MFORM *FormAddress, short *global_aes);
 short	mt_graf_rubberbox	(short Ix, short Iy, short Iw, short Ih, short *Fw, short *Fh, short *global_aes);
 short	mt_graf_multirubber (short bx, short by, short mw, short mh, GRECT *rec, short *rw, short *rh, short *global_aes);
 short	mt_graf_shrinkbox	(short Fx, short Fy, short Fw, short Fh, short Sx, short Sy, short Sw, short Sh, short *global_aes);
+short	mt_graf_shrinkbox_grect	(const GRECT *in, const GRECT *out, short *global_aes);
 short	mt_graf_slidebox	(OBJECT *, short Parent, short Object, short Direction, short *global_aes);
 short	mt_graf_watchbox	(OBJECT *, short Object, short InState, short OutState, short *global_aes);
 short	mt_graf_wwatchbox	(OBJECT *, short Object, short InState, short OutState, short whandle, short *global_aes);
@@ -1168,6 +1171,7 @@ short	mt_objc_change	(OBJECT *, short Object, short Res,
 short	mt_objc_delete	(OBJECT *, short Object, short *global_aes);
 short	mt_objc_draw	(OBJECT *, short Start, short Depth,
 						 short Cx, short Cy, short Cw, short Ch, short *global_aes);
+short	mt_objc_draw_grect	(OBJECT *, short Start, short Depth, const GRECT *r, short *global_aes);
 short	mt_objc_edit	(OBJECT *, short Object, short Char, short *Index, short Kind, short *global_aes); 
 short	mt_objc_find	(OBJECT *, short Start, short Depth, short Mx, short My, short *global_aes);
 short	mt_objc_xfind	(OBJECT *, short Start, short Depth, short Mx, short My, short *global_aes);

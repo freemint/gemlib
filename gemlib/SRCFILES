@@ -300,6 +300,7 @@ COBJS = \
 	a_form_alert.c \
 	a_form_button.c \
 	a_form_center.c \
+	a_form_center_grect.c \
 	a_form_dial.c \
 	a_form_do.c \
 	a_form_error.c \
@@ -309,6 +310,7 @@ COBJS = \
 	a_fsel_boxinput.c \
 	a_graf_dragbox.c \
 	a_graf_growbox.c \
+	a_graf_growbox_grect.c \
 	a_graf_handle.c \
 	a_graf_mbox.c \
 	a_graf_mkstate.c \
@@ -316,6 +318,7 @@ COBJS = \
 	a_graf_multirubber.c \
 	a_graf_rubbox.c \
 	a_graf_shrinkbox.c \
+	a_graf_shrinkbox_grect.c \
 	a_graf_slidebox.c \
 	a_graf_watchbox.c \
 	a_graf_wwatchbox.c \
@@ -336,6 +339,7 @@ COBJS = \
 	a_objc_change.c \
 	a_objc_delete.c \
 	a_objc_draw.c \
+	a_objc_draw_grect.c \
 	a_objc_edit.c \
 	a_objc_find.c \
 	a_objc_xfind.c \
@@ -446,6 +450,7 @@ COBJS = \
 	x_form_wbutton.c \
 	x_form_wkeybd.c \
 	x_form_xdial.c \
+	x_form_xdial_grect.c \
 	x_form_xdo.c \
 	x_form_xerr.c \
 	x_xfrm_popup.c \
