@@ -3,8 +3,6 @@
  * gem.h - main header file for new gem-lib
  */
 
-/** @file */
-
 #ifndef _GEMLIB_H_
 # define _GEMLIB_H_
 
@@ -844,10 +842,9 @@ typedef struct {
  * The AES bindings from old aesbind.h
  */
 
-/** @defgroup AES AES bindings
+/** @addtogroup a_appl
  *  @{
  */
-
 short	mt_appl_bvset  (short bvdisk, short bvhard, short *global_aes);
 short	mt_appl_control (short ap_cid, short ap_cwhat, void *ap_cout, short *global_aes);
 short	mt_appl_exit    (short *global_aes);
@@ -875,7 +872,11 @@ short	mt_appl_yield   (short *global_aes);
 #define appl_trecord(a,b) mt_appl_trecord(a,b,aes_global)
 #define appl_write(a,b,c) mt_appl_write(a,b,c,aes_global)
 #define appl_yield() mt_appl_yield(aes_global)
+/**@}*/
 
+/** @addtogroup a_evnt
+ *  @{
+ */
 short	mt_evnt_button (short Clicks, short WhichButton, short WhichState,
 						short *Mx, short *My, short *ButtonState, short *KeyState, short *global_aes);
 short	mt_evnt_dclick (short ToSet, short SetGet, short *global_aes);
@@ -899,7 +900,11 @@ short	mt_evnt_timer  (unsigned long Interval, short *global_aes);
 #define event_multi(a,b,c,d, e,f,g,h,i, j,k,l,m,n, o,p,q,r, s,t,u,v) mt_event_multi(a,b,c,d, e,f,g,h,i, j,k,l,m,n, o,p,q,r, s,t,u,v,aes_global)
 #define event_multi_fast(a,b,c) mt_event_multi_fast(a,b,c,aes_global)
 #define event_timer(a) mt_event_timer(a,aes_global)
+/**@}*/
 
+/** @addtogroup a_form
+ *  @{
+ */
 short form_alert  (short DefButton, const char *Str);
 short form_button (OBJECT *, short Bobject, short Bclicks, short *Bnxtobj);
 short form_center (OBJECT *, short *Cx, short *Cy, short *Cw, short *Ch);
@@ -909,10 +914,18 @@ short form_do     (OBJECT *, short StartObj);
 short form_error  (short ErrorCode);
 short form_keybd  (OBJECT *, short Kobject, short Kobnext, short Kchar,
                              short *Knxtobject, short *Knxtchar);
+/**@}*/
 
+/** @addtogroup a_fsel
+ *  @{
+ */
 short 	fsel_exinput	(char *Path, char *File, short *ExitButton, const char *title);
 short 	fsel_input	(char *Path, char *File, short *ExitButton);
+/**@}*/
 
+/** @addtogroup a_graf
+ *  @{
+ */
 short	graf_dragbox	(short Sw, short Sh, short Sx, short Sy, short Bx, short By, short Bw, short Bh, short *Fw, short *Fh); 
 short	graf_growbox	(short Sx, short Sy, short Sw, short Sh, short Fx, short Fy, short Fw, short Fh); 
 short	graf_handle	(short *Wchar, short *Hchar, short *Wbox, short *Hbox);
@@ -927,7 +940,11 @@ short	graf_watchbox	(OBJECT *, short Object, short InState, short OutState);
 /* the old names */
 #define graf_movebox(a,b,c,d,e,f) graf_mbox(a,b,c,d,e,f)
 #define graf_rubberbox(a,b,c,d,e,f) graf_rubbbox(a,b,c,d,e,f)
+/**@}*/
 
+/** @addtogroup a_menu
+ *  @{
+ */
 short 	menu_attach 	(short me_flag, OBJECT *me_tree, short me_item, MENU *me_mdata);
 short 	menu_bar 	(void *Tree, short ShowFlag);
 short	menu_click	(short click, short setit);
@@ -940,7 +957,11 @@ short 	menu_settings 	(short me_flag, MN_SET *me_values);
 short 	menu_text 	(void *Tree, short Item, char *Text);
 short 	menu_tnormal 	(void *Tree, short Item, short NormalFlag);
 short	menu_unregister	(short id);
+/**@}*/
 
+/** @addtogroup a_objc
+ *  @{
+ */
 short	objc_add	(OBJECT *, short Parent, short Child);
 short	objc_change	(OBJECT *, short Object, short Res,
 			 short Cx, short Cy, short Cw, short Ch,
@@ -953,18 +974,30 @@ short	objc_find	(OBJECT *, short Start, short Depth, short Mx, short My);
 short	objc_offset	(OBJECT *, short Object, short *X, short *Y);
 short	objc_order	(OBJECT *, short Object, short NewPos);
 short	objc_sysvar	(short mode, short which, short in1, short in2, short *out1, short *out2);
+/**@}*/
 
+/** @addtogroup a_rsrc
+ *  @{
+ */
 short	rsrc_free	(void);
 short	rsrc_gaddr	(short Type, short Index, void *Address);
 short	rsrc_load	(const char *Name);
 short	rsrc_obfix	(OBJECT *, short Index);
 short	rsrc_rcfix	(void *rc_header);
 short	rsrc_saddr	(short Type, short Index, void *Address);
+/**@}*/
 
+/** @addtogroup a_scrp
+ *  @{
+ */
 short	scrp_clear 	(void);
 short	scrp_read 	(char *Scrappath);
 short	scrp_write 	(const char *Scrappath);
+/**@}*/
 
+/** @addtogroup a_shel
+ *  @{
+ */
 short	shel_envrn 	(char **result, const char *param);
 short	shel_find 	(char *buf);
 short 	shel_get 	(char *Buf, short Len);
@@ -974,7 +1007,11 @@ short	shel_rdef	(char *lpcmd, char *lpdir);
 short	shel_read 	(char *Command, char *Tail);
 short	shel_wdef	(const char *lpcmd, const char *lpdir);
 short	shel_write	(short Exit, short Graphic, short Aes, void *Command, char *Tail);
+/**@}*/
 
+/** @addtogroup a_wind
+ *  @{
+ */
 short	wind_calc 	(short Type, short Parts, short InX, short InY, short InW, short InH, short *OutX, short *OutY, short *OutW, short *OutH);
 short	wind_close 	(short WindowHandle);
 short	wind_create 	(short Parts, short Wx, short Wy, short Ww, short Wh); 
@@ -996,13 +1033,22 @@ short wind_get_grect    (short WindowHandle, short What, GRECT *r);
 short	wind_open_grect	(short WindowHandle, const GRECT *r);
 short wind_set_grect    (short WindowHandle, short What, const GRECT *r);
 short wind_set_str      (short WindowHandle, short What, const char *str);
+/**@}*/
 
+/** @addtogroup a_util
+ *  @{
+ */
 short	rc_copy      (const GRECT *src, GRECT *dst);
 short	rc_equal     (const GRECT *r1,  const GRECT *r2);
 short rc_intersect (const GRECT *src, GRECT *dst);
 GRECT * array_to_grect (const short *array, GRECT *area);
 short * grect_to_array (const GRECT *area, short *array);
+/**@}*/
 
+
+/** @addtogroup AES
+ *  @{
+ */
 
 /*
  * aes trap interface
@@ -1028,18 +1074,38 @@ typedef struct
 
 extern short gl_apid, gl_ap_version;			/* initialized in appl_init */
 
+/** global AES array */
 extern short aes_global[];
+
+/** AES version number */
 #define	_AESversion   (aes_global[0])
+
+/** Number of concurrent applications possible (normally 1).
+    MultiTOS will return -1. */
 #define	_AESnumapps   (aes_global[1])
+
+/** Application identifier (same as mt_appl_init() return value). */
 #define	_AESapid 	  (aes_global[2])
+
+/** LONG global available for use by the application */
 #define	_AESappglobal (*((long *)&aes_global[3]))
+
+/** Pointer to the base of the resource loaded via rsrc_load(). */
 #define	_AESrscfile   ((OBJECT **)(*((long *)&aes_global[5])))
+
+/** Current maximum character used by the AES to do vst_height() prior to
+    writing to the screen. This entry is only present as of AES version 0x0400.*/
 #define	_AESmaxchar   (aes_global[13])
+
+/** Current minimum character used by the AES to do vst_height() prior to
+    writing to the screen. This entry is only present as of AES version 0x0400.*/
 #define	_AESminchar   (aes_global[14])
 
+/** perform AES trap */
 extern void aes (AESPB *pb);
 
 /**@}*/
+
 #endif /* AES */
 
 
