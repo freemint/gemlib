@@ -367,6 +367,15 @@ graf_rubbbox(short bx, short by, short mw, short mh, short *rw, short *rh)
 	return(mt_graf_rubberbox( bx,  by, mw, mh, rw, rh, aes_global));
 }
 
+#ifdef graf_rubbox
+#undef graf_rubbox
+#endif
+short
+graf_rubbox(short bx, short by, short mw, short mh, short *rw, short *rh)
+{
+	return(mt_graf_rubberbox( bx,  by, mw, mh, rw, rh, aes_global));
+}
+
 #ifdef graf_shrinkbox
 #undef graf_shrinkbox
 #endif

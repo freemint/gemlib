@@ -87,6 +87,7 @@ __BEGIN_DECLS
 /* the old names */
 #define graf_movebox(a,b,c,d,e,f) mt_graf_mbox(a,b,c,d,e,f,aes_global)
 #define graf_rubbbox(a,b,c,d,e,f) mt_graf_rubberbox(a,b,c,d,e,f,aes_global)
+#define graf_rubbox(a,b,c,d,e,f)  mt_graf_rubberbox(a,b,c,d,e,f,aes_global)
 /**@}*/
 
 /** @addtogroup a_menu
