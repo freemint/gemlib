@@ -2,7 +2,8 @@
  *  $Id$
  */
 
-#include "gem_aesP.h"
+#include "mt_gem.h"
+#include "gem.h"
 
 #ifdef appl_bvset
 #undef appl_bvset
