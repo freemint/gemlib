@@ -124,7 +124,7 @@ __BEGIN_DECLS
 #define APPEVNT_MOUSE	 	2	/**< TODO */
 #define APPEVNT_KEYBOARD 	3	/**< TODO */
 
-/** struct used by mt_appl_trecord and mt_appl_tplay */
+/** struct used by mt_appl_trecord() and mt_appl_tplay() */
 typedef struct pEvntrec
 {
 	long ap_event;		/**< TODO */

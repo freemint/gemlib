@@ -6,9 +6,9 @@
 
 /** plays back events originally recorded with mt_appl_trecord().
  *
- *  @param mem is a pointer to an array of EVNTREC structures (see
- *         appl_trecord())
- *  @param num indicates the number of EVNTREC's to play back.
+ *  @param mem is a pointer to an array of ::EVNTREC structures (see
+ *         mt_appl_trecord())
+ *  @param num indicates the number of ::EVNTREC's to play back.
  *  @param scale indicates on a scale of 1 to 10000 how fast the AES
  *         will attempt to play back your recording.
  *         The "original" doc
@@ -30,12 +30,12 @@
  *  Corp..
  *
  *  @note The mt_appl_trecord() function is bugged and stores a count of
- *        a 200Hz timer in EVNTREC::ap_value for APPEVNT_TIMER events,
+ *        a 200Hz timer in EVNTREC::ap_value for #APPEVNT_TIMER events,
  *        instead of a number of millisecondes. So, there is a coefficient
  *        of 5 between the value stored by mt_appl_trecord() and the value
  *        expected by mt_appl_tplay().
  *        The mt_appl_tplay() function takes care of that and adds a coefficient
- *        of 5 for APPEVNT_TIMER event... but this has been implemented the
+ *        of 5 for #APPEVNT_TIMER event... but this has been implemented the
  *        wrong way ! and now the coefficient between "time" recorded by 
  *        mt_appl_trecord() and "time" played by mt_appl_tplay() is 25.
  *        That's the reason why the right value for the scale parameter is
