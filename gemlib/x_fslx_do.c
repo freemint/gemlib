@@ -15,11 +15,15 @@
  *  @param patterns 
  *  @param filter 
  *  @param paths 
- *  @param sort_mode 
+ *  @param sort_mode  \n
+ *             [option CHECK_NULLPTR] sort_mode may be NULL
  *  @param flags 
- *  @param button 
- *  @param nfiles 
- *  @param pattern 
+ *  @param button  \n
+ *             [option CHECK_NULLPTR] button may be NULL
+ *  @param nfiles  \n
+ *             [option CHECK_NULLPTR] nfiles may be NULL
+ *  @param pattern  \n
+ *             [option CHECK_NULLPTR] pattern may be NULL
  *  @param global_aes global AES array
  *
  *  @return 
@@ -53,9 +57,21 @@ mt_fslx_do(char *title, char *path, short pathlen, char *fname, short fnamelen,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (button)
+#endif
 	*button = aes_intout[1];
+#if CHECK_NULLPTR
+	if (nfiles)
+#endif
 	*nfiles = aes_intout[2];
+#if CHECK_NULLPTR
+	if (sort_mode)
+#endif
 	*sort_mode = aes_intout[3];
+#if CHECK_NULLPTR
+	if (pattern)
+#endif
 	*pattern = (char *)aes_addrout[1];
 	
 	return (void *)aes_addrout[0];
