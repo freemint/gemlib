@@ -972,12 +972,12 @@ void	array_to_grect	(short *array, GRECT *area);
 
 typedef struct
 {
-	short	*control;
-	short	*global;
-	short	*intin;
-	short	*intout;
-	long	*addrin;
-	long	*addrout;
+	short       *control;
+	short	      *global;
+	const short *intin;
+	short       *intout;
+	const long  *addrin;
+	long        *addrout;
 } AESPB;
 
 extern short	aes_global[];
@@ -1358,11 +1358,11 @@ short	vdi_str2array		(const char  *src, short *des);
 
 typedef struct
 {
-	short	*control;
-	short	*intin;
-	short	*ptsin;
-	short	*intout;
-	short	*ptsout;
+	short       *control;
+	const short *intin;
+	const short *ptsin;
+	short       *intout;
+	short       *ptsout;
 } VDIPB;
 
 extern short	vdi_intin[];
