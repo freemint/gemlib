@@ -228,18 +228,15 @@ typedef struct pEvntrec
 #define HIGHLIGHT		0
 #define UNHIGHLIGHT		1
 
-/* menu_settings uses a new structure for setting and inquiring the submenu
- * delay values and the menu scroll height.	The delay values are measured in
- * milliseconds and the height is based upon the number of menu items.
- */
-
+/** menu_settings uses a new structure for setting and inquiring the submenu
+    delay values and the menu scroll height.*/
 typedef struct _mn_set 
 {
-	long  display;		/*  the submenu display delay */
-	long  drag;		/*  the submenu drag delay */
-	long  delay;		/*  the single-click scroll delay */
-	long  speed;		/*  the continuous scroll delay */
-	short height; 		/*  the menu scroll height */
+	long  display;		/**< the submenu display delay in milliseconds */
+	long  drag;			/**< the submenu drag delay in milliseconds */
+	long  delay;		/**< the single-click scroll delay in milliseconds */
+	long  speed;		/**< the continuous scroll delay in milliseconds */
+	short height; 		/**< the menu scroll height (in items) */
 } MN_SET;
 
 /* shel_get modes */
@@ -786,13 +783,19 @@ typedef struct rshdr
 	unsigned short	rsh_rssize;		/* total bytes in resource */
 } RSHDR;
 
+/** MENU structure, used by a_menu functions */
 typedef struct _menu
 {
-	OBJECT *mn_tree;
-	short  mn_menu;
-	short  mn_item;
-	short  mn_scroll;
-	short  mn_keystate;
+	OBJECT *mn_tree;    /**< Points to the OBJECT tree of the sub-menu */ 
+	short  mn_menu;     /**< Is an index to the parent object of the menu
+                             items. */
+	short  mn_item;     /**< Is the starting menu item */
+	short  mn_scroll;   /**< If SCROLL_NO (0), the menu will not scroll.
+                             If SCROLL_YES (1), and the number of menu
+                             items exceed the menu scroll height, arrows
+                             will appear which allow the user to scroll
+                             selections.*/
+	short  mn_keystate; /**< */
 } MENU;
 
 typedef struct
@@ -968,44 +971,56 @@ short	mt_graf_watchbox	(OBJECT *, short Object, short InState, short OutState, s
 /** @addtogroup a_menu
  *  @{
  */
-short 	menu_attach 	(short me_flag, OBJECT *me_tree, short me_item, MENU *me_mdata);
-short 	menu_bar 	(void *Tree, short ShowFlag);
-short	menu_click	(short click, short setit);
-short 	menu_icheck 	(void *Tree, short Item, short CheckFlag);
-short 	menu_ienable	(void *Tree, short Item, short EnableFlag);
-short 	menu_istart 	(short me_flag, OBJECT *me_tree, short me_imenu, short me_item);
-short 	menu_popup 	(MENU *me_menu, short me_xpos, short me_ypos, MENU *me_mdata);
-short 	menu_register 	(short ApId, char *MenuText);
-short 	menu_settings 	(short me_flag, MN_SET *me_values);
-short 	menu_text 	(void *Tree, short Item, char *Text);
-short 	menu_tnormal 	(void *Tree, short Item, short NormalFlag);
-short	menu_unregister	(short id);
+short 	mt_menu_attach		   (short me_flag, OBJECT *me_tree, short me_item, MENU *me_mdata, short *global);
+short 	mt_menu_bar 		   (OBJECT *me_tree, short me_mode, short *global);
+short	mt_menu_click		   (short click, short setit, short *global);
+short 	mt_menu_icheck		   (OBJECT *me_tree, short me_item, short me_check, short *global);
+short 	mt_menu_ienable 	   (OBJECT *me_tree, short me_item, short me_enable, short *global);
+short 	mt_menu_istart		   (short me_flag, OBJECT *me_tree, short me_imenu, short me_item, short *global);
+short 	mt_menu_popup		   (MENU *me_menu, short me_xpos, short me_ypos, MENU *me_mdata, short *global);
+short 	mt_menu_register	   (short ap_id, char *me_text, short *global);
+short 	mt_menu_settings	   (short me_flag, MN_SET *me_values, short *global);
+short 	mt_menu_text		   (OBJECT *me_tree, short me_item, char *me_text, short *global);
+short 	mt_menu_tnormal 	   (OBJECT *me_tree, short me_item, short me_normal, short *global);
+short	mt_menu_unregister	   (short id, short *global);
+#define menu_attach(a,b,c,d)	mt_menu_attach(a,b,c,d,aes_global)
+#define menu_bar(a,b)			mt_menu_bar(a,b,aes_global)
+#define menu_click(a,b)			mt_menu_click(a,b,aes_global)
+#define menu_icheck(a,b,c)		mt_menu_icheck(a,b,c,aes_global)
+#define menu_ienable(a,b,c)		mt_menu_ienable(a,b,c,aes_global)
+#define menu_istart(a,b,c,d)	mt_menu_istart(a,b,c,d,aes_global)
+#define menu_popup(a,b,c,d)		mt_menu_popup(a,b,c,d,aes_global)
+#define menu_register(a,b)		mt_menu_register(a,b,aes_global)
+#define menu_settings(a,b)		mt_menu_settings(a,b,aes_global)
+#define menu_text(a,b,c)		mt_menu_text(a,b,c,aes_global)
+#define menu_tnormal(a,b,c)		mt_menu_tnormal(a,b,c,aes_global)
+#define menu_unregister(a)		mt_menu_unregister(a,aes_global)
 /**@}*/
 
 /** @addtogroup a_objc
  *  @{
  */
-short	mt_objc_add		(OBJECT *, short Parent, short Child);
+short	mt_objc_add		(OBJECT *, short Parent, short Child, short *global);
 short	mt_objc_change	(OBJECT *, short Object, short Res,
 						 short Cx, short Cy, short Cw, short Ch,
-						 short NewState,short Redraw);
-short	mt_objc_delete	(OBJECT *, short Object);
+						 short NewState,short Redraw, short *global_aes);
+short	mt_objc_delete	(OBJECT *, short Object, short *global_aes);
 short	mt_objc_draw	(OBJECT *, short Start, short Depth,
-						 short Cx, short Cy, short Cw, short Ch);
-short	mt_objc_edit	(OBJECT *, short Object, short Char, short *Index, short Kind); 
-short	mt_objc_find	(OBJECT *, short Start, short Depth, short Mx, short My);
-short	mt_objc_offset	(OBJECT *, short Object, short *X, short *Y);
-short	mt_objc_order	(OBJECT *, short Object, short NewPos);
-short	mt_objc_sysvar	(short mode, short which, short in1, short in2, short *out1, short *out2);
-#define objc_add(a,b,c) mt_objc_add(a,b,c,aes_global)
-#define objc_change(a,b,c,d,e,f,g,h,i) mt_objc_change(a,b,c,d,e,f,g,h,i,aes_global)
-#define objc_delete(a,b) mt_objc_delete(a,b,aes_global)
-#define objc_draw(a,b,c,d,e,f,g) mt_objc_draw(a,b,c,d,e,f,g,aes_global)
-#define objc_edit(a,b,c,d,e) mt_objc_edit(a,b,c,d,e,aes_global)
-#define objc_find(a,b,c,d,e) mt_objc_find(a,b,c,d,e,aes_global)
-#define objc_offset(a,b,c,d) mt_objc_offset(a,b,c,d,aes_global)
-#define objc_order(a,b,c) mt_objc_order(a,b,c,aes_global)
-#define objc_sysvar(a,b,c,d,e,f) mt_objc_sysvar(a,b,c,d,e,f,aes_global)
+						 short Cx, short Cy, short Cw, short Ch, short *global_aes);
+short	mt_objc_edit	(OBJECT *, short Object, short Char, short *Index, short Kind, short *global_aes); 
+short	mt_objc_find	(OBJECT *, short Start, short Depth, short Mx, short My, short *global_aes);
+short	mt_objc_offset	(OBJECT *, short Object, short *X, short *Y, short *global_aes);
+short	mt_objc_order	(OBJECT *, short Object, short NewPos, short *global_aes);
+short	mt_objc_sysvar	(short mode, short which, short in1, short in2, short *out1, short *out2, short *global_aes);
+#define objc_add(a,b,c)					mt_objc_add(a,b,c,aes_global)
+#define objc_change(a,b,c,d,e,f,g,h,i)	mt_objc_change(a,b,c,d,e,f,g,h,i,aes_global)
+#define objc_delete(a,b)				mt_objc_delete(a,b,aes_global)
+#define objc_draw(a,b,c,d,e,f,g)		mt_objc_draw(a,b,c,d,e,f,g,aes_global)
+#define objc_edit(a,b,c,d,e)			mt_objc_edit(a,b,c,d,e,aes_global)
+#define objc_find(a,b,c,d,e)			mt_objc_find(a,b,c,d,e,aes_global)
+#define objc_offset(a,b,c,d)			mt_objc_offset(a,b,c,d,aes_global)
+#define objc_order(a,b,c)				mt_objc_order(a,b,c,aes_global)
+#define objc_sysvar(a,b,c,d,e,f)		mt_objc_sysvar(a,b,c,d,e,f,aes_global)
 /**@}*/
 
 /** @addtogroup a_rsrc
