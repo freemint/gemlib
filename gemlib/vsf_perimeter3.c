@@ -26,13 +26,13 @@
  */
 
 short
-vsf_perimeter (short handle, short vis, short style)
+vsf_perimeter3 (short handle, short vis, short style)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[1]; 
 	short vdi_intin[2]; 
-	VDI_PARAMS(vdi_control, intin, 0L, vdi_intout, 0L );
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L );
 #endif
 
 	vdi_intin[0] = vis;
