@@ -28,7 +28,7 @@
 short 
 mt_wind_xset_grect(short WindowHandle, short What, const GRECT *s, GRECT *r, short *global_aes)
 {
-	AES_PARAMS(104,6,5,0,0);
+	AES_PARAMS(105,6,5,0,0);
                     
 	aes_intin[0] = WindowHandle;
 	aes_intin[1] = What;
