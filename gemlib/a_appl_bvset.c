@@ -17,19 +17,7 @@
 short 
 mt_appl_bvset(short bvdisk, short bvhard, short *global_aes)
 {
-	static short	aes_control[AES_CTRLMAX]={16,2,1,0,0};
-	short			aes_intin  [AES_INTINMAX],
-					aes_intout [AES_INTOUTMAX];
-	long			aes_addrin [AES_ADDRINMAX],
-					aes_addrout[AES_ADDROUTMAX];
-
-	AESPB aes_params;
-  	aes_params.control = &aes_control[0];
-  	aes_params.global  = &global_aes[0]; 
-  	aes_params.intin   = &aes_intin[0];  
-  	aes_params.intout  = &aes_intout[0]; 
-  	aes_params.addrin  = &aes_addrin[0]; 
-  	aes_params.addrout = &aes_addrout[0];
+	AES_PARAMS({16,2,1,0,0});
 
 	aes_intin[0] = bvdisk;
 	aes_intin[1] = bvhard;
