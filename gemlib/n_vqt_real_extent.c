@@ -33,7 +33,7 @@ vqt_real_extent (short handle, short x, short y, char *string, short extent[])
 #endif
 	register short n = vdi_str2array (string, vdi_intin);
 #if USE_LOCAL_VDIPB
-	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, 0L, extent);
+	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, extent);
 #endif
 	
 #if !(USE_LOCAL_VDIPB)

@@ -26,7 +26,7 @@ vqt_pairkern (short handle, short ch1, short ch2, long *x, long *y)
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[2];   
 	short vdi_intout[4]; 
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 #endif
 	
 	vdi_intin[0] = ch1;

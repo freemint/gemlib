@@ -30,7 +30,7 @@ vs_document_info (short handle, short type, char *s, short wchar)
 #endif
 	register short n = 1;
 #if USE_LOCAL_VDIPB
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 #endif
 
 	vdi_intout[0] = 0;

@@ -25,7 +25,7 @@ vqt_f_extent16 (short handle, const WCHAR * wstr, short extent[])
 #endif
 	register short n = vdi_wstrlen ((const short *)wstr);
 #if USE_LOCAL_VDIPB
-	VDI_PARAMS(vdi_control, wstr, 0L, 0L, extent);
+	VDI_PARAMS(vdi_control, wstr, 0L, vdi_dummy, extent);
 #endif
 
 #if !(USE_LOCAL_VDIPB)
