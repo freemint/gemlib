@@ -82,23 +82,6 @@ deselect(WINDIAL *wd, short obj)
 		objc_xchange(wd, obj, ob[obj].ob_state & ~OS_SELECTED, 1);
 }
 
-static long
-newkey(WINDIAL *wd, short vec, short ks, short kc)
-{
-	if ((kc & 0x007f) == 0x0011)
-		windial_longjmp(wd, vec);
-	return 0;
-}
-
-static long
-newmsg(WINDIAL *wd, short vec, short *msg)
-{
-	if (msg[0] == AP_TERM)
-		windial_longjmp(wd, vec);
-
-	return 0;
-}
-
 static char *libbuf;
 static long liblen;
 static ushort libmode;
@@ -183,11 +166,6 @@ do_window(WINDIAL *wd)
 
 	windial_open(wd);
 
-	if (windial_setjmp(wd, WD_MSGVEC, newmsg))
-		return;
-	if (windial_setjmp(wd, WD_KEYVEC, newkey))
-		return;
-
 	for (;;)
 	{
 		short m;
@@ -254,7 +232,7 @@ do_window(WINDIAL *wd)
 					return;
 				}
 
-				users = (gemma.exec)(gemma.handle, (long)43, (short)0);
+				users = get_users();
 				if (users > 1)
 				{
 					a = windial_alert(1, (char *)IMMEDIATELY);
@@ -262,7 +240,11 @@ do_window(WINDIAL *wd)
 					{
 						a = 0;
 						for (x = 0; x < NUMSET; x++)
-							a |= (gemma.exec)(gemma.handle, (long)34, (short)2, (short)x+0x4000, (long)settings[x]);
+						{
+							SLB *g = get_gemma_p();
+							
+							a |= (g->exec)(g->handle, (long)34, (short)2, (short)x+0x4000, (long)settings[x]);
+						}
 						if (a < 0)
 							windial_error(a, (char *)-1);
 					}

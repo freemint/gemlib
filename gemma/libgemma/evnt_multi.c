@@ -1,3 +1,20 @@
+/*
+ * This file is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2, or (at your option)
+ * any later version.
+ * 
+ * This file is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
 # include "extdef.h"
 
 long
@@ -8,44 +25,41 @@ evnt_multi(short mflags, short mbclicks, short mbmask, short mbstate, \
 	short *mmobut, short *mmokstate, short *mkreturn, short *mbreturn)
 {
 	long r;
-# ifdef GEMMA_MULTIPROC
-	GEM_ARRAY *gem;
+	GEM_ARRAY *gem_array = gem_control();
 
-	gem = gem_control();
-# endif
-	gem->int_in[0] = mflags;
-	gem->int_in[1] = mbclicks;
-	gem->int_in[2] = mbmask;
-	gem->int_in[3] = mbstate;
-	gem->int_in[4] = mm1flags;
-	gem->int_in[5] = mm1x;
-	gem->int_in[6] = mm1y;
-	gem->int_in[7] = mm1w;
-	gem->int_in[8] = mm1h;
-	gem->int_in[9] = mm2flags;
-	gem->int_in[10] = mm2x;
-	gem->int_in[11] = mm2y;
-	gem->int_in[12] = mm2w;
-	gem->int_in[13] = mm2h;
-	gem->int_in[14] = (short)count;
-	gem->int_in[15] = (short)(count>>16);
+	gem_array->int_in[0] = mflags;
+	gem_array->int_in[1] = mbclicks;
+	gem_array->int_in[2] = mbmask;
+	gem_array->int_in[3] = mbstate;
+	gem_array->int_in[4] = mm1flags;
+	gem_array->int_in[5] = mm1x;
+	gem_array->int_in[6] = mm1y;
+	gem_array->int_in[7] = mm1w;
+	gem_array->int_in[8] = mm1h;
+	gem_array->int_in[9] = mm2flags;
+	gem_array->int_in[10] = mm2x;
+	gem_array->int_in[11] = mm2y;
+	gem_array->int_in[12] = mm2w;
+	gem_array->int_in[13] = mm2h;
+	gem_array->int_in[14] = (short)count;
+	gem_array->int_in[15] = (short)(count>>16);
 
-	gem->addr_in[0] = (long)mmgpbuff;
+	gem_array->addr_in[0] = (long)mmgpbuff;
 
-	r = call_aes(gem, 25);
+	r = call_aes(gem_array, 25);
 
 	if (mmox)
-		*mmox = gem->int_out[1];
+		*mmox = gem_array->int_out[1];
 	if (mmoy)
-		*mmoy = gem->int_out[2];
+		*mmoy = gem_array->int_out[2];
 	if (mmobut)
-		*mmobut = gem->int_out[3];
+		*mmobut = gem_array->int_out[3];
 	if (mmokstate)
-		*mmokstate = gem->int_out[4];
+		*mmokstate = gem_array->int_out[4];
 	if (mkreturn)
-		*mkreturn = gem->int_out[5];
+		*mkreturn = gem_array->int_out[5];
 	if (mbreturn)
-		*mbreturn = gem->int_out[6];
+		*mbreturn = gem_array->int_out[6];
 
 	return r;
 }

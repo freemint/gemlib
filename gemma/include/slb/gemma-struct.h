@@ -3,7 +3,7 @@
 # ifndef GEMMA_STRUCT_H
 # define GEMMA_STRUCT_H
 
-# define GEMMA_VERSION	0x010aL
+# define GEMMA_VERSION	0x010bL
 
 # define GEM_CTRL	0x00
 # define CALL_AES	0x01
@@ -48,6 +48,8 @@
 # define PROC_EXEC	0x29
 # define GET_VERSION	0x2a
 # define GET_USERS	0x2b
+# define WD_CLALL	0x2c
+# define WD_DELALL	0x2d
 
 typedef struct {
 	long 	aesparams[6];

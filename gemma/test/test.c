@@ -33,6 +33,12 @@ deselect(WINDIAL *wd, short obj)
 		objc_xchange(wd, obj, ob[obj].ob_state & ~OS_SELECTED, 1);
 }
 
+/* External handlers for Ctrl/Q and AP_TERM.
+ * As of 1.11 you do not have to register these, because they are
+ * handled internally. But I've left them here as as example of
+ * such handlers.
+ */
+# if 0
 static long
 newkey(WINDIAL *wd, short vec, short ks, short kc)
 {
@@ -49,6 +55,7 @@ newmsg(WINDIAL *wd, short vec, short *msg)
 
 	return 0;
 }
+# endif
 
 static void
 do_windows()
@@ -66,6 +73,8 @@ do_windows()
 	/* Open the first one */
 	windial_open(win_1);
 
+	/* Handler registration */
+# if 0
 	if (windial_setjmp(win_1, WD_MSGVEC, newmsg))
 		goto exit;
 	if (windial_setjmp(win_1, WD_KEYVEC, newkey))
@@ -74,6 +83,7 @@ do_windows()
 		goto exit;
 	if (windial_setjmp(win_2, WD_KEYVEC, newkey))
 		goto exit;
+# endif
 
 	for (;;)
 	{
@@ -136,9 +146,10 @@ do_windows()
 			}
 		}
 	}
+# if 0
 exit:
-	windial_delete(win_1);
-	windial_delete(win_2);
+# endif
+	windial_delete_all();
 
 	return;
 }

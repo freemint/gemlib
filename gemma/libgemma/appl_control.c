@@ -1,3 +1,20 @@
+/*
+ * This file is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2, or (at your option)
+ * any later version.
+ * 
+ * This file is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ */
+
 # include "extdef.h"
 
 /* as of AES 4.0 when appl_getinfo() indicates */
@@ -5,14 +22,13 @@
 long
 appl_control(short cid, short cwhat, void *out)
 {
-# ifdef GEMMA_MULTIPROC
-	gem = gem_control();
-# endif
-	gem->int_in[0] = cid;
-	gem->int_in[1] = cwhat;
-	gem->addr_in[0] = (long)out;
+	GEM_ARRAY *gem_array = gem_control();
 
-	return call_aes(gem, 129);
+	gem_array->int_in[0] = cid;
+	gem_array->int_in[1] = cwhat;
+	gem_array->addr_in[0] = (long)out;
+
+	return call_aes(gem_array, 129);
 }
 
 /* EOF */
