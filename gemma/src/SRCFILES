@@ -27,6 +27,6 @@ COBJS = \
 	rsrc.c 
 
 SOBJS = \
-	header.S
+	header.s
 
 SRCFILES = $(HEADER) $(COBJS) $(SOBJS)
