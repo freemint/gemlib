@@ -1,9 +1,8 @@
-
 #include "gem.h"
 
 
-int
-graf_watchbox (void *Tree, int Object, int InState, int OutState)
+short
+graf_watchbox (OBJECT *Tree, short Object, short InState, short OutState)
 {
 	aes_addrin[0] = (long) Tree;
 	aes_intin[0] = 0;

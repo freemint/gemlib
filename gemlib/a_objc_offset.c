@@ -1,9 +1,8 @@
-
 #include "gem.h"
 
 
-int
-objc_offset (void *Tree, int Object, int *X, int *Y)
+short
+objc_offset (OBJECT *Tree, short Object, short *X, short *Y)
 {
 	aes_addrin[0] = (long) Tree;
 	aes_intin[0] = Object;

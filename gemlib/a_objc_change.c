@@ -1,10 +1,10 @@
-
 #include "gem.h"
 
 
-int
-objc_change (void *Tree, int Object, int Res, int Cx, int Cy, int Cw, int Ch,
-	     int NewState, int Redraw)
+short
+objc_change (OBJECT *Tree, short Object, short Res,
+             short Cx, short Cy, short Cw, short Ch,
+             short NewState, short Redraw)
 {
 	aes_intin[0] = Object;
 	aes_intin[1] = Res;

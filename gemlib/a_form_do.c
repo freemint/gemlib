@@ -1,9 +1,8 @@
-
 #include "gem.h"
 
 
-int
-form_do (void *Tree, int StartObj)
+short
+form_do (OBJECT *Tree, short StartObj)
 {
 	aes_intin[0] = StartObj;
 	aes_addrin[0] = (long) Tree;

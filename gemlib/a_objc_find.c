@@ -1,9 +1,8 @@
-
 #include "gem.h"
 
 
-int
-objc_find (void *Tree, int Start, int Depth, int Mx, int My)
+short
+objc_find (OBJECT *Tree, short Start, short Depth, short Mx, short My)
 {
 	aes_intin[0] = Start;
 	aes_intin[1] = Depth;

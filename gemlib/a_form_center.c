@@ -1,9 +1,8 @@
-
 #include "gem.h"
 
 
-int
-form_center (void *Tree, int *Cx, int *Cy, int *Cw, int *Ch)
+short
+form_center (OBJECT *Tree, int *Cx, int *Cy, int *Cw, int *Ch)
 {
 	aes_addrin[0] = (long) Tree;
 	aes_control[0] = 54;

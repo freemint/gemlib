@@ -758,18 +758,18 @@ typedef struct mouse_event_type
  * The AES bindings from old aesbind.h
  */
 	 
-int	appl_bvset 	(int bvdisk, int bvhard);
-int	appl_control	(int ap_cid, int ap_cwhat, void *ap_cout);
-int	appl_exit 	(void);
-int	appl_find 	(const char *Name);
-int	appl_getinfo 	(int type, int *out1, int *out2, int *out3, int *out4);
-int	appl_init 	(void);
-int	appl_read 	(int ApId, int Length, void *ApPbuff);
-int	appl_search 	(int mode, char *fname, int *type, int *ap_id);
-int	appl_tplay 	(void *Mem, int Num, int Scale);
-int	appl_trecord 	(void *Mem, int Count);
-int	appl_write 	(int ApId, int Length, void *ApPbuff);
-int 	appl_yield 	(void);
+int	appl_bvset   (int bvdisk, int bvhard);
+int	appl_control (int ap_cid, int ap_cwhat, void *ap_cout);
+int	appl_exit    (void);
+int	appl_find    (const char *Name);
+int	appl_getinfo (int type, int *out1, int *out2, int *out3, int *out4);
+int	appl_init    (void);
+int	appl_read    (int ApId, int Length, void *ApPbuff);
+int	appl_search  (int mode, char *fname, int *type, int *ap_id);
+int	appl_tplay   (void *Mem, int Num, int Scale);
+int	appl_trecord (void *Mem, int Count);
+int	appl_write   (int ApId, int Length, void *ApPbuff);
+int 	appl_yield   (void);
 
 int	evnt_button 	(int Clicks, int WhichButton,	int WhichState, int *Mx, int *My, int *ButtonState, int *KeyState); 
 int	evnt_dclick 	(int ToSet, int SetGet);
@@ -783,29 +783,30 @@ int 	evnt_multi 	(int Type, int Clicks, int WhichButton, int WhichState,
 											int *ButtonState, int *KeyState, int *Key, int *ReturnCount);
 int	evnt_timer 	(unsigned long Interval);
 
-int 	form_alert 	(int DefButton, const char *Str);
-int 	form_button 	(void *Btree, int Bobject, int Bclicks, int *Bnxtobj);
-int 	form_center 	(void *Tree, int *Cx, int *Cy, int *Cw, int *Ch);
-int 	form_dial 	(int Flag, int Sx, int Sy, int Sw, int Sh, int Bx, int By, int Bw, int Bh);
-int 	form_do 	(void *Tree, int StartObj);
-int 	form_error 	(int ErrorCode);
-int 	form_keybd 	(void *Ktree, int Kobject, int Kobnext, int Kchar, int *Knxtobject, int *Knxtchar);
+int 	form_alert  (int DefButton, const char *Str);
+short form_button (OBJECT *, short Bobject, short Bclicks, short *Bnxtobj);
+short form_center (OBJECT *, int *Cx, int *Cy, int *Cw, int *Ch);
+int 	form_dial   (int Flag, int Sx, int Sy, int Sw, int Sh, int Bx, int By, int Bw, int Bh);
+short form_do     (OBJECT *, short StartObj);
+int 	form_error  (int ErrorCode);
+short form_keybd  (OBJECT *, short Kobject, short Kobnext, short Kchar,
+                   short *Knxtobject, short *Knxtchar);
 
-int 	fsel_exinput 	(char *Path, char *File, int *ExitButton, const char *title);
-int 	fsel_input 	(char *Path, char *File, int *ExitButton);
+int 	fsel_exinput (char *Path, char *File, int *ExitButton, const char *title);
+int 	fsel_input   (char *Path, char *File, int *ExitButton);
 
-int 	graf_dragbox 	(int Sw, int Sh, int Sx, int Sy, int Bx, int By, int Bw, int Bh, int *Fw, int *Fh); 
-int 	graf_growbox 	(int Sx, int Sy, int Sw, int Sh, int Fx, int Fy, int Fw, int Fh); 
-int 	graf_handle	(int *Wchar, int *Hchar, int *Wbox, int *Hbox);
-int 	graf_mbox 	(int Sw, int Sh, int Sx, int Sy, int Dx, int Dy);
+int    graf_dragbox   (int Sw, int Sh, int Sx, int Sy, int Bx, int By, int Bw, int Bh, int *Fw, int *Fh); 
+int    graf_growbox   (int Sx, int Sy, int Sw, int Sh, int Fx, int Fy, int Fw, int Fh); 
+int    graf_handle    (int *Wchar, int *Hchar, int *Wbox, int *Hbox);
+int    graf_mbox      (int Sw, int Sh, int Sx, int Sy, int Dx, int Dy);
 #define graf_movebox(a,b,c,d,e,f) graf_mbox(a,b,c,d,e,f)
-int 	graf_mkstate 	(int *Mx, int *My, int *ButtonState, int *KeyState); 
-int 	graf_mouse 	(int Form, void *FormAddress);
-int 	graf_rubbbox	(int Ix, int Iy, int Iw, int Ih, int *Fw, int *Fh);
+int    graf_mkstate   (int *Mx, int *My, int *ButtonState, int *KeyState); 
+int    graf_mouse     (int Form, void *FormAddress);
+int    graf_rubbbox   (int Ix, int Iy, int Iw, int Ih, int *Fw, int *Fh);
 #define graf_rubberbox(a,b,c,d,e,f) graf_rubbbox(a,b,c,d,e,f)
-int 	graf_shrinkbox	(int Fx, int Fy, int Fw, int Fh, int Sx, int Sy, int Sw, int Sh); 
-int 	graf_slidebox 	(void *Tree, int Parent, int Object, int Direction); 
-int 	graf_watchbox 	(void *Tree, int Object, int InState, int OutState);
+int    graf_shrinkbox (int Fx, int Fy, int Fw, int Fh, int Sx, int Sy, int Sw, int Sh); 
+short  graf_slidebox  (OBJECT *, short Parent, short Object, short Direction); 
+short  graf_watchbox  (OBJECT *, short Object, short InState, short OutState);
 
 int 	menu_attach 	(int me_flag, OBJECT *me_tree, int me_item, MENU *me_mdata);
 int 	menu_bar 	(void *Tree, int ShowFlag);
@@ -820,22 +821,25 @@ int 	menu_text 	(void *Tree, int Item, char *Text);
 int 	menu_tnormal 	(void *Tree, int Item, int NormalFlag);
 int	menu_unregister	(int id);
 
-int	objc_add 	(void *Tree, int Parent, int Child);
-int	objc_change 	(void *Tree, int Object, int Res, int Cx, int Cy, int Cw, int Ch, int NewState,int Redraw);
-int	objc_delete 	(void *Tree, int Object);
-int	objc_draw 	(void *Tree, int Start, int Depth, int Cx,int Cy, int Cw, int Ch);
-int	objc_edit 	(void *Tree, int Object, int Char, int *Index, int Kind); 
-int	objc_find 	(void *Tree, int Start, int Depth, int Mx, int My);
-int	objc_offset 	(void *Tree, int Object, int *X, int *Y);
-int	objc_order 	(void *Tree, int Object, int NewPos);
-int	objc_sysvar 	(int mode, int which, int in1, int in2, int *out1, int *out2);
+short objc_add    (OBJECT *, short Parent, short Child);
+short objc_change (OBJECT *, short Object, short Res,
+                             short Cx, short Cy, short Cw, short Ch,
+                             short NewState,short Redraw);
+short objc_delete (OBJECT *, short Object);
+short objc_draw   (OBJECT *, short Start, short Depth,
+                             short Cx, short Cy, short Cw, short Ch);
+short objc_edit   (OBJECT *, short Object, short Char, short *Index, short Kind); 
+short objc_find   (OBJECT *, short Start, short Depth, short Mx, short My);
+short objc_offset (OBJECT *, short Object, short *X, short *Y);
+short objc_order  (OBJECT *, short Object, short NewPos);
+int   objc_sysvar (int mode, int which, int in1, int in2, int *out1, int *out2);
 
-int	rsrc_free 	(void);
-int	rsrc_gaddr 	(int Type, int Index, void *Address);
-int	rsrc_load 	(const char *Name);
-int	rsrc_obfix 	(void *Tree, int Index);
-int	rsrc_rcfix 	(void *rc_header);
-int	rsrc_saddr 	(int Type, int Index, void *Address);
+int   rsrc_free  (void);
+int   rsrc_gaddr (int Type, int Index, void *Address);
+int   rsrc_load  (const char *Name);
+short rsrc_obfix (OBJECT *, short Index);
+int   rsrc_rcfix (void *rc_header);
+int   rsrc_saddr (int Type, int Index, void *Address);
 
 int	scrp_clear 	(void);
 int	scrp_read 	(char *Scrappath);

@@ -1,9 +1,8 @@
-
 #include "gem.h"
 
 
-int
-objc_delete (void *Tree, int Object)
+short
+objc_delete (OBJECT *Tree, short Object)
 {
 	aes_addrin[0] = (long) Tree;
 	aes_intin[0] = Object;

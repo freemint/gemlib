@@ -1,9 +1,8 @@
-
 #include "gem.h"
 
 
-int
-objc_order (void *Tree, int Object, int NewPos)
+short
+objc_order (OBJECT *Tree, short Object, short NewPos)
 {
 	aes_intin[0] = Object;
 	aes_intin[1] = NewPos;

@@ -1,9 +1,9 @@
-
 #include "gem.h"
 
 
-int
-objc_draw (void *Tree, int Start, int Depth, int Cx, int Cy, int Cw, int Ch)
+short
+objc_draw (OBJECT *Tree, short Start, short Depth,
+           short Cx, short Cy, short Cw, short Ch)
 {
 	aes_intin[0] = Start;
 	aes_intin[1] = Depth;
