@@ -10,8 +10,10 @@
  *
  *  @param handle Device handle
  *  @param ch character index
- *  @param advx x advance in 1/65536 pixels
- *  @param advy y advance in 1/65536 Pixels
+ *  @param advx x advance in 1/65536 pixels \n
+ *         [option CHECK_NULLPTR] advx may be NULL
+ *  @param advy y advance in 1/65536 Pixels \n
+ *         [option CHECK_NULLPTR] advy may be NULL
  *
  *  @since NVDI 3.00
  *
@@ -34,8 +36,14 @@ vqt_advance32 (short handle, short ch, long *advx, long *advy)
 	vdi_intin[0] = ch;
 #endif
 	
-	VDI_TRAP (vdi_params, handle, 247, 0,2);
+	VDI_TRAP (vdi_params, handle, 247, 0,1);
 
+#if CHECK_NULLPTR
+	if (advx)
+#endif
 	*advx = *(long*)&vdi_ptsout[4];
+#if CHECK_NULLPTR
+	if (advy)
+#endif
 	*advy = *(long*)&vdi_ptsout[6];
 }
