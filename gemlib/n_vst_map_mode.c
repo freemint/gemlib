@@ -14,7 +14,7 @@
  *         - 1: ASCII mapping
  *         - 2: Unicode mapping
  *
- *  @return set mapping mode
+ *  @return set mapping mode, or -1.
  *
  *  @since NVDI 4
  *
@@ -23,6 +23,8 @@
  *  the character does not exist. Instead of vqt_width() you can also call 
  *  vqt_char_index() and map the Unicode index into a direct index.
  *
+ *  @note this function returns -1 if the VDI doesn't support this call, or if the VDI
+ *  doesn't return anything (NVDI3?).
  *
  */
 
@@ -41,5 +43,5 @@ vst_map_mode (short handle, short mode)
 
 	VDI_TRAP (vdi_params, handle, 236, 0,2);
 
-	return vdi_intout[0];
+	return (vdi_control[4] ? vdi_intout[0] : -1);
 }
