@@ -48,7 +48,7 @@ APPEVNT_KEYBOARD 3    Keyboard  bits 0-7:	ASCII code
 short 
 mt_appl_trecord(void *Mem, short Count, short *global_aes)
 {
-	AES_PARAMS({15,1,1,1,0});
+	AES_PARAMS(15,1,1,1,0);
                     
 	aes_intin[0]  = Count;
 	aes_addrin[0] = (long)Mem;

@@ -23,7 +23,7 @@
 short 
 mt_appl_exit(short *global_aes)
 {
-	AES_PARAMS({19,0,1,0,0});
+	AES_PARAMS(19,0,1,0,0);
                     
 	AES_TRAP(aes_params);
 

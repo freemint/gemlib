@@ -39,7 +39,7 @@
 short 
 mt_appl_read(short ApId, short Length, void *ApPbuff, short *global_aes)
 {
-	AES_PARAMS({11,2,1,1,0});
+	AES_PARAMS(11,2,1,1,0);
                     
 	aes_intin[0]  = ApId;
 	aes_intin[1]  = Length;

@@ -32,7 +32,7 @@ Value   Playback Speed
 short 
 mt_appl_tplay(void *Mem, short Num, short Scale, short *global_aes)
 {
-	AES_PARAMS({14,2,1,1,0});
+	AES_PARAMS(14,2,1,1,0);
                     
 	aes_intin[0]  = Num;
 	aes_intin[1]  = Scale;

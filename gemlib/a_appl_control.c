@@ -18,7 +18,7 @@
 short
 mt_appl_control(short ap_cid, short ap_cwhat, void *ap_cout, short *global_aes)
 {
-	AES_PARAMS({129,2,1,1,0});
+	AES_PARAMS(129,2,1,1,0);
                    
 	aes_intin[0]  = ap_cid;
 	aes_intin[1]  = ap_cwhat;

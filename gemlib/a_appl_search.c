@@ -39,7 +39,7 @@
 short 
 mt_appl_search(short mode, char *fname, short *type, short *ap_id, short *global_aes)
 {
-	AES_PARAMS({18,1,3,1,0});
+	AES_PARAMS(18,1,3,1,0);
                     
 	aes_intin[0]  = mode;
 	aes_addrin[0] = (long)fname;

@@ -37,7 +37,7 @@
 short 
 mt_appl_find(const char *Name, short *global_aes)
 {
-	AES_PARAMS({13,0,1,1,0});
+	AES_PARAMS(13,0,1,1,0);
                     
 	aes_addrin[0] = (long)Name;
 

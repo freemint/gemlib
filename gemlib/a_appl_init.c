@@ -66,7 +66,7 @@ mt_appl_init(short *global_aes)
 	short *pts;
 	long *ptl;
 #endif		
-	AES_PARAMS({10,0,1,0,0});
+	AES_PARAMS(10,0,1,0,0);
                     
 	/* clear all binding arrays */
 #ifdef __MINT__  /* mintlib have bzero() */

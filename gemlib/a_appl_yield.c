@@ -4,18 +4,22 @@
 
 #include "gem_aesP.h"
 
-/** Application Yield
+/** 
  *
  *  @param global_aes global AES array
- *  @return add return description here
  *
- *  add detailled description here.  
+ *  @return 
+ *
+ *  @since 
+ *
+ *  @sa 
+ * 
  */
 
 short 
 mt_appl_yield(short *global_aes)
 {
-	AES_PARAMS({17,0,1,0,0});
+	AES_PARAMS(17,0,1,0,0);
                     
 	AES_TRAP(aes_params);
 

@@ -4,20 +4,24 @@
 
 #include "gem_aesP.h"
 
-/** Application Bit-Vector Set
+/** 
  *
- *  @param bvdisk add parameter description here
- *  @param bvhard add parameter description here
+ *  @param bvdisk 
+ *  @param bvhard 
  *  @param global_aes global AES array
- *  @return add return description here
  *
- *  add detailled description here.  
+ *  @return
+ *
+ *  @since 
+ *
+ *  @sa 
+ *  
  */
 
 short 
 mt_appl_bvset(short bvdisk, short bvhard, short *global_aes)
 {
-	AES_PARAMS({16,2,1,0,0});
+	AES_PARAMS(16,2,1,0,0);
 
 	aes_intin[0] = bvdisk;
 	aes_intin[1] = bvhard;
