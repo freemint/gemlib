@@ -45,3 +45,10 @@ gcc:
 	$(ZIP) -ur $@.zip $@
 	rm -rf $@
 
+sources:
+	rm -f www/gemlib-src.tgz
+	cd ..; tar -cvzf gemlib/www/gemlib-src.tgz --exclude=CVS \
+		--exclude=www --exclude=gem.lib --exclude=gem.a \
+		--exclude=libgem.a --exclude=libgem16.a \
+		--exclude=gem.olb --exclude=gem16.olb gemlib
+		
