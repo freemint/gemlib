@@ -10,7 +10,7 @@
 # include <compiler.h>
 
 #ifndef INT16  /* keep compatibility with Mgemlib */
-#define INT16 short
+#define INT16 short  /**< 16 bits signed integer */
 #endif
 
 # ifdef __GEMLIB_OLDBIND		/* Backward-compatibility */
@@ -23,12 +23,12 @@
 #  endif
 
 # else				/* New include scheme: one header defines all */
-#  define __GEMLIB_DEFS
+#  define __GEMLIB_DEFS  /**< told the compiler to parse both AES and VDI definitions */
 #  ifndef _GEM_VDI_P_
-#   define __GEMLIB_AES
+#   define __GEMLIB_AES  /**< told the compiler to parse AES prototypes */
 #  endif
 #  ifndef _GEM_AES_P_
-#   define __GEMLIB_VDI
+#   define __GEMLIB_VDI  /**< told the compiler to parse VDI prototypes */
 #  endif
 # endif
 
@@ -41,15 +41,15 @@ __BEGIN_DECLS
 
 /* Major and minor version number of the GEMLib package.  Use these macros 
    to test for features in specific releases.  */
-#define __GEMLIB__			 __GEMLIB_MAJOR__
-#define	__GEMLIB_MAJOR__     @MAJOR@
-#define	__GEMLIB_MINOR__     @MINOR@
-#define __GEMLIB_REVISION__  @REVISION@
-#define __GEMLIB_BETATAG__   @BETATAG@
+#define __GEMLIB__			 __GEMLIB_MAJOR__ 		/**< tell the world this is GEMLIB */
+#define	__GEMLIB_MAJOR__     @MAJOR@				/**< MAJOR version number of gemlib */
+#define	__GEMLIB_MINOR__     @MINOR@				/**< MINOR version number of gemlib */
+#define __GEMLIB_REVISION__  @REVISION@				/**< REVISION version number of gemlib */
+#define __GEMLIB_BETATAG__   @BETATAG@				/**< BETATAG of gemlib */
 
 /* the other name of this release is MGEMLIB 42 */
-#define MGEMLIB				42
-#define __MGEMLIB__			42
+#define MGEMLIB				42						/**< this gemlib is compatible with MGEMLIB */
+#define __MGEMLIB__			42						/**< another identifier for MGEMLIB */
 
 
 #ifdef __GEMLIB_DEFS
@@ -58,9 +58,9 @@ __BEGIN_DECLS
  * The AES specific stuff from old gemfast.h
  */
 
-#define NIL 				0
-#define DESKTOP_HANDLE		0
-#define DESK			 	DESKTOP_HANDLE
+#define NIL 				0					/**< TODO */
+#define DESKTOP_HANDLE		0					/**< TODO */
+#define DESK			 	DESKTOP_HANDLE		/**< TODO */
 
 /* mt_appl_control() mode */
 #define APC_HIDE			10  /**< Hide application -- see mt_appl_control() */
@@ -77,51 +77,51 @@ __BEGIN_DECLS
 #define APCI_HASDESK		0x04  /**< the application has a own desk -- subopcode for #APC_INFO */
 
 /* appl_getinfo modes */
-#define AES_LARGEFONT		0
-#define AES_SMALLFONT		1
-#define AES_SYSTEM			2
-#define AES_LANGUAGE 		3
-#define AES_PROCESS 		4
-#define AES_PCGEM			5
-#define AES_INQUIRE 		6
-#define AES_MOUSE			8
-#define AES_MENU			9
-#define AES_SHELL			10
-#define AES_WINDOW			11
-#define AES_MESSAGE			12
-#define AES_OBJECT			13
-#define AES_FORM			14
+#define AES_LARGEFONT		0	/**< TODO */
+#define AES_SMALLFONT		1	/**< TODO */
+#define AES_SYSTEM			2	/**< TODO */
+#define AES_LANGUAGE 		3	/**< TODO */
+#define AES_PROCESS 		4	/**< TODO */
+#define AES_PCGEM			5	/**< TODO */
+#define AES_INQUIRE 		6	/**< TODO */
+#define AES_MOUSE			8	/**< TODO */
+#define AES_MENU			9	/**< TODO */
+#define AES_SHELL			10	/**< TODO */
+#define AES_WINDOW			11	/**< TODO */
+#define AES_MESSAGE			12	/**< TODO */
+#define AES_OBJECT			13	/**< TODO */
+#define AES_FORM			14	/**< TODO */
 
 /* appl_getinfo return values */
-#define SYSTEM_FONT			0
-#define OUTLINE_FONT 		1
+#define SYSTEM_FONT			0	/**< TODO */
+#define OUTLINE_FONT 		1	/**< TODO */
 
-#define AESLANG_ENGLISH		0
-#define AESLANG_GERMAN		1
-#define AESLANG_FRENCH		2
-#define AESLANG_SPANISH 	4
-#define AESLANG_ITALIAN 	5
-#define AESLANG_SWEDISH 	6
+#define AESLANG_ENGLISH		0	/**< TODO */
+#define AESLANG_GERMAN		1	/**< TODO */
+#define AESLANG_FRENCH		2	/**< TODO */
+#define AESLANG_SPANISH 	4	/**< TODO */
+#define AESLANG_ITALIAN 	5	/**< TODO */
+#define AESLANG_SWEDISH 	6	/**< TODO */
 
 /* appl_read modes */
-#define APR_NOWAIT			-1
+#define APR_NOWAIT			-1	/**< TODO */
 
 /* appl_search modes */
-#define APP_FIRST 			0
-#define APP_NEXT			1
-#define APP_DESK			2
+#define APP_FIRST 			0	/**< TODO */
+#define APP_NEXT			1	/**< TODO */
+#define APP_DESK			2	/**< TODO */
 
 /* appl_search return values*/
-#define APP_SYSTEM			0x01
-#define APP_APPLICATION		0x02
-#define APP_ACCESSORY		0x04
-#define APP_SHELL 			0x08
+#define APP_SYSTEM			0x01	/**< TODO */
+#define APP_APPLICATION		0x02	/**< TODO */
+#define APP_ACCESSORY		0x04	/**< TODO */
+#define APP_SHELL 			0x08	/**< TODO */
 
 /* appl_trecord types */
-#define APPEVNT_TIMER	 	0
-#define APPEVNT_BUTTON	 	1
-#define APPEVNT_MOUSE	 	2
-#define APPEVNT_KEYBOARD 	3
+#define APPEVNT_TIMER	 	0	/**< TODO */
+#define APPEVNT_BUTTON	 	1	/**< TODO */
+#define APPEVNT_MOUSE	 	2	/**< TODO */
+#define APPEVNT_KEYBOARD 	3	/**< TODO */
 
 /** struct used by mt_appl_trecord and mt_appl_tplay */
 typedef struct pEvntrec
@@ -131,65 +131,65 @@ typedef struct pEvntrec
 } EVNTREC;
 
 /* evnt_button flags */
-#define LEFT_BUTTON		0x0001
-#define RIGHT_BUTTON 	0x0002
-#define MIDDLE_BUTTON	0x0004
+#define LEFT_BUTTON		0x0001	/**< TODO */
+#define RIGHT_BUTTON 	0x0002	/**< TODO */
+#define MIDDLE_BUTTON	0x0004	/**< TODO */
 
-#define K_RSHIFT		0x0001
-#define K_LSHIFT		0x0002
-#define K_CTRL 			0x0004
-#define K_ALT			0x0008
+#define K_RSHIFT		0x0001	/**< TODO */
+#define K_LSHIFT		0x0002	/**< TODO */
+#define K_CTRL 			0x0004	/**< TODO */
+#define K_ALT			0x0008	/**< TODO */
 
 /* evnt_dclick flags */
-#define EDC_INQUIRE		0
-#define EDC_SET			1
+#define EDC_INQUIRE		0	/**< TODO */
+#define EDC_SET			1	/**< TODO */
 
 /* event message values */
-#define MN_SELECTED	 	10
-#define WM_REDRAW 	 	20
-#define WM_TOPPED 	 	21
-#define WM_CLOSED 	 	22
-#define WM_FULLED 	 	23
-#define WM_ARROWED	 	24
-#define WM_HSLID		25
-#define WM_VSLID		26
-#define WM_SIZED		27
-#define WM_MOVED		28
-#define WM_NEWTOP		29
-#define WM_UNTOPPED		30
-#define WM_ONTOP		31
-#define WM_BOTTOM		33
-#define WM_ICONIFY		34
-#define WM_UNICONIFY	35
-#define WM_ALLICONIFY	36
-#define WM_TOOLBAR		37
-#define AC_OPEN			40
-#define AC_CLOSE		41
-#define AP_TERM			50
-#define AP_TFAIL		51
-#define AP_RESCHG 		57
+#define MN_SELECTED	 	10	/**< TODO */
+#define WM_REDRAW 	 	20	/**< TODO */
+#define WM_TOPPED 	 	21	/**< TODO */
+#define WM_CLOSED 	 	22	/**< TODO */
+#define WM_FULLED 	 	23	/**< TODO */
+#define WM_ARROWED	 	24	/**< TODO */
+#define WM_HSLID		25	/**< TODO */
+#define WM_VSLID		26	/**< TODO */
+#define WM_SIZED		27	/**< TODO */
+#define WM_MOVED		28	/**< TODO */
+#define WM_NEWTOP		29	/**< TODO */
+#define WM_UNTOPPED		30	/**< TODO */
+#define WM_ONTOP		31	/**< TODO */
+#define WM_BOTTOM		33	/**< TODO */
+#define WM_ICONIFY		34	/**< TODO */
+#define WM_UNICONIFY	35	/**< TODO */
+#define WM_ALLICONIFY	36	/**< TODO */
+#define WM_TOOLBAR		37	/**< TODO */
+#define AC_OPEN			40	/**< TODO */
+#define AC_CLOSE		41	/**< TODO */
+#define AP_TERM			50	/**< TODO */
+#define AP_TFAIL		51	/**< TODO */
+#define AP_RESCHG 		57	/**< TODO */
 
 /* old name */
-#define WM_BOTTOMED		WM_BOTTOM
+#define WM_BOTTOMED		WM_BOTTOM	/**< TODO */
 
 /* Xcontrol messages */
-#define CT_UPDATE		50
-#define CT_MOVE			51
-#define CT_NEWTOP		52
-#define CT_KEY			53
+#define CT_UPDATE		50	/**< TODO */
+#define CT_MOVE			51	/**< TODO */
+#define CT_NEWTOP		52	/**< TODO */
+#define CT_KEY			53	/**< TODO */
 
-#define SHUT_COMPLETED		60
-#define RESCHG_COMPLETED	61
-#define RESCH_COMPLETED		61
-#define AP_DRAGDROP 		63
-#define SH_WDRAW			72
-#define SC_CHANGED			80
-#define PRN_CHANGED 		82
-#define FNT_CHANGED 		83
-#define THR_EXIT			88
-#define PA_EXIT 			89
-#define CH_EXIT 			90
-#define WM_M_BDROPPED		100		/* KAOS 1.4  */
+#define SHUT_COMPLETED		60	/**< TODO */
+#define RESCHG_COMPLETED	61	/**< TODO */
+#define RESCH_COMPLETED		61	/**< TODO */
+#define AP_DRAGDROP 		63	/**< TODO */
+#define SH_WDRAW			72	/**< TODO */
+#define SC_CHANGED			80	/**< TODO */
+#define PRN_CHANGED 		82	/**< TODO */
+#define FNT_CHANGED 		83	/**< TODO */
+#define THR_EXIT			88	/**< TODO */
+#define PA_EXIT 			89	/**< TODO */
+#define CH_EXIT 			90	/**< TODO */
+#define WM_M_BDROPPED		100		/* KAOS 1.4  */	/**< TODO */
 
 /** MAG!X screen manager extension
  *
@@ -220,8 +220,8 @@ typedef struct pEvntrec
 #define SM_M_RES7			107		/**< MAG!X screen manager extension */
 #define SM_M_RES8			108		/**< MAG!X screen manager extension */
 #define SM_M_RES9			109		/**< MAG!X screen manager extension */
-#define WM_SHADED			22360	/* [WM_SHADED apid 0 win 0 0 0 0]   */
-#define WM_UNSHADED 		22361	/* [WM_UNSHADED apid 0 win 0 0 0 0] */
+#define WM_SHADED			22360	/**< TODO [WM_SHADED apid 0 win 0 0 0 0]   */
+#define WM_UNSHADED 		22361	/**< TODO [WM_UNSHADED apid 0 win 0 0 0 0] */
 
 /* SM_M_SPECIAL sub-opcode */
 #define SMC_TIDY_UP		0    /* MagiC 2  */ 	 /**< TODO */
@@ -235,56 +235,56 @@ typedef struct pEvntrec
 #define SMC_HIDEACT		8    /* MagiC 3.1	*/   /**< TODO */
 
 /* evnt_mouse modes */
-#define MO_ENTER		0
-#define MO_LEAVE		1
+#define MO_ENTER		0	/**< TODO */
+#define MO_LEAVE		1	/**< TODO */
 
 /* evnt_multi flags */
-#define MU_KEYBD			0x0001
-#define MU_BUTTON			0x0002
-#define MU_M1				0x0004
-#define MU_M2				0x0008
-#define MU_MESAG			0x0010
-#define MU_TIMER			0x0020
-#define MU_WHEEL			0x0040		/* XaAES */
-#define MU_MX				0x0080		/* XaAES */
-#define MU_NORM_KEYBD		0x0100		/* XaAES */
-#define MU_DYNAMIC_KEYBD	0x0200	/* XaAES */
+#define MU_KEYBD			0x0001	/**< TODO */
+#define MU_BUTTON			0x0002	/**< TODO */
+#define MU_M1				0x0004	/**< TODO */
+#define MU_M2				0x0008	/**< TODO */
+#define MU_MESAG			0x0010	/**< TODO */
+#define MU_TIMER			0x0020	/**< TODO */
+#define MU_WHEEL			0x0040		/* XaAES */	/**< TODO */
+#define MU_MX				0x0080		/* XaAES */	/**< TODO */
+#define MU_NORM_KEYBD		0x0100		/* XaAES */	/**< TODO */
+#define MU_DYNAMIC_KEYBD	0x0200	/* XaAES */	/**< TODO */
 
 /* form_dial opcodes */
-#define FMD_START 			0
-#define FMD_GROW			1
-#define FMD_SHRINK			2
-#define FMD_FINISH			3
+#define FMD_START 			0	/**< TODO */
+#define FMD_GROW			1	/**< TODO */
+#define FMD_SHRINK			2	/**< TODO */
+#define FMD_FINISH			3	/**< TODO */
 
 /* form_error modes */
-#define FERR_FILENOTFOUND	 2
-#define FERR_PATHNOTFOUND	 3
-#define FERR_NOHANDLES		 4
-#define FERR_ACCESSDENIED	 5
-#define FERR_LOWMEM			 8
-#define FERR_BADENVIRON 	10
-#define FERR_BADFORMAT		11
-#define FERR_BADDRIVE		15
-#define FERR_DELETEDIR		16
-#define FERR_NOFILES 		18
+#define FERR_FILENOTFOUND	 2	/**< TODO */
+#define FERR_PATHNOTFOUND	 3	/**< TODO */
+#define FERR_NOHANDLES		 4	/**< TODO */
+#define FERR_ACCESSDENIED	 5	/**< TODO */
+#define FERR_LOWMEM			 8	/**< TODO */
+#define FERR_BADENVIRON 	10	/**< TODO */
+#define FERR_BADFORMAT		11	/**< TODO */
+#define FERR_BADDRIVE		15	/**< TODO */
+#define FERR_DELETEDIR		16	/**< TODO */
+#define FERR_NOFILES 		18	/**< TODO */
 
 /* fsel_(ex)input return values */
-#define FSEL_CANCEL		 0
-#define FSEL_OK			 1
+#define FSEL_CANCEL		 0	/**< TODO */
+#define FSEL_OK			 1	/**< TODO */
 
 /* menu_attach modes */
-#define ME_INQUIRE		0
-#define ME_ATTACH 		1
-#define ME_REMOVE 		2
+#define ME_INQUIRE		0	/**< TODO */
+#define ME_ATTACH 		1	/**< TODO */
+#define ME_REMOVE 		2	/**< TODO */
 
 /* menu_attach attributes */
-#define SCROLL_NO 		0
-#define SCROLL_YES		1
+#define SCROLL_NO 		0	/**< TODO */
+#define SCROLL_YES		1	/**< TODO */
 
 /* menu_bar modes */
-#define MENU_INQUIRE	-1
-#define MENU_REMOVE		0
-#define MENU_INSTALL	1
+#define MENU_INQUIRE	-1	/**< TODO */
+#define MENU_REMOVE		0	/**< TODO */
+#define MENU_INSTALL	1	/**< TODO */
 #define MENU_GETMODE	3	   /**< Get the menu bar mode */
 #define MENU_SETMODE	4	   /**< Set the menu bar mode */
 #define MENU_UPDATE 	5	   /**< Update the system part of the menu bar */
@@ -297,26 +297,26 @@ typedef struct pEvntrec
 #define  MENU_SHADOWED  0x0004 /**< menu bar with shadows */
 
 /* menu_icheck modes */
-#define UNCHECK			0
-#define CHECK			1
+#define UNCHECK			0	/**< TODO */
+#define CHECK			1	/**< TODO */
 
 /* menu_ienable modes */
-#define DISABLE			0
-#define ENABLE 			1
+#define DISABLE			0	/**< TODO */
+#define ENABLE 			1	/**< TODO */
 
 /* menu_istart modes */
-#define MIS_GETALIGN 		0
-#define MIS_SETALIGN 		1
+#define MIS_GETALIGN 		0	/**< TODO */
+#define MIS_SETALIGN 		1	/**< TODO */
 
 /* menu_popup modes */
-#define SCROLL_LISTBOX		-1
+#define SCROLL_LISTBOX		-1	/**< TODO */
 
 /* menu_register modes */
-#define REG_NEWNAME		-1
+#define REG_NEWNAME		-1	/**< TODO */
 
 /* menu_tnormal modes */
-#define HIGHLIGHT		0
-#define UNHIGHLIGHT		1
+#define HIGHLIGHT		0	/**< TODO */
+#define UNHIGHLIGHT		1	/**< TODO */
 
 /** menu_settings uses a new structure for setting and inquiring the submenu
     delay values and the menu scroll height.*/
@@ -330,7 +330,7 @@ typedef struct _mn_set
 } MN_SET;
 
 /* shel_get modes */
-#define SHEL_BUFSIZE (-1)
+#define SHEL_BUFSIZE (-1)	/**< TODO */
 
 /** Struktur fr erweiterte Start-Daten (fr shel_write) */
 typedef struct
@@ -374,38 +374,38 @@ typedef  struct
 
 
 /* shel_write modes */
-#define SWM_LAUNCH			0
-#define SWM_LAUNCHNOW		1
-#define SWM_LAUNCHACC		3
-#define SWM_SHUTDOWN		4
-#define SWM_REZCHANGE		5
-#define SWM_BROADCAST		7
-#define SWM_ENVIRON			8
-#define SWM_NEWMSG			9
-#define SWM_AESMSG			10
-#define SWM_THRCREATE		20
+#define SWM_LAUNCH			0	/**< TODO */
+#define SWM_LAUNCHNOW		1	/**< TODO */
+#define SWM_LAUNCHACC		3	/**< TODO */
+#define SWM_SHUTDOWN		4	/**< TODO */
+#define SWM_REZCHANGE		5	/**< TODO */
+#define SWM_BROADCAST		7	/**< TODO */
+#define SWM_ENVIRON			8	/**< TODO */
+#define SWM_NEWMSG			9	/**< TODO */
+#define SWM_AESMSG			10	/**< TODO */
+#define SWM_THRCREATE		20	/**< TODO */
 
 /* other names for shel_write modes */
-#define SHW_NOEXEC			SWM_LAUNCH
-#define SHW_EXEC			SWM_LAUNCHNOW
-#define SHW_EXEC_ACC		SWM_LAUNCHACC
-#define SHW_SHUTDOWN		SWM_SHUTDOWN
-#define SHW_RESCHNG			SWM_REZCHANGE
-#define SHW_BROADCAST		SWM_BROADCAST
-#define SHW_INFRECGN		SWM_NEWMSG
-#define SHW_AESSEND			SWM_AESMSG
-#define SHW_THR_CREATE		SWM_THRCREATE
+#define SHW_NOEXEC			SWM_LAUNCH		/**< TODO */
+#define SHW_EXEC			SWM_LAUNCHNOW	/**< TODO */
+#define SHW_EXEC_ACC		SWM_LAUNCHACC	/**< TODO */
+#define SHW_SHUTDOWN		SWM_SHUTDOWN	/**< TODO */
+#define SHW_RESCHNG			SWM_REZCHANGE	/**< TODO */
+#define SHW_BROADCAST		SWM_BROADCAST	/**< TODO */
+#define SHW_INFRECGN		SWM_NEWMSG		/**< TODO */
+#define SHW_AESSEND			SWM_AESMSG		/**< TODO */
+#define SHW_THR_CREATE		SWM_THRCREATE	/**< TODO */
 
 /* shel_write */
-#define SHW_IMMED			0	/* PC-GEM  2.x */
-#define SHW_CHAIN			1	/* TOS */
-#define SHW_DOS				2	/* PC-GEM  2.x */
-#define SHW_PARALLEL		100	/* MAG!X */
-#define SHW_SINGLE			101	/* MAG!X */
-
+#define SHW_IMMED			0	/* PC-GEM  2.x */	/**< TODO */
+#define SHW_CHAIN			1	/* TOS */			/**< TODO */
+#define SHW_DOS				2	/* PC-GEM  2.x */	/**< TODO */
+#define SHW_PARALLEL		100	/* MAG!X */			/**< TODO */
+#define SHW_SINGLE			101	/* MAG!X */			/**< TODO */
+	
 /* command line parser (shel_write: parameter "isover") */
-#define CL_NORMAL		0
-#define CL_PARSE		1
+#define CL_NORMAL		0	/**< TODO */
+#define CL_PARSE		1	/**< TODO */
 
 /* shutdown action (shel_write: mode SWM_SHUTDOWN, parameter "isover") */
 #define SD_ABORT		0		/**< Abort shutdown mode */
@@ -413,392 +413,392 @@ typedef  struct
 #define SD_COMPLETE		2		/**< Complete shutdown mode */
 
 /* shel_write: mode SWM_ENVIRON, parameter 'wisgr' */
-#define ENVIRON_SIZE	0
-#define ENVIRON_CHANGE	1
-#define ENVIRON_COPY	2
+#define ENVIRON_SIZE	0	/**< TODO */
+#define ENVIRON_CHANGE	1	/**< TODO */
+#define ENVIRON_COPY	2	/**< TODO */
 
 /* shel_write: mode SWM_NEWMSG, parameter 'wisgr' */
-#define NM_APTERM		0x0001
+#define NM_APTERM		0x0001	/**< TODO */
 
 /* Werte fr Modus SWM_AESMSG (fr shel_write) */
-#define AP_AESTERM		52     /* Mode 10: N.AES komplett terminieren. */
+#define AP_AESTERM		52     /* Mode 10: N.AES komplett terminieren. */	/**< TODO */
 
 /* extended shel_write() modes and parameter structure */
-#define SHW_XMDLIMIT	256
-#define SHW_XMDNICE		512
-#define SHW_XMDDEFDIR	1024
-#define SHW_XMDENV		2048
+#define SHW_XMDLIMIT	256	/**< TODO */
+#define SHW_XMDNICE		512	/**< TODO */
+#define SHW_XMDDEFDIR	1024	/**< TODO */
+#define SHW_XMDENV		2048	/**< TODO */
 
 /* shel_write flags */
-#define SW_PSETLIMIT	0x0100
-#define SW_PRENICE		0x0200
-#define SW_DEFDIR 		0x0400
-#define SW_ENVIRON		0x0800
+#define SW_PSETLIMIT	0x0100	/**< TODO */
+#define SW_PRENICE		0x0200	/**< TODO */
+#define SW_DEFDIR 		0x0400	/**< TODO */
+#define SW_ENVIRON		0x0800	/**< TODO */
 
 /* rsrc_gaddr structure types */
-#define R_TREE			0
-#define R_OBJECT		1
-#define R_TEDINFO 		2
-#define R_ICONBLK 		3
-#define R_BITBLK		4
-#define R_STRING		5
-#define R_IMAGEDATA		6
-#define R_OBSPEC		7
-#define R_TEPTEXT 		8
-#define R_TEPTMPLT		9
-#define R_TEPVALID		10
-#define R_IBPMASK		11
-#define R_IBPDATA		12
-#define R_IBPTEXT		13
-#define R_BIPDATA		14
-#define R_FRSTR			15
-#define R_FRIMG			16
+#define R_TREE			0	/**< TODO */
+#define R_OBJECT		1	/**< TODO */
+#define R_TEDINFO 		2	/**< TODO */
+#define R_ICONBLK 		3	/**< TODO */
+#define R_BITBLK		4	/**< TODO */
+#define R_STRING		5	/**< TODO */
+#define R_IMAGEDATA		6	/**< TODO */
+#define R_OBSPEC		7	/**< TODO */
+#define R_TEPTEXT 		8	/**< TODO */
+#define R_TEPTMPLT		9	/**< TODO */
+#define R_TEPVALID		10	/**< TODO */
+#define R_IBPMASK		11	/**< TODO */
+#define R_IBPDATA		12	/**< TODO */
+#define R_IBPTEXT		13	/**< TODO */
+#define R_BIPDATA		14	/**< TODO */
+#define R_FRSTR			15	/**< TODO */
+#define R_FRIMG			16	/**< TODO */
 
 
 
 /* Window Attributes */
-#define NAME			0x0001
-#define CLOSER 			0x0002
-#define FULLER 			0x0004
-#define MOVER			0x0008
-#define INFO			0x0010
-#define SIZER			0x0020
-#define UPARROW			0x0040
-#define DNARROW			0x0080
-#define VSLIDE 			0x0100
-#define LFARROW			0x0200
-#define RTARROW			0x0400
-#define HSLIDE 			0x0800
-#define HOTCLOSEBOX		0x1000      /* GEM 2.x (deprecated) */
-#define MENUBAR			0x1000		/* XaAES */
-#define BACKDROP		0x2000
-#define SMALLER			0x4000
-#define ICONIFIER		SMALLER
+#define NAME			0x0001	/**< TODO */
+#define CLOSER 			0x0002	/**< TODO */
+#define FULLER 			0x0004	/**< TODO */
+#define MOVER			0x0008	/**< TODO */
+#define INFO			0x0010	/**< TODO */
+#define SIZER			0x0020	/**< TODO */
+#define UPARROW			0x0040	/**< TODO */
+#define DNARROW			0x0080	/**< TODO */
+#define VSLIDE 			0x0100	/**< TODO */
+#define LFARROW			0x0200	/**< TODO */
+#define RTARROW			0x0400	/**< TODO */
+#define HSLIDE 			0x0800	/**< TODO */
+#define HOTCLOSEBOX		0x1000      /* GEM 2.x (deprecated) */	/**< TODO */
+#define MENUBAR			0x1000		/* XaAES */	/**< TODO */
+#define BACKDROP		0x2000	/**< TODO */
+#define SMALLER			0x4000	/**< TODO */
+#define ICONIFIER		SMALLER	/**< TODO */
 
 /* wind_create flags */
-#define WC_BORDER 	 	0
-#define WC_WORK		 	1
+#define WC_BORDER 	 	0	/**< TODO */
+#define WC_WORK		 	1	/**< TODO */
 
 /* wind_get flags */
-#define WF_KIND			  1
-#define WF_NAME			  2
-#define WF_INFO			  3
-#define WF_WORKXYWH		  4
-#define WF_CURRXYWH		  5
-#define WF_PREVXYWH		  6
-#define WF_FULLXYWH		  7
-#define WF_HSLIDE 		  8
-#define WF_VSLIDE 		  9
-#define WF_TOP 			 10
-#define WF_FIRSTXYWH 	 11
-#define WF_NEXTXYWH		 12
-#define WF_RESVD		 13
-#define WF_NEWDESK		 14
-#define WF_HSLSIZE		 15
-#define WF_VSLSIZE		 16
-#define WF_SCREEN 		 17
-#define WF_COLOR		 18
-#define WF_DCOLOR 		 19
-#define WF_OWNER		 20
-#define WF_BEVENT 		 24
-#define WF_BOTTOM 		 25
-#define WF_ICONIFY		 26
-#define WF_UNICONIFY 	 27
-#define WF_UNICONIFYXYWH 28
-#define WF_TOOLBAR		 30
-#define WF_FTOOLBAR		 31
-#define WF_NTOOLBAR		 32
-#define WF_MENU			 33		 /* XaAEES */
-#define WF_WHEEL		 40		 /* XaAES */
-#define WF_M_BACKDROP	100      /* KAOS 1.4    */
-#define WF_M_OWNER		101      /* KAOS 1.4    */
-#define WF_M_WINDLIST	102      /* KAOS 1.4    */
-#define WF_MINXYWH		103      /* MagiC 6     */
-#define WF_INFOXYWH		104      /* MagiC 6.10  */
-#define WF_WIDGETS		200		 /* NAES */
-#define WF_WINX			22360
-#define WF_WINXCFG		22361
-#define WF_SHADE	    22365      /* WINX 2.3 */
-#define WF_STACK		22366      /* WINX 2.3 */
-#define WF_TOPALL		22367      /* WINX 2.3 */
-#define WF_BOTTOMALL	22368	   /* WINX 2.3 */
-#define WF_XAAES		0x5841	   /* XaAES: 'XA' */
+#define WF_KIND			  1	/**< TODO */
+#define WF_NAME			  2	/**< TODO */
+#define WF_INFO			  3	/**< TODO */
+#define WF_WORKXYWH		  4	/**< TODO */
+#define WF_CURRXYWH		  5	/**< TODO */
+#define WF_PREVXYWH		  6	/**< TODO */
+#define WF_FULLXYWH		  7	/**< TODO */
+#define WF_HSLIDE 		  8	/**< TODO */
+#define WF_VSLIDE 		  9	/**< TODO */
+#define WF_TOP 			 10	/**< TODO */
+#define WF_FIRSTXYWH 	 11	/**< TODO */
+#define WF_NEXTXYWH		 12	/**< TODO */
+#define WF_RESVD		 13	/**< TODO */
+#define WF_NEWDESK		 14	/**< TODO */
+#define WF_HSLSIZE		 15	/**< TODO */
+#define WF_VSLSIZE		 16	/**< TODO */
+#define WF_SCREEN 		 17	/**< TODO */
+#define WF_COLOR		 18	/**< TODO */
+#define WF_DCOLOR 		 19	/**< TODO */
+#define WF_OWNER		 20	/**< TODO */
+#define WF_BEVENT 		 24	/**< TODO */
+#define WF_BOTTOM 		 25	/**< TODO */
+#define WF_ICONIFY		 26	/**< TODO */
+#define WF_UNICONIFY 	 27	/**< TODO */
+#define WF_UNICONIFYXYWH 28	/**< TODO */
+#define WF_TOOLBAR		 30	/**< TODO */
+#define WF_FTOOLBAR		 31	/**< TODO */
+#define WF_NTOOLBAR		 32	/**< TODO */
+#define WF_MENU			 33		 /* XaAEES */	/**< TODO */
+#define WF_WHEEL		 40		 /* XaAES */	/**< TODO */
+#define WF_M_BACKDROP	100      /* KAOS 1.4    */	/**< TODO */
+#define WF_M_OWNER		101      /* KAOS 1.4    */	/**< TODO */
+#define WF_M_WINDLIST	102      /* KAOS 1.4    */	/**< TODO */
+#define WF_MINXYWH		103      /* MagiC 6     */	/**< TODO */
+#define WF_INFOXYWH		104      /* MagiC 6.10  */	/**< TODO */
+#define WF_WIDGETS		200		 /* NAES */	/**< TODO */
+#define WF_WINX			22360	/**< TODO */
+#define WF_WINXCFG		22361	/**< TODO */
+#define WF_SHADE	    22365      /* WINX 2.3 */	/**< TODO */
+#define WF_STACK		22366      /* WINX 2.3 */	/**< TODO */
+#define WF_TOPALL		22367      /* WINX 2.3 */	/**< TODO */
+#define WF_BOTTOMALL	22368	   /* WINX 2.3 */	/**< TODO */
+#define WF_XAAES		0x5841	   /* XaAES: 'XA' */	/**< TODO */
 
 /* wind_set(WF_BEVENT) */
-#define BEVENT_WORK     0x0001    /* AES 4.0  */
-#define BEVENT_INFO     0x0002    /* MagiC 6  */
+#define BEVENT_WORK     0x0001    /* AES 4.0  */	/**< TODO */
+#define BEVENT_INFO     0x0002    /* MagiC 6  */	/**< TODO */
 
 /* window elements */
-#define W_BOX			0
-#define W_TITLE			1
-#define W_CLOSER		2
-#define W_NAME 			3
-#define W_FULLER		4
-#define W_INFO 			5
-#define W_DATA 			6
-#define W_WORK 			7
-#define W_SIZER			8
-#define W_VBAR 			9
-#define W_UPARROW		10
-#define W_DNARROW		11
-#define W_VSLIDE		12
-#define W_VELEV			13
-#define W_HBAR			14
-#define W_LFARROW		15
-#define W_RTARROW		16
-#define W_HSLIDE		17
-#define W_HELEV			18
-#define W_SMALLER		19
-#define W_BOTTOMER		20      /* MagiC 3     */
-#define W_HIDER			30
+#define W_BOX			0	/**< TODO */
+#define W_TITLE			1	/**< TODO */
+#define W_CLOSER		2	/**< TODO */
+#define W_NAME 			3	/**< TODO */
+#define W_FULLER		4	/**< TODO */
+#define W_INFO 			5	/**< TODO */
+#define W_DATA 			6	/**< TODO */
+#define W_WORK 			7	/**< TODO */
+#define W_SIZER			8	/**< TODO */
+#define W_VBAR 			9	/**< TODO */
+#define W_UPARROW		10	/**< TODO */
+#define W_DNARROW		11	/**< TODO */
+#define W_VSLIDE		12	/**< TODO */
+#define W_VELEV			13	/**< TODO */
+#define W_HBAR			14	/**< TODO */
+#define W_LFARROW		15	/**< TODO */
+#define W_RTARROW		16	/**< TODO */
+#define W_HSLIDE		17	/**< TODO */
+#define W_HELEV			18	/**< TODO */
+#define W_SMALLER		19	/**< TODO */
+#define W_BOTTOMER		20      /* MagiC 3     */	/**< TODO */
+#define W_HIDER			30	/**< TODO */
 
 /* arrow message */
-#define WA_UPPAGE 		0
-#define WA_DNPAGE 		1
-#define WA_UPLINE 		2
-#define WA_DNLINE 		3
-#define WA_LFPAGE 		4
-#define WA_RTPAGE 		5
-#define WA_LFLINE 		6
-#define WA_RTLINE 		7
-#define WA_WHEEL		8	/* XaAES */
+#define WA_UPPAGE 		0	/**< TODO */
+#define WA_DNPAGE 		1	/**< TODO */
+#define WA_UPLINE 		2	/**< TODO */
+#define WA_DNLINE 		3	/**< TODO */
+#define WA_LFPAGE 		4	/**< TODO */
+#define WA_RTPAGE 		5	/**< TODO */
+#define WA_LFLINE 		6	/**< TODO */
+#define WA_RTLINE 		7	/**< TODO */
+#define WA_WHEEL		8	/* XaAES */	/**< TODO */
 
 /* wind_update flags */
-#define END_UPDATE		0
-#define BEG_UPDATE		1
-#define END_MCTRL		2
-#define BEG_MCTRL		3
+#define END_UPDATE		0	/**< TODO */
+#define BEG_UPDATE		1	/**< TODO */
+#define END_MCTRL		2	/**< TODO */
+#define BEG_MCTRL		3	/**< TODO */
 
 /* graf_mouse mouse types */
-#define ARROW			 0
-#define TEXT_CRSR 		 1
-#define BEE 			 2
-#define BUSY_BEE	  BEE 	/* alias */
-#define BUSYBEE		  BEE 	/* alias */
-#define HOURGLASS 		 2
-#define POINT_HAND		 3
-#define FLAT_HAND 		 4
-#define THIN_CROSS		 5
-#define THICK_CROSS		 6
-#define OUTLN_CROSS		 7
-#define USER_DEF		  255
-#define M_OFF			  256
-#define M_ON			  257
-#define M_SAVE 			  258
-#define M_RESTORE 		  259
-#define M_LAST 			  260
-#define M_PREVIOUS        M_LAST  /* alias */
-#define M_FORCE			0x8000
+#define ARROW			 0	/**< TODO */
+#define TEXT_CRSR 		 1	/**< TODO */
+#define BEE 			 2	/**< TODO */
+#define BUSY_BEE	  BEE 	/* alias */	/**< TODO */
+#define BUSYBEE		  BEE 	/* alias */	/**< TODO */
+#define HOURGLASS 		 2	/**< TODO */
+#define POINT_HAND		 3	/**< TODO */
+#define FLAT_HAND 		 4	/**< TODO */
+#define THIN_CROSS		 5	/**< TODO */
+#define THICK_CROSS		 6	/**< TODO */
+#define OUTLN_CROSS		 7	/**< TODO */
+#define USER_DEF		  255	/**< TODO */
+#define M_OFF			  256	/**< TODO */
+#define M_ON			  257	/**< TODO */
+#define M_SAVE 			  258	/**< TODO */
+#define M_RESTORE 		  259	/**< TODO */
+#define M_LAST 			  260	/**< TODO */
+#define M_PREVIOUS        M_LAST  /* alias */	/**< TODO */
+#define M_FORCE			0x8000	/**< TODO */
 
 /* objects - general */
-#define ROOT		 	0 	 /* index of ROOT */
-#define MAX_LEN			81 	 /* max string length */
-#define MAX_DEPTH		8 	 /* max depth of search or draw */
+#define ROOT		 	0 	 /* index of ROOT */	/**< TODO */
+#define MAX_LEN			81 	 /* max string length */	/**< TODO */
+#define MAX_DEPTH		8 	 /* max depth of search or draw */	/**< TODO */
 
 /* inside fill patterns */
-#define IP_HOLLOW		0
-#define IP_1PATT		1
-#define IP_2PATT		2
-#define IP_3PATT		3
-#define IP_4PATT		4
-#define IP_5PATT		5
-#define IP_6PATT		6
-#define IP_SOLID		7
+#define IP_HOLLOW		0	/**< TODO */
+#define IP_1PATT		1	/**< TODO */
+#define IP_2PATT		2	/**< TODO */
+#define IP_3PATT		3	/**< TODO */
+#define IP_4PATT		4	/**< TODO */
+#define IP_5PATT		5	/**< TODO */
+#define IP_6PATT		6	/**< TODO */
+#define IP_SOLID		7	/**< TODO */
 
 /* font types */
-#define GDOS_PROP		0
-#define GDOS_MONO		1
-#define GDOS_BITM		2
-#define IBM			3
-#define SMALL			5
+#define GDOS_PROP		0	/**< TODO */
+#define GDOS_MONO		1	/**< TODO */
+#define GDOS_BITM		2	/**< TODO */
+#define IBM				3	/**< TODO */
+#define SMALL			5	/**< TODO */
 
 /* object types */
-#define G_BOX			20
-#define G_TEXT			21
-#define G_BOXTEXT		22
-#define G_IMAGE			23
-#define G_USERDEF		24
-#define G_PROGDEF		G_USERDEF
-#define G_IBOX			25
-#define G_BUTTON		26
-#define G_BOXCHAR		27
-#define G_STRING		28
-#define G_FTEXT			29
-#define G_FBOXTEXT		30
-#define G_ICON			31
-#define G_TITLE			32
-#define G_CICON			33
+#define G_BOX			20	/**< TODO */
+#define G_TEXT			21	/**< TODO */
+#define G_BOXTEXT		22	/**< TODO */
+#define G_IMAGE			23	/**< TODO */
+#define G_USERDEF		24	/**< TODO */
+#define G_PROGDEF		G_USERDEF	/**< TODO */
+#define G_IBOX			25	/**< TODO */
+#define G_BUTTON		26	/**< TODO */
+#define G_BOXCHAR		27	/**< TODO */
+#define G_STRING		28	/**< TODO */
+#define G_FTEXT			29	/**< TODO */
+#define G_FBOXTEXT		30	/**< TODO */
+#define G_ICON			31	/**< TODO */
+#define G_TITLE			32	/**< TODO */
+#define G_CICON			33	/**< TODO */
 
 /* extended object types, MagiC only */
-#define G_SWBUTTON		34
-#define G_POPUP			35
-#define G_WINTITLE		36
-#define G_EDIT			37
-#define G_SHORTCUT		38
+#define G_SWBUTTON		34	/**< TODO */
+#define G_POPUP			35	/**< TODO */
+#define G_WINTITLE		36	/**< TODO */
+#define G_EDIT			37	/**< TODO */
+#define G_SHORTCUT		38	/**< TODO */
 
 
 /* object flags */
-#define OF_NONE		 	0x0000
-#define OF_SELECTABLE		0x0001
-#define OF_DEFAULT		0x0002
-#define OF_EXIT			0x0004
-#define OF_EDITABLE		0x0008
-#define OF_RBUTTON		0x0010
-#define OF_LASTOB		0x0020
-#define OF_TOUCHEXIT		0x0040
-#define OF_HIDETREE		0x0080
-#define OF_INDIRECT		0x0100
-#define OF_FL3DIND		0x0200	/* bit 9 */
-#define OF_FL3DBAK		0x0400	/* bit 10 */
-#define OF_FL3DACT		0x0600
-#define OF_SUBMENU		0x0800	/* bit 11 */
-#define OF_FLAG11		OF_SUBMENU
-#define OF_FLAG12		0x1000
-#define OF_FLAG13		0x2000
-#define OF_FLAG14		0x4000
-#define OF_FLAG15		0x8000
+#define OF_NONE		 	0x0000	/**< TODO */
+#define OF_SELECTABLE	0x0001	/**< TODO */
+#define OF_DEFAULT		0x0002	/**< TODO */
+#define OF_EXIT			0x0004	/**< TODO */
+#define OF_EDITABLE		0x0008	/**< TODO */
+#define OF_RBUTTON		0x0010	/**< TODO */
+#define OF_LASTOB		0x0020	/**< TODO */
+#define OF_TOUCHEXIT	0x0040	/**< TODO */
+#define OF_HIDETREE		0x0080	/**< TODO */
+#define OF_INDIRECT		0x0100	/**< TODO */
+#define OF_FL3DIND		0x0200	/* bit 9 */	/**< TODO */
+#define OF_FL3DBAK		0x0400	/* bit 10 */	/**< TODO */
+#define OF_FL3DACT		0x0600	/**< TODO */
+#define OF_SUBMENU		0x0800	/* bit 11 */	/**< TODO */
+#define OF_FLAG11		OF_SUBMENU	/**< TODO */
+#define OF_FLAG12		0x1000	/**< TODO */
+#define OF_FLAG13		0x2000	/**< TODO */
+#define OF_FLAG14		0x4000	/**< TODO */
+#define OF_FLAG15		0x8000	/**< TODO */
 
 /* Object states */
-#define OS_NORMAL		0x0000
-#define OS_SELECTED		0x0001
-#define OS_CROSSED		0x0002
-#define OS_CHECKED		0x0004
-#define OS_DISABLED		0x0008
-#define OS_OUTLINED		0x0010
-#define OS_SHADOWED		0x0020
-#define OS_WHITEBAK		0x0040
-#define OS_DRAW3D		0x0080
-#define OS_STATE08		0x0100
-#define OS_STATE09		0x0200
-#define OS_STATE10		0x0400
-#define OS_STATE11		0x0800
-#define OS_STATE12		0x1000
-#define OS_STATE13		0x2000
-#define OS_STATE14		0x4000
-#define OS_STATE15		0x8000
+#define OS_NORMAL		0x0000	/**< TODO */
+#define OS_SELECTED		0x0001	/**< TODO */
+#define OS_CROSSED		0x0002	/**< TODO */
+#define OS_CHECKED		0x0004	/**< TODO */
+#define OS_DISABLED		0x0008	/**< TODO */
+#define OS_OUTLINED		0x0010	/**< TODO */
+#define OS_SHADOWED		0x0020	/**< TODO */
+#define OS_WHITEBAK		0x0040	/**< TODO */
+#define OS_DRAW3D		0x0080	/**< TODO */
+#define OS_STATE08		0x0100	/**< TODO */
+#define OS_STATE09		0x0200	/**< TODO */
+#define OS_STATE10		0x0400	/**< TODO */
+#define OS_STATE11		0x0800	/**< TODO */
+#define OS_STATE12		0x1000	/**< TODO */
+#define OS_STATE13		0x2000	/**< TODO */
+#define OS_STATE14		0x4000	/**< TODO */
+#define OS_STATE15		0x8000	/**< TODO */
 
 /* Object colors - default pall. */
-#define G_WHITE			0
-#define G_BLACK			1
-#define G_RED			2
-#define G_GREEN			3
-#define G_BLUE			4
-#define G_CYAN			5
-#define G_YELLOW		6
-#define G_MAGENTA		7
-#define G_LWHITE		8
-#define G_LBLACK		9
-#define G_LRED			10
-#define G_LGREEN		11
-#define G_LBLUE			12
-#define G_LCYAN			13
-#define G_LYELLOW		14
-#define G_LMAGENTA		15
+#define G_WHITE			0	/**< TODO */
+#define G_BLACK			1	/**< TODO */
+#define G_RED			2	/**< TODO */
+#define G_GREEN			3	/**< TODO */
+#define G_BLUE			4	/**< TODO */
+#define G_CYAN			5	/**< TODO */
+#define G_YELLOW		6	/**< TODO */
+#define G_MAGENTA		7	/**< TODO */
+#define G_LWHITE		8	/**< TODO */
+#define G_LBLACK		9	/**< TODO */
+#define G_LRED			10	/**< TODO */
+#define G_LGREEN		11	/**< TODO */
+#define G_LBLUE			12	/**< TODO */
+#define G_LCYAN			13	/**< TODO */
+#define G_LYELLOW		14	/**< TODO */
+#define G_LMAGENTA		15	/**< TODO */
 
 
 #ifdef __GEMLIB_OLDNAMES
 
 /* object flags */
-#define NONE		 	0x0000
-#define SELECTABLE		0x0001
-#define DEFAULT			0x0002
-#define EXIT			0x0004
-#define EDITABLE		0x0008
-#define RBUTTON			0x0010
-#define LASTOB			0x0020
-#define TOUCHEXIT		0x0040
-#define HIDETREE		0x0080
-#define INDIRECT		0x0100
-#define FL3DIND			0x0200	/* bit 9 */
-#define FL3DBAK			0x0400	/* bit 10 */
-#define FL3DACT			0x0600
-#define SUBMENU			0x0800	/* bit 11 */
-#define FLAG11			SUBMENU
-#define FLAG12			0x1000
-#define FLAG13			0x2000
-#define FLAG14			0x4000
-#define FLAG15			0x8000
+#define NONE		 	0x0000	/**< TODO */
+#define SELECTABLE		0x0001	/**< TODO */
+#define DEFAULT			0x0002	/**< TODO */
+#define EXIT			0x0004	/**< TODO */
+#define EDITABLE		0x0008	/**< TODO */
+#define RBUTTON			0x0010	/**< TODO */
+#define LASTOB			0x0020	/**< TODO */
+#define TOUCHEXIT		0x0040	/**< TODO */
+#define HIDETREE		0x0080	/**< TODO */
+#define INDIRECT		0x0100	/**< TODO */
+#define FL3DIND			0x0200	/* bit 9 */	/**< TODO */
+#define FL3DBAK			0x0400	/* bit 10 */	/**< TODO */
+#define FL3DACT			0x0600	/**< TODO */
+#define SUBMENU			0x0800	/* bit 11 */	/**< TODO */
+#define FLAG11			SUBMENU	/**< TODO */
+#define FLAG12			0x1000	/**< TODO */
+#define FLAG13			0x2000	/**< TODO */
+#define FLAG14			0x4000	/**< TODO */
+#define FLAG15			0x8000	/**< TODO */
 
 /* Object states */
-#define NORMAL			0x0000
-#define SELECTED		0x0001
-#define CROSSED			0x0002
-#define CHECKED			0x0004
-#define DISABLED		0x0008
-#define OUTLINED		0x0010
-#define SHADOWED		0x0020
-#define WHITEBAK		0x0040
-#define DRAW3D			0x0080
-#define STATE08			0x0100
-#define STATE09			0x0200
-#define STATE10			0x0400
-#define STATE11			0x0800
-#define STATE12			0x1000
-#define STATE13			0x2000
-#define STATE14			0x4000
-#define STATE15			0x8000
+#define NORMAL			0x0000	/**< TODO */
+#define SELECTED		0x0001	/**< TODO */
+#define CROSSED			0x0002	/**< TODO */
+#define CHECKED			0x0004	/**< TODO */
+#define DISABLED		0x0008	/**< TODO */
+#define OUTLINED		0x0010	/**< TODO */
+#define SHADOWED		0x0020	/**< TODO */
+#define WHITEBAK		0x0040	/**< TODO */
+#define DRAW3D			0x0080	/**< TODO */
+#define STATE08			0x0100	/**< TODO */
+#define STATE09			0x0200	/**< TODO */
+#define STATE10			0x0400	/**< TODO */
+#define STATE11			0x0800	/**< TODO */
+#define STATE12			0x1000	/**< TODO */
+#define STATE13			0x2000	/**< TODO */
+#define STATE14			0x4000	/**< TODO */
+#define STATE15			0x8000	/**< TODO */
 
 /* Object colors - default pall. */
-#define WHITE			0
-#define BLACK			1
-#define RED			2
-#define GREEN			3
-#define BLUE			4
-#define CYAN			5
-#define YELLOW			6
-#define MAGENTA			7
-#define LWHITE			8
-#define LBLACK			9
-#define LRED			10
-#define LGREEN			11
-#define LBLUE			12
-#define LCYAN			13
-#define LYELLOW			14
-#define LMAGENTA		15
+#define WHITE			0	/**< TODO */
+#define BLACK			1	/**< TODO */
+#define RED				2	/**< TODO */
+#define GREEN			3	/**< TODO */
+#define BLUE			4	/**< TODO */
+#define CYAN			5	/**< TODO */
+#define YELLOW			6	/**< TODO */
+#define MAGENTA			7	/**< TODO */
+#define LWHITE			8	/**< TODO */
+#define LBLACK			9	/**< TODO */
+#define LRED			10	/**< TODO */
+#define LGREEN			11	/**< TODO */
+#define LBLUE			12	/**< TODO */
+#define LCYAN			13	/**< TODO */
+#define LYELLOW			14	/**< TODO */
+#define LMAGENTA		15	/**< TODO */
 
 #endif
 
 
 /* editable text field definitions */
-#define EDSTART			0
-#define EDINIT 			1
-#define EDCHAR 			2
-#define EDEND			3
+#define EDSTART			0	/**< TODO */
+#define EDINIT 			1	/**< TODO */
+#define EDCHAR 			2	/**< TODO */
+#define EDEND			3	/**< TODO */
 
-#define ED_START		EDSTART
-#define ED_INIT			EDINIT
-#define ED_CHAR			EDCHAR
-#define ED_END 			EDEND
+#define ED_START		EDSTART	/**< TODO */
+#define ED_INIT			EDINIT	/**< TODO */
+#define ED_CHAR			EDCHAR	/**< TODO */
+#define ED_END 			EDEND	/**< TODO */
 
-#define ED_CRSR			100		/* MagiC only */
-#define ED_DRAW			103		/* MagiC only */
+#define ED_CRSR			100		/* MagiC only */	/**< TODO */
+#define ED_DRAW			103		/* MagiC only */	/**< TODO */
 
 /* editable text justification */
-#define TE_LEFT			0
-#define TE_RIGHT		1
-#define TE_CNTR			2
+#define TE_LEFT			0	/**< TODO */
+#define TE_RIGHT		1	/**< TODO */
+#define TE_CNTR			2	/**< TODO */
 
 /* objc_change modes */
-#define NO_DRAW			0
-#define REDRAW 			1
+#define NO_DRAW			0	/**< TODO */
+#define REDRAW 			1	/**< TODO */
 
 /* objc_order modes */
-#define OO_LAST			-1
-#define OO_FIRST		0
+#define OO_LAST			-1	/**< TODO */
+#define OO_FIRST		0	/**< TODO */
 
 /* objc_sysvar modes */
-#define SV_INQUIRE		0
-#define SV_SET 			1
+#define SV_INQUIRE		0	/**< TODO */
+#define SV_SET 			1	/**< TODO */
 
 /* objc_sysvar values */
-#define LK3DIND			1
-#define LK3DACT			2
-#define INDBUTCOL 		3
-#define ACTBUTCOL 		4
-#define BACKGRCOL 		5
-#define AD3DVAL			6
-#define MX_ENABLE3D		10      /* MagiC 3.0   */
-#define MENUCOL			11      /* MagiC 6     */
+#define LK3DIND			1	/**< TODO */
+#define LK3DACT			2	/**< TODO */
+#define INDBUTCOL 		3	/**< TODO */
+#define ACTBUTCOL 		4	/**< TODO */
+#define BACKGRCOL 		5	/**< TODO */
+#define AD3DVAL			6	/**< TODO */
+#define MX_ENABLE3D		10      /* MagiC 3.0   */	/**< TODO */
+#define MENUCOL			11      /* MagiC 6     */	/**< TODO */
 
 /** Mouse Form Definition Block */
 typedef struct mouse_form
@@ -813,7 +813,7 @@ typedef struct mouse_form
 } MFORM;
 
 #ifndef __PXY
-# define __PXY
+# define __PXY	/**< TODO */
 /** TODO */
 typedef struct point_coord
 {
@@ -823,7 +823,7 @@ typedef struct point_coord
 #endif
 
 #ifndef __GRECT
-# define __GRECT
+# define __GRECT	/**< TODO */
 /** TODO */
 typedef struct graphic_rectangle
 {
@@ -1026,6 +1026,7 @@ typedef struct
 	short m_h;		/**< TODO */
 } MOBLK;
 
+/** TODO */
 typedef struct mouse_event_type
 {
 	short *x;	/**< TODO */
@@ -1307,205 +1308,205 @@ extern void aes (AESPB *pb);
  */
 
 /* normal graphics drawing modes */
-#define MD_REPLACE		1
-#define MD_TRANS		2
-#define MD_XOR			3
-#define MD_ERASE		4
+#define MD_REPLACE		1	/**< TODO */
+#define MD_TRANS		2	/**< TODO */
+#define MD_XOR			3	/**< TODO */
+#define MD_ERASE		4	/**< TODO */
 
 /* bit blt rules */
-#define ALL_WHITE		0
-#define S_AND_D			1
-#define S_AND_NOTD		2
-#define S_ONLY			3
-#define NOTS_AND_D		4
-#define D_ONLY			5
-#define S_XOR_D			6
-#define S_OR_D			7
-#define NOT_SORD		8
-#define NOT_SXORD		9
-#define D_INVERT		10
-#define NOT_D			10
-#define S_OR_NOTD		11
-#define NOT_S			12
-#define NOTS_OR_D		13
-#define NOT_SANDD		14
-#define ALL_BLACK		15
+#define ALL_WHITE		0	/**< TODO */
+#define S_AND_D			1	/**< TODO */
+#define S_AND_NOTD		2	/**< TODO */
+#define S_ONLY			3	/**< TODO */
+#define NOTS_AND_D		4	/**< TODO */
+#define D_ONLY			5	/**< TODO */
+#define S_XOR_D			6	/**< TODO */
+#define S_OR_D			7	/**< TODO */
+#define NOT_SORD		8	/**< TODO */
+#define NOT_SXORD		9	/**< TODO */
+#define D_INVERT		10	/**< TODO */
+#define NOT_D			10	/**< TODO */
+#define S_OR_NOTD		11	/**< TODO */
+#define NOT_S			12	/**< TODO */
+#define NOTS_OR_D		13	/**< TODO */
+#define NOT_SANDD		14	/**< TODO */
+#define ALL_BLACK		15	/**< TODO */
 
 /* v_bez modes */
-#define BEZ_BEZIER		0x01
-#define BEZ_POLYLINE		0x00
-#define BEZ_NODRAW		0x02
+#define BEZ_BEZIER		0x01	/**< TODO */
+#define BEZ_POLYLINE	0x00	/**< TODO */
+#define BEZ_NODRAW		0x02	/**< TODO */
 
 /* v_bit_image modes */
-#define IMAGE_LEFT		0
-#define IMAGE_CENTER		1
-#define IMAGE_RIGHT		2
-#define IMAGE_TOP 		0
-#define IMAGE_BOTTOM		2
+#define IMAGE_LEFT		0	/**< TODO */
+#define IMAGE_CENTER	1	/**< TODO */
+#define IMAGE_RIGHT		2	/**< TODO */
+#define IMAGE_TOP 		0	/**< TODO */
+#define IMAGE_BOTTOM	2	/**< TODO */
 
 /* v_justified modes */
-#define NOJUSTIFY		0
-#define JUSTIFY			1
+#define NOJUSTIFY		0	/**< TODO */
+#define JUSTIFY			1	/**< TODO */
 
 /* vq_color modes */
-#define COLOR_REQUESTED		0
-#define COLOR_ACTUAL		1
+#define COLOR_REQUESTED		0	/**< TODO */
+#define COLOR_ACTUAL		1	/**< TODO */
 
 /* return values for vq_vgdos() inquiry */
-#define GDOS_NONE		(-2L) 		 /* no GDOS installed */
-#define GDOS_FSM		0x5F46534DL /* '_FSM' */
-#define GDOS_FNT		0x5F464E54L /* '_FNT' */
+#define GDOS_NONE		(-2L) 		 /* no GDOS installed */	/**< TODO */
+#define GDOS_FSM		0x5F46534DL /* '_FSM' */	/**< TODO */
+#define GDOS_FNT		0x5F464E54L /* '_FNT' */	/**< TODO */
 
 /* vqin_mode & vsin_mode modes */
-#define VINMODE_LOCATOR		1
-#define VINMODE_VALUATOR	2
-#define VINMODE_CHOICE		3
-#define VINMODE_STRING		4
+#define VINMODE_LOCATOR		1	/**< TODO */
+#define VINMODE_VALUATOR	2	/**< TODO */
+#define VINMODE_CHOICE		3	/**< TODO */
+#define VINMODE_STRING		4	/**< TODO */
 
 #ifdef __GEMLIB_OLDNAMES
-#define LOCATOR			1
-#define VALUATOR		2
-#define CHOICE			3
-#define STRING			4
+#define LOCATOR			1	/**< TODO */
+#define VALUATOR		2	/**< TODO */
+#define CHOICE			3	/**< TODO */
+#define STRING			4	/**< TODO */
 #endif
 
 /* vqt_cachesize modes */
-#define CACHE_CHAR		0
-#define CACHE_MISC		1
+#define CACHE_CHAR		0	/**< TODO */
+#define CACHE_MISC		1	/**< TODO */
 
 /* vqt_devinfo return values */
-#define DEV_MISSING		0
-#define DEV_INSTALLED		1
+#define DEV_MISSING		0	/**< TODO */
+#define DEV_INSTALLED		1	/**< TODO */
 
 /* vqt_name return values */
-#define BITMAP_FONT		0
+#define BITMAP_FONT		0	/**< TODO */
 
 /* vsf_interior modes */
-#define FIS_HOLLOW		0
-#define FIS_SOLID		1
-#define FIS_PATTERN		2
-#define FIS_HATCH		3
-#define FIS_USER		4
+#define FIS_HOLLOW		0	/**< TODO */
+#define FIS_SOLID		1	/**< TODO */
+#define FIS_PATTERN		2	/**< TODO */
+#define FIS_HATCH		3	/**< TODO */
+#define FIS_USER		4	/**< TODO */
 
 /* vsf_perimeter modes */
-#define PERIMETER_OFF		0
-#define PERIMETER_ON		1
+#define PERIMETER_OFF		0	/**< TODO */
+#define PERIMETER_ON		1	/**< TODO */
 
 /* vsl_ends modes */
-#define SQUARE			0
-#define ARROWED			1
-#define ROUND			2
+#define SQUARE			0	/**< TODO */
+#define ARROWED			1	/**< TODO */
+#define ROUND			2	/**< TODO */
 
 /* other names */
-#define LE_SQUARED	SQUARE
-#define LE_ARROWED	ARROWED
-#define LE_ROUNDED	ROUND
+#define LE_SQUARED	SQUARE	/**< TODO */
+#define LE_ARROWED	ARROWED	/**< TODO */
+#define LE_ROUNDED	ROUND	/**< TODO */
 
 /* vsl_type modes */
-#define SOLID			1
-#define LDASHED			2
-#define DOTTED			3
-#define DASHDOT			4
-#define DASH			5
-#define DASHDOTDOT		6
-#define USERLINE		7
+#define SOLID			1	/**< TODO */
+#define LDASHED			2	/**< TODO */
+#define DOTTED			3	/**< TODO */
+#define DASHDOT			4	/**< TODO */
+#define DASH			5	/**< TODO */
+#define DASHDOTDOT		6	/**< TODO */
+#define USERLINE		7	/**< TODO */
 
 /* other names */
-#define LT_SOLID		SOLID
-#define LT_LONGDASH		LDASHED
-#define LT_DOTTED		DOTTED
-#define LT_DASHDOT		DASHDOT
-#define LT_DASHED		DASH
-#define LT_DASHDOTDOT	DASHDOTDOT
-#define LT_USERDEF		USERLINE
-#define LONGDASH		LDASHED
-#define DOT				DOTTED
-#define DASH2DOT		DASHDOTDOT
+#define LT_SOLID		SOLID		/**< TODO */
+#define LT_LONGDASH		LDASHED		/**< TODO */
+#define LT_DOTTED		DOTTED		/**< TODO */
+#define LT_DASHDOT		DASHDOT		/**< TODO */
+#define LT_DASHED		DASH		/**< TODO */
+#define LT_DASHDOTDOT	DASHDOTDOT	/**< TODO */
+#define LT_USERDEF		USERLINE	/**< TODO */
+#define LONGDASH		LDASHED		/**< TODO */
+#define DOT				DOTTED		/**< TODO */
+#define DASH2DOT		DASHDOTDOT	/**< TODO */
 
 /* vsm_type modes */
-#define MRKR_DOT		1
-#define MRKR_PLUS 		2
-#define MRKR_ASTERISK		3
-#define MRKR_BOX		4
-#define MRKR_CROSS		5
-#define MRKR_DIAMOND		6
+#define MRKR_DOT		1	/**< TODO */
+#define MRKR_PLUS 		2	/**< TODO */
+#define MRKR_ASTERISK	3	/**< TODO */
+#define MRKR_BOX		4	/**< TODO */
+#define MRKR_CROSS		5	/**< TODO */
+#define MRKR_DIAMOND	6	/**< TODO */
 
 /* other names */
-#define MT_DOT		MRKR_DOT
-#define MT_PLUS		MRKR_PLUS
-#define MT_ASTERISK	MRKR_ASTERISK
-#define MT_SQUARE	MRKR_BOX
-#define MT_DCROSS	MRKR_CROSS
-#define MT_DIAMOND	MRKR_DIAMOND
+#define MT_DOT		MRKR_DOT		/**< TODO */
+#define MT_PLUS		MRKR_PLUS		/**< TODO */
+#define MT_ASTERISK	MRKR_ASTERISK	/**< TODO */
+#define MT_SQUARE	MRKR_BOX		/**< TODO */
+#define MT_DCROSS	MRKR_CROSS		/**< TODO */
+#define MT_DIAMOND	MRKR_DIAMOND	/**< TODO */
 
 /* vst_alignment modes */
-#define TA_LEFT         	0 /* horizontal */
-#define TA_CENTER       	1
-#define TA_RIGHT        	2
-#define TA_BASE         	0 /* vertical */
-#define TA_HALF         	1
-#define TA_ASCENT       	2
-#define TA_BOTTOM       	3
-#define TA_DESCENT      	4
-#define TA_TOP          	5
+#define TA_LEFT         	0 /* horizontal */	/**< TODO */
+#define TA_CENTER       	1	/**< TODO */
+#define TA_RIGHT        	2	/**< TODO */
+#define TA_BASE         	0 /* vertical */	/**< TODO */
+#define TA_HALF         	1	/**< TODO */
+#define TA_ASCENT       	2	/**< TODO */
+#define TA_BOTTOM       	3	/**< TODO */
+#define TA_DESCENT      	4	/**< TODO */
+#define TA_TOP          	5	/**< TODO */
 
 /* vst_charmap modes */
-#define MAP_BITSTREAM   0
-#define MAP_ATARI       1
-#define MAP_UNICODE     2 /* for vst_map_mode, NVDI 4 */
+#define MAP_BITSTREAM   0	/**< TODO */
+#define MAP_ATARI       1	/**< TODO */
+#define MAP_UNICODE     2 /* for vst_map_mode, NVDI 4 */	/**< TODO */
 
 /* vst_effects modes */
-#define TXT_NORMAL		0x0000
-#define TXT_THICKENED		0x0001
-#define TXT_LIGHT		0x0002
-#define TXT_SKEWED		0x0004
-#define TXT_UNDERLINED		0x0008
-#define TXT_OUTLINED		0x0010
-#define TXT_SHADOWED		0x0020
+#define TXT_NORMAL		0x0000	/**< TODO */
+#define TXT_THICKENED	0x0001	/**< TODO */
+#define TXT_LIGHT		0x0002	/**< TODO */
+#define TXT_SKEWED		0x0004	/**< TODO */
+#define TXT_UNDERLINED	0x0008	/**< TODO */
+#define TXT_OUTLINED	0x0010	/**< TODO */
+#define TXT_SHADOWED	0x0020	/**< TODO */
 
 /* other names */
-#define	TF_NORMAL		TXT_NORMAL
-#define TF_THICKENED	TXT_THICKENED
-#define TF_LIGHTENED	TXT_LIGHT
-#define TF_SLANTED		TXT_SKEWED
-#define TF_UNDERLINED	TXT_UNDERLINED
-#define TF_OUTLINED		TXT_OUTLINED
-#define TF_SHADOWED		TXT_SHADOWED
+#define	TF_NORMAL		TXT_NORMAL		/**< TODO */
+#define TF_THICKENED	TXT_THICKENED	/**< TODO */
+#define TF_LIGHTENED	TXT_LIGHT		/**< TODO */
+#define TF_SLANTED		TXT_SKEWED		/**< TODO */
+#define TF_UNDERLINED	TXT_UNDERLINED	/**< TODO */
+#define TF_OUTLINED		TXT_OUTLINED	/**< TODO */
+#define TF_SHADOWED		TXT_SHADOWED	/**< TODO */
 
 
 /* vst_error modes */
-#define APP_ERROR		0
-#define SCREEN_ERROR		1
+#define APP_ERROR		0	/**< TODO */
+#define SCREEN_ERROR	1	/**< TODO */
 
 /* vst_error return values */
-#define NO_ERROR		0
-#define CHAR_NOT_FOUND		1
-#define FILE_READERR 		8
-#define FILE_OPENERR 		9
-#define BAD_FORMAT		10
-#define CACHE_FULL		11
-#define MISC_ERROR		(-1)
+#define NO_ERROR		0		/**< TODO */
+#define CHAR_NOT_FOUND	1		/**< TODO */
+#define FILE_READERR 	8		/**< TODO */
+#define FILE_OPENERR 	9		/**< TODO */
+#define BAD_FORMAT		10		/**< TODO */
+#define CACHE_FULL		11		/**< TODO */
+#define MISC_ERROR		(-1)	/**< TODO */
 
 /* vst_kern tmodes */
-#define TRACK_NONE		0
-#define TRACK_NORMAL 		1
-#define TRACK_TIGHT		2
-#define TRACK_VERYTIGHT		3
+#define TRACK_NONE		0	/**< TODO */
+#define TRACK_NORMAL 	1	/**< TODO */
+#define TRACK_TIGHT		2	/**< TODO */
+#define TRACK_VERYTIGHT	3	/**< TODO */
 
 /* vst_kern pmodes */
-#define PAIR_OFF		0
-#define PAIR_ON			1
+#define PAIR_OFF		0	/**< TODO */
+#define PAIR_ON			1	/**< TODO */
 
 /* vst_scratch modes */
-#define SCRATCH_BOTH		0
-#define SCRATCH_BITMAP		1
-#define SCRATCH_NONE		2
+#define SCRATCH_BOTH		0	/**< TODO */
+#define SCRATCH_BITMAP		1	/**< TODO */
+#define SCRATCH_NONE		2	/**< TODO */
 
 /* v_updwk return values */
-#define SLM_OK			0x00
-#define SLM_ERROR		0x02
-#define SLM_NOTONER		0x03
-#define SLM_NOPAPER		0x04
+#define SLM_OK			0x00	/**< TODO */
+#define SLM_ERROR		0x02	/**< TODO */
+#define SLM_NOTONER		0x03	/**< TODO */
+#define SLM_NOPAPER		0x04	/**< TODO */
 
 /** VDI Memory Form Definition Block */
 typedef struct memory_form
@@ -1678,7 +1679,7 @@ void v_rvon        (VdiHdl );
 void vq_chcells    (VdiHdl , short *n_rows, short *n_cols);
 void vq_curaddress (VdiHdl , short *cur_row, short *cur_col);
 void vs_curaddress (VdiHdl , short row, short col);
-/* alternative name for vs_curaddress */
+/** alternative name for vs_curaddress */
 #define v_curaddress vs_curaddress
 /**@}*/
  
