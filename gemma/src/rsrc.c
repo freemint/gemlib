@@ -20,9 +20,9 @@
 # include <fcntl.h>
 # include <string.h>
 
-# include "dosproto.h"
 # include "gemma.h"
 # include "gemproto.h"
+# include "dosproto.h"
 # include "user.h"
 
 /* BUG: does not recognize the xrsrc extension of Interface
@@ -45,7 +45,7 @@ rsrc_xload(BASEPAGE *bp, long fn, short nargs, char *name, PROC_ARRAY *p)
 	DEBUGMSG("enter");
 	DEBUGMSG(name);
 
-	len = _size(name);
+	len = _size(proc, name);
 	if (len < 0)
 		return len;
 	if (!len)
@@ -73,16 +73,16 @@ rsrc_xload(BASEPAGE *bp, long fn, short nargs, char *name, PROC_ARRAY *p)
 
 		DEBUGMSG("open()");
 
-		r = file = _open(name, O_RDONLY|O_DENYW);
+		r = file = _open(proc, name, O_RDONLY|O_DENYW);
 		if (file < 0)
-			r = file = _open(name, O_RDONLY);
+			r = file = _open(proc, name, O_RDONLY);
 		if (file < 0)
 			goto error;
 
 		DEBUGMSG("read()");
 
-		r = _read(file, len, wrsc);
-		_close(file);
+		r = _read(proc, file, len, wrsc);
+		_close(proc, file);
 
 		DEBUGMSG("loaded OK");
 

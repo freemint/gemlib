@@ -19,8 +19,8 @@
 # include <errno.h>
 # include <string.h>
 
-# include "dosproto.h"
 # include "gemma.h"
+# include "dosproto.h"
 # include "gemproto.h"
 # include "user.h"
 # include "alert.h"
@@ -78,7 +78,7 @@ find_window(short handle, PROC_ARRAY *proc)
 	DEBUGMSG("NULL wd");
 
 	/* Something bad happened, we didn't find the window! */
-	_alert(proc, 1, "[1][find_window():|cannot find window!][ Cancel ]");
+	_alert(proc, 1, "*[1][find_window():|cannot find window!][ Cancel ]");
 
 	return 0;
 }
@@ -391,6 +391,47 @@ windial_center(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 	return 0;
 }
 
+long
+windial_link(BASEPAGE *bp, long fn, short nargs, WINDIAL *old, WINDIAL *new, PROC_ARRAY *p)
+{
+	WINDIAL *newhandle = new, *w = old;
+
+	if (nargs < 2) return -EINVAL;
+
+	if (old->wb_magic != WINDIAL_MAGIC)
+		return -EFAULT;
+
+	while (w->wb_next)
+	{
+		if (w->wb_next == old)
+			return -EINTERNAL;
+		w = w->wb_next;
+	}
+
+	w->wb_next = newhandle;
+	newhandle->wb_prev = w;
+
+	return 0;
+}
+
+long
+windial_unlink(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
+{
+	PROC_ARRAY *proc = 0;
+
+	if (!nargs) return -EINVAL;
+	if (nargs > 1) proc = p;
+	if ((nargs < 2) || !proc) proc = get_contrl(bp);
+
+	if (wd->wb_magic != WINDIAL_MAGIC)
+		return -EFAULT;
+
+	if (wd != proc->wchain)
+		wd_struct_unlink(wd);
+
+	return 0;
+}
+
 /* Initialize the WINDIAL structure for the window
  */
 long
@@ -478,7 +519,7 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 	r = rsrc_xgaddr(bp, 16L, 3, R_TREE, obj, proc);
 	if (r <= 0)
 	{
-		_alert(proc, 1, "[1][windial_create():|cannot find root object|requested by apid %a!][ Cancel ]\n");
+		_alert(proc, 1, "*[1][windial_create():|cannot find root object|requested by apid %a!][ Cancel ]\n");
 		goto fatal;
 	}
 	TOUCH(r);
@@ -531,7 +572,7 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 	r = _wind_create(proc, wd->wb_gadgets, &wd->wb_border_x);
 	if (r <= 0)
 	{
-		_alert(proc, 1, "[1][windial_create():|cannot create new window|requested by apid %a!][ Cancel ]\n");
+		_alert(proc, 1, "*[1][windial_create():|cannot create new window|requested by apid %a!][ Cancel ]\n");
 		goto fatal;
 	}
 	wd->wb_handle = r;
@@ -552,6 +593,9 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 
 	wd->wb_autofree = m;
 	wd->wb_magic = WINDIAL_MAGIC;
+
+	if (proc->wchain != wd)
+		windial_link(bp, 20L, 3, proc->wchain, wd, proc);
 
 	DEBUGMSG("complete");
 
@@ -725,7 +769,7 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 
 		DEBUGMSG("exiting event loop");
 
-		if (m & MU_TIMER)
+		if ((proc->alert == 0) && (m & MU_TIMER))
 		{
 			typedef void (*EXEC)(WINDIAL *wd, short vec, ulong count);
 			EXEC hnd = (EXEC)wd->wb_timhandler;
@@ -738,7 +782,7 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 			}
 		}
 
-		if (m & MU_BUTTON)
+		if ((proc->alert == 0) && (m & MU_BUTTON))
 		{
 			typedef void (*EXEC)(WINDIAL *wd, short vec);
 			EXEC hnd = (EXEC)wd->wb_buthandler;
@@ -791,7 +835,7 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 
 			kst = proc->gem.int_out[4];
 			key = proc->gem.int_out[5];
-			if (hnd)
+			if (hnd && (proc->alert == 0))
 			{
 				DEBUGMSG("calling keyboard handler");
 				r = (hnd)(wd, WD_KEYVEC, kst, key);
@@ -854,7 +898,7 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 				typedef long (*EXEC)(WINDIAL *wd, short vec, short *aesmsg);
 				EXEC hnd = (EXEC)wd->wb_exthandler;
 
-				if (hnd)
+				if ((proc->alert == 0) && hnd)
 				{
 					DEBUGMSG("calling message handler");
 					r = (hnd)(wd, WD_MSGVEC, wd->wb_aesmessage);
@@ -870,6 +914,8 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 				{
 					case WM_CLOSED:
 						{
+							if (proc->alert)
+								break;
 							DEBUGMSG("WM_CLOSED");
 							retval = wd->wb_box;
 							retval <<= 16;
@@ -878,6 +924,8 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 						}
 					case WM_TOPPED:
 					case WM_ONTOP:
+						if (proc->alert)
+							break;
 						if ((wd->wb_ontop & 0x0001) == 0)
 						{
 							DEBUGMSG("WM_TOPPED/WM_ONTOP");
@@ -1012,49 +1060,6 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 	DEBUGMSG("exit");
 
 	return retval;
-}
-
-long
-windial_link(BASEPAGE *bp, long fn, short nargs, WINDIAL *old, WINDIAL *new, PROC_ARRAY *p)
-{
-	WINDIAL *newhandle = new, *w = old;
-
-	if (nargs < 2) return -EINVAL;
-
-	if (old->wb_magic != WINDIAL_MAGIC)
-		return -EFAULT;
-
-	for(;;)
-	{
-		if (!w->wb_next)
-			break;
-		if (w->wb_next == old)
-			return -EINTERNAL;
-		w = w->wb_next;
-	}
-
-	w->wb_next = newhandle;
-	newhandle->wb_prev = w;
-
-	return (long)newhandle;
-}
-
-long
-windial_unlink(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
-{
-	PROC_ARRAY *proc = 0;
-
-	if (!nargs) return -EINVAL;
-	if (nargs > 1) proc = p;
-	if ((nargs < 2) || !proc) proc = get_contrl(bp);
-
-	if (wd->wb_magic != WINDIAL_MAGIC)
-		return -EFAULT;
-
-	if (wd != proc->wchain)
-		wd_struct_unlink(wd);
-
-	return 0;
 }
 
 /* EOF */

@@ -18,12 +18,12 @@
 
 # include <errno.h>
 # include <string.h>
-# include <mint/mintbind.h>
+# include <mintbind.h>
 # include <mint/ostruct.h>
 # include <sys/stat.h>
 
-# include "dosproto.h"
 # include "gemma.h"
+# include "dosproto.h"
 
 /* BIOS function calls
  */
@@ -64,14 +64,6 @@ _getrez(void)
 /* GEMDOS function calls
  */
 
-# ifndef _HAVE_APPL_YIELD
-void
-_yield(void)
-{
-	(void)Syield();
-}
-# endif
-
 void
 _conws(char *string)
 {
@@ -97,33 +89,6 @@ u2d(const char *in, char *out)
 	}
 	else
 		strcpy(out, in);
-}
-
-short
-_open(const char *name, short mode)
-{
-	char temp[1024];
-
-	u2d(name, temp);
-	return Fopen(temp, mode);
-}
-
-long
-_read(short file, long len, void *buf)
-{
-	return Fread(file, len, buf);
-}
-
-long
-_write(short file, long len, void *buf)
-{
-	return Fwrite(file, len, buf);
-}
-
-void
-_close(short file)
-{
-	(void)Fclose(file);
 }
 
 long
@@ -184,12 +149,6 @@ void
 _free(long adr)
 {
 	(void)Mfree(adr);
-}
-
-void
-_domain(short d)
-{
-	(void)Pdomain(d);
 }
 
 long
@@ -302,47 +261,6 @@ long
 _signal(short sig, void *hnd)
 {
 	return Psignal(sig, hnd);
-}
-
-long
-_exec(short mode, void *cmd, void *tail, void *env)
-{
-	return Pexec(mode, cmd, tail, env);
-}
-
-long
-_size(const char *name)
-{
-# ifndef _HAVE_MINT_GEMDOS
-	typedef struct _dta DTABUF;
-	DTABUF dta, *olddta;
-# else
-	struct xattr xa;
-	struct stat st;
-# endif
-	long r;
-	char temp[1024];
-
-	u2d(name, temp);
-
-# ifdef _HAVE_MINT_GEMDOS
-	r = Fstat64(0, temp, &st);	/* MiNT 1.15 has real stat() */
-	if (r == 0)
-		return st.st_size;
-
-	r = _stat(0, temp, &xa);	/* 32-bit stat() from older MiNTs */
-	if (r == 0)
-		return xa.size;
-# else
-	olddta = (DTABUF *)Fgetdta();	/* TOS? ups... */
-	Fsetdta(&dta);
-	r = Fsfirst(temp, 0);
-	Fsetdta(olddta);
-	if (r == 0)
-		return dta.dta_size;
-# endif
-
-	return r;
 }
 
 /* EOF */

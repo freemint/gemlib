@@ -19,8 +19,8 @@
 
 # include <string.h>
 
-# include "dosproto.h"
 # include "gemma.h"
+# include "dosproto.h"
 # include "gemproto.h"
 # include "emu.h"
 

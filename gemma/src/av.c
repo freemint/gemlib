@@ -18,8 +18,8 @@
 # include <errno.h>
 # include <string.h>
 
-# include "dosproto.h"
 # include "gemma.h"
+# include "dosproto.h"
 # include "gemproto.h"
 # include "alert.h"
 
@@ -278,20 +278,20 @@ av_help(BASEPAGE *bp, long fn, short nargs, char *pathname, PROC_ARRAY *p)
 
 static const char *services[] =
 {
-  "ftp:", "http:", "file:", "mail:",
+  "ftp:", "http:", "file:", "mail:", "mailto:",
   "telnet:", "news:", "nntp:", "gopher:", 0
 };
 
 static const char *clients[] =
 {
-  "GEMFTP=", "GEMWWW=", "GEMWWW=",
+  "GEMFTP=", "GEMWWW=", "GEMWWW=", "GEMMAIL=",
   "GEMMAIL=", "GEMTELNET=", "GEMNEWS=",
   "GEMNEWS=", "GEMGOPHER="
 };
 
 static const char *alt_clients[] =
 {
-  "FTP_CLIENT=", "BROWSER=", "BROWSER=",
+  "FTP_CLIENT=", "BROWSER=", "BROWSER=", "MAIL_CLIENT=",
   "MAIL_CLIENT=", "TELNET=", "NEWS_CLIENT=",
   "NEWS_CLIENT=", "GOPHER="
 };
@@ -335,6 +335,7 @@ open_url(BASEPAGE *bp, long fn, short nargs, char *url, PROC_ARRAY *p)
 			break;
 		}
 	}
+
 	cli = getenv(proc, cli);
 	if (!cli)
 	{

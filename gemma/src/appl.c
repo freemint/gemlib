@@ -18,11 +18,11 @@
 
 # include <errno.h>
 # include <string.h>
-# include <mint/mintbind.h>
+# include <mintbind.h>
 
-# include "dosproto.h"
 # include "gemma.h"
 # include "gemproto.h"
+# include "dosproto.h"
 # include "user.h"
 
 short whitebak;
@@ -107,11 +107,8 @@ appl_close(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 
 	_appl_exit(proc);
 
-	if (proc->kern.exec)
-	{
-		Slbclose(proc->kern.handle);
-		proc->kern.exec = proc->kern.handle = 0;
-	}
+	Slbclose(proc->kern.handle);
+	proc->kern.exec = proc->kern.handle = 0;
 
 	DEBUGMSG("complete");
 
@@ -143,7 +140,10 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 	if (proc->gem.global[0])
 		return proc->gem.global[2];
 
-	(void)Slbopen("kernel.slb", 0L, 0x0100L, &proc->kern.handle, &proc->kern.exec);
+	r = Slbopen("kernel.slb", 0L, 0x0100L, &proc->kern.handle, &proc->kern.exec);
+
+	if (r < 0)
+		return r;
 
 	apid = _appl_init(proc);
 
@@ -152,11 +152,13 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 	if (apid < 0)
 	{
 		_conws("This program requires GEM\n");
-		return apid;
+
+		r = (long)apid;
+		goto error;
 	}
 
 	home = getenv(proc, "HOME=");
-	_domain(1);		/* ... obviously */
+	_domain(proc, 1);		/* ... obviously */
 
 	if (home && (flag & 4))
 		_setpath(home);
@@ -181,7 +183,7 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 				strcat(rscname, "\\");
 				strcat(rscname, name);
 
-				if (_size(rscname) > 0)
+				if (_size(proc, rscname) > 0)
 					name = rscname;
 			}
 
@@ -232,7 +234,10 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 
 error:	_appl_exit(proc);
 
-	DEBUGMSG("exit on error");
+	Slbclose(proc->kern.handle);
+	proc->kern.exec = proc->kern.handle = 0;
+
+	DEBUGMSG("error");
 
 	return r;
 }

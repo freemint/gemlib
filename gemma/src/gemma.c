@@ -20,8 +20,8 @@
 # include <errno.h>
 # include <string.h>
 
-# include "dosproto.h"
 # include "gemma.h"
+# include "dosproto.h"
 # include "user.h"
 
 long gemma_init(void);

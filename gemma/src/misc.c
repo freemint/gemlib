@@ -17,8 +17,8 @@
 
 # include <errno.h>
 
-# include "dosproto.h"
 # include "gemma.h"
+# include "dosproto.h"
 # include "gemproto.h"
 # include "user.h"
 
@@ -60,7 +60,7 @@ lib_control(BASEPAGE *bp, long fn, short nargs, \
 		case	0x0002:	/* get version */
 		{
 			return (long)
-			"Gemma shared library version 1.09 pl 1, "
+			"Gemma shared library version 1.09 pl 2, "
 			"compiled " __DATE__ ". "
 			"Copyright (c) 1999-2002 Draco/YC. "
 			"Dedicated with love to Magda.";		

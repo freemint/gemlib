@@ -143,7 +143,7 @@ struct gemma_flags sflags =
 	0,		/* draw moveboxes for WM_MOVED */
 	0,		/* enable desktop size compensation */
 	1,		/* use form_alert() for displaying alerts */
-	0, 		/* alert handles redraws in windows below it */
+	0, 		/* unassigned, reserved */
 	DEBUGFAC,	/* global debugging facility */
 	0,		/* load external fileselector library */
 	0		/* fix for buggy linker */
@@ -247,15 +247,14 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 		case 17:	/* appl_yield() */
 		{
 			proc->gem.int_out[0] = 1;
-			_yield();
+			_yield(proc);
 
 			return 1;
 		}
 # endif
 		case 51:	/* form_dial() */
 		{
-			if ((proc->gem.int_in[0] == 0) || \
-				(proc->gem.int_in[0] == 3))
+			if ((proc->gem.int_in[0] == 0) || (proc->gem.int_in[0] == 3))
 				break;
 			if (sflags.zoomboxes)
 				break;
@@ -370,7 +369,7 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 			{
 				short ap[4];
 
-				_appl_getinfo(proc, 4, ap);	/* this will wrap back to this function :-) */
+				_appl_getinfo(proc, 4, ap);	/* this will re-enter call_aes() :-) */
 				if (ap[1])
 					break;
 			}

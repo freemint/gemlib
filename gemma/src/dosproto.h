@@ -25,13 +25,50 @@ long _getexc(long vec);
 short _kbshift(long wh);
 short _getrez(void);
 
-short _open(const char *name, short mode);
-long _read(short file, long len, void *buf);
-long _write(short file, long len, void *buf);
-void _close(short file);
+static inline
+long _domain(PROC_ARRAY *proc, long dom)
+{
+	return (proc->kern.exec)(proc->kern.handle, 0x0119L, (short)1, (long)dom);
+}
+
+static inline
+void _yield(PROC_ARRAY *proc)
+{
+	(proc->kern.exec)(proc->kern.handle, 0x00ffL, (short)0);
+}
+
+static inline
+long _size(PROC_ARRAY *proc, char *name)
+{
+	return (proc->kern.exec)(proc->kern.handle, 0x0201L, (short)1, name);
+}
+
+static inline
+long _open(PROC_ARRAY *proc, const char *name, short mode)
+{
+	return (proc->kern.exec)(proc->kern.handle, 0x003dL, (short)2, name, mode);
+}
+
+static inline
+void _close(PROC_ARRAY *proc, long fd)
+{
+	(proc->kern.exec)(proc->kern.handle, 0x003eL, (short)1, (short)fd);
+}
+
+static inline
+long _read(PROC_ARRAY *proc, long fd, long len, void *buf)
+{
+	return (proc->kern.exec)(proc->kern.handle, 0x003fL, (short)3, (short)fd, len, buf);
+}
+
+static inline
+long _write(PROC_ARRAY *proc, long fd, long len, void *buf)
+{
+	return (proc->kern.exec)(proc->kern.handle, 0x0040L, (short)3, (short)fd, len, buf);
+}
+
 long _cntl(short file, void *arg, short cmd);
 long _stat(short flag, const char *name, void *out);
-long _delete(char *filespec);
 
 long _wait3(short flag, long *rus);
 
@@ -45,14 +82,12 @@ long _signal(short sig, void *hnd);
 void _conws(char *str);
 short _dup(short file);
 void _force(short f1, short f2);
+long _delete(char *filespec);
 
 long _alloc(long size);
 long _rdalloc(long size);
 void _shrink(void *base, long newsize);
 void _free(long adr);
-
-void _domain(short d);
-void _yield(void);
 
 long _getdrv(void);
 long _setdrv(long drv);
@@ -60,9 +95,5 @@ long _dfree(long *m, short d);
 long _getpath(void *p, short drv);
 long _setpath(const char *p);
 long _getcwd(void *p, short drv, short len);
-
-long _exec(short mode, void *cmd, void *tail, void *env);
-
-long _size(const char *name);
 
 /* EOF */

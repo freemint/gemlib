@@ -88,11 +88,30 @@ line_break(char *line, const short rmargin)
 	}
 }
 
+/* Skeleton routine for putting code doing windowed alerts
+ */
+static long
+_wind_alert(PROC_ARRAY *proc, short button, char *msg)
+{
+	return _form_alert(proc, button, msg);
+}
+
 long
 _alert(PROC_ARRAY *proc, short button, char *msg)
 {
 	char tmp[512], c;
-	short x, y = 0;
+	short x, y = 0, forcesys = 0;
+	long r;
+
+	/* Asterisk at the begin forces usage of regular form_alert()
+	 * instead of internal routines. This is intened for internal
+	 * error handling purposes, not for the user.
+	 */
+	if (msg[0] == '*')
+	{
+		msg++;
+		forcesys++;
+	}
 
 	for (x = 0; x < 512; x++)
 	{
@@ -112,7 +131,12 @@ _alert(PROC_ARRAY *proc, short button, char *msg)
 		tmp[y++] = msg[x];
 	}
 
-	return _form_alert(proc, button, tmp);
+	if (forcesys || sflags.system_alerts)
+		r = _form_alert(proc, button, tmp);
+	else
+		r = _wind_alert(proc, button, tmp);
+
+	return r;
 }
 
 long
@@ -152,7 +176,7 @@ windial_error(BASEPAGE *bp, long fn, short nargs, long error, char *message, PRO
 
 	if (error > 0)
 	{
-		_alert(proc, 1, "[1][windial_error():|value out of range for apid %a!][ Cancel ]");
+		_alert(proc, 1, "*[1][windial_error():|value out of range for apid %a!][ Cancel ]");
 		return -EBADARG;
 	}
 
@@ -184,13 +208,7 @@ windial_error(BASEPAGE *bp, long fn, short nargs, long error, char *message, PRO
 		}
 	}
 
-	if (error)
-		m = "Unknown error";
-	else
-		m = "No errors";
-
-	if (proc->kern.exec)
-		m = (char *)(proc->kern.exec)(proc->kern.handle, 512L, (short)1, error);
+	m = (char *)(proc->kern.exec)(proc->kern.handle, 512L, (short)1, error);
 
 	strcat(msgbuf, m);
 	
