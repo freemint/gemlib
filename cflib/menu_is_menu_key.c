@@ -38,7 +38,12 @@ check_item_key (char *str, short kstate, short kreturn)
 	short found = FALSE;
 	short len, i, r, ks;
 	char s[50], ascii;
-	int scan;
+	unsigned char scan;
+
+	/* do not make shift keys differences */
+	if ( kstate & K_RSHIFT ) kstate |= K_LSHIFT;
+	/* look only to shift/alt/ctrl modifiers */
+	kstate &= K_LSHIFT|K_CTRL|K_ALT;
 
 	scan = (kreturn & 0xff00) >> 8;
 	if (scan > 127)
@@ -78,11 +83,11 @@ check_item_key (char *str, short kstate, short kreturn)
 						ks |= K_CTRL;
 						i++;
 						break;
-					case '':
+					case '\7':
 						ks |= K_ALT;
 						i++;
 						break;
-					case '':
+					case '\1':
 						ks |= K_LSHIFT;
 						i++;
 						break;
