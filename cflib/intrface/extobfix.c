@@ -78,12 +78,12 @@
 
 /****** Functions ************************************************************/
 
-long pinit_obfix (int status);
+long pinit_obfix (short status);
 
-static void fix_objs (OBJECT * tree, int is_dialog);
-static void (*get_name) (void *window, int obj, char *txt);
+static void fix_objs (OBJECT * tree, short is_dialog);
+static void (*get_name) (void *window, short obj, char *txt);
 static void test_form (OBJECT *tree, short editobj, long get_n, void *window);
-static int test_alert (int def, char *str);
+static short test_alert (short def, char *str);
 
 /****** Variables ************************************************************/
 
@@ -100,7 +100,7 @@ static long routines[] =
 /*****************************************************************************/
 
 static void
-fix_objs (OBJECT * tree, int is_dialog)
+fix_objs (OBJECT * tree, short is_dialog)
 {
 	fix_dial (tree);
 }
@@ -142,8 +142,8 @@ test_form (OBJECT *tree, short editobj, long get_n, void *window)
 }
 
 /*****************************************************************************/
-static int
-test_alert (int def, char *str)
+static short
+test_alert (short def, char *str)
 {
 	return do_alert (def, 0, str);
 }
@@ -169,9 +169,9 @@ main (void)
 /*****************************************************************************/
 
 long
-pinit_obfix (int status)
+pinit_obfix (short status)
 {
-	int i;
+	short i;
 
 	if (status == TRUE)
 	{

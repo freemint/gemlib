@@ -20,11 +20,11 @@ all-here: $(TARGET)
 
 # default overwrites
 INCLUDES += -I..
-GENERAL = -mshort
+#GENERAL = -mshort
 
 # default definitions
 OBJS = $(COBJS:.c=.o) $(SOBJS:.s=.o)
-LIBS += -L.. -lcflib16 -lgem16
+LIBS += -L.. -lcflib -lgem
 GENFILES = $(TARGET)
 
 $(TARGET): $(OBJS)
