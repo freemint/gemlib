@@ -33,7 +33,7 @@ _vdi_trap_esc (VDIPB * vdipb,
 		"
 		:
 		: "a"(vdipb), "g"(cntrl_0_1), "g"(cntrl_3), "g"(cntrl_5), "g"(handle)
-		: "a0", "d0","d1"
+		: "a0", "d0","d1","memory"
 	);
 }
 #define VDI_TRAP_ESC(vdipb, handle, opcode, subop, cntrl_1, cntrl_3) \
@@ -56,7 +56,7 @@ _vdi_trap_00 (VDIPB * vdipb, long cntrl_0_1, short handle)
 		"
 		:
 		: "a"(vdipb), "g"(cntrl_0_1), "g"(handle)
-		: "a0", "d0","d1"
+		: "a0", "d0","d1","memory"
 	);
 }
 #define VDI_TRAP_00(vdipb, handle, opcode) \
