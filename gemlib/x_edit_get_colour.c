@@ -9,8 +9,10 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param tcolour will be filled with the Text colour
- *  @param bcolour will be filled with the Background colour
+ *  @param tcolour will be filled with the Text colour \p
+ *         [option CHECK_NULLPTR] tcolour may be NULL
+ *  @param bcolour will be filled with the Background colour \p
+ *         [option CHECK_NULLPTR] bcolour may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 for error, else 1
@@ -35,7 +37,13 @@ mt_edit_get_colour( OBJECT *tree, short obj, short *tcolour, short *bcolour, sho
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (tcolour)
+#endif
 	*tcolour = aes_intout[1];
+#if CHECK_NULLPTR
+	if (bcolour)
+#endif
 	*bcolour = aes_intout[2];
 
 	return(aes_intout[0]);
