@@ -276,7 +276,7 @@
  *  documentation on these functions.
  *
  *  @note
- *  If mt_appl_getinfo() is not implemented (gl_ap_version < 0X0400 and the
+ *  If mt_appl_getinfo() is not implemented (mt_AESversion() < 0X0400 and the
  *  application "?AGI" (Winx, Magic>2) is not found), the trap is not performed
  *  (may crash on some system).
  *
