@@ -145,18 +145,18 @@ typedef struct pEvntrec
 } EVNTREC;
 
 /* evnt_button flags */
-#define LEFT_BUTTON		0x0001	/**< TODO */
-#define RIGHT_BUTTON 	0x0002	/**< TODO */
-#define MIDDLE_BUTTON	0x0004	/**< TODO */
+#define LEFT_BUTTON		0x0001	/**< mask for left mouse button, see mt_evnt_button() */
+#define RIGHT_BUTTON 	0x0002	/**< mask for right mouse button, see mt_evnt_button() */
+#define MIDDLE_BUTTON	0x0004	/**< mask for middle mouse button, see mt_evnt_button() */
 
-#define K_RSHIFT		0x0001	/**< TODO */
-#define K_LSHIFT		0x0002	/**< TODO */
-#define K_CTRL 			0x0004	/**< TODO */
-#define K_ALT			0x0008	/**< TODO */
+#define K_RSHIFT		0x0001	/**< mask for right shift key, see mt_evnt_button() */
+#define K_LSHIFT		0x0002	/**< mask for left shift key, see mt_evnt_button() */
+#define K_CTRL 			0x0004	/**< mask for control key, see mt_evnt_button() */
+#define K_ALT			0x0008	/**< mask for alternate key, see mt_evnt_button() */
 
 /* evnt_dclick flags */
-#define EDC_INQUIRE		0	/**< TODO */
-#define EDC_SET			1	/**< TODO */
+#define EDC_INQUIRE		0	/**< inquire double-clic rate, see mt_evnt_dclick() */
+#define EDC_SET			1	/**< set double-clic rate, see mt_evnt_dclick() */
 
 /* event message values */
 
