@@ -771,7 +771,7 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 
 		if ((proc->alert == 0) && (m & MU_TIMER))
 		{
-			typedef void (*EXEC)(WINDIAL *wd, short vec, ulong count);
+			typedef void (*EXEC)(WINDIAL *w, short vec, ulong count);
 			EXEC hnd = (EXEC)wd->wb_timhandler;
 
 			if (hnd)
@@ -784,7 +784,7 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 
 		if ((proc->alert == 0) && (m & MU_BUTTON))
 		{
-			typedef void (*EXEC)(WINDIAL *wd, short vec);
+			typedef void (*EXEC)(WINDIAL *w, short vec);
 			EXEC hnd = (EXEC)wd->wb_buthandler;
 			short newhandle;
 
@@ -828,7 +828,7 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 
 		if (m & MU_KEYBD)
 		{
-			typedef long (*EXEC)(WINDIAL *wd, short vec, short ks, short kc);
+			typedef long (*EXEC)(WINDIAL *w, short vec, short ks, short kc);
 			EXEC hnd = (EXEC)wd->wb_keyhandler;
 			long r = 0;
 			short key, kst;
@@ -895,7 +895,7 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 			}
 
 			{
-				typedef long (*EXEC)(WINDIAL *wd, short vec, short *aesmsg);
+				typedef long (*EXEC)(WINDIAL *w, short vec, short *aesmsg);
 				EXEC hnd = (EXEC)wd->wb_exthandler;
 
 				if ((proc->alert == 0) && hnd)

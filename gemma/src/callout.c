@@ -218,17 +218,17 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 
 		case 12:	/* appl_write(), round length up to 16 byte boundary */
 		{
-			short r;
+			short t;
 
 			TOUCH(proc->gem.addr_in[0]);	/* access test */
-			r = proc->gem.int_in[1];
-			if (r & 0x000f)
+			t = proc->gem.int_in[1];
+			if (t & 0x000f)
 			{
-				r += 0xf;
-				r &= ~0xf;
-				proc->gem.int_in[1] = r;
+				t += 0xf;
+				t &= ~0xf;
+				proc->gem.int_in[1] = t;
 			}
-			TOUCH((proc->gem.addr_in[0] + r - 1));	/* also for the end of the buffer */
+			TOUCH((proc->gem.addr_in[0] + t - 1));	/* also for the end of the buffer */
 			break;
 		}
 
@@ -360,12 +360,12 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 	{
 		case 13:	/* appl_find() */
 		{
-			ulong adr, r;
+			ulong adr, rv;
 
 			adr = (ulong)proc->gem.addr_in[0];
-			r = adr & 0xffff0000L;
-			r >>= 16;
-			if (!r || (r == 0xfffe) || (r == 0xffff))
+			rv = adr & 0xffff0000L;
+			rv >>= 16;
+			if (!rv || (rv == 0xfffe) || (rv == 0xffff))
 			{
 				short ap[4];
 
