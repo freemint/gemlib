@@ -7,22 +7,20 @@
 /** allows the user to move a box frame within
  *  the constraints of a bounding rectangle.
  *
- *  @param  w
- *  @param  h specify the initial width and height
- *            of the box to draw.
- *  @param sx
- *  @param sy specify the starting x and y screen
- *            coordinates.
- *  @param bx
- *  @param by
- *  @param bw
- *  @param bh give the coordinates of the bounding
- *            rectangle.
- *  @param rx
- *  @param ry are WORD pointers which, on function exit,
- *            will be filled in with the ending x and y
- *            position of the box. \n
- *             [option CHECK_NULLPTR] rx and/or ry may be NULL
+ *  @param  w initial width of the box to draw.
+ *  @param  h initial height of the box to draw.
+ *  @param sx starting x screen coordinate
+ *  @param sy starting y screen coordinate
+ *  @param bx x-coordinate of the bounding rectangle.
+ *  @param by y-coordinate of the bounding rectangle.
+ *  @param bw width of the bounding rectangle.
+ *  @param bh height of the bounding rectangle.
+ *  @param rx will be filled in (on function exit) with the ending
+ *            x position of the box. \n
+ *             [option CHECK_NULLPTR] rx may be NULL
+ *  @param ry will be filled in (on function exit) with the ending
+ *            y position of the box. \n
+ *             [option CHECK_NULLPTR] ry may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred during
