@@ -974,6 +974,8 @@ typedef struct
 
 typedef unsigned short WCHAR; /**< 16bit string, eg. for unicode */
 
+#ifdef __GEMLIB_VDI  /* defined in gem.h */
+
 void	v_ftext         (VdiHdl, short x, short y, const char  *str);
 void	v_ftext16       (VdiHdl, short x, short y, const WCHAR *wstr);
 void	v_ftext16n      (VdiHdl, PXY pos, const WCHAR *wstr, short num);
@@ -1019,6 +1021,8 @@ long  vst_setsize32 	(VdiHdl, long point, short *wchar, short *hchar, short *wce
 short vst_skew 	(VdiHdl, short skew);
 void  vst_track_offset(VdiHdl, long offset, short pairmode, short *tracks, short *pairs);
 void  vst_width	(VdiHdl, short width, short *char_width, short *char_height, short *cell_width, short *cell_height);
+
+#endif 
 
 
 /*
@@ -1262,10 +1266,10 @@ struct _gcbitmap
 
 typedef struct																/* Rechteck fr 16-Bit-Koordinaten */
 {
-	INT16	x1;
-	INT16	y1;
-	INT16	x2;
-	INT16	y2;
+	short	x1;
+	short	y1;
+	short	x2;
+	short	y2;
 } RECT16;
 
 typedef struct																/* Rechteck fr 32-Bit-Koordinaten */
