@@ -383,6 +383,114 @@ graf_slidebox(OBJECT *tree, short parent, short object, short direction)
 	return(mt_graf_slidebox(tree, parent, object, direction, aes_global));
 }
 
+#ifdef menu_attach
+#undef menu_attach
+#endif
+short
+menu_attach(short me_flag, OBJECT *me_tree, short me_item, MENU *me_mdata)
+{
+	return(mt_menu_attach( me_flag, me_tree, me_item, me_mdata, aes_global));
+}
+
+#ifdef menu_bar
+#undef menu_bar
+#endif
+short
+menu_bar(OBJECT *me_tree, int me_mode)
+{
+	return(mt_menu_bar(me_tree, me_mode, aes_global));
+}
+
+#ifdef menu_click
+#undef menu_click
+#endif
+short
+menu_click(short click, short setit)
+{
+	return(mt_menu_click( click, setit, aes_global));
+}
+
+#ifdef menu_icheck
+#undef menu_icheck
+#endif
+short
+menu_icheck(OBJECT *me_tree, short me_item, short me_check)
+{
+	return(mt_menu_icheck(me_tree, me_item, me_check, aes_global));
+}
+
+#ifdef menu_ienable
+#undef menu_ienable
+#endif
+short
+menu_ienable(OBJECT *me_tree, short me_item, short me_enable)
+{
+	return(mt_menu_ienable(me_tree, me_item, me_enable,aes_global));
+}
+
+#ifdef menu_istart
+#undef menu_istart
+#endif
+short
+menu_istart(short me_flag, OBJECT *me_tree, short me_imenu, short me_item)
+{
+	return(mt_menu_istart(me_flag, me_tree, me_imenu, me_item, aes_global));
+}
+
+#ifdef menu_popup
+#undef menu_popup
+#endif
+short
+menu_popup(MENU *me_menu, short me_xpos, short me_ypos, MENU *me_mdata)
+{
+	return(mt_menu_popup(me_menu, me_xpos, me_ypos, me_mdata, aes_global));
+}
+
+#ifdef menu_register
+#undef menu_register
+#endif
+short
+menu_register(short ap_id, char *me_text)
+{
+	return(mt_menu_register(ap_id, me_text, aes_global));
+}
+
+#ifdef menu_settings
+#undef menu_settings
+#endif
+short
+menu_settings(short me_flag, MN_SET *me_values)
+{
+	return(mt_menu_settings(me_flag, me_values, aes_global));
+}
+
+#ifdef menu_text
+#undef menu_text
+#endif
+short
+menu_text(OBJECT *me_tree, int me_item, char *me_text)
+{
+	return(mt_menu_text(me_tree, me_item, me_text, aes_global));
+}
+
+#ifdef menu_tnormal
+#undef menu_tnormal
+#endif
+short
+menu_tnormal(OBJECT *me_tree, short me_item, short me_normal)
+{
+	return(mt_menu_tnormal(me_tree, me_item, me_normal, aes_global));
+}
+
+#ifdef menu_unregister
+#undef menu_unregister
+#endif
+short
+menu_unregister(int id)
+{
+	return(mt_menu_unregister(id, aes_global));
+}
+
 #ifdef objc_add
 #undef objc_add
 #endif
