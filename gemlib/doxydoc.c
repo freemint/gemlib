@@ -134,6 +134,15 @@
  *  says that mt_fnts_xx() functions are available.
  */
 
+/** @defgroup x_fslx MagiC/WDIALOG extension: File selector Library
+ *
+ *  @brief file selector functions
+ *
+ *  This File Selector library availability can be found calling
+ *  mt_appl_getinfo(7). Bit 3 of \p ap_gout1, if equal to 1,
+ *  says that mt_flsx_xx() functions are available.
+ */
+
 /**@}*/
 
 /** @defgroup VDI VDI  Function Reference
