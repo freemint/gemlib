@@ -29,7 +29,7 @@
 
 #ifdef __MINT__
 
-#include <sys/cookie.h>
+#include <mint/cookie.h>
 
 int
 getcookie (char *cookie, long *p_value)
