@@ -3,7 +3,7 @@
 #
 
 SHELL = /bin/sh
-SUBDIRS = documentation libgemma libslb src usage
+SUBDIRS = documentation libgemma libslb src
 
 srcdir = .
 top_srcdir = ..
