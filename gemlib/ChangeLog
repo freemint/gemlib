@@ -1,3 +1,284 @@
+2004-11-03 20:00  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* VERSION: Bumped to release 0.43.3
+
+2004-11-03 20:00  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* Makefile: pc target added (pure c compiler)
+
+2004-10-29 09:57  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_wind_calc.c, a_wind_create.c, a_wind_delete.c, a_wind_find.c,
+	a_wind_get.c, a_wind_get_grect.c, a_wind_open.c, mt_gem.h.in:
+	documentation updated
+
+2004-10-27 22:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_shel_write.c, mt_gem.h.in: - added constants to manage AES
+	threads: SWM_THREXIT, SWM_THRKILL, SHW_THR_EXIT   and SHW_THR_KILL
+	- documentation updated
+
+2004-10-23 12:24  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_wind_set.c, a_wind_set_grect.c, a_wind_set_str.c,
+	a_wind_update.c, mt_gem.h.in: added constant NO_BLOCK for
+	mt_wind_update() documentation updated
+
+2004-10-22 18:42  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* mt_gem.h.in: fix comment about SHELW extensions
+
+2004-10-21 20:50  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_shel_write.c, mt_gem.h.in: documentation updated
+
+2004-10-20 20:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* mt_gem.h.in: add XaAES/oAESis extended modes for shel_write(): -
+	uid and gid are added to the SHELW structure - SW_UID and SW_GID
+	constants added add MagiC6 extended mode for shel_write(): - flags
+	added to XSHW_COMMAND structure SHELTAIL structure is now
+	compatible with 32 bits compilers (int -> short)
+
+2004-10-18 22:50  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* mt_gem.h.in: documentation updated
+
+2004-10-18 22:20  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_scrp_read.c, a_shel_rdef.c, a_shel_wdef.c, a_shel_write.c:
+	documentation: some fixes
+
+2004-10-17 09:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_shel_write.c, mt_gem.h.in: documentation updated
+
+2004-10-15 22:55  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_getinfo.c, a_shel_envrn.c, a_shel_get.c, a_shel_help.c,
+	a_shel_rdef.c, a_shel_wdef.c, mt_gem.h.in: - added constant
+	SHP_HELP (for mt_shel_help()) - documentation updated
+
+2004-10-14 22:37  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_rsrc_free.c, a_rsrc_gaddr.c, a_rsrc_load.c, a_rsrc_rcfix.c,
+	a_rsrc_saddr.c, a_scrp_clear.c, a_scrp_read.c, a_scrp_write.c,
+	mt_gem.h.in: - added constants SCRAP_XXX for mt_scrap_read(). They
+	are return values for	MagiC-PC 2.0 (information taken from
+	TOS.HYP) - documentation updated
+
+2004-10-14 20:58  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* rc_array_to_grect.c: fixed array_to_grect() : the width and
+	height were always 1
+
+2004-10-12 22:35  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_objc_edit.c, a_objc_find.c, a_objc_sysvar.c, mt_gem.h.in,
+	x_objc_wdraw.c, x_objc_xedit.c: documentation updated
+
+2004-10-09 21:11  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_objc_add.c, a_objc_change.c, a_objc_draw.c,
+	a_objc_draw_grect.c, a_objc_edit.c, a_objc_find.c, a_objc_offset.c,
+	a_objc_order.c, a_objc_sysvar.c, a_objc_xfind.c, mt_gem.h.in:
+	documentation updated (cosmetic)
+
+2004-10-05 23:08  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_menu_attach.c, a_menu_bar.c, a_menu_icheck.c, a_menu_ienable.c,
+	a_menu_istart.c, a_menu_popup.c, a_menu_register.c,
+	a_menu_settings.c, a_menu_tnormal.c, mt_gem.h.in: - add MN_INQUIRE
+	and MN_CHANGE (constants for mt_menu_settings()) - documentation
+	updated (cosmetic)
+
+2004-10-04 22:12  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_menu_click.c, a_menu_unregister.c: documentation added
+
+2004-10-04 20:53  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_graf_xhandle.c: variable device now contains 0 if AES doesnt
+	support this extension
+
+2004-10-04 20:51  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_graf_multirubber.c, a_graf_rubbox.c, a_graf_shrinkbox.c,
+	a_graf_shrinkbox_grect.c, a_graf_slidebox.c, a_graf_watchbox.c,
+	a_graf_wwatchbox.c, mt_gem.h.in: documentation updated (cosmetic)
+
+2004-09-29 21:18  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_graf_dragbox.c, a_graf_handle.c, a_graf_mbox.c,
+	a_graf_mkstate.c, a_graf_mouse.c, mt_gem.h.in: documentation
+	updated (cosmetic)
+
+2004-09-28 22:12  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_graf_dragbox.c, a_graf_growbox.c, a_graf_growbox_grect.c:
+	documentation updated (cosmetic)
+
+2004-09-28 21:22  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_fsel_boxinput.c, mt_gem.h.in: add FSEL_CALLBACK callback
+	function type for mt_fsel_boxinput
+
+2004-09-27 22:59  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_fsel_boxinput.c, a_fsel_exinput.c, a_fsel_input.c, mt_gem.h.in:
+	documentation updated
+
+2004-09-27 22:23  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_getinfo.c: documentation updated (cosmetic)
+
+2004-09-24 22:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* gemlib.todo: remove unused file (unused since gemlib43)
+
+2004-09-23 23:27  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* mt_gem.h.in: documentation updated (WA_WHEEL)
+
+2004-09-23 20:10  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* x_form_xerr.c: documentation updated
+
+2004-09-21 22:41  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* x_form_popup.c: fix docu (typo)
+
+2004-09-21 22:05  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* x_form_popup.c, x_form_xdial.c, x_form_xdo.c, x_form_xerr.c:
+	documentation added
+
+2004-09-17 20:54  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_form_center.c, a_form_keybd.c: documentation updated (cosmetic)
+
+2004-09-17 20:32  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_form_error.c, mt_gem.h.in: documentation updated (cosmetic)
+
+2004-09-17 20:19  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_form_dial.c, a_form_do.c, mt_gem.h.in: documentation updated
+	(cosmetic)
+
+2004-09-16 22:39  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_form_button.c: documentation updated (cosmetic)
+
+2004-09-16 21:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_form_alert.c, mt_gem.h.in: - add FA_xxx constants for
+	mt_form_alert icon (moved from windom) - update documentation
+
+2004-09-14 23:00  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_evnt_multi.c, a_evnt_timer.c, mt_gem.h.in: documentation
+	updated (cosmetic)
+
+2004-09-13 20:55  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_evnt_mesag.c, a_evnt_mouse.c, mt_gem.h.in: documentation
+	updated (cosmetic)
+
+2004-09-13 20:43  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_evnt_mesag.c, mt_gem.h.in: documentation updated (cosmetic)
+
+2004-09-11 12:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_evnt_keybd.c, a_evnt_mesag.c, mt_gem.h.in: documentation
+	updated (cosmetic)
+
+2004-09-08 21:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_evnt_button.c, a_evnt_dclick.c, mt_gem.h.in: documentation
+	updated (cosmetics)
+
+2004-09-03 14:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_search.c: update documentation for APP_DESK command
+
+2004-08-18 22:43  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_write.c, a_appl_yield.c: documentation updated (cosmetic)
+
+2004-08-18 22:32  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_trecord.c, mt_gem.h.in: documentation updated (cosmetic)
+
+2004-08-18 22:14  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_tplay.c, mt_gem.h.in: documentation updated (cosmetic)
+
+2004-08-18 21:45  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_search.c, mt_gem.h.in: documentation updated
+
+2004-08-18 21:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_init.c: documentation updated
+
+2004-08-18 20:56  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_getinfo.c: documentation updated
+
+2004-08-18 19:45  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* mt_gem.h.in: add mt_AESxxx macro (similar to _AESxxx from gem.h)
+
+2004-08-17 23:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_getinfo.c, mt_gem.h.in: documentation updated (cosmetic)
+
+2004-08-17 21:48  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_read.c, mt_gem.h.in: documentation updated (cosmetic)
+
+2004-08-16 22:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_control.c: documentation updated (cosmetic)
+
+2004-08-16 22:02  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* mt_gem.h.in: documentation updated (cosmetic)
+
+2004-08-16 21:30  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* mt_gem.h.in: documentation updated (cosmetic)
+
+2004-08-16 19:44  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_appl_control.c: documentation updated (cosmetic)
+
+2004-08-16 19:31  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* Doxyfile.in: update configuration for doxygen 1.3.8 set quiet
+	option to ON
+
+2004-07-25 14:29  'Frank Naumann <fnaumann@freemint.de>'
+
+	* Makefile: Changed to be /bin/sh compatible.
+
+2004-07-20 15:54  'Standa Opichal <opichals@seznam.cz>'
+
+	* vs_clip.c, vswr_mode.c: Adjusting documentation typos and
+	indentation.
+
+2004-07-18 21:48  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* a_glue.c, gem.h: the dirty appl_init() macro defined in gem.h has
+	been replaced by a nice appl_init() static inline function.  This
+	should fix the "gl_ap_version not initialised" bug.
+
+2004-07-12 20:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+
+	* ChangeLog: update
+
 2004-07-12 20:14  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
 
 	* x_evnt_multi.c: quiet a gcc warning
