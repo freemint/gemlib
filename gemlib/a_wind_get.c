@@ -22,12 +22,37 @@
  *
  *  @return a 0 if an error occurred or non-zero otherwise.
  *
- *  @since All AES versions.
+ *  @since All AES versions. WF_KIND, WF_NAME and WF_INFO since NAES (release?).
  *
  *  @sa mt_wind_set()
  *
 <pre>
     Name         mode  Meaning
+
+ 	WF_KIND        1   Gets the actual components (MOVER,
+	                   CLOSER,...) of the window in \p W1.
+ 
+ 	WF_NAME        2   Gets the actual title of the window
+	                   and copies the title in the buffer 
+					   with the address in \p W1.
+ 
+ 			           If the window has no title, the return
+					   value of the function equals 0, the buffer
+					   remains unchanged.
+ 
+ 			           Since a title may have a length of 128
+					   chars, the buffer must be large enough!
+ 
+ 	WF_INFO        3   Gets the actual infoline of the window
+	                   and copies the infoline in the buffer with
+					   the address \p W1.
+ 
+ 					   If the window has no infoline, the return
+					   value of the function equals 0, the buffer 
+					   remains unchanged.
+ 
+ 					   Since an infoline may have a length of 128
+					   chars, the buffer must be large enough!
 
     WF_WORKXYWH    4   \p W1, \p W2, \p W3 and \p W4 are
                        filled in with the x, y, w, and h of the
@@ -279,13 +304,20 @@ mt_wind_get (short WindowHandle, short What,
 	ptr = aes_control;
 	*(ptr ++) = 104;									/* aes_control[0] */
 
-	if (What == WF_DCOLOR || What == WF_COLOR)
-	{
-		aes_intin[2] = *W1;
-		*(ptr ++) = 3;									/* aes_control[1] */
+	switch (What) {
+		case WF_DCOLOR:
+		case WF_COLOR:
+			aes_intin[2] = *W1;
+			*(ptr ++) = 3;								/* aes_control[1] */
+			break;
+		case WF_INFO:
+		case WF_NAME:
+			*(short**)&aes_intin[2] = W1;
+			*(ptr ++) = 4;								/* aes_control[1] */
+			break;
+		default:
+			*(ptr ++) = 2;								/* aes_control[1] */
 	}
-	else
-		*(ptr ++) = 2;									/* aes_control[1] */
 
 	*(ptr ++) = 5;										/* aes_control[2] */
 	*(ptr ++) = 0;										/* aes_control[3] */
