@@ -35,7 +35,9 @@
 short
 mt_graf_mkstate (short *mx, short *my, short *mbutton, short *kmeta, short *global_aes)
 {
+#if !(CHECK_NULLPTR)
 	short *ptr;
+#endif
 
 	AES_PARAMS(79,0,5,0,0);
 
