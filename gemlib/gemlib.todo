@@ -465,31 +465,32 @@ x_fslx_evnt.c           -- idem
 x_fslx_getnxtfile.c     -- idem
 x_fslx_open.c           -- idem
 x_fslx_set_flags.c      -- idem
-x_lbox_ascroll_to.c
-x_lbox_bscroll_to.c
-x_lbox_cnt_items.c
-x_lbox_create.c
-x_lbox_delete.c
-x_lbox_do.c
-x_lbox_free_items.c
-x_lbox_free_list.c
-x_lbox_get_afirst.c
-x_lbox_get_bentries.c
-x_lbox_get_bfirst.c
-x_lbox_get_bvis.c
-x_lbox_get_idx.c
-x_lbox_get_item.c
-x_lbox_get_items.c
-x_lbox_get_slct_idx.c
-x_lbox_get_slct_item.c
-x_lbox_get_tree.c
-x_lbox_get_udata.c
-x_lbox_get_visible.c
-x_lbox_set_asldr.c
-x_lbox_set_bentries.c
-x_lbox_set_bsldr.c
-x_lbox_set_items.c
-x_lbox_update.c
+x_lbox_ascroll_to.c     -- idem
+x_lbox_bscroll_to.c     -- idem
+x_lbox_cnt_items.c      -- idem
+x_lbox_create.c         -- idem
+x_lbox_delete.c         -- idem
+x_lbox_do.c             -- idem
+x_lbox_free_items.c     -- idem
+x_lbox_free_list.c      -- idem
+x_lbox_get_afirst.c     -- idem
+x_lbox_get_bentries.c   -- idem
+x_lbox_get_bfirst.c     -- idem
+x_lbox_get_bvis.c       -- idem
+x_lbox_get_idx.c        -- idem
+x_lbox_get_item.c       -- idem
+x_lbox_get_items.c      -- idem
+x_lbox_get_slct_idx.c   -- idem
+x_lbox_get_slct_item.c  -- idem
+x_lbox_get_tree.c       -- idem
+x_lbox_get_udata.c      -- idem
+x_lbox_get_visible.c    -- idem : fix both gemlib and mgemlib (the first 'l'
+                           was missing in the function name)
+x_lbox_set_asldr.c      -- idem
+x_lbox_set_bentries.c   -- idem
+x_lbox_set_bsldr.c      -- idem
+x_lbox_set_items.c      -- idem
+x_lbox_update.c         -- idem
 x_objc_wchange.c        -- idem
 x_objc_wdraw.c          -- idem
 x_objc_wedit.c          -- idem
