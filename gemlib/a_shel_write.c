@@ -104,7 +104,7 @@
  *			 This mode is only supported by AES
  *			 versions greater than or equal to 4.0.
  *
- *  <tr><td> #SWM_RESCHANGE <td> 5 <td>
+ *  <tr><td> #SWM_REZCHANGE <td> 5 <td>
  *			 Change screen resolution.
  *			 - \a wisgr is the work station ID of the new resolution.
  *           - No other parameters are utilized.

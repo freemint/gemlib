@@ -13,7 +13,7 @@
  *  @return The return value is not at present well-known.
  *
  *  @since The presence of this function can be determined by mt_appl_getinfo() with mode
- *        #AES_PCGEM. Under MagiC-PC, this function is available since release 2.0
+ *        #AES_PCGEM. Under PC-GEM, this function is available since release 2.0
  *
  *  @sa mt_shel_rdef()
  *  
