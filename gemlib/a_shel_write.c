@@ -54,8 +54,56 @@
  *			     a TOS application
  *			   - #GEMAPP, the application will be
  *			     launched as a GEM application.
- *			 - For the meaning of other parameters and the meaning
- *             of returned value, see mode #SWM_LAUNCH.
+ *           - \a wiscr may be (MagiC extension):
+ *             - #SHW_IMMED (not supported by MagiC)
+ *             - #SHW_CHAIN : This is the procedure under TOS. The program makes the call, and 
+ *				 after terminating itself the AES launches the new program. #SHW_CHAIN
+ *				 does not work with desk accessories, as these must never be permitted
+ *				 to terminate. \n
+ *				 The new program inherits the standard paths and files that the
+ *				 previous program had at the time of its launch. In general these are
+ *				 in turn the ones that the program had that earlier launched the
+ *				 "ancestor" of the application with #SHW_PARALLEL. In the case of
+ *				 application #0 therefore the new program gets the standard paths of
+ *				 the  AES. \n
+ *				 If \c DESKTOP.APP (shell of GEM 2.2) is installed as a shell, then
+ *				 Mag!X will insert the current path and drive before the filename.
+ *             - #SHW_DOS (not supported by MagiC)
+ *             - #SHW_PARALLEL : A new application will be created. It inherits all standard paths 
+ *				 and files from the current application. The new application runs in
+ *				 parallel to the previous one. One will only get an error code if a
+ *				 memory shortage occured during set-up. There is no message at the
+ *				 termination of the new application (no "death-of-child").
+ *             - #SHW_SINGLE Works like #SHW_CHAIN, with the exception that before calling the 
+ *				 program all applications apart from application 0 and 1 (SCRENMGR)
+ *				 are frozen. The programs are unfrozen once more after the program
+ *				 terminates as long as it did not make a new mt_shel_write() call with
+ *				 #SHW_SINGLE on its part. \n
+ *				 One should add that from Mag!X 2.00 onward when calling mt_shel_write()
+ *				 in #SHW_SINGLE mode the current paths of the caller are passed to the
+ *				 parent and hence to the new program. Warning: The paths of the
+ *				 calling program are destroyed after this, though this is not critical
+ *				 as the call following mt_shel_write() is generally a Pterm.
+ *			 - For the meaning of returned value, see mode #SWM_LAUNCH.
+ *
+ *			 How do I launch a program in "single mode" under MagiC ?
+ *			  -#   Ensure that I am application 0 (i.e. ap_id == 0).
+ *			  -#   Set paths and drive for the new program.
+ *			  -#   mt_shel_write(1, isgr, #SHW_SINGLE, cmd, path);
+ *			  -#   All important settings to temporary file or shell-buffer.
+ *			  -#   mt_appl_exit()/v_clsvwk()/Pterm0.
+ *
+ *			 How do I launch a program in "chain mode" under MagiC ?
+ *			  -#   If appropriate set paths and drive for the new program and make a call
+ *			 	   mt_shel_write(1, dummy, #SHW_SINGLE, dummy2, dummy3);
+ *			 	   in order to set the paths for the new program (incompatible to TOS).
+ *			  -#   shel_write(1, isgr, #SHW_CHAIN, cmd, path);
+ *			  -#   All important settings to temporary file or shell-buffer.
+ *			  -#   mt_appl_exit()/v_clsvwk()/Pterm0.
+ *
+ *			 After the program terminates the shell will be reloaded automatically.
+ *			 When calling the shell one gets in the command line (-> mt_shel_read() ) the
+ *			 "magic" sequence #SHELTAIL.
  *
  *			 Parent applications which launch
  *			 children using this mode are suspended
@@ -171,34 +219,61 @@
  *           The application produces a new Thread
  *           - \a wisgr	can be:
  *             - 0 = Start program in the VT52 window of the application, if one is opened.	
- *             - 1 = open no new window	
+ *             - 1 = do not open a VT52 window	
  *             - 2 = open new VT52-Fenster	
  *           - \a wiscr shall be set to 0 	
  *           - \a cmd Pointer on #THREADINFO structure.	
  *           - \a tail Parameter of the type (void *) for the Thread function (see THREADINFO::proc).
- *           - the application ID of the new thread is returned.
+ *           
+ *            The function returns either 0 (error) or the application ID of the new thread
+ *            ( > 0).
  *
- *  <tr><td> SWM_??? <td> 21 <td>
- *           This mode allows a thread to terminated itself.
+ *            The launched thread executes the function THREADINFO::proc, and the parameter 
+ *            \a tail is passed on the stack.
+ *            THREADINFO::proc may alter the CPU registers d0-d2/a0-a2.
+ *
+ *  <tr><td> #SWM_THREXIT <td> 21 <td>
+ *           This mode allows a thread to terminate itself.
  *           - \a wisgr, \a wiscr and \a tail shall be set to 0
  *           - \a cmd shall be set to the error code which will be returned to the parent process
+ *           
+ *           Returns 0 if an error occured (the function does not return when succeed !). An error
+ *           can occur if
+ *           -  the callers is not a thread but something else
+ *           -  the thread has made a Pexec() call in the meantime
  *
  *           Normally implementing of this function is not necessary, since the thread
  *           is automatically terminated with the end of its procedure (i.e. with the CPU
  *           instruction RTS).
  *
- *          Important: If the thread accomplished a Pexec() call, then first the current
- *          process must be terminated by Pterm, before the thread can be terminated.
+ *			 If the thread has made a Pexec() call, then the running process must be
+ *			 first terminated with Pterm() before the thread can terminate itself.
  *
- *  <tr><td> SWM_??? <td> 22 <td>
+ *
+ *  <tr><td> #SWM_THRKILL <td> 22 <td>
  *          This mode allows the main program to terminate a thread.
  *          - \a wiscr contains the application ID of the thread
  *          - \a wisgr, \a tail and \a cmd shall be set to 0
  *
  *          Normally this function is not necessary, since with main program terminates,
  *          then all associated Threads are terminated as well.
- *          The function was successfully implemented, if as result the value 1 is returned the delivery.  To consider is however that if the Thread implemented in the meantime a Pexec only this program by Pterm (EBREAK) is terminated;  the Thread is only then terminated if the Aufrufer received THR_EXIT (*).
  *
+ *          Returns 0 (error) or 1 (OK). An error can occur if:
+ *			-	the ap_id is invalid
+ *			-	the thread has already terminated itself
+ *			-	it's not a thread running under the ap_id, but something else
+ *			-	the thread does not belong to the caller
+ *
+ *			Even if the return value is 1, one should note that in cases where the
+ *			thread has launched another program with Pexec() in the meantime, only
+ *			this program will be terminated with Pterm(EBREAK). The thread will
+ *			only be terminated when the caller has received #THR_EXIT.
+ *
+ *			Warning:  One should note that the memory that the thread allocates
+ *			belongs to the process, i.e. it is not released automatically
+ *			when the thread terminates. The same applies for open files,
+ *			which are closed only on program termination.
+ *          
  *	</table>
  *
  *  The parameter \a wodex have extended bits, only supported
@@ -211,8 +286,8 @@
  *   - #SW_PRENICE   
  *   - #SW_DEFDIR    
  *   - #SW_ENVIRON   
- *   - #SW_UID (XaAES/oAESis only extension)
- *   - #SW_GID (XaAES/oAESis only extension)
+ *   - #SW_UID (XaAES only extension)
+ *   - #SW_GID (XaAES only extension)
  *   - #SHW_XMDFLAGS (MagiC6 only extension)
  *
  *	If the upper byte is empty, extended mode is not entered and 

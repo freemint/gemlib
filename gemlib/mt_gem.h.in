@@ -677,7 +677,25 @@ typedef struct pEvntrec
 #define SC_CHANGED			80	/**< TODO */
 #define PRN_CHANGED 		82	/**< TODO */
 #define FNT_CHANGED 		83	/**< TODO */
-#define THR_EXIT			88	/**< TODO */
+
+/** message received when a child thread that this application has
+ *  started returns.
+ *
+ * - msg[0] = #THR_EXIT
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = application identifier of the terminated thread
+ * - msg[4] = exit code of the thread (HIGH WORD)
+ * - msg[5] = exit code of the thread (LOW WORD)
+ * - msg[6] = 
+ * - msg[7] =
+ *
+ *  Warning: the error code is a LONG (32 bits) value !
+ *
+ *  @since MagiC (?).
+ */
+#define THR_EXIT			88
+
 #define PA_EXIT 			89	/**< TODO */
 
 /** message received when a child process that this application has
@@ -883,8 +901,8 @@ typedef struct
 	 *  only used if the extended mode #SW_UID is set
 	 */
 	short uid;
-	/* New child's GID (group id)
-	 * only used if the extended mode #SW_GID is set
+	/** New child's GID (group id)
+	 *  only used if the extended mode #SW_GID is set
 	 */
 	short gid;
 } SHELW;
@@ -904,19 +922,40 @@ typedef struct
 typedef struct
 {
 	long			__CDECL (*proc)(void *par);	/**< entry point of the thread */
-	void			*user_stack;				/**< user stack for the thread */
-	unsigned long	stacksize;					/**< size of the user stack */
-	short			mode;						/**< immer auf 0 setzen! (???)  */
-	long			res1;						/**< immer auf 0L setzen! (???) */
+	/** user stack for the thread
+	 *  If \a  user_stack = NULL, then the system creates the stack itself. If 
+	 *  the thread terminates then the system releases the stack anyway.
+	 */
+	void			*user_stack;
+	/** size of the user stack 
+	 *  \a stacksize has to be specified in each case so that the system can set 
+	 *  the stack pointer to the end of the thread. The supervisor stack is 
+	 *  set by the system itself; its size cannot be influenced.
+	 */
+	unsigned long	stacksize;
+	short			mode;						/**< always set to 0 (reserved)  */
+	long			res1;						/**< always set to 0 (reserved) */
 } THREADINFO;
 
-/** TODO */
+/** tail for default shell (MagiC), see mt_shel_write() */
 typedef  struct
 {
 	short   dummy;		/**< a null  word 			   */ 
 	long    magic;		/**< 'SHEL', if it's a Shell   */ 
-	short   isfirst;	/**< first call of the Shell   */ 
-	long    lasterr;	/**< last error  			   */ 
+	/** first call of the Shell 
+	 *  If \a isfirst is set then the status is to be read from something like 
+	 *  \c DESKTOP.INF, if \a isfirst is not set then one takes the temporary file or 
+	 *  shell-buffer.
+	 */
+	short   isfirst;
+	/** last error 
+	 *  \a lasterr is the return value of the program running previously. If this 
+	 *  was a GEM program then the error will already have been displayed in an 
+	 *  alert box. It is well known that the longword is negative if the error 
+	 *  occurred with Pexec itself; a program return value always has the high 
+	 *  word 0.
+	 */ 
+	long    lasterr;
 	short   wasgr;		/**< Program was a grafic app. */ 
 } SHELTAIL;
 
@@ -940,6 +979,8 @@ typedef  struct
 #define SWM_NEWMSG			9	
 #define SWM_AESMSG			10	/**< Send a message to the AES, see mt_shel_write() */
 #define SWM_THRCREATE		20	/**< create a new thread, see mt_shel_write() */
+#define SWM_THREXIT			21	/**< thread terminates itself, see mt_shel_write() */
+#define SWM_THRKILL			22	/**< parent kills a thread, see mt_shel_write() */
 
 /* other names for shel_write modes */
 #define SHW_NOEXEC			SWM_LAUNCH		/**< alias */
@@ -951,17 +992,19 @@ typedef  struct
 #define SHW_INFRECGN		SWM_NEWMSG		/**< alias */
 #define SHW_AESSEND			SWM_AESMSG		/**< alias */
 #define SHW_THR_CREATE		SWM_THRCREATE	/**< alias */
+#define SHW_THR_EXIT		SWM_THREXIT		/**< alias */
+#define SHW_THR_KILL		SWM_THRKILL		/**< alias */
 
 /* shel_write, parameter wisgr */
 #define TOSAPP				0  /**< application launched as TOS application, see mt_shel_write() */
 #define GEMAPP				1  /**< application launched as GEM application, see mt_shel_write() */
 
-/* shel_write */
-#define SHW_IMMED			0	/* PC-GEM  2.x */	/**< TODO */
-#define SHW_CHAIN			1	/* TOS */			/**< TODO */
-#define SHW_DOS				2	/* PC-GEM  2.x */	/**< TODO */
-#define SHW_PARALLEL		100	/* MAG!X */			/**< TODO */
-#define SHW_SINGLE			101	/* MAG!X */			/**< TODO */
+/* shel_write, parameter wiscr when wodex=1 (SWM_LAUNCHNOW) */
+#define SHW_IMMED			0	/**< unsupported (PC-GEM  2.x) */
+#define SHW_CHAIN			1	/**< TOS way, see mt_shel_write() */
+#define SHW_DOS				2	/**< unsupported (PC-GEM  2.x) */
+#define SHW_PARALLEL		100	/**< create a new application to be ran in parallel, see mt_shel_write() */
+#define SHW_SINGLE			101	/**< run an application in single mode (all other applications but apid 0 and 1 are frozen), see mt_shel_write() */
 	
 /* command line parser (shel_write: parameter "wiscr") */
 #define CL_NORMAL		0	/**< command line passed normaly, see mt_shel_write() */
@@ -984,17 +1027,17 @@ typedef  struct
 #define AP_AESTERM		52     /* Mode 10: N.AES komplett terminieren. */	/**< TODO */
 
 /* extended shel_write() modes */
-#define SW_PSETLIMIT	0x0100	/**< Initial Psetlimit() */
-#define SW_PRENICE		0x0200	/**< Initial Prenice() */
-#define SW_DEFDIR 		0x0400	/**< Default Directory */
-#define SW_ENVIRON		0x0800	/**< Environment */
+#define SW_PSETLIMIT	0x0100	/**< Initial Psetlimit() , see SHELW::psetlimit */
+#define SW_PRENICE		0x0200	/**< Initial Prenice() , see SHELW::prenice */
+#define SW_DEFDIR 		0x0400	/**< Default Directory , see SHELW::defdir */
+#define SW_ENVIRON		0x0800	/**< Environment , see SHELW::env */
 
 /* XaAES extensions for shel_write() extended modes*/
-#define SW_UID			0x1000	/**< Set user id of launched child */
-#define	SW_GID			0x2000	/**< Set group id of launched child */
+#define SW_UID			0x1000	/**< Set user id of launched child, see SHELW::uid */
+#define	SW_GID			0x2000	/**< Set group id of launched child, see SHELW::gid */
 
 /* MagiC 6 extensions for shel_write() extended modes*/
-#define SHW_XMDFLAGS	0x1000
+#define SHW_XMDFLAGS	0x1000	/**< magiC 6 extension, see XSHW_COMMAND::flags*/
 
 /* other names... */
 #define SHW_XMDLIMIT	SW_PSETLIMIT	/**< alias */
