@@ -1026,6 +1026,7 @@ short	mt_graf_mbox	(short Sw, short Sh, short Sx, short Sy, short Dx, short Dy, 
 short	mt_graf_mkstate	(short *Mx, short *My, short *ButtonState, short *KeyState, short *global_aes);
 short	mt_graf_mouse	(short Form, const MFORM *FormAddress, short *global_aes);
 short	mt_graf_rubberbox	(short Ix, short Iy, short Iw, short Ih, short *Fw, short *Fh, short *global_aes);
+short	mt_graf_multirubber (short bx, short by, short mw, short mh, GRECT *rec, short *rw, short *rh, short *global_aes);
 short	mt_graf_shrinkbox	(short Fx, short Fy, short Fw, short Fh, short Sx, short Sy, short Sw, short Sh, short *global_aes);
 short	mt_graf_slidebox	(OBJECT *, short Parent, short Object, short Direction, short *global_aes);
 short	mt_graf_watchbox	(OBJECT *, short Object, short InState, short OutState, short *global_aes);

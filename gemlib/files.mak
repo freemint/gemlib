@@ -66,6 +66,7 @@ OBJ = \
  a_graf_mbox.o	\
  a_graf_mkstate.o	\
  a_graf_mouse.o	\
+ a_graf_multirubber.o	\
  a_graf_rubbox.o	\
  a_graf_shrinkbox.o	\
  a_graf_slidebox.o	\
