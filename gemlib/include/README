@@ -1,0 +1,15 @@
+This directory contains extra include file needed for some compiler
+to get gemlib compilable.
+
+
+For Pure C user:
+copy the file purec/compiler.h to your pure_c/include directory
+
+For SozobonX user:
+copy the file sozobon/compiler.h to your sozobon/include directory
+
+For GCC 2.81 user:
+copy the file gcc281/compiler.h to your gcc_281/include directory
+
+For GCC >= 2.95 user:
+mintlib already have an up-to-date compiler.h file, nothing to do.
