@@ -1,6 +1,6 @@
 @database "CF-Lib"
 @author "Christian Felsch"
-@$VER: PL 12
+@$VER: 0.20.0
 @subject "Programmieren/C"
 @options "+zz-s"
 
@@ -33,6 +33,19 @@
 ## ##############################################################################
 @node "Einleitung" "CF-Lib: Einleitung"
 @{U}Einleitung                                                          CF-Lib@{0}
+
+Die cflib ist ab Version 0.20.0 Bestandteil des freemint CVS
+repositorys. Vielen Dank an dieser Stelle an Christian Felsch
+der die cflib unter die LGPL Lizenz gestellt hat.
+
+Siehe /usr/doc/cflib-*/COPYING.LIB fÅr die Nutzungsbedingungen.
+Siehe /usr/doc/cflib-*/LiesMich fÅr weitere Informationen.
+Siehe /usr/doc/cflib-*/ChangeLog fÅr eine exakte Auflistung aller énderungen.
+
+Frank Naumann <fnaumann@freemint.de>
+2001-02-27
+
+------------------------------------------------------------------------------
 
 Im Laufe meiner C-ProgrammierttÑtigkeit auf dem Atari habe ich
 verschiedene Bibiliotheken benutzt. qed nutzte frÅher die MyDials
@@ -95,6 +108,27 @@ email: C.Felsch@gmx.de
 @node "Entwicklungsgeschichte" "CF-Lib: Entwicklungsgeschichte"
 @{U}Entwicklungsgeschichte                                              CF-Lib@{0}
 
+ Version 0.20.0 - Frank Naumann <fnaumann@freemint.de>
+ 
+    Die cflib wurde von Christian Felsch unter die LGPL gestellt und ist
+    jetzt Bestandteil des FreeMiNT CVS repositorys. SÑmtliche Entwicklung
+    geht von jetzt an Åber cvs. Eine exakte Auflistung aller énderungen
+    befindet sich im ChangeLog.
+    
+    In Kurzform:
+    
+    Typberichtigungen in der gesamten Lib. Viele kleine Berichtigungen.
+    Achtung, es sind ebenfalls Anpassungen an Programmen die diese Lib
+    nutzen dadurch notwendig.
+    
+    Anpassungen an die neue GEMlib, diese wird jetzt zwingend benîtigt
+    Es erfolgt ein Versionscheck in cflib.h. Die 'normale' 32bit int
+    cflib funktioniert nun wesentlich besser.
+    
+    Aufsplittung der Sourcen in seperate Modulfiles, ungenutzte Funktionen
+    werden nun nicht mehr hinzugelinkt.
+ 
+ 
  PL 12 vom 09.09.00
 
     extobfix.prg
@@ -364,38 +398,38 @@ zugegriffen werden.
    #define CFLIB_PATCHLEVEL   EnthÑlt den PatchLevel als String
    char __Ident_cflib[];      Ident-String
 
-   int   gl_apid              Applikations-Nummer
-   int   gl_phys_handle       Physikalische WS
+   short gl_apid              Applikations-Nummer
+   short gl_phys_handle       Physikalische WS
 
    GRECT gl_desk              Grîûe des Desktops
 
-   int   sys_big_id           ID und Hîhe der SystmezeichensÑtze
-   int   sys_big_height
-   int   sys_big_pts
-   int   sys_sml_id
-   int   sys_sml_height
-   int   sys_sml_pts
+   short sys_big_id           ID und Hîhe der SystmezeichensÑtze
+   short sys_big_height
+   short sys_big_pts
+   short sys_sml_id
+   short sys_sml_height
+   short sys_sml_pts
 
-   int   sys_wchar            Zeichenbox-Grîûen des groûen Systemzeichensatz
-   int   sys_hchar
-   int   sys_wbox
-   int   sys_hbox
+   short sys_wchar            Zeichenbox-Grîûen des groûen Systemzeichensatz
+   short sys_hchar
+   short sys_wbox
+   short sys_hbox
 
-   int   gl_wchar             Zeichenbox-Grîûen von graf_handle()
-   int   gl_hchar
-   int   gl_wbox
-   int   gl_hbox
+   short gl_wchar             Zeichenbox-Grîûen von graf_handle()
+   short gl_hchar
+   short gl_wbox
+   short gl_hbox
 
-   int   gl_gdos              Ist 1, falls ein GDOS installiert ist
-   int   gl_planes            Anzahl der Farbebenen
+   short gl_gdos              Ist 1, falls ein GDOS installiert ist
+   short gl_planes            Anzahl der Farbebenen
 
    char  gl_appdir[]          Der Pfad, von der das Programm gestartet wurde
 
-   int   gl_gem               EnthÑlt die GEM-Version
-   int   gl_mint              Versionsnummer von MiNT oder 0
-   int   gl_naes              Versionsnummer von N.AES oder 0
-   int   gl_magx              Versionsnummer von MagiC oder 0
-   int   gl_nvdi              Versionsnummer von NVDI oder 0
+   short gl_gem               EnthÑlt die GEM-Version
+   short gl_mint              Versionsnummer von MiNT oder 0
+   short gl_naes              Versionsnummer von N.AES oder 0
+   short gl_magx              Versionsnummer von MagiC oder 0
+   short gl_nvdi              Versionsnummer von NVDI oder 0
                               Alle Versionsnummern liegen als HEX-Werte
                               vor (z.B. 0x601 -> 6.01)
 @endnode
@@ -413,13 +447,13 @@ MagiC-konform die Buttons 1 bis 3 aus. Als Shortcut wird grundsÑtzlich
 das erste Zeichen im Button verwendet.
 
 @alabel do_alert
-   int do_alert(int def, int undo, char *str);
+   short do_alert(short def, short undo, char *str);
       Zeigt eine herkîmmliche (modale) Alert-Box an. Parameter wie beim
       form_alert(), allerdings kann zusÑtzlich ein Button definiert
       werden, der mit UNDO ausgelîst wird.
 
 @alabel do_walert
-   int do_walert(int def, int undo, char *str, char *win_title);
+   short do_walert(short def, short undo, char *str, char *win_title);
       Wie do_alert(), allerdings als app-modaler Fensterdialog.
       FÅr das Fenster kann ein Titel angegeben werden.
       Ein Fenster-Alert verhÑlt sich wie ein MDial, d.h. fÅr den
@@ -465,7 +499,7 @@ Einige nÅtzlichen Funktionen, die jede Applikation benîtigt.
          Schaltet die Maus an.
 
 @alabel appl_xgetinfo
-   int  appl_xgetinfo(int type, int *out1, int *out2, int *out3, int *out4)
+   short  appl_xgetinfo(short type, short *out1, short *out2, short *out3, short *out4)
          Ruft appl_getinfo() auf, prÅft aber zunÑchst auf dessen
          Vorhandensein.
 
@@ -479,7 +513,7 @@ Die ASCII-Tabelle stell alle nicht Åber die Tastatur erreichbaren Zeichen
 zum EinfÅgen zur VerfÅgung.
 
 @alabel ascii_table
-   int ascii_table(int id, int pts);
+   short ascii_table(short id, short pts);
          Ruft die Tabelle als modalen Dialog auf. öbergeben werden muû
          der Font, der zur Darstellung der Zeichen verwendet werden
          soll. Font-Hîhe in Point!!
@@ -518,7 +552,7 @@ tatsÑchliche Auflîsung angepasst.
       auf 10 Felder beschrÑnkt.
 
 @alabel init_colorpop
-   int init_colorpop(int maxplanes);
+   short init_colorpop(short maxplanes);
       Initialisiert die Colorpop-Routinen, muû bei Programminit einmal
       aufgerufen werden.
       maxplanes   Maximale Anzahl der benutzten Farb-Planes (1-8)
@@ -531,23 +565,23 @@ tatsÑchliche Auflîsung angepasst.
       einmal aufgerufen werden.
 
 @alabel fix_colorpopobj
-   void fix_colorpopobj(OBJECT *tree, int obj, int color);
+   void fix_colorpopobj(OBJECT *tree, short obj, short color);
       Wandelt ein Boxobjekt in ein Farb-Userdef um, mit welchem bis zu
       256 Farben dargestellt werden kînnen. Die Farben kînnen mit
       get_popobjcolor() und set_popobjcolor() erfragt bzw. gesetzt werden.
 
 @alabel get_popobjcolor
-   int get_popobjcolor(OBJECT *tree, int obj);
+   short get_popobjcolor(OBJECT *tree, short obj);
       Aktuelle Farbe eines Farb-Userdefs abfragen
 
 @alabel set_popobjcolor
-   void set_popobjcolor(OBJECT *tree, int obj, int color);
+   void set_popobjcolor(OBJECT *tree, short obj, short color);
       Farbe eines Farb-Userdefs setzen. Das
       Objekt muû ggf. nach dem Aufruf von set_popobjcolor() neu gezeichnet
       werden.
 
 @alabel do_colorpop
-   int do_colorpop( int x, int y, int item, int planes, int show_noncolor );
+   short do_colorpop( short x, short y, short item, short planes, short show_noncolor );
       Stellt ein Farb-Popup dar und wertet es aus.
       x,y      Koordinaten; werden ggf. an Bildschirm angepasst, wenn sie
                auûerhalb desselben liegen
@@ -564,8 +598,8 @@ tatsÑchliche Auflîsung angepasst.
                do_colorpop() -2 zurÅck.
 
 @alabel handle_colorpop
-   int handle_colorpop( OBJECT *dial, int dial_obj, int mode,
-                        int planes, int show_noncolor );
+   short handle_colorpop( OBJECT *dial, short dial_obj, short mode,
+                        short planes, short show_noncolor );
       Hi-Level Farbpopupverwaltung fÅr Dialoge
       dial     der Dialog, in dem das Farb-Popup angeklickt wurde
       dial_obj Nummer des Objekts im Dialog
@@ -589,11 +623,11 @@ tatsÑchliche Auflîsung angepasst.
 @{U}Kommunikation                                                       CF-Lib@{0}
 
 @alabel send_vastart
-   void send_vastart(int id, char *str);
+   void send_vastart(short id, char *str);
          Schickt ein VA_START an die Applikation <id>.
 
 @alabel send_m_special
-   void send_m_special(int mode, int app);
+   void send_m_special(short mode, short app);
          Schickt eine Spezial-Nachricht an den ScreenManager von MagiC.
 
 @alabel send_scchanged
@@ -729,7 +763,7 @@ tatsÑchliche Auflîsung angepasst.
             RÅckgabe    1, wenn O.K.
 
 @alabel dd_reply
-   int dd_reply(int fd, int ack);
+   int dd_reply(short fd, int ack);
          Schickt 1-Byte-Antwort an den Sender.
             fd          Handle der Pipe
             ack         Antwort: (DD_OK, DD_NAK, ...)
@@ -816,7 +850,7 @@ tatsÑchliche Auflîsung angepasst.
 @{U}Dateiauswahl                                                        CF-Lib@{0}
 
 @alabel FSEL_CB
-   typedef void (* FSEL_CB)(char *path, char *name);
+   typedef int (*FSEL_CB)(char *path, char *name);
    #define FSCB_NULL
 
 @alabel select_file
@@ -873,7 +907,7 @@ tatsÑchliche Auflîsung angepasst.
 @{U}Fontauswahl                                                         CF-Lib@{0}
 
 @alabel do_fontsel
-   int do_fontsel(int flags, char *title, int *id, int *pts);
+   short do_fontsel(short flags, char *title, short *id, short *pts);
          Ruft eine Fontauswahl auf.
          öber verschiedene in <flags> gesetzte Bits kann die Font-
          auswahl konfiguriert werden:
@@ -923,18 +957,18 @@ tatsÑchliche Auflîsung angepasst.
 @{U}Dialogroutinen                                                      CF-Lib@{0}
 
 @alabel cf_form_do
-   int  cf_form_do(OBJECT *tree, int *ed_start);
+   short  cf_form_do(OBJECT *tree, short *ed_start);
          form_do()-Ersatz mit Sondertastenauswertung. Das Start-Objekt
          muû als Variable Åbergeben werden, da der cf_form_do() am Ende
          dort das aktuelle Editfeld eintrÑgt.
 
 @alabel simple_dial
-   int  simple_dial(OBJECT *tree, int start_edit);
+   short  simple_dial(OBJECT *tree, short start_edit);
          FÅhrt einen simplen Dialog durch.
 
 @alabel KEY_CB
-   typedef int (* KEY_CB )(OBJECT *tree, int edit_obj, int kstate,
-                           int *kreturn, int *next_obj);
+   typedef short (* KEY_CB )(OBJECT *tree, short edit_obj, short kstate,
+                           short *kreturn, short *next_obj);
          Typ der Tasten-Routine fÅr set_formdo_keycb().
          Wenn ein Exit-Objekt simuliert werden soll, muû die Routine
          den Objekt-Index in next_obj eintragen und 0 zurÅckliefern.
@@ -955,13 +989,13 @@ tatsÑchliche Auflîsung angepasst.
 @{U}MagiC Kontrollfunktionen                                            CF-Lib@{0}
 
 @alabel get_magx_version
-   int  get_magx_version(void);
+   int get_magx_version(void);
          Liefert die MagiX-Version zurÅck.
          Man kann statt dessen auch die Variable gl_magx verwenden, da
          die Funktion von init_app() aufgerufen wird.
 
 @alabel get_magx_obj
-   int  get_magx_obj(OBJECT *tree, int obj);
+   short get_magx_obj(OBJECT *tree, short obj);
          PrÅft, ob <obj> ein spezielles MagiC-Objekt ist.
          Folgende Typen werden erkannt (anhand des Status WHITEBAK):
 
@@ -984,7 +1018,7 @@ tatsÑchliche Auflîsung angepasst.
          dar! (siehe auch Userdef)
 
 @alabel get_magx_shortcut
-   int  get_magx_shortcut(OBJECT *tree, int obj, char *c);
+   short  get_magx_shortcut(OBJECT *tree, short obj, char *c);
          Liefert die Position des Shortcuts eines Buttons zurÅck, oder -1.
          In <c> wird das Shortcut-Zeichen eingetragen.
 
@@ -1001,7 +1035,7 @@ Die Funktionen sind ist re-entrant, d.h. wenn ein Dialoge offen ist,
 darf ein weiterer geîffnet werden (z.B. Fenster-Alert).
 
 @alabel MDIAL_WCB
-   typedef (* MDIAL_WCB )(int *msg);
+   typedef (* MDIAL_WCB )(short *msg);
          Callback fÅr die Fenster-Events der anderen Fenster. MDial
          hat eine eigene Event-Schleife, die bestimmte WM_-Nachrichten
          (z.B. WM_REDRAW, WM_MOVED) Åber diesen Callback herausreicht,
@@ -1018,7 +1052,7 @@ darf ein weiterer geîffnet werden (z.B. Fenster-Alert).
 
 
 @alabel open_mdial
-   MDIAL *open_mdial(OBJECT *tree, int edit_start);
+   MDIAL *open_mdial(OBJECT *tree, short edit_start);
          Legt einen neuen Dialog an und îffnet das Fenster. ZurÅckgegeben
          wird das Dialog-Handle oder NULL. ZusÑtzlich zum Dialogbaum
          muû das Editfeld angegeben werden, auf dem der Cursor beim
@@ -1026,7 +1060,7 @@ darf ein weiterer geîffnet werden (z.B. Fenster-Alert).
          anzugeben.
 
 @alabel do_mdial
-   int do_mdial(MDIAL *mdial);
+   short do_mdial(MDIAL *mdial);
          Event-Schleife des Dialogs. Kehrt erst, wenn ein Exit-Objekt
          gedrÅckt wurde, mit dessen Index zurÅck.
 
@@ -1039,17 +1073,17 @@ darf ein weiterer geîffnet werden (z.B. Fenster-Alert).
          Fenster werden also erst noch neu gezeichnet).
 
 @alabel simple_mdial
-   int simple_mdial(OBJECT *tree, int edit_start);
+   short simple_mdial(OBJECT *tree, short edit_start);
          FÅhrt einen modalen Fensterdialog komplett durch.
          Ruft dazu open_mdial(), do_mdial() und close_mdial() nacheinander
          auf und liefert das Exit-Objekt zurÅck.
 
 @alabel redraw_mdobj
-   void redraw_mdobj(MDIAL *mdial, int obj);
+   void redraw_mdobj(MDIAL *mdial, short obj);
          Zeichnet ein Objekt im Dialog neu.
 
 @alabel change_mdedit
-   void change_mdedit(MDIAL *wd, int new);
+   void change_mdedit(MDIAL *wd, short new);
          Sollte man einmal aufrufen, nachdem man man den Status von Edit-
          feldern in offenen Dialogen geÑndert (z.B. DISABLED) hat, damit
          die Cursor-Verwaltung sich ein neues gÅltiges Editfeld sucht bzw.
@@ -1065,7 +1099,7 @@ Verwaltung die MenÅleiste der Applikation.
 ACHTUNG: Nicht re-entrant, d.h. jede Applikation nur ein Kreuz, Ñh MenÅ!
 
 @alabel create_menu
-   int create_menu(OBJECT *tree)
+   short create_menu(OBJECT *tree)
          Neues MenÅ anlegen und anzeigen.
          Liefer 1, wenn alles OK.
 
@@ -1082,7 +1116,7 @@ ACHTUNG: Nicht re-entrant, d.h. jede Applikation nur ein Kreuz, Ñh MenÅ!
          enablen, wie man vorher disabled hat!
 
 @alabel is_menu_key
-   int is_menu_key(int kreturn, int kstate, int *title, int *item)
+   short is_menu_key(short kreturn, short kstate, short *title, short *item)
          Wenn es sich bei der Taste um einen MenÅ-Shortcut handelt,
          wird 1 sonst 0 geliefert.
 
@@ -1120,8 +1154,8 @@ ACHTUNG: Nicht re-entrant, d.h. jede Applikation nur ein Kreuz, Ñh MenÅ!
 
 @alabel grect_to_array
 @alabel array_to_grect
-   int *grect_to_array( GRECT *g, int *pxy );
-   void array_to_grect( int *pxy, GRECT *g );
+   short *grect_to_array( GRECT *g, short *pxy );
+   void array_to_grect( short *pxy, GRECT *g );
          Wandelt eine AES-Rechteck-Struktur GRECT (x, y, w, h)
          in ein VDI-Koordinaten-Array (x1, y1, x2, y2) um bzw. vice versa.
          Diese Funktionen sind Bestandteil der GNU GEM-Lib; da sie
@@ -1185,7 +1219,7 @@ dem TOS- und dem normalisierten Format zu konvertieren.
 
 
 @alabel nkc_init
-   int nkc_init(void);
+   short nkc_init(void);
          Initialisiert die NKCC. Wird nur benîtigt, wenn nkc_tos2n(),
          nkc_n2tos(), norm_to_gem() oder gem_to_norm() benutzt werden
          sollen.
@@ -1199,8 +1233,8 @@ dem TOS- und dem normalisierten Format zu konvertieren.
 
 @alabel gem_to_norm
 @alabel norm_to_gem
-   unsigned short gem_to_norm(int ks, int kr);
-   void norm_to_gem(unsigned int norm, int *ks, int *kr);
+   unsigned short gem_to_norm(short ks, short kr);
+   void norm_to_gem(unsigned short norm, short *ks, short *kr);
          Wandelt GEM-Taste (z.B. vom evnt_multi) in normalisierten Code
          um.
 
@@ -1225,68 +1259,68 @@ dem TOS- und dem normalisierten Format zu konvertieren.
 @{U}Objektmanipulation                                                  CF-Lib@{0}
 
 @alabel get_obtype
-   int  get_obtype(OBJECT *tree, int obj, short *ud);
+   short  get_obtype(OBJECT *tree, short obj, short *ud);
          Gibt den Objekttyp zurÅck. Bei umgewandelten Objekten
          (USERDEFs) wird jeweils der Basistyp zurÅckgegeben und
          <ud> auf 1 gesetzt (nur, falls <ud> != NULL).
 
 @alabel get_obspec
 @alabel set_obspec
-   long get_obspec(OBJECT *tree, int obj);
-   void set_obspec(OBJECT *tree, int obj, long spec)
+   long get_obspec(OBJECT *tree, short obj);
+   void set_obspec(OBJECT *tree, short obj, long spec)
          Abfragen/éndern der ob_spec.
          Bei umgewandelten Objekten (USERDEFs) wird der Original-
          wert zurÅckgegeben/geÑndert.
 
 @alabel get_string
 @alabel set_string
-   void set_string(OBJECT *tree, int obj, char *text);
-   void get_string(OBJECT *tree, int obj, char *text);
+   void set_string(OBJECT *tree, short obj, char *text);
+   void get_string(OBJECT *tree, short obj, char *text);
          Objekttext setzen/auslesen. Funkt fÅr G_BUTTON, G_STRING, G_TITLE,
          G_CICON, G_ICON, G_TEXT, G_BOXTEXT, G_FTEXT, G_FBOXTEXT.
 
-@alabel set_int
-@alabel get_int
+@alabel set_short
+@alabel get_short
 @alabel set_long
 @alabel get_long
 @alabel set_ulong
-   void set_int(OBJECT *tree, int obj, int i);
-   int  get_int(OBJECT *tree, int obj);
-   void set_long(OBJECT *tree, int obj, long l);
-   long get_long(OBJECT *tree, int obj);
-   void set_ulong(OBJECT *tree, int obj, unsigned long l);
+   void set_short(OBJECT *tree, short obj, short i);
+   short  get_short(OBJECT *tree, short obj);
+   void set_long(OBJECT *tree, short obj, long l);
+   long get_long(OBJECT *tree, short obj);
+   void set_ulong(OBJECT *tree, short obj, unsigned long l);
          Zahl in Text-Objekt setzen/lesen.
 
 @alabel set_state
 @alabel get_state
-   void set_state(OBJECT *tree, int obj, int state, int set);
-   int get_state(OBJECT *tree, int obj, int state);
+   void set_state(OBJECT *tree, short obj, short state, short set);
+   short get_state(OBJECT *tree, short obj, short state);
          Objektstatus setzen (set = 1) oder lîschen (set = 0)
          bzw. abfragen.
 
 @alabel tree_state
-   void tree_state(OBJECT *tree, int start_obj, int state, int set);
+   void tree_state(OBJECT *tree, short start_obj, short state, short set);
          Bei allen Elementen eines Sub-Baums den Status Ñndern
          (nicht rekursiv!!)
 
 @alabel set_flag
 @alabel get_flag
-   void set_flag(OBJECT *tree, int obj, int flag, int set);
-   int get_flag(OBJECT *tree, int obj, int flag);
+   void set_flag(OBJECT *tree, short obj, short flag, short set);
+   short get_flag(OBJECT *tree, short obj, short flag);
          Objektflag setzen (set = 1) oder lîschen (set = 0)
          bzw. abfragen.
 
 @alabel find_flag
-   int  find_flag(OBJECT *tree, int flag);
+   short  find_flag(OBJECT *tree, short flag);
          Sucht das erste Object im Baum, bei dem <flag> gesetzt ist.
 
 @alabel get_objframe
-   void get_objframe(OBJECT *tree, int obj, GRECT *r);
+   void get_objframe(OBJECT *tree, short obj, GRECT *r);
          Ermittelt die absoluten Ausmaûe eines Objekts. Beachtet Rahmen,
          3D und alle anderen Flags.
 
 @alabel readrw_obj
-   void redraw_obj(OBJECT *tree, int obj);
+   void redraw_obj(OBJECT *tree, short obj);
          Objekt neu zeichnen.
 
 @endnode
@@ -1302,14 +1336,14 @@ dynamisch zur Laufzeit Popups erzeugen.
    typedef struct _popup
    {
       OBJECT   *tree;      /* der Objektbaum */
-      int      max_item;   /* maximal mîgliche Anzahl */
-      int      akt_item;   /* aktuelle Anzahl */
-      int      item_len;   /* LÑnge eines Eintrages */
+      short      max_item;   /* maximal mîgliche Anzahl */
+      short      akt_item;   /* aktuelle Anzahl */
+      short      item_len;   /* LÑnge eines Eintrages */
    } POPUP;
          Kontrollstruktur fÅr die dynamischen Popups.
 
 @alabel create_popup
-   int create_popup(POPUP *p, int anz, int maxlen, char *item);
+   short create_popup(POPUP *p, short anz, short maxlen, char *item);
          Neues Popup anlegen.
             p        die Popup Variable
             anz      die Anzahl der maximal mîglichen EintrÑge
@@ -1321,11 +1355,11 @@ dynamisch zur Laufzeit Popups erzeugen.
          nicht angefordert werden konnte.
 
 @alabel free_popup
-   int free_popup(POPUP *p);
+   short free_popup(POPUP *p);
          Gibt den Speicher wieder frei.
 
 @alabel append_popup
-   int append_popup(POPUP *p, char *item);
+   short append_popup(POPUP *p, char *item);
          Eintrag am Ende anhÑngen.
          p        das Popup
          item     Eintrag, der am Ende angehÑngt werden soll. Wenn ein
@@ -1334,14 +1368,14 @@ dynamisch zur Laufzeit Popups erzeugen.
          nicht angefordert werden konnte.
 
 @alabel do_popup
-   int do_popup(POPUP *p, int button);
+   short do_popup(POPUP *p, short button);
          Popup auf den Bildschirm bringen und ausfÅhren. Es erscheint
          an der aktuellen Mausposition.
          RÅckgabe:
             Der ausgewÑhlte Eintrag (beginnend bei 1) oder null.
 
 @alabel cf_menu_popup
-   int cf_menu_popup(MENU *m1, int x, int y, MENU *m2, int button, int off);
+   short cf_menu_popup(MENU *m1, short x, short y, MENU *m2, short button, short off);
          Kopie von menu_popup(), die enweder menu_popup() aufruft oder
          diesen Call emuliert.
          Die Emulation unterstÅtzt keine scrollende MenÅs!!
@@ -1355,8 +1389,8 @@ dynamisch zur Laufzeit Popups erzeugen.
          aber z.B. nicht).
 
 @alabel handle_popup
-   int handle_popup(OBJECT *dial, int dial_obj, OBJECT *pop, int pop_obj,
-                     int mode);
+   short handle_popup(OBJECT *dial, short dial_obj, OBJECT *pop, short pop_obj,
+                     short mode);
          Hi-Level Popupverwaltung fÅr Dialoge.
             dial     der Dialog, in dem das Popup angeklickt wurde
             dial_obj Nummer des Objekts im Dialog
@@ -1404,7 +1438,7 @@ normalen MagiC-Flags noch der Status CHECKED aktiviert wird.
          Trenner in Popups benutzt werden.
 
 @alabel fix_popup
-   void fix_popup(OBJECT *tree, int thin_line);
+   void fix_popup(OBJECT *tree, short thin_line);
          Alternative zu fix_menu().
          Unter MagiC werden die EintrÑge in G_SHORTCUT gewandelt.
          Auûerdem ist es mîglich, eine dÅnnere Linie als Trennlinien,
@@ -1427,16 +1461,16 @@ ACHTUNG: Wenn ein Programm neben den von der CF-Lib verwalteten auch
 @{U}NÅtzliches rumd um das VDI                                          CF-Lib@{0}
 
 @alabel open_vwork
-   int open_vwork(int *w_out);
-         Virtuelle WS îffnen. öbergeben werden muû das 57 int groûe
+   short open_vwork(short *w_out);
+         Virtuelle WS îffnen. öbergeben werden muû das 57 short groûe
          work_out Array.
 
 @alabel set_clipping
-   void set_clipping(int handle, int x, int y, int w, int h, int on);
+   void set_clipping(short handle, short x, short y, short w, short h, short on);
          Clipping an- bzw. ausschalten.
 
 @alabel height2pts
-   int height2pts(int handle, int f_id, int f_height);
+   short height2pts(short handle, short f_id, short f_height);
          Ermittelt aus einer Pixel-Hîhe die zugehîrige Point-Hîhe.
 
 @endnode
@@ -1459,8 +1493,8 @@ Applikation.
 
 @alabel WDIAL_OCB
 @alabel WDIAL_XCB
-   typedef void (* WDIAL_OCB )(WDIALOG *dial);
-   typedef int  (* WDIAL_XCB )(WDIALOG *dial, int exit_obj);
+   typedef void (*WDIAL_OCB)(WDIALOG *dial);
+   typedef int  (*WDIAL_XCB)(WDIALOG *dial, short exit_obj);
 
    #define WOCB_NULL
    #define WXCB_NULL
@@ -1474,15 +1508,15 @@ Applikation.
 
       OBJECT      *tree;           /* Objektbaum */
       OBJECT      *icon;           /* Icon fÅr Iconify */
-      int         mode;            /* aktueller Status */
-      int         win_handle;      /* Fensterhandle */
+      short       mode;            /* aktueller Status */
+      short       win_handle;      /* Fensterhandle */
       char        win_name[80];    /* Fenstertitel */
-      int         win_kind;        /* Elemente */
+      short       win_kind;        /* Elemente */
       GRECT       work;            /* Fenstergrîûe */
-      int         title_obj;       /* Objektnummer des Titelobjektes */
-      int         cancel_obj;      /*       "      des Abbruchbuttons */
-      int         delta_y;         /* Offset bis zum Titelobjekt */
-      int         edit_idx,        /* Objektnummern fÅr die Editfelder */
+      short       title_obj;       /* Objektnummer des Titelobjektes */
+      short       cancel_obj;      /*       "      des Abbruchbuttons */
+      short       delta_y;         /* Offset bis zum Titelobjekt */
+      short       edit_idx,        /* Objektnummern fÅr die Editfelder */
                   next_obj,
                   edit_obj;
       WDIAL_OCB   open_cb;
@@ -1491,7 +1525,7 @@ Applikation.
 
 
 @alabel create_wdial
-   WDIALOG *create_wdial(OBJECT *tree, OBJECT *icon, int edit_obj,
+   WDIALOG *create_wdial(OBJECT *tree, OBJECT *icon, short edit_obj,
                                  WDIAL_OCB open_cb, WDIAL_XCB exit_cb);
          Neuen Fensterdialog anlegen. Dazu wird der Objektbaum, der
          Baum fÅr das Icon-Fenster, das erste Editfeld (oder 0) sowie
@@ -1510,7 +1544,7 @@ Applikation.
          Fensterdialog wieder abmelden.
 
 @alabel open_wdial
-   void open_wdial(WDIALOG *wd, int pos_x, int pos_y);
+   void open_wdial(WDIALOG *wd, short pos_x, short pos_y);
          Dialog an der Åbergebenen Position geîffnet. Bei (-1,-1) wird
          er zentriert.
 
@@ -1519,15 +1553,15 @@ Applikation.
          Schlieût das Fenster.
 
 @alabel redraw_wdobj
-   void redraw_wdobj(WDIALOG *wd, int obj);
+   void redraw_wdobj(WDIALOG *wd, short obj);
          Zeichnet Objekt neu.
 
 @alabel redraw_wdicon
-   void redraw_wdicon(WDIALOG *wd, int obj);
+   void redraw_wdicon(WDIALOG *wd, short obj);
          Zeichnet den iconifizierten Dialog neu.
 
 @alabel change_wdedit
-   void change_wdedit(WDIALOG *wd, int new);
+   void change_wdedit(WDIALOG *wd, short new);
          Sollte man einmal aufrufen, nachdem man man den Status von Edit-
          feldern in offenen Dialogen geÑndert (z.B. DISABLED) hat, damit
          die Cursor-Verwaltung sich ein neues gÅltiges Editfeld sucht bzw.
@@ -1536,9 +1570,9 @@ Applikation.
 @alabel message_wdial
 @alabel click_wdial
 @alabel key_wdial
-   int message_wdial(int *msg);
-   int click_wdial(int clicks, int x, int y, int kshift, int mbutton);
-   int key_wdial(int kreturn, int kstate);
+   short message_wdial(short *msg);
+   short click_wdial(short clicks, short x, short y, short kshift, short mbutton);
+   short key_wdial(short kreturn, short kstate);
          Diese drei Funktionen mÅûen von der der Haupt-Eventschleife der
          Applikation bei den entsprechenden Events aufgerufen werden.
          Wurde ein Event verarbeitet, wird 1 zurÅckgeliefert, sonst 0.

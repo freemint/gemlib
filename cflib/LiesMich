@@ -1,0 +1,72 @@
+
+ LiesMich zur CF-Lib 0.20.0
+ --------------------------
+ 
+Die CF-Lib ist eine Utility-Bibliothek fÅr GNU C.
+
+Seit Version 0.20.0 ist die cflib unter der LGPL Lizenz verfÅgbar.
+Vielen Dank an dieser Stelle an Christian Felsch der so freundlich
+war und die cflib dem freemint CVS repository zur VerfÅgung gestellt hat.
+
+Siehe auch COPYING.LIB fÅr die genauen Nutzungsbedingungen.
+
+Die Bibliothek stellt eine Reihe von Funktionen zur VerfÅgung, die man
+in GEM-Programmen immer wieder benîtigt, insbesondere sind das app-modale
+und non-modale Dialoge und Alerts in Fenstern.
+Die Dialogverwaltung basiert auf den erweiterten Objekttypen von MagiC und 
+emuliert diese, falls MagiC nicht aktiv ist.
+
+Achtung: Diese neue Version der cflib ist zu einem Grossteil Åberarbeitet.
+         Sie benîtigt zwingend die neue GEMLIB 0.40.0. Desweiteren
+         gab es énderungen am Interface der cflib. Es wurde eine
+         Typkorrektur vorgenommen. Die meisten Funktionen erwarten jetzt
+         ein short bzw. short * Argument anstatt eines int bzw. int * was
+         wesentlich exakter ist und die Eigenschaften des AES wieder-
+         spiegelt.
+         
+         Dadurch lÑuft die cflib jetzt wesentlich besser unter GNU-C.
+         Auch werden jetzt die optimierten Bindings der gemlib verwendet.
+         
+         Die Anpassung vorhandener Sourcen beschrÑnkt sich auf eine
+         Ersetzung von int durch short und sollte kein echter Nachteil
+         sein.
+
+
+Zur aktuellen Version gehîren folgende Dateien:
+
+	demo/demo.c
+		 pdlg.c
+		 demo.h
+		 demo.rsc
+		 demo.hrd
+		 demo.app
+		 demo.prj
+		 demo_p.prj
+		 Makefile		Demo-Programm mit Quelltext
+
+	intrface/extobfix.prg		Dialog-Testroutinen fÅr InterFace
+	intrface/liesmich
+	
+	/usr/GEM/lib/cflib.h		Der Header fÅr GNU und PureC
+	
+	/usr/GEM/lib/cflib.a			
+	/usr/GEM/lib/cflib16.a		Die Libs fÅr GNU C
+		
+	/usr/GEM/stguide/cflib.hyp
+	/usr/GEM/stguide/cflib.ref	Die Online-Hilfe zur Lib
+
+
+Um die Lib benutzen zu kînnen, muû GNU C Umgebung vorhanden
+sein. Weiter Infos sind im Hypertext unter 'Einleitung' zu finden.
+
+Die aktuelle Version der Lib ist immer im freemint CVS repository
+zu finden. Siehe http://wh58-508.st.uni-magdeburg.de/sparemint/cvs.html
+fÅr exakte Informationen zur Benutzung von cvs.
+
+An der Weiterentwicklung der cflib kann jeder der mîchte partizipieren.
+Hierbei ist ebenfalls die Benutzung von cvs erwÅnscht da dies den
+administrativen Aufwand extrem verkleinert.
+
+
+Frank Naumann <fnaumann@freemint.de>
+2001-02-27
