@@ -23,13 +23,13 @@ include $(top_srcdir)/PHONY
 all-here: 
 
 dist-gemlib:
-	make dist BUILDLIB=gemlib VERSION="0.42.99"
+	$(MAKE) dist BUILDLIB=gemlib VERSION="0.42.99"
 
 dist-cflib:
-	make dist BUILDLIB=cflib VERSION="20"
+	$(MAKE) dist BUILDLIB=cflib VERSION="20"
 
 dist-gemma:
-	make dist BUILDLIB=gemma VERSION="dist"
+	$(MAKE) dist BUILDLIB=gemma VERSION="dist"
 
 dist: distdir
 	-chmod -R a+r $(distdir) 
