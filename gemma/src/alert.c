@@ -22,6 +22,8 @@
 # include "gemproto.h"
 # include "user.h"
 
+# include "alert.h"
+
 void
 bin2asc(long number, char *out)
 {

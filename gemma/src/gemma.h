@@ -16,9 +16,10 @@
  */
 
 # include <basepage.h>
-# include "/usr/GEM/include/gem.h"
-# include <gemma/struct.h>
 # include <mint/slb.h>
+
+# include "../../gemlib/gem.h"
+# include "../include/gemma/struct.h"
 
 # include "../config.h"
 
