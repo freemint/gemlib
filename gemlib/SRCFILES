@@ -379,6 +379,7 @@ COBJS = \
 	a_wind_open_grect.c \
 	a_wind_set.c \
 	a_wind_set_grect.c \
+	a_wind_xset_grect.c \
 	a_wind_set_str.c \
 	a_wind_update.c \
 	\

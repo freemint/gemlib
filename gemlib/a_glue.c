@@ -880,6 +880,15 @@ wind_set_grect(short WindowHandle, short What, const GRECT *r)
 	return(mt_wind_set_grect(WindowHandle, What, r, aes_global));
 }
 
+#ifdef wind_xset_grect
+#undef wind_xset_grect
+#endif
+short
+wind_xset_grect(short WindowHandle, short What, const GRECT *s, const GRECT *r)
+{
+	return(mt_wind_xset_grect(WindowHandle, What, s, r, aes_global));
+}
+
 #ifdef wind_set_str
 #undef wind_set_str
 #endif

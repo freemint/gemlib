@@ -24,7 +24,7 @@
  *         - #MENUBAR  (0x1000)   Window has a menu bar.
  *         - #BACKDROP (0x2000)   Window has a backdrop box.
  *         - #SMALLER  (0x4000)   Window has an iconifier.
- *         .
+ *         - #BORDER   (0x8000)   Window has border-resize capability (XaAES).
  *         The parameter \a Parts is created by OR'ing together any desired
  *         elements.
  *  @param Wx X-position of the maximum extents of the window.
@@ -45,6 +45,9 @@
  *  @sa mt_wind_open(), mt_wind_close(), mt_wind_delete()
  *
  *  The #SMALLER gadget is only available as of AES version 4.1.
+ *
+ *  The #BORDER gadget is only available in XaAES kernel module
+ *  versions compiled after November 8, 2004.
  *
  *  A window is not actually displayed on screen with this call,
  *  you need to call mt_wind_open() to do that.
