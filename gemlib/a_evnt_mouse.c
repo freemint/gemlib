@@ -18,12 +18,12 @@
  *  @param mx
  *  @param my WORD pointers which will be filled in with the final
  *                position of the mouse.
- *  @param button is a WORD pointer which will be filled in upon
+ *  @param mbutton is a WORD pointer which will be filled in upon
  *                return with the final state of the mouse button as defined
- *                in evnt_button().
- *  @param kstate is a WORD pointer which will be filled in upon
+ *                in mt_evnt_button().
+ *  @param kmeta is a WORD pointer which will be filled in upon
  *                return with the final state of the keyboard shift keys as
- *                defined in evnt_button().
+ *                defined in mt_evnt_button().
  *  @param global_aes global AES array
  *
  *  @return should be reserved (and should always be 1). Actually it depends
@@ -33,14 +33,14 @@
  *
  *  @sa mt_evnt_multi()
  *
- *  The evnt_multi() function can be used to watch two mouse/rectangle
+ *  The mt_evnt_multi() function can be used to watch two mouse/rectangle
  *  events as opposed to one.
  *
  */
 
 short
 mt_evnt_mouse(short flag, short x, short y, short w, short h,
-			  short *mx, short *my, short *button, short *kstate, short *global_aes)
+			  short *mx, short *my, short *mbutton, short *kmeta, short *global_aes)
 {
 	AES_PARAMS(22,5,5,0,0);
 
@@ -54,8 +54,8 @@ mt_evnt_mouse(short flag, short x, short y, short w, short h,
 
 	*mx = aes_intout[1];
 	*my = aes_intout[2];
-	*button = aes_intout[3];
-	*kstate = aes_intout[4];
+	*mbutton = aes_intout[3];
+	*kmeta = aes_intout[4];
 	return aes_intout[0];
 }
 
@@ -63,7 +63,7 @@ mt_evnt_mouse(short flag, short x, short y, short w, short h,
 #undef evnt_mouse
 #endif
 short evnt_mouse(short flag, short x, short y, short w, short h,
-				 short *mx, short *my, short *button, short *kstate)
+				 short *mx, short *my, short *mbutton, short *kmeta)
 {
-	return(mt_evnt_mouse(flag, x, y, w, h, mx, my, button, kstate, aes_global));
+	return(mt_evnt_mouse(flag, x, y, w, h, mx, my, mbutton, kmeta, aes_global));
 }

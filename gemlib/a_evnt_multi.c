@@ -23,12 +23,12 @@
  *  @param bclicks
  *  @param bmask
  *  @param bstate see mt_evnt_button()
- *  @param m1_flag
+ *  @param m1_leave
  *  @param m1_x
  *  @param m1_y
  *  @param m1_w
  *  @param m1_h see mt_evnt_mouse()
- *  @param m2_flag
+ *  @param m2_leave
  *  @param m2_x
  *  @param m2_y
  *  @param m2_w
@@ -38,8 +38,8 @@
  *  @param mx
  *  @param my
  *  @param mbutton
- *  @param kstate see mt_evnt_button()
- *  @param key the return value of the evnt_keybd()
+ *  @param kmeta see mt_evnt_button()
+ *  @param kreturn the return value of the mt_evnt_keybd()
  *  @param mbclicks see mt_evnt_button()
  *  @param global_aes global AES array
  *
@@ -67,11 +67,11 @@
 
 short
 mt_evnt_multi (short events, short bclicks, short bmask, short bstate,
-			   short m1_flag, short m1_x, short m1_y, short m1_w, short m1_h,
-			   short m2_flag, short m2_x, short m2_y, short m2_w, short m2_h,
+			   short m1_leave, short m1_x, short m1_y, short m1_w, short m1_h,
+			   short m2_leave, short m2_x, short m2_y, short m2_w, short m2_h,
 			   short msg[], unsigned long interval,
 			   short *mx, short *my,
-			   short *mbutton, short *kstate, short *key, short *mbclicks,
+			   short *mbutton, short *kmeta, short *kreturn, short *mbclicks,
 			   short *global_aes)
 {
 	short *ptr;
@@ -84,12 +84,12 @@ mt_evnt_multi (short events, short bclicks, short bmask, short bstate,
 	*(ptr ++) = bclicks;
 	*(ptr ++) = bmask;
 	*(ptr ++) = bstate;
-	*(ptr ++) = m1_flag;
+	*(ptr ++) = m1_leave;
 	*(ptr ++) = m1_x;
 	*(ptr ++) = m1_y;
 	*(ptr ++) = m1_w;
 	*(ptr ++) = m1_h;
-	*(ptr ++) = m2_flag;
+	*(ptr ++) = m2_leave;
 	*(ptr ++) = m2_x;
 	*(ptr ++) = m2_y;
 	*(ptr ++) = m2_w;
@@ -105,8 +105,8 @@ mt_evnt_multi (short events, short bclicks, short bmask, short bstate,
 	*mx = *(ptr ++);									/* [1] */
 	*my = *(ptr ++);									/* [2] */
 	*mbutton = *(ptr ++);						    	/* [3] */
-	*kstate = *(ptr ++);								/* [4] */
-	*key = *(ptr ++);									/* [5] */
+	*kmeta = *(ptr ++);								/* [4] */
+	*kreturn = *(ptr ++);									/* [5] */
 	*mbclicks = *(ptr);								    /* [6] */
 
 	return (aes_intout[0]);
@@ -117,11 +117,11 @@ mt_evnt_multi (short events, short bclicks, short bmask, short bstate,
 #endif
 short
 evnt_multi(short events, short bclicks, short bmask, short bstate,
-		   short m1_flag, short m1_x, short m1_y, short m1_w, short m1_h,
-		   short m2_flag, short m2_x, short m2_y, short m2_w, short m2_h,
+		   short m1_leave, short m1_x, short m1_y, short m1_w, short m1_h,
+		   short m2_leave, short m2_x, short m2_y, short m2_w, short m2_h,
 		   short msg[], unsigned long interval,
 		   short *mx, short *my,
-		   short *mbutton, short *kstate, short *key, short *mbclicks)
+		   short *mbutton, short *kmeta, short *kreturn, short *mbclicks)
 {
-	return(mt_evnt_multi(events, bclicks, bmask, bstate, m1_flag, m1_x, m1_y, m1_w, m1_h, m2_flag, m2_x, m2_y, m2_w, m2_h, msg, interval, mx, my, mbutton, kstate, key, mbclicks, aes_global));
+	return(mt_evnt_multi(events, bclicks, bmask, bstate, m1_leave, m1_x, m1_y, m1_w, m1_h, m2_leave, m2_x, m2_y, m2_w, m2_h, msg, interval, mx, my, mbutton, kmeta, kreturn, mbclicks, aes_global));
 }

@@ -30,9 +30,9 @@
  *             x-position of the mouse pointer at the time of the event.
  *  @param my is a pointer to a WORD which upon return will contain the
  *             y-position of the mouse pointer at the time of the event.
- *  @param button is a pointer to a WORD which upon return will
+ *  @param mbutton is a pointer to a WORD which upon return will
  *             contain the mouse button state as defined in state.
- *  @param kstate is a pointer to a WORD which upon return will
+ *  @param kmeta is a pointer to a WORD which upon return will
  *             contain the current status of the keyboard shift keys.
  *             The value is a bit-mask defined as follows:
  *             - \p K_RSHIFT         (0x01)     Right Shift
@@ -68,7 +68,7 @@
 
 short
 mt_evnt_button (short clicks, short mask, short state,
-				short *mx, short *my, short *button, short *kstate, short *global_aes)
+				short *mx, short *my, short *mbutton, short *kmeta, short *global_aes)
 {
 	AES_PARAMS(21,3,5,0,0);
 
@@ -78,10 +78,10 @@ mt_evnt_button (short clicks, short mask, short state,
 
 	AES_TRAP (aes_params);
 
-	*mx     = aes_intout[1];
-	*my     = aes_intout[2];
-	*button = aes_intout[3];
-	*kstate = aes_intout[4];
+	*mx      = aes_intout[1];
+	*my      = aes_intout[2];
+	*mbutton = aes_intout[3];
+	*kmeta   = aes_intout[4];
 
 	return aes_intout[0];
 }
@@ -91,8 +91,8 @@ mt_evnt_button (short clicks, short mask, short state,
 #endif
 short
 event_button(short clicks, short mask, short state,
-				short *mx, short *my, short *button, short *kstate)
+				short *mx, short *my, short *mbutton, short *kmeta)
 {
 	return(mt_event_button(clicks,mask,state,
-						   mx,my,button,kstate, aes_global));
+						   mx,my,mbutton,kmeta, aes_global));
 }
