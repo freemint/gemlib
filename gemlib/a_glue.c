@@ -66,7 +66,9 @@ appl_xgetinfo(short type, short *out1, short *out2, short *out3, short *out4)
 short
 appl_init(void)
 {
-	return(mt_appl_init(aes_global));
+	gl_apid = mt_appl_init(aes_global);
+	gl_ap_version = aes_global[0];
+	return gl_apid;
 }
 
 #ifdef appl_read
