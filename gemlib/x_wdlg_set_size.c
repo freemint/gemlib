@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** With mt_wdlg_set_size() one can alter the size of a window dialog. The 
  *  GRECT \p new_size sets the new position and size of the window's working 

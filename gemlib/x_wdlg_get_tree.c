@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** returns the size of the object tree and the size of the 
  *  window (of the working area). If the dialog size has not been altered 

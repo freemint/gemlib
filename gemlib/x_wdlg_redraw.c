@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** works in a similar way to mt_objc_draw(), but unlike there the 
  *  rectangle list of the dialog window is taken into account

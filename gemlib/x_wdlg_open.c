@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** opens a window with the title line \p title at the position \p x, \p y.
  *	Before mt_wdlg_open() returns to the caller, the service routine \p handle_exit

@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** activates an edit object, i.e. the cursor will be drawn 
  *  in object \p obj and deleted from any previously active object.

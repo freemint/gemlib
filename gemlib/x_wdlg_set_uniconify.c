@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** The counterpart to mt_wdlg_set_iconify(). 
  *  The GRECT \p g sets the new position and size of the window (external 

@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** With mt_wdlg_set_iconify() one can iconify a window dialog. The GRECT \p g
  *  sets the new position and size of the window (external dimensions). 

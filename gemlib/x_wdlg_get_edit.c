@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** returns the number of the current edit object. If the 
  *  result is 0, then no edit object is active at the present time.

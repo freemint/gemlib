@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** represents a new object tree in a dialog. If the new root 
  *  object has a different size, the window size will be adapted to suit.
