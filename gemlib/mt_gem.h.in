@@ -1342,10 +1342,17 @@ extern void aes (AESPB *pb);
 #define GDOS_FNT		0x5F464E54L /* '_FNT' */
 
 /* vqin_mode & vsin_mode modes */
+#define VINMODE_LOCATOR		1
+#define VINMODE_VALUATOR	2
+#define VINMODE_CHOICE		3
+#define VINMODE_STRING		4
+
+#ifdef __GEMLIB_OLDNAMES
 #define LOCATOR			1
 #define VALUATOR		2
 #define CHOICE			3
 #define STRING			4
+#endif
 
 /* vqt_cachesize modes */
 #define CACHE_CHAR		0
