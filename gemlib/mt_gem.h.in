@@ -880,14 +880,14 @@ typedef struct
 	char *env;
 } SHELW;
 
-/** Andere Definition dafr (aus MagiC-Doku) */
+/** same as ::SHELW */
 typedef struct
 {
-	char	*command;	/**< TODO */
-	long	limit;		/**< TODO */
-	long	nice;		/**< TODO */
-	char	*defdir;	/**< TODO */
-	char	*env;		/**< TODO */
+	char	*command;	/**< see SHELW::newcmd */
+	long	limit;		/**< see SHELW::psetlimit */
+	long	nice;		/**< see SHELW::prenice */
+	char	*defdir;	/**< see SHELW::defdir */
+	char	*env;		/**< see SHELW::env */
 } XSHW_COMMAND;
 
 /** TODO */
@@ -916,7 +916,7 @@ typedef  struct
  *  depending on the extension of the file. See mt_shel_write()
  */
 #define SWM_LAUNCH			0
-/** Launch a GEM or TOS application based on the value of \a wisgr
+/** Launch a GEM or TOS application based on the value of \a wisgr, see mt_shel_write()
  */
 #define SWM_LAUNCHNOW		1
 #define SWM_LAUNCHACC		3	/**< Launch a GEM desk accessory, see mt_shel_write() */
