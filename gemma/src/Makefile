@@ -1,7 +1,7 @@
 #
 # Makefile for gemma, a minimal GEM library
 #
-TARGET = gemma.slb
+TARGET = gemma32.slb
 
 SHELL = /bin/sh
 SUBDIRS = 
@@ -20,7 +20,7 @@ all-here: $(TARGET)
 
 # default overwrites
 INCLUDES += 
-GENERAL += -mshort
+GENERAL = 
 
 # default definitions
 OBJS =  $(SOBJS:.s=.o) $(COBJS:.c=.o)
