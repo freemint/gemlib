@@ -1,15 +1,11 @@
-
 #include "gem.h"
 
 
 short
-wind_open_grect (short WindowHandle, GRECT *r)
+wind_open_grect (short WindowHandle, const GRECT *r)
 {
-	aes_intin[0] = WindowHandle;
-	aes_intin[1] = r->g_x;
-	aes_intin[2] = r->g_y;
-	aes_intin[3] = r->g_w;
-	aes_intin[4] = r->g_h;
+	aes_intin[0]            = WindowHandle;
+	*(GRECT*)(aes_intin +1) = *r;
 	
 	aes_control[0] = 101;
 	aes_control[1] = 5;

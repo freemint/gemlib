@@ -1,8 +1,7 @@
-
 #include "gem.h"
 
 
-void
+short
 wind_get_grect (short WindowHandle, short What, GRECT *r)
 {
 	aes_intin[0] = WindowHandle;
@@ -16,8 +15,7 @@ wind_get_grect (short WindowHandle, short What, GRECT *r)
 	
 	aes (&aes_params);
 	
-	r->g_x = aes_intout[1];
-	r->g_y = aes_intout[2];
-	r->g_w = aes_intout[3];
-	r->g_h = aes_intout[4];
+	*r = *(GRECT*)(aes_intout +1);
+	
+	return aes_intout[0];
 }

@@ -1,16 +1,12 @@
-
 #include "gem.h"
 
 
-void
-wind_set_str (short WindowHandle, short What, char *str)
+short
+wind_set_str (short WindowHandle, short What, const char *str)
 {
-	unsigned short *s = (unsigned short *) &str;
-
-	aes_intin[0] = WindowHandle;
-	aes_intin[1] = What;
-	aes_intin[2] = s[0];
-	aes_intin[3] = s[1];
+	aes_intin[0]                  = WindowHandle;
+	aes_intin[1]                  = What;
+	*(const char**)(aes_intin +2) = str;
 	
 	aes_control[0] = 105;
 	aes_control[1] = 6;
@@ -19,4 +15,6 @@ wind_set_str (short WindowHandle, short What, char *str)
 	aes_control[4] = 0;
 	
 	aes (&aes_params);
+	
+	return aes_intout[0];
 }
