@@ -23,22 +23,11 @@
 void
 v_opnvwk (short work_in[], short *handle, short work_out[])
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+
 	VDI_PARAMS(vdi_control, work_in, 0L, &work_out[0], &work_out[45] );
-#else
-	vdi_params.intin  = &work_in[0];
-	vdi_params.intout = &work_out[0];
-	vdi_params.ptsout = &work_out[45];
-#endif
 	
 	VDI_TRAP (vdi_params, *handle, 100, 0,11);
-
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.intin  = vdi_intin;
-	vdi_params.intout = vdi_intout;
-	vdi_params.ptsout = vdi_ptsout;
-#endif
 
 	*handle = vdi_control[6];
 	
@@ -47,14 +36,20 @@ v_opnvwk (short work_in[], short *handle, short work_out[])
 	
 	if (vdi_control[6]!=0)
 	{ 
+#if !(CHECK_NULLPTR)
 		short dummy;
+#endif
 		
 		vsf_perimeter(vdi_control[6],PERIMETER_ON);
 		vsl_ends(vdi_control[6],0,0);
 		vsl_width(vdi_control[6],1);
 		vst_effects(vdi_control[6],0);
 		vsm_height(vdi_control[6],9);
+#if CHECK_NULLPTR
+		vst_height(vdi_control[6],13,0L,0L,0L,0L);
+#else
 		vst_height(vdi_control[6],13,&dummy,&dummy,&dummy,&dummy);
+#endif
 	}
 }
 
