@@ -1,5 +1,8 @@
+/*
+ *   general attribute
+ */
 
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
@@ -10,15 +13,5 @@ vs_color (short handle, short index, short rgb[])
 	vdi_intin[2] = rgb[1];
 	vdi_intin[3] = rgb[2];
 
-	vdi_control[0] = 14;
-	vdi_control[1] = 0;
-	vdi_control[3] = 4;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
-
-	vdi (&vdi_params);
+	VDI_TRAP (vdi_params, handle, 14, 0,4);
 }
-
-/*
- * * general attribute
- */

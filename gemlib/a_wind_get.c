@@ -1,23 +1,15 @@
-
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
-wind_get (short WindowHandle, short What, short *W1, short *W2, short *W3, short *W4)
+wind_get (short WindowHandle, short What,
+          short *W1, short *W2, short *W3, short *W4)
 {
 	aes_intin[0] = WindowHandle;
 	aes_intin[1] = What;
+	aes_intin[2] = *W1;  /* set always, only needed for WF_DCOLOR and WF_COLOR */
 	
-	if (What == WF_DCOLOR || What == WF_COLOR)
-		aes_intin[2] = *W1;
-	
-	aes_control[0] = 104;
-	aes_control[1] = 2;
-	aes_control[2] = 5;
-	aes_control[3] = 0;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
+	AES_TRAP (aes_params, 104, 2,5,0,0);
 	
 	*W1 = aes_intout[1];
 	*W2 = aes_intout[2];

@@ -1,16 +1,11 @@
-
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
 vql_attributes (short handle, short attrib[])
 {
-	vdi_control[0] = 35;
-	vdi_control[1] = 0;
-	vdi_control[3] = 0;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	VDI_TRAP (vdi_params, handle, 35, 0,0);
+	
 	attrib[0] = vdi_intout[0];
 	attrib[1] = vdi_intout[1];
 	attrib[2] = vdi_intout[2];

@@ -1,21 +1,14 @@
-
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
 vqt_fontinfo (short handle, short *minade, short *maxade, short distances[],
-	      short *maxwidth, short effects[])
+              short *maxwidth, short effects[])
 {
-	vdi_control[0] = 131;
-	vdi_control[1] = 0;
-	vdi_control[3] = 0;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
+	VDI_TRAP (vdi_params, handle, 131, 0,0);
 
-	vdi (&vdi_params);
-
-	*minade = vdi_intout[0];
-	*maxade = vdi_intout[1];
+	*minade   = vdi_intout[0];
+	*maxade   = vdi_intout[1];
 	*maxwidth = vdi_ptsout[0];
 
 	distances[0] = vdi_ptsout[1];

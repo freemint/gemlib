@@ -1,18 +1,12 @@
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
 form_center (OBJECT *Tree, short *Cx, short *Cy, short *Cw, short *Ch)
 {
-	aes_addrin[0] = (long) Tree;
+	aes_addrin[0] = (long)Tree;
 	
-	aes_control[0] = 54;
-	aes_control[1] = 0;
-	aes_control[2] = 5;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
+	AES_TRAP (aes_params, 54, 0,5,1,0);
 	
 	*Cx = aes_intout[1];
 	*Cy = aes_intout[2];

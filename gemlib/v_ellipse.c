@@ -1,5 +1,4 @@
-
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
@@ -9,10 +8,6 @@ v_ellipse (short handle, short x, short y, short xrad, short yrad)
 	vdi_ptsin[1] = y;
 	vdi_ptsin[2] = xrad;
 	vdi_ptsin[3] = yrad;
-	vdi_control[0] = 11;
-	vdi_control[1] = 2;
-	vdi_control[3] = 0;
-	vdi_control[5] = 5;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	
+	VDI_TRAP_ESC (vdi_params, handle, 11,5, 2,0);
 }

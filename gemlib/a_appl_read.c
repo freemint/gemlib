@@ -1,22 +1,14 @@
-
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
 appl_read (short ApId, short Length, void *ApPbuff)
 {
-	aes_intin[0] = ApId;
-	aes_intin[1] = Length;
+	aes_intin[0]  = ApId;
+	aes_intin[1]  = Length;
+	aes_addrin[0] = (long)ApPbuff;
 	
-	aes_addrin[0] = (long) ApPbuff;
-	
-	aes_control[0] = 11;
-	aes_control[1] = 2;
-	aes_control[2] = 1;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
+	AES_TRAP (aes_params, 11, 2,1,1,0);
 	
 	return aes_intout[0];
 }

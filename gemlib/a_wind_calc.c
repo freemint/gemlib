@@ -1,10 +1,9 @@
-
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
-wind_calc (short Type, short Parts, short InX, short InY, short InW, short InH, short *OutX,
-	   short *OutY, short *OutW, short *OutH)
+wind_calc (short Type, short Parts, short InX, short InY, short InW, short InH,
+           short *OutX, short *OutY, short *OutW, short *OutH)
 {
 	aes_intin[0] = Type;
 	aes_intin[1] = Parts;
@@ -13,13 +12,7 @@ wind_calc (short Type, short Parts, short InX, short InY, short InW, short InH, 
 	aes_intin[4] = InW;
 	aes_intin[5] = InH;
 	
-	aes_control[0] = 108;
-	aes_control[1] = 6;
-	aes_control[2] = 5;
-	aes_control[3] = 0;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
+	AES_TRAP (aes_params, 108, 6,5,0,0);
 	
 	*OutX = aes_intout[1];
 	*OutY = aes_intout[2];

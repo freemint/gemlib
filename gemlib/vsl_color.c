@@ -1,5 +1,8 @@
+/*
+ *   line attribute
+ */
 
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 short
@@ -7,17 +10,7 @@ vsl_color (short handle, short index)
 {
 	vdi_intin[0] = index;
 
-	vdi_control[0] = 17;
-	vdi_control[1] = 0;
-	vdi_control[3] = 1;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
-
-	vdi (&vdi_params);
+	VDI_TRAP (vdi_params, handle, 17, 0,1);
 
 	return vdi_intout[0];
 }
-
-/*
- * * line attribute
- */

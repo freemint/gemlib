@@ -1,16 +1,12 @@
-
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
 vex_curv (short handle, void *new, void **old)
 {
 	*((void **) (&vdi_control[7])) = new;
-	vdi_control[0] = 127;
-	vdi_control[1] = 0;
-	vdi_control[3] = 0;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	
+	VDI_TRAP (vdi_params, handle, 127, 0,0);
+	
 	*old = *((void **) (&vdi_control[9]));
 }

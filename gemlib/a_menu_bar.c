@@ -1,21 +1,13 @@
-
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
 menu_bar (void *Tree, short ShowFlag)
 {
-	aes_intin[0] = ShowFlag;
+	aes_intin[0]  = ShowFlag;
+	aes_addrin[0] = (long)Tree;
 	
-	aes_addrin[0] = (long) Tree;
-	
-	aes_control[0] = 30;
-	aes_control[1] = 1;
-	aes_control[2] = 1;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
+	AES_TRAP (aes_params, 30, 1,1,1,0);
 	
 	return aes_intout[0];
 }

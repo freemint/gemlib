@@ -1,20 +1,13 @@
-
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
 fsel_input (char *path, char *file, short *exit_but)
 {
-	aes_addrin[0] = (long) path;
-	aes_addrin[1] = (long) file;
+	aes_addrin[0] = (long)path;
+	aes_addrin[1] = (long)file;
 	
-	aes_control[0] = 90;
-	aes_control[1] = 0;
-	aes_control[2] = 2;
-	aes_control[3] = 2;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
+	AES_TRAP (aes_params, 90, 0,2,2,0);
 	
 	*exit_but = aes_intout[1];
 	

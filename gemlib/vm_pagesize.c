@@ -1,5 +1,8 @@
+/*
+ * * metafile function
+ */
 
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
@@ -8,14 +11,6 @@ vm_pagesize (short handle, short pgwidth, short pgheight)
 	vdi_intin[0] = 0;
 	vdi_intin[1] = pgwidth;
 	vdi_intin[2] = pgheight;
-	vdi_control[0] = 5;
-	vdi_control[1] = 0;
-	vdi_control[3] = 3;
-	vdi_control[5] = 99;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	
+	VDI_TRAP_ESC (vdi_params, handle, 5,99, 0,3);
 }
-
-/*
- * * metafile function
- */
