@@ -391,6 +391,8 @@ COBJS = \
 	vdi_str2array.c \
 	vdi_wstrlen.c \
 	\
+	vdi_dummy.c \
+	\
 	$(_VDI_ATTRIB) \
 	$(_VDI_CONTRL) \
 	$(_VDI_ESCAPE) \
