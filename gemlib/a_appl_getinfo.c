@@ -105,7 +105,7 @@
  *                    - \a out1 is 0 if -1 is not a valid
  *                         ap_id parameter to mt_appl_read() or 1
  *                         if it is.
- *                    - \a out2 is 0 if -1 is not a valid
+ *                    - \a out2 is 0 if #SHEL_BUFSIZE is not a valid
  *                         length parameter to mt_shel_get() or 1
  *                         if it is.
  *                    - \a out3 is 0 if -1 is not a valid
@@ -266,6 +266,26 @@
  *                         position from mt_objc_edit() is not
  *                         returned or 1 if it is.
  *                    - \a out4 is currently reserved.
+ *
+ *  <tr><td> extended functions     <td>  64    <td>
+ *     	              Extended functions
+ *                    - \a out1 is 0 if mt_shel_write() with #AP_AESTERM
+ *                         is not supported or 1 if it is.
+ *                    - \a out2 is 0 if extended mt_shel_write() mode
+ *                         #SWM_SHUTDOWN / #SWM_REZCHANGE are not supported,
+ *                         or 1 if they are.
+ *                    - \a out3 is 0 if mt_appl_search() with langnamen (?)
+ *                         is not supported, or 1 if it is.
+ *                    - \a out4 is 0 if mt_form_error() doesn't support all
+ *                         GEMDOS error codes, or 1 if it does.
+ *
+ *  <tr><td> Additional N.AES functions <td>  65    <td>
+ *                    Additional N.AES functions
+ *                    - \a out1 is 1 if mt_appl_control() is available, or
+ *                         0 otherwise.
+ *                    - \a out2 is filled with the highest Opcode for mt_appl_control()
+ *                    - \a out3 is 1 if mt_shel_help() is available, or 0 otherwise.
+ *                    - \a out4 is 1 if mt_wind_draw() is available, or 0 otherwise.
  *  </table>
  *
  *  Using an \a ap_gtype value of 4 and above is only supported as

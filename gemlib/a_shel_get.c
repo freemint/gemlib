@@ -24,9 +24,10 @@
  *  of 4192 bytes.
  *
  *  In AES versions 4.0 or greater the shell buffer is no
- *  longer of a fixed size. When appl_getinfo() indicates that
+ *  longer of a fixed size. When mt_appl_getinfo() with parameter
+ *  #AES_INQUIRE indicates that
  *  this feature is supported, length can be specified as
- *  SHEL_BUFSIZE (-1) to return the size of the current shell
+ *  #SHEL_BUFSIZE to return the size of the current shell
  *  buffer.
  *
  */

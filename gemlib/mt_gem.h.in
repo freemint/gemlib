@@ -850,7 +850,10 @@ typedef struct _mn_set
 } MN_SET;
 
 /* shel_get modes */
-#define SHEL_BUFSIZE (-1)	/**< TODO */
+#define SHEL_BUFSIZE (-1)	/**< return the size of AES shell buffer, see mt_shel_read() */
+
+/* shel_help mode */
+#define SHP_HELP 0      /**< see mt_shel_help() */
 
 /** Struktur fr erweiterte Start-Daten (fr shel_write) */
 typedef struct
