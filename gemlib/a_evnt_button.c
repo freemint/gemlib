@@ -27,11 +27,14 @@
  *             - 0x04   Middle button depressed
  *             - 0x08   etc...
  *  @param mx is a pointer to a WORD which upon return will contain the
- *             x-position of the mouse pointer at the time of the event.
+ *             x-position of the mouse pointer at the time of the event. \n
+ *             [option CHECK_NULLPTR] mx may be NULL
  *  @param my is a pointer to a WORD which upon return will contain the
- *             y-position of the mouse pointer at the time of the event.
+ *             y-position of the mouse pointer at the time of the event. \n
+ *             [option CHECK_NULLPTR] my may be NULL
  *  @param mbutton is a pointer to a WORD which upon return will
- *             contain the mouse button state as defined in state.
+ *             contain the mouse button state as defined in state. \n
+ *             [option CHECK_NULLPTR] mbutton may be NULL
  *  @param kmeta is a pointer to a WORD which upon return will
  *             contain the current status of the keyboard shift keys.
  *             The value is a bit-mask defined as follows:
@@ -39,6 +42,8 @@
  *             - \p K_LSHIFT         (0x02)     Left Shift
  *             - \p K_CTRL           (0x04)     Control
  *             - \p K_ALT            (0x08)     Alternate
+ *             .
+ *             [option CHECK_NULLPTR] kmeta may be NULL
  *  @param global_aes global AES array
  *
  *  @return a WORD indicating the number of times the mouse
@@ -78,9 +83,21 @@ mt_evnt_button (short clicks, short mask, short state,
 
 	AES_TRAP (aes_params);
 
+#if CHECK_NULLPTR
+	if (mx)
+#endif
 	*mx      = aes_intout[1];
+#if CHECK_NULLPTR
+	if (my)
+#endif
 	*my      = aes_intout[2];
+#if CHECK_NULLPTR
+	if (mbutton)
+#endif
 	*mbutton = aes_intout[3];
+#if CHECK_NULLPTR
+	if (kmeta)
+#endif
 	*kmeta   = aes_intout[4];
 
 	return aes_intout[0];
