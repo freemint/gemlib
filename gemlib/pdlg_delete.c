@@ -1,16 +1,29 @@
+/*
+ *  $Id$
+ */
+
 #include "gemx.h"
 #include "gem_aesP.h"
 
+/** releases the memory for the print dialog
+ *
+ *  @param prn_dialog Pointer to management structure
+ *  @param global_aes global AES array
+ *
+ *  @return  1
+ *
+ *  @since mt_appl_getinfo(7) give informations on mt_pdlg_xx() functions availability
+ *
+ */
 
-short
-pdlg_delete (PRN_DIALOG * prn_dialog)
+short 
+mt_pdlg_delete(PRN_DIALOG *prn_dialog, short *global_aes)
 {
-	aes_addrin[0] = (long) prn_dialog;
-	aes_control[0] = 201;
-	aes_control[1] = 0;
-	aes_control[2] = 1;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	aes (&aes_params);
+	AES_PARAMS(201,0,1,1,0);
+
+	aes_addrin[0] = (long)prn_dialog;
+
+	AES_TRAP(aes_params);
+
 	return aes_intout[0];
 }

@@ -1,17 +1,32 @@
+/*
+ *  $Id$
+ */
+
 #include "gemx.h"
 #include "gem_aesP.h"
 
+/** Memory for printer settings is allocated, the structure is initialised 
+ *  and returned
+ *
+ *  @param prn_dialog Pointer to management structure
+ *  @param global_aes global AES array
+ *
+ *  @return Printer settings
+ *
+ *  @since mt_appl_getinfo(7) give informations on mt_pdlg_xx() functions availability
+ *
+ */
 
 PRN_SETTINGS *
-pdlg_new_settings (PRN_DIALOG * prn_dialog)
+mt_pdlg_new_settings(PRN_DIALOG *prn_dialog, short *global_aes)
 {
+	AES_PARAMS(205,1,0,1,1);
+
 	aes_intin[0] = 5;
-	aes_addrin[0] = (long) prn_dialog;
-	aes_control[0] = 205;
-	aes_control[1] = 1;
-	aes_control[2] = 0;
-	aes_control[3] = 1;
-	aes_control[4] = 1;
-	aes (&aes_params);
-	return (PRN_SETTINGS *) aes_addrout[0];
+	
+	aes_addrin[0] = (long)prn_dialog;
+
+	AES_TRAP(aes_params);
+	
+	return (PRN_SETTINGS*) aes_addrout[0];
 }

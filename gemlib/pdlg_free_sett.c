@@ -1,17 +1,31 @@
+/*
+ *  $Id$
+ */
+
 #include "gemx.h"
 #include "gem_aesP.h"
 
+/** Releases the memory allocated with mt_pdlg_new_settings().
+ *
+ *  @param settings Printer settings
+ *  @param global_aes global AES array
+ *
+ *  @return unknown ???
+ *
+ *  @since mt_appl_getinfo(7) give informations on mt_pdlg_xx() functions availability
+ *
+ */
 
 short
-pdlg_free_settings (PRN_SETTINGS * settings)
+mt_pdlg_free_settings(PRN_SETTINGS *settings, short *global_aes)
 {
+	AES_PARAMS(205,1,1,1,0);
+
 	aes_intin[0] = 6;
-	aes_addrin[0] = (long) settings;
-	aes_control[0] = 205;
-	aes_control[1] = 1;
-	aes_control[2] = 1;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	aes (&aes_params);
+
+	aes_addrin[0] = (long)settings;
+
+	AES_TRAP(aes_params);
+
 	return aes_intout[0];
 }

@@ -1,17 +1,33 @@
+/*
+ *  $Id$
+ */
+
 #include "gemx.h"
 #include "gem_aesP.h"
 
+/** removes the printers installed with mt_pdlg_add_printers() from the binding.
+ *
+ *  @param prn_dialog Pointer to management structure
+ *  @param global_aes global AES array
+ *
+ *  @return unknown ???
+ *
+ *  @since mt_appl_getinfo(7) give informations on mt_pdlg_xx() functions availability
+ *
+ *  @note mt_pdlg_remove_printers() must be called before mt_pdlg_delete().
+ *
+ */
 
 short
-pdlg_remove_printers (PRN_DIALOG * prn_dialog)
+mt_pdlg_remove_printers(PRN_DIALOG *prn_dialog, short *global_aes)
 {
+	AES_PARAMS(205,1,1,1,0);
+
 	aes_intin[0] = 1;
+
 	aes_addrin[0] = (long) prn_dialog;
-	aes_control[0] = 205;
-	aes_control[1] = 1;
-	aes_control[2] = 1;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	aes (&aes_params);
+
+	AES_TRAP(aes_params);
+
 	return aes_intout[0];
 }
