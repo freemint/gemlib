@@ -25,13 +25,10 @@
 short
 vst_effects (short handle, short effects)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[1]; 
+	
 	VDI_PARAMS(vdi_control, &effects, 0L, vdi_intout, vdi_dummy );
-#else
-	vdi_intin[0] = effects;
-#endif
 	
 	VDI_TRAP (vdi_params, handle, 106, 0,1);
 

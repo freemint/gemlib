@@ -23,13 +23,10 @@
 short
 vst_rotation (short handle, short ang)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[1]; 
+	
 	VDI_PARAMS(vdi_control, &ang, 0L, vdi_intout, vdi_dummy );
-#else
-	vdi_intin[0] = ang;
-#endif
 	
 	VDI_TRAP (vdi_params, handle, 13, 0,1);
 
