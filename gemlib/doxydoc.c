@@ -143,6 +143,15 @@
  *  says that mt_flsx_xx() functions are available.
  */
 
+/** @defgroup x_lbox MagiC/WDIALOG extension: List Box Library
+ *
+ *  @brief list box functions
+ *
+ *  This List Box library availability can be found calling
+ *  mt_appl_getinfo(7). Bit 1 of \p ap_gout1, if equal to 1,
+ *  says that mt_lbox_xx() functions are available.
+ */
+
 /**@}*/
 
 /** @defgroup VDI VDI  Function Reference
