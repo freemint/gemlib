@@ -47,7 +47,7 @@ init_app (char *rsc)
 	graf_mouse (ARROW, 0x0L);
 	__app_hidden = 0;
 #ifdef __MINT__
-	gl_gem = gl_ap_version;
+	gl_gem = _AESversion;
 #else
 	gl_gem = _GemParBlk.global[0];
 #endif
