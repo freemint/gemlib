@@ -46,8 +46,9 @@ WF_VSLIDE         9    \p W1 specifies the new position of
                        the slider is in its uppermost
                        position.
 
-WF_TOP            10   \p W1 specifies the window handle of
-                       the window to top. Note that if
+WF_TOP            10   \p WindowHandle specifies the window
+                       handle of the window to top (parameter
+					   \p W1 is unused !). Note that if
                        multiple calls of mt_wind_set( WF_TOP,
                        ... ) are made without releasing
                        control to the AES (which allows the
