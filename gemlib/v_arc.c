@@ -21,12 +21,11 @@
 void
 v_arc (short handle, short x, short y, short radius, short begang, short endang)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[2];   
 	short vdi_ptsin[8];   
+
 	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy);
-#endif
 	
 	vdi_intin[0] = begang;
 	vdi_intin[1] = endang;

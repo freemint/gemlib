@@ -33,12 +33,11 @@ void
 vst_width (short handle, short width, short *char_width, short *char_height,
            short *cell_width, short *cell_height)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsin[2];   
 	short vdi_ptsout[4]; 
+
 	VDI_PARAMS(vdi_control, 0L, vdi_ptsin, vdi_dummy, vdi_ptsout);
-#endif
 	
 	vdi_ptsin[0] = width;
 	

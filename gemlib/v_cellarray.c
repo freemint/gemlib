@@ -46,24 +46,14 @@ v_cellarray (short handle, short pxy[], short row_length, short elements,
              short nrows, short write_mode, short colarray[])
 {
 	register short n = row_length * nrows;
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+
 	VDI_PARAMS(vdi_control, colarray, pxy, vdi_dummy, vdi_dummy );
-#endif
-	
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.intin = colarray;
-	vdi_params.ptsin = pxy;
-#endif
 	
 	vdi_control[7]  = row_length;
 	vdi_control[8]  = elements;
 	vdi_control[9]  = nrows;
 	vdi_control[10] = write_mode;
+
 	VDI_TRAP (vdi_params, handle, 10, 2,n);
-	
-#if !(USE_LOCAL_VDIPB)
-	vdi_params.intin = vdi_intin;
-	vdi_params.ptsin = vdi_ptsin;
-#endif
 }

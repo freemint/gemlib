@@ -34,12 +34,9 @@
 void
 vst_charmap (short handle, short mode)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+
 	VDI_PARAMS(vdi_control, &mode, 0L, vdi_dummy, vdi_dummy);
-#else
-	vdi_intin[0] = mode;
-#endif
 
 	VDI_TRAP (vdi_params, handle, 236, 0,1);
 }
