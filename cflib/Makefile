@@ -54,12 +54,16 @@ docu: cflib.stg
 	$(HCP) -ocflib.hyp cflib.stg
 
 install:
-	install -m 644 cflib.h              ${PREFIX}/include
-	install -m 644 lib{cflib,cflib16}.a ${PREFIX}/lib
-	install -m 644 cflib.{hyp,ref}      ${PREFIX}/stguide
+	install -m 644 cflib.h        ${PREFIX}/include
+	install -m 644 libcflib.a     ${PREFIX}/lib
+	install -m 644 libcflib16.a   ${PREFIX}/lib
+	install -m 644 cflib.hyp      ${PREFIX}/stguide
+	install -m 644 cflib.ref      ${PREFIX}/stguide
 
 uninstall:
 	rm -f ${PREFIX}/include/cflib.h
-	rm -f ${PREFIX}/lib/lib{cflib,cflib16}.a
-	rm -f ${PREFIX}/stguide/cflib.{hyp,ref}
+	rm -f ${PREFIX}/lib/libcflib.a
+	rm -f ${PREFIX}/lib/libcflib16.a
+	rm -f ${PREFIX}/stguide/cflib.hyp
+	rm -f ${PREFIX}/stguide/cflib.ref
 
