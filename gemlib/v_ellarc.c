@@ -29,7 +29,7 @@ v_ellarc (short handle, short x, short y,
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[2];   
 	short vdi_ptsin[4];   
-	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, 0L, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy);
 #endif
 	
 	vdi_intin[0] = begang;

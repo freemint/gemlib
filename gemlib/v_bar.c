@@ -19,7 +19,7 @@ v_bar (short handle, short pxy[])
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDI_PARAMS(vdi_control, 0L, pxy, 0L, 0L);
+	VDI_PARAMS(vdi_control, 0L, pxy, vdi_dummy, vdi_dummy);
 #else
 	vdi_params.ptsin = pxy;
 #endif

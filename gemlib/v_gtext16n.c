@@ -20,7 +20,7 @@ v_gtext16n (short handle, PXY pos, const short *wstr, short num)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDI_PARAMS(vdi_control, wstr, (short*)&pos, 0L, 0L );
+	VDI_PARAMS(vdi_control, wstr, (short*)&pos, vdi_dummy, vdi_dummy );
 #else
 	vdi_params.intin = wstr;
 	*(PXY*)vdi_ptsin = pos;

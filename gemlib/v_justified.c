@@ -35,7 +35,7 @@ v_justified (short handle, short x, short y,
 #endif
 	register short n = 2 + vdi_str2array (str, vdi_intin + 2);
 #if USE_LOCAL_VDIPB
-	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, 0L, 0L );
+	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy );
 #endif
 
 	vdi_intin[0] = word_space;

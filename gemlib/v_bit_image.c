@@ -43,7 +43,7 @@ v_bit_image (short handle, const char *filename, short aspect, short x_scale,
 #endif
 	register short n = 5 + vdi_str2array (filename, vdi_intin + 5);
 #if USE_LOCAL_VDIPB
-	VDI_PARAMS(vdi_control, vdi_intin, pxy, 0L, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, pxy, vdi_dummy, vdi_dummy);
 #endif
 
 #if !(USE_LOCAL_VDIPB)

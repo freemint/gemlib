@@ -33,7 +33,7 @@ v_meta_extents (short handle,
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsin[4];   
-	VDI_PARAMS(vdi_control, 0L, vdi_ptsin, 0L, 0L );
+	VDI_PARAMS(vdi_control, 0L, vdi_ptsin, vdi_dummy, vdi_dummy );
 #endif
 	
 	vdi_ptsin[0] = min_x;

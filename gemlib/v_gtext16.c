@@ -22,7 +22,7 @@ v_gtext16 (short handle, short x, short y, const short *wstr)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsin[2];   
-	VDI_PARAMS(vdi_control, wstr, vdi_ptsin, 0L, 0L );
+	VDI_PARAMS(vdi_control, wstr, vdi_ptsin, vdi_dummy, vdi_dummy );
 #endif
 	
 #if !(USE_LOCAL_VDIPB)

@@ -22,7 +22,7 @@ v_fontinit (short handle, const void * font_header)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDI_PARAMS(vdi_control, &font_header, 0L, 0L, 0L );
+	VDI_PARAMS(vdi_control, &font_header, 0L, vdi_dummy, vdi_dummy );
 #else
 	*(void**)vdi_intin = font_header;
 #endif
