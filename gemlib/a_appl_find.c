@@ -4,31 +4,40 @@
 
 #include "gem_aesP.h"
 
-/** Application Find
+/** searches the AES's current process list for a program named Name and,
+ *  if present, returns the application identifier of the process.
  *
- *  @param Name add parameter description here
+ *  @param Name is a pointer to a null-terminated ASCII string
+ *         containing a valid GEMDOS filename (not including an
+ *         extension) padded with blanks to be exactly 8 characters
+ *         long (not including the NULL).
  *  @param global_aes global AES array
- *  @return add return description here
  *
- *  add detailled description here.  
+ *  @return the application identifier of the process if it is found or
+ *          -1 otherwise.
+ *
+ *  @since All AES versions.
+ *
+ *  @sa mt_appl_write(), mt_appl_init()
+ *
+ *  AES versions from 4.0 add several extensions to this call
+ *  for the benefit of MultiTOS as follows: If the upper word
+ *  of the CHAR * is 0xFFFF, the lower word is assumed to be
+ *  the MiNT id and mt_appl_find() will return the AES application
+ *  identifier.
+ *  If the upper word of the CHAR * is 0xFFFE, the lower word
+ *  is assumed to be the AES application identifier and the
+ *  MiNT id is returned.
+ *  If the upper word of the CHAR * is 0x0000, the current
+ *  processes' application identifier is returned. This
+ *  functionality only exists if the AES version is 4.0 and
+ *  above and mt_appl_getinfo() indicates that it is available.
  */
 
 short 
 mt_appl_find(const char *Name, short *global_aes)
 {
-   	static short 	aes_control[AES_CTRLMAX]={13,0,1,1,0};
-	short			aes_intin[AES_INTINMAX],
-					aes_intout[AES_INTOUTMAX];
-	long			aes_addrin[AES_ADDRINMAX],
-					aes_addrout[AES_ADDROUTMAX];
-
-	AESPB aes_params;
-  	aes_params.control = &aes_control[0];   /* AES Control Array             */
-  	aes_params.global  = &global_aes[0];    /* AES Global Array              */
-  	aes_params.intin   = &aes_intin[0];     /* input integer array           */
-  	aes_params.intout  = &aes_intout[0];    /* output integer array          */
-  	aes_params.addrin  = &aes_addrin[0];    /* input address array           */
-  	aes_params.addrout = &aes_addrout[0];   /* output address array          */
+	AES_PARAMS({13,0,1,1,0});
                     
 	aes_addrin[0] = (long)Name;
 

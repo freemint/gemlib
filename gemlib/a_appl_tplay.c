@@ -4,33 +4,35 @@
 
 #include "gem_aesP.h"
 
-/** Application TPlay
+/** plays back events originally recorded with mt_appl_trecord().
  *
- *  @param Mem add parameter description here
- *  @param Num add parameter description here
- *  @param Scale add parameter description here
+ *  @param Mem is a pointer to an array of EVNTREC structures (see
+ *         appl_trecord())
+ *  @param Num indicates the number of EVNTREC's to play back.
+ *  @param Scale indicates on a scale of 1 to 10000 how fast the AES
+ *         will attempt to play back your recording as follows:<pre>			   
+Value   Playback Speed
+ 100    recorded speed
+ 200    twice recorded speed
+  50    half of the recorded speed</pre>					
+ *         Other values will respond accordingly.
  *  @param global_aes global AES array
- *  @return add return description here
  *
- *  add detailled description here.  
+ *  @return always returns 1 meaning no error occurred.
+ *
+ *  @since All AES versions.
+ *
+ *  @sa mt_appl_trecord()
+ *
+ *  This function does not work correctly on AES versions less
+ *  than 1.40 without a patch program available from Atari
+ *  Corp..  
  */
 
 short 
 mt_appl_tplay(void *Mem, short Num, short Scale, short *global_aes)
 {
-   	static short 	aes_control[AES_CTRLMAX]={14,2,1,1,0};
-	short			aes_intin[AES_INTINMAX],
-					aes_intout[AES_INTOUTMAX];
-	long			aes_addrin[AES_ADDRINMAX],
-					aes_addrout[AES_ADDROUTMAX];
-
-	AESPB aes_params;
-  	aes_params.control = &aes_control[0];   /* AES Control Array             */
-  	aes_params.global  = &global_aes[0];    /* AES Global Array              */
-  	aes_params.intin   = &aes_intin[0];     /* input integer array           */
-  	aes_params.intout  = &aes_intout[0];    /* output integer array          */
-  	aes_params.addrin  = &aes_addrin[0];    /* input address array           */
-  	aes_params.addrout = &aes_addrout[0];   /* output address array          */
+	AES_PARAMS({14,2,1,1,0});
                     
 	aes_intin[0]  = Num;
 	aes_intin[1]  = Scale;

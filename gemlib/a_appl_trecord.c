@@ -4,32 +4,51 @@
 
 #include "gem_aesP.h"
 
-/** Application TRecord
+/** records AES events for later playback.
  *
- *  @param Mem add parameter description here
- *  @param Count add parameter description here
+ *  @param Mem points to an array of \p Count EVNTREC structures
+ *  @param Count dimension of the array of EVNTREC structures into which
+ *         the AES will record events as indicated here:<pre>
+typedef struct pEvntrec
+{
+	WORD ap_event;
+	LONG ap_value;
+} EVNTREC;</pre>
+ *         ap_event defines the required interpretation of ap_value
+ *         as follows:<pre>
+Name		 ap_event Event 	ap_value
+
+APPEVNT_TIMER	 0    Timer 	Elapsed Time (in
+								milliseconds)
+
+APPEVNT_BUTTON   1    Button	low word  = state
+											(1 = down)
+								high word = # of clicks
+
+APPEVNT_MOUSE	 2    Mouse 	low word  = X pos
+								high word = Y pos
+
+APPEVNT_KEYBOARD 3    Keyboard  bits 0-7:	ASCII code
+								bits 8-15:  scan code
+								bits 16-31: shift key
+								state</pre>
  *  @param global_aes global AES array
- *  @return add return description here
  *
- *  add detailled description here.  
+ *  @return addreturns the number of events actually recorded.
+ *
+ *  @since All AES versions.
+ *
+ *  @sa mt_appl_tplay()
+ *
+ *  This function does not work correctly on AES versions less
+ *  than 1.40 without a patch program available from Atari
+ *  Corp.
  */
 
 short 
 mt_appl_trecord(void *Mem, short Count, short *global_aes)
 {
-   	static short 	aes_control[AES_CTRLMAX]={15,1,1,1,0};
-	short		    aes_intin[AES_INTINMAX],
-				    aes_intout[AES_INTOUTMAX];
-	long		    aes_addrin[AES_ADDRINMAX],
-				    aes_addrout[AES_ADDROUTMAX];
-
-	AESPB aes_params;
-  	aes_params.control = &aes_control[0];   /* AES Control Array             */
-  	aes_params.global  = &global_aes[0];    /* AES Global Array              */
-  	aes_params.intin   = &aes_intin[0];     /* input integer array           */
-  	aes_params.intout  = &aes_intout[0];    /* output integer array          */
-  	aes_params.addrin  = &aes_addrin[0];    /* input address array           */
-  	aes_params.addrout = &aes_addrout[0];   /* output address array          */
+	AES_PARAMS({15,1,1,1,0});
                     
 	aes_intin[0]  = Count;
 	aes_addrin[0] = (long)Mem;

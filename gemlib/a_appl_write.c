@@ -4,33 +4,40 @@
 
 #include "gem_aesP.h"
 
-/** Application Write
+/** can be used to send a message to a valid message pipe.
  *
- *  @param ApId add parameter description here
- *  @param Length add parameter description here
- *  @param ApPbuff add parameter description here
+ *  @param ApId is the application identifier of the process to which
+ *         you wish to send the message.
+ *  @param Length specifies the number of bytes present in the message.
+ *  @param ApPbuff is a pointer to a memory buffer with at least
+ *         length bytes available
  *  @param global_aes global AES array
- *  @return add return description here
  *
- *  add detailled description here.  
+ *  @return 0 if an error occurred or greater than 0 if the message was
+ *          sent successfully.
+ *
+ *  @since All AES versions.
+ *
+ *  @sa mt_appl_read(), mt_shel_write()
+ *
+ *  As of AES version 1.40, desk accessories may send
+ *  MN_SELECTED messages to the desktop to trigger desktop
+ *  functions.
+ *
+ *  As of AES version 4.00 you can use mt_shel_write(7,...) to
+ *  'broadcast' a message to all processes running with the
+ *  exception of the AES itself, the desktop, and your own
+ *  application. See mt_shel_write() for details.
+ *
+ *  It is recommended that you always send messages in 16 byte
+ *  blocks using a WORD array of 8 elements as the AES does.
+ *
  */
 
 short 
 mt_appl_write(short ApId, short Length, void *ApPbuff, short *global_aes)
 {
-   	static short 	aes_control[AES_CTRLMAX]={12,2,1,1,0};
-	short			aes_intin[AES_INTINMAX],
-					aes_intout[AES_INTOUTMAX];
-	long			aes_addrin[AES_ADDRINMAX],
-					aes_addrout[AES_ADDROUTMAX];
-
-	AESPB aes_params;
-  	aes_params.control = &aes_control[0];   /* AES Control Array             */
-  	aes_params.global  = &global_aes[0];    /* AES Global Array              */
-  	aes_params.intin   = &aes_intin[0];     /* input integer array           */
-  	aes_params.intout  = &aes_intout[0];    /* output integer array          */
-  	aes_params.addrin  = &aes_addrin[0];    /* input address array           */
-  	aes_params.addrout = &aes_addrout[0];   /* output address array          */
+	AES_PARAMS({12,2,1,1,0});
 
 	aes_intin[0]  = ApId;
 	aes_intin[1]  = Length;

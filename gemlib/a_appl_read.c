@@ -4,33 +4,42 @@
 
 #include "gem_aesP.h"
 
-/** Application Read
+/** is designed to facilitate inter-process
+ *  communication between processes running under the AES. The
+ *  call will halt the application until a message of
+ *  sufficient length is available (see version notes below).
  *
- *  @param ApId add parameter description here
- *  @param Length add parameter description here
- *  @param ApPbuff add parameter description here
+ *  @param ApId is your application identifier as returned by
+ *         mt_appl_init().
+ *  @param Length is the length (in bytes) of the message to read.
+ *  @param ApPbuff is a pointer to a memory buffer where the incoming
+ *         message should be copied to.
  *  @param global_aes global AES array
- *  @return add return description here
  *
- *  add detailled description here.  
+ *  @return 0 if an error occurred or non-zero otherwise.
+ *
+ *  @since All AES versions.
+ *
+ *  @sa mt_appl_write()
+ *
+ *  If the AES version is 4.0 or higher and appl_getinfo()
+ *  indicates that this feature is supported, ap_id takes on an
+ *  additional meaning. If APR_NOWAIT (-1) is passed instead of
+ *  ap_id, appl_read() will return immediately if no message is
+ *  currently waiting. 
+ *
+ *  Normally this call is not used. evnt_multi() or
+ *  evnt_mesag() is used instead for standard message
+ *  reception. appl_read() is required for reading messages
+ *  that are long and/or of variable length.
+ *  It is recommended that message lengths in multiples of 16
+ *  bytes be used.
  */
 
 short 
 mt_appl_read(short ApId, short Length, void *ApPbuff, short *global_aes)
 {
-   	static short 	aes_control[AES_CTRLMAX]={11,2,1,1,0};
-	short		    aes_intin[AES_INTINMAX],
-				    aes_intout[AES_INTOUTMAX];
-	long		    aes_addrin[AES_ADDRINMAX],
-				    aes_addrout[AES_ADDROUTMAX];
-
-	AESPB aes_params;
-  	aes_params.control = &aes_control[0];   /* AES Control Array             */
-  	aes_params.global  = &global_aes[0];    /* AES Global Array              */
-  	aes_params.intin   = &aes_intin[0];     /* input integer array           */
-  	aes_params.intout  = &aes_intout[0];    /* output integer array          */
-  	aes_params.addrin  = &aes_addrin[0];    /* input address array           */
-  	aes_params.addrout = &aes_addrout[0];   /* output address array          */
+	AES_PARAMS({11,2,1,1,0});
                     
 	aes_intin[0]  = ApId;
 	aes_intin[1]  = Length;

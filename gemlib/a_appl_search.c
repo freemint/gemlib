@@ -4,34 +4,42 @@
 
 #include "gem_aesP.h"
 
-/** Application Search
+/** provides a method of identifying all of the
+ *  currently running processes.
  *
- *  @param mode add parameter description here
- *  @param fname add parameter description here
- *  @param type add parameter description here
- *  @param ap_id add parameter description here
+ *  @param mode specifies the search mode as follows:
+ *         - APP_FIRST (0) Return the filename of the first process
+ *         - APP_NEXT (1) Return the filename of subsequent processes
+ *  @param fname should point to a memory location at least 9 bytes
+ *		   long to hold the 8 character process filename found and
+ *		   the NULL byte.
+ *  @param type is a pointer to a WORD into which will be
+ *		   placed the process type as follows:
+ *	       - APP_SYSTEM        (0x01)   System process
+ *	       - APP_APPLICATION   (0x02)   Application
+ *	       - APP_ACCESSORY     (0x04)   Accessory
+ *	       - APP_SHELL         (0x08)
+ *  @param ap_id is a pointer to a word into which will be placed the
+ *	       processes' application identifier.
  *  @param global_aes global AES array
- *  @return add return description here
  *
- *  add detailled description here.  
+ *  @return 0 if no more applications exist or 1
+ *          when more processes exist that meet the search criteria.
+ *
+ *  @since Available only in AES versions 4.0 and above when
+ *         mt_appl_getinfo() indicates its presence.
+ *
+ *  The \p type parameter is actually a bit mask so it is possible
+ *  that a process containing more than one characteristic will
+ *  appear. The currently running shell process (usually the
+ *  desktop) will return a value of APP_APPLICATION | APP_SHELL
+ *  (0x0A).
  */
 
 short 
 mt_appl_search(short mode, char *fname, short *type, short *ap_id, short *global_aes)
 {
-   	static short 	aes_control[AES_CTRLMAX]={18,1,3,1,0};
-	short			aes_intin[AES_INTINMAX],
-					aes_intout[AES_INTOUTMAX];
-	long			aes_addrin[AES_ADDRINMAX],
-					aes_addrout[AES_ADDROUTMAX];
-
-	AESPB aes_params;
-  	aes_params.control = &aes_control[0];   /* AES Control Array             */
-  	aes_params.global  = &global_aes[0];    /* AES Global Array              */
-  	aes_params.intin   = &aes_intin[0];     /* input integer array           */
-  	aes_params.intout  = &aes_intout[0];    /* output integer array          */
-  	aes_params.addrin  = &aes_addrin[0];    /* input address array           */
-  	aes_params.addrout = &aes_addrout[0];   /* output address array          */
+	AES_PARAMS({18,1,3,1,0});
                     
 	aes_intin[0]  = mode;
 	aes_addrin[0] = (long)fname;

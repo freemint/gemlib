@@ -5,11 +5,57 @@
 #include <string.h>
 #include "gem_aesP.h"
 
-/** Application Initialisation
+/** should be the first function called in any application that intends
+ *  to use GEM calls.
  *
- *  @return add return description here
+ *  @param global_aes global AES array
  *
- *  add detailled description here.  
+ *  @return the applications' global identifier if
+ *			successful or -1 if the AES cannot register the
+ *			application. If successful, the global identifier should
+ *			be stored in a global variable for later use.
+ *			GEM applications may not make any AES or VDI calls unless
+ *			appl_init() succeeds.
+ *			Besides the return value, the AES fills in the
+ *			application's global array (to reference the global array
+ *			see your programming languages' manual).
+<pre>
+       Name       global[x] Meaning
+
+       _AESversion    0     AES version number.
+
+       _AESnumapps    1     Number of concurrent applications
+                            possible (normally 1). MultiTOS
+                            will return -1.
+
+       _AESapid       2     Application identifier (same as
+                            appl_init() return value).
+
+       _AESappglobal  3-4   LONG global available for use by the
+                            application.
+
+       _AESrscfile    5-6   Pointer to the base of the resource
+                            loaded via rsrc_load().
+
+       (reserved)     7-12  Reserved
+
+       _AESmaxchar    13    Current maximum character used by the
+                            AES to do vst_height() prior to
+                            writing to the screen. This entry is
+                            only present as of AES version 0x0400.
+
+       _AESminchar    14    Current minimum character used by the
+                            AES to do vst_height() prior to
+                            writing to the screen. This entry is
+                            only present as of AES version 0x0400.
+</pre>
+ *
+ *  @since All AES versions.
+ *
+ *  @sa mt_appl_init()
+ *
+ *  @note
+ *  Why should we zero-ed local array ? This seems very stupid !
  */
 
 short 
@@ -20,19 +66,7 @@ mt_appl_init(short *global_aes)
 	short *pts;
 	long *ptl;
 #endif		
-   	static short 	aes_control[AES_CTRLMAX]={10,0,1,0,0};
-	short			aes_intin[AES_INTINMAX],
-					aes_intout[AES_INTOUTMAX];
-	long			aes_addrin[AES_ADDRINMAX],
-					aes_addrout[AES_ADDROUTMAX];
-
-	AESPB aes_params;
-  	aes_params.control = &aes_control[0];   /* AES Control Array             */
-  	aes_params.global  = &global_aes[0];    /* AES Global Array              */
-  	aes_params.intin   = &aes_intin[0];     /* input integer array           */
-  	aes_params.intout  = &aes_intout[0];    /* output integer array          */
-  	aes_params.addrin  = &aes_addrin[0];    /* input address array           */
-  	aes_params.addrout = &aes_addrout[0];   /* output address array          */
+	AES_PARAMS({10,0,1,0,0});
                     
 	/* clear all binding arrays */
 #ifdef __MINT__  /* mintlib have bzero() */
@@ -41,19 +75,19 @@ mt_appl_init(short *global_aes)
 	bzero (&aes_intout[0], AES_INTOUTMAX * sizeof (short));
 	bzero (&aes_addrin[0], AES_ADDRINMAX * sizeof (short));
 	bzero (&aes_addrout[0], AES_ADDROUTMAX * sizeof (short));
-	bzero (&aes_global[0], AES_GLOBMAX * sizeof (short));
+/*	bzero (&aes_global[0], AES_GLOBMAX * sizeof (short));*/
 #else
 	for(ff=0,pts=&aes_intin[0];ff<AES_INTINMAX;ff++) *(pts++)=0;
 	for(ff=0,pts=&aes_intout[0];ff<AES_INTOUTMAX;ff++) *(pts++)=0;
 	for(ff=0,ptl=&aes_addrin[0];ff<AES_ADDRINMAX;ff++) *(ptl++)=0L;
 	for(ff=0,ptl=&aes_addrout[0];ff<AES_ADDROUTMAX;ff++) *(ptl++)=0L;
-	for(ff=0,pts=&global_aes[0];ff<AES_GLOBMAX;ff++) *(pts++)=0;
+/*	for(ff=0,pts=&global_aes[0];ff<AES_GLOBMAX;ff++) *(pts++)=0;*/
 #endif
 
 	AES_TRAP(aes_params);
 
 	gl_ap_version = aes_global[0];
-	gl_apid = aes_intout[0];
+	gl_apid 	  = aes_intout[0];
 	
 	return aes_intout[0];
 }
