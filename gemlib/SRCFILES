@@ -218,7 +218,7 @@ _VDI_EXTENSIONS = \
 	n_vqt_f_extent16.c \
 	n_vqt_fg_color.c \
 	n_vqt_fontheader.c \
-	n_vqt_name_and_id \
+	n_vqt_name_and_id.c \
 	n_vqt_pairkern.c \
 	n_vqt_real_extent.c \
 	n_vqt_trackkern.c \
