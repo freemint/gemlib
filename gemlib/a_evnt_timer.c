@@ -13,7 +13,7 @@
  *  @return reserved and is currently always 1.
  *
  *  @since All AES versions. Under TOS 1.0, calling this
- *         function from a desk accessory with \p interval
+ *         function from a desk accessory with \a interval
  *         having a value of 0 will hang the system.
  *
  *  @sa mt_evnt_multi()

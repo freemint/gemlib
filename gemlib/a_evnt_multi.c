@@ -10,36 +10,33 @@
  *  @param events is a bit mask which tells the function which events
  *               your application is interested in. You should logically
  *               'OR' any of the following values together:
- *            - \p MU_KEYBD   (0x01) Wait for a user keypress.
- *            - \p MU_BUTTON  (0x02) Wait for the specified mouse button
- *                                   state.
- *            - \p MU_M1      (0x04) Wait for a mouse/rectangle event as
- *                                   specified.
- *            - \p MU_M2      (0x08) Wait for a mouse/rectangle event as
- *                                   specified.
- *            - \p MU_MESAG   (0x10) Wait for a message.
- *            - \p MU_TIMER   (0x20) Wait the specified amount of time.
+ *            - #MU_KEYBD  Wait for a user keypress.
+ *            - #MU_BUTTON Wait for the specified mouse button state.
+ *            - #MU_M1     Wait for a mouse/rectangle event as specified.
+ *            - #MU_M2     Wait for a mouse/rectangle event as specified.
+ *            - #MU_MESAG  Wait for a message.
+ *            - #MU_TIMER  Wait the specified amount of time.
  *
- *  @param bclicks
- *  @param bmask
+ *  @param bclicks see mt_evnt_button()
+ *  @param bmask see mt_evnt_button()
  *  @param bstate see mt_evnt_button()
- *  @param m1_leave
- *  @param m1_x
- *  @param m1_y
- *  @param m1_w
+ *  @param m1_leave see mt_evnt_mouse()
+ *  @param m1_x see mt_evnt_mouse()
+ *  @param m1_y see mt_evnt_mouse()
+ *  @param m1_w see mt_evnt_mouse()
  *  @param m1_h see mt_evnt_mouse()
- *  @param m2_leave
- *  @param m2_x
- *  @param m2_y
- *  @param m2_w
+ *  @param m2_leave see mt_evnt_mouse()
+ *  @param m2_x see mt_evnt_mouse()
+ *  @param m2_y see mt_evnt_mouse()
+ *  @param m2_w see mt_evnt_mouse()
  *  @param m2_h see mt_evnt_mouse()
  *  @param msg see mt_evnt_mesag()
  *  @param interval see mt_evnt_timer()
- *  @param mx \n
+ *  @param mx  see mt_evnt_button()\n
  *         [option CHECK_NULLPTR] mx may be NULL
- *  @param my \n
+ *  @param my  see mt_evnt_button()\n
  *         [option CHECK_NULLPTR] my may be NULL
- *  @param mbutton \n
+ *  @param mbutton  see mt_evnt_button()\n
  *         [option CHECK_NULLPTR] mbutton may be NULL
  *  @param kmeta see mt_evnt_button() \n
  *         [option CHECK_NULLPTR] kmeta may be NULL
@@ -54,7 +51,7 @@
  *          be prepared to handle each.
  *
  *  @since All AES versions. Under TOS 1.0, calling this function
- *         from a desk accessory with the MU_TIMER mask and \p interval
+ *         from a desk accessory with the #MU_TIMER mask and \a interval
  *         being equal to 0 could hang the system.
  *
  *  @sa mt_evnt_button(), mt_evnt_keybd(), mt_evnt_mesag(),
@@ -64,10 +61,6 @@
  *  mt_evnt_mesag(), mt_evnt_mouse(), and mt_evnt_timer() into one call.
  *  This call is usually the cornerstone of all GEM
  *  applications that must process system events.
- *
- *  The only facet of mt_evnt_multi() which has changed from AES
- *  version 4.0 is that which relates to mt_evnt_mesag(). For
- *  further information you should consult that section.
  *
  */
 
