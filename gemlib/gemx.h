@@ -69,70 +69,94 @@ short	objc_xedit	(OBJECT *tree, short obj, short key, short *xpos, short subfn, 
 /*
  * fnts_* font selection (MagiC/WDIALOG only)
  */
+
+/** @addtogroup x_fnts
+ *  @{
+ */
+
+/** opaque structure (internal management structure) */ 
 typedef void *FNT_DIALOG;
+
+/** */
 typedef void __CDECL (*UTXT_FN)(short x, short y, short *clip_rect, long id, long pt, long ratio, char *string);
 
+/** */
 typedef struct _fnts_item FNTS_ITEM;
+
+/** FNTS_ITEM data structure */
 struct _fnts_item
 {
-	FNTS_ITEM	*next;		/* Zeiger auf den nÑchsten Font oder 0L (Ende der Liste) */
-	UTXT_FN		display; 	/* Zeiger auf die Anzeige-Funktion fÅr applikationseigene Fonts */
-	long		id;		/* ID des Fonts, >= 65536 fÅr applikationseigene Fonts */
-	short 		index;		/* Index des Fonts (falls VDI-Font) */
-	char		mono; 		/* Flag fÅr Ñquidistante Fonts */
-	char		outline; 	/* Flag fÅr Vektorfont */
-	short 		npts; 		/* Anzahl der vordefinierten Punkthîhen */
-	char		*full_name; 	/* Zeiger auf den vollstÑndigen Namen */
-	char		*family_name;	/* Zeiger auf den Familiennamen */
-	char		*style_name;	/* Zeiger auf den Stilnamen */
-	char		*pts; 		/* Zeiger auf Feld mit Punkthîhen */
-	long		reserved[4];	/* reserviert, mÅssen 0 sein */
+	FNTS_ITEM	*next;		  /**< Pointer to the next font or 0L (end of the list) */
+	UTXT_FN		display;	  /**< Pointer to the display function for the user fonts */
+	long		id; 		  /**< Font ID, >= 65536 for user fonts */
+	short 		index;		  /**< Must be 0, as not a VDI font */
+	char		mono;		  /**< Flag for mono-spaced font */
+	char		outline;	  /**< Flag for vector font */
+	short 		npts;		  /**< Number of predefined point sizes */
+	char		*full_name;   /**< Pointer to the complete name */
+	char		*family_name; /**< Pointer to the family name */
+	char		*style_name;  /**< Pointer to the style name */
+	char		*pts; 		  /**< Pointer to field with point sizes */
+	long		reserved[4];  /**< Reserved, must be 0 */
 };
 
-/* Definitionen fÅr <font_flags> bei fnts_create() */
-#define FNTS_BTMP 		1		/* Bitmapfonts anzeigen */
-#define FNTS_OUTL 		2		/* Vektorfonts anzeigen */
-#define FNTS_MONO 		4		/* Ñquidistante Fonts anzeigen */
-#define FNTS_PROP 		8		/* proportionale Fonts anzeigen */
+/* Definition of <font_flags> in mt_fnts_create() */
+#define FNTS_BTMP 		1		    /**< Display bitmap fonts */
+#define FNTS_OUTL 		2		    /**< Display vector fonts */
+#define FNTS_MONO 		4		    /**< Display mono-spaced fonts */
+#define FNTS_PROP 		8		    /**< Display proportional fonts */
 
-/* Definitionen fÅr <dialog_flags> bei fnts_create() */
-#define FNTS_3D			1		/* 3D-Design benutzen */
+/* Definition  of <dialog_flags> in mt_fnts_create() */
+#define FNTS_3D			1			/**< Display selector in 3D-look */
 
-/* Definitionen fÅr <button_flags> bei fnts_open() */
-#define FNTS_SNAME		0x01		/* Checkbox fÅr die Namen selektieren */
-#define FNTS_SSTYLE		0x02		/* Checkbox fÅr die Stile selektieren */
-#define FNTS_SSIZE		0x04		/* Checkbox fÅr die Hîhe selektieren */
-#define FNTS_SRATIO		0x08		/* Checkbox fÅr das VerhÑltnis Breite/Hîhe selektieren */
+/* Definition of <button_flags> in mt_fnts_open() */
+#define FNTS_SNAME		0x01		/**< Select checkbox for names */
+#define FNTS_SSTYLE		0x02		/**< Select checkbox for style */
+#define FNTS_SSIZE		0x04		/**< Select checkbox for height  */
+#define FNTS_SRATIO		0x08		/**< Select checkbox for width/height ratio */
 
-#define FNTS_CHNAME		0x0100		/* Checkbox fÅr die Namen anzeigen */
-#define FNTS_CHSTYLE 		0x0200		/* Checkbox fÅr die Stile anzeigen */
-#define FNTS_CHSIZE		0x0400		/* Checkbox fÅr die Hîhe anzeigen */
-#define FNTS_CHRATIO 		0x0800		/* Checkbox fÅr das VerhÑltnis Breite/Hîhe anzeigen */
-#define FNTS_RATIO		0x1000		/* VerhÑltnis Breite/Hîhe einstellbar */
-#define FNTS_BSET 		0x2000		/* Button "setzen" anwÑhlbar */
-#define FNTS_BMARK		0x4000		/* Button "markieren" anwÑhlbar */
+#define FNTS_CHNAME		0x0100		/**< Display checkbox for names */
+#define FNTS_CHSTYLE 	0x0200		/**< Display checkbox for style */
+#define FNTS_CHSIZE		0x0400		/**< Display checkbox for height */
+#define FNTS_CHRATIO 	0x0800		/**< Display checkbox for width/height ratio */
+#define FNTS_RATIO		0x1000		/**< Width/height ratio adjustable */
+#define FNTS_BSET 		0x2000		/**< Button "Set" selectable */
+#define FNTS_BMARK		0x4000		/**< Button "Mark" selectable */
 
-/* Definitionen fÅr <button> bei fnts_evnt() */
-#define FNTS_CANCEL		1		/* "Abbruch" wurde angewÑhlt */
-#define FNTS_OK			2		/* "OK" wurde gedrÅckt */
-#define FNTS_SET		3		/* "setzen" wurde angewÑhlt */
-#define FNTS_MARK 		4		/* "markieren" wurde betÑtigt */
-#define FNTS_OPT		5		/* der applikationseigene Button wurde ausgewÑhlt */
+/* Definition of <button> in mt_fnts_evnt() */
+#define FNTS_CANCEL		1		
+#define FNTS_OK			2		
+#define FNTS_SET		3		
+#define FNTS_MARK 		4		
+#define FNTS_OPT		5		
 
-short		fnts_add		(FNT_DIALOG *fnt_dialog, FNTS_ITEM *user_fonts);
-short		fnts_close		(FNT_DIALOG *fnt_dialog, short *x, short *y);
-FNT_DIALOG *	fnts_create		(short vdi_handle, short no_fonts, short font_flags, short dialog_flags, char *sample, char *opt_button);
-short		fnts_delete		(FNT_DIALOG *fnt_dialog, short vdi_handle);
-short		fnts_do			(FNT_DIALOG *fnt_dialog, short button_flags, long id_in, long pt_in, long ratio_in, short *check_boxes, long *id, long *pt, long *ratio);
-short		fnts_evnt		(FNT_DIALOG *fnt_dialog, EVNT *events, short *button, short *check_boxes, long *id, long *pt, long *ratio);
-short		fnts_get_info		(FNT_DIALOG *fnt_dialog, long id, short *mono, short *outline);
-short		fnts_get_name		(FNT_DIALOG *fnt_dialog, long id, char *full_name, char *family_name, char *style_name);
-short		fnts_get_no_styles	(FNT_DIALOG *fnt_dialog, long id);
-long		fnts_get_style		(FNT_DIALOG *fnt_dialog, long id, short __index);
-short		fnts_open		(FNT_DIALOG *fnt_dialog, short button_flags, short x, short y, long id, long pt, long ratio);
-void		fnts_remove		(FNT_DIALOG *fnt_dialog);
-short		fnts_update		(FNT_DIALOG *fnt_dialog, short button_flags, long id, long pt, long ratio);
-
+short		mt_fnts_add			(FNT_DIALOG *fnt_dialog, FNTS_ITEM *user_fonts, short *global);
+short		mt_fnts_close		(FNT_DIALOG *fnt_dialog, short *x, short *y, short *global);
+FNT_DIALOG *mt_fnts_create		(short vdi_handle, short no_fonts, short font_flags, short dialog_flags, char *sample, char *opt_button, short *global);
+short		mt_fnts_delete		(FNT_DIALOG *fnt_dialog, short vdi_handle, short *global);
+short		mt_fnts_do			(FNT_DIALOG *fnt_dialog, short button_flags, long id_in, long pt_in, long ratio_in, short *check_boxes, long *id, long *pt, long *ratio, short *global);
+short		mt_fnts_evnt		(FNT_DIALOG *fnt_dialog, EVNT *events, short *button, short *check_boxes, long *id, long *pt, long *ratio, short *global);
+short		mt_fnts_get_info	(FNT_DIALOG *fnt_dialog, long id, short *mono, short *outline, short *global);
+short		mt_fnts_get_name	(FNT_DIALOG *fnt_dialog, long id, char *full_name, char *family_name, char *style_name, short *global);
+short		mt_fnts_get_no_styles (FNT_DIALOG *fnt_dialog, long id, short *global);
+long		mt_fnts_get_style	(FNT_DIALOG *fnt_dialog, long id, short __index, short *global);
+short		mt_fnts_open		(FNT_DIALOG *fnt_dialog, short button_flags, short x, short y, long id, long pt, long ratio, short *global);
+void		mt_fnts_remove		(FNT_DIALOG *fnt_dialog, short *global);
+short		mt_fnts_update		(FNT_DIALOG *fnt_dialog, short button_flags, long id, long pt, long ratio, short *global);
+#define fnts_add(a,b)				mt_fnts_add(a,b,aes_global)
+#define fnts_close(a,b,c)			mt_fnts_close(a,b,c,aes_global)
+#define fnts_create(a,b,c,d,e,f)	mt_fnts_create(a,b,c,d,e,f,aes_global)
+#define fnts_delete(a,b)			mt_fnts_delete(a,b,aes_global)
+#define fnts_do(a,b,c,d,e,f,g,h,i)	mt_fnts_do(a,b,c,d,e,f,g,h,i,aes_global)
+#define fnts_evnt(a,b,c,d,e,f,g)	mt_fnts_evnt(a,b,c,d,e,f,g,aes_global)
+#define fnts_get_info(a,b,c,d)		mt_fnts_get_info(a,b,c,d,aes_global)
+#define fnts_get_name(a,b,c,d,e)	mt_fnts_get_name(a,b,c,d,e,aes_global)
+#define fnts_get_no_styles(a,b)		mt_fnts_get_no_styles(a,b,aes_global)
+#define fnts_get_style(a,b,c)		mt_fnts_get_style(a,b,c,aes_global)
+#define fnts_open(a,b,c,d,e,f,g)	mt_fnts_open(a,b,c,d,e,f,g,aes_global)
+#define fnts_remove(a)				mt_fnts_remove(a,aes_global)
+#define fnts_update(a,b,c,d,e)		mt_fnts_update(a,b,c,d,e,aes_global)
+/**@}*/
 
 /*
  * fslx_* file selection (MagiC only)
