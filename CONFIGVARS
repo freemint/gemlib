@@ -15,6 +15,8 @@ NATIVECC = gcc
 NATIVECFLAGS = -O
 CRLF = echo crlf -s
 
+PREFIX=/usr/m68k-atari-mint
+
 else
 
 CROSSPREFIX=
@@ -22,6 +24,8 @@ CROSSPREFIX=
 NATIVECC = gcc
 NATIVECFLAGS = -O
 CRLF  = crlf -s
+
+PREFIX=/usr
 
 endif
 

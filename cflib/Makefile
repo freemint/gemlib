@@ -47,3 +47,14 @@ objs: .lib$(TARGET)
 
 docu: cflib.stg
 	$(HCP) -ocflib.hyp cflib.stg
+
+install:
+	install -m 644 cflib.h              ${PREFIX}/include
+	install -m 644 lib{cflib,cflib16}.a ${PREFIX}/lib
+	install -m 644 cflib.{hyp,ref}      ${PREFIX}/stguide
+
+uninstall:
+	rm -f ${PREFIX}/include/cflib.h
+	rm -f ${PREFIX}/lib/lib{cflib,cflib16}.a
+	rm -f ${PREFIX}/stguide/cflib.{hyp,ref}
+
