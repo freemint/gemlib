@@ -39,11 +39,11 @@ __BEGIN_DECLS
 
 /* Major and minor version number of the GEMLib package.  Use these macros 
    to test for features in specific releases.  */
-#define __GEMLIB__		__GEMLIB_MAJOR__
-#define	__GEMLIB_MAJOR__     0
-#define	__GEMLIB_MINOR__    42
-#define __GEMLIB_REVISION__  99
-#define __GEMLIB_BETATAG__   "-20030323"
+#define __GEMLIB__			 __GEMLIB_MAJOR__
+#define	__GEMLIB_MAJOR__     @MAJOR@
+#define	__GEMLIB_MINOR__     @MINOR@
+#define __GEMLIB_REVISION__  @REVISION@
+#define __GEMLIB_BETATAG__   @BETATAG@
 
 /* the other name of this release is MGEMLIB 42 */
 #define MGEMLIB				42
