@@ -226,134 +226,129 @@ short	fslx_set_flags 	(short flags, short *oldval, short *global);
  * pdlg_* printer configuration dialogs (WDIALOG only)
  */
 
+/** @addtogroup x_pdlg
+ *  @{
+ */
+
 typedef void *PRN_DIALOG;
 
-typedef struct _prn_tray	PRN_TRAY;
-typedef struct _media_size	MEDIA_SIZE;
-typedef struct _media_type	MEDIA_TYPE;
-typedef struct _prn_mode	PRN_MODE;
-typedef struct _prn_entry	PRN_ENTRY;
-typedef struct _dither_mode	DITHER_MODE;
-typedef struct _drv_entry	DRV_ENTRY;
-typedef struct _pdlg_sub	PDLG_SUB;
+typedef struct _prn_tray		PRN_TRAY;
+typedef struct _media_size		MEDIA_SIZE;
+typedef struct _media_type		MEDIA_TYPE;
+typedef struct _prn_mode		PRN_MODE;
+typedef struct _prn_entry		PRN_ENTRY;
+typedef struct _dither_mode 	DITHER_MODE;
+typedef struct _drv_entry		DRV_ENTRY;
+typedef struct _pdlg_sub		PDLG_SUB;
 typedef struct _prn_settings	PRN_SETTINGS;
 
-struct _prn_tray				/* Beschreibung eines Einzugs/Auswurfs */
+/** Description of a feed/output tray */
+struct _prn_tray
 {
-	PRN_TRAY	*next;
-	
-	long		tray_id; 		/* Nummer des Einzugs oder Auswurfs */
-	char		name[32];		/* Name des Schachts */
+	PRN_TRAY	*next;		/**< Pointer to next output tray description */
+	long		tray_id; 	/**< Number of the feed or output tray */
+	char		name[32];	/**< Name of the tray */
 };
 
-struct _media_size 				/* Beschreibung eines Papierformats */
+/** Description of a paper format */
+struct _media_size 
 {
-	MEDIA_SIZE	*next;
-
-	long		size_id; 		/* Kennung des Papierformats */
-	char		name[32];		/* Name des Papierformats */
+	MEDIA_SIZE	*next;		/**< Pointer to next paper format description */
+	long		size_id; 	/**< Paper format size ID */
+	char		name[32];	/**< Name of the paper format */
 };
 
-struct _media_type 				/* Beschreibung eines Papiertyps/Druckmediums */
+/** Description of a paper type/print medium */
+struct _media_type
 {
-	MEDIA_TYPE	*next;
-
-	long		type_id; 		/* Kennung des Papierformats */
-	char		name[32];		/* Name des Papierformats */
+	MEDIA_TYPE	*next;		/**< Pointer to next print medium description */
+	long		type_id; 	/**< Paper format type ID */
+	char		name[32];	/**< Name of the paper format */
 };
 
-struct _prn_mode				/* Beschreibung eines Druckermodus */
+/** Description of a print mode */
+struct _prn_mode
 {
-	PRN_MODE	*next; 			/* Zeiger auf den nÑchsten Druckermodus */
-
-	long		mode_id; 		/* Moduskennung (Index innerhalb der Datei) */
-	short 		hdpi; 			/* horizontale Auflîsung in dpi */
-	short 		vdpi; 			/* vertikale Auflîsung in dpi */
-	long		mode_capabilities;	/* Moduseigenschaften */
-
-	long		color_capabilities;	/* einstellbare Farbmodi */
-	long		dither_flags;		/* Flags, die angeben, ob der korrespondierende Farbmodus mit oder ohne Dithern ansprechbar ist */
-	MEDIA_TYPE	*paper_types;		/* geeignete Papiertypen */
-	long		reserved;
-
-	char		name[32];		/* Modusname */
+	PRN_MODE	*next; 				/**< Pointer to the next print mode */
+	long		mode_id; 			/**< Mode ID (index within the file) */
+	short 		hdpi; 				/**< Horizontal resolution in dpi */
+	short 		vdpi; 				/**< Vertical resolution in dpi */
+	long		mode_capabilities;	/**< Mode capabilities */
+	long		color_capabilities;	/**< Colour capabilities */
+	long		dither_flags;		/**< Flags specifying whether the
+	                                     corresponding colour mode is accessible
+										 with or without dithering */
+	MEDIA_TYPE	*paper_types;		/**< Suitable paper types */
+	long		reserved;			/**< Reserved */
+	char		name[32];			/**< Mode name  */
 };
 
 /* sub_flags */
-#define	PRN_STD_SUBS	0x0001			/* Standard-Unterdialoge fÅr NVDI-Drucker */
-#define	PRN_FSM_SUBS	0x0002			/* Standard-Unterdialoge fÅr FSM-Drucker */
-#define	PRN_QD_SUBS 	0x0004			/* Standard-Unterdialoge fÅr QuickDraw-Drucker */
+#define	PRN_STD_SUBS	0x0001			/**< Standard-Unterdialoge fÅr NVDI-Drucker */
+#define	PRN_FSM_SUBS	0x0002			/**< Standard-Unterdialoge fÅr FSM-Drucker */
+#define	PRN_QD_SUBS 	0x0004			/**< Standard-Unterdialoge fÅr QuickDraw-Drucker */
 
-/* old_printer kann auch 0L sein */
+/* old_printer can also be 0L */
 typedef long __CDECL (*PRN_SWITCH)(DRV_ENTRY *drivers, PRN_SETTINGS *settings, PRN_ENTRY *old_printer, PRN_ENTRY *new_printer);
 
-struct _prn_entry				/* GerÑtebeschreibung */
+/** Device description */
+struct _prn_entry
 {
-	PRN_ENTRY	*next;			/* Zeiger auf die die nÑchste GerÑtebeschreibung */
-	long		length;			/* StrukturlÑnge */
-	long		format;			/* Datenformat */
-	long		reserved;		/* reserviert */
-	
-	short 		driver_id;		/* Treiberkennung */
-	short 		driver_type;		/* Treibertyp */
-	long		printer_id; 		/* Druckerkennung */
-	long		printer_capabilities;	/* Druckereigenschaften */
+	PRN_ENTRY	*next;					/**< Pointer to next device description */
+	long		length; 				/**< Structure length */
+	long		format; 				/**< Data format */
+	long		reserved;				/**< Reserved */
+	short 		driver_id;				/**< Driver ID */
+	short 		driver_type;			/**< Driver type */
+	long		printer_id; 			/**< Printer ID */
+	long		printer_capabilities;	/**< Printer capabilities */
 	long		reserved1;
-
-	long		sub_flags;		/* Flags fÅr die Unterdialoge */
-	PDLG_SUB	*sub_dialogs;		/* Zeiger auf die Liste der Unterdialoge fÅr diesen Drucker */
-	PRN_SWITCH	setup_panel;		/* Unterdialog bei Druckerwechsel initialisieren */
-	PRN_SWITCH	close_panel;		/* Unterdialog bei Druckerwechsel schlieûen */
-
-	PRN_MODE 	*modes;			/* Liste der vorhandenen Auflîsungen */
-	MEDIA_SIZE	*papers; 		/* Liste der vorhandenen Papierformate */
-	PRN_TRAY 	*input_trays;		/* Liste der EinzÅge */
-	PRN_TRAY 	*output_trays; 		/* Liste der AuswÅrfe */
-
-	char		name[32];		/* Name des Druckers */
+	long		sub_flags;		/**<  */
+	PDLG_SUB	*sub_dialogs;	/**< Pointer to the list of sub-dialogs for this printer */
+	PRN_SWITCH	setup_panel;	/**< Initialise sub-dialog at printer change  */
+	PRN_SWITCH	close_panel;	/**< Close sub-dialog at printer change */
+	PRN_MODE 	*modes;			/**< List of available resolutions */
+	MEDIA_SIZE	*papers; 		/**< List of available paper formats */
+	PRN_TRAY 	*input_trays;	/**< List of feed trays */
+	PRN_TRAY 	*output_trays; 	/**< List of output trays */
+	char		name[32];		/**< Name of the printer */
 };
 
+/** */
 struct _dither_mode
 {
 	DITHER_MODE	*next;
-	long		length;			/* StrukturlÑnge */
-	long		format;			/* Datenformat */
-	long		reserved;		/* reserviert */
-
-	long		dither_id;		/* Kennung */
-	long		color_modes;		/* unterstÅtzte Farbtiefen */
-	long		reserved1;
-	long		reserved2;
-	
-	char		name[32];		/* Name des Rasterverfahrens */
+	long		length;			/**< Structure length */
+	long		format;			/**< Data format */
+	long		reserved;		/**< Reserved */
+	long		dither_id;		/**< Dither ID */
+	long		color_modes;	/**< Colour depths supported */
+	long		reserved1;		/**< Reserved */
+	long		reserved2;		/**< Reserved */
+	char		name[32];		/**< Name of the dither process */
 };
 
-
+/** */
 typedef struct
 {
-	long		magic;			/* 'pdnf' */
-	long		length;			/* StrukturlÑnge */
-	long		format;			/* Datenformat */
-	long		reserved;		/* reserviert */
-
-	short 		driver_id;		/* Treibernummer fÅrs VDI */
-	short 		driver_type;		/* Treibertyp */
-	long		reserved1;
-	long		reserved2;
-	long		reserved3;
-
-	PRN_ENTRY	*printers;		/* Liste der zum Treiber gehîrenden Drucker */
-	DITHER_MODE	*dither_modes; 		/* Liste der vom Treiber unterstÅtzten Rasterverfahren */
-	long		reserved4;
-	long		reserved5;
-
-	long		reserved6;
-	long		reserved7;
-	long		reserved8;
-	long		reserved9;
-	
-	char		device[128];		/* Ausgabedatei des Druckertreibers */
-	
+	long		magic;			/**< 'pdnf' */
+	long		length;			/**< Structure length */
+	long		format;			/**< Data format */
+	long		reserved;		/**< Reserved */
+	short 		driver_id;		/**< Driver number for the VDI */
+	short 		driver_type;	/**< Driver type */
+	long		reserved1;		/**< Reserved */
+	long		reserved2;		/**< Reserved */
+	long		reserved3;		/**< Reserved */
+	PRN_ENTRY	*printers;		/**< List of printers belonging to the driver */
+	DITHER_MODE	*dither_modes; 	/**< List of dither processes supported by the driver */
+	long		reserved4;		/**< Reserved */
+	long		reserved5;		/**< Reserved */
+	long		reserved6;		/**< Reserved */
+	long		reserved7;		/**< Reserved */
+	long		reserved8;		/**< Reserved */
+	long		reserved9;		/**< Reserved */
+	char		device[128];	/**< Printer driver output file */
 } DRV_INFO;
 
 struct _drv_entry
@@ -365,7 +360,7 @@ struct _drv_entry
 #define	PDLG_IS_BUTTON	0x40000000L
 
 #define	PDLG_PREBUTTON	0x20000000L
-#define	PDLG_PB_OK	1
+#define	PDLG_PB_OK		1
 #define	PDLG_PB_CANCEL	2
 #define	PDLG_PB_DEVICE	3
 
@@ -377,215 +372,256 @@ typedef long __CDECL (*PDLG_INIT)(PRN_SETTINGS *settings, PDLG_SUB *sub);
 typedef long __CDECL (*PDLG_HNDL)(PRN_SETTINGS *settings, PDLG_SUB *sub, short exit_obj);
 typedef long __CDECL (*PDLG_RESET)(PRN_SETTINGS *settings, PDLG_SUB *sub);
 
-struct _pdlg_sub				/* Unterdialog fÅr GerÑteeinstellung */
+/** Sub-dialog for setting device */
+struct _pdlg_sub
 {
-	PDLG_SUB	*next; 			/* Zeiger auf den Nachfolger in der Liste */
-	long		length;			/* StrukturlÑnge */
-	long		format;			/* Datenformat */
-	long		reserved;		/* reserviert */
-	
-	void		*drivers;		/* nur fÅr interne Dialoge */
-	short 		option_flags;		/* Flags, u.a. PDLG_PRINTING, PDLG_PREFS */
-	short 		sub_id;			/* Kennung des Unterdialogs, wird fÅr globale Unterdialoge von pdlg_add() eingetragen */
-	void		*dialog; 		/* Zeiger auf die Struktur des Fensterdialogs oder 0L */
-	OBJECT		*tree;			/* Zeiger auf den zusammengesetzen Objektbaum */
-	short 		index_offset;		/* Indexverschiebung des Unterdialogs */
-	short 		reserved1;
-	long		reserved2;
-	long		reserved3;
-	long		reserved4;
-
-	PDLG_INIT	init_dlg;		/* Initialisierungsfunktion */
-	PDLG_HNDL	do_dlg;			/* Behandlungsfunktion */
-	PDLG_RESET	reset_dlg;		/* ZurÅcksetzfunktion */
-	long		reserved5;
-
-	OBJECT		*sub_icon;		/* Zeiger auf das Icon fÅr die Listbox */
-	OBJECT		*sub_tree;		/* Zeiger auf den Objektbaum des Unterdialogs */
-	long		reserved6;
-	long		reserved7;
-
-	long		private1;		/* dialogeigene Informationen */
-	long		private2;
-	long		private3;
-	long		private4;
-
+	PDLG_SUB	*next; 			/**< Pointer to the successor in the list */
+	long		length;			/**< Structure length */
+	long		format;			/**< Data format */
+	long		reserved;		/**< Reserved */
+	void		*drivers;		/**< Only for internal dialogs */
+	short 		option_flags;	/**< Flags, inc. PDLG_PRINTING, PDLG_PREFS */
+	short 		sub_id;			/**< Sub-dialog ID, entered for global 
+                                     sub-dialogs of mt_pdlg_add() */
+	void		*dialog; 		/**< Pointer to the structure of the window
+                                     dialog or 0L */
+	OBJECT		*tree;			/**< Pointer to the assembled object tree */
+	short 		index_offset;	/**< Index offset of the sub-dialog */
+	short 		reserved1;		/**< Reserved */
+	long		reserved2;		/**< Reserved */
+	long		reserved3;		/**< Reserved */
+	long		reserved4;		/**< Reserved */
+	PDLG_INIT	init_dlg;		/**< Initialisation function */
+	PDLG_HNDL	do_dlg;			/**< Handling function */
+	PDLG_RESET	reset_dlg;		/**< Reset function */
+	long		reserved5;		/**< Reserved */
+	OBJECT		*sub_icon;		/**< Pointer to the icon for the list box */
+	OBJECT		*sub_tree;		/**< Pointer to the object tree of the 
+                                     sub-dialog */
+	long		reserved6;		/**< Reserved */
+	long		reserved7;		/**< Reserved */
+	long		private1;		/**< Dialog's private information */
+	long		private2;		/**< Dialog's private information */
+	long		private3;		/**< Dialog's private information */
+	long		private4;		/**< Dialog's private information */
 };
 
 
 /*----------------------------------------------------------------------------------------*/ 
 /* einstellbare Farbmodi eines Druckermodus																*/
 /*----------------------------------------------------------------------------------------*/ 
-#define	CC_MONO			0x0001		/* 2 Grautîne */
-#define	CC_4_GREY		0x0002		/* 4 Grautîne */
-#define	CC_8_GREY		0x0004		/* 8 Grautîne */
-#define	CC_16_GREY		0x0008		/* 16 Grautîne */
-#define	CC_256_GREY 		0x0010		/* 256 Grautîne */
-#define	CC_32K_GREY 		0x0020		/* 32768 Farben in Grautîne wandeln */
-#define	CC_65K_GREY 		0x0040		/* 65536 Farben in Grautîne wandeln */
-#define	CC_16M_GREY 		0x0080		/* 16777216 Farben in Grautîne wandeln */
+#define	CC_MONO			0x0001		/**< 2 Grautîne */
+#define	CC_4_GREY		0x0002		/**< 4 Grautîne */
+#define	CC_8_GREY		0x0004		/**< 8 Grautîne */
+#define	CC_16_GREY		0x0008		/**< 16 Grautîne */
+#define	CC_256_GREY 	0x0010		/**< 256 Grautîne */
+#define	CC_32K_GREY 	0x0020		/**< 32768 Farben in Grautîne wandeln */
+#define	CC_65K_GREY 	0x0040		/**< 65536 Farben in Grautîne wandeln */
+#define	CC_16M_GREY 	0x0080		/**< 16777216 Farben in Grautîne wandeln */
 
-#define	CC_2_COLOR		0x0100		/* 2 Farben */
-#define	CC_4_COLOR		0x0200		/* 4 Farben */
-#define	CC_8_COLOR		0x0400		/* 8 Farben */
-#define	CC_16_COLOR 		0x0800		/* 16 Farben */
-#define	CC_256_COLOR		0x1000		/* 256 Farben */
-#define	CC_32K_COLOR		0x2000		/* 32768 Farben */
-#define	CC_65K_COLOR		0x4000		/* 65536 Farben */
-#define	CC_16M_COLOR		0x8000		/* 16777216 Farben */
+#define	CC_2_COLOR		0x0100		/* *<2 Farben */
+#define	CC_4_COLOR		0x0200		/**< 4 Farben */
+#define	CC_8_COLOR		0x0400		/* *<8 Farben */
+#define	CC_16_COLOR 	0x0800		/**< 16 Farben */
+#define	CC_256_COLOR	0x1000		/**< 256 Farben */
+#define	CC_32K_COLOR	0x2000		/**< 32768 Farben */
+#define	CC_65K_COLOR	0x4000		/**< 65536 Farben */
+#define	CC_16M_COLOR	0x8000		/**< 16777216 Farben */
 
 #define	NO_CC_BITS		16
 
 /*----------------------------------------------------------------------------------------*/ 
 /* einstellbare Rasterverfahren																				*/
 /*----------------------------------------------------------------------------------------*/ 
-#define	DC_NONE			0		/* keine Rasterverfahren */
-#define	DC_FLOYD 		1		/* einfacher Floyd-Steinberg */
+#define	DC_NONE			0			/**< keine Rasterverfahren */
+#define	DC_FLOYD 		1			/**< einfacher Floyd-Steinberg */
 #define	NO_DC_BITS		1
 
 /*----------------------------------------------------------------------------------------*/ 
 /* Druckereigenschaften 																						*/
 /*----------------------------------------------------------------------------------------*/ 
-#define	PC_FILE			0x0001		/* Drucker kann Åber GEMDOS-Dateien angesprochen werden */
-#define	PC_SERIAL		0x0002		/* Drucker kann auf der seriellen Schnittstelle angesteuert werden */
-#define	PC_PARALLEL 		0x0004		/* Drucker kann auf der parallelen Schnittstelle angesteuert werden */
-#define	PC_ACSI			0x0008		/* Drucker kann auf der ACSI-Schnittstelle ausgeben */
-#define	PC_SCSI			0x0010		/* Drucker kann auf der SCSI-Schnittstelle ausgeben */
+#define	PC_FILE			0x0001		/**< Drucker kann Åber GEMDOS-Dateien angesprochen werden */
+#define	PC_SERIAL		0x0002		/**< Drucker kann auf der seriellen Schnittstelle angesteuert werden */
+#define	PC_PARALLEL 	0x0004		/**< Drucker kann auf der parallelen Schnittstelle angesteuert werden */
+#define	PC_ACSI			0x0008		/**< Drucker kann auf der ACSI-Schnittstelle ausgeben */
+#define	PC_SCSI			0x0010		/**< Drucker kann auf der SCSI-Schnittstelle ausgeben */
 
-#define	PC_BACKGROUND		0x0080		/* Treiber kann im Hintergrund ausdrucken */
+#define	PC_BACKGROUND	0x0080		/**< Treiber kann im Hintergrund ausdrucken */
 
-#define	PC_SCALING		0x0100		/* Treiber kann Seite skalieren */
-#define	PC_COPIES		0x0200		/* Treiber kann Kopien einer Seite erstellen */
+#define	PC_SCALING		0x0100		/**< Treiber kann Seite skalieren */
+#define	PC_COPIES		0x0200		/**< Treiber kann Kopien einer Seite erstellen */
 
 /*----------------------------------------------------------------------------------------*/ 
 /* Moduseigenschaften																							*/
 /*----------------------------------------------------------------------------------------*/ 
-#define	MC_PORTRAIT 		0x0001		/* Seite kann im Hochformat ausgegeben werden */
-#define	MC_LANDSCAPE		0x0002		/* Seite kann im Querformat ausgegeben werden */
-#define	MC_REV_PTRT 		0x0004		/* Seite kann um 180 Grad gedreht im Hochformat ausgegeben werden */
-#define	MC_REV_LNDSCP		0x0008		/* Seite kann um 180 Grad gedreht im Querformat ausgegeben werden */
-#define	MC_ORIENTATION		0x000f
+#define	MC_PORTRAIT 	0x0001		/**< Seite kann im Hochformat ausgegeben werden */
+#define	MC_LANDSCAPE	0x0002		/**< Seite kann im Querformat ausgegeben werden */
+#define	MC_REV_PTRT 	0x0004		/**< Seite kann um 180 Grad gedreht im Hochformat ausgegeben werden */
+#define	MC_REV_LNDSCP	0x0008		/**< Seite kann um 180 Grad gedreht im Querformat ausgegeben werden */
+#define	MC_ORIENTATION	0x000f
 
-#define	MC_SLCT_CMYK		0x0400		/* Treiber kann bestimmte Farbebenen ausgeben */
-#define	MC_CTRST_BRGHT		0x0800		/* Treiber kann Kontrast und Helligkeit verÑndern */
+#define	MC_SLCT_CMYK	0x0400		/**< Treiber kann bestimmte Farbebenen ausgeben */
+#define	MC_CTRST_BRGHT	0x0800		/**< Treiber kann Kontrast und Helligkeit verÑndern */
 
 /*----------------------------------------------------------------------------------------*/ 
 /* plane_flags 																									*/
 /*----------------------------------------------------------------------------------------*/ 
-#define	PLANE_BLACK 		0x0001
-#define	PLANE_YELLOW		0x0002
-#define	PLANE_MAGENTA		0x0004
+#define	PLANE_BLACK 	0x0001
+#define	PLANE_YELLOW	0x0002
+#define	PLANE_MAGENTA	0x0004
 #define	PLANE_CYAN		0x0008
 
 
 /* <driver_mode> */
-#define	DM_BG_PRINTING		0x0001		/* Flag fÅr Hintergrunddruck */
+#define	DM_BG_PRINTING	0x0001		/**< Flag fÅr Hintergrunddruck */
 
 /*----------------------------------------------------------------------------------------*/ 
 
 /* <page_flags> */
-#define	PG_EVEN_PAGES		0x0001		/* nur Seiten mit gerader Seitennummer ausgeben */
-#define	PG_ODD_PAGES		0x0002		/* nur Seiten mit ungerader Seitennummer ausgeben */
+#define  PG_EVEN_PAGES  0x0001  	/**< Only output pages with even page numbers */
+#define  PG_ODD_PAGES   0x0002  	/**< Only output pages with odd page numbers */
 
 /* <first_page/last_page> */
-#define	PG_MIN_PAGE 		1
-#define	PG_MAX_PAGE 		9999
+#define	PG_MIN_PAGE 	1
+#define	PG_MAX_PAGE 	9999
 
 /* <orientation> */
-#define	PG_UNKNOWN		0x0000		/* Ausrichtung unbekannt und nicht verstellbar */
-#define	PG_PORTRAIT 		0x0001		/* Seite im Hochformat ausgeben */
-#define	PG_LANDSCAPE		0x0002		/* Seite im Querformat ausgeben */
+#define  PG_UNKNOWN     0x0000  	/**< Orientation unknown and not adjustable */
+#define  PG_PORTRAIT    0x0001  	/**< Output page in portrait format */
+#define  PG_LANDSCAPE   0x0002  	/**< Output page in landscape format */
 
+/** printer settings
+ * 
+ *  The following structure items can be read by the application:
+ *  - length
+ *  - page_flags
+ *  - first_page
+ *  - last_page
+ *  - no_copies
+ *  - orientation
+ *  - scale
+ *  - driver_id
+ *  .
+ *  All other entries should not be accessed. Data such as the printer 
+ *  resolution or colour planes, for instance, should not be taken from the 
+ *  settings structure but requested from the printer at the start of printing 
+ *  (it is possible, for instance, that the printer driver is forced by a 
+ *  shortage of memory to reduce the print resolution below the value entered 
+ *  in PRN_SETTINGS).
+ */
 struct _prn_settings
 {
-	long		magic;			/* 'pset' */
-	long		length;			/* StrukturlÑnge */
-	long		format;			/* Strukturtyp */
+	long		magic;			/**< 'pset' */
+	long		length;			/**< Structure length */
+	long		format;			/**< Structure type */
 	long		reserved;
 
-	long		page_flags; 		/* Flags, u.a. gerade Seiten, ungerade Seiten */
-	short		first_page; 		/* erste zu druckende Seite */
-	short		last_page;		/* letzte zu druckende Seite */
-	short		no_copies;		/* Anzahl der Kopien */
-	short		orientation;		/* Drehung */
-	long		scale;			/* Skalierung: 0x10000L entspricht 100% */
+	long		page_flags; 	/**< Flags, inc. even pages, odd pages */
+	short		first_page; 	/**< First page to be printed */
+	short		last_page;		/**< Last page to be printed */
+	short		no_copies;		/**< Number of copies */
+	short		orientation;	/**< Orientation */
+	long		scale;			/**< Scaling: 0x10000L corresponds to 100%  */
 
-	short		driver_id;		/* VDI-GerÑtenummer */
-	short		driver_type;		/* Typ des eingestellten Treibers */
-	long		driver_mode;		/* Flags, u.a. fÅr Hintergrunddruck */
-	long		reserved1;
-	long		reserved2;
+	short		driver_id;		/**< VDI device number */
+	short		driver_type;	/**< Type of driver set */
+	long		driver_mode;	/**< Flags, inc. for background printing */
+	long		reserved1;		/**< Reserved */
+	long		reserved2;		/**< Reserved */
 	
-	long		printer_id; 		/* Druckernummer */
-	long		mode_id; 		/* Modusnummer */
-	short		mode_hdpi;		/* horizontale Auflîsung in dpi */
-	short		mode_vdpi;		/* vertikale Auflîsung in dpi */
-	long		quality_id; 		/* Druckmodus (hardwÑremÑûige QualitÑt, z.B. Microweave oder Econofast) */
+	long		printer_id; 	/**< Printer number */
+	long		mode_id; 		/**< Mode number */
+	short		mode_hdpi;		/**< Horizontal resolution in dpi */
+	short		mode_vdpi;		/**< Vertical resolution in dpi */
+	long		quality_id; 	/**< Print mode (hardware-dependent quality,
+                                     e.g. Microweave or Econofast) */
 
-	long		color_mode; 		/* Farbmodus */
-	long		plane_flags;		/* Flags fÅr auszugebende Farbebenen (z.B. nur cyan) */
-	long		dither_mode;		/* Rasterverfahren */
-	long		dither_value;		/* Parameter fÅr das Rasterverfahren */
+	long		color_mode; 	/**< Colour mode */
+	long		plane_flags;	/**< Flags for colour planes to be output
+                                     (e.g. cyan only) */
+	long		dither_mode;	/**< Dither process */
+	long		dither_value;	/**< Parameter for the dither process */
 
-	long		size_id; 		/* Papierformat */
-	long		type_id; 		/* Papiertyp (normal, glossy) */
-	long		input_id;		/* Papiereinzug */
-	long		output_id;		/* Papierauswurf */
+	long		size_id; 		/**< Paper format */
+	long		type_id; 		/**< Paper type (normal, glossy) */
+	long		input_id;		/**< Paper feed channel */
+	long		output_id;		/**< Paper output channel */
 
-	long		contrast;		/* Kontrast: 0x10000L entspricht Normaleinstellung */
-	long		brightness; 		/* Helligkeit: 0x1000L entspricht Normaleinstellung */
-	long		reserved3;
-	long		reserved4;
+	long		contrast;		/**< Contrast: 0x10000L corresponds to the
+                                     normal setting */
+	long		brightness; 	/**< Brightness: 0x1000L corresponds to the
+                                     normal setting */
+	long		reserved3;		/**< Reserved */
+	long		reserved4;		/**< Reserved */
 
-	long		reserved5;
-	long		reserved6;
-	long		reserved7;
-	long		reserved8;
+	long		reserved5;		/**< Reserved */
+	long		reserved6;		/**< Reserved */
+	long		reserved7;		/**< Reserved */
+	long		reserved8;		/**< Reserved */
 
-	char		device[128];		/* Dateiname fÅr den Ausdruck */
+	char		device[128];	/**< File name to be printed  */
 
 	struct
 	{
 		char	inside[120];
-	} mac_settings;
+	} mac_settings;             /**< Settings of the Mac printer driver */
 };
 
 
-/* <dialog_flags> fÅr pdlg_create() */
-#define PDLG_3D			0x0001
+/* <dialog_flags> for mt_pdlg_create() */
+#define PDLG_3D			0x0001      /**< Use 3D-look */
 
-/* <option_flags> fÅr pdlg_open/do() */
-#define PDLG_PREFS		0x0000		/* Einstelldialog anzeigen */
-#define PDLG_PRINT		0x0001		/* Druckdialog anzeigen */
+/* <option_flags> for mt_pdlg_open/do() */
+#define PDLG_PREFS          0x0000  /**< Display settings dialog */
+#define PDLG_PRINT          0x0001  /**< Display print dialog */
 
-#define PDLG_ALWAYS_COPIES	0x0010		/* immer Kopien anbieten */
-#define PDLG_ALWAYS_ORIENT	0x0020		/* immer Querformat anbieten */
-#define PDLG_ALWAYS_SCALE	0x0040		/* immer Skalierung anbieten */
+#define PDLG_ALWAYS_COPIES  0x0010  /**< Always offer No. of copies */
+#define PDLG_ALWAYS_ORIENT  0x0020  /**< Always offer landscape format */
+#define PDLG_ALWAYS_SCALE   0x0040  /**< Always offer scaling */
 
-#define	PDLG_EVENODD		0x0100		/* Option fÅr gerade und ungerade Seiten anbieten */
+#define PDLG_EVENODD        0x0100  /**< Offer option for even and odd pages */
 
-/* <button> fÅr pdlg_evnt()/pdlg_do */
-#define	PDLG_CANCEL 1				/* "Abbruch" wurde angewÑhlt */
-#define	PDLG_OK		2			/* "OK" wurde gedrÅckt */
+/* <button> for mt_pdlg_evnt()/mt_pdlg_do() */
+#define	PDLG_CANCEL 1				/**< "Abbruch" wurde angewÑhlt */
+#define	PDLG_OK		2				/**< "OK" wurde gedrÅckt */
 
-short		pdlg_add_printers 		(PRN_DIALOG *prn_dialog, DRV_INFO *drv_info);
-short		pdlg_add_sub_dialogs 		(PRN_DIALOG *prn_dialog, PDLG_SUB *sub_dialogs);
-short		pdlg_close			(PRN_DIALOG *prn_dialog, short *x, short *y);
-PRN_DIALOG *	pdlg_create			(short dialog_flags);
-short		pdlg_delete 			(PRN_DIALOG *prn_dialog);
-short		pdlg_dflt_settings		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
-short		pdlg_do				(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, char *document_name, short option_flags);
-short		pdlg_evnt			(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, EVNT *events, short *button);
-short		pdlg_free_settings		(PRN_SETTINGS *settings);
-long		pdlg_get_setsize		(void);
-PRN_SETTINGS *	pdlg_new_settings		(PRN_DIALOG *prn_dialog);
-short		pdlg_open			(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, char *document_name, short option_flags, short x, short y);
-short		pdlg_remove_printers 		(PRN_DIALOG *prn_dialog);
-short		pdlg_remove_sub_dialogs 	(PRN_DIALOG *prn_dialog);
-short		pdlg_save_default_settings	(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
-short		pdlg_update 			(PRN_DIALOG *prn_dialog, char *document_name);
-short		pdlg_use_settings 		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
-short		pdlg_validate_settings		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
+short		   mt_pdlg_add_printers 		(PRN_DIALOG *prn_dialog, DRV_INFO *drv_info, short *global);
+short		   mt_pdlg_add_sub_dialogs		(PRN_DIALOG *prn_dialog, PDLG_SUB *sub_dialogs, short *global);
+short		   mt_pdlg_close	    		(PRN_DIALOG *prn_dialog, short *x, short *y, short *global);
+PRN_DIALOG *   mt_pdlg_create				(short dialog_flags, short *global);
+short		   mt_pdlg_delete		    	(PRN_DIALOG *prn_dialog, short *global);
+short		   mt_pdlg_dflt_settings    	(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, short *global);
+short		   mt_pdlg_do			    	(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, char *document_name, short option_flags, short *global);
+short		   mt_pdlg_evnt 		    	(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, EVNT *events, short *button, short *global);
+short		   mt_pdlg_free_settings    	(PRN_SETTINGS *settings, short *global);
+long		   mt_pdlg_get_setsize      	(short *global);
+PRN_SETTINGS * mt_pdlg_new_settings			(PRN_DIALOG *prn_dialog, short *global);
+short		   mt_pdlg_open 			    (PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, char *document_name, short option_flags, short x, short y, short *global);
+short		   mt_pdlg_remove_printers      (PRN_DIALOG *prn_dialog, short *global);
+short		   mt_pdlg_remove_sub_dialogs   (PRN_DIALOG *prn_dialog, short *global);
+short		   mt_pdlg_save_default_settings(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, short *global);
+short		   mt_pdlg_update			    (PRN_DIALOG *prn_dialog, char *document_name, short *global);
+short		   mt_pdlg_use_settings 	    (PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, short *global);
+short		   mt_pdlg_validate_settings    (PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, short *global);
+#define pdlg_add_printers(a,b)			mt_pdlg_add_printers(a,b,aes_global)
+#define pdlg_add_sub_dialogs(a,b)		mt_pdlg_add_sub_dialogs(a,b,aes_global)
+#define pdlg_close(a,b,c)				mt_pdlg_close(a,b,c,aes_global)
+#define pdlg_create(a)					mt_pdlg_create(a,aes_global)
+#define pdlg_delete(a)					mt_pdlg_delete(a,aes_global)
+#define pdlg_dflt_settings(a,b)			mt_pdlg_dflt_settings(a,b,aes_global)
+#define pdlg_do(a,b,c,d)				mt_pdlg_do(a,b,c,d,aes_global)
+#define pdlg_evnt(a,b,c,d)				mt_pdlg_evnt(a,b,c,d,aes_global)
+#define pdlg_free_settings(a)			mt_pdlg_free_settings(a,aes_global)
+#define pdlg_get_setsize()				mt_pdlg_get_setsize(aes_global)
+#define pdlg_new_settings(a)			mt_pdlg_new_settings(a,aes_global)
+#define pdlg_open(a,b,c,d,e,f)			mt_pdlg_open(a,b,c,d,e,f,aes_global)
+#define pdlg_remove_printers(a)			mt_pdlg_remove_printers(a,aes_global)
+#define pdlg_remove_sub_dialogs(a)		mt_pdlg_remove_sub_dialogs(a,aes_global)
+#define pdlg_save_default_settings(a,b)	mt_pdlg_save_default_settings(a,b,aes_global)
+#define pdlg_update(a,b)				mt_pdlg_update(a,b,aes_global)
+#define pdlg_use_settings(a,b)			mt_pdlg_use_settings(a,b,aes_global)
+#define pdlg_validate_settings(a,b)		mt_pdlg_validate_settings(a,b,aes_global)
+/**@}*/
 
 
 /******************************************************************************
