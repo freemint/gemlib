@@ -28,13 +28,10 @@
 void
 vqt_advance32 (short handle, short ch, long *advx, long *advy)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsout[8]; 
+
 	VDI_PARAMS(vdi_control, &ch, 0L, vdi_dummy, vdi_ptsout);
-#else
-	vdi_intin[0] = ch;
-#endif
 	
 	VDI_TRAP (vdi_params, handle, 247, 0,1);
 

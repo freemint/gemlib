@@ -33,12 +33,11 @@ short
 vqt_ext_name (short handle, short index,
               char *name, short *font_format, short *flags)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[2];   
 	short vdi_intout[35]; 
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
-#endif
 	
 	vdi_intin[0] = index;
 	vdi_intin[1] = 0;

@@ -23,15 +23,12 @@
 short
 vs_document_info (short handle, short type, char *s, short wchar)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_intout[1]; 
-#endif
 	register short n = 1;
-#if USE_LOCAL_VDIPB
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
-#endif
 
 	vdi_intout[0] = 0;
 	vdi_intin[0]  = type;
