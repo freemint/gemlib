@@ -28,7 +28,8 @@ R_IBPDATA	  12   ib_pdata within ICONBLKs
 R_IBPTEXT	  13   ib_ptext within ICONBLKs
 R_BIPDATA	  14   bi_pdata within BITBLKs
 R_FRSTR 	  15   Free string
-R_FRIMG 	  16   Free image</pre>
+R_FRIMG 	  16   Free image</pre> \n
+ *         [option CHECK_NULLPTR] Address may be NULL
  *  @param global_aes global AES array
  *
  *  @return The correct return value is 0 if an error occurred or
@@ -53,6 +54,9 @@ mt_rsrc_gaddr(short Type, short Index, void *Address, short *global_aes)
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (Address)
+#endif
 	*((void **) Address) = (void *)aes_addrout[0];
 	
 	return aes_intout[0];
