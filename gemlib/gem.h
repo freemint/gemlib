@@ -39,8 +39,8 @@ __BEGIN_DECLS
    to test for features in specific releases.  */
 #define __GEMLIB__		__GEMLIB_MAJOR__
 #define	__GEMLIB_MAJOR__     0
-#define	__GEMLIB_MINOR__    41
-#define __GEMLIB_REVISION__   1
+#define	__GEMLIB_MINOR__    42
+#define __GEMLIB_REVISION__   0
 #define __GEMLIB_BETATAG__   ""
 
 
@@ -413,31 +413,6 @@ typedef struct _mn_set
 #define IP_6PATT		6
 #define IP_SOLID		7
 
-/* normal graphics drawing modes */
-#define MD_REPLACE		1
-#define MD_TRANS		2
-#define MD_XOR			3
-#define MD_ERASE		4
-
-/* bit blt rules */
-#define ALL_WHITE		0
-#define S_AND_D			1
-#define S_AND_NOTD		2
-#define S_ONLY			3
-#define NOTS_AND_D		4
-#define D_ONLY			5
-#define S_XOR_D			6
-#define S_OR_D			7
-#define NOT_SORD		8
-#define NOT_SXORD		9
-#define D_INVERT		10
-#define NOT_D			10
-#define S_OR_NOTD		11
-#define NOT_S			12
-#define NOTS_OR_D		13
-#define NOT_SANDD		14
-#define ALL_BLACK		15
-
 /* font types */
 #define GDOS_PROP		0
 #define GDOS_MONO		1
@@ -643,13 +618,25 @@ typedef struct mouse_form
 	short		mf_data[16];
 } MFORM;
 
+#ifndef __PXY
+# define __PXY
+typedef struct point_coord
+{
+	short p_x;
+	short p_y;
+} PXY;
+#endif
+
+#ifndef __GRECT
+# define __GRECT
 typedef struct graphic_rectangle
 {
-	short 		g_x;
-	short 		g_y;
-	short 		g_w;
-	short 		g_h;
+	short g_x;
+	short g_y;
+	short g_w;
+	short g_h;
 } GRECT;
+#endif
 
 typedef struct objc_colorword 
 {
@@ -802,29 +789,48 @@ typedef struct rshdr
 
 typedef struct _menu
 {
-	OBJECT		*mn_tree;
-	short		mn_menu;
-	short		mn_item;
-	short		mn_scroll;
-	short		mn_keystate;
+	OBJECT *mn_tree;
+	short  mn_menu;
+	short  mn_item;
+	short  mn_scroll;
+	short  mn_keystate;
 } MENU;
 
 typedef struct
 {
-	short 		m_out;
-	short 		m_x;
-	short 		m_y;
-	short 		m_w;
-	short		m_h;
+	short m_out;
+	short m_x;
+	short m_y;
+	short m_w;
+	short m_h;
 } MOBLK;
 
 typedef struct mouse_event_type
 {
-	short		*x;
-	short		*y;
-	short		*b;
-	short		*k;
+	short *x;
+	short *y;
+	short *b;
+	short *k;
 } MOUSE;
+
+typedef struct {
+	short emi_flags;
+	short emi_bclicks, emi_bmask, emi_bstate;
+	short emi_m1leave;
+	GRECT emi_m1;
+	short emi_m2leave;
+	GRECT emi_m2;
+	short emi_tlow, emi_thigh;
+} EVMULT_IN;
+
+typedef struct {
+	short emo_events;
+	PXY   emo_mouse;
+	short emo_mbutton;
+	short emo_kmeta;
+	short emo_kreturn;
+	short emo_mclicks;
+} EVMULT_OUT;
 
 #endif 
 
@@ -847,17 +853,20 @@ short	appl_trecord	(void *Mem, short Count);
 short	appl_write	(short ApId, short Length, void *ApPbuff);
 short 	appl_yield	(void);
 
-short	evnt_button 	(short Clicks, short WhichButton, short WhichState, short *Mx, short *My, short *ButtonState, short *KeyState); 
-short	evnt_dclick 	(short ToSet, short SetGet);
-short	evnt_keybd 	(void);
-short	evnt_mesag 	(short MesagBuf[]);
-short	evnt_mouse 	(short EnterExit, short InX, short InY, short InW, short InH, short *OutX, short *OutY, short *ButtonState, short *KeyState); 
-short 	evnt_multi 	(short Type, short Clicks, short WhichButton, short WhichState, 
+short	evnt_button (short Clicks, short WhichButton, short WhichState,
+                   short *Mx, short *My, short *ButtonState, short *KeyState); 
+short	evnt_dclick (short ToSet, short SetGet);
+short	evnt_keybd  (void);
+short	evnt_mesag  (short MesagBuf[]);
+short	evnt_mouse  (short EnterExit, short InX, short InY, short InW, short InH, short *OutX, short *OutY, short *ButtonState, short *KeyState); 
+short evnt_multi  (short Type, short Clicks, short WhichButton, short WhichState, 
 			 short EnterExit1, short In1X, short In1Y, short In1W, short In1H,
 			 short EnterExit2, short In2X, short In2Y, short In2W, short In2H,
 			 short MesagBuf[], unsigned long Interval, short *OutX, short *OutY,
 			 short *ButtonState, short *KeyState, short *Key, short *ReturnCount);
-short	evnt_timer 	(unsigned long Interval);
+short evnt_multi_fast (const EVMULT_IN * em_i,
+                       short MesagBuf[], EVMULT_OUT * em_o);
+short	evnt_timer  (unsigned long Interval);
 
 short form_alert  (short DefButton, const char *Str);
 short form_button (OBJECT *, short Bobject, short Bclicks, short *Bnxtobj);
@@ -999,6 +1008,31 @@ void aes (AESPB *pb);
 /*******************************************************************************
  * The VDI specific stuff from old gemfast.h
  */
+
+/* normal graphics drawing modes */
+#define MD_REPLACE		1
+#define MD_TRANS		2
+#define MD_XOR			3
+#define MD_ERASE		4
+
+/* bit blt rules */
+#define ALL_WHITE		0
+#define S_AND_D			1
+#define S_AND_NOTD		2
+#define S_ONLY			3
+#define NOTS_AND_D		4
+#define D_ONLY			5
+#define S_XOR_D			6
+#define S_OR_D			7
+#define NOT_SORD		8
+#define NOT_SXORD		9
+#define D_INVERT		10
+#define NOT_D			10
+#define S_OR_NOTD		11
+#define NOT_S			12
+#define NOTS_OR_D		13
+#define NOT_SANDD		14
+#define ALL_BLACK		15
 
 /* v_bez modes */
 #define BEZ_BEZIER		0x01
@@ -1205,6 +1239,8 @@ short v_savecache      (VdiHdl , const char *filename);
 void  v_set_app_buff   (VdiHdl , void *buf_p, short size);
 void  v_updwk          (VdiHdl );
 void  vs_clip          (VdiHdl , short clip_flag, short pxy[]);
+void  vs_clip_pxy      (VdiHdl , PXY pxy[]);
+void  vs_clip_off      (VdiHdl );
 short vst_load_fonts   (VdiHdl , short /* select */);
 void  vst_unload_fonts (VdiHdl , short /* select */);
 
@@ -1288,6 +1324,8 @@ void  vqm_attributes (VdiHdl , short atrib[]);
 void  vqt_attributes (VdiHdl , short atrib[]);
 void  vqt_cachesize  (VdiHdl , short which_cache, long *size);
 void  vqt_extent     (VdiHdl , const char *str, short extent[]);
+void  vqt_extent16   (VdiHdl , const short *wstr, short extent[]);
+void  vqt_extent16n  (VdiHdl , const short *wstr, short num, short extent[]);
 void  vqt_fontinfo   (VdiHdl , short *minade, short *maxade, short distances[],
                                short *maxwidth, short effects[]);
 void  vqt_get_table  (VdiHdl , short **map);
@@ -1341,8 +1379,9 @@ void v_ellipse     (VdiHdl , short x, short y, short xrad, short yrad);
 void v_ellpie      (VdiHdl , short x, short y, short xrad, short yrad,
                              short begang, short endang);
 void v_fillarea    (VdiHdl , short count, short pxy[]);
-void v_gtext       (VdiHdl , short x, short y, const char *str) ;
-void v_gtext16     (VdiHdl , short x, short y, const short *wstr) ;
+void v_gtext       (VdiHdl , short x, short y, const char *str);
+void v_gtext16     (VdiHdl , short x, short y, const short *wstr);
+void v_gtext16n    (VdiHdl , PXY pos, const short *wstr, short num);
 void v_justified   (VdiHdl , short x, short y, const char *str,
                              short len, short word_space, short char_space);
 void v_pieslice    (VdiHdl , short x, short y,
