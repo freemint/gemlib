@@ -39,7 +39,7 @@ mshort:
 
 ChangeLog:
 	cvs log -d "20021201<" . >ChangeLog.tmp
-	perl cvs2cl.pl --usermap users --stdin --stdout <ChangeLog.tmp >ChangeLog
+	perl cvs2cl.pl --separate-header --no-wrap --usermap users --stdin --stdout <ChangeLog.tmp >ChangeLog
 	rm -f ChangeLog.tmp
 	
 doc: Doxyfile ChangeLog
