@@ -81,7 +81,7 @@ affects all programs which use the library.
 @node "License"
 
     Gemma, support library for GEM application programs.
-    Copyright (C) 1999-2002 Draco/YC
+    Copyright (C) 1999-2003 Draco/YC
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
@@ -111,7 +111,7 @@ I. Headers and static modules
 
 - function prototypes and structure definitions are inside the
   header file gemma.h, which belongs to /usr/include/gemma folder.
-  If you #include <gemma/gemma.h>, you do NOT need to include
+  If you #include <slb/gemma.h>, you do NOT need to include
   gem.h, the usual header for GEM programs.
 
 - definitions needed for an SLB, but not belonging to the Gemma
@@ -144,9 +144,9 @@ is done by the appl_open() you call at the begin of your program.
 
 II. Other info
 
-- currently there is only support for `-mshort' programs.
-- you should provide at least 8k room on the stack for the
-  gemma.slb functions.
+- there is NO support for -mshort programs. 
+- you should provide at least 16k room on the stack in your program
+  for the correct execution of the SLB functions.
 
 III. Writing programs with gemma.slb
 
@@ -161,7 +161,7 @@ themselves are not the same. The main difference is that they do
 not trap to the AES directly but pass the application calls to the
 shared object. Prototypes are provided by gemma.h header file.
 
-The shared object, apart of the AES interface, also contains 45
+The shared object, apart of the AES interface, also contains 46
 more or less complex functions. In your program you can use
 standard AES functions and complex library functions, but only
 under the condition, that all AES calls your application uses go
@@ -179,6 +179,16 @@ appl_exit(). Calling the appl_open() causes the shared object to be
 loaded to the memory (or just to be opened, when it had already
 been loaded by another application). Similarly, the appl_close()
 causes the shared object to be closed and unloaded.
+
+After that you can create a windowed dialog using windial_create(),
+open it to the screen using windial_open() and let the library handle
+it using windial_formdo(). The windial_formdo() function does
+everything it can do for you, i.e. automatically handles most
+events your window can receive (such as topping, untopping,
+iconifying, moving etc.) and returns your information about objects
+clicked by the user.
+
+Many windowed dialogs may be handled such way simultaneously.
 
 @line 1 70 0
 
@@ -223,9 +233,8 @@ You define this by adding a line like:
 
 setenv SLBPATH u:/the/path/where/you/keep/libs
 
-to your mint.cnf file. Notice that the FreeMiNT kernel requires it
-to be a single pathname, unlike $PATH, which can be a string made
-of subsequent pathnames of folders to search by.
+to your mint.cnf file. As of MiNT 1.16.0 the variable may contain
+a list of folders to search by (like $PATH).
 
 If you already have an older version of the gemma.slb in that
 folder, you will probably have to replace it with newer one. If the
@@ -239,7 +248,6 @@ library for more functionality, when present. The server is
 available on the web under the following addresses:
 
 http://draco.atari.org
-http://wh58-508.st.uni-magdeburg.de/~draco/atari.html
 
 Also installing the Assemsoft's StringServer is recommended. The
 StringServer can be downloaded at http://assemsoft.atari.org.
@@ -261,7 +269,7 @@ just don't define the variable.
 Have fun,
 draco@atari.org
 
-Warszawa, December 2000
+Warszawa, December 2003
 
 @line 1 70 0
 
@@ -343,7 +351,7 @@ perform the most often used (by me) AV commands doing automatically
 as much as possible.
 
 Since the memory protection violation is the Typically Encountered
-Problem¿ when dealing with AV protocol, because people often don't
+Problem(tm) when dealing with AV protocol, because people often don't
 understand what they actually should, the library carries all this
 automatically as well. That is, no pointer to data given as an
 argument is directly passed to the AV server, but instead of that,
@@ -498,6 +506,19 @@ Caveats:      the library will run into problems, when the file to
 Return value: a pointer to the pathname selected, if the user
 	      clicked OK, or NULL otherwise.
 
+@{B}char *get_version(void)@{b}
+
+Opcode:       42
+Function:     returns a pointer to a NULL terminated string
+              containing version and copyright information for
+              the library.
+
+@{B}long get_users(void)@{b}
+
+Opcode:       43
+Function:     returns the actual number of current library users
+              (i.e. number of processes that have opened the lib).
+
 @line 1 70 0
 
 @endnode
@@ -616,7 +637,8 @@ Function:      display an "error" alert box with a text appropriate
 	       is -2, the message will say "Resource busy"). The
 	       `error' value should be negative, exactly as
 	       returned by GEMDOS. These messages are provided by
-	       separate library called `error.slb'.
+	       separate library called `kernel32.slb'.
+
 	       The second argument is optional and ignored when its
 	       value is -1. Otherwise it is treated as a pointer
 	       to a free string, which will be displayed in
@@ -911,6 +933,11 @@ Function:     returns the minimum size of the WD structure for a
 	      by this function is the same for all dialog boxes the
 	      program needs to create - it only can be different
 	      across different versions of the lib.
+	      
+	      This function is only necessary, when you want to
+	      allocate all structures on your own. But you can let
+	      the library to automatically do that as well. See
+	      below.
 
 @{B}long windial_create(WD *window, short box, short icon, \
 			 short ftext, char *title)@{b}
@@ -921,16 +948,20 @@ Function:     initializes the window structure in the memory buffer
 	      is NULL, the function will first allocate the needed
 	      memory buffer (freed later by the windial_delete()
 	      function), though it is not an optimal choice.
+
 	      `box' is the resource index of the dialog box object
 	      tree. This parameter is obligatory.
+
 	      `icon' is the resource index of the icon object tree.
 	      If this parameter is 0, the dialog box won't have the
 	      iconifier gadget and no iconification will be
 	      possible.
+
 	      `ftext' is the resource index of the first editable
 	      textfield found in the object `box'. If there are no
 	      editable textfields in the box, the parameter should
 	      be 0.
+
 	      `title' is a pointer to a free string which will be
 	      used as the window's title displayed on its title
 	      bar. When no title is required, the pointer should
@@ -944,6 +975,11 @@ Function:     initializes the window structure in the memory buffer
 	      can be manipulated so that the subsequent
 	      windial_open() call will display the window e.g. in
 	      an arbitrary location rather than the default one.
+
+              Windows created by subsequent windial_create() calls
+              are automatically linked to the list of caller's
+              windows, so that no separate calls to windial_link()
+              are normally necessary.
 
 Return value: returns a pointer to the WD structure, or 0 if the
 	      function failed.
@@ -993,6 +1029,14 @@ Function:     closes the specified window. The window's structure
 	      reopened by windial_open().
 Return value: currently 0 (success).
 
+@{B}long windial_close_all()@{b}
+
+Opcode:       44
+Function:     closes all windows attached to the calling process.
+              The window structures in the memory are not released
+              so that any of the windows can be reopened by windial_open().
+Return value: currently 0 (success).
+
 @{B}long windial_delete(WD *window)@{b}
 
 Opcode:       7
@@ -1000,7 +1044,28 @@ Function:     deletes the specified window. The window's structure
 	      in the memory is released so that it cannot be
 	      reopened by windial_open() without a previous call to
 	      windial_create().
+
+	      If the window is still visible on the screen upon calling
+	      this function, a call to windial_close() is made
+	      automatically.
+
 Return value: currently 0 (success).
+
+@{B}long windial_delete_all()@{b}
+
+Opcode:       45
+Function:     deletes all windows attached to the calling process.
+              The window structures in the memory are released
+              so that none of the windows can be reopened without
+              a previous call to windial_create().
+
+              Since this function is simply a series of functions
+              windial_delete() called in a loop, it also calls
+              windial_close() for any window, that is open
+              during execution of the windial_delete_all().
+
+Return value: currently 0 (success).
+
 
 @{B}long windial_center(WD *window)@{b}
 
@@ -1012,10 +1077,15 @@ Return value: currently 0.
 @{B}long windial_link(WD *from, WD *to)@{b}
 
 Opcode:       20
-Function:     two windows created independently with two separate
-	      windial_create() calls are linked together, so that
-	      the windial_formdo() routine can automatically switch
-	      from one to another handling them both as necessary.
+Function:     link the 'from' window to the linked list, a member
+              of which is the 'to' window.
+
+	      NOTE:
+              Windows created by subsequent windial_create() calls
+              are automatically linked to the list of caller's
+              windows, so that no separate calls to windial_link()
+              are normally necessary.
+
 Return value: 0 on success or a negative error code otherwise.
 
 @{B}long windial_unlink(WD *window)@{b}
@@ -1166,6 +1236,8 @@ Opcode		Function prototype
   17		long appl_open(char *filename, short thread, char *pname)
   18		long windial_error(long error, char *usermsg)
 
+  19            (reserved)
+
   20		long windial_link(WD *from, WD *to)
   21		char *env_get(char *var)
   22		char *env_eval(char *var)
@@ -1193,7 +1265,8 @@ Opcode		Function prototype
 				char *file, char *cmd, char *env)
   42		char *get_version(void)
   43		long get_users(void)
-  44		SLB  *get_kern(void)
+  44		long windial_close_all(void)
+  45		long windial_delete_all(void)
 
 @line 1 70 0
 
@@ -1310,6 +1383,16 @@ TODO:
 - add font selection support
 - support the xrsrc
 - emulate drawing WHITEBAK objects where not directly supported
+
+Version 1.11
+
+- added two new functions: opcode 44 windial_close_all() and
+  opcode 45 windial_delete_all().
+- if the user hasn't registered a message handler for AP_TERM,
+  the message is now handled automatically inside the windial_formdo()
+  by calling windial_delete_all(), appl_close() and Pterm().
+- and the same is done for Control/Q.
+- libgemma.a reworked to provide MT support.
 
 Version 1.10
 
