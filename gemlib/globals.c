@@ -1,3 +1,7 @@
+/*
+ *  $Id$
+ */
+
 
 # include "gem.h"
 
@@ -7,41 +11,32 @@
 # define _stringify(x)	#x
 #endif
 
+/*
+ *  global data related to the lib
+ */
+
+/** release number of this lib in constant string */
 #define GEMLIB_PATCHLEVEL	str(__GEMLIB_MAJOR__) "." str(__GEMLIB_MINOR__) "." \
 				str(__GEMLIB_REVISION__) __GEMLIB_BETATAG__
 
-/*
- * global identify string for the lib
- */
+/** global identify string for the lib */
 char __Ident_gem[] = "$PatchLevel: GEM library: " GEMLIB_PATCHLEVEL " $";
 
 
 /*
- * global aes variables, initialized by appl_init
+ *  global data related to AES stuff
  */
+ 
+/** global aes variable: Application ID initialized by appl_init */
 short gl_apid;
+
+/** global aes variable: AES version initialized by appl_init */
 short gl_ap_version;
 
-
-/*
- * global aes binding params 
+/** global aes variable: aes global array, used by all 
+    "old style" aes functions (function without "mt_")
  */
-short	aes_control [AES_CTRLMAX];
-short	aes_global  [AES_GLOBMAX];
-short	aes_intin   [AES_INTINMAX];
-short	aes_intout  [AES_INTOUTMAX];
-long	aes_addrin  [AES_ADDRINMAX];
-long	aes_addrout [AES_ADDROUTMAX];
-
-AESPB aes_params =
-{
-	&aes_control[0],
-	&aes_global[0],
-	&aes_intin[0],
-	&aes_intout[0],
-	&aes_addrin[0],
-	&aes_addrout[0]
-};
+short aes_global  [AES_GLOBMAX];
 
 
 /*
