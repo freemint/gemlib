@@ -218,6 +218,7 @@ _VDI_EXTENSIONS = \
 	n_vqt_f_extent16.c \
 	n_vqt_fg_color.c \
 	n_vqt_fontheader.c \
+	n_vqt_name_and_id \
 	n_vqt_pairkern.c \
 	n_vqt_real_extent.c \
 	n_vqt_trackkern.c \
@@ -313,11 +314,6 @@ COBJS = \
 	a_objc_offset.c \
 	a_objc_order.c \
 	a_objc_sysvar.c \
-	a_rect_array_to_grect.c \
-	a_rect_copy.c \
-	a_rect_equal.c \
-	a_rect_grect_to_array.c \
-	a_rect_intersect.c \
 	a_rsrc_free.c \
 	a_rsrc_gaddr.c \
 	a_rsrc_load.c \
@@ -352,6 +348,12 @@ COBJS = \
 	a_wind_set_grect.c \
 	a_wind_set_str.c \
 	a_wind_update.c \
+	\
+	rc_copy.c \
+	rc_equal.c \
+	rc_intersect.c \
+	rc_array_to_grect.c \
+	rc_grect_to_array.c \
 	\
 	globals.c \
 	\

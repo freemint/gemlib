@@ -1,10 +1,9 @@
-
 #include <macros.h>
 #include "gem.h"
 
 
 short
-rc_intersect (GRECT * r1, GRECT * r2)
+rc_intersect (const GRECT * r1, GRECT * r2)
 {
 	short tx, ty, tw, th, ret;
 
