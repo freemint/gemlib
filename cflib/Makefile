@@ -14,6 +14,7 @@ default: all
 include $(top_srcdir)/CONFIGVARS
 include $(top_srcdir)/RULES
 include $(top_srcdir)/PHONY
+include $(srcdir)/VERSION
 
 all-here: libs
 
@@ -44,6 +45,10 @@ objs: .lib$(TARGET)
 .lib$(TARGET):
 	$(MKDIR) $@
 	$(CP) Makefile.objs $@/Makefile
+
+cflib.spec: cflib.spec.in VERSION
+	rm -f $@
+	sed 's,@VERSION@,$(VERSION),g' $@.in >$@
 
 docu: cflib.stg
 	$(HCP) -ocflib.hyp cflib.stg

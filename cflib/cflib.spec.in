@@ -1,6 +1,12 @@
+# cflib specfile
+
+# Please note this file is maintained in the freemint CVS repository as
+# "lib/cflib/cflib.spec.in". Most current version is avaible there and
+# any modification should be stored there.
+
 Summary       : Christian Felsch's GEM utility library
 Name          : cflib
-Version       : 20
+Version       : @VERSION@
 Release       : 1
 Copyright     : LGPL
 Group         : Development/Libraries
@@ -13,7 +19,7 @@ Prefix        : %{_prefix}
 Docdir        : %{_prefix}/doc
 BuildRoot     : %{_tmppath}/%{name}-root
 
-Source: cflib-%{version}.tar.gz
+Source: %{name}-%{version}.tar.gz
 
 
 %description
@@ -53,7 +59,7 @@ den ganzen Kompatibilitäts-Kram kümmern zu müssen.
 
 
 %prep
-%setup -q -n cflib-0.20.0
+%setup -q -n %{name}-%{version}
 
 
 %build
@@ -64,13 +70,16 @@ make
 %install
 [ "${RPM_BUILD_ROOT}" != "/" ] && rm -rf ${RPM_BUILD_ROOT}
 
-mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/GEM/{include,lib,stguide}
+mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
+mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
+mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/GEM/stguide
 
 cd cflib
-install -m 644 lib{cflib,cflib16}.a ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
-install -m 644 cflib.h              ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
-install -m 644 cflib.hyp            ${RPM_BUILD_ROOT}%{_prefix}/GEM/stguide
-install -m 644 cflib.ref            ${RPM_BUILD_ROOT}%{_prefix}/GEM/stguide
+install -m 644 libcflib.a    ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
+install -m 644 libcflib16.a  ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
+install -m 644 cflib.h       ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
+install -m 644 cflib.hyp     ${RPM_BUILD_ROOT}%{_prefix}/GEM/stguide
+install -m 644 cflib.ref     ${RPM_BUILD_ROOT}%{_prefix}/GEM/stguide
 
 
 %clean
@@ -80,7 +89,7 @@ install -m 644 cflib.ref            ${RPM_BUILD_ROOT}%{_prefix}/GEM/stguide
 %post
 # Try to run ST-Guide's stool.
 found_stool=yes
-PATH=%{_prefix}/GEM/stguide:/usr/GEM/stguide:/usr/GEM/stguide:"$PATH"
+PATH=%{_prefix}/GEM/stguide:/usr/local/GEM/stguide:/usr/GEM/stguide:"$PATH"
 export PATH
 stool  >/dev/null 2>&1 || \
 stool.tos  >/dev/null 2>&1 || \
@@ -97,7 +106,7 @@ fi
 %postun
 # Try to run ST-Guide's stool.
 found_stool=yes
-PATH=%{_prefix}/GEM/stguide:/usr/GEM/stguide:/usr/GEM/stguide:"$PATH"
+PATH=%{_prefix}/GEM/stguide:/usr/local/GEM/stguide:/usr/GEM/stguide:"$PATH"
 export PATH
 stool  >/dev/null 2>&1 || \
 stool.tos  >/dev/null 2>&1 || \
@@ -123,6 +132,9 @@ fi
 
 
 %changelog
+* Tue Jan  6 2004 Standa Opichal <opichals@seznam.cz>
+- updated to version 0.20.1, using the new gemlib 0.43.1
+
 * Thu Feb 15 2001 Frank Naumann <fnaumann@freemint.de>
 - updated to version 0.20.0
 
