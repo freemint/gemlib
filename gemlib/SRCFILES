@@ -16,7 +16,7 @@ _VDI_ATTRIB = \
 	vsf_color.c \
 	vsf_interior.c \
 	vsf_perimeter.c \
-	vsf_perimeter3.c \
+	vsf_xperimeter.c \
 	vsf_style.c \
 	vsf_udpat.c \
 	vsl_color.c \

@@ -26,7 +26,7 @@
  */
 
 short
-vsf_perimeter3 (short handle, short vis, short style)
+vsf_xperimeter (short handle, short vis, short style)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
