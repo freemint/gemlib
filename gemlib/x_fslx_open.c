@@ -51,14 +51,14 @@
  *			 If NFOLLOWSLKS is set, then symbolic
  *			 links will not be followed, i.e. date
  *			 and time etc., as well as the XATTR-
- *			 structure that is passed to <filter>,
+ *			 structure that is passed to \p filter,
  *			 belong to the link itself.
  *         - GETMULTI	 (8)\n
  *			 If GETMULTI is set, one can select and
  *			 pass several files at the same time.
  *			 For this fslx_getnxtfile() is used
  *			 if fslx_evnt() or fslx_do() in the
- *			 parameter <nfiles> signals that there
+ *			 parameter \p nfiles signals that there
  *			 are still further files selected.
  *  @param global_aes global AES array
  *
