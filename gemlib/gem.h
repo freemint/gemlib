@@ -13,9 +13,41 @@ __BEGIN_DECLS
 
 #ifdef __GEMLIB_AES
 
-/*******************************************************************************
- * The AES bindings from old aesbind.h
+/** @addtogroup AES
+ *  @{
  */
+
+extern short gl_apid, gl_ap_version;			/* initialized in appl_init */
+
+/** global AES array */
+extern short aes_global[];
+
+/** AES version number */
+#define	_AESversion   (aes_global[0])
+
+/** Number of concurrent applications possible (normally 1).
+    MultiTOS will return -1. */
+#define	_AESnumapps   (aes_global[1])
+
+/** Application identifier (same as mt_appl_init() return value). */
+#define	_AESapid 	  (aes_global[2])
+
+/** LONG global available for use by the application */
+#define	_AESappglobal (*((long *)&aes_global[3]))
+
+/** Pointer to the base of the resource loaded via rsrc_load(). */
+#define	_AESrscfile   ((OBJECT **)(*((long *)&aes_global[5])))
+
+/** Current maximum character used by the AES to do vst_height() prior to
+    writing to the screen. This entry is only present as of AES version 0x0400.*/
+#define	_AESmaxchar   (aes_global[13])
+
+/** Current minimum character used by the AES to do vst_height() prior to
+    writing to the screen. This entry is only present as of AES version 0x0400.*/
+#define	_AESminchar   (aes_global[14])
+
+/**@}*/
+
 
 /** @addtogroup a_appl
  *  @{
@@ -26,15 +58,19 @@ __BEGIN_DECLS
 #define appl_find(a) mt_appl_find(a,aes_global)
 #define appl_getinfo(a,b,c,d,e) mt_appl_getinfo(a,b,c,d,e,aes_global)
 #define appl_xgetinfo(a,b,c,d,e) mt_appl_getinfo(a,b,c,d,e,aes_global)
-/* dirty hack to have gl_apid and gl_ap_version initialised. Note: aes_global[2] is the value returned 
- * by mt_appl_init... so, the define always returns gl_apid */
-#define appl_init() ( ((gl_apid=mt_appl_init(aes_global)) && (gl_ap_version=aes_global[0])) ? gl_apid : aes_global[2])
 #define appl_read(a,b,c) mt_appl_read(a,b,c,aes_global)
 #define appl_search(a,b,c,d) mt_appl_search(a,b,c,d,aes_global)
 #define appl_tplay(a,b,c) mt_appl_tplay(a,b,c,aes_global)
 #define appl_trecord(a,b) mt_appl_trecord(a,b,aes_global)
 #define appl_write(a,b,c) mt_appl_write(a,b,c,aes_global)
 #define appl_yield() mt_appl_yield(aes_global)
+
+static inline short appl_init( void) {
+	gl_apid = mt_appl_init(aes_global);
+	gl_ap_version = aes_global[0];
+	return gl_apid;
+}
+
 /**@}*/
 
 /** @addtogroup a_evnt
@@ -189,47 +225,6 @@ __BEGIN_DECLS
 #define wind_set_str(a,b,c) mt_wind_set_str(a,b,c,aes_global)
 /**@}*/
 
-
-
-/** @addtogroup AES
- *  @{
- */
-
-/*
- * aes trap interface
- */
-
-extern short gl_apid, gl_ap_version;			/* initialized in appl_init */
-
-/** global AES array */
-extern short aes_global[];
-
-/** AES version number */
-#define	_AESversion   (aes_global[0])
-
-/** Number of concurrent applications possible (normally 1).
-    MultiTOS will return -1. */
-#define	_AESnumapps   (aes_global[1])
-
-/** Application identifier (same as mt_appl_init() return value). */
-#define	_AESapid 	  (aes_global[2])
-
-/** LONG global available for use by the application */
-#define	_AESappglobal (*((long *)&aes_global[3]))
-
-/** Pointer to the base of the resource loaded via rsrc_load(). */
-#define	_AESrscfile   ((OBJECT **)(*((long *)&aes_global[5])))
-
-/** Current maximum character used by the AES to do vst_height() prior to
-    writing to the screen. This entry is only present as of AES version 0x0400.*/
-#define	_AESmaxchar   (aes_global[13])
-
-/** Current minimum character used by the AES to do vst_height() prior to
-    writing to the screen. This entry is only present as of AES version 0x0400.*/
-#define	_AESminchar   (aes_global[14])
-
-
-/**@}*/
 
 #endif /* AES */
 
