@@ -4,9 +4,9 @@
 void
 vex_curv (short handle, void *new, void **old)
 {
-	*((void **) (&vdi_control[7])) = new;
+	vdi_control_ptr(7) = new;
 	
-	VDI_TRAP (vdi_params, handle, 127, 0,0);
+	VDI_TRAP_00 (vdi_params, handle, 127);
 	
-	*old = *((void **) (&vdi_control[9]));
+	*old = vdi_control_ptr(9);
 }

@@ -4,5 +4,5 @@
 void
 v_hide_c (short handle)
 {
-	VDI_TRAP (vdi_params, handle, 123, 0,0);
+	VDI_TRAP_00 (vdi_params, handle, 123);
 }

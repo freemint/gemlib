@@ -4,7 +4,7 @@
 short
 v_flushcache (short handle)
 {
-	VDI_TRAP (vdi_params, handle, 251, 0,0);
+	VDI_TRAP_00 (vdi_params, handle, 251);
 	
 	return vdi_intout[0];
 }

@@ -4,7 +4,7 @@
 void
 vql_attributes (short handle, short attrib[])
 {
-	VDI_TRAP (vdi_params, handle, 35, 0,0);
+	VDI_TRAP_00 (vdi_params, handle, 35);
 	
 	attrib[0] = vdi_intout[0];
 	attrib[1] = vdi_intout[1];

@@ -8,5 +8,5 @@ vqt_cachesize (short handle, short which_cache, long *size)
 	
 	VDI_TRAP (vdi_params, handle, 255, 0,1);
 	
-	*size = *((long *) (&vdi_intout[0]));
+	*size = vdi_intout_ptr(0);
 }

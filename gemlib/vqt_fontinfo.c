@@ -5,7 +5,7 @@ void
 vqt_fontinfo (short handle, short *minade, short *maxade, short distances[],
               short *maxwidth, short effects[])
 {
-	VDI_TRAP (vdi_params, handle, 131, 0,0);
+	VDI_TRAP_00 (vdi_params, handle, 131);
 
 	*minade   = vdi_intout[0];
 	*maxade   = vdi_intout[1];
