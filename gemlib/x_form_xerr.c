@@ -25,6 +25,9 @@
  *
  *  @sa mt_form_error()
  *
+ *  @note if \a errcode is 0 (EOK, no error) or -68 (EBREAK, program aborted
+ *        by the user by pressing CTRL-C keys), then no form is display.
+ *
  */
 
 short 
