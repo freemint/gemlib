@@ -23,6 +23,9 @@
  *  @param set_output selected output tray \n
  *         [option CHECK_NULLPTR] set_output may be NULL
  *
+ *  @return 0 if the driver doesn't supporte this function, any positive
+ *          value (2) otherwise
+ *
  *  @since depends on the driver. If the driver doesn't supporte this
  *         function, \p set_input and \p set_output will contain 0.
  *
@@ -30,7 +33,7 @@
  *
  */
 
-void
+short
 v_trays (short handle, short input, short output,
          short *set_input, short *set_output)
 {
@@ -68,4 +71,6 @@ v_trays (short handle, short input, short output,
 #endif
 		*set_output = 0;
 	}
+	
+	return vdi_control[4];
 }

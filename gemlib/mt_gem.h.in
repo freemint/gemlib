@@ -1462,7 +1462,7 @@ short v_orient          (VdiHdl , short orientation);
 void  v_output_window   (VdiHdl , short *pxy);
 short v_page_size       (VdiHdl , short page_id);
 void  v_rmcur           (VdiHdl );
-void  v_trays           (VdiHdl , short input, short output,
+short v_trays           (VdiHdl , short input, short output,
                                   short *set_input, short *set_output);
 short vq_calibrate      (VdiHdl , short *flag);
 short vq_page_name      (VdiHdl , short page_id, char *page_name,
@@ -1470,7 +1470,7 @@ short vq_page_name      (VdiHdl , short page_id, char *page_name,
 void  vq_scan           (VdiHdl , short *g_slice, short *g_page,
                                   short *a_slice, short *a_page, short *div_fac);
 short vq_tabstatus      (VdiHdl );
-void  vq_tray_names     (VdiHdl , char *input_name, char *output_name,
+short vq_tray_names     (VdiHdl , char *input_name, char *output_name,
                                   short *input, short *output);
 short vs_calibrate      (VdiHdl , short flag, short *rgb);
 short vs_palette        (VdiHdl , short palette);
