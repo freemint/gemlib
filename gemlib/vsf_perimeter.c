@@ -30,13 +30,10 @@
 short
 vsf_perimeter (short handle, short vis)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[1]; 
+	
 	VDI_PARAMS(vdi_control, &vis, 0L, vdi_intout, vdi_dummy );
-#else
-	vdi_intin[0] = vis;
-#endif
 
 	VDI_TRAP (vdi_params, handle, 104, 0,1);
 
