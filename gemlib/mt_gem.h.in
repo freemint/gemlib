@@ -1935,7 +1935,6 @@ short	mt_wind_update 	(short Code, short *global_aes);
 short	mt_wind_calc_grect   (short Type, short Parts, const GRECT *In, GRECT *Out, short *global_aes);  
 short	mt_wind_create_grect (short Parts, const GRECT *r, short *global_aes); 
 short	mt_wind_get_grect    (short WindowHandle, short What, GRECT *r, short *global_aes);
-short	mt_wind_xget_grect   (short WindowHandle, short What, const GRECT *clip, GRECT *r, short *global_aes);
 short	mt_wind_open_grect   (short WindowHandle, const GRECT *r, short *global_aes);
 short	mt_wind_set_grect    (short WindowHandle, short What, const GRECT *r, short *global_aes);
 short	mt_wind_xset_grect   (short WindowHandle, short What, const GRECT *s, GRECT *r, short *global_aes);

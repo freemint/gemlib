@@ -220,7 +220,6 @@ static inline short appl_init( void) {
 #define wind_calc_grect(a,b,c,d) mt_wind_calc_grect(a,b,c,d,aes_global)  
 #define wind_create_grect(a,b) mt_wind_create_grect(a,b,aes_global) 
 #define wind_get_grect(a,b,c) mt_wind_get_grect(a,b,c,aes_global)
-#define wind_xget_grect(a,b,c,d) mt_wind_xget_grect(a,b,c,d,aes_global)
 #define wind_open_grect(a,b) mt_wind_open_grect(a,b,aes_global)
 #define wind_set_grect(a,b,c) mt_wind_set_grect(a,b,c,aes_global)
 #define wind_xset_grect(a,b,c,d) mt_wind_xset_grect(a,b,c,d,aes_global)
