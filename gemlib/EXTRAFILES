@@ -11,4 +11,5 @@ SRCFILES += \
 	SRCFILES \
 	\
 	gemlib.spec \
-	VERSION
+	VERSION \
+	mt_gem.h.in
