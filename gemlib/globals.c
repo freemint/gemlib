@@ -4,7 +4,7 @@
 
 
 #include "mt_gem.h"
-# include "gem.h"
+#include "gem.h"
 
 /* i don't know any way to stringify using sozobonx built-in preprocessor */
 /* here is a very dirty hack just to get this file compilable with sozobonx */
@@ -43,25 +43,3 @@ short gl_ap_version;
     "old style" aes functions (function without "mt_")
  */
 short aes_global  [AES_GLOBMAX];
-
-
-/*
- * global vdi binding params 
- */
-
-#if 0
-short vdi_control[VDI_CNTRLMAX];
-short vdi_intin[VDI_INTINMAX];
-short vdi_ptsin[VDI_PTSINMAX];
-short vdi_intout[VDI_INTOUTMAX];
-short vdi_ptsout[VDI_PTSOUTMAX];
-
-VDIPB vdi_params =
-{
-	&vdi_control[0],
-	&vdi_intin[0],
-	&vdi_ptsin[0],
-	&vdi_intout[0],
-	&vdi_ptsout[0]
-};
-#endif
