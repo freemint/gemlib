@@ -13,7 +13,7 @@
  *         between 1 and the result of mt_fnts_get_no_styles().
  *  @param global_aes global AES array
  *
- *  @return ID of the <index>-th font of the family
+ *  @return ID of the \p index -th font of the family
  *
  *  @since mt_appl_getinfo(7) give informations on mt_fnts_xx() functions availability
  */
