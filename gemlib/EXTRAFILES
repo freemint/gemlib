@@ -10,4 +10,5 @@ SRCFILES += \
 	Makefile.objs \
 	SRCFILES \
 	\
-	gemlib.spec
+	gemlib.spec \
+	VERSION
