@@ -31,14 +31,7 @@ vs_calibrate (short handle, short flag, short *rgb)
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[3];   
 	short vdi_intout[1]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&vdi_intin[0],               /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		&vdi_intout[0],              /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L );
 #endif
 	
 	vdi_intin_ptr(0) = rgb;

@@ -25,14 +25,7 @@ vs_clip (short handle, short clip_flag, short pxy[])
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&clip_flag,                  /* vdi_intin   */
-		pxy,                         /* vdi_ptsin   */
-		0L,                          /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, &clip_flag, pxy, 0L, 0L );
 #else
 	vdi_params.ptsin = pxy;
 	vdi_intin[0] = clip_flag;
