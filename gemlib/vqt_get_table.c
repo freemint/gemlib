@@ -4,7 +4,7 @@
 void
 vqt_get_table (short handle, short **map)
 {
-	VDI_TRAP (vdi_params, handle, 254, 0,0);
+	VDI_TRAP_00 (vdi_params, handle, 254);
 	
-	*map = *((short **)(&vdi_intout[0]));
+	*map = vdi_intout_ptr(0);
 }

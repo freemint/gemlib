@@ -4,7 +4,7 @@
 short
 vsm_choice (short handle, short *choice)
 {
-	VDI_TRAP (vdi_params, handle, 30, 0,0);
+	VDI_TRAP_00 (vdi_params, handle, 30);
 	
 	*choice = vdi_intout[0];
 	

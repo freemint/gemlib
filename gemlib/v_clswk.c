@@ -4,5 +4,5 @@
 void
 v_clswk (short handle)
 {
-	VDI_TRAP (vdi_params, handle, 2, 0,0);
+	VDI_TRAP_00 (vdi_params, handle, 2);
 }
