@@ -360,6 +360,8 @@ COBJS = \
 	a_wind_set_str.c \
 	a_wind_update.c \
 	\
+	a_glue.c \
+	\
 	rc_copy.c \
 	rc_equal.c \
 	rc_intersect.c \
