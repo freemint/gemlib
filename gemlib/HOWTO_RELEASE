@@ -1,0 +1,172 @@
+HOW TO release gemlib.
+($Id$)
+
+written by Arnaud BERCEGEAY <arnaud.bercgeay@free.fr>
+March 2005.
+
+
+This is a small document that describes how to make a distribution
+of gemlib.
+
+a release of gemlib is made of the following archives :
+- a RPM package of the library
+- a RPM package of the sources
+- a zip file of the library for GCC 2.95
+- a zip file of the library for GCC 2.81
+- a zip file of the library for SozobonX C
+- a zip file of the library for Pure C
+- a gzipped tarball of the documentation
+- a gzipped tarball of the sources
+
+In order to make all these files, you need:
+- a sparemint environment (for building RPMs)
+- standard dev tools (gmake, gcc, zip, tar, gzip...)
+- CVS and PERL (to generate the ChangeLog)
+- DOXYGEN (to generate the documentation)
+- pure C compiler
+- SozobonX C compiler
+- GCC 2.81 compiler
+
+For sozobonx, purec and gcc 2.81 compilers, some variables should be set
+(for example in your $(MAKEFILES) file). Here is an extract of my make.ini file:
+CC_SOX        = K:/SOZOBONX/bin/cc.ttp
+CC_PUREC      = K:/PURE_C/pcc.ttp
+CC_GCC281     = K:/GCC/bin/gcc.ttp
+PURECINC      =/k/pure_c/include
+PURECLIB      =/k/pure_c/lib
+AS_SOX        = K:/SOZOBONX/bin/jas.ttp
+AS_PUREC      = K:/PURE_C/pasm.ttp
+AS_GCC281     = K:/GCC/bin/gcc.ttp
+AR_SOX        = K:/SOZOBONX/BIN/AR.TTP
+AR_PUREC      = K:/PURE_C/PLINK.TTP
+AR_GCC281     = K:/GCC/bin/ar.ttp
+
+
+
+0. BUMPED THE VERSION NUMBER
+
+Modify the file VERSION and set there the new version number.
+
+This is the only place where the version of gemlib appears. Other files
+that had the version number (for example the header file mt_gem.h) are
+generated (f.e. from mt_gem.h.in and VERSION).
+
+It's a good idea to update the gemlib.spec.in file too (add a line in
+the changelog area), and generate gemlib.spec by typing
+$make gemlib.spec
+
+
+1. BUILD THE LIBRARIES
+
+in the gemlib directory, type the following commands to build gemlib for
+all the supported compilers. 
+
+To build the libraries for gcc 2.95 (./libgem.a and ./libgem16.a), type:
+$ make clean && make
+
+To build the library for sozobonx (./lib/sozobon/gem.a), type:
+$ rm -f *.o *.O && make -f sox.mak
+
+To build the library for pure C (./lib/purec/gem.lib), type:
+$ rm -f *.o *.O && make -f pc.mak
+
+To build the libraries for GCC 2.81 (./lib/gcc281/gem[16].olb), type:
+$ rm -f *.o *.O && make -f gcc281.mak
+$ rm -f *.o *.O && make -f gcc281-16.mak
+
+A good idea is to build the documentation now (this will not be the final
+version of the documentation because the ChangeLog is not yet updated, but
+this allows to check the documentation now, and modify the documentation
+if needed... by modifying the sources since the documentation is embedded in
+the source. The entry point of the doc is ./html/index.html, and the following
+command builds the doc:
+$ make doc
+
+If one of the build fails, then sources should be fixed, and the library shall
+be rebuild for all compilers.
+
+ +---------------------------------------------------------------------+
+ |  At this point, gemlib is successfully compiled by all supported    |
+ |  compilers (sozobonx, purec, GCC 2.81 and GCC 2.95)                 |
+ +---------------------------------------------------------------------+
+ 
+
+2. GET READY FOR THE RELEASE
+
+Now, we are sure that gemlib and its documentation compiles fine... A good idea
+is to test the libraries.
+
+The libraries works fine ? Ok, we are ready for the release.
+
+
+3. UPDATE THE CHANGELOG
+
+The ChangeLog will be used as part of the documentation. To update ChangeLog,
+just remove your existing ChangeLog and make a new one.
+$ rm -f ChangeLog
+$ make ChangeLog
+
+remark: you have to be connected to the CVS server.
+
+Then, just commit the new ChangeLog to CVS :
+$ cvs ci -m "updated for version 0.43.4" ChangeLog
+
+
+4. CREATE THE RELEASE
+
+You can now tag the CVS repository, and tell the world that this is the new
+gemlib release:
+$ cvs tag release-0_43_4
+
+will tag the sources for gemlib 0.43.4
+
+
+5. CREATE THE DOCUMENTATION
+
+To build the documentation, just type :
+$ make doc
+
+You have to do it now, because the documentation contains the ChangeLog, which
+just has been updated in previous steps.
+
+
+6. BUILD ARCHIVES
+
+To build archives, just type
+$make zip
+
+This will generate the following archives:
+- gemlib-0.43.4-purec.zip     (headers and library for pure C compiler)
+- gemlib-0.43.4-sozobonx.zip  (headers and library for SozobonX C compiler)
+- gemlib-0.43.4-gcc281.zip    (headers and libraries for GCC 2.81 compiler)
+- gemlib-0.43.4-gcc.zip       (headers and libraries for GCC 2.95 compiler)
+- gemlib-0.43.4-doc.tgz       (gemlib documentation in HTML format)
+- gemlib-0.43.4-src.tgz       (sources of gemlib)
+
+
+6. BUILD THE RPMS
+
+In the previous step, the tarball ../gemlib-0.43.4.tar.gz has been created
+(this is a copy of gemlib-0.43.4-src.tgz).
+
+RPMs packages will be built from that tarball.
+
+Copy the tarball and the specfile:
+$ cp ../gemlib-0.43.4.tar.gz /usr/src/redhat/SOURCES
+$ cp gemlib.spec /usr/src/redhat/SPECS
+
+Build the [S]RPMS by typing
+$ rpm -bs gemlib.spec
+
+The packages generated are 
+- /usr/redhat/RPMS/gemlib-0.43.4-1.m68kmint.rpm
+- /usr/redhat/SRPMS/gemlib-0.43.4-1.src.rpm
+
+
+7. WWW
+
+Now, just upload the RPMS in the sparemint server, and update the gemlib www site with
+all the archives.
+
+
+[end]
