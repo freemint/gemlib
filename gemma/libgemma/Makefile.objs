@@ -18,8 +18,8 @@ include $(top_srcdir)/PHONY
 all-here: objs
 
 # default overwrites
-INCLUDES = -I$(top_srcdir)/gemma/include/gemma/
-GENERAL += -mshort
+INCLUDES = -I$(top_srcdir)/gemma/include/
+GENERAL = 
 DEFINITIONS =
 
 ifeq ($(TARGET),020)
