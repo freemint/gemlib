@@ -956,25 +956,32 @@ typedef  struct
 #define SW_ENVIRON		0x0800	/**< TODO */
 
 /* rsrc_gaddr structure types */
-#define R_TREE			0	/**< TODO */
-#define R_OBJECT		1	/**< TODO */
-#define R_TEDINFO 		2	/**< TODO */
-#define R_ICONBLK 		3	/**< TODO */
-#define R_BITBLK		4	/**< TODO */
-#define R_STRING		5	/**< TODO */
-#define R_IMAGEDATA		6	/**< TODO */
-#define R_OBSPEC		7	/**< TODO */
-#define R_TEPTEXT 		8	/**< TODO */
-#define R_TEPTMPLT		9	/**< TODO */
-#define R_TEPVALID		10	/**< TODO */
-#define R_IBPMASK		11	/**< TODO */
-#define R_IBPDATA		12	/**< TODO */
-#define R_IBPTEXT		13	/**< TODO */
-#define R_BIPDATA		14	/**< TODO */
-#define R_FRSTR			15	/**< TODO */
-#define R_FRIMG			16	/**< TODO */
+#define R_TREE			0	/**< Object tree, see mt_rsrc_gaddr() */
+#define R_OBJECT		1	/**< Individual object, see mt_rsrc_gaddr() */
+#define R_TEDINFO 		2	/**< TEDINFO structure, see mt_rsrc_gaddr() */
+#define R_ICONBLK 		3	/**< ICONBLK structure, see mt_rsrc_gaddr() */
+#define R_BITBLK		4	/**< BITBLK structure, see mt_rsrc_gaddr() */
+#define R_STRING		5	/**< Free String data, see mt_rsrc_gaddr() */
+#define R_IMAGEDATA		6	/**< Free Image data, see mt_rsrc_gaddr() */
+#define R_OBSPEC		7	/**< ob_spec field within OBJECTs, see mt_rsrc_gaddr() */
+#define R_TEPTEXT 		8	/**< te_ptext within TEDINFOs, see mt_rsrc_gaddr() */
+#define R_TEPTMPLT		9	/**< te_ptmplt within TEDINFOs, see mt_rsrc_gaddr() */
+#define R_TEPVALID		10	/**< te_pvalid within TEDINFOs, see mt_rsrc_gaddr() */
+#define R_IBPMASK		11	/**< ib_pmask within ICONBLKs, see mt_rsrc_gaddr() */
+#define R_IBPDATA		12	/**< ib_pdata within ICONBLKs, see mt_rsrc_gaddr() */
+#define R_IBPTEXT		13	/**< ib_ptext within ICONBLKs, see mt_rsrc_gaddr() */
+#define R_BIPDATA		14	/**< bi_pdata within BITBLKs, see mt_rsrc_gaddr() */
+#define R_FRSTR			15	/**< Free string, see mt_rsrc_gaddr() */
+#define R_FRIMG			16	/**< Free image, see mt_rsrc_gaddr() */
 
-
+/* scrap_read return values */
+#define SCRAP_CSV       0x0001  /**< clipboard has a scrap.csv file, see mt_scrap_read() */
+#define SCRAP_TXT       0x0002  /**< clipboard has a scrap.txt file, see mt_scrap_read() */
+#define SCRAP_GEM       0x0004  /**< clipboard has a scrap.gem file, see mt_scrap_read() */
+#define SCRAP_IMG       0x0008  /**< clipboard has a scrap.img file, see mt_scrap_read() */
+#define SCRAP_DCA       0x0010  /**< clipboard has a scrap.dca file, see mt_scrap_read() */
+#define SCRAP_DIF       0x0020  /**< clipboard has a scrap.dif file, see mt_scrap_read() */
+#define SCRAP_USR       0x8000  /**< clipboard has a scrap.usr file, see mt_scrap_read() */
 
 /* Window Attributes */
 #define NAME			0x0001	/**< TODO */

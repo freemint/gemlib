@@ -7,8 +7,7 @@
 /** sets the address of a resource element.
  *
  *  @param Type specifies the type of resource element to set as
- *         defined under mt_rsrc_gaddr()\n
- *         Use only 7 to 16 here! Others destroy a part of the object tree.
+ *         defined under mt_rsrc_gaddr()
  *  @param Index specifies the index of the element to modify (0 based)
  *  @param Address specifies the actual address that will be placed in
  *         the appropriate data structure.
@@ -19,6 +18,10 @@
  *  @since All AES versions.
  *
  *  @sa mt_rsrc_gaddr(), mt_rsrc_load()
+ *
+ *  Use only \a Type from 7 to 16 here (that is #R_OBSPEC, #R_TEPTEXT, #R_TEPTMPLT,
+ *  #R_TEPVALID, #R_IBPMASK, #R_IBPDATA, #R_IBPTEXT, #R_BIPDATA, #R_FRSTR or
+ *  #R_FRIMG ) ! Others destroy a part of the object tree.
  *
  *  In most cases, direct manipulation of the structures
  *  involved is quicker and easier than using this call.
