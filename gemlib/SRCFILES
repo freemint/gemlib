@@ -210,6 +210,7 @@ _VDI_EXTENSIONS = \
 	n_vqr_bg_color.c \
 	n_vqr_fg_color.c \
 	n_vqt_advance.c \
+	n_vqt_advance32.c \
 	n_vqt_bg_color.c \
 	n_vqt_char_index.c \
 	n_vqt_ext_name.c \
