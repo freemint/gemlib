@@ -10,8 +10,10 @@
  *  @param handle Device handle
  *  @param page_id paper format
  *  @param page_name pointer to the name
- *  @param page_width width in micro meters
- *  @param page_height height in micro meters
+ *  @param page_width width in micro meters \n
+ *         [option CHECK_NULLPTR] page_width may be NULL
+ *  @param page_height height in micro meters \n
+ *         [option CHECK_NULLPTR] page_height may be NULL
  *
  *  @return paper format or -1 (error: the paper format is not defined and its size cannot 
  *          be returned.)
@@ -41,7 +43,13 @@ vq_page_name (short handle, short page_id, char *page_name,
 	if (vdi_control[4] == 0) /* function not supported by the driver */
 		return -1;
 	
+#if CHECK_NULLPTR
+	if (page_width)
+#endif
 	*page_width  = vdi_intout_long(1);
+#if CHECK_NULLPTR
+	if (page_height)
+#endif
 	*page_height = vdi_intout_long(3);
 	
 	return vdi_intout[0];
