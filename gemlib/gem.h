@@ -50,7 +50,7 @@ __BEGIN_DECLS
 #define DESKTOP_HANDLE		0
 #define DESK			 	DESKTOP_HANDLE
 
-		/* appl_getinfo modes */
+/* appl_getinfo modes */
 #define AES_LARGEFONT		0
 #define AES_SMALLFONT		1
 #define AES_SYSTEM		2
@@ -63,7 +63,7 @@ __BEGIN_DECLS
 #define AES_SHELL 		10
 #define AES_WINDOW		11
 
-		/* appl_getinfo return values */
+/* appl_getinfo return values */
 #define SYSTEM_FONT		0
 #define OUTLINE_FONT 		1
 
@@ -74,33 +74,33 @@ __BEGIN_DECLS
 #define AESLANG_ITALIAN 	5
 #define AESLANG_SWEDISH 	6
 
-		/* appl_read modes */
+/* appl_read modes */
 #define APR_NOWAIT		-1
 
-		/* appl_search modes */
+/* appl_search modes */
 #define APP_FIRST 		0
 #define APP_NEXT		1
 
-		/* appl_search return values*/
+/* appl_search return values*/
 #define APP_SYSTEM		0x01
 #define APP_APPLICATION		0x02
 #define APP_ACCESSORY		0x04
 #define APP_SHELL 		0x08
 
-		/* appl_trecord types */
+/* appl_trecord types */
 #define APPEVNT_TIMER	 	0
 #define APPEVNT_BUTTON	 	1
 #define APPEVNT_MOUSE	 	2
 #define APPEVNT_KEYBOARD 	3
 
-		/* struct used by appl_trecord and appl_tplay */
+/* struct used by appl_trecord and appl_tplay */
 typedef struct pEvntrec
 {
 	long ap_event;
 	long ap_value;
 } EVNTREC;
 
-		/* evnt_button flags */
+/* evnt_button flags */
 #define LEFT_BUTTON		0x0001
 #define RIGHT_BUTTON 		0x0002
 #define MIDDLE_BUTTON		0x0004
@@ -110,11 +110,11 @@ typedef struct pEvntrec
 #define K_CTRL 			0x0004
 #define K_ALT			0x0008
 
-		/* evnt_dclick flags */
+/* evnt_dclick flags */
 #define EDC_INQUIRE		0
 #define EDC_SET			1
 
-		/* event message values */
+/* event message values */
 #define MN_SELECTED	 	10
 #define WM_REDRAW 	 	20
 #define WM_TOPPED 	 	21
@@ -128,7 +128,7 @@ typedef struct pEvntrec
 #define WM_NEWTOP		29
 #define WM_UNTOPPED		30
 #define WM_ONTOP		31
-#define WM_BOTTOMED		33
+#define WM_BOTTOM		33
 #define WM_ICONIFY		34
 #define WM_UNICONIFY		35
 #define WM_ALLICONIFY		36
@@ -139,7 +139,10 @@ typedef struct pEvntrec
 #define AP_TFAIL		51
 #define AP_RESCHG 		57
 
-		/* Xcontrol messages */
+/* old name */
+#define WM_BOTTOMED		WM_BOTTOM
+
+/* Xcontrol messages */
 #define CT_UPDATE		50
 #define CT_MOVE			51
 #define CT_NEWTOP		52
@@ -152,11 +155,11 @@ typedef struct pEvntrec
 #define SH_WDRAW		72
 #define CH_EXIT			90
 
-		/* evnt_mouse modes */
+/* evnt_mouse modes */
 #define MO_ENTER		0
 #define MO_LEAVE		1
 
-		/* evnt_multi flags */
+/* evnt_multi flags */
 #define MU_KEYBD		0x0001
 #define MU_BUTTON		0x0002
 #define MU_M1			0x0004
@@ -164,13 +167,13 @@ typedef struct pEvntrec
 #define MU_MESAG		0x0010
 #define MU_TIMER		0x0020
 
-		/* form_dial opcodes */
+/* form_dial opcodes */
 #define FMD_START 		0
 #define FMD_GROW		1
 #define FMD_SHRINK		2
 #define FMD_FINISH		3
 
-		/* form_error modes */
+/* form_error modes */
 #define FERR_FILENOTFOUND	 2
 #define FERR_PATHNOTFOUND	 3
 #define FERR_NOHANDLES		 4
@@ -182,40 +185,40 @@ typedef struct pEvntrec
 #define FERR_DELETEDIR		16
 #define FERR_NOFILES 		18
 
-		/* fsel_(ex)input return values*/
+/* fsel_(ex)input return values*/
 #define FSEL_CANCEL		 0
 #define FSEL_OK			 1
 
-		/* menu_attach modes */
+/* menu_attach modes */
 #define ME_INQUIRE		0
 #define ME_ATTACH 		1
 #define ME_REMOVE 		2
 
-		/* menu_attach attributes */
+/* menu_attach attributes */
 #define SCROLL_NO 		0
 #define SCROLL_YES		1
 
-		/* menu_bar modes */
+/* menu_bar modes */
 #define MENU_REMOVE		0
 #define MENU_INSTALL		1
 #define MENU_INQUIRE		-1
 
-		/* menu_icheck modes */
+/* menu_icheck modes */
 #define UNCHECK			0
 #define CHECK			1
 
-		/* menu_ienable modes */
+/* menu_ienable modes */
 #define DISABLE			0
 #define ENABLE 			1
 
-		/* menu_istart modes */
+/* menu_istart modes */
 #define MIS_GETALIGN 		0
 #define MIS_SETALIGN 		1
 
-		/* menu_popup modes */
+/* menu_popup modes */
 #define SCROLL_LISTBOX		-1
 
-		/* menu_register modes */
+/* menu_register modes */
 #define REG_NEWNAME		-1
 
 /* menu_tnormal modes */
@@ -412,7 +415,7 @@ typedef struct _mn_set
 #define MD_XOR			3
 #define MD_ERASE		4
 
-		/* bit blt rules */
+/* bit blt rules */
 #define ALL_WHITE		0
 #define S_AND_D			1
 #define S_AND_NOTD		2
@@ -431,7 +434,7 @@ typedef struct _mn_set
 #define NOT_SANDD		14
 #define ALL_BLACK		15
 
-		/* font types */
+/* font types */
 #define GDOS_PROP		0
 #define GDOS_MONO		1
 #define GDOS_BITM		2
@@ -624,7 +627,7 @@ typedef struct _mn_set
 #define BACKGRCOL 		5
 #define AD3DVAL			6
 
-		/* Mouse Form Definition Block */
+/* Mouse Form Definition Block */
 typedef struct mouse_form
 {
 	short		mf_xhot;
