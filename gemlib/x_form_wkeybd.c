@@ -11,8 +11,10 @@
  *  @param fo_kobject as for mt_form_keybd()
  *  @param fo_kobnext as for mt_form_keybd()
  *  @param fo_kchar as for mt_form_keybd()
- *  @param fo_knxtobject as for mt_form_keybd()
- *  @param fo_knxtchar as for mt_form_keybd()
+ *  @param fo_knxtobject as for mt_form_keybd() \n
+ *             [option CHECK_NULLPTR] fo_knxtobject may be NULL
+ *  @param fo_knxtchar as for mt_form_keybd() \n
+ *             [option CHECK_NULLPTR] fo_knxtchar may be NULL
  *  @param whandle window handle
  *  @param global_aes global AES array
  *
@@ -39,7 +41,13 @@ mt_form_wkeybd( OBJECT *fo_ktree, short fo_kobject, short fo_kobnext, short fo_k
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (fo_knxtobject)
+#endif
 	*fo_knxtobject = aes_intout[1];
+#if CHECK_NULLPTR
+	if (fo_knxtchar)
+#endif
 	*fo_knxtchar   = aes_intout[2];
 	
 	return aes_intout[0];

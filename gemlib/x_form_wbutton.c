@@ -10,7 +10,8 @@
  *  @param fo_btree as for mt_form_button()
  *  @param fo_bobject as for mt_form_button()
  *  @param fo_bclicks as for mt_form_button()
- *  @param fo_bnxtobj as for mt_form_button()
+ *  @param fo_bnxtobj as for mt_form_button() \n
+ *             [option CHECK_NULLPTR] fo_bnxtobj may be NULL
  *  @param whandle window handle
  *  @param global_aes global AES array
  *
@@ -34,6 +35,9 @@ mt_form_wbutton(OBJECT *fo_btree, short fo_bobject, short fo_bclicks, short *fo_
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (fo_bnxtobj)
+#endif
 	*fo_bnxtobj = aes_intout[1];
 	
 	return aes_intout[0];

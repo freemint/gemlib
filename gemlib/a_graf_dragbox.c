@@ -21,7 +21,8 @@
  *  @param rx
  *  @param ry are WORD pointers which, on function exit,
  *            will be filled in with the ending x and y
- *            position of the box.
+ *            position of the box. \n
+ *             [option CHECK_NULLPTR] rx and/or ry may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred during
@@ -57,7 +58,13 @@ mt_graf_dragbox(short  w, short  h, short sx, short sy,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (rx)
+#endif
 	*rx = aes_intout[1];
+#if CHECK_NULLPTR
+	if (ry)
+#endif
 	*ry = aes_intout[2];
 
 	return aes_intout[0];
