@@ -7,17 +7,39 @@
 
 include files.mak
 
-ZIP_SRC = gemlib-src.zip
-ZIP_ALL = gemlib-all.zip
+.PHONY: purec sozobonx gcc281 gcc
 
-all : $(ZIP_SRC)
+default: purec sozobonx gcc281 gcc
 
-# $(ZIP_ALL)
+purec:
+	rm -rf $@
+	mkdir $@ $@/lib $@/include
+	cp $(FILES_INC) include/purec/compiler.h $@/include
+	cp $(LIB_PUREC) $@/lib
+	$(ZIP) -ur $@.zip $@
+	rm -rf $@
 
-.PHONY: $(ZIP_SRC) $(ZIP_ALL)
+sozobonx:
+	rm -rf $@
+	mkdir $@ $@/lib $@/include
+	cp $(FILES_INC) include/sozobon/compiler.h $@/include
+	cp $(LIB_SOZOBON) $@/lib
+	$(ZIP) -ur $@.zip $@
+	rm -rf $@
 
-$(ZIP_SRC):
-	$(ZIP) -u $@  $(FILES_SRC) $(FILES_INC) $(LIB_PATH)
+gcc281:
+	rm -rf $@
+	mkdir $@ $@/lib $@/include
+	cp $(FILES_INC) include/gcc281/compiler.h $@/include
+	cp $(LIB_GCC281_MSHORT) $(LIB_GCC281) $@/lib
+	$(ZIP) -ur $@.zip $@
+	rm -rf $@
 
-$(ZIP_ALL):
-	$(ZIP) -u $@ $(FILES_SRC) $(FILES_INC) $(FILES_BIN)
+gcc:
+	rm -rf $@
+	mkdir $@ $@/lib $@/include
+	cp $(FILES_INC) $@/include
+	cp $(LIB_GCC $(LIB_GCC_MSHORT) $@/lib
+	$(ZIP) -ur $@.zip $@
+	rm -rf $@
+
