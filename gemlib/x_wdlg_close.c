@@ -8,8 +8,10 @@
 /** closes the window dialog
  *
  *  @param dialog Pointer to the dialog structure
- *  @param x Last x-coordinate of the dialog
- *  @param y Last y-coordinate of the dialog
+ *  @param x Last x-coordinate of the dialog \n
+ *         x  may be NULL
+ *  @param y Last y-coordinate of the dialog \n
+ *         y  may be NULL
  *  @param global_aes global AES array
  *
  *  @return 1
