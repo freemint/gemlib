@@ -742,6 +742,14 @@ typedef struct pEvntrec
 #define MU_NORM_KEYBD		0x0100	/**< TODO (XaAES) */
 #define MU_DYNAMIC_KEYBD	0x0200	/**< TODO (XaAES) */
 
+/* constants for form_alert */
+#define FA_NOICON   "[0]"	/**< display no icon, see mt_form_alert() */
+#define FA_ERROR    "[1]"	/**< display Exclamation icon, see mt_form_alert() */
+#define FA_QUESTION "[2]"	/**< display Question icon, see mt_form_alert() */
+#define FA_STOP     "[3]"	/**< display Stop icon, see mt_form_alert() */
+#define FA_INFO     "[4]"	/**< display Info icon, see mt_form_alert() */
+#define FA_DISK     "[5]"	/**< display Disk icon, see mt_form_alert() */
+
 /* form_dial opcodes */
 #define FMD_START 			0	/**< TODO */
 #define FMD_GROW			1	/**< TODO */
