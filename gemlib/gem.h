@@ -40,7 +40,7 @@ __BEGIN_DECLS
 #define __GEMLIB__		__GEMLIB_MAJOR__
 #define	__GEMLIB_MAJOR__     0
 #define	__GEMLIB_MINOR__    42
-#define __GEMLIB_REVISION__   0
+#define __GEMLIB_REVISION__   1
 #define __GEMLIB_BETATAG__   ""
 
 
@@ -805,6 +805,7 @@ typedef struct
 	short m_h;
 } MOBLK;
 
+#if !( defined(__PUREC__) && defined(__TOS) )
 typedef struct mouse_event_type
 {
 	short *x;
@@ -812,6 +813,7 @@ typedef struct mouse_event_type
 	short *b;
 	short *k;
 } MOUSE;
+#endif
 
 typedef struct {
 	short emi_flags;
@@ -994,8 +996,9 @@ typedef struct
 	long        *addrout;
 } AESPB;
 
-extern AESPB	aes_params;
-extern short	gl_apid, gl_ap_version;			/* initialized in appl_init */
+extern AESPB       aes_params;
+#define _GemParBlk aes_params
+extern short gl_apid, gl_ap_version;			/* initialized in appl_init */
 
 void aes (AESPB *pb);
 
@@ -1180,6 +1183,13 @@ typedef struct memory_form
 	short 	fd_r2;		/* Reserved */
 	short 	fd_r3;		/* Reserved */
 } MFDB;
+
+/* RGB intesities in promille */
+typedef struct rgb_1000
+{ short  red;    /* Red-Intensity in range [0..1000] */
+  short  green;  /* Green-Intensity in range [0..1000] */
+  short  blue;   /* Blue-Intensity in range [0..1000] */
+} RGB1000;
 
 #endif 
 
