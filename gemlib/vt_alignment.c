@@ -22,12 +22,10 @@
 void
 vt_alignment (short handle, short dx, short dy)
 {
-#if USE_LOCAL_VDIPB
-	/* todo (doc wanted) */
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intin[2];   
+	short vdi_intin[2];  
+	 
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_dummy, vdi_dummy );
-#endif
 	
 	vdi_intin[0] = dx;
 	vdi_intin[1] = dy;

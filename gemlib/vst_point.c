@@ -33,15 +33,12 @@ vst_point (short handle, short point,
 #if !(CHECK_NULLPTR)
 	short *ptr;
 #endif
-#if USE_LOCAL_VDIPB
-	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intout[1]; 
-	short vdi_ptsout[4]; 
+	short vdi_control[VDI_CNTRLMAX];
+	short vdi_intout[1];
+	short vdi_ptsout[4];
+	
 	VDI_PARAMS(vdi_control, &point, 0L, vdi_intout, vdi_ptsout );
-#else
-	vdi_intin[0] = point;
-#endif
-		
+	
 	VDI_TRAP (vdi_params, handle, 107, 0,1);
 
 #if CHECK_NULLPTR
