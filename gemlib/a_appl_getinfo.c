@@ -9,10 +9,14 @@
  *  @param type specifies the type of information to be returned
  *         in the shorts pointed to by \p out1, \p out2, \p out3
  *         and \p out4.
- *  @param out1 1st return value
- *  @param out2 2nd return value
- *  @param out3 3rd return value
- *  @param out4 4th return value
+ *  @param out1 1st return value\p
+ *         [option CHECK_NULLPTR] out1 may be NULL
+ *  @param out2 2nd return value\p
+ *         [option CHECK_NULLPTR] out2 may be NULL
+ *  @param out3 3rd return value\p
+ *         [option CHECK_NULLPTR] out3 may be NULL
+ *  @param out4 4th return value\p
+ *         [option CHECK_NULLPTR] out4 may be NULL
 \verbatim
     Name      Value               Returns
 
@@ -275,9 +279,21 @@ mt_appl_getinfo (short type, short *out1, short *out2, short *out3, short *out4,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (out1)
+#endif
 	*out1 = aes_intout[1];
+#if CHECK_NULLPTR
+	if (out2)
+#endif
 	*out2 = aes_intout[2];
+#if CHECK_NULLPTR
+	if (out3)
+#endif
 	*out3 = aes_intout[3];
+#if CHECK_NULLPTR
+	if (out4)
+#endif
 	*out4 = aes_intout[4];
 
 	return (aes_intout[0]);
