@@ -29,7 +29,7 @@ vr_transfer_bits (short handle, GCBITMAP * src_bm, GCBITMAP * dst_bm,
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[4];   
 	short vdi_ptsin[8];   
-	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, 0L, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy);
 #endif
 	
 	vdi_intin[0] = mode;

@@ -25,7 +25,7 @@ vqt_bg_color (short handle, COLOR_ENTRY * bg_color)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[6]; 
-	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, 0L );
+	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_dummy );
 #endif
 	
 	VDI_TRAP_ESC (vdi_params, handle, 203,0, 0,0);

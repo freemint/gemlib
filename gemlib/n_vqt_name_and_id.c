@@ -36,7 +36,7 @@ vqt_name_and_id (short handle, short font_format, char *font_name, char *ret_nam
 #endif
 	register short n = 1 + vdi_str2array (font_name, vdi_intin+1);
 #if USE_LOCAL_VDIPB
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 #endif
 	
 	vdi_intin[0]     = font_format;

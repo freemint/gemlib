@@ -23,7 +23,7 @@ vs_dflt_ctab (short handle)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[1]; 
-	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, 0L);
+	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_dummy);
 #endif
 	
 	VDI_TRAP_ESC (vdi_params, handle, 205,2, 0,0);

@@ -38,7 +38,7 @@ vqt_xfntinfo (short handle, short flags, short id, short index, XFNT_INFO *info)
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[5];   
 	short vdi_intout[3]; /* vdi_intout[0..2] will be filled */
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 #endif
 	
 	info->size = sizeof (XFNT_INFO);

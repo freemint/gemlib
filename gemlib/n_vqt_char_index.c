@@ -57,7 +57,7 @@ vqt_char_index (short handle, short scr_index, short scr_mode, short dst_mode)
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[3];   
 	short vdi_intout[1]; 
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L );
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy );
 #endif
 	
 	vdi_intin[0] = scr_index;
