@@ -30,7 +30,7 @@ DIALOG *
 mt_wdlg_create( HNDL_OBJ handle_exit, OBJECT *tree, void *user_data,
                 short code, void *data, short flags, short *global_aes )
 {
-	AES_PARAMS(160,2,0,4,0);
+	AES_PARAMS(160,2,0,4,1);
 	
 	aes_intin[0]	= code;
 	aes_intin[1]	= flags;
