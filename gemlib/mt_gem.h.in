@@ -1280,18 +1280,18 @@ typedef  struct
 
 
 /* editable text field definitions */
-#define EDSTART			0	/**< TODO */
-#define EDINIT 			1	/**< TODO */
-#define EDCHAR 			2	/**< TODO */
-#define EDEND			3	/**< TODO */
+#define ED_START		0	/**< Reserved. Do not use, see mt_objc_edit() */
+#define ED_INIT 		1	/**< turn ON the cursor, see mt_objc_edit() */
+#define ED_CHAR 		2	/**< insert a character in the editable field, see mt_objc_ecit() */
+#define ED_END			3	/**< turn OFF the cursor, see mt_objc_edit() */
 
-#define ED_START		EDSTART	/**< TODO */
-#define ED_INIT			EDINIT	/**< TODO */
-#define ED_CHAR			EDCHAR	/**< TODO */
-#define ED_END 			EDEND	/**< TODO */
+#define EDSTART			ED_START	/**< alias */
+#define EDINIT			ED_INIT		/**< alias */
+#define EDCHAR			ED_CHAR		/**< alias */
+#define EDEND 			ED_END		/**< alias */
 
-#define ED_CRSR			100		/* MagiC only */	/**< TODO */
-#define ED_DRAW			103		/* MagiC only */	/**< TODO */
+#define ED_CRSR			100	/**< TO BE COMPLETED (MagiC), see mt_objc_edit() */
+#define ED_DRAW			103	/**< TO BE COMPLETED (MagiC), see mt_objc_edit() */
 
 /* editable text justification */
 #define TE_LEFT			0	/**< TODO */
@@ -1299,26 +1299,26 @@ typedef  struct
 #define TE_CNTR			2	/**< TODO */
 
 /* objc_change modes */
-#define NO_DRAW			0	/**< TODO */
-#define REDRAW 			1	/**< TODO */
+#define NO_DRAW			0	/**< object will not be redrawn, see mt_objc_change() */
+#define REDRAW 			1	/**< object will be redrawn, see mt_objc_change() */
 
 /* objc_order modes */
-#define OO_LAST			-1	/**< TODO */
-#define OO_FIRST		0	/**< TODO */
+#define OO_LAST			-1	/**< make object the last child, see mt_objc_order() */
+#define OO_FIRST		0	/**< make object the first child, see mt_objc_order() */
 
 /* objc_sysvar modes */
-#define SV_INQUIRE		0	/**< TODO */
-#define SV_SET 			1	/**< TODO */
+#define SV_INQUIRE		0	/**< inquire sysvar data, see mt_objc_sysvar() */
+#define SV_SET 			1	/**< set sysvar data, see mt_objc_sysvar() */
 
 /* objc_sysvar values */
-#define LK3DIND			1	/**< TODO */
-#define LK3DACT			2	/**< TODO */
-#define INDBUTCOL 		3	/**< TODO */
-#define ACTBUTCOL 		4	/**< TODO */
-#define BACKGRCOL 		5	/**< TODO */
-#define AD3DVAL			6	/**< TODO */
-#define MX_ENABLE3D		10      /* MagiC 3.0   */	/**< TODO */
-#define MENUCOL			11      /* MagiC 6     */	/**< TODO */
+#define LK3DIND			1	/**< text of indicator object moves when selected, see mt_objc_sysvar() */
+#define LK3DACT			2	/**< text of activator object moves when selected, see mt_objc_sysvar()*/
+#define INDBUTCOL 		3	/**< default color for indicator objects, see mt_objc_sysvar() */
+#define ACTBUTCOL 		4	/**< default color for activator objects, see mt_objc_sysvar() */
+#define BACKGRCOL 		5	/**< default color for background objects, see mt_objc_sysvar()  */
+#define AD3DVAL			6	/**< number of extra pixels to accomodate 3D effects, see mt_objc_sysvar() */
+#define MX_ENABLE3D		10  /**< TO BE COMPLETED (MagiC 3.0), see mt_objc_sysvar() */
+#define MENUCOL			11  /**< TO BE COMPLETED (MagiC 6), see mt_objc_sysvar() */
 
 /** Mouse Form Definition Block, see mt_graf_mouse() */
 typedef struct mouse_form

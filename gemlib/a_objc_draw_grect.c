@@ -9,7 +9,7 @@
  *  @param tree   see mt_objc_draw()
  *  @param start  see mt_objc_draw()
  *  @param depth  see mt_objc_draw()
- *  @param r  see mt_objc_draw()
+ *  @param r  clipping rectangle to enforce during drawing
  *  @param global_aes global AES array
  *
  *  @return  see mt_objc_draw()

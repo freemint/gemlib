@@ -17,7 +17,7 @@
  *  @param global_aes global AES array
  *
  *  @return the object index of the object found at
- *          coordinates ( mx, my ) or -1 if no object is found.
+ *          coordinates ( \a mx, \a my ) or -1 if no object is found.
  *
  *  @since All AES versions.
  *

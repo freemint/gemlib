@@ -8,47 +8,58 @@
  *  and placement of 3D object effects.
  *
  *  @param mode determines whether attributes should be read or
- *         modified. A value of SV_INQUIRE (0) will read the current
- *         values whereas a value of SV_SET (1) will modify the
+ *         modified. A value of #SV_INQUIRE (0) will read the current
+ *         values whereas a value of #SV_SET (1) will modify the
  *         current values.
  *  @param which determines what attribute you wish to
- *         read or modify.
+ *         read or modify. see the table below.
  *  @param in1 specifies the 1st new value when modifying values, unused otherwise.
  *  @param in2 specifies the 2nd new value when modifying values, unused otherwise.
  *  @param out1 will be filled by the 1st value when reading value, unused otherwise. \n
- *         [option CHECK_NULLPTR] out1 may be NULL
+ *         [option CHECK_NULLPTR] \a out1 may be NULL
  *  @param out2 will be filled by the 2st value when reading value, unused otherwise. \n
- *         [option CHECK_NULLPTR] out2 may be NULL \n
- *          Here is the meanings of the two input/output values referred to as
- *          \p val1 and \p val2 are as follows:
- *          - LK3DIND (1) :   If \p val1 is 1, the text of indicator objects
- *                            does move when selected, otherwise, if 0,
- *                            it does not.
- *                            If \p val2 is 1, the color of indicator
- *                            objects does change when selected,
- *                            otherwise, if 0, it does not.
- *          - LK3DACT (2) :   Same as LK3DIND for activator objects.
- *          - INDBUTCOL (3) : \p val1 specifies the default color for
- *                            indicator objects. \p val2 is unused.
- *          - ACTBUTCOL (4) : \p val1 specifies the default color for
- *                            activator objects. \p val2 is unused.
- *          - BACKGRCOL (5) : \p val1 specifies the default color for
- *                            background objects. \p val2 is unused.
- *          - AD3DVAL (6) :   \p val1 specifies the number of extra pixels on
- *                            each horizontal side of an indicator or
- *                            activator object needed to accomodate 3D
- *                            effects.
- *                            \p val2 specifies the number of extra pixels
- *                            on each vertical side of an indicator or
- *                            activator object needed to accomodate 3D
- *                            effects.
- *                            This setting may only be read, not
- *                            modified.
+ *         [option CHECK_NULLPTR] \a out2 may be NULL \n
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.
  *
  *  @since All AES versions.
+ *
+ *  <table>
+ *  <tr><td>\a which <td> \a in1 / \a out1 <td> \a in2 / \a out2
+ *  <tr><td>#LK3DIND (1)   <td>  If 1, the text of indicator objects
+ *                               does move when selected, otherwise, if 0,
+ *                               it does not.
+ *                         <td>  If 1, the color of indicator
+ *                               objects does change when selected,
+ *                               otherwise, if 0, it does not.
+ *  <tr><td>#LK3DACT (2)   <td>  Same as #LK3DIND for activator objects.
+ *                         <td>  Same as #LK3DIND for activator objects.
+ *  <tr><td>#INDBUTCOL (3) <td>  specifies the default color for
+ *                               indicator objects.
+ *                         <td>  unused.
+ *  <tr><td>#ACTBUTCOL (4) <td>  specifies the default color for
+ *                               activator objects.
+ *                         <td>  unused.
+ *  <tr><td>#BACKGRCOL (5) <td>  specifies the default color for
+ *                               background objects.
+ *                         <td>  unused.
+ *  <tr><td>#AD3DVAL (6)   <td>  specifies the number of extra pixels on
+ *                               each horizontal side of an indicator or
+ *                               activator object needed to accomodate 3D
+ *                               effects. This setting may only be read, not
+ *                               modified.
+ *                         <td>  specifies the number of extra pixels
+ *                               on each vertical side of an indicator or
+ *                               activator object needed to accomodate 3D
+ *                               effects.
+ *                               This setting may only be read, not
+ *                               modified.
+ *  <tr><td>#MX_ENABLE3D (10) <td> TO BE COMPLETED (TODO)
+ *                            <td> TO BE COMPLETED (TODO)
+ *  <tr><td>#MENUCOL (11)  <td>  TO BE COMPLETED (TODO)
+ *                         <td>  TO BE COMPLETED (TODO)
+ *  </table>
  *
  *  Applications should not use mt_objc_sysvar() to change these
  *  settings since all changes are global. Only CPXs or Desk

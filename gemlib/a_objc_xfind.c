@@ -17,15 +17,16 @@
  *  @param global_aes global AES array
  *
  *  @return the object index of the object found at
- *          coordinates ( mx, my ) or -1 if no object is found.
+ *          coordinates ( \a mx, \a my ) or -1 if no object is found.
  *
  *  @sa mt_objc_find()
  *
- *  The Difference between this function and objc_find is it, that not the
+ *  The Difference between this function and mt_objc_find() is it, that not the
  *  normal rectangle of the OBJECT, but the outer rectangle is used, so that
  *  this function handles the border of the OBJECTs.
  *   
- *  @since The existence of this function can be checked with mt_appl_getinfo(5)
+ *  @since The existence of this function can be checked with mt_appl_getinfo() 
+ *         with #AES_PCGEM mode.
  *
  */
 
