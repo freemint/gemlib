@@ -39,7 +39,7 @@ gcc:
 	rm -rf $@
 	mkdir $@ $@/lib $@/include
 	cp $(FILES_INC) $@/include
-	cp $(LIB_GCC $(LIB_GCC_MSHORT) $@/lib
+	cp $(LIB_GCC) $(LIB_GCC_MSHORT) $@/lib
 	$(ZIP) -ur $@.zip $@
 	rm -rf $@
 
