@@ -40,6 +40,10 @@ _v_bez (int ctrl0, int handle, int count, int *xyarr, char *bezarr,
 	*totmoves = vdi_intout[1];
 }
 
+/*
+ * * NOTE: requires NVDI version 2.x or higher
+ */
+
 void
 v_bez (int handle, int count, int *xyarr, char *bezarr, int *extent,
        int *totpts, int *totmoves)
@@ -47,6 +51,9 @@ v_bez (int handle, int count, int *xyarr, char *bezarr, int *extent,
 	_v_bez (6, handle, count, xyarr, bezarr, extent, totpts, totmoves);
 }
 
-/*
- * * NOTE: requires NVDI version 2.x or higher
- */
+void
+v_bez_fill (int handle, int count, int *xyarr, char *bezarr, int *extent,
+	    int *totpts, int *totmoves)
+{
+	_v_bez (9, handle, count, xyarr, bezarr, extent, totpts, totmoves);
+}
