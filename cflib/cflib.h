@@ -42,12 +42,15 @@
    to test for features in specific releases.  */
 #define __CFLIB__		__CFLIB_MAJOR__
 #define	__CFLIB_MAJOR__		0
-#define	__CFLIB_MINOR__		20
+#define	__CFLIB_MINOR__		21
 #define __CFLIB_REVISION__	0
 #define __CFLIB_BETATAG__	""
 
 #if !defined(__GEMLIB__)
-#error This cflib version require an up-to-date GEMLib
+    || (__GEMLIB_MAJOR__ != 0
+        || __GEMLIB_MINOR__ < 43
+        || (__GEMLIB_MINOR__ == 43 && __GEMLIB_REVISION__ < 2))
+#error This cflib version require an up-to-date gemlib.
 #endif
 
 /*******************************************************************************
