@@ -900,14 +900,14 @@ typedef struct
 	long	flags;		/**< since MagiC 6.  only used if the extended mode #SHW_XMDFLAGS is set*/
 } XSHW_COMMAND;
 
-/** TODO */
+/** description of a thread, see mt_shel_write() with #SWM_THRCREATE mode */
 typedef struct
 {
-	long			__CDECL (*proc)(void *par);	/**< TODO */
-	void			*user_stack;				/**< TODO */
-	unsigned long	stacksize;					/**< TODO */
-	short			mode;						/**< immer auf 0 setzen!  */
-	long			res1;						/**< immer auf 0L setzen! */
+	long			__CDECL (*proc)(void *par);	/**< entry point of the thread */
+	void			*user_stack;				/**< user stack for the thread */
+	unsigned long	stacksize;					/**< size of the user stack */
+	short			mode;						/**< immer auf 0 setzen! (???)  */
+	long			res1;						/**< immer auf 0L setzen! (???) */
 } THREADINFO;
 
 /** TODO */
@@ -939,7 +939,7 @@ typedef  struct
  */
 #define SWM_NEWMSG			9	
 #define SWM_AESMSG			10	/**< Send a message to the AES, see mt_shel_write() */
-#define SWM_THRCREATE		20	/**< MagiC 4.5 */
+#define SWM_THRCREATE		20	/**< create a new thread, see mt_shel_write() */
 
 /* other names for shel_write modes */
 #define SHW_NOEXEC			SWM_LAUNCH		/**< alias */
