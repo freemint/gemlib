@@ -39,8 +39,8 @@ __BEGIN_DECLS
 #define __GEMLIB__		__GEMLIB_MAJOR__
 #define	__GEMLIB_MAJOR__     0
 #define	__GEMLIB_MINOR__    42
-#define __GEMLIB_REVISION__   2
-#define __GEMLIB_BETATAG__   ""
+#define __GEMLIB_REVISION__  99
+#define __GEMLIB_BETATAG__   "-20021228"
 
 
 #ifdef __GEMLIB_DEFS
@@ -899,14 +899,15 @@ short   mt_evnt_multi  (short Type, short Clicks, short WhichButton, short Which
 short   mt_evnt_multi_fast (const EVMULT_IN * em_i,
 							short MesagBuf[], EVMULT_OUT * em_o, short *global_aes);
 short	mt_evnt_timer  (unsigned long Interval, short *global_aes);
-#define event_button(a,b,c,d,e,f,g) mt_event_button(a,b,c,d,e,f,g,aes_global)
-#define event_dclick(a,b) mt_event_dclick(a,b,aes_global)
-#define event_keybd() mt_event_keybd(aes_global)
-#define event_mesag(a) mt_event_mesag(a,aes_global)
-#define event_mouse(a,b,c,d,e,f,g,h,i) mt_event_mouse(a,b,c,d,e,f,g,h,i,aes_global)
-#define event_multi(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v) mt_event_multi(a,b,c,d, e,f,g,h,i, j,k,l,m,n, o,p,q,r, s,t,u,v,aes_global)
-#define event_multi_fast(a,b,c) mt_event_multi_fast(a,b,c,aes_global)
-#define event_timer(a) mt_event_timer(a,aes_global)
+#define evnt_button(a,b,c,d,e,f,g)		mt_evnt_button(a,b,c,d,e,f,g,aes_global)
+#define evnt_dclick(a,b)				mt_evnt_dclick(a,b,aes_global)
+#define evnt_keybd()					mt_evnt_keybd(aes_global)
+#define evnt_mesag(a)					mt_evnt_mesag(a,aes_global)
+#define evnt_mouse(a,b,c,d,e,f,g,h,i)	mt_event_mouse(a,b,c,d,e,f,g,h,i,aes_global)
+#define evnt_multi(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v) \
+										mt_evnt_multi(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,aes_global)
+#define evnt_multi_fast(a,b,c)			mt_evnt_multi_fast(a,b,c,aes_global)
+#define evnt_timer(a)					mt_evnt_timer(a,aes_global)
 /**@}*/
 
 /** @addtogroup a_form
@@ -953,15 +954,16 @@ short	mt_graf_shrinkbox	(short Fx, short Fy, short Fw, short Fh, short Sx, short
 short	mt_graf_slidebox	(OBJECT *, short Parent, short Object, short Direction, short *global_aes);
 short	mt_graf_watchbox	(OBJECT *, short Object, short InState, short OutState, short *global_aes);
 
-#define graf_dragbox(a,b,c,d, e,f,g,h, i,j) mt_graf_dragbox(a,b,c,d,e,f,g,h,i,jaes_global)
-#define graf_growbox(a,b,c,d, e,f,g,h) mt_graf_growbox(a,b,c,d,e,f,g,h,aes_global)
-#define graf_handle(a,b,c,d) mt_graf_handle(a,b,c,d,aes_global)
-#define graf_mbox(a,b,c,d,e,f) mt_graf_mbox(a,b,c,d,e,f,aes_global)
-#define graf_mouse(a,b) mt_graf_mouse(a,b,aes_global)
-#define graf_rubberbox(a,b,c,d,e,f) mt_graf_rubberbox(a,b,c,d,e,f,aes_global)
-#define graf_shrinkbox(a,b,c,d, e,f,g,h) mt_graf_shrinkbox(a,b,c,d,e,f,g,h,aes_global)
-#define graf_slidebox(a,b,c,d,e) mt_graf_slidebox(a,b,c,d,e,aes_global)
-#define graf_watchbox(a,b,c,d,e) mt_graf_watchbox(a,b,c,d,e,aes_global)
+#define graf_dragbox(a,b,c,d,e,f,g,h,i,j)	mt_graf_dragbox(a,b,c,d,e,f,g,h,i,j,aes_global)
+#define graf_growbox(a,b,c,d, e,f,g,h)		mt_graf_growbox(a,b,c,d,e,f,g,h,aes_global)
+#define graf_handle(a,b,c,d)				mt_graf_handle(a,b,c,d,aes_global)
+#define graf_mbox(a,b,c,d,e,f)				mt_graf_mbox(a,b,c,d,e,f,aes_global)
+#define graf_mkstate(a,b,c,d)				mt_graf_mkstate(a,b,c,d,aes_global)
+#define graf_mouse(a,b)						mt_graf_mouse(a,b,aes_global)
+#define graf_rubberbox(a,b,c,d,e,f)			mt_graf_rubberbox(a,b,c,d,e,f,aes_global)
+#define graf_shrinkbox(a,b,c,d,e,f,g,h)		mt_graf_shrinkbox(a,b,c,d,e,f,g,h,aes_global)
+#define graf_slidebox(a,b,c,d)				mt_graf_slidebox(a,b,c,d,aes_global)
+#define graf_watchbox(a,b,c,d)				mt_graf_watchbox(a,b,c,d,aes_global)
 
 /* the old names */
 #define graf_movebox(a,b,c,d,e,f) mt_graf_mbox(a,b,c,d,e,f,aes_global)
