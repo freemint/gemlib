@@ -108,6 +108,7 @@ _VDI_INPUT = \
 	vex_butv.c \
 	vex_curv.c \
 	vex_motv.c \
+	vex_wheelv.c \
 	vex_timv.c \
 	vq_key_s.c \
 	vq_mouse.c \
