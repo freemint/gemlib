@@ -1,3 +1,118 @@
+2004-07-18 Sunday 19:46  Frank Naumann <fnaumann@freemint.de>
+
+	* VERSION, cflib.h:
+
+	Bumped version to 0.21.0 for new release.
+	
+2004-07-18 Sunday 19:45  Frank Naumann <fnaumann@freemint.de>
+
+	* cflib.spec.in:
+
+	Updated for new release.
+	
+2004-07-18 Sunday 19:03  Frank Naumann <fnaumann@freemint.de>
+
+	* app_init.c:
+
+	Updated for gemlib changes, use _AESversion macro.
+	
+2004-05-17 Monday 08:28  Standa Opichal <opichals@seznam.cz>
+
+	* Makefile:
+
+	Removing bash only features (?)
+	
+2004-05-17 Monday 08:28  Standa Opichal <opichals@seznam.cz>
+
+	* menu_is_menu_key.c:
+
+	Making the menu shortcut search to also work when capslock is on and
+	not making left/right shift differences.
+	
+2004-05-17 Monday 08:23  Standa Opichal <opichals@seznam.cz>
+
+	* nkcc-gc.s:
+
+	Fixing register usage.
+	The gcc version didn't have the d2-d4 saved before use.
+	
+2004-01-06 Tuesday 08:16  Standa Opichal <opichals@seznam.cz>
+
+	* Makefile, Makefile.objs, VERSION, cflib.spec, cflib.spec.in:
+
+	Updating to use the VERSION file.
+	
+2003-08-19 Tuesday 11:40  Standa Opichal <opichals@seznam.cz>
+
+	* Makefile.objs, intrface/Makefile:
+
+	Adjusted to be able to propagate CVS/CONFIGVARS GLOBAL variable setting.
+	
+	This is usefull e.g. when you have the libc in other than default directory
+	on your system to specify the -I and -L paths.
+	
+2003-03-25 Tuesday 10:20  Frank Naumann <fnaumann@freemint.de>
+
+	* cflib.h, misc_get_patchlev.c:
+
+	get_patchlev get const char * instead char *.
+	
+2003-03-03 Monday 10:24  Standa Opichal <opichals@seznam.cz>
+
+	* app_xgetinfo.c, cflib.h:
+
+	The version check fixed.
+	
+2003-02-28 Friday 20:46  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* EXTRAFILES, app_xgetinfo.c, cflib.h:
+
+	merge branch mgemlib-gemlib-0_42_2
+	
+2002-05-28 Tuesday 12:33  Standa Opichal <opichals@seznam.cz>
+
+	* Makefile:
+
+	PREFIX variable added to the CONFIGVARS for install and uninstall makefile rules.
+	
+2002-05-28 Tuesday 12:31  Standa Opichal <opichals@seznam.cz>
+
+	* intrface/: Makefile, extobfix.c:
+
+	The int -> short conversion and 32bit int is used. Compilable with the current
+	mintlib.
+	
+2002-05-08 Wednesday 12:48  Standa Opichal <opichals@seznam.cz>
+
+	* cookie.c:
+
+	The include adjusted to work with the current mintlib CVS.
+	
+2001-07-23 Monday 13:21  Ralph Lowinski <altf4@freemint.de>
+
+	* app_init.c:
+
+	adapted to gemlib 0.41.1;  aes_global, aes_control, ... are no longer declared public
+	
+2001-04-17 Tuesday 01:14  Frank Naumann <fnaumann@freemint.de>
+
+	* colorpop.c:
+
+	Fixed 'black color' bug in the colorpopup.
+	
+2001-04-11 Wednesday 23:11  Frank Naumann <fnaumann@freemint.de>
+
+	* Makefile.objs, demo/Makefile, intrface/Makefile:
+
+	cflib/gemma depend now on the gemlib in the repository and not the
+	globally installed gemlib. Fixed some header includes too.
+	
+2001-02-28 Wednesday 20:58  Frank Naumann <fnaumann@freemint.de>
+
+	* ChangeLog:
+
+	Added ChangeLog for 0.20.0 release.
+	
 2001-02-28 Wednesday 15:18  Frank Naumann <fnaumann@freemint.de>
 
 	* cflib.spec:
