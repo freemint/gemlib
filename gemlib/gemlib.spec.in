@@ -1,7 +1,7 @@
 # Gemlib specfile
 
 # Please note this file is maintained in the freemint CVS repository as
-# "lib/gemlib/gemlib.spec". Most current version is avaible there and
+# "lib/gemlib/gemlib.spec.in". Most current version is avaible there and
 # any modification should be stored there.
 
 Summary       : GEM libraries and header files
@@ -11,7 +11,7 @@ Release       : 1
 Copyright     : Public Domain
 Group         : Development/Libraries
 
-Packager      : Xavier Joubert <xavier.joubert@free.fr>
+Packager      : Standa Opichal <opichals@seznam.cz>
 Vendor        : Sparemint
 URL           : http://arnaud.bercegeay.free.fr/gemlib/
 
@@ -82,6 +82,9 @@ ln -s %{_prefix}/include/mt_gemx.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include/
 
 
 %changelog
+* Tue Oct 21 2003 Standa Opichal <opichals@seznam.cz>
+- version 0.43.0 - new generation gemlib
+
 * Sun Feb 16 2003 Standa Opichal <opichals@seznam.cz>
 - updated to version 0.42.99, betaversion of new generation gemlib
 
