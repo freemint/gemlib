@@ -29,7 +29,7 @@ vt_resolution (short handle, short xres, short yres, short *xset, short *yset)
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[2];   
 	short vdi_intout[2]; 
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 #endif
 	
 	vdi_intin[0] = xres;

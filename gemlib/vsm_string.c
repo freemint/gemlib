@@ -31,7 +31,7 @@ vsm_string (short handle, short len, short echo, short echoxy[], char *str)
 	short vdi_intin[2];   
 	short vdi_ptsin[2];   
 	short vdi_intout[VDI_INTOUTMAX]; 
-	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_intout, 0L );
+	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_intout, vdi_dummy );
 #endif
 	
 	vdi_intin[0]      = len;
