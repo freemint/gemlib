@@ -42,6 +42,8 @@ short aes_global  [AES_GLOBMAX];
 /*
  * global vdi binding params 
  */
+
+#if 0
 short vdi_control[VDI_CNTRLMAX];
 short vdi_intin[VDI_INTINMAX];
 short vdi_ptsin[VDI_PTSINMAX];
@@ -56,3 +58,4 @@ VDIPB vdi_params =
 	&vdi_intout[0],
 	&vdi_ptsout[0]
 };
+#endif
