@@ -29,20 +29,20 @@
  *  than 1.40 without a patch program available from Atari
  *  Corp..
  *
- *  @note The mt_appl_record() function is bugged and stores a count of
+ *  @note The mt_appl_trecord() function is bugged and stores a count of
  *        a 200Hz timer in EVNTREC::ap_value for APPEVNT_TIMER events,
  *        instead of a number of millisecondes. So, there is a coefficient
- *        of 5 between the value stored by mt_appl_record() and the value
+ *        of 5 between the value stored by mt_appl_trecord() and the value
  *        expected by mt_appl_tplay().
  *        The mt_appl_tplay() function takes care of that and adds a coefficient
  *        of 5 for APPEVNT_TIMER event... but this has been implemented the
  *        wrong way ! and now the coefficient between "time" recorded by 
- *        mt_appl_record() and "time" played by mt_appl_tplay() is 25.
+ *        mt_appl_trecord() and "time" played by mt_appl_tplay() is 25.
  *        That's the reason why the right value for the scale parameter is
  *        100/25=4 for normal speed, 200/25=8 for twice speeder replay,
  *        50/25=2 for twice slower replay...
  *
- *  @note about the previous note: this story is just an hypothesis to explain 
+ *  @note About the previous note: this story is just an hypothesis to explain 
  *        the fact: the official doc says 100=normal speed but experiences have
  *        proven that 4=normal speed (Magic, tos).
  *
