@@ -154,15 +154,16 @@
  *                    - \a out1 & 0x00FF indicates the
  *                         highest legal value for the
  *                         mode parameter of mt_shel_write().
+ *                         (parameter \a wodex & 0x00FF)
  *                    - \a out1 & 0xFF00 indicate which
  *                         extended mt_shel_write() mode bits
- *                         are supported.
+ *                         are supported. (parameter \a wodex & 0xFF00)
  *                    - \a out2 is 0 if mt_shel_write() with
- *                         a mode parameter of 0 launches
+ *                         a mode parameter of 0 (#SWM_LAUNCH) launches
  *                         an application or 1 if it cancels
  *                         the previous mt_shel_write().
  *                    - \a out3 is 0 if mt_shel_write() with
- *                         a mode parameter of 1 launches an
+ *                         a mode parameter of 1 (#SWM_LAUNCHNOW) launches an
  *                         application immediately or 1 if
  *                         it takes effect when the current
  *                         application exits.
