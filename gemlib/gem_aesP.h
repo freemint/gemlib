@@ -7,7 +7,9 @@
 #ifndef _GEM_AES_P_
 # define _GEM_AES_P_
 
+# ifndef _GEMLIB_H_
 # include "gem.h"
+# endif
 
 
 #if defined(__GNUC_INLINE__) && (__GNUC__ > 2 || __GNUC_MINOR__ > 5)
