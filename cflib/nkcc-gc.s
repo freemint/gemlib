@@ -143,6 +143,7 @@ exit1:
 
 _nkc_tos2n:
 	movel	sp@(4), d0		| Parameter Åber Stack!
+	movem.l	d2-d4,sp@- 		| store registers
 
 |------------- separate TOS key code
 
@@ -379,6 +380,7 @@ scan12:
 
 exit2:
 	tstw	d0			| set CCR
+	movem.l	sp@+,d2-d4 		| restore registers
 	rts				| bye
 
 |------------- special handling for key codes created by TOS' 3.06 ASCII input
@@ -386,6 +388,7 @@ exit2:
 tos306:
 	andw	#NKFf_CAPS,d2		| isolate CapsLock flag
 	orw	d2,d0			| merge with ASCII code
+	movem.l	sp@+,d2-d4 		| restore registers
 	rts				| bye
 
 |***************************************************************************
