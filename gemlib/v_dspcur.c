@@ -30,11 +30,10 @@
 void
 v_dspcur (short handle, short x, short y)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsin[2];   
+
 	VDI_PARAMS(vdi_control, 0L, vdi_ptsin, vdi_dummy, vdi_dummy );
-#endif
 	
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;
