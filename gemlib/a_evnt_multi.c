@@ -99,7 +99,7 @@ mt_evnt_multi (short events, short bclicks, short bmask, short bstate,
 
 	aes_addrin[0] = (long)msg;
 
-	aes(&aes_params);
+	AES_TRAP(aes_params);
 
 	ptr = &aes_intout[1];
 	*mx = *(ptr ++);									/* [1] */
