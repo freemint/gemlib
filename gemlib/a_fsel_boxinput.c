@@ -9,9 +9,9 @@
  *
  *  @param path 
  *  @param file 
- *  @param exit_but All parameters are consistent with fsel_exinput() with the
+ *  @param exit_button All parameters are consistent with fsel_exinput() with the
  *                  notable lack of title. \n
- *             [option CHECK_NULLPTR] exit_but may be NULL
+ *             [option CHECK_NULLPTR] exit_button may be NULL
  *  @param label title for the fileselector
  *  @param callback (TODO: doc wanted!)
  *  @param global_aes global AES array
@@ -25,7 +25,7 @@
  */
 
 short
-mt_fsel_boxinput (char *path, char *file, short *exit_but, const char *label, void * callback, short *global_aes)
+mt_fsel_boxinput (char *path, char *file, short *exit_button, const char *label, void * callback, short *global_aes)
 {
 	AES_PARAMS(91,0,2,4,0);
 
@@ -37,9 +37,9 @@ mt_fsel_boxinput (char *path, char *file, short *exit_but, const char *label, vo
 	AES_TRAP(aes_params);
 
 #if CHECK_NULLPTR
-	if (exit_but)
+	if (exit_button)
 #endif
-	*exit_but = aes_intout[1];
+	*exit_button = aes_intout[1];
 
 	return aes_intout[0];
 }
