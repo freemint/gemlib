@@ -60,8 +60,9 @@ typedef enum
 	Modem1, Modem2, Seriell1, Seriell2, Prn
 } DEBUGDEV;
 
-typedef struct _popup POPUP;
-struct _popup
+
+typedef struct popup POPUP;
+struct popup
 {
 	OBJECT	*tree;			/* der Objektbaum */
 	short	max_item;		/* maximal m”gliche Anzahl */
@@ -69,11 +70,11 @@ struct _popup
 	short	item_len;		/* L„nge eines Eintrages */
 };
 
-typedef short (*KEY_CB)(OBJECT *tree, short edit_obj, short kstate, short *kreturn, short *next_obj);
 
+typedef void (*MDIAL_WCB)(short *msg);
 
-typedef struct _mdial MDIAL;
-struct _mdial
+typedef struct mdial MDIAL;
+struct mdial
 {
 	OBJECT	*tree;
 	short	win_handle;
@@ -87,11 +88,16 @@ struct _mdial
 	MDIAL	*next;
 };
 
-typedef void (*MDIAL_WCB)(short *msg);
 
+typedef struct wdialog WDIALOG;
 
-typedef struct _wdial WDIALOG;
-struct _wdial
+typedef void (*WDIAL_OCB)(WDIALOG *dial);
+typedef int  (*WDIAL_XCB)(WDIALOG *dial, short exit_obj);
+
+#define WOCB_NULL	NULL
+#define WXCB_NULL	NULL
+
+struct wdialog
 {
 	WDIALOG	*next;
 
@@ -109,18 +115,9 @@ struct _wdial
 		next_obj,
 		edit_obj;
 
-	void	(*open_cb) (WDIALOG *dial);	
-	int	(*exit_cb) (WDIALOG *dial, short exit_obj);	
+	WDIAL_OCB open_cb;	
+	WDIAL_XCB exit_cb;	
 };
-
-typedef void (*WDIAL_OCB)(WDIALOG *dial);
-typedef int  (*WDIAL_XCB)(WDIALOG *dial, short exit_obj);
-
-#define WOCB_NULL	(WDIAL_OCB)NULL
-#define WXCB_NULL	(WDIAL_XCB)NULL
-
-typedef int (*FSEL_CB)(char *path, char *name);
-#define FSCB_NULL	(FSEL_CB)NULL
 
 /*******************************************************************************
  * globals.c
@@ -262,6 +259,9 @@ int	fs_case_sens	(char *filename);
  * filesel functions
  *******************************************************************************/
 
+typedef int (*FSEL_CB)(char *path, char *name);
+#define FSCB_NULL NULL
+
 int select_file (char *path, char *name, char *mask, char *title, FSEL_CB open_cb);
 
 /*******************************************************************************
@@ -283,6 +283,9 @@ short do_fontsel (short flags, char *title, short *id, short *pts);
 
 short	cf_form_do (OBJECT *tree, short *ed_start);
 short 	simple_dial (OBJECT *tree, short start_edit);
+
+typedef short (*KEY_CB)(OBJECT *tree, short edit_obj, short kstate, short *kreturn, short *next_obj);
+
 KEY_CB	set_formdo_keycb (KEY_CB keycb);
 
 /*******************************************************************************
