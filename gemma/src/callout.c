@@ -522,14 +522,6 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 				case SWM_LAUNCHNOW:
 				case SWM_LAUNCHACC:
 				{
-					typedef struct
-					{
-						char *newcmd;
-						long psetlimit;
-						long prenice;
-						char *defdir;
-						char *env;
-					} SHELW;
 
 					if (proc->gem.addr_in[1])
 						TOUCH(proc->gem.addr_in[1]);
