@@ -75,10 +75,19 @@ short	mt_form_xerr	(long errcode, char *errfile, short * global);
 /*
  * Extensions to the object library (MagiC only)
  */
-void	objc_wchange	(OBJECT *tree, short obj, short new_state, GRECT *clip, short whandle);
-void	objc_wdraw	(OBJECT *tree, short start, short depth, GRECT *clip, short whandle);
-short	objc_wedit	(OBJECT *tree, short obj, short key, short *idx, short kind, short whandle);
-short	objc_xedit	(OBJECT *tree, short obj, short key, short *xpos, short subfn, GRECT *r);
+
+/** @addtogroup a_form
+ *  @{
+ */
+void	mt_objc_wchange	(OBJECT *tree, short obj, short new_state, GRECT *clip, short whandle, short * global);
+void	mt_objc_wdraw	(OBJECT *tree, short start, short depth, GRECT *clip, short whandle, short * global);
+short	mt_objc_wedit	(OBJECT *tree, short obj, short key, short *idx, short kind, short whandle, short * global);
+short	mt_objc_xedit	(OBJECT *tree, short obj, short key, short *xpos, short subfn, GRECT *r, short * global);
+#define objc_wchange(a,b,c,d,e)	mt_objc_wchange(a,b,c,d,e,aes_global)
+#define objc_wdraw(a,b,c,d,e)	mt_objc_wdraw(a,b,c,d,e,aes_global)
+#define objc_wedit(a,b,c,d,e,f)	mt_objc_wedit(a,b,c,d,e,f,aes_global)
+#define objc_xedit(a,b,c,d,e,f)	mt_objc_xedit(a,b,c,d,e,f,aes_global)
+/**@}*/
 
 
 /*
