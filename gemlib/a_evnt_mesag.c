@@ -315,6 +315,7 @@
                                  identifier and msg[4] contains its exit
                                  code.
 \endverbatim
+ *  @param global_aes global AES array
  *
  *  @return Currently reserved by Atari and currently is defined
  *          as a value of 1.
