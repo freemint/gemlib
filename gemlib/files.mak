@@ -310,6 +310,7 @@ OBJ = \
  v_updwk.o	\
  v_write_meta.o	\
  vdi_array2str.o	\
+ vdi_dummy.o	\
  vdi_str2array.o	\
  vdi_wstrlen.o	\
  vex_butv.o	\
