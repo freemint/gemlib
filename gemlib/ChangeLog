@@ -1,0 +1,1510 @@
+2003-10-20 Monday 19:05  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/VERSION:
+
+	this is now gemlib 0.43.0
+	
+2003-09-22 Monday 19:07  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: gem_aesP.h, gem_vdiP.h:
+
+	fixed some warnings with gcc3 (patch supplied by Patrice Mandin)
+	
+2003-08-19 Tuesday 11:40  Standa Opichal <opichals@seznam.cz>
+
+	* cflib/Makefile.objs, cflib/intrface/Makefile, gemlib/Makefile,
+	gemlib/Makefile.objs, gemma/libgemma/Makefile.objs,
+	gemma/src/Makefile:
+
+	Adjusted to be able to propagate CVS/CONFIGVARS GLOBAL variable setting.
+	
+	This is usefull e.g. when you have the libc in other than default directory
+	on your system to specify the -I and -L paths.
+	
+2003-08-07 Thursday 07:49  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gem_vdiP.h:
+
+	remove USE_LOCAL_VDIPB option:
+	the default setting has always been USE_LOCAL_VDIPB=1, and the case
+	USE_LOCAL_VDIPB=0 never worked (some piece of code is missing). Furthermore
+	the option USE_LOCAL_VDIPB=1 is the only way to have safe thread VDI
+	bindings... so the code specific to USE_LOCAL_VDIPB=0 is now removed and
+	the option USE_LOCAL_VDIPB no more exist.
+	
+2003-08-07 Thursday 07:44  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/v_opnvwk.c:
+
+	- remove USE_LOCAL_VDIPB option
+	- replace dummy variable by 0L if option CHECK_NULLPTR is set
+	
+2003-08-07 Thursday 07:41  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: vst_point.c, vst_rotation.c, vst_scratch.c,
+	vst_unload_fonts.c, vswr_mode.c, vt_alignment.c, vt_axis.c,
+	vt_origin.c, vt_resolution.c:
+
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 Thursday 07:32  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: n_v_bez_off.c, vsin_mode.c, vsl_color.c, vsl_ends.c,
+	vsl_type.c, vsl_udsty.c, vsl_width.c, vsm_choice.c, vsm_color.c,
+	vsm_height.c, vsm_locator.c, vsm_string.c, vsm_type.c,
+	vsm_valuator.c, vsp_film.c, vst_alignment.c, vst_color.c,
+	vst_effects.c, vst_error.c, vst_font.c, vst_height.c,
+	vst_load_fonts.c:
+
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 Thursday 07:15  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: vql_attributes.c, vqm_attributes.c, vqp_filmname.c,
+	vqt_attributes.c, vqt_cachesize.c, vqt_extent.c, vqt_extent16.c,
+	vqt_extent16n.c, vqt_fontinfo.c, vqt_get_table.c, vqt_name.c,
+	vqt_width.c, vr_recfl.c, vr_trnfm.c, vro_cpyfm.c, vrq_choice.c,
+	vrq_locator.c, vrq_string.c, vrq_valuator.c, vrt_cpyfm.c,
+	vs_calibrate.c, vs_clip.c, vs_clip_off.c, vs_clip_pxy.c,
+	vs_color.c, vs_curaddress.c, vs_mute.c, vs_palette.c, vsc_expose.c,
+	vsc_form.c, vsf_color.c, vsf_interior.c, vsf_perimeter.c,
+	vsf_style.c, vsf_udpat.c, vsf_xperimeter.c:
+
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 Thursday 07:05  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: v_pmarker.c, v_rbox.c, v_rfbox.c, v_rmcur.c, v_rvoff.c,
+	v_rvon.c, v_savecache.c, v_set_app_buff.c, v_show_c.c, v_sound.c,
+	v_trays.c, v_updwk.c, v_write_meta.c, vex_butv.c, vex_curv.c,
+	vex_motv.c, vex_timv.c, vex_wheelv.c, vm_coords.c, vm_filename.c,
+	vm_pagesize.c, vq_calibrate.c, vq_cellarray.c, vq_chcells.c,
+	vq_color.c, vq_curaddress.c, vq_extnd.c, vq_key_s.c, vq_mouse.c,
+	vq_page_name.c, vq_scan.c, vq_tabstatus.c, vq_tdimensions.c,
+	vq_tray_names.c, vqf_attributes.c, vqin_mode.c:
+
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 Thursday 06:56  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: v_copies.c, v_curdown.c, v_curhome.c, v_curleft.c,
+	v_curright.c, v_curtext.c, v_curup.c, v_dspcur.c, v_eeol.c,
+	v_eeos.c, v_ellarc.c, v_ellipse.c, v_ellpie.c, v_enter_cur.c,
+	v_escape2000.c, v_exit_cur.c, v_fillarea.c, v_flushcache.c,
+	v_fontinit.c, v_form_adv.c, v_get_pixel.c, v_gtext.c, v_gtext16.c,
+	v_gtext16n.c, v_hardcopy.c, v_hide_c.c, v_justified.c,
+	v_loadcache.c, v_meta_extents.c, v_offset.c, v_opnwk.c, v_orient.c,
+	v_output_window.c, v_page_size.c, v_pieslice.c, v_pline.c:
+
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 Thursday 06:46  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: n_vqt_name_and_id.c, n_vqt_pairkern.c,
+	n_vqt_real_extent.c, n_vqt_trackkern.c, n_vqt_xfntinfo.c,
+	n_vr_transfer_bits.c, n_vs_ctab.c, n_vs_ctab_entry.c,
+	n_vs_dflt_ctab.c, n_vs_document_info.c, n_vs_hilite_color.c,
+	n_vs_max_color.c, n_vs_min_color.c, n_vs_weight_color.c,
+	n_vsf_bg_color.c, n_vsf_fg_color.c, n_vsl_bg_color.c,
+	n_vsl_fg_color.c, n_vsm_bg_color.c, n_vsm_fg_color.c,
+	n_vsr_bg_color.c, n_vsr_fg_color.c, n_vst_arbpt.c, n_vst_arbpt32.c,
+	n_vst_bg_color.c, n_vst_charmap.c, n_vst_fg_color.c, n_vst_kern.c,
+	n_vst_map_mode.c, n_vst_name.c, n_vst_setsize.c, n_vst_setsize32.c,
+	n_vst_skew.c, n_vst_track_offset.c, n_vst_width.c, v_alpha_text.c,
+	v_arc.c, v_bar.c, v_bit_image.c, v_cellarray.c, v_circle.c,
+	v_clear_disp_list.c, v_clrwk.c, v_clsvwk.c, v_clswk.c,
+	v_contourfill.c:
+
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 Thursday 06:36  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: n_v_value2color.c, n_vq_ctab.c, n_vq_ctab_entry.c,
+	n_vq_ctab_id.c, n_vq_devinfo.c, n_vq_dflt_ctab.c,
+	n_vq_ext_devinfo.c, n_vq_hilite_color.c, n_vq_margins.c,
+	n_vq_max_color.c, n_vq_min_color.c, n_vq_prn_scaling.c,
+	n_vq_px_format.c, n_vq_scrninfo.c, n_vq_weight_color.c,
+	n_vqf_bg_color.c, n_vqf_fg_color.c, n_vql_bg_color.c,
+	n_vql_fg_color.c, n_vqm_bg_color.c, n_vqm_fg_color.c,
+	n_vqr_bg_color.c, n_vqr_fg_color.c, n_vqt_advance.c,
+	n_vqt_advance32.c, n_vqt_bg_color.c, n_vqt_char_index.c,
+	n_vqt_ext_name.c, n_vqt_f_extent.c, n_vqt_f_extent16.c,
+	n_vqt_f_extent16n.c, n_vqt_fg_color.c, n_vqt_fontheader.c:
+
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 Thursday 06:26  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: n_v_bez.c, n_v_bez_on.c, n_v_bez_qual.c, n_v_clsbm.c,
+	n_v_color2nearest.c, n_v_color2value.c, n_v_create_ctab.c,
+	n_v_create_itab.c, n_v_ctab_idx2value.c, n_v_ctab_idx2vdi.c,
+	n_v_ctab_vdi2idx.c, n_v_delete_ctab.c, n_v_delete_itab.c,
+	n_v_ftext.c, n_v_ftext16.c, n_v_ftext16n.c, n_v_ftext_offset.c,
+	n_v_ftext_offset16.c, n_v_get_ctab_id.c, n_v_get_outline.c,
+	n_v_getbitmap_info.c, n_v_getoutline.c, n_v_open_bm.c, n_v_opnbm.c,
+	n_v_opnprn.c, n_v_resize_bm.c, n_v_setrgb.c:
+
+	remove USE_LOCAL_VDIPB option
+	
+2003-07-29 Tuesday 20:31  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/n_vqt_ext_name.c:
+
+	set font_format to 1 (bitmap font) instead of 0 if vdi_control[4]=34
+	and vdi_intout[33] (=name[32]) says that it's a bitmap font.
+	
+2003-07-28 Monday 20:00  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_edit_get_pos.c:
+
+	fix binding (ctrl4=2, not 0)
+	
+2003-07-22 Tuesday 17:48  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: SRCFILES, files.mak, mt_gem.h.in, vsf_perimeter3.c,
+	vsf_xperimeter.c:
+
+	rename vsf_perimeter3 to vsf_xperimeter (contr. Gerhard Stoll)
+	
+2003-07-22 Tuesday 17:43  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_graf_multirubber.c:
+
+	fix binding: it's AES#69, it's not AES#70 (contr. Gerhard Stoll)
+	
+2003-07-22 Tuesday 17:38  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_appl_getinfo.c:
+
+	[DOC] add note: Magic2 not supported
+	
+2003-07-21 Monday 20:22  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_appl_trecord.c:
+
+	[DOC] fix EVNTREC struct: ap_event is a LONG (contrib Gerhard Stoll)
+	
+2003-07-14 Monday 16:52  Frank Naumann <fnaumann@freemint.de>
+
+	* gemlib/EXTRAFILES:
+
+	Added missing source file mt_gem.h.in.
+	
+2003-07-14 Monday 16:45  Frank Naumann <fnaumann@freemint.de>
+
+	* gemlib/EXTRAFILES:
+
+	Added missing VERSION file.
+	
+2003-07-14 Monday 08:17  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/VERSION:
+
+	this is release 0.42.99-20030714 (last beta release before 0.43.0 ?)
+	
+2003-07-14 Monday 08:14  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/n_vq_devinfo.c:
+
+	lot of changes (almost rewritten from scratch)
+	
+2003-07-14 Monday 08:11  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gemx.h:
+
+	- add new type GEMLIB_XATTR (defined to XATTR or void) for XFSL_FILTER
+	- 2nd parameter of vq_devinfo is now named "dev_exists" instead of "dev_open"
+	- add vqt_devinfo
+	
+2003-07-14 Monday 08:06  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: SRCFILES, files.mak, n_vqt_devinfo.c:
+
+	add vqt_devinfo
+	
+2003-06-24 Tuesday 21:01  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/doxydoc.c:
+
+	[DOC] add history sections (ChangeLog* files)
+	
+2003-06-24 Tuesday 19:21  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/ChangeLog.422:
+
+	add old ChangeLog files (ChangeLog.422 and ChangeLog.MGL) from gemlib38
+	(after the split) up to gemlib 0.42.99 (before the merge), for both
+	branches of the lib:
+	- ChangeLog.422 for gemlib from 0.41.0 to 0.42.2
+	- ChangeLog.MGL for mgemlib from PL39 to PL41
+	
+2003-06-24 Tuesday 19:15  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/ChangeLog.MGL:
+
+	ChangeLog.422
+	
+2003-06-24 Tuesday 19:12  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: Makefile, cvs2cl.pl, users:
+
+	add rules and tools to build the ChangeLog file
+	
+2003-06-24 Tuesday 18:58  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: mt_gem.h.in, mt_gemx.h:
+
+	[DOC] add (dummy) doc to undocumented struct/macro
+	
+2003-06-24 Tuesday 18:55  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_graf_multirubber.c:
+
+	[DOC] fix doc: the parameter name is 'rec', it's not 'rect'
+	
+2003-06-24 Tuesday 18:51  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/v_fontinit.c:
+
+	cast vdi_intin to quiet gcc warnings
+	
+2003-06-24 Tuesday 18:49  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_edit_get_format.c:
+
+	[DOC] fixed doxygen syntax
+	
+2003-06-18 Wednesday 18:27  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/.cvsignore:
+
+	add Doxyfile and gemlib.spec, now generated files
+	
+2003-06-17 Tuesday 18:53  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/v_orient.c:
+
+	v_orient now returns O (portrait) instead of 1 (landscape) as default value
+	
+2003-06-17 Tuesday 18:51  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gemx.h:
+
+	add vqt_is_char_available (macro)
+	
+2003-06-17 Tuesday 18:50  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gem.h.in:
+
+	add VINMODE_ prefix for vqin_mode/vsin_mode mode values
+	
+2003-06-17 Tuesday 15:28  Frank Naumann <fnaumann@freemint.de>
+
+	* gemlib/: .cvsignore, mt_gem.h.in:
+
+	Ignore mt_gem.h and changed parameter name so it don't conflict with
+	MiNTLib head (just avoid some warnings).
+	
+2003-06-09 Monday 18:57  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gem.h.in:
+
+	- add other names for vsl_ends modes (LE_SQUARED, LE_ARROWED, LE_ROUNDED)
+	- add other names for vsl_type modes (LT_SOLID, LT_LONGDASH, LT_DOTTED,
+	  LT_DASHDOT, LT_DASHED, LT_DASHDOTDOT, LT_USERDEF, LONGDASH, DOT, DASH2DOT)
+	- add other names for vsm_type modes (MT_DOT, MT_PLUS, MT_ASTERISK,
+	  MT_SQUARE, MT_DCROSS, MT_DIAMOND)
+	- add other names for vst_effects modes (TF_NORMAL, TF_THICKENED,
+	  TF_LIGHTENED, TF_SLANTED, TF_UNDERLINED, TF_OUTLINED, TF_SHADOWED)
+	
+2003-06-09 Monday 16:04  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_shel_envrn.c:
+
+	add patch for TOSes 'PATH=' bug
+	
+2003-06-03 Tuesday 20:13  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gem.h.in:
+
+	add MENUCOL and fix MFORM (swap mf_bg and mf_fg)
+	
+2003-06-02 Monday 20:44  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/vqt_name.c:
+
+	[DOC] add doc (contrib. Rainer Seitel)
+	fixed name filling: the vdi_array2str function added a NULL byte at the end
+	of the string, so vdi_array2str can't be used here (contrib. Rainer Seitel)
+	
+2003-06-02 Monday 20:39  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_shel_read.c, a_wind_get.c:
+
+	[DOC] some fixes (contrib. Rainer Seitel)
+	
+2003-06-02 Monday 20:36  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_shel_find.c:
+
+	[DOC] expand buffer size to 260 bytes (contrib. Rainer Seitel)
+	
+2003-06-02 Monday 20:32  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_rsrc_saddr.c:
+
+	[DOC] add doc (contrib. Rainer Seitel)
+	
+2003-06-02 Monday 20:28  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_objc_offset.c:
+
+	[DOC] add note (contrib. Rainer Seitel)
+	
+2003-06-02 Monday 20:23  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_fsel_exinput.c:
+
+	GEM 2 doesn't have extended fileselector... so fixed the
+	global_aes[] check.
+	[DOC] change buffer size to 260 bytes (VFAT or mint domain)
+	
+2003-06-02 Monday 20:16  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_appl_trecord.c:
+
+	[DOC] add note: the LONG value seems to have words swapped
+	
+2003-05-24 Saturday 18:27  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gem.h.in:
+
+	- remove SHW_RESCHANGE
+	- add structure SHELTAIL
+	- fix structure THREADINFO
+	
+2003-05-19 Monday 11:47  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gem.h.in:
+
+	- add some appl_control constants (APC_INFO, APC_MENU, APC_WIDGETS,
+	  APCI_HIDDEN, APCI_HASMBAR, APCI_HASDESK)
+	- add some appl_getinfo constants (AES_MESSAGE, AES_OBJECT, AES_FORM)
+	- add some menu_bar modes (MENU_GETMODE, MENU_SETMODE, MENU_UPDATE,
+	  MENU_INSTL, MENU_HIDDEN, MENU_PULLDOWN, MENU_SHADOWED)
+	- add shel_write structures (SHELW, XSHW_COMMAND, THREADINFO)
+	- add shel_write constant SWM_THRCREATE
+	- add shel_write alternative constants (SHW_NOEXEC, SHW_EXEC, SHW_EXEC_ACC,
+	  SHW_SHUTDOWN, SHW_RESCHNG, SHW_BROADCAST, SHW_INFRECGN, SHW_AESSEND,
+	  SHW_THR_CREATE)
+	- add shel_write constants (where do theses constant come from and mean ?)
+	  SHW_IMMED, SHW_CHAIN, SHW_DOS, SHW_RESCHANGE, SHW_PARALLEL, SHW_SINGLE
+	- add shel_write constants for parameter 'isover' (CL_NORMAL, CL_PARSE)
+	- add shel_write constants for parameter 'isover' (ENVIRON_SIZE,
+	  ENVIRON_CHANGE, ENVIRON_COPY)
+	- add shel_write constants (NM_APTERM, AP_AESTERM)
+	- add extended shel_write modes and parameters (SHW_XMDLIMIT, SHW_XMDNICE,
+	  SHW_XMDDEFDIR, SHW_XMDENV)
+	- add WF_WIDGETS
+	- add W_HIDER
+	
+2003-05-19 Monday 11:30  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_wind_get.c, a_wind_set.c:
+
+	[DOC] add doc for WF_WIDGETS
+	
+2003-05-19 Monday 11:25  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_shel_write.c:
+
+	[DOC] add item SWM_THRCREATE (doc wanted)
+	
+2003-05-19 Monday 11:22  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_appl_control.c:
+
+	[DOC] add doc for APC_INFO, APC_MENU and APC_WIDGETS
+	
+2003-05-17 Saturday 17:38  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gemx.h:
+
+	add FNTS_OPTION (another name for FNTS_OPT)
+	add SORTDEFAULT (for extended fileselector)
+	add COLOR_TAB_MAGIC (value of the COLOR_TAB.magic field)
+	fix _gcbitmap structure (replace "CTAB_REF * ctab" and "ITAB_REF * itab"
+	by "CTAB_REF ctab" and "ITAB_REF itab")
+	
+2003-05-12 Monday 16:36  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gem_aesP.h:
+
+	fix asm inline trap (add 'memory' keyword)
+	and remove previous workaround ('volatile' keyword for intout and ptsout)
+	
+2003-05-12 Monday 16:31  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gem_vdiP.h:
+
+	fix asm inline trap (add 'memory' keyword)
+	
+2003-05-11 Sunday 18:34  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: vst_rotation.c, vst_unload_fonts.c, vswr_mode.c,
+	vt_alignment.c, vt_axis.c, vt_origin.c, vt_resolution.c:
+
+	add vdi_dummy feature
+	
+2003-05-11 Sunday 18:25  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: v_rvon.c, v_savecache.c, v_set_app_buff.c, v_show_c.c,
+	v_sound.c, v_trays.c, v_updwk.c, v_write_meta.c, vex_butv.c,
+	vex_curv.c, vex_motv.c, vex_timv.c, vex_wheelv.c, vm_coords.c,
+	vm_filename.c, vm_pagesize.c, vq_calibrate.c, vq_cellarray.c,
+	vq_chcells.c, vq_color.c, vq_curaddress.c, vq_key_s.c,
+	vq_page_name.c, vq_scan.c, vq_tabstatus.c, vq_tdimensions.c,
+	vq_tray_names.c, vqf_attributes.c, vqin_mode.c, vqp_filmname.c,
+	vqt_extent.c, vqt_extent16.c, vqt_extent16n.c, vqt_name.c,
+	vr_recfl.c, vr_trnfm.c, vro_cpyfm.c, vrq_choice.c, vrq_string.c,
+	vrq_valuator.c, vrt_cpyfm.c, vs_calibrate.c, vs_clip.c,
+	vs_clip_off.c, vs_clip_pxy.c, vs_color.c, vs_curaddress.c,
+	vs_mute.c, vs_palette.c, vsc_expose.c, vsc_form.c, vsf_color.c,
+	vsf_interior.c, vsf_perimeter.c, vsf_perimeter3.c, vsf_style.c,
+	vsf_udpat.c, vsin_mode.c, vsl_color.c, vsl_ends.c, vsl_type.c,
+	vsl_udsty.c, vsl_width.c, vsm_choice.c, vsm_color.c, vsm_height.c,
+	vsm_string.c, vsm_type.c, vsm_valuator.c, vsp_film.c,
+	vst_alignment.c, vst_color.c, vst_effects.c, vst_font.c,
+	vst_height.c, vst_load_fonts.c:
+
+	add vdi_dummy feature
+	
+2003-05-11 Sunday 18:14  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: n_vs_dflt_ctab.c, n_vs_document_info.c,
+	n_vs_hilite_color.c, n_vs_max_color.c, n_vs_min_color.c,
+	n_vs_weight_color.c, n_vsf_bg_color.c, n_vsf_fg_color.c,
+	n_vsl_bg_color.c, n_vsl_fg_color.c, n_vsm_bg_color.c,
+	n_vsm_fg_color.c, n_vsr_bg_color.c, n_vsr_fg_color.c,
+	n_vst_bg_color.c, n_vst_charmap.c, n_vst_fg_color.c, n_vst_kern.c,
+	n_vst_map_mode.c, n_vst_name.c, n_vst_skew.c, n_vst_track_offset.c,
+	n_vst_width.c, v_alpha_text.c, v_arc.c, v_bar.c, v_bit_image.c,
+	v_cellarray.c, v_circle.c, v_clear_disp_list.c, v_clrwk.c,
+	v_clsvwk.c, v_clswk.c, v_contourfill.c, v_copies.c, v_curdown.c,
+	v_curhome.c, v_curleft.c, v_curright.c, v_curtext.c, v_curup.c,
+	v_dspcur.c, v_eeol.c, v_eeos.c, v_ellarc.c, v_ellipse.c,
+	v_ellpie.c, v_enter_cur.c, v_escape2000.c, v_exit_cur.c,
+	v_fillarea.c, v_flushcache.c, v_fontinit.c, v_form_adv.c,
+	v_get_pixel.c, v_gtext.c, v_gtext16.c, v_gtext16n.c, v_hardcopy.c,
+	v_hide_c.c, v_justified.c, v_meta_extents.c, v_offset.c,
+	v_orient.c, v_output_window.c, v_page_size.c, v_pieslice.c,
+	v_pline.c, v_pmarker.c, v_rbox.c, v_rfbox.c, v_rmcur.c, v_rvoff.c:
+
+	add vdi_dummy feature
+	
+2003-05-11 Sunday 18:06  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/n_vq_margins.c:
+
+	add vdi_dummy feature; update doc
+	
+2003-05-11 Sunday 18:03  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: n_v_bez_off.c, n_v_bez_on.c, n_v_bez_qual.c,
+	n_v_clsbm.c, n_v_color2nearest.c, n_v_color2value.c,
+	n_v_create_ctab.c, n_v_create_itab.c, n_v_ctab_idx2value.c,
+	n_v_ctab_idx2vdi.c, n_v_ctab_vdi2idx.c, n_v_delete_ctab.c,
+	n_v_delete_itab.c, n_v_ftext.c, n_v_ftext16.c, n_v_ftext16n.c,
+	n_v_ftext_offset.c, n_v_ftext_offset16.c, n_v_get_ctab_id.c,
+	n_v_get_outline.c, n_v_getbitmap_info.c, n_v_getoutline.c,
+	n_v_open_bm.c, n_v_resize_bm.c, n_v_setrgb.c, n_v_value2color.c,
+	n_vq_ctab.c, n_vq_ctab_entry.c, n_vq_ctab_id.c, n_vq_dflt_ctab.c,
+	n_vq_ext_devinfo.c, n_vq_hilite_color.c, n_vq_max_color.c,
+	n_vq_min_color.c, n_vq_prn_scaling.c, n_vq_px_format.c,
+	n_vq_scrninfo.c, n_vq_weight_color.c, n_vqf_bg_color.c,
+	n_vqf_fg_color.c, n_vql_bg_color.c, n_vql_fg_color.c,
+	n_vqm_bg_color.c, n_vqm_fg_color.c, n_vqr_bg_color.c,
+	n_vqr_fg_color.c, n_vqt_advance.c, n_vqt_advance32.c,
+	n_vqt_bg_color.c, n_vqt_char_index.c, n_vqt_ext_name.c,
+	n_vqt_f_extent.c, n_vqt_f_extent16.c, n_vqt_f_extent16n.c,
+	n_vqt_fg_color.c, n_vqt_fontheader.c, n_vqt_name_and_id.c,
+	n_vqt_pairkern.c, n_vqt_real_extent.c, n_vqt_trackkern.c,
+	n_vqt_xfntinfo.c, n_vr_transfer_bits.c, n_vs_ctab.c,
+	n_vs_ctab_entry.c:
+
+	add vdi_dummy feature
+	
+2003-05-11 Sunday 18:01  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gem_vdiP.h:
+
+	add USE_VDI_DUMMY option:
+	if USE_VDI_DUMMY=1, when VDIPB.intout and/or VDIPB.ptsout are unused in
+	a binding, they are set to a dummy array (vdi_dummy) instead of NULL to
+	avoid crash when a buggy VDI driver tries to write data in intout or in
+	ptsout.
+	
+2003-05-11 Sunday 17:54  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: SRCFILES, files.mak:
+
+	add vdi_dummy
+	
+2003-05-11 Sunday 17:52  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/vdi_dummy.c:
+
+	initial checkin
+	
+2003-05-11 Sunday 14:35  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gem_aesP.h:
+
+	add 'volatile' keywords for aes_intout[] and aes_ptsout[].
+	
+	Is there another way to tell GCC that AES_TRAP(aespb) may
+	alter data in aespb (aespb.intout and aespb.ptsout) ?
+	
+2003-05-11 Sunday 14:31  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_wind_draw.c:
+
+	remove unsused 'ptr' variable
+	
+2003-05-11 Sunday 14:30  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_graf_multirubber.c:
+
+	cast 'rec' to (long) to quiet GCC warnings
+	
+2003-05-11 Sunday 14:28  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_graf_handle.c, a_graf_mkstate.c:
+
+	add 'if CHECK_NULLPTR' preprocessor test to quiet GCC warnings
+	
+2003-05-08 Thursday 17:52  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/v_get_pixel.c:
+
+	add CHECK_NULLPTR option
+	
+2003-05-08 Thursday 17:50  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: SRCFILES, files.mak, mt_gem.h.in:
+
+	add v_sound, vs_mute, vqp_filmname, v_offset and v_fontinit
+	
+2003-05-08 Thursday 17:47  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: v_fontinit.c, v_offset.c, v_sound.c, vqp_filmname.c,
+	vs_mute.c:
+
+	add new bindings
+	
+2003-05-08 Thursday 14:50  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/vsf_perimeter3.c:
+
+	some fixes (hmmm... :-/)
+	
+2003-05-08 Thursday 14:47  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: mt_gem.h.in, v_trays.c, vq_tray_names.c:
+
+	v_trays and vq_tray_names are now short function (return >0 value is call supported)
+	
+2003-05-08 Thursday 13:55  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: SRCFILES, files.mak, mt_gem.h.in, vsf_perimeter3.c:
+
+	add vsf_perimeter3()
+	
+2003-05-08 Thursday 13:52  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/vrq_valuator.c:
+
+	add CHECK_NULLPTR option
+	
+2003-05-08 Thursday 11:42  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gemx.h:
+
+	add names mt_edit_get_color and mt_edit_set_color (with color instead of colour)
+	
+2003-05-08 Thursday 09:24  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: SRCFILES, a_graf_multirubber.c, files.mak, gem.h,
+	mt_gem.h.in:
+
+	add graf_multirubber()
+	
+2003-05-03 Saturday 18:37  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/vqm_attributes.c:
+
+	add optimisation (for USE_LOCAL_VDIPB option only)
+	
+2003-05-03 Saturday 18:35  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/v_pieslice.c:
+
+	fix zeroing of ptsin[2..5]
+	
+2003-05-03 Saturday 18:33  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: vq_cellarray.c, vqt_fontinfo.c, vqt_width.c:
+
+	add CHECK_NULLPTR option
+	
+2003-05-03 Saturday 18:30  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/n_vqt_advance32.c:
+
+	fix binding: ctrl3=1 (just 1 entry in intin); add CHECK_NULLPTR option
+	
+2003-05-03 Saturday 18:28  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/n_vqt_xfntinfo.c:
+
+	fill fields format, id, and index of info using values returned in intout[0..2]
+	
+2003-05-03 Saturday 18:21  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: n_v_getbitmap_info.c, n_vq_hilite_color.c,
+	n_vq_max_color.c, n_vq_min_color.c, n_vq_weight_color.c,
+	n_vqt_advance.c, n_vqt_pairkern.c, n_vqt_trackkern.c:
+
+	add CHECK_NULLPTR option
+	
+2003-05-03 Saturday 18:18  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/n_v_bez_on.c:
+
+	fix binding: ctrl1=1 (here, ctrl doesnt mean nb of entries in ptsin, ctrl1=1 means bez_ON and ctrl1=0 means bez_OFF)
+	
+2003-04-29 Tuesday 20:18  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gem.h.in:
+
+	add v_curaddress (another name for vs_curaddress)
+	
+2003-04-29 Tuesday 20:14  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gemx.h:
+
+	add vst_kern_info (another name for vst_track_offset)
+	
+2003-04-29 Tuesday 20:05  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/n_vst_map_mode.c:
+
+	vst_map_mode now returns -1 if the VDI doesnt support this call, or if the VDI doesnt return anything
+	
+2003-04-27 Sunday 13:28  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: vq_page_name.c, vq_scan.c, vq_tdimensions.c, vt_axis.c,
+	vt_resolution.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-27 Sunday 13:16  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: n_vqf_bg_color.c, n_vqf_fg_color.c, n_vql_bg_color.c,
+	n_vql_fg_color.c, n_vqm_bg_color.c, n_vqm_fg_color.c,
+	n_vqr_bg_color.c, n_vqr_fg_color.c, n_vqt_bg_color.c,
+	n_vqt_fg_color.c, v_trays.c, vq_chcells.c, vq_curaddress.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-27 Sunday 13:08  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: n_v_color2nearest.c, n_v_value2color.c,
+	n_vq_ctab_entry.c, n_vq_px_format.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-23 Wednesday 15:26  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: vst_alignment.c, vst_height.c, vst_point.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-23 Wednesday 15:20  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/v_loadcache.c:
+
+	fix binding: nb elt in intin have to be put in ctrl3 (not ctrl1)
+	
+2003-04-23 Wednesday 15:04  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: n_vst_arbpt.c, n_vst_arbpt32.c, n_vst_kern.c,
+	n_vst_name.c, n_vst_setsize.c, n_vst_setsize32.c,
+	n_vst_track_offset.c, n_vst_width.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-23 Wednesday 15:01  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gem_vdiP.h:
+
+	enable option CHECK_NULLPTR for VDI bindings
+	
+2003-04-21 Monday 19:22  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_appl_init.c:
+
+	initialise some variable that may be used to check if an AES is loaded
+	
+2003-04-19 Saturday 16:49  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_wind_get.c:
+
+	add doc for WF_KIND, WF_NAME, WF_INFO; extent binding for WF_INFO and WF_NAME
+	
+2003-04-19 Saturday 16:47  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/SRCFILES:
+
+	add new files a_fsel_boxinput.c a_graf_wwatchbox.c a_graf_xhandle.c a_objc_xfind.c and a_wind_draw.c
+	
+2003-04-19 Saturday 16:44  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: gem.h, mt_gem.h.in:
+
+	add mt_fsel_boxinput, mt_graf_xhandle, mt_graf_wwatchbox, mt_objc_xfind, and mt_wind_draw
+	
+2003-04-19 Saturday 16:40  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_fsel_boxinput.c, a_graf_wwatchbox.c, a_graf_xhandle.c,
+	a_objc_xfind.c, a_wind_draw.c:
+
+	new function (thanks to Martin Elsaesser for the bindings)
+	
+2003-04-18 Friday 19:09  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gem.h.in:
+
+	add constants APC_xxx for appl_control mode
+	
+2003-04-17 Thursday 20:45  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/Makefile:
+
+	add Doxyfile as dependency for doc; add mt_gem.h as dependency for objs
+	
+2003-04-16 Wednesday 18:29  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_glue.c, gem.h:
+
+	add graf_rubbox (another name for graf_rubberbox)
+	
+2003-04-15 Tuesday 19:11  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/Makefile:
+
+	add targets gemlib.spec, mt_gem.h and Doxyfile
+	
+2003-04-15 Tuesday 19:10  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/VERSION:
+
+	contain release numbers used to build gemlib.spec, mt_gem.h and Doxyfile
+	
+2003-04-15 Tuesday 19:05  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: gemlib.spec, gemlib.spec.in:
+
+	gemlib.spec is now generated from gemlib.spec.in
+	
+2003-04-15 Tuesday 19:01  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: mt_gem.h, mt_gem.h.in:
+
+	mt_gem.h is now generated from mt_gem.h.in
+	
+2003-04-15 Tuesday 18:51  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: Doxyfile, Doxyfile.in:
+
+	Doxyfile is now generated from Doxyfile.in
+	
+2003-04-08 Tuesday 21:38  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_wdlg_close.c:
+
+	[doc] update (pointer to returned parameters may be NULL)
+	
+2003-04-08 Tuesday 21:35  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_wdlg_get_edit.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-08 Tuesday 21:33  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: x_wdlg_create.c, x_wdlg_get_udata.c:
+
+	fix: ctrl[4]=1, it's not 0
+	
+2003-04-08 Tuesday 21:26  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_wind_get.c:
+
+	add CHECK_NULLPTR option and fix init of aes_control[3,4]
+	
+2003-04-08 Tuesday 21:21  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_rsrc_gaddr.c, a_wind_calc.c, pdlg_close.c,
+	pdlg_evnt.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-06 Sunday 17:13  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_objc_offset.c, a_objc_sysvar.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-06 Sunday 16:11  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: x_lbox_get_slct_item.c, x_lbox_get_tree.c,
+	x_lbox_get_udata.c:
+
+	fix: ctrl[4]=1, not 0
+	
+2003-04-06 Sunday 16:02  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: x_lbox_create.c, x_lbox_get_item.c, x_lbox_get_items.c:
+
+	fix: ctrl[4]=1, not 0
+	
+2003-04-06 Sunday 11:00  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_graf_dragbox.c, a_graf_handle.c, a_graf_mkstate.c,
+	a_graf_rubbox.c, x_form_wbutton.c, x_form_wkeybd.c, x_form_xdo.c,
+	x_fslx_do.c, x_fslx_evnt.c, x_fslx_open.c, x_fslx_set_flags.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-06 Sunday 10:48  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_form_button.c, a_form_center.c, a_form_keybd.c,
+	a_fsel_exinput.c, a_fsel_input.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-05 Saturday 17:34  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: x_fnts_do.c, x_fnts_evnt.c, x_fnts_get_info.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-05 Saturday 17:29  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_fnts_create.c:
+
+	fix: ctrl[3]=2, not 4
+	
+2003-04-05 Saturday 17:25  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_fnts_close.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-03 Thursday 20:02  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_appl_getinfo.c, a_appl_search.c, x_edit_evnt.c,
+	x_edit_get_buf.c, x_edit_get_colour.c, x_edit_get_font.c,
+	x_edit_get_format.c, x_edit_get_pos.c, x_edit_get_scrollinfo.c,
+	x_edit_get_sel.c, x_edit_resized.c:
+
+	[doc] fix some doxygen layout
+	
+2003-04-03 Thursday 19:10  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_evnt_mouse.c, a_evnt_multi.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-03 Thursday 18:51  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_evnt_button.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-03 Thursday 18:37  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_edit_set_dirty.c:
+
+	fix: ctrl[1]=3 instead of 2 and ctrl[3]=1 instead of 2
+	
+2003-04-03 Thursday 18:33  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_edit_resized.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-03 Thursday 18:24  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_edit_get_scrollinfo.c:
+
+	fix: ctrl[2]=10 instead of 6
+	
+2003-04-03 Thursday 18:21  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: x_edit_get_sel.c, x_edit_get_scrollinfo.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-03 Thursday 18:18  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_edit_get_sel.c:
+
+	fix: ctrl[4]=2 instead of 0
+	
+2003-04-03 Thursday 18:09  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_edit_get_cursor.c:
+
+	fix: ctrl[4]=1 instead of 0
+	
+2003-04-03 Thursday 18:07  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: x_edit_get_font.c, x_edit_get_cursor.c,
+	x_edit_get_pos.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-03 Thursday 17:55  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: x_edit_get_buf.c, x_edit_get_format.c,
+	x_edit_get_colour.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-03 Thursday 17:51  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_edit_get_buf.c:
+
+	fix: ctrl[4]=1 instead of 0
+	
+2003-04-03 Thursday 17:46  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_edit_evnt.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-03 Thursday 17:37  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_edit_create.c:
+
+	fix: ctrl[4]=1 instead of 0
+	
+2003-04-03 Thursday 17:14  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_glue.c, a_appl_init.c:
+
+	move initialisation of gl_apid and gl_ap_version from mt_appl_init() to appl_init()
+	
+2003-04-03 Thursday 17:12  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gem.h:
+
+	move initialisation of gl_apid and gl_ap_version from mt_appl_init() to the appl_init() macro
+	
+2003-04-03 Thursday 16:58  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: a_appl_getinfo.c, a_appl_search.c:
+
+	add CHECK_NULLPTR option
+	
+2003-04-03 Thursday 16:49  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gem_aesP.h:
+
+	add CHECK_NULLPTR (nice idea by Martin Elsasser against dummy variables)
+	
+2003-03-25 Tuesday 10:20  Frank Naumann <fnaumann@freemint.de>
+
+	* cflib/: cflib.h, misc_get_patchlev.c:
+
+	get_patchlev get const char * instead char *.
+	
+2003-03-25 Tuesday 10:18  Frank Naumann <fnaumann@freemint.de>
+
+	* gemlib/gemlib.spec:
+
+	Corrected URL and packager too.
+	
+2003-03-25 Tuesday 09:28  Frank Naumann <fnaumann@freemint.de>
+
+	* gemlib/gemlib.spec:
+
+	Updated specfile with new release too. Btw. is maybe a good idea
+	to sort out the version numbering in one file and update all
+	other dependencies automatically.
+	
+2003-03-24 Monday 22:51  Standa Opichal <opichals@seznam.cz>
+
+	* gemlib/vsl_ends.c:
+
+	Note about the TOS4.04 added into the documentation.
+	
+2003-03-24 Monday 22:49  Standa Opichal <opichals@seznam.cz>
+
+	* gemlib/vsl_ends.c:
+
+	The TOS4.04 VDI requires the intout array to be set. Otherwise it crashes.
+	
+2003-03-24 Monday 15:00  Frank Naumann <fnaumann@freemint.de>
+
+	* Makefile:
+
+	Use $(MAKE) instead hardcoded 'make'.
+	
+2003-03-23 Sunday 17:39  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gem.h:
+
+	this is now release 0.42.99-20030323
+	
+2003-03-23 Sunday 17:36  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/files.mak:
+
+	add vex_wheelv.o module for sozobon, purec and gcc281 makefiles
+	
+2003-03-19 Wednesday 14:41  Frank Naumann <fnaumann@freemint.de>
+
+	* gemlib/: SRCFILES, mt_gem.h, vex_wheelv.c:
+
+	Added new binding vex_wheelv. Hope it's correct so.
+	
+2003-03-18 Tuesday 21:06  Frank Naumann <fnaumann@freemint.de>
+
+	* gemlib/vsf_udpat.c:
+
+	Corrected binding, planes are in cntrl_3 and not cntrl_1!
+	
+2003-03-16 Sunday 14:52  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gem.h:
+
+	XaAES extensions: fix MU_MX, add MU_WHEEL, add MU_MX, add MU_NORM_KEYBD, add MU_DYNAMIC_KEYBD, add MENUBAR, add WF_MENU, add WF_WHEEL, add WF_XAAES, add WA_WHEEL
+	
+2003-03-15 Saturday 19:35  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: v_page_size.c, vro_cpyfm.c, x_lbox_create.c,
+	x_lbox_set_items.c:
+
+	[doc] fix some comments (doxygen syntax)
+	
+2003-03-15 Saturday 19:33  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gemx.h:
+
+	swap mt_lbox_get_avis and mt_lbox_get_visible (mt_lbox_get_visible is the real function, mt_lbox_get_avis is a macro to mt_lbox_get_visible); [doc] fix some doxygen syntax in comments; [doc] add /** TODO */ comment to undocumented data
+	
+2003-03-15 Saturday 19:28  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gem.h:
+
+	[doc] add some /** TODO */ comments to undocumented data
+	
+2003-03-15 Saturday 19:25  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gemx.h:
+
+	fix lbox_get_avis and lbox_get_visible macro: the real function name is mt_lbox_get_visible (it's not mt_lbox_get_avis)
+	
+2003-03-15 Saturday 19:23  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/doxydoc.c:
+
+	[doc] add doxygen group x_wdlg
+	
+2003-03-15 Saturday 19:21  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/Doxyfile:
+
+	[doc] add VdiHdl=short predefined macro for doxygen
+	
+2003-03-14 Friday 20:47  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/x_fslx_open.c:
+
+	[doc] fix some doxy-comment syntax
+	
+2003-03-14 Friday 20:45  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gemx.h:
+
+	[doc] add dummy /** TODO */ comment to undocumented data
+	
+2003-03-14 Friday 20:43  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gem.h:
+
+	[doc] add VDI groups; add dummy /** TODO */ comment to undocumented data
+	
+2003-03-14 Friday 20:38  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/: x_fnts_create.c, x_fnts_get_style.c:
+
+	[doc] fix some doxy-comment syntax
+	
+2003-03-14 Friday 20:35  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/doxydoc.c:
+
+	[doc] create groups for VDI API
+	
+2003-03-14 Friday 20:33  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_objc_sysvar.c:
+
+	remove extra antislash-p keyword before EOL
+	
+2003-03-14 Friday 20:28  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_evnt_mesag.c:
+
+	[doc] add missing parameter global_aes
+	
+2003-03-14 Friday 20:26  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_appl_getinfo.c:
+
+	[doc] remove the 4 antislash-0, uneeded here
+	
+2003-03-14 Friday 20:23  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/Doxyfile:
+
+	[doc] exclude a_glue.c gem.h and gemx.h
+	
+2003-03-03 Monday 10:24  Standa Opichal <opichals@seznam.cz>
+
+	* cflib/: app_xgetinfo.c, cflib.h:
+
+	The version check fixed.
+	
+2003-02-28 Friday 20:46  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* CONFIGVARS, Makefile, RULES, cflib/EXTRAFILES,
+	cflib/app_xgetinfo.c, cflib/cflib.h, gemlib/Doxyfile,
+	gemlib/EXTRAFILES, gemlib/MISCFILES, gemlib/Makefile,
+	gemlib/SRCFILES, gemlib/_sx_asm.s, gemlib/a_appl_bvset.c,
+	gemlib/a_appl_control.c, gemlib/a_appl_exit.c,
+	gemlib/a_appl_find.c, gemlib/a_appl_getinfo.c,
+	gemlib/a_appl_init.c, gemlib/a_appl_read.c, gemlib/a_appl_search.c,
+	gemlib/a_appl_tplay.c, gemlib/a_appl_trecord.c,
+	gemlib/a_appl_write.c, gemlib/a_appl_xgetinfo.c,
+	gemlib/a_appl_yield.c, gemlib/a_evnt_button.c,
+	gemlib/a_evnt_dclick.c, gemlib/a_evnt_keybd.c,
+	gemlib/a_evnt_mesag.c, gemlib/a_evnt_mouse.c,
+	gemlib/a_evnt_multi.c, gemlib/a_evnt_multi_fast.c,
+	gemlib/a_evnt_timer.c, gemlib/a_form_alert.c,
+	gemlib/a_form_button.c, gemlib/a_form_center.c,
+	gemlib/a_form_dial.c, gemlib/a_form_do.c, gemlib/a_form_error.c,
+	gemlib/a_form_keybd.c, gemlib/a_fsel_exinput.c,
+	gemlib/a_fsel_input.c, gemlib/a_glue.c, gemlib/a_graf_dragbox.c,
+	gemlib/a_graf_growbox.c, gemlib/a_graf_handle.c,
+	gemlib/a_graf_mbox.c, gemlib/a_graf_mkstate.c,
+	gemlib/a_graf_mouse.c, gemlib/a_graf_rubbox.c,
+	gemlib/a_graf_shrinkbox.c, gemlib/a_graf_slidebox.c,
+	gemlib/a_graf_watchbox.c, gemlib/a_menu_attach.c,
+	gemlib/a_menu_bar.c, gemlib/a_menu_click.c, gemlib/a_menu_icheck.c,
+	gemlib/a_menu_ienable.c, gemlib/a_menu_istart.c,
+	gemlib/a_menu_popup.c, gemlib/a_menu_register.c,
+	gemlib/a_menu_settings.c, gemlib/a_menu_text.c,
+	gemlib/a_menu_tnormal.c, gemlib/a_menu_unregister.c,
+	gemlib/a_objc_add.c, gemlib/a_objc_change.c,
+	gemlib/a_objc_delete.c, gemlib/a_objc_draw.c, gemlib/a_objc_edit.c,
+	gemlib/a_objc_find.c, gemlib/a_objc_offset.c,
+	gemlib/a_objc_order.c, gemlib/a_objc_sysvar.c,
+	gemlib/a_rsrc_free.c, gemlib/a_rsrc_gaddr.c, gemlib/a_rsrc_load.c,
+	gemlib/a_rsrc_obfix.c, gemlib/a_rsrc_rcfix.c,
+	gemlib/a_rsrc_saddr.c, gemlib/a_scrp_clear.c, gemlib/a_scrp_read.c,
+	gemlib/a_scrp_write.c, gemlib/a_shel_envrn.c, gemlib/a_shel_find.c,
+	gemlib/a_shel_get.c, gemlib/a_shel_help.c, gemlib/a_shel_put.c,
+	gemlib/a_shel_rdef.c, gemlib/a_shel_read.c, gemlib/a_shel_wdef.c,
+	gemlib/a_shel_write.c, gemlib/a_wind_calc.c,
+	gemlib/a_wind_calc_grect.c, gemlib/a_wind_close.c,
+	gemlib/a_wind_create.c, gemlib/a_wind_create_grect.c,
+	gemlib/a_wind_delete.c, gemlib/a_wind_find.c, gemlib/a_wind_get.c,
+	gemlib/a_wind_get_grect.c, gemlib/a_wind_new.c,
+	gemlib/a_wind_open.c, gemlib/a_wind_open_grect.c,
+	gemlib/a_wind_set.c, gemlib/a_wind_set_grect.c,
+	gemlib/a_wind_set_str.c, gemlib/a_wind_update.c, gemlib/doxydoc.c,
+	gemlib/files.mak, gemlib/gcc.mak, gemlib/gcc281-16.mak,
+	gemlib/gcc281.mak, gemlib/gem.h, gemlib/gem_aesP.h,
+	gemlib/gem_vdiP.h, gemlib/gemlib.spec, gemlib/gemlib.todo,
+	gemlib/gemx.h, gemlib/globals.c, gemlib/mt_gem.h, gemlib/mt_gemx.h,
+	gemlib/n_v_bez.c, gemlib/n_v_bez_fill.c, gemlib/n_v_bez_off.c,
+	gemlib/n_v_bez_on.c, gemlib/n_v_bez_qual.c, gemlib/n_v_clsbm.c,
+	gemlib/n_v_color2nearest.c, gemlib/n_v_color2value.c,
+	gemlib/n_v_create_ctab.c, gemlib/n_v_create_itab.c,
+	gemlib/n_v_ctab_idx2value.c, gemlib/n_v_ctab_idx2vdi.c,
+	gemlib/n_v_ctab_vdi2idx.c, gemlib/n_v_delete_ctab.c,
+	gemlib/n_v_delete_itab.c, gemlib/n_v_ftext.c, gemlib/n_v_ftext16.c,
+	gemlib/n_v_ftext16n.c, gemlib/n_v_ftext_offset.c,
+	gemlib/n_v_ftext_offset16.c, gemlib/n_v_get_ctab_id.c,
+	gemlib/n_v_get_outline.c, gemlib/n_v_getbitmap_info.c,
+	gemlib/n_v_getoutline.c, gemlib/n_v_open_bm.c, gemlib/n_v_opnbm.c,
+	gemlib/n_v_opnprn.c, gemlib/n_v_resize_bm.c, gemlib/n_v_setrgb.c,
+	gemlib/n_v_value2color.c, gemlib/n_vq_ctab.c,
+	gemlib/n_vq_ctab_entry.c, gemlib/n_vq_ctab_id.c,
+	gemlib/n_vq_devinfo.c, gemlib/n_vq_dflt_ctab.c,
+	gemlib/n_vq_ext_devinfo.c, gemlib/n_vq_hilite_color.c,
+	gemlib/n_vq_margins.c, gemlib/n_vq_max_color.c,
+	gemlib/n_vq_min_color.c, gemlib/n_vq_prn_scaling.c,
+	gemlib/n_vq_px_format.c, gemlib/n_vq_scrninfo.c,
+	gemlib/n_vq_weight_color.c, gemlib/n_vqf_bg_color.c,
+	gemlib/n_vqf_fg_color.c, gemlib/n_vql_bg_color.c,
+	gemlib/n_vql_fg_color.c, gemlib/n_vqm_bg_color.c,
+	gemlib/n_vqm_fg_color.c, gemlib/n_vqr_bg_color.c,
+	gemlib/n_vqr_fg_color.c, gemlib/n_vqt_advance.c,
+	gemlib/n_vqt_advance32.c, gemlib/n_vqt_bg_color.c,
+	gemlib/n_vqt_char_index.c, gemlib/n_vqt_ext_name.c,
+	gemlib/n_vqt_f_extent.c, gemlib/n_vqt_f_extent16.c,
+	gemlib/n_vqt_f_extent16n.c, gemlib/n_vqt_fg_color.c,
+	gemlib/n_vqt_fontheader.c, gemlib/n_vqt_name_and_id.c,
+	gemlib/n_vqt_pairkern.c, gemlib/n_vqt_real_extent.c,
+	gemlib/n_vqt_trackkern.c, gemlib/n_vqt_xfntinfo.c,
+	gemlib/n_vr_transfer_bits.c, gemlib/n_vs_ctab.c,
+	gemlib/n_vs_ctab_entry.c, gemlib/n_vs_dflt_ctab.c,
+	gemlib/n_vs_document_info.c, gemlib/n_vs_hilite_color.c,
+	gemlib/n_vs_max_color.c, gemlib/n_vs_min_color.c,
+	gemlib/n_vs_weight_color.c, gemlib/n_vsf_bg_color.c,
+	gemlib/n_vsf_fg_color.c, gemlib/n_vsl_bg_color.c,
+	gemlib/n_vsl_fg_color.c, gemlib/n_vsm_bg_color.c,
+	gemlib/n_vsm_fg_color.c, gemlib/n_vsr_bg_color.c,
+	gemlib/n_vsr_fg_color.c, gemlib/n_vst_arbpt.c,
+	gemlib/n_vst_arbpt32.c, gemlib/n_vst_bg_color.c,
+	gemlib/n_vst_charmap.c, gemlib/n_vst_fg_color.c,
+	gemlib/n_vst_kern.c, gemlib/n_vst_map_mode.c, gemlib/n_vst_name.c,
+	gemlib/n_vst_setsize.c, gemlib/n_vst_setsize32.c,
+	gemlib/n_vst_skew.c, gemlib/n_vst_track_offset.c,
+	gemlib/n_vst_width.c, gemlib/pc.mak, gemlib/pdlg_add_printers.c,
+	gemlib/pdlg_add_sub_dlgs.c, gemlib/pdlg_close.c,
+	gemlib/pdlg_create.c, gemlib/pdlg_delete.c,
+	gemlib/pdlg_dflt_sett.c, gemlib/pdlg_do.c, gemlib/pdlg_evnt.c,
+	gemlib/pdlg_free_sett.c, gemlib/pdlg_get_setsize.c,
+	gemlib/pdlg_new_sett.c, gemlib/pdlg_open.c,
+	gemlib/pdlg_rmv_printers.c, gemlib/pdlg_rmv_sub_dlgs.c,
+	gemlib/pdlg_save_dflt_sett.c, gemlib/pdlg_update.c,
+	gemlib/pdlg_use_sett.c, gemlib/pdlg_validate_sett.c,
+	gemlib/rc_array_to_grect.c, gemlib/rc_copy.c, gemlib/rc_equal.c,
+	gemlib/rc_grect_to_array.c, gemlib/rc_intersect.c, gemlib/sox.mak,
+	gemlib/v_alpha_text.c, gemlib/v_arc.c, gemlib/v_bar.c,
+	gemlib/v_bit_image.c, gemlib/v_cellarray.c, gemlib/v_circle.c,
+	gemlib/v_clear_disp_list.c, gemlib/v_clrwk.c, gemlib/v_clsvwk.c,
+	gemlib/v_clswk.c, gemlib/v_contourfill.c, gemlib/v_copies.c,
+	gemlib/v_curdown.c, gemlib/v_curhome.c, gemlib/v_curleft.c,
+	gemlib/v_curright.c, gemlib/v_curtext.c, gemlib/v_curup.c,
+	gemlib/v_dspcur.c, gemlib/v_eeol.c, gemlib/v_eeos.c,
+	gemlib/v_ellarc.c, gemlib/v_ellipse.c, gemlib/v_ellpie.c,
+	gemlib/v_enter_cur.c, gemlib/v_escape2000.c, gemlib/v_exit_cur.c,
+	gemlib/v_fillarea.c, gemlib/v_flushcache.c, gemlib/v_form_adv.c,
+	gemlib/v_get_pixel.c, gemlib/v_gtext.c, gemlib/v_gtext16.c,
+	gemlib/v_gtext16n.c, gemlib/v_hardcopy.c, gemlib/v_hide_c.c,
+	gemlib/v_justified.c, gemlib/v_loadcache.c,
+	gemlib/v_meta_extents.c, gemlib/v_opnvwk.c, gemlib/v_opnwk.c,
+	gemlib/v_orient.c, gemlib/v_output_window.c, gemlib/v_page_size.c,
+	gemlib/v_pieslice.c, gemlib/v_pline.c, gemlib/v_pmarker.c,
+	gemlib/v_rbox.c, gemlib/v_rfbox.c, gemlib/v_rmcur.c,
+	gemlib/v_rvoff.c, gemlib/v_rvon.c, gemlib/v_savecache.c,
+	gemlib/v_set_app_buff.c, gemlib/v_show_c.c, gemlib/v_trays.c,
+	gemlib/v_updwk.c, gemlib/v_write_meta.c, gemlib/vdi_array2str.c,
+	gemlib/vdi_str2array.c, gemlib/vdi_wstrlen.c, gemlib/vex_butv.c,
+	gemlib/vex_curv.c, gemlib/vex_motv.c, gemlib/vex_timv.c,
+	gemlib/vm_coords.c, gemlib/vm_filename.c, gemlib/vm_pagesize.c,
+	gemlib/vq_calibrate.c, gemlib/vq_cellarray.c, gemlib/vq_chcells.c,
+	gemlib/vq_color.c, gemlib/vq_curaddress.c, gemlib/vq_extnd.c,
+	gemlib/vq_key_s.c, gemlib/vq_mouse.c, gemlib/vq_page_name.c,
+	gemlib/vq_scan.c, gemlib/vq_tabstatus.c, gemlib/vq_tdimensions.c,
+	gemlib/vq_tray_names.c, gemlib/vqf_attributes.c,
+	gemlib/vqin_mode.c, gemlib/vql_attributes.c,
+	gemlib/vqm_attributes.c, gemlib/vqt_attributes.c,
+	gemlib/vqt_cachesize.c, gemlib/vqt_extent.c, gemlib/vqt_extent16.c,
+	gemlib/vqt_extent16n.c, gemlib/vqt_fontinfo.c,
+	gemlib/vqt_get_table.c, gemlib/vqt_name.c, gemlib/vqt_width.c,
+	gemlib/vr_recfl.c, gemlib/vr_trnfm.c, gemlib/vro_cpyfm.c,
+	gemlib/vrq_choice.c, gemlib/vrq_locator.c, gemlib/vrq_string.c,
+	gemlib/vrq_valuator.c, gemlib/vrt_cpyfm.c, gemlib/vs_calibrate.c,
+	gemlib/vs_clip.c, gemlib/vs_clip_off.c, gemlib/vs_clip_pxy.c,
+	gemlib/vs_color.c, gemlib/vs_curaddress.c, gemlib/vs_palette.c,
+	gemlib/vsc_expose.c, gemlib/vsc_form.c, gemlib/vsf_color.c,
+	gemlib/vsf_interior.c, gemlib/vsf_perimeter.c, gemlib/vsf_style.c,
+	gemlib/vsf_udpat.c, gemlib/vsin_mode.c, gemlib/vsl_color.c,
+	gemlib/vsl_ends.c, gemlib/vsl_type.c, gemlib/vsl_udsty.c,
+	gemlib/vsl_width.c, gemlib/vsm_choice.c, gemlib/vsm_color.c,
+	gemlib/vsm_height.c, gemlib/vsm_locator.c, gemlib/vsm_string.c,
+	gemlib/vsm_type.c, gemlib/vsm_valuator.c, gemlib/vsp_film.c,
+	gemlib/vst_alignment.c, gemlib/vst_color.c, gemlib/vst_effects.c,
+	gemlib/vst_error.c, gemlib/vst_font.c, gemlib/vst_height.c,
+	gemlib/vst_load_fonts.c, gemlib/vst_point.c, gemlib/vst_rotation.c,
+	gemlib/vst_scratch.c, gemlib/vst_unload_fonts.c,
+	gemlib/vswr_mode.c, gemlib/vt_alignment.c, gemlib/vt_axis.c,
+	gemlib/vt_origin.c, gemlib/vt_resolution.c, gemlib/x_edit_close.c,
+	gemlib/x_edit_create.c, gemlib/x_edit_cursor.c,
+	gemlib/x_edit_delete.c, gemlib/x_edit_evnt.c,
+	gemlib/x_edit_get_buf.c, gemlib/x_edit_get_colour.c,
+	gemlib/x_edit_get_cursor.c, gemlib/x_edit_get_dirty.c,
+	gemlib/x_edit_get_font.c, gemlib/x_edit_get_format.c,
+	gemlib/x_edit_get_pos.c, gemlib/x_edit_get_scrollinfo.c,
+	gemlib/x_edit_get_sel.c, gemlib/x_edit_open.c,
+	gemlib/x_edit_resized.c, gemlib/x_edit_scroll.c,
+	gemlib/x_edit_set_buf.c, gemlib/x_edit_set_colour.c,
+	gemlib/x_edit_set_cursor.c, gemlib/x_edit_set_dirty.c,
+	gemlib/x_edit_set_font.c, gemlib/x_edit_set_format.c,
+	gemlib/x_edit_set_pos.c, gemlib/x_fnts_add.c,
+	gemlib/x_fnts_close.c, gemlib/x_fnts_create.c,
+	gemlib/x_fnts_delete.c, gemlib/x_fnts_do.c, gemlib/x_fnts_evnt.c,
+	gemlib/x_fnts_get_info.c, gemlib/x_fnts_get_name.c,
+	gemlib/x_fnts_get_no_styles.c, gemlib/x_fnts_get_style.c,
+	gemlib/x_fnts_open.c, gemlib/x_fnts_remove.c,
+	gemlib/x_fnts_update.c, gemlib/x_form_popup.c,
+	gemlib/x_form_wbutton.c, gemlib/x_form_wkeybd.c,
+	gemlib/x_form_xdial.c, gemlib/x_form_xdo.c, gemlib/x_form_xerr.c,
+	gemlib/x_fslx_close.c, gemlib/x_fslx_do.c, gemlib/x_fslx_evnt.c,
+	gemlib/x_fslx_getnxtfile.c, gemlib/x_fslx_open.c,
+	gemlib/x_fslx_set_flags.c, gemlib/x_lbox_ascroll_to.c,
+	gemlib/x_lbox_bscroll_to.c, gemlib/x_lbox_cnt_items.c,
+	gemlib/x_lbox_create.c, gemlib/x_lbox_delete.c, gemlib/x_lbox_do.c,
+	gemlib/x_lbox_free_items.c, gemlib/x_lbox_free_list.c,
+	gemlib/x_lbox_get_afirst.c, gemlib/x_lbox_get_bentries.c,
+	gemlib/x_lbox_get_bfirst.c, gemlib/x_lbox_get_bvis.c,
+	gemlib/x_lbox_get_idx.c, gemlib/x_lbox_get_item.c,
+	gemlib/x_lbox_get_items.c, gemlib/x_lbox_get_slct_idx.c,
+	gemlib/x_lbox_get_slct_item.c, gemlib/x_lbox_get_tree.c,
+	gemlib/x_lbox_get_udata.c, gemlib/x_lbox_get_visible.c,
+	gemlib/x_lbox_set_asldr.c, gemlib/x_lbox_set_bentries.c,
+	gemlib/x_lbox_set_bsldr.c, gemlib/x_lbox_set_items.c,
+	gemlib/x_lbox_update.c, gemlib/x_objc_wchange.c,
+	gemlib/x_objc_wdraw.c, gemlib/x_objc_wedit.c,
+	gemlib/x_objc_xedit.c, gemlib/x_wdlg_close.c,
+	gemlib/x_wdlg_create.c, gemlib/x_wdlg_delete.c,
+	gemlib/x_wdlg_evnt.c, gemlib/x_wdlg_get_edit.c,
+	gemlib/x_wdlg_get_handle.c, gemlib/x_wdlg_get_tree.c,
+	gemlib/x_wdlg_get_udata.c, gemlib/x_wdlg_open.c,
+	gemlib/x_wdlg_redraw.c, gemlib/x_wdlg_set_edit.c,
+	gemlib/x_wdlg_set_iconify.c, gemlib/x_wdlg_set_size.c,
+	gemlib/x_wdlg_set_tree.c, gemlib/x_wdlg_set_uniconify.c,
+	gemlib/zip.mak, gemlib/include/README,
+	gemlib/include/gcc281/compiler.h, gemlib/include/purec/compiler.h,
+	gemlib/include/sozobon/compiler.h, gemma/documentation/MISCFILES,
+	gemma/src/MISCFILES:
+
+	merge branch mgemlib-gemlib-0_42_2
+	
+2003-02-26 Wednesday 10:28  Frank Naumann <fnaumann@freemint.de>
+
+	* gemlib/gemlib.spec:
+
+	Removed bash feature use (work now with sh).
+	
+2003-02-19 Wednesday 19:02  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/include/: gcc281/compiler.h, purec/compiler.h,
+	sozobon/compiler.h:
+
+	file compiler.h was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-02-19 Wednesday 19:01  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/include/README:
+
+	file README was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-02-16 Sunday 21:03  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/pc.mak:
+
+	file pc.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-02-08 Saturday 19:23  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gemx.h:
+
+	file mt_gemx.h was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-02-08 Saturday 19:23  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/mt_gem.h:
+
+	file mt_gem.h was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 Sunday 08:48  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/GEMLIB.PRJ:
+
+	file GEMLIB.PRJ was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 Sunday 08:45  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/_sx_asm.s:
+
+	file _sx_asm.s was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 Sunday 08:44  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/zip.mak:
+
+	file zip.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 Sunday 08:42  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gcc281.mak:
+
+	file gcc281.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 Sunday 08:42  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gcc281-16.mak:
+
+	file gcc281-16.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 Sunday 08:42  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/sox.mak:
+
+	file sox.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 Sunday 08:42  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gcc.mak:
+
+	file gcc.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 Sunday 08:41  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/files.mak:
+
+	file files.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2002-12-18 Wednesday 19:40  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/a_glue.c:
+
+	file a_glue.c was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2002-12-07 Saturday 22:29  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/doxydoc.c:
+
+	file doxydoc.c was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2002-12-05 Thursday 20:40  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/gemlib.todo:
+
+	file gemlib.todo was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2002-12-05 Thursday 20:39  Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>
+
+	* gemlib/Doxyfile:
+
+	file Doxyfile was initially added on branch mgemlib-gemlib-0_42_2.
