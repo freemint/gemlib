@@ -17,7 +17,7 @@
  *         ap_event defines the required interpretation of ap_value
  *         as follows:
  *         - ap_event : APPEVNT_TIMER (0) \n
- *           ap_value : Elapsed Time (in milliseconds)
+ *           ap_value : Elapsed Time (in milliseconds -- see the note below)
  *         - ap_event : APPEVNT_BUTTON (1) \n
  *           ap_value : low word  = state (1 = down), high word = # of clicks
  *         - ap_event : APPEVNT_MOUSE (2) \n
@@ -38,6 +38,13 @@
  *
  *  @note \p ap_value seems to have words swapped (APPEVNT_MOUSE: X pos is in the high
  *  word and Y pos is in the low word).
+ *
+ *  @note Warning: the "elapsed time" unit should be milliseconds but it seems that most
+ *       of the AES fill this value with a count of the 200Hz timer... but this is
+ *       taken into account by a dirty and bugged workaround in mt_appl_tplay().
+ *
+ *  @note It seems that Geneva follows the original doc and stores the "elapsed time"
+ *        in milliseconds.
  */
 
 short
