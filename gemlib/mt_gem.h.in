@@ -91,6 +91,7 @@ __BEGIN_DECLS
 #define AES_MESSAGE			12	/**< see  mt_appl_getinfo() */
 #define AES_OBJECT			13	/**< see  mt_appl_getinfo() */
 #define AES_FORM			14	/**< see  mt_appl_getinfo() */
+#define AES_VERSION         96  /**< see  mt_appl_getinfo() and  mt_appl_getinfo_str() */
 
 /* appl_getinfo return values (AES_LARGEFONT, AES_SMALLFONT) */
 #define SYSTEM_FONT			0	/**< see  mt_appl_getinfo() */
@@ -1770,6 +1771,8 @@ short	mt_appl_exit    (short *global_aes);
 short	mt_appl_find    (const char *name, short *global_aes);
 short	mt_appl_getinfo (short type,
 						 short *out1, short *out2, short *out3, short *out4, short *global_aes);
+short	mt_appl_getinfo_str (short type,
+						 char *out1, char *out2, char *out3, char *out4, short *global_aes);
 short	mt_appl_init    (short *global_aes);
 short	mt_appl_read    (short ap_id, short length, void *ap_pbuff, short *global_aes);
 short	mt_appl_search  (short mode, char *fname, short *type, short *ap_id, short *global_aes);

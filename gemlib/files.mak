@@ -35,6 +35,7 @@ OBJ = \
  a_appl_exit.o	\
  a_appl_find.o	\
  a_appl_getinfo.o	\
+ a_appl_getinfo_str.o	\
  a_appl_init.o	\
  a_appl_read.o	\
  a_appl_search.o	\
