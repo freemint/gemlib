@@ -1,8 +1,9 @@
+/*
+ *   NOTE: requires NVDI version 3.x or higher
+ */
 
 #include "gemx.h"
 
-
-short vdi_wstrlen (const short *wstr);
 
 void
 v_ftext16 (short handle, short x, short y, const short *wstr)
@@ -22,7 +23,3 @@ v_ftext16 (short handle, short x, short y, const short *wstr)
 
 	vdi_params.intin = vdi_intin;
 }
-
-/*
- * * NOTE: requires NVDI version 3.x or higher
- */

@@ -1,8 +1,5 @@
-
 #include "gem.h"
 
-
-short vdi_wstrlen (const short *wstr);
 
 short
 vdi_wstrlen (const short *wstr)

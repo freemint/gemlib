@@ -1338,9 +1338,9 @@ void	vrt_cpyfm		(short handle, short mode, short pxy[], MFDB *src, MFDB *dst, sh
 /*
  * Some usefull extensions.
  */
-void	vdi_array2str		(const short *src, char  *des, short len);
-short	vdi_str2array		(const char  *src, short *des);
-
+void  vdi_array2str (const short *src, char  *des, short len);
+short vdi_str2array (const char  *src, short *des);
+short vdi_wstrlen   (const short *wstr);
 
 /*
  * vdi trap interface
