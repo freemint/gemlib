@@ -32,14 +32,14 @@ a_appl_trecord.c	    -- idem
 a_appl_write.c		    -- idem
 a_appl_xgetinfo.c
 a_appl_yield.c		    -- idem
-a_evnt_button.c
-a_evnt_dclick.c
-a_evnt_keybd.c
-a_evnt_mesag.c
-a_evnt_mouse.c
-a_evnt_multi.c
-a_evnt_multi_fast.c
-a_evnt_timer.c
+a_evnt_button.c			-- idem
+a_evnt_dclick.c			-- idem
+a_evnt_keybd.c			-- idem
+a_evnt_mesag.c			-- idem
+a_evnt_mouse.c			-- idem
+a_evnt_multi.c			-- idem
+a_evnt_multi_fast.c		-- idem
+a_evnt_timer.c			-- idem
 a_form_alert.c
 a_form_button.c
 a_form_center.c

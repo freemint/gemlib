@@ -4,13 +4,18 @@
 
 #include "gem_aesP.h"
 
-/** Event Keyboard
+/** relinquishes program control to the operating system until
+ *  a valid keypress is available in the applications' message pipe.
  *
- *  AES Opcode: 20 (0x14)
+ *  @param global_aes global AES array
  *
- *  Relinquishes program control to the operating
- *  system until a valid keypress is available in the
- *  applications' message pipe.
+ *  @return 16-bit value containing the ASCII
+ *          code of the key entered in the lower eight bits and the
+ *          scan code in the upper 8-bits.
+ *
+ *  @since All AES versions.
+ *
+ *  @sa mt_evnt_multi()
  *
  *  TOS versions released at or above 2.06 and 3.06 disabled
  *  reception of keys 1 through 9 on the numeric keypad when
@@ -21,20 +26,12 @@
  *  applications. The standard numeric keypad is still
  *  available.
  *
- *  @param global_aes global AES array
-
- *  @return 16-bit value containing the ASCII
- *          code of the key entered in the lower eight bits and the
- *          scan code in the upper 8-bits.
- *
- *  @see mt_evnt_multi()
  */
-
 
 short
 mt_evnt_keybd(short *global_aes)
 {
-	AES_PARAMS({20,0,1,0,0});
+	AES_PARAMS(20,0,1,0,0);
 
 	AES_TRAP(aes_params);
 

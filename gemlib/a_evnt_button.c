@@ -4,12 +4,49 @@
 
 #include "gem_aesP.h"
 
-/** Event Button
- *
- *  AES Opcode: 21 (0x15)
- *
- *  Releases control to the operating system until the specified mouse
+/** releases control to the operating system until the specified mouse
  *  button event has occurred.
+ *
+ *  @param clicks specifies the number of mouse-clicks that must occur
+ *             before returning
+ *  @param mask specifies the mouse buttons to wait for as follows:
+ *               - \p LEFT_BUTTON   (0x01)  Left mouse button
+ *               - \p RIGHT_BUTTON  (0x02)  Right mouse button
+ *               - \p MIDDLE_BUTTON (0x04)  Middle button (this button would be
+ *                                            the first button to the left of the
+ *                                            rightmost button on the device).
+ *               - \p -             (0x08)  Other buttons (0x08 is the mask for
+ *                                            the button to the immediate left of
+ *                                            the middle button. Masks continue
+ *                                            leftwards).
+ *  @param state specifies the button state that must occur before
+ *             returning as follows:
+ *             - 0x00   All buttons released
+ *             - 0x01   Left button depressed
+ *             - 0x02   Right button depressed
+ *             - 0x04   Middle button depressed
+ *             - 0x08   etc...
+ *  @param mx is a pointer to a WORD which upon return will contain the
+ *             x-position of the mouse pointer at the time of the event.
+ *  @param my is a pointer to a WORD which upon return will contain the
+ *             y-position of the mouse pointer at the time of the event.
+ *  @param button is a pointer to a WORD which upon return will
+ *             contain the mouse button state as defined in state.
+ *  @param kstate is a pointer to a WORD which upon return will
+ *             contain the current status of the keyboard shift keys.
+ *             The value is a bit-mask defined as follows:
+ *             - \p K_RSHIFT         (0x01)     Right Shift
+ *             - \p K_LSHIFT         (0x02)     Left Shift
+ *             - \p K_CTRL           (0x04)     Control
+ *             - \p K_ALT            (0x08)     Alternate
+ *  @param global_aes global AES array
+ *
+ *  @return returns a WORD indicating the number of times the mouse
+ *             button state matched state.
+ *
+ *  @since All AES versions.
+ *
+ *  @sa mt_evnt_multi(), Kbshift(), vq_mouse()
  *
  *  A previously undocumented feature of this call is accessed by
  *  logically OR'ing the clicks parameter with 0x100 or 0x200.
@@ -25,65 +62,26 @@
  *  messages what could cause problems especially in
  *  multitasking operating systems.
  *
- *  This method works with evnt_multi() as well.
+ *  This method works with mt_evnt_multi() as well.
  *
- *  @param Clicks specifies the number of mouse-clicks that must occur
- *             before returning
- *  @param WhichButton specifies the mouse buttons to wait
- *             for as follows:
- * FIXME TODO find out the formatting for the list like the folowing...
- *             <ul>
- *               <li>
- *               \p LEFT_BUTTON      0x01     Left mouse button
- *               <li>
- *               \p RIGHT_BUTTON     0x02     Right mouse button
- *               <li>
- *               \p MIDDLE_BUTTON    0x04     Middle button (this button would be
- *                                            the first button to the left of the
- *                                            rightmost button on the device).
- *               <li>
- *               \p -                0x08     Other buttons (0x08 is the mask for
- *                                            the button to the immediate left of
- *                                            the middle button. Masks continue
- *                                            leftwards).
- *             </ul>
- *  @param WhichState specifies the button state that must occur before
- *             returning
- *  @param Mx is a pointer to a WORD which upon return will contain the
- *             x-position of the mouse pointer at the time of the event.
- *  @param My is a pointer to a WORD which upon return will contain the
- *             y-position of the mouse pointer at the time of the event.
- *  @param ButtonState is a pointer to a WORD which upon return will
- *             contain the mouse button state as defined in state.
- *  @param KeyState is a pointer to a WORD which upon return will
- *             contain the current status of the keyboard shift keys.
- *             The value is a bit-mask defined as follows:
- *
- *
- *  @param global_aes global AES array
- *  @return returns a WORD indicating the number of times the mouse
- *             button state matched state.
- *
- *  @see mt_evnt_multi(), Kbshift(), vq_mouse()
  */
 
-
 short
-mt_evnt_button (short Clicks, short WhichButton, short WhichState,
-				short *Mx, short *My, short *ButtonState, short *KeyState, short *global_aes)
+mt_evnt_button (short clicks, short mask, short state,
+				short *mx, short *my, short *button, short *kstate, short *global_aes)
 {
-	AES_PARAMS({21,3,5,0,0});
+	AES_PARAMS(21,3,5,0,0);
 
-	aes_intin[0] = Clicks;
-	aes_intin[1] = WhichButton;
-	aes_intin[2] = WhichState;
+	aes_intin[0] = clicks;
+	aes_intin[1] = mask;
+	aes_intin[2] = state;
 
 	AES_TRAP (aes_params);
 
-	*Mx          = aes_intout[1];
-	*My          = aes_intout[2];
-	*ButtonState = aes_intout[3];
-	*KeyState    = aes_intout[4];
+	*mx     = aes_intout[1];
+	*my     = aes_intout[2];
+	*button = aes_intout[3];
+	*kstate = aes_intout[4];
 
 	return aes_intout[0];
 }
@@ -92,9 +90,9 @@ mt_evnt_button (short Clicks, short WhichButton, short WhichState,
 #undef event_button
 #endif
 short
-event_button(short Clicks, short WhichButton, short WhichState,
-			 short *Mx, short *My, short *ButtonState, short *KeyState)
+event_button(short clicks, short mask, short state,
+				short *mx, short *my, short *button, short *kstate)
 {
-	return(mt_event_button(Clicks,WhichButton,WhichState,
-						   Mx,My,ButtonState,KeyState, aes_global));
+	return(mt_event_button(clicks,mask,state,
+						   mx,my,button,kstate, aes_global));
 }
