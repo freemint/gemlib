@@ -1,56 +1,70 @@
-Summary: GEM libraries and header files
-Name: gemlib
-Version: 38
-Release: 5
-Copyright: Public Domain
-Group: Development/Libraries
-Source: gemlib-%{version}.tar.gz
-Patch0: gemlib38-config.patch
-BuildRoot: /var/tmp/gemlib38-root
-Packager: Guido Flohr <guido@freemint.de>
-Vendor: Sparemint
-Summary(de): GEM-Bibliothek und Header-Dateien
+Summary       : GEM libraries and header files
+Name          : gemlib
+Version       : 0.42.2
+Release       : 1
+Copyright     : Public Domain
+Group         : Development/Libraries
+
+Packager      : Xavier Joubert <xavier.joubert@free.fr>
+Vendor        : Sparemint
+URL           : http://wh58-508.st.uni-magdeburg.de/sparemint/
+
+Prefix        : %{_prefix}
+Docdir        : %{_prefix}/doc
+BuildRoot     : %{_tmppath}/%{name}-root
+
+Source: %{name}-%{version}.tar.gz
+
 
 %description
 Contains the standard libraries and header files to develop your own GEM
 applications.
 
-%description -l de
-Enthält die Standard-Bibliotheken und Header-Dateien, die benötigt werden, 
-um GEM-Programme selbst zu entwickeln.
+Attention, starting from version 0.40.0 the gemlib is heavily modernized
+and updated. There are incompatible changes that require modifications
+of programs that use this lib too.
+
+Package version numbering has been modified to the one used by the
+library itself. Please use the --oldpackage option if upgrading from a
+0.40.0 or older gemlib and rpm complains about installed package being
+newer than this one.
+
 
 %prep
-%setup -q
-%patch0 -p1
+%setup -q -n %{name}-%{version}
+
 
 %build
 cd gemlib
-
 make
 
-%install
-cd gemlib
 
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/usr/GEM
-mkdir -p $RPM_BUILD_ROOT/usr/GEM/{include,lib}
-install -m 644 -o root -g wheel lib{gem,gem16}.a \
-  $RPM_BUILD_ROOT/usr/GEM/lib
-install -m 644 -o root -g wheel include/{gem,gemx}.h \
-  $RPM_BUILD_ROOT/usr/GEM/include
+%install
+[ "${RPM_BUILD_ROOT}" != "/" ] && rm -rf ${RPM_BUILD_ROOT}
+
+cd gemlib
+mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/GEM/{include,lib}
+install -m 644 lib{gem,gem16}.a ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
+install -m 644 {gem,gemx}.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
+
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+[ "${RPM_BUILD_ROOT}" != "/" ] && rm -rf ${RPM_BUILD_ROOT}
+
 
 %files
 %defattr(-,root,root)
-%doc ChangeLog*
-/usr/GEM/lib/lib*.a
-/usr/GEM/include/*.h
+%doc gemlib/ChangeLog*
+%{_prefix}/GEM/lib/lib*.a
+%{_prefix}/GEM/include/*.h
+
 
 %changelog
-* Sat Sep 16 2000 Frank Naumann <fnaumann@freemint.de>
-- updated to new version
+* Mon Jul 15 2002 Xavier Joubert <xavier.joubert@free.fr>
+- updated to version 0.42.2, modified version numbering
+
+* Thu Feb 27 2001 Frank Naumann <fnaumann@freemint.de>
+- updated to version 0.40.0
 
 * Mon Mar 27 2000 Frank Naumann <fnaumann@freemint.de>
 - rebuild against new MiNTLib 0.55
