@@ -7,7 +7,9 @@
 #ifndef _GEM_VDI_P_
 # define _GEM_VDI_P_
 
-# include "gem.h"
+# ifndef _GEMLIB_H_
+#  include "gem.h"
+# endif
 
 
 #define vdi_control_ptr(n)   *((void**)(vdi_control +n))
@@ -74,6 +76,8 @@ _vdi_trap_00 (VDIPB * vdipb, long cntrl_0_1, short handle)
 	vdi_control[6] = handle;  \
 	vdi (&vdipb);
 
+#define VDI_TRAP_00(vdipb, handle, opcode) \
+	VDI_TRAP_ESC (vdipb, handle, opcode, 0, 0, 0)
 #endif
 
 
