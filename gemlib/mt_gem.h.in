@@ -1633,7 +1633,7 @@ void vm_pagesize    (VdiHdl , short pgwidth, short pgheight);
 
 void  vsc_expose	(VdiHdl , short state);
 void  vsp_film		(VdiHdl , short color_idx, short lightness);
-short vqp_filmname	(VdiHdl , short index, char * name);
+short vqp_filmname	(VdiHdl , short _index, char * name);
 
 void v_offset		(VdiHdl , short offset);
 void v_fontinit		(VdiHdl , const void * font_header);
