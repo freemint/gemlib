@@ -14,10 +14,14 @@
  *  @param InY  Y-position of the input area
  *  @param InW  Width of the input area
  *  @param InH  Height of the input area
- *  @param OutX X-position of the output area
- *  @param OutY Y-position of the output area
- *  @param OutW Width of the output area
- *  @param OutH Height of the output area
+ *  @param OutX X-position of the output area \n
+ *         [option CHECK_NULLPTR] OutX may be NULL
+ *  @param OutY Y-position of the output area \n
+ *         [option CHECK_NULLPTR] OutY may be NULL
+ *  @param OutW Width of the output area \n
+ *         [option CHECK_NULLPTR] OutW may be NULL
+ *  @param OutH Height of the output area \n
+ *         [option CHECK_NULLPTR] OutH may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.
@@ -60,11 +64,18 @@ mt_wind_calc (short Type, short Parts, short InX,  short InY, short InW, short I
 	
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (OutX)	*OutX = aes_intout[1];
+	if (OutY)	*OutY = aes_intout[2];
+	if (OutW)	*OutW = aes_intout[3];
+	if (OutH)	*OutH = aes_intout[4];
+#else
 	ptr = &aes_intout[1];
 	*OutX = *(ptr ++);						   /* aes_intout[1] */
 	*OutY = *(ptr ++);						   /* aes_intout[2] */
 	*OutW = *(ptr ++);						   /* aes_intout[3] */
 	*OutH = *(ptr);							   /* aes_intout[4] */
+#endif
 
 	return (aes_intout[0]);
 }
