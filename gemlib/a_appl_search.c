@@ -10,7 +10,7 @@
  *  @param mode specifies the search mode as follows:
  *         - #APP_FIRST (0) Return the filename of the first process
  *         - #APP_NEXT (1) Return the filename of subsequent processes
- *         - #APP_DESK (2) (??? return the filename of the desktop ???)
+ *         - #APP_DESK (2) Return the filename of the desktop
  *  @param fname should point to a memory location at least 9 bytes
  *		   long to hold the 8 character process filename found and
  *		   the NULL byte.
@@ -35,9 +35,8 @@
  *
  *  The \a type parameter is actually a bit mask so it is possible
  *  that a process containing more than one characteristic will
- *  appear. The currently running shell process (usually the
- *  desktop) will return a value of #APP_APPLICATION | #APP_SHELL
- *  (0x0A).
+ *  appear. For example, the desktop may return a value of
+ *  #APP_APPLICATION | #APP_SHELL (0x0A).
  */
 
 short
