@@ -45,6 +45,8 @@ _VDI_CONTRL = \
 	v_savecache.c \
 	v_set_app_buff.c \
 	vs_clip.c \
+	vs_clip_pxy.c \
+	vs_clip_off.c \
 	vst_load_fonts.c \
 	vst_unload_fonts.c
 
@@ -128,6 +130,8 @@ _VDI_INQUIRE = \
 	vqt_attributes.c \
 	vqt_cachesize.c \
 	vqt_extent.c \
+	vqt_extent16.c \
+	vqt_extent16n.c \
 	vqt_fontinfo.c \
 	vqt_get_table.c \
 	vqt_name.c \
@@ -145,6 +149,7 @@ _VDI_OUTPUT = \
 	v_fillarea.c \
 	v_gtext.c \
 	v_gtext16.c \
+	v_gtext16n.c \
 	v_justified.c \
 	v_pieslice.c \
 	v_pline.c \
@@ -276,6 +281,7 @@ COBJS = \
 	a_evnt_mesag.c \
 	a_evnt_mouse.c \
 	a_evnt_multi.c \
+	a_evnt_multi_fast.c \
 	a_evnt_timer.c \
 	a_form_alert.c \
 	a_form_button.c \
