@@ -35,7 +35,7 @@
 XEDITINFO *
 mt_edit_create( short *global_aes )
 {
-	AES_PARAMS(210,0,0,0,0);
+	AES_PARAMS(210,0,0,0,1);
 
 	AES_TRAP(aes_params);
 
