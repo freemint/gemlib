@@ -16,6 +16,6 @@ vqt_attributes (short handle, short atrib[])
 
 	vdi (&vdi_params);
 
-	vdi_params.intout = &vdi_intout[0];
-	vdi_params.ptsout = &vdi_ptsout[0];
+	vdi_params.intout = vdi_intout;
+	vdi_params.ptsout = vdi_ptsout;
 }

@@ -3,17 +3,18 @@
 
 
 void
-v_rfbox (short handle, short pxyarray[])
+v_rfbox (short handle, short pxy[])
 {
-	register short i;
-
-	for (i = 0; i < 4; i++)
-		vdi_ptsin[i] = pxyarray[i];
-
 	vdi_control[0] = 11;
-	vdi_control[1] = 4;
+	vdi_control[1] = 2;
 	vdi_control[3] = 0;
 	vdi_control[5] = 9;
 	vdi_control[6] = handle;
+
+	vdi_params.ptsin = pxy;
+
 	vdi (&vdi_params);
+
+	vdi_params.ptsin = vdi_ptsin;
 }
+

@@ -5,16 +5,17 @@
 void
 vsf_udpat (short handle, short pat[], short planes)
 {
-	register short i, j;
-
-	j = planes << 4;
-	for (i = 0; i < j; i++)
-		vdi_intin[i] = pat[i];
 	vdi_control[0] = 112;
 	vdi_control[1] = 0;
-	vdi_control[3] = j;
+	vdi_control[3] = planes << 4;
+	vdi_control[5] = 0;
 	vdi_control[6] = handle;
+
+	vdi_params.intin = pat;
+
 	vdi (&vdi_params);
+
+	vdi_params.intin = vdi_intin;
 }
 
 /*

@@ -3,7 +3,7 @@
 
 
 void
-vqf_attributes (short handle, short atrib[])
+vqf_attributes (short handle, short attrib[])
 {
 	vdi_control[0] = 37;
 	vdi_control[1] = 0;
@@ -11,8 +11,8 @@ vqf_attributes (short handle, short atrib[])
 	vdi_control[5] = 0;
 	vdi_control[6] = handle;
 	vdi (&vdi_params);
-	atrib[0] = vdi_intout[0];
-	atrib[1] = vdi_intout[1];
-	atrib[2] = vdi_intout[2];
-	atrib[3] = vdi_intout[3];
+	attrib[0] = vdi_intout[0];
+	attrib[1] = vdi_intout[1];
+	attrib[2] = vdi_intout[2];
+	attrib[3] = vdi_intout[3];
 }
