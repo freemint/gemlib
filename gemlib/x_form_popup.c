@@ -1,18 +1,34 @@
+/*
+ *  $Id$
+ */
+
 #include "gemx.h"
 #include "gem_aesP.h"
 
+/** 
+ *
+ *  @param tree
+ *  @param x
+ *  @param y
+ *  @param global_aes global AES array
+ *
+ *  @return 
+ *
+ *  @since 
+ *
+ */
 
-short
-form_popup (OBJECT * tree, short x, short y)
+short 
+mt_form_popup(OBJECT *tree, short x, short y, short *global_aes)
 {
+	AES_PARAMS(135,2,1,1,0);
+                    
 	aes_intin[0] = x;
 	aes_intin[1] = y;
-	aes_addrin[0] = (long) tree;
-	aes_control[0] = 135;
-	aes_control[1] = 2;
-	aes_control[2] = 1;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	aes (&aes_params);
+	
+	aes_addrin[0] = (long)tree;
+
+	AES_TRAP(aes_params);
+
 	return aes_intout[0];
 }
