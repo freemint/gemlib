@@ -17,10 +17,10 @@
  *  @param bh height of the bounding rectangle.
  *  @param rx will be filled in (on function exit) with the ending
  *            x position of the box. \n
- *             [option CHECK_NULLPTR] rx may be NULL
+ *             [option CHECK_NULLPTR] \a rx may be NULL
  *  @param ry will be filled in (on function exit) with the ending
  *            y position of the box. \n
- *             [option CHECK_NULLPTR] ry may be NULL
+ *             [option CHECK_NULLPTR] \a ry may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred during

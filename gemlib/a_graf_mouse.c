@@ -7,113 +7,50 @@
 /** alters the appearance of the mouse form and can be used
  *  to hide and display the mouse pointer from the screen.
  *
- *  @param shape is defined as follows:
-\verbatim
-               shape        #     Meaning                Shape
-
-               ARROW        0     Change the current
-                                  mouse cursor shape.
-
-               TEXT_CRSR    1     Change the current
-                                  mouse cursor shape.
-
-               BUSY_BEE     2     Change the current
-                                  mouse cursor shape.
-
-               POINT_HAND   3     Change the current
-                                  mouse cursor shape.
-
-               FLAT_HAND    4     Change the current
-                                  mouse cursor shape.
-
-               THIN_CROSS   5     Change the current
-                                  mouse cursor shape.
-
-               THICK_CROSS  6     Change the current
-                                  mouse cursor shape.
-
-               OUTLN_CROSS  7     Change the current
-                                  mouse cursor shape.
-
-               USER_DEF     255   Change the current     Form is defined
-                                  mouse cursor shape.    below.
-
-               M_OFF        256   Remove the mouse       No shape change.
-                                  cursor from the
-                                  screen.
-
-               M_ON         257   Display the mouse      No shape change.
-                                  cursor.
-
-               M_SAVE       258   Save the current       No shape change.
-                                  mouse form in an AES
-                                  provided buffer.
-                                  Check appl_getinfo()
-                                  for the presence of
-                                  this feature.
-
-               M_RESTORE    259   Restore the most       Changes the shape
-                		          recently saved mouse   as indicated.
-                                  form. Check
-                                  appl_getinfo() for
-                                  the presence of this
-                                  feature.
-
-               M_LAST       260   Restore the mouse      Changes the shape
-               M_PREVIOUS         form to its last       as indicated.
-                                  shape. Check
-                                  appl_getinfo() for
-                                  the presence of this
-                                  feature.
-\endverbatim
- *  @param shape_addr a pointer to a MFORM structure as defined below
- *             (if \p shape is different than USER_DEF, \p shape_addr
- *             should be NULL):
- *<pre>
-               typedef struct {
-                   short mf_xhot;
-                   short mf_yhot;
-                   short mf_nplanes;
-                   short mf_fg;
-                   short mf_bg;
-                   short mf_mask[16];
-                   short mf_data[16];
-               } MFORM;</pre>
- *
- *             \p mf_xhot and \p mf_yhot are the location of the mouse
- *             'hot-spot'. These values should be in the range 0 to 15 and
- *             define what offset into the bitmap is actually the 'point'.
- *
- *             \p mf_nplanes specifies the number of bit-planes used by the
- *             mouse pointer. Currently, the value of \p 1 is the only legal
- *             value.
- *
- *             \p mf_fg and \p mf_bg are the mask and data colors of the mouse
- *             specified as palette indexes. Usually these values will be
- *             \p 0 and \p 1 respectively.
- *
- *             \p mf_mask is an array of 16 WORD's which define the mask
- *             portion of the mouse form.
- *
- *			   \p mf_data is an array of 16 WORD's which define the data
- *  		   portion of the mouse form.
- *
+ *  @param shape specifies the new form of the mouse pointer, or
+ *         specifies an action regarding this form (save, restore,
+ *         hide...). See the table hereafter for details.
+ *  @param shape_addr a pointer to a ::MFORM structure. If 
+ *         \a shape is different than #USER_DEF, \a shape_addr
+ *         should be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.
  *
- *  @since All AES versions. As of AES 4.0 and beyond,
- *         the AES may not allow a mouse
- *         form to change to benefit another application. If it is
- *         absolutely necessary for the application to display its
- *         mouse form, logically OR the mode parameter with \p M_FORCE
- *         (0x8000) and make the call.
- *         This will force the AES to change to your mouse form.
- *         It should, however, be done within the scope
- *         of a mt_wind_update() sequence.
+ *  @since All AES versions. mt_appl_getinfo() with #AES_FORM gives
+ *         the availability of #M_SAVE, #M_RESTORE and #M_PREVIOUS modes
  *
  *  @sa vsc_form()
  *
+ *  The table hereafter summaries the values that \a shape can take.
+ *  <table>
+ *  <tr><td> shape <td> value <td> meaning
+ *  <tr><td> #ARROW <td> 0 <td>  Change the current mouse cursor shape
+ *  <tr><td> #TEXT_CRSR <td> 1 <td>  Change the current mouse cursor shape
+ *  <tr><td> #BUSY_BEE <td> 2 <td>  Change the current mouse cursor shape
+ *  <tr><td> #POINT_HAND <td> 3 <td>  Change the current mouse cursor shape
+ *  <tr><td> #FLAT_HAND <td> 4 <td>  Change the current mouse cursor shape
+ *  <tr><td> #THIN_CROSS <td> 5 <td>  Change the current mouse cursor shape
+ *  <tr><td> #THICK_CROSS <td> 6 <td>  Change the current mouse cursor shape
+ *  <tr><td> #OUTLN_CROSS <td> 7 <td>  Change the current mouse cursor shape
+ *  <tr><td> #USER_DEF <td> 255 <td>  Change the current mouse cursor shape
+ *  <tr><td> #M_OFF <td> 256 <td>  Remove the mouse cursor from the screen
+ *  <tr><td> #M_ON <td> 257 <td>  Display the cursor
+ *  <tr><td> #M_SAVE <td> 258 <td>  Save the current mouse form in an AES
+ *                                provided buffer. 
+ *  <tr><td> #M_RESTORE <td> 259 <td>  Restore the most recently saved mouse form
+ *  <tr><td> #M_PREVIOUS <td> 260 <td>  Restore the mouse form to its last shape
+ *  </table>
+ *
+ *	@note As of AES 4.0 and beyond,
+ *		  the AES may not allow a mouse
+ *		  form to change to benefit another application. If it is
+ *		  absolutely necessary for the application to display its
+ *		  mouse form, logically OR the \a shape parameter with #M_FORCE
+ *		  (0x8000) and make the call.
+ *		  This will force the AES to change to your mouse form.
+ *		  It should, however, be done within the scope
+ *		  of a mt_wind_update() sequence.
  *  @note There is currently no defined method of handling an error
  *        generated by this function.
  *

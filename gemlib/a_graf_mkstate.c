@@ -8,19 +8,20 @@
  *  of the mouse pointer, buttons, and keyboard
  *  meta keys state.
  *
- *  @param mx
- *  @param my are WORD pointers, which, on function exit will
- *               be filled in with the current x and y coordinates of the
- *               mouse pointer. \n
- *             [option CHECK_NULLPTR] mx and/or my may be NULL
- *  @param mbutton  is a WORD pointer, which, on function
- *               exit will be filled in with the current button state of the
- *               mouse as defined in mt_evnt_button(). \n
- *             [option CHECK_NULLPTR] mbutton may be NULL
- *  @param kmeta is a pointer to a WORD which upon return will
- *               contain the current status of the keyboard shift keys
- *               as defined in mt_evnt_button(). \n
- *             [option CHECK_NULLPTR] kmeta may be NULL
+ *  @param mx pointer to a short integer, which on function exit will be
+ *         filled in with the current x-coordinate of the mouse pointer.\n
+ *         [option CHECK_NULLPTR] \a mx may be NULL
+ *  @param my pointer to a short integer, which on function exit will be
+ *         filled in with the current y-coordinate of the mouse pointer.\n
+ *         [option CHECK_NULLPTR] \a my may be NULL
+ *  @param mbutton pointer to a short integer, which on function exit will be
+ *         filled in with the current button state of the mouse as defined
+ *         in mt_evnt_button(). \n
+ *         [option CHECK_NULLPTR] \a mbutton may be NULL
+ *  @param kmeta pointer to a short integer which upon return will
+ *         contain the current status of the keyboard shift keys
+ *         as defined in mt_evnt_button(). \n
+ *         [option CHECK_NULLPTR] \a kmeta may be NULL
  *
  *  @param global_aes global AES array
  *

@@ -7,16 +7,18 @@
 /** returns important information regarding the
  *  physical workstation currently in use by the AES.
  *
- *  @param wcell
- *  @param hcell are WORD pointers which on function exit
- *               will be filled in with the width and height, respectively,
- *               of the current system character set. \n
- *             [option CHECK_NULLPTR] wcell and/or hcell may be NULL
- *  @param  wbox
- *  @param  hbox are WORD pointers which on function exit
- *               will be filled in with the width and height, respectively,
- *               of the minimum bounding box of a BOXCHAR character. \n
- *             [option CHECK_NULLPTR] wbox and/or hbox may be NULL
+ *  @param wcell pointer to a short int which will contain (on function exit)
+ *               the width of the current system character set. \n
+ *               [option CHECK_NULLPTR] \a wcell may be NULL
+ *  @param hcell  pointer to a short int which will contain (on function exit)
+ *               the height of the current system character set. \n
+ *               [option CHECK_NULLPTR] \a hcell may be NULL
+ *  @param wbox pointer to a short int which will contain (on function exit)
+ *               the width of the minimum bounding box of a BOXCHAR character. \n
+ *               [option CHECK_NULLPTR] \a wbox may be NULL
+ *  @param hbox pointer to a short int which will contain (on function exit)
+ *               the height of the minimum bounding box of a BOXCHAR character. \n
+ *               [option CHECK_NULLPTR] \a hbox may be NULL
  *  @param global_aes global AES array
  *
  *  @return the VDI handle for the current physical workstation used
