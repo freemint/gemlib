@@ -11,7 +11,7 @@ Release       : 1
 Copyright     : Public Domain
 Group         : Development/Libraries
 
-Packager      : Standa Opichal <opichals@seznam.cz>
+Packager      : Arnaud Bercegeay <arnaud.bercegeay@free.fr>
 Vendor        : Sparemint
 URL           : http://arnaud.bercegeay.free.fr/gemlib/
 
@@ -82,6 +82,9 @@ ln -s %{_prefix}/include/mt_gemx.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include/
 
 
 %changelog
+* Wed Nov  3 2004 Arnaud Bercegeay <arnaud.bercegeay@free.fr>
+- updated to version 0.43.3
+
 * Mon Jan  5 2004 Standa Opichal <opichals@seznam.cz>
 - updated to version 0.43.1
 
