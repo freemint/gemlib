@@ -37,7 +37,7 @@ v_ftext_offset (short handle, short x, short y,
 	long       * dst =       (long*)vdi_ptsin;
 	short     i, len = vdi_str2array (str, vdi_intin);
 #if USE_LOCAL_VDIPB
-	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, 0L, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy);
 #endif
 	
 	vdi_ptsin[0] = x;

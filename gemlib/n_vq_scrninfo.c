@@ -259,7 +259,7 @@ vq_scrninfo (short handle, short *work_out)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	static short vdi_intin[1] = {2};   
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, work_out, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, work_out, vdi_dummy);
 #else
 	vdi_params.intout = work_out;
 	vdi_intin[0] = 2;

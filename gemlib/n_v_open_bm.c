@@ -30,7 +30,7 @@ v_open_bm (short base_handle, GCBITMAP * bitmap, short color_flags,
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[4];   
 	short vdi_intout[1]; 
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 #endif
 	
 	vdi_intin[0] = color_flags;

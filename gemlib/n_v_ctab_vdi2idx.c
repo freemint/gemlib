@@ -24,7 +24,7 @@ v_ctab_vdi2idx (short handle, short vdi_index)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[1]; 
-	VDI_PARAMS(vdi_control, &vdi_index, 0L, vdi_intout, 0L);
+	VDI_PARAMS(vdi_control, &vdi_index, 0L, vdi_intout, vdi_dummy);
 #else
 	vdi_intin[0] = vdi_index;
 #endif
