@@ -7,7 +7,7 @@
 Summary       : GEM libraries and header files
 Name          : gemlib
 Version       : 0.42.99
-Release       : 20030216
+Release       : 20030323
 Copyright     : Public Domain
 Group         : Development/Libraries
 
