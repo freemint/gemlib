@@ -146,6 +146,7 @@ struct _fnts_item
 #define FNTS_SET		3			/**< TODO */
 #define FNTS_MARK 		4			/**< TODO */
 #define FNTS_OPT		5			/**< TODO */
+#define FNTS_OPTION		FNTS_OPT	/**< see FNTS_OPT */
 
 short		mt_fnts_add			(FNT_DIALOG *fnt_dialog, FNTS_ITEM *user_fonts, short *global);
 short		mt_fnts_close		(FNT_DIALOG *fnt_dialog, short *x, short *y, short *global);
@@ -179,6 +180,7 @@ typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, void *xattr);
 #define SORTBYSIZE		2			/**< TODO */
 #define SORTBYTYPE		3			/**< TODO */
 #define SORTBYNONE		4			/**< TODO */
+#define SORTDEFAULT		-1			/**< TODO */
 
 /* Flags fr Dateiauswahl */
 #define DOSMODE			1			/**< TODO */
@@ -1077,9 +1079,12 @@ typedef union
 } COLOR_ENTRY;
 
 /** TODO */
+#define	COLOR_TAB_MAGIC	'ctab'
+
+/** TODO */
 typedef struct
 {
-	long		magic;				/**< TODO */
+	long		magic;				/**< 'ctab' */
 	long		length;				/**< TODO */
 	long		format;				/**< TODO */
 	long		reserved;			/**< TODO */
@@ -1128,8 +1133,8 @@ struct _gcbitmap
 	long		xmax;			/**< TODO */
 	long		ymax;			/**< TODO */
 
-	CTAB_REF	*ctab;			/**< TODO */
-	ITAB_REF 	*itab;			/**< TODO */
+	CTAB_REF	ctab;			/**< TODO */
+	ITAB_REF 	itab;			/**< TODO */
 	long		reserved0;		/**< TODO */
 	long		reserved1;		/**< TODO */
 };
