@@ -263,6 +263,24 @@ form_keybd(OBJECT *tree, short object, short reserved, short key, short *nextobj
 	return(mt_form_keybd(tree, object, reserved, key, nextobject, nextchar, aes_global));
 }
 
+#ifdef fsel_exinput
+#undef fsel_exinput
+#endif
+short
+fsel_exinput(char *path, char *file, short *exit_but, const char *title)
+{
+	return(mt_fsel_exinput(path, file, exit_but, title, aes_global));
+}
+
+#ifdef fsel_input
+#undef fsel_input
+#endif
+short
+fsel_input(char *path, char *file, short *exit_but)
+{
+	return(mt_fsel_input(path, file, exit_but,aes_global));
+}
+
 #ifdef graf_dragbox
 #undef graf_dragbox
 #endif
