@@ -1,27 +1,20 @@
-
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
-evnt_button (short Clicks, short WhichButton, short WhichState, short *Mx, short *My,
-	     short *ButtonState, short *KeyState)
+evnt_button (short Clicks, short WhichButton, short WhichState,
+             short *Mx, short *My, short *ButtonState, short *KeyState)
 {
 	aes_intin[0] = Clicks;
 	aes_intin[1] = WhichButton;
 	aes_intin[2] = WhichState;
 	
-	aes_control[0] = 21;
-	aes_control[1] = 3;
-	aes_control[2] = 5;
-	aes_control[3] = 0;
-	aes_control[4] = 0;
+	AES_TRAP (aes_params, 21, 3,5,0,0);
 	
-	aes (&aes_params);
-	
-	*Mx = aes_intout[1];
-	*My = aes_intout[2];
+	*Mx          = aes_intout[1];
+	*My          = aes_intout[2];
 	*ButtonState = aes_intout[3];
-	*KeyState = aes_intout[4];
+	*KeyState    = aes_intout[4];
 	
 	return aes_intout[0];
 }

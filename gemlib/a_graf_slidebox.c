@@ -1,5 +1,4 @@
-
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
@@ -11,13 +10,7 @@ graf_slidebox (OBJECT *Tree, short Parent, short Object, short Direction)
 	aes_intin[1] = Object;
 	aes_intin[2] = Direction;
 	
-	aes_control[0] = 76;
-	aes_control[1] = 3;
-	aes_control[2] = 1;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
+	AES_TRAP (aes_params, 76, 3,1,1,0);
 	
 	return aes_intout[0];
 }

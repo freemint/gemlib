@@ -1,5 +1,8 @@
+/*
+ *   line attribute
+ */
 
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
@@ -8,15 +11,5 @@ vsl_ends (short handle, short begstyle, short endstyle)
 	vdi_intin[0] = begstyle;
 	vdi_intin[1] = endstyle;
 
-	vdi_control[0] = 108;
-	vdi_control[1] = 0;
-	vdi_control[3] = 2;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
-
-	vdi (&vdi_params);
+	VDI_TRAP (vdi_params, handle, 108, 0,2);
 }
-
-/*
- * * line attribute
- */

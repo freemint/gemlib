@@ -1,10 +1,9 @@
-
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
-graf_shrinkbox (short Fx, short Fy, short Fw, short Fh, short Sx, short Sy, short Sw,
-		short Sh)
+graf_shrinkbox (short Fx, short Fy, short Fw, short Fh,
+                short Sx, short Sy, short Sw, short Sh)
 {
 	aes_intin[0] = Fx;
 	aes_intin[1] = Fy;
@@ -15,13 +14,7 @@ graf_shrinkbox (short Fx, short Fy, short Fw, short Fh, short Sx, short Sy, shor
 	aes_intin[6] = Sw;
 	aes_intin[7] = Sh;
 	
-	aes_control[0] = 74;
-	aes_control[1] = 8;
-	aes_control[2] = 1;
-	aes_control[3] = 0;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
+	AES_TRAP (aes_params, 74, 8,1,0,0);
 	
 	return aes_intout[0];
 }

@@ -1,5 +1,4 @@
-
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
@@ -10,13 +9,7 @@ evnt_timer (unsigned long Interval)
 	aes_intin[0] = i[1];
 	aes_intin[1] = i[0];
 	
-	aes_control[0] = 24;
-	aes_control[1] = 2;
-	aes_control[2] = 1;
-	aes_control[3] = 0;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
+	AES_TRAP (aes_params, 24, 2,1,0,0);
 	
 	return aes_intout[0];
 }

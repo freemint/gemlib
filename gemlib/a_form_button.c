@@ -1,21 +1,14 @@
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
 form_button (OBJECT *Btree, short Bobject, short Bclicks, short *Bnxtobj)
 {
-	aes_addrin[0] = (long) Btree;
+	aes_intin[0]  = Bobject;
+	aes_intin[1]  = Bclicks;
+	aes_addrin[0] = (long)Btree;
 	
-	aes_intin[0] = Bobject;
-	aes_intin[1] = Bclicks;
-	
-	aes_control[0] = 56;
-	aes_control[1] = 2;
-	aes_control[2] = 2;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
+	AES_TRAP (aes_params, 56, 2,2,1,0);
 	
 	*Bnxtobj = aes_intout[1];
 	

@@ -1,5 +1,4 @@
-
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
@@ -12,18 +11,12 @@ evnt_mouse (short EnterExit, short InX, short InY, short InW, short InH,
 	aes_intin[3] = InW;
 	aes_intin[4] = InH;
 	
-	aes_control[0] = 22;
-	aes_control[1] = 5;
-	aes_control[2] = 5;
-	aes_control[3] = 0;
-	aes_control[4] = 0;
+	AES_TRAP (aes_params, 22, 5,5,0,0);
 	
-	aes (&aes_params);
-	
-	*OutX = aes_intout[1];
-	*OutY = aes_intout[2];
+	*OutX        = aes_intout[1];
+	*OutY        = aes_intout[2];
 	*ButtonState = aes_intout[3];
-	*KeyState = aes_intout[4];
+	*KeyState    = aes_intout[4];
 	
 	return aes_intout[0];
 }

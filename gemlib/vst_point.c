@@ -1,20 +1,17 @@
+/*
+ *  text attribute
+ */
 
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 short
-vst_point (short handle, short point, short *charw, short *charh, short *cellw,
-	   short *cellh)
+vst_point (short handle, short point,
+           short *charw, short *charh, short *cellw, short *cellh)
 {
 	vdi_intin[0] = point;
 
-	vdi_control[0] = 107;
-	vdi_control[1] = 0;
-	vdi_control[3] = 1;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
-
-	vdi (&vdi_params);
+	VDI_TRAP (vdi_params, handle, 107, 0,1);
 
 	*charw = vdi_ptsout[0];
 	*charh = vdi_ptsout[1];
@@ -23,7 +20,3 @@ vst_point (short handle, short point, short *charw, short *charh, short *cellw,
 
 	return vdi_intout[0];
 }
-
-/*
- * * text attribute
- */

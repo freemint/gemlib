@@ -1,20 +1,16 @@
+/*
+ *   special graphic funkcion
+ */
 
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 short
 vs_palette (short handle, short palette)
 {
 	vdi_intin[0] = palette;
-	vdi_control[0] = 5;
-	vdi_control[1] = 0;
-	vdi_control[3] = 1;
-	vdi_control[5] = 60;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	
+	VDI_TRAP_ESC (vdi_params, handle, 5,60, 0,1);
+	
 	return vdi_intout[0];
 }
-
-/*
- * * special graphic funkcion
- */

@@ -1,22 +1,15 @@
-
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
 graf_handle (short *Wchar, short *Hchar, short *Wbox, short *Hbox)
 {
-	aes_control[0] = 77;
-	aes_control[1] = 0;
-	aes_control[2] = 5;
-	aes_control[3] = 0;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
+	AES_TRAP (aes_params, 77, 0,5,0,0);
 	
 	*Wchar = aes_intout[1];
 	*Hchar = aes_intout[2];
-	*Wbox = aes_intout[3];
-	*Hbox = aes_intout[4];
+	*Wbox  = aes_intout[3];
+	*Hbox  = aes_intout[4];
 	
 	return aes_intout[0];
 }

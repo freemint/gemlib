@@ -1,19 +1,12 @@
-
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
 v_bar (short handle, short pxy[])
 {
-	vdi_control[0] = 11;
-	vdi_control[1] = 2;
-	vdi_control[3] = 0;
-	vdi_control[5] = 1;
-	vdi_control[6] = handle;
-
 	vdi_params.ptsin = pxy;
 
-	vdi (&vdi_params);
+	VDI_TRAP_ESC (vdi_params, handle, 11,1, 2,0);
 
 	vdi_params.ptsin = vdi_ptsin;
 }

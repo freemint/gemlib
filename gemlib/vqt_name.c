@@ -1,5 +1,4 @@
-
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 short
@@ -7,14 +6,9 @@ vqt_name (short handle, short element, char *name)
 {
 	vdi_intin[0] = element;
 
-	vdi_control[0] = 130;
-	vdi_control[1] = 0;
-	vdi_control[3] = 1;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
-
-	vdi (&vdi_params);
+	VDI_TRAP (vdi_params, handle, 130, 0,1);
 
 	vdi_array2str (vdi_intout + 1, name, 33);
+	
 	return vdi_intout[0];
 }

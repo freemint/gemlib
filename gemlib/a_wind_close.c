@@ -1,5 +1,4 @@
-
-#include "gem.h"
+#include "gem_aesP.h"
 
 
 short
@@ -7,13 +6,7 @@ wind_close (short WindowHandle)
 {
 	aes_intin[0] = WindowHandle;
 	
-	aes_control[0] = 102;
-	aes_control[1] = 1;
-	aes_control[2] = 1;
-	aes_control[3] = 0;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
+	AES_TRAP (aes_params, 102, 1,1,0,0);
 	
 	return aes_intout[0];
 }
