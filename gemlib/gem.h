@@ -58,6 +58,7 @@ extern short aes_global[];
 #define appl_find(a) mt_appl_find(a,aes_global)
 #define appl_getinfo(a,b,c,d,e) mt_appl_getinfo(a,b,c,d,e,aes_global)
 #define appl_xgetinfo(a,b,c,d,e) mt_appl_getinfo(a,b,c,d,e,aes_global)
+#define appl_getinfo_str(a,b,c,d,e) mt_appl_getinfo_str(a,b,c,d,e,aes_global)
 #define appl_read(a,b,c) mt_appl_read(a,b,c,aes_global)
 #define appl_search(a,b,c,d) mt_appl_search(a,b,c,d,aes_global)
 #define appl_tplay(a,b,c) mt_appl_tplay(a,b,c,aes_global)

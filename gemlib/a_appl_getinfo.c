@@ -189,7 +189,11 @@
  *                         <tr><td>  6  <td> #WF_BOTTOM set.
  *                         <tr><td>  7  <td> #WF_ICONIFY set.
  *                         <tr><td>  8  <td> #WF_UNICONIFY set.
- *                         <tr><td> 9-15<td> Unused
+ *                         <tr><td>  9  <td> #WF_WHEEL set/get.
+ *                         <tr><td>  10 <td> #WF_FIRSTAREAXYWH get.
+ *                         <tr><td>  11 <td> #WF_OPTS set/get.
+ *                         <tr><td>  12 <td> #WF_MENU set/get.
+ *                         <tr><td> 13-15<td> Unused
  *                         </table>
  *                    - \a out2 is current unused.
  *                    - \a out3 is a bitmap of supported
@@ -224,7 +228,8 @@
  *                         <tr><td> 7     <td> #WM_ICONIFY is sent.
  *                         <tr><td> 8     <td> #WM_UNICONIFY is sent.
  *                         <tr><td> 9     <td> #WM_ALLICONIFY is sent.
- *                         <tr><td> 10-15 <td> Unused
+ *                         <tr><td> 10    <td> #WM_REPOSED is sent.
+ *                         <tr><td> 11-15 <td> Unused
  *                         </table>
  *                    - \a out2 is a bitmap of extra messages
  *                         supported. Current all bits are
@@ -286,6 +291,15 @@
  *                    - \a out2 is filled with the highest Opcode for mt_appl_control()
  *                    - \a out3 is 1 if mt_shel_help() is available, or 0 otherwise.
  *                    - \a out4 is 1 if mt_wind_draw() is available, or 0 otherwise.
+ *  <tr><td> #AES_VERSION <td>  96    <td>
+ *                    Additional AES functions
+ *                    - \a out1 : major version of the AES (ex: 0 for version 0.992).
+ *                    - \a out2 : minor version of the AES (ex: 992 for version 0.992).
+ *                    - \a out3 : development status. The low byte indicates the release
+ *                                status (0=alpha, 1=beta, 2=release). The high byte may be
+ *                                1 to indicate a stable version (\a out3 & 0x100),
+ *                                or 0 otherwise.
+ *                    - \a out4 : target platform. May only be 0 (m68k) for now.
  *  </table>
  *
  *  Using an \a ap_gtype value of 4 and above is only supported as
