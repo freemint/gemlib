@@ -234,14 +234,22 @@
 
 /** @mainpage
  *
- *  Official home of gemlib is http://sparemint.atariforge.net/sparemint
+ *  Welcome to GEMlib documentation main page.
  *
- *  History:
- *  - \link Changelog.old up to gemlib PL38 \endlink
- *  - from gemlib PL38 to Dec 2002 (before merging gemlib and mgemlib)
+ *  If you want to get last news about GEMlib, please visit
+ *  http://arnaud.bercegeay.free.fr/gemlib/
+ *
+ *  If you want to get details about last changes done in GEMlib, you can
+ *  read the \link Changelog Changelog \endlink (from Dec 2002).
+ *
+ *  If you are interested in older changes that occured between GEMlib PL38 (last release before the
+ *  MGEMlib branch of the library was created) and GEMlib 0.43.0 (merge back of MGEMlib and GEMlib),
+ *  you can read
  *    - \link Changelog.MGL MGEMLIB branch (mgemlib 39 -> mgemlib 41) \endlink
  *    - \link Changelog.422 GEMLIB branch (gemlib 0.40.0 -> gemlib 0.42.2) \endlink
- *  - \link Changelog from Dec 2002 (up to now) \endlink
+ *
+ *  And last, the very first changelog, up to GEMlib PL38:  
+ *  \link Changelog.old Changelog.old \endlink 
  */
 
 /** @page Changelog.old
