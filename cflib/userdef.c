@@ -36,16 +36,10 @@
  *
  */
 
+#define __GEMLIB_OLDNAMES
+
 #include "intern.h"
-
-#ifdef __MINT__
-#include "gemx.h"
-#endif
-
-#ifndef TXT_LIGHT
-#define TXT_LIGHT			0x0002
-#define TXT_UNDERLINED	0x0008
-#endif
+#include <gemx.h>
 
 #include "inline.rsh"
 #include "inline.rh"
@@ -53,25 +47,26 @@
 OBJECT *cf_ascii_tab = NULL;
 OBJECT *cf_alert_box = NULL;
 
-static int handle = -1, ud_wchar, ud_hchar, ud_wbox, ud_hbox;
+static short handle = -1, ud_wchar, ud_hchar, ud_wbox, ud_hbox;
 static USERBLK menu_blk, popup_blk;
-static int gnva, use_3D, mx_buttons, mx_shortcut;
-static int back_col;
+static short gnva, use_3D, mx_buttons, mx_shortcut;
+static short back_col;
 static CICONBLK *radio_cib, *check_cib;
-static int mask_col[2] = { 0, 0 }, icon_col[2] = { 1, 0 };
-static int use_all_userdefs = FALSE;
+static short mask_col[2] = { 0, 0 }, icon_col[2] = { 1, 0 };
+static short use_all_userdefs = FALSE;
 
 /* -- diverser Kleinkram ----------------------------------------------------- */
 
-static int
+static short
 get_txtlen (char *str)
 {
-	int pxy[8];
+	short pxy[8];
 
 	if (gl_nvdi >= 0x300)
 		vqt_real_extent (handle, 0, 0, str, pxy);
 	else
 		vqt_extent (handle, str, pxy);
+
 	return pxy[2] - pxy[0];
 }
 
@@ -79,12 +74,12 @@ get_txtlen (char *str)
 /* -- allgemeine Zeichenroutinen --------------------------------------------- */
 
 static void
-draw_string (OBJECT * tree, int obj, int x, int y, char *str, int effect)
+draw_string (OBJECT *tree, short obj, short x, short y, char *str, short effect)
 {
-	int l, pos;
+	short l, pos;
 	char c;
 
-	if (tree[obj].ob_state & DISABLED)
+	if (tree[obj].ob_state & OS_DISABLED)
 		effect |= TXT_LIGHT;
 
 	vst_effects (handle, effect);
@@ -112,10 +107,10 @@ draw_string (OBJECT * tree, int obj, int x, int y, char *str, int effect)
 
 
 static void
-draw_bitblk (short *data, int planes, int mode, int *col, int x, int y)
+draw_bitblk (short *data, short planes, short mode, short *col, short x, short y)
 {
 	MFDB dst, src;
-	int pxy[8];
+	short pxy[8];
 
 	src.fd_addr = data;
 	src.fd_w = radio_cib->monoblk.ib_wicon;
@@ -144,17 +139,17 @@ draw_bitblk (short *data, int planes, int mode, int *col, int x, int y)
 
 /* -- Zeichenroutinen fÅr die Objekte ---------------------------------------- */
 
-static int cdecl
-draw_radiobutton (PARMBLK * p)
+static short cdecl
+draw_radiobutton (PARMBLK *p)
 {
 	char *str;
-	int wchar, d, i_m;
+	short wchar, d, i_m;
 	short *m_d, *i_d;
 
 	set_clipping (handle, p->pb_xc, p->pb_yc, p->pb_wc, p->pb_hc, TRUE);
 	vswr_mode (handle, MD_TRANS);
 
-	if (p->pb_currstate & SELECTED)
+	if (p->pb_currstate & OS_SELECTED)
 	{
 		i_d = (short *) radio_cib->mainlist->sel_data;
 		m_d = (short *) radio_cib->mainlist->sel_mask;
@@ -167,6 +162,7 @@ draw_radiobutton (PARMBLK * p)
 
 	/* Maske */
 	draw_bitblk (m_d, 1, MD_TRANS, mask_col, p->pb_x, p->pb_y);
+
 	/* Icon */
 	if (radio_cib->mainlist->num_planes > 1)
 	{
@@ -177,8 +173,8 @@ draw_radiobutton (PARMBLK * p)
 	}
 	else
 		i_m = MD_TRANS;
-	draw_bitblk (i_d, radio_cib->mainlist->num_planes, i_m, icon_col,
-		     p->pb_x, p->pb_y);
+
+	draw_bitblk (i_d, radio_cib->mainlist->num_planes, i_m, icon_col, p->pb_x, p->pb_y);
 
 	/* Text nur beim objc_draw ausgeben */
 	if (p->pb_prevstate == p->pb_currstate)
@@ -189,21 +185,22 @@ draw_radiobutton (PARMBLK * p)
 		draw_string (p->pb_tree, p->pb_obj, p->pb_x + p->pb_h + wchar,
 			     p->pb_y, str, 0);
 	}
-	return (p->pb_currstate & ~(SELECTED | DISABLED));
+
+	return (p->pb_currstate & ~(OS_SELECTED | OS_DISABLED));
 }
 
 
-static int cdecl
-draw_checkbutton (PARMBLK * p)
+static short cdecl
+draw_checkbutton (PARMBLK *p)
 {
 	char *str;
-	int wchar, d, i_m;
+	short wchar, d, i_m;
 	short *m_d, *i_d;
 
 	set_clipping (handle, p->pb_xc, p->pb_yc, p->pb_wc, p->pb_hc, TRUE);
 	vswr_mode (handle, MD_TRANS);
 
-	if (p->pb_currstate & SELECTED)
+	if (p->pb_currstate & OS_SELECTED)
 	{
 		i_d = (short *) check_cib->mainlist->sel_data;
 		m_d = (short *) check_cib->mainlist->sel_mask;
@@ -216,6 +213,7 @@ draw_checkbutton (PARMBLK * p)
 
 	/* Maske */
 	draw_bitblk (m_d, 1, MD_TRANS, mask_col, p->pb_x, p->pb_y);
+
 	/* Icon */
 	if (radio_cib->mainlist->num_planes > 1)
 	{
@@ -226,8 +224,8 @@ draw_checkbutton (PARMBLK * p)
 	}
 	else
 		i_m = MD_TRANS;
-	draw_bitblk (i_d, check_cib->mainlist->num_planes, i_m, icon_col,
-		     p->pb_x, p->pb_y);
+
+	draw_bitblk (i_d, check_cib->mainlist->num_planes, i_m, icon_col, p->pb_x, p->pb_y);
 
 	/* Text nur beim objc_draw ausgeben */
 	if (p->pb_prevstate == p->pb_currstate)
@@ -238,15 +236,15 @@ draw_checkbutton (PARMBLK * p)
 		draw_string (p->pb_tree, p->pb_obj, p->pb_x + p->pb_h + wchar,
 			     p->pb_y, str, 0);
 	}
-	return (p->pb_currstate & ~(SELECTED | DISABLED));
+	return (p->pb_currstate & ~(OS_SELECTED | OS_DISABLED));
 }
 
 
-static int cdecl
-draw_underline (PARMBLK * p)
+static short cdecl
+draw_underline (PARMBLK *p)
 {
 	char *str;
-	int d, len, pxy[8], wBox, hBox;
+	short d, len, pxy[8], wBox, hBox;
 
 	set_clipping (handle, p->pb_xc, p->pb_yc, p->pb_wc, p->pb_hc, TRUE);
 	vswr_mode (handle, MD_TRANS);
@@ -260,17 +258,19 @@ draw_underline (PARMBLK * p)
 	draw_string (p->pb_tree, p->pb_obj, p->pb_x, p->pb_y, str, 0);
 
 	/* Linie */
-	/*      len = get_txtlen(str); */
+	/* len = get_txtlen(str); */
 	len = p->pb_w;
 
 	if (use_3D)
 		vsl_color (handle, 9);
 	else
 		vsl_color (handle, 1);
+
 	pxy[0] = p->pb_x;
 	pxy[1] = p->pb_y + hBox;
 	pxy[2] = p->pb_x + len;
 	pxy[3] = pxy[1];
+
 	v_pline (handle, 2, pxy);
 
 	if (use_3D)
@@ -281,21 +281,21 @@ draw_underline (PARMBLK * p)
 		v_pline (handle, 2, pxy);
 	}
 
-	return (p->pb_currstate & ~(CHECKED | DISABLED));
+	return (p->pb_currstate & ~(OS_CHECKED | OS_DISABLED));
 }
 
 
-int cdecl
-draw_groupbox (PARMBLK * p)
+static short cdecl
+draw_groupbox (PARMBLK *p)
 {
-	int pxy[12], len, wBox, hBox, d;
-	int x, y, w, h;
+	short pxy[12], len, wBox, hBox, d;
+	short x, y, w, h;
 	char *str;
 
 	set_clipping (handle, p->pb_xc, p->pb_yc, p->pb_wc, p->pb_hc, TRUE);
 
 	/* Font */
-	if (p->pb_tree[p->pb_obj].ob_state & CHECKED)	/* kleine Schrift */
+	if (p->pb_tree[p->pb_obj].ob_state & OS_CHECKED) /* kleine Schrift */
 	{
 		vst_font (handle, sys_sml_id);
 		vst_height (handle, sys_sml_height, &d, &d, &wBox, &hBox);
@@ -375,15 +375,16 @@ draw_groupbox (PARMBLK * p)
 		pxy[3] = pxy[1];
 		v_pline (handle, 2, pxy);
 	}
+
 	return 0;
 }
 
 
-static int cdecl
-draw_scstring (PARMBLK * p)
+static short cdecl
+draw_scstring (PARMBLK *p)
 {
 	char *str;
-	int d;
+	short d;
 
 	set_clipping (handle, p->pb_xc, p->pb_yc, p->pb_wc, p->pb_hc, TRUE);
 	vswr_mode (handle, MD_TRANS);
@@ -403,16 +404,16 @@ draw_scstring (PARMBLK * p)
  * MenÅ-Tuning: Trennlinien als Linie (fÅr HauptmenÅs)
  * (ST-Computer 3/92, Seite 87)
  */
-static int cdecl
-draw_menuline (PARMBLK * p)
+static short cdecl
+draw_menuline (PARMBLK *p)
 {
-	int pxy[4];
+	short pxy[4];
 
-	/* Unter TOS und N.AES 1.x gibt es fÅr das HauptmenÅ falsche Clippingdaten. */
-	/* Unter Geneva (Tear-Away-MenÅs) sowie MagiC stimmen sie */
+	/* Unter TOS und N.AES 1.x gibt es fÅr das HauptmenÅ falsche Clippingdaten.
+	 * Unter Geneva (Tear-Away-MenÅs) sowie MagiC stimmen sie
+	 */
 	if (gnva || gl_magx)
-		set_clipping (handle, p->pb_xc, p->pb_yc, p->pb_wc, p->pb_hc,
-			      TRUE);
+		set_clipping (handle, p->pb_xc, p->pb_yc, p->pb_wc, p->pb_hc, TRUE);
 	else
 		vs_clip (handle, 0, pxy);
 
@@ -424,13 +425,13 @@ draw_menuline (PARMBLK * p)
 	if (use_3D)
 	{
 		vsf_interior (handle, FIS_SOLID);
-		vsf_color (handle, LBLACK);
+		vsf_color (handle, OC_LBLACK);
 	}
 	else
 	{
 		vsf_interior (handle, FIS_PATTERN);
 		vsf_style (handle, 4);
-		vsf_color (handle, BLACK);
+		vsf_color (handle, OC_BLACK);
 	}
 	vr_recfl (handle, pxy);
 
@@ -441,34 +442,34 @@ draw_menuline (PARMBLK * p)
  * DÅnne Trennlinien fÅr PopupmenÅs.
  * Von Joachim Fornallaz <jfornall@stud.ee.ethz.ch>
  */
-static int cdecl
-draw_popupline (PARMBLK * p)
+static short cdecl
+draw_popupline (PARMBLK *p)
 {
-	int pxy[4];
+	short pxy[4];
 
 	set_clipping (handle, p->pb_xc, p->pb_yc, p->pb_wc, p->pb_hc, TRUE);
 
 	pxy[0] = p->pb_x;
 	pxy[1] = p->pb_y + (p->pb_h / 2) - 1;
 	pxy[2] = p->pb_x + p->pb_w - 1;
-	pxy[3] = pxy[1];	/*p->pb_y + (p->pb_h / 2); */
+	pxy[3] = pxy[1];	/* p->pb_y + (p->pb_h / 2); */
 
 	if (use_3D)
 	{
-		vsl_color (handle, LBLACK);
+		vsl_color (handle, OC_LBLACK);
 		v_pline (handle, 2, pxy);
 
 		pxy[1] = p->pb_y + (p->pb_h / 2);
 		pxy[3] = pxy[1];
 
-		vsl_color (handle, WHITE);
+		vsl_color (handle, OC_WHITE);
 		v_pline (handle, 2, pxy);
 	}
 	else
 	{
 		vsf_interior (handle, FIS_PATTERN);
 		vsf_style (handle, 4);
-		vsf_color (handle, BLACK);
+		vsf_color (handle, OC_BLACK);
 		vr_recfl (handle, pxy);
 	}
 
@@ -480,7 +481,7 @@ draw_popupline (PARMBLK * p)
 static void
 init_inline_rsc (void)
 {
-	int i, obj;
+	short i, obj;
 
 	for (i = 0; i < NUM_OBS; i++)
 		rsrc_obfix (&rs_object[i], 0);
@@ -506,17 +507,16 @@ init_inline_rsc (void)
 }
 
 static void
-make_userdef (OBJECT * tree, int obj, int cdecl (*proc) (PARMBLK * p))
+make_userdef (OBJECT *tree, short obj, short cdecl (*proc)(PARMBLK *p))
 {
 	USERBLK *uPtr;
 
-	uPtr =
-		(USERBLK *) cf_malloc (sizeof (USERBLK), "make_userdef",
-				       FALSE);
-	if (uPtr != NULL)
+	uPtr = cf_malloc (sizeof (USERBLK), "make_userdef", FALSE);
+	if (uPtr)
 	{
 		uPtr->ub_code = proc;	/* neue Zeichenfunktion */
 		uPtr->ub_parm = tree[obj].ob_spec.index;	/* alte obSpec sichern */
+
 		/* alten Typ hochschieben und neuen eintragen */
 		tree[obj].ob_type = (tree[obj].ob_type << 8) + G_USERDEF;
 		tree[obj].ob_spec.index = (long) uPtr;	/* Userblock eintragen */
@@ -526,7 +526,7 @@ make_userdef (OBJECT * tree, int obj, int cdecl (*proc) (PARMBLK * p))
 /* -- exportierte Funtkionen ------------------------------------------------- */
 
 void
-fix_dial (OBJECT * tree)
+fix_dial (OBJECT *tree)
 {
 	int mtyp, obj;
 
@@ -534,8 +534,7 @@ fix_dial (OBJECT * tree)
 		return;
 
 	obj = -1;
-	do
-	{
+	do {
 		obj++;
 		mtyp = get_magx_obj (tree, obj);
 
@@ -578,21 +577,20 @@ fix_dial (OBJECT * tree)
 			}
 		}
 	}
-	while (!(tree[obj].ob_flags & LASTOB));
+	while (!(tree[obj].ob_flags & OF_LASTOB));
 }
 
 
 void
-fix_menu (OBJECT * tree)
+fix_menu (OBJECT *tree)
 {
-	int i = -1;
+	short i = -1;
 
-	do
-	{
+	do {
 		i++;
 		if (tree[i].ob_type == G_STRING)
 		{
-			if ((tree[i].ob_state & DISABLED)
+			if ((tree[i].ob_state & OS_DISABLED)
 			    && (tree[i].ob_spec.free_string[0] == '-'))
 			{
 				tree[i].ob_type =
@@ -601,13 +599,13 @@ fix_menu (OBJECT * tree)
 			}
 		}
 	}
-	while (!(tree[i].ob_flags & LASTOB));
+	while (!(tree[i].ob_flags & OF_LASTOB));
 }
 
 void
-fix_popup (OBJECT * tree, int thin_line)
+fix_popup (OBJECT *tree, short thin_line)
 {
-	int i = -1;
+	short i = -1;
 
 	do
 	{
@@ -619,7 +617,7 @@ fix_popup (OBJECT * tree, int thin_line)
 				tree[i].ob_type = G_SHORTCUT;
 #endif
 
-			if ((tree[i].ob_state & DISABLED)
+			if ((tree[i].ob_state & OS_DISABLED)
 			    && (tree[i].ob_spec.free_string[0] == '-'))
 			{
 				tree[i].ob_type =
@@ -631,14 +629,14 @@ fix_popup (OBJECT * tree, int thin_line)
 			}
 		}
 	}
-	while (!(tree[i].ob_flags & LASTOB));
+	while (!(tree[i].ob_flags & OF_LASTOB));
 }
 
 
 void
 init_userdef (void)
 {
-	int work_out[57], d, ap1, ap2, ap3, ap4;
+	short work_out[57], d, ap1, ap2, ap3, ap4;
 
 	handle = open_vwork (work_out);
 
@@ -710,7 +708,7 @@ exit_userdef (void)
  * MagiC in USERDEFs umgewandelt.
  */
 void
-cf_use_all_userdefs (int all)
+cf_use_all_userdefs (short all)
 {
 	use_all_userdefs = all;
 }

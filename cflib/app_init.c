@@ -24,6 +24,8 @@
  * 
  */
 
+#include <osbind.h>
+
 #include "intern.h"
 #include "app.h"
 
@@ -31,9 +33,9 @@
 void
 init_app (char *rsc)
 {
-	int d;
+	short d;
 	long l;
-	int work_out[57];
+	short work_out[57];
 	char s[128];
 	char path[256];
 

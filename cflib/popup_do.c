@@ -27,10 +27,10 @@
 #include "intern.h"
 
 
-int
-do_popup (POPUP * p, int button)
+short
+do_popup (POPUP *p, short button)
 {
-	int flag, p_x, p_y, d;
+	short flag, p_x, p_y, d;
 	MENU Menu, MData;
 
 	Menu.mn_tree = p->tree;
@@ -38,18 +38,9 @@ do_popup (POPUP * p, int button)
 	Menu.mn_item = 0;
 	Menu.mn_scroll = FALSE;
 
-#ifdef __MTAES__
-	{
-		EVNTDATA ev;
-
-		graf_mkstate (&ev);
-		p_x = ev.x;
-		p_y = ev.y;
-	}
-#else
 	graf_mkstate (&p_x, &p_y, &d, &d);
-#endif
 
 	flag = cf_menu_popup (&Menu, p_x, p_y, &MData, button, 0);
+
 	return (flag ? MData.mn_item : 0);
 }

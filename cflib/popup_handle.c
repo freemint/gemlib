@@ -27,13 +27,13 @@
 #include "intern.h"
 
 
-int
-handle_popup (OBJECT * dial, int dial_obj, OBJECT * pop, int pop_obj,
-	      int mode)
+short
+handle_popup (OBJECT * dial, short dial_obj, OBJECT *pop, short pop_obj,
+	      short mode)
 {
 	char active_str[50] = "", s[50];
-	int first, last, item, i, first_offset;
-	int x, y;
+	short first, last, item, i, first_offset;
+	short x, y;
 	MENU m1, m2;
 	GRECT r;
 	int down_pop;
@@ -124,15 +124,7 @@ handle_popup (OBJECT * dial, int dial_obj, OBJECT * pop, int pop_obj,
 			}
 			else
 			{
-#ifdef __MTAES__
-				EVNTDATA ev;
-
-				graf_mkstate (&ev);
-				x = ev.x;
-				y = ev.y;
-#else
 				graf_mkstate (&x, &y, &i, &i);
-#endif
 				get_objframe (pop, item, &r);
 				x -= r.g_w / 2;
 				y -= r.g_h / 2;
@@ -158,8 +150,8 @@ handle_popup (OBJECT * dial, int dial_obj, OBJECT * pop, int pop_obj,
 				if (item > last)
 					item = first;
 			}
-			while (((pop[item].ob_state & DISABLED) ||
-				!(pop[item].ob_flags & SELECTABLE)) &&
+			while (((pop[item].ob_state & OS_DISABLED) ||
+				!(pop[item].ob_flags & OF_SELECTABLE)) &&
 			       i <= last - first);
 
 			if (i > last - first)
@@ -177,11 +169,7 @@ handle_popup (OBJECT * dial, int dial_obj, OBJECT * pop, int pop_obj,
 		get_string (pop, item, s);
 		set_string (dial, dial_obj, s);
 		get_objframe (dial, dial_obj, &r);
-#ifdef __MTAES__
-		objc_draw (dial, dial_obj, 1, &r);
-#else
 		objc_draw (dial, dial_obj, 1, r.g_x, r.g_y, r.g_w, r.g_h);
-#endif
 	}
 
 	return item;

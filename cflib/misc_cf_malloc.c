@@ -24,6 +24,7 @@
  * 
  */
 
+#include <osbind.h>
 #include "intern.h"
 
 
@@ -32,7 +33,7 @@ cf_malloc (long size, char *who, int global)
 {
 	void *r = NULL;
 
-	if (global &&getcookie ("MiNT", NULL))
+	if (global && getcookie ("MiNT", NULL))
 		r = (void *) Mxalloc (size, 0x23);
 	else
 		r = (void *) Malloc (size);

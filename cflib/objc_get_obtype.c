@@ -27,13 +27,14 @@
 #include "intern.h"
 
 
-int
-get_obtype (OBJECT * tree, int obj, short *ud)
+short
+get_obtype (OBJECT *tree, short obj, short *ud)
 {
-	int type;
+	short type;
 
 	if (ud != NULL)
 		*ud = FALSE;
+
 	type = tree[obj].ob_type & 0x00FF;
 
 	/* Special: im Falle UserDef steht im oberen Byte der Original-Typ! */
@@ -43,5 +44,6 @@ get_obtype (OBJECT * tree, int obj, short *ud)
 		if (ud != NULL)
 			*ud = TRUE;
 	}
+
 	return type;
 }

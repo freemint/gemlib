@@ -32,11 +32,11 @@
 
 extern WDIALOG *__wdial_list;
 
-WDIALOG *get_wdial (int w_handle);
-void draw_wdial (WDIALOG * wd, int obj, int depth, int x, int y, int w, int h);
-void wdial_draw_cursor (WDIALOG *wd, int mode);
-void iconify_wdial (WDIALOG *wd, int x, int y, int w, int h);
-void uniconify_wdial (WDIALOG *wd, int x, int y, int w, int h);
+WDIALOG *get_wdial (short w_handle);
+void draw_wdial (WDIALOG *wd, short obj, short depth, short x, short y, short w, short h);
+void wdial_draw_cursor (WDIALOG *wd, short mode);
+void iconify_wdial (WDIALOG *wd, short x, short y, short w, short h);
+void uniconify_wdial (WDIALOG *wd, short x, short y, short w, short h);
 void wdial_call_cb (WDIALOG *wd);
 
 

@@ -33,24 +33,16 @@
 #define TRUE	1
 #endif
 
-#ifdef __MTAES__
-#define wind_create_grect(a,b)		wind_create(a,b)
-#define wind_calc_grect(a,b,c,d)	wind_calc(a,b,c,d)
-#define wind_open_grect(a,b)		wind_open(a,b)
-#define wind_set_str(a,b,c)		wind_set_string(a,b,c)
-extern int rc_intersect (GRECT * r1, GRECT * r2);
-#endif
-
 /* --------------------------------------------------------------------------- */
-OBJECT         *menu, *objdial, *popdial, *wicon, *popups, *about;
-WDIALOG        *wdial;
-int             quit;
-int             msg[8], vdi_handle;
-int             event, msx, msy, mbutton, kstate, mclick, kreturn, win_handle;
-int             modal = FALSE;
-int             id = 1, pts = 10;
+OBJECT	*menu, *objdial, *popdial, *wicon, *popups, *about;
+WDIALOG	*wdial;
+short	quit;
+short	msg[8], vdi_handle;
+short	event, msx, msy, mbutton, kstate, mclick, kreturn, win_handle;
+short	modal = FALSE;
+short	id = 1, pts = 10;
 
-static void     handle_msg (int *msg);
+static void handle_msg (short *msg);
 
 /* --------------------------------------------------------------------------- */
 /* 
@@ -59,10 +51,10 @@ static void     handle_msg (int *msg);
  * werden.
  */
 static void
-redraw_win (int handle, int xc, int yc, int wc, int hc)
+redraw_win (short handle, short xc, short yc, short wc, short hc)
 {
 	GRECT t1, t2;
-	int temp[4];
+	short temp[4];
 
 	hide_mouse ();
 	wind_update (TRUE);
@@ -96,7 +88,7 @@ redraw_win (int handle, int xc, int yc, int wc, int hc)
 static void
 open_win (void)
 {
-	int work_out[57];
+	short work_out[57];
 	GRECT r = { 100, 100, 350, 150 };
 
 	vdi_handle = open_vwork (work_out);
@@ -107,7 +99,7 @@ open_win (void)
 }
 
 static void
-win_msg (int *msg)
+win_msg (short *msg)
 {
 	if (msg[3] == win_handle)
 	{
@@ -144,34 +136,23 @@ win_msg (int *msg)
 static void
 modal_dial (void)
 {
-	int antw, edit;
+	short antw, edit;
 	GRECT r;
 
 	wind_update (BEG_UPDATE);
-#ifdef __MTAES__
-	form_center (objdial, &r);
-	form_dial (FMD_START, &r, &r);
-	objc_draw (objdial, ROOT, MAX_DEPTH, &r);
-#else
 	form_center (objdial, &r.g_x, &r.g_y, &r.g_w, &r.g_h);
 	form_dial (FMD_START, r.g_x, r.g_y, r.g_w, r.g_h, r.g_x, r.g_y, r.g_w,
 		   r.g_h);
 	objc_draw (objdial, ROOT, MAX_DEPTH, r.g_x, r.g_y, r.g_w, r.g_h);
-#endif
 
 	edit = EDIT1;
-	do
-	{
+	do {
 		antw = cf_form_do (objdial, &edit);
 	}
 	while (antw != ENDE && antw != UNDO);
-	set_state (objdial, antw, SELECTED, FALSE);
-#ifdef __MTAES__
-	form_dial (FMD_FINISH, &r, &r);
-#else
+	set_state (objdial, antw, OS_SELECTED, FALSE);
 	form_dial (FMD_FINISH, r.g_x, r.g_y, r.g_w, r.g_h, r.g_x, r.g_y,
 		   r.g_w, r.g_h);
-#endif
 	wind_update (END_UPDATE);
 	if (antw == ENDE)
 		quit = TRUE;
@@ -183,8 +164,8 @@ static void
 appmodal_dial (void)
 {
 	void *mdial;
-	int close = FALSE;
-	int id, exit_obj;
+	short close = FALSE;
+	short id, exit_obj;
 
 	mdial = open_mdial (objdial, EDIT1);
 	while (!close)
@@ -213,8 +194,8 @@ appmodal_dial (void)
 				close = TRUE;
 				break;
 		}
-		if (get_flag (objdial, exit_obj, EXIT))
-			set_state (objdial, exit_obj, SELECTED, FALSE);
+		if (get_flag (objdial, exit_obj, OF_EXIT))
+			set_state (objdial, exit_obj, OS_SELECTED, FALSE);
 		if (!close)
 			redraw_mdobj (mdial, exit_obj);
 	}
@@ -226,10 +207,10 @@ appmodal_dial (void)
 static POPUP pop;
 
 static void
-set_popcolor (int s_obj, OBJECT * d_tree, int d_obj)
+set_popcolor (short s_obj, OBJECT *d_tree, short d_obj)
 {
 	OBSPEC spec;
-	int color;
+	short color;
 
 	spec.index = get_obspec (popups, s_obj);
 	color = spec.obspec.interiorcol;	/* neue Farbe holen */
@@ -239,7 +220,7 @@ set_popcolor (int s_obj, OBJECT * d_tree, int d_obj)
 }
 
 static void
-nonmodal_open_cb (WDIALOG * wd)
+nonmodal_open_cb (WDIALOG *wd)
 {
 	char str[10];
 
@@ -258,10 +239,10 @@ nonmodal_open_cb (WDIALOG * wd)
 }
 
 static int
-nonmodal_exit_cb (WDIALOG * wd, int obj)
+nonmodal_exit_cb (WDIALOG *wd, short obj)
 {
-	int close = FALSE;
-	int y;
+	short close = FALSE;
+	short y;
 	char s[30];
 
 	switch (obj)
@@ -320,7 +301,7 @@ nonmodal_exit_cb (WDIALOG * wd, int obj)
 				y =
 					handle_colorpop (wd->tree, P5BOX,
 							 POP_OPEN, 8, 0);
-			set_state (wd->tree, obj, SELECTED, FALSE);
+			set_state (wd->tree, obj, OS_SELECTED, FALSE);
 			redraw_wdobj (wd, P5BOX);
 			break;
 
@@ -347,7 +328,7 @@ fsel_cb (char *path, char *name)
 
 /* --------------------------------------------------------------------------- */
 static void
-handle_menu (int title, int item)
+handle_menu (short title, short item)
 {
 	switch (item)
 	{
@@ -453,7 +434,7 @@ handle_menu (int title, int item)
 }
 
 static void
-handle_msg (int *msg)
+handle_msg (short *msg)
 {
 	if (!message_wdial (msg))
 	{
@@ -485,13 +466,9 @@ handle_msg (int *msg)
 int
 main (void)
 {
+	extern char __Ident_cflib[];
 	OBJECT *tree;
 	char tmp[20];
-
-#ifdef __MTAES__
-	GRECT           n = { 0, 0, 0, 0 };
-	EVNTDATA        ev;
-#endif
 
 	init_app ("demo.rsc");
 	init_colorpop (8);
@@ -533,16 +510,6 @@ main (void)
 	while (!quit)
 	{
 		mbutton = 0;
-#ifdef __MTAES__
-		event = evnt_multi (MU_MESAG | MU_BUTTON | MU_KEYBD,
-				    1, 1, 1,
-				    0, &n, 0, &n,
-				    msg, 0, &ev, &kreturn, &mclick);
-		msx = ev.x;
-		msy = ev.y;
-		mbutton = ev.bstate;
-		kstate = ev.kstate;
-#else
 		event = evnt_multi (MU_MESAG | MU_BUTTON | MU_KEYBD,
 				    1, 1, 1,
 				    0, 0, 0, 0, 0,
@@ -551,7 +518,6 @@ main (void)
 				    0,
 				    &msx, &msy, &mbutton, &kstate,
 				    &kreturn, &mclick);
-#endif
 
 		if (event & MU_MESAG)
 			handle_msg (msg);
@@ -565,7 +531,7 @@ main (void)
 		{
 			if (!key_wdial (kreturn, kstate))
 			{
-				int             title, item;
+				short title, item;
 
 				if (is_menu_key
 				    (kreturn, kstate, &title, &item))

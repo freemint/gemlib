@@ -24,6 +24,7 @@
  * 
  */
 
+#include "app.h"
 #include "mdial.h"
 
 

@@ -27,11 +27,11 @@
 #include "wdial.h"
 
 
-int
-key_wdial (int kreturn, int kstate)
+short
+key_wdial (short kreturn, short kstate)
 {
-	int wh, d;
-	int ret = TRUE, cont, ctrl;
+	short wh, d;
+	short ret = TRUE, cont, ctrl;
 	WDIALOG *wd;
 
 	wind_get (0, WF_TOP, &wh, &d, &d, &d);
@@ -48,7 +48,7 @@ key_wdial (int kreturn, int kstate)
 					      &wd->edit_idx, ED_CHAR, kstate,
 					      &ctrl);
 			else if (cont
-				 && (wd->tree[wd->next_obj].ob_flags & EDITABLE))
+				 && (wd->tree[wd->next_obj].ob_flags & OF_EDITABLE))
 			{
 				objc_edit (wd->tree, wd->edit_obj, 0,
 					   &wd->edit_idx, ED_END);

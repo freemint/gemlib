@@ -33,17 +33,17 @@
 
 
 static void
-toggle_menu (int dis)
+toggle_menu (short dis)
 {
 	if ((__menu_tree != NULL) && (__menu_disabled != dis))
 	{
-		int titel;
+		short titel;
 
 		wind_update (BEG_UPDATE);
 		titel = __menu_tree[3].ob_next;	/* 3: Desk-Titel */
 		while (titel != 2)	/* 2: Box, die die Titel umgibt */
 		{
-			set_state (__menu_tree, titel, DISABLED, dis);
+			set_state (__menu_tree, titel, OS_DISABLED, dis);
 			titel = __menu_tree[titel].ob_next;
 		}
 		menu_bar (__menu_tree, TRUE);

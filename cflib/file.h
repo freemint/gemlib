@@ -34,7 +34,7 @@
 #include <support.h>
 #else
 #include <ext.h>
-#define S_IFMT			0170000
+#define S_IFMT		0170000
 #define S_IFDIR		0040000
 #define S_ISDIR(m)	((m & S_IFMT) == S_IFDIR)
 #endif
@@ -42,16 +42,19 @@
 #include "intern.h"
 
 
-int file_exists(char *filename)
+int
+file_exists (char *filename)
 {
-	struct stat	s;
+	struct stat s;
 	
 	if (filename[0] == '\0')
 		return FALSE;
-	return (stat(filename, &s) == 0);
+
+	return (stat (filename, &s) == 0);
 }
 
-int path_exists(char *pathname)
+int
+path_exists (char *pathname)
 {
 	struct stat	s;
 	int			r = FALSE;
@@ -76,12 +79,14 @@ int path_exists(char *pathname)
 			}
 		}
 	}
+
 	return r;
 }
 
-int get_path(char *path, char drive)
+int
+get_path (char *path, char drive)
 {
-	int 	ret, drive_nr;
+	int ret, drive_nr;
 
 	if (drive == 0)
 	{
@@ -106,9 +111,10 @@ int get_path(char *path, char drive)
 	return (ret == 0);
 }
 
-int set_path(char *path)
+int
+set_path (char *path)
 {
-	int	drive, ret;
+	int drive, ret;
 
 	if (path[0] == '\0')
 		return FALSE;
@@ -123,9 +129,10 @@ int set_path(char *path)
 	return (ret == 0);
 }
 
-void split_filename(char *fullname, char *path, char *name)
+void
+split_filename (char *fullname, char *path, char *name)
 {
-	char	*str;
+	char *str;
 
 	str = strrchr (fullname, '\\');
 
@@ -151,7 +158,8 @@ void split_filename(char *fullname, char *path, char *name)
 	}
 }
 
-void split_extension(char *filename, char *name, char *extension)
+void
+split_extension (char *filename, char *name, char *extension)
 {
 	char *ptr = strrchr(filename, '.');
 	char *slash = strrchr(filename, '\\');
@@ -175,7 +183,8 @@ void split_extension(char *filename, char *name, char *extension)
 		strcpy(extension, ptr+1);
 }
 
-void set_extension(char *filename, char *new_ext)
+void
+set_extension (char *filename, char *new_ext)
 {
 	char *ptr = strrchr(filename, '.');
 	char *slash = strrchr(filename, '\\');
@@ -200,12 +209,13 @@ void set_extension(char *filename, char *new_ext)
 		strcpy(ptr + 1, new_ext);
 }
 
-int make_normalpath(char *path)
+int
+make_normalpath (char *path)
 {
-	int	i;
-	char	p[256];
-	char	*f, drv;
-	int	ret;
+	int i;
+	char p[256];
+	char *f, drv;
+	int ret;
 
 	if (path[0] == '\0')
 		return FALSE;
@@ -269,11 +279,12 @@ int make_normalpath(char *path)
 	return ret;
 }
 
-void make_shortpath(char *path, char *shortpath, int maxlen)
+void
+make_shortpath (char *path, char *shortpath, int maxlen)
 {
-	char	help[256];
-	int	path_len;
-	char	*p1, *p2;
+	char help[256];
+	int path_len;
+	char *p1, *p2;
 
 	strcpy(help, path);
 	path_len = (int)strlen(help);
@@ -308,10 +319,11 @@ void make_shortpath(char *path, char *shortpath, int maxlen)
 	strcpy(shortpath, help);
 }
 
-int fs_long_name(char *filename)
+int
+fs_long_name (char *filename)
 {
-	char	path[256];
-	long	ret;
+	char path[256];
+	long ret;
 
 	/* eigentlichen Dateinamen abschneiden und durch '.' ersetzen -
 		muž sein, da Datei evtl. noch nicht existiert... */
@@ -320,13 +332,15 @@ int fs_long_name(char *filename)
 	ret = Dpathconf(path, 3);
 	if ((ret < 0) || (ret == 12))
 		ret = 0;
+
 	return (int) ret;
 }
 
-int fs_case_sens(char *filename)
+int
+fs_case_sens (char *filename)
 {
-	char	path[256];
-	int	ret;
+	char path[256];
+	int ret;
 
 	/* Eigentlichen Dateinamen abschneiden und durch '.' ersetzen -
 		muž sein, da Datei evtl. noch nicht existiert... */
@@ -349,5 +363,6 @@ int fs_case_sens(char *filename)
 		default:
 			ret = NO_CASE;		/* Dpathconf() nicht verfgbar, oder kein Unterschied */
 	}
+
 	return ret;
 }

@@ -31,35 +31,47 @@
 #include "intern.h"
 
 
-int	gl_apid = -1;
-int	gl_phys_handle = -1;
+#ifndef str
+# define str(x)		_stringify (x)
+# define _stringify(x)	#x
+#endif
 
+#define CFLIB_PATCHLEVEL	str(__CFLIB_MAJOR__) "." str(__CFLIB_MINOR__) "." \
+				str(__CFLIB_REVISION__) __CFLIB_BETATAG__
+
+/*
+ * global identify string for the lib
+ */
+char __Ident_cflib[] = "$PatchLevel: CF library: " CFLIB_PATCHLEVEL " $";
+
+
+short	gl_phys_handle = -1;
 GRECT	gl_desk;
 
-int	sys_big_id;
-int	sys_big_height;
-int	sys_big_pts;
-int	sys_sml_id;
-int	sys_sml_height;
-int	sys_sml_pts;
-int	sys_wchar;
-int	sys_hchar;
-int	sys_wbox;
-int	sys_hbox;
+short	sys_big_id;
+short	sys_big_height;
+short	sys_big_pts;
+short	sys_sml_id;
+short	sys_sml_height;
+short	sys_sml_pts;
+short	sys_wchar;
+short	sys_hchar;
+short	sys_wbox;
+short	sys_hbox;
 
-int	gl_wchar;
-int	gl_hchar;
-int	gl_wbox;
-int	gl_hbox;
+short	gl_wchar;
+short	gl_hchar;
+short	gl_wbox;
+short	gl_hbox;
 
-int	gl_gdos = FALSE;
-int	gl_font_anz = 1;
-int	gl_planes = 1;
+short	gl_gdos = FALSE;
+short	gl_font_anz = 1;
+short	gl_planes = 1;
 
-int	gl_gem = 0;
-int	gl_mint = 0;
-int	gl_naes = 0;
-int	gl_magx = 0;
-int	gl_nvdi = 0;
+short	gl_gem = 0;
+short	gl_mint = 0;
+short	gl_naes = 0;
+short	gl_magx = 0;
+short	gl_nvdi = 0;
 
 char	gl_appdir[256] = "";

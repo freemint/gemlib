@@ -34,6 +34,6 @@
 
 
 OBJECT *__menu_tree = NULL;
-int __menu_disabled = FALSE;
-int __menu_dis_cnt = 0;
+short __menu_disabled = FALSE;
+short __menu_dis_cnt = 0;
 KEYTAB *__menu_keys = NULL;

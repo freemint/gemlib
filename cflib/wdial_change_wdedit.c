@@ -31,9 +31,9 @@
  * Cursor updaten
  */
 void
-change_wdedit (WDIALOG * wd, int new)
+change_wdedit (WDIALOG *wd, short new)
 {
-	int last = 0;
+	short last = 0;
 
 	if (wd != NULL)
 	{

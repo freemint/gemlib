@@ -56,31 +56,6 @@
 #define K_SHIFT			(K_RSHIFT|K_LSHIFT)
 #endif
 
-#ifndef ED_CRSR
-#define ED_CRSR			100		/* MAG!X */
-#define ED_DRAW			103		/* MAG!X 2.00  */
-#endif
-
-#ifndef G_SHORTCUT
-#define G_SHORTCUT		38		/* MagiC 6 */
-#endif
-
-/* ob_state */
-#ifndef FLAG11
-#define FLAG11			0x0800
-#define FLAG12			0x1000
-#define FLAG13			0x2000
-#define FLAG14			0x4000
-#define FLAG15			0x5000
-#endif
-
-/* vst_alignment() */
-#ifndef TA_LEFT
-#define TA_LEFT			0
-#define TA_CENTER		1
-#define TA_TOP 			5
-#endif
-
 /* boolean */
 #ifdef TRUE
 #undef TRUE
@@ -100,43 +75,37 @@ typedef struct
 } KEYTAB;
 #endif
 
-/* lib-interne globale Variablen */
-extern int cf_vdi_handle;
-extern int cf_font_anz;
-extern int cf_msg_cb;
-extern int cf_magxPC;
-
-void *	cf_malloc(long size, char *who, int global);
+void *	cf_malloc (long size, char *who, int global);
 
 /* cicon */
-CICON *	fix_cicon(CICONBLK *cicnblk, int screen_planes, int handle);
+CICON *	fix_cicon (CICONBLK *cicnblk, short screen_planes, short handle);
 
 
 /* form_do */
 #define FMD_BACKWARD	1
 #define FMD_FORWARD	2
 
-int	edit_valid(OBJECT *tree, int obj);
-int	find_edit(OBJECT *tree, int obj, int mode);
-int 	cf_objc_find(OBJECT *tree, int start, int depth, int x, int y);
-int 	find_shortcut(OBJECT *tree, int kstate, int kreturn);
-int 	cf_form_keybd(OBJECT *tree, int edit_obj, int kstate, int *kreturn, int *next_obj);
-void	cf_objc_edit(OBJECT *tree, int obj, int kreturn, int *idx, int mode, int kstate, int *ctrl);
+short	edit_valid (OBJECT *tree, short obj);
+short	find_edit (OBJECT *tree, short obj, short mode);
+short 	cf_objc_find (OBJECT *tree, short start, short depth, short x, short y);
+short 	find_shortcut (OBJECT *tree, short kstate, short kreturn);
+short 	cf_form_keybd (OBJECT *tree, short edit_obj, short kstate, short *kreturn, short *next_obj);
+void	cf_objc_edit (OBJECT *tree, short obj, short kreturn, short *idx, short mode, short kstate, short *ctrl);
 
 
 /* mdial */
-void handle_mdial_msg(int *msg);
+void handle_mdial_msg (short *msg);
 
 
 /* userdef */
 extern OBJECT	*cf_ascii_tab;
 extern OBJECT	*cf_alert_box;
 
-void init_userdef(void);
-void exit_userdef(void);
+void init_userdef (void);
+void exit_userdef (void);
 
 /* popup */
-int popup_valid_item(OBJECT *tree, int obj);
+short popup_valid_item (OBJECT *tree, short obj);
 
 
 #ifdef __MINT__
@@ -164,17 +133,9 @@ int popup_valid_item(OBJECT *tree, int obj);
 
 #define min(a,b)	  (((a) < (b)) ? (a) : (b))
 #define max(a,b)	  (((a) > (b)) ? (a) : (b))
-int rc_intersect(GRECT *r1, GRECT *r2);
-void vqt_real_extent(int handle, int x, int y, char *string, int extent[]);
+short rc_intersect(GRECT *r1, GRECT *r2);
+void vqt_real_extent(int handle, short x, short y, char *string, short extent[]);
 
-#endif
-
-
-#ifdef __MTAES__
-#define wind_create_grect(a,b)	wind_create(a,b)
-#define wind_calc_grect(a,b,c,d)	wind_calc(a,b,c,d)
-#define wind_open_grect(a,b)		wind_open(a,b)
-#define wind_set_str(a,b,c)		wind_set_string(a,b,c)
 #endif
 
 

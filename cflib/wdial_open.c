@@ -31,10 +31,10 @@
  * Dialog-Fenster ”ffnen.
  */
 void
-open_wdial (WDIALOG * wd, int pos_x, int pos_y)
+open_wdial (WDIALOG *wd, short pos_x, short pos_y)
 {
 	GRECT r1, r2;
-	int d;
+	short d;
 
 	if (wd != NULL)
 	{
@@ -70,12 +70,8 @@ open_wdial (WDIALOG * wd, int pos_x, int pos_y)
 			wd->tree[0].ob_spec.obspec.framesize = 0;
 
 			if ((pos_x == -1) || (pos_y == -1))	/* Zentrieren */
-#ifdef __MTAES__
-				form_center (wd->tree, &r1);
-#else
 				form_center (wd->tree, &r1.g_x, &r1.g_y,
 					     &r1.g_w, &r1.g_h);
-#endif
 			else
 			{
 				wd->tree[0].ob_x = pos_x;
@@ -92,7 +88,7 @@ open_wdial (WDIALOG * wd, int pos_x, int pos_y)
 					(wd->tree[wd->title_obj].ob_y +
 					 wd->tree[wd->title_obj].ob_height);
 				wd->tree[0].ob_y -= wd->delta_y;
-				set_flag (wd->tree, wd->title_obj, HIDETREE,
+				set_flag (wd->tree, wd->title_obj, OF_HIDETREE,
 					  TRUE);
 			}
 			else

@@ -37,10 +37,11 @@
 #include "intern.h"
 
 
-int
-find_edit (OBJECT * tree, int obj, int mode)
+short
+find_edit (OBJECT *tree, short obj, short mode)
 {
-	int ret = 0, i = 0;
+	short ret = 0;
+	int i = 0;
 	int prev = 0, next = 0;
 	int first = 0, last = 0;
 
@@ -62,7 +63,7 @@ find_edit (OBJECT * tree, int obj, int mode)
 			last = i;
 		}
 	}
-	while (!(tree[i].ob_flags & LASTOB));
+	while (!(tree[i].ob_flags & OF_LASTOB));
 
 	if (prev == 0)
 		prev = last;

@@ -25,23 +25,25 @@
  * 
  */
 
+#include <osbind.h>
+
 #include "intern.h"
 
 
 static int pal_init = FALSE;
 static short farbtbl[256][32];
-static int rgb_palette[256][4];
+static short rgb_palette[256][4];
 
 static void
 fill_farbtbl (int screen_planes, int handle)
 {
 	if ((screen_planes > 8) && !pal_init)
 	{
-		int np, color, pxy[8], backup[32], rgb[3];
+		short np, color, pxy[8], backup[32], rgb[3];
 		MFDB screen;
 		MFDB pixel = { NULL, 16, 1, 1, 0, 1, 0, 0, 0 };
 		MFDB stdfm = { NULL, 16, 1, 1, 1, 1, 0, 0, 0 };
-		int pixtbl[16] =
+		short pixtbl[16] =
 			{ 0, 2, 3, 6, 4, 7, 5, 8, 9, 10, 11, 14, 12, 15, 13,
 				16 };
 
@@ -187,9 +189,9 @@ fix_cdata (short *col_data, long len, int old_planes, int new_planes)
 }
 
 CICON *
-fix_cicon (CICONBLK * cicnblk, int screen_planes, int handle)
+fix_cicon (CICONBLK *cicnblk, short screen_planes, short handle)
 {
-	int best_planes, find_planes;
+	short best_planes, find_planes;
 	short *buf1, *buf2 = NULL;
 	CICON *cicn, *new_icn = NULL, *best_icn = NULL;
 	long len, *next;
@@ -224,9 +226,7 @@ fix_cicon (CICONBLK * cicnblk, int screen_planes, int handle)
 
 	if (best_icn != NULL)	/* passendes Farbicon gefunden */
 	{
-		new_icn =
-			(CICON *) cf_malloc (sizeof (CICON), "fix_cicon",
-					     FALSE);
+		new_icn = cf_malloc (sizeof (CICON), "fix_cicon", FALSE);
 		*new_icn = *best_icn;
 
 		if (best_planes > 1)

@@ -31,13 +31,13 @@
  * Dialog vorbereiten.
  */
 WDIALOG *
-create_wdial (OBJECT * tree, OBJECT * icon, int edit_obj,
+create_wdial (OBJECT *tree, OBJECT *icon, short edit_obj,
 	      WDIAL_OCB open_cb, WDIAL_XCB exit_cb)
 {
 	WDIALOG *new;
-	int d;
+	short d;
 
-	new = (WDIALOG *) cf_malloc (sizeof (WDIALOG), "create_wdial", FALSE);
+	new = cf_malloc (sizeof (WDIALOG), "create_wdial", FALSE);
 	if (new != NULL)
 	{
 		/* in die Liste h„ngen */
@@ -70,7 +70,7 @@ create_wdial (OBJECT * tree, OBJECT * icon, int edit_obj,
 		/*
 		 * Gibt es ein Abbruch-Button? -> Closer
 		 */
-		d = find_flag (tree, FLAG11);
+		d = find_flag (tree, OF_FLAG11);
 		if (d != -1)
 			new->cancel_obj = d;
 		else
@@ -86,5 +86,6 @@ create_wdial (OBJECT * tree, OBJECT * icon, int edit_obj,
 		new->open_cb = open_cb;
 		new->exit_cb = exit_cb;
 	}
+
 	return new;
 }

@@ -28,7 +28,7 @@
 
 
 void
-set_string (OBJECT * tree, int obj, char *text)
+set_string (OBJECT *tree, short obj, char *text)
 {
 	long spec;
 	int type;

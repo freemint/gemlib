@@ -37,27 +37,14 @@
 #include "intern.h"
 
 
-int
-simple_dial (OBJECT * tree, int start_edit)
+short
+simple_dial (OBJECT *tree, short start_edit)
 {
-	int exit_obj;
+	short exit_obj;
 	GRECT r;
-
-#ifdef __MTAES__
-	GRECT n = { 0, 0, 0, 0 };
-#endif
 
 	graf_mouse (ARROW, NULL);
 	wind_update (BEG_UPDATE);
-#ifdef __MTAES__
-	form_center (tree, &r);
-	form_dial (FMD_START, &n, &r);
-	graf_mouse (M_OFF, NULL);
-	objc_draw (tree, ROOT, MAX_DEPTH, &r);
-	graf_mouse (M_ON, NULL);
-	exit_obj = cf_form_do (tree, &start_edit) & 0x7FFF;
-	form_dial (FMD_FINISH, &n, &r);
-#else
 	form_center (tree, &r.g_x, &r.g_y, &r.g_w, &r.g_h);
 	form_dial (FMD_START, 0, 0, 0, 0, r.g_x, r.g_y, r.g_w, r.g_h);
 	graf_mouse (M_OFF, NULL);
@@ -65,8 +52,8 @@ simple_dial (OBJECT * tree, int start_edit)
 	graf_mouse (M_ON, NULL);
 	exit_obj = cf_form_do (tree, &start_edit) & 0x7FFF;
 	form_dial (FMD_FINISH, 0, 0, 0, 0, r.g_x, r.g_y, r.g_w, r.g_h);
-#endif
 	wind_update (END_UPDATE);
-	set_state (tree, exit_obj, SELECTED, FALSE);
+	set_state (tree, exit_obj, OS_SELECTED, FALSE);
+
 	return exit_obj;
 }

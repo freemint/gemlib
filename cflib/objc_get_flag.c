@@ -27,8 +27,8 @@
 #include "intern.h"
 
 
-int
-get_flag (OBJECT * tree, int obj, int flag)
+short
+get_flag (OBJECT *tree, short obj, short flag)
 {
 	return (tree[obj].ob_flags & flag);
 }

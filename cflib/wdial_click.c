@@ -24,15 +24,16 @@
  * 
  */
 
+#include <osbind.h>
 #include "wdial.h"
 
 
-int
-click_wdial (int clicks, int x, int y, int kshift, int mbutton)
+short
+click_wdial (short clicks, short x, short y, short kshift, short mbutton)
 {
-	int wh;
-	int ret = TRUE, cont;
-	int obj;
+	short wh;
+	short ret = TRUE, cont;
+	short obj;
 	WDIALOG *wd;
 
 	wh = wind_find (x, y);
@@ -50,7 +51,7 @@ click_wdial (int clicks, int x, int y, int kshift, int mbutton)
 				if (cont
 				    &&
 				    (get_flag
-				     (wd->tree, wd->next_obj, EDITABLE)))
+				     (wd->tree, wd->next_obj, OF_EDITABLE)))
 				{
 					objc_edit (wd->tree, wd->edit_obj, 0,
 						   &wd->edit_idx, ED_END);
@@ -83,5 +84,6 @@ click_wdial (int clicks, int x, int y, int kshift, int mbutton)
 	}
 	else
 		ret = FALSE;
+
 	return ret;
 }

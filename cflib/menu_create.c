@@ -29,10 +29,11 @@
  * ACHTUNG: Nicht re-entrant, d.h. jede Applikation nur ein Kreuz, Ñh MenÅ!
  */
 
+#include <osbind.h>
 #include "menu.h"
 
 
-int
+short
 create_menu (OBJECT * t)
 {
 	if (__menu_keys == NULL)

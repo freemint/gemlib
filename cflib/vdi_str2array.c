@@ -33,18 +33,18 @@
 
 #ifndef __MINT__
 
-int vdi_str2array(char *src, int *des)
+short
+vdi_str2array (char *src, int *des)
 {
-	int				len;
-	unsigned char	*c;
-	
-	len = 0;
-	c = (unsigned char*)src;
+	short len = 0;
+	unsigned char *c = (unsigned char *) src;
+
 	while (*c != '\0')
 	{
 		*des++ = *c++;
 		len++;
 	}
+
 	return len;
 }
 

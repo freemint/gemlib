@@ -28,10 +28,10 @@
 
 
 void
-get_objframe (OBJECT * tree, int obj, GRECT * r)
+get_objframe (OBJECT *tree, short obj, GRECT *r)
 {
-	int d, i;
-	int type, shadow = 0, outline = 0, line = 0;
+	short d, i;
+	short type, shadow = 0, outline = 0, line = 0;
 
 	objc_offset (tree, obj, &r->g_x, &r->g_y);
 	r->g_w = tree[obj].ob_width;
@@ -51,18 +51,18 @@ get_objframe (OBJECT * tree, int obj, GRECT * r)
 
 		case G_BUTTON:
 			line = 1;
-			if (tree[obj].ob_flags & DEFAULT)
+			if (tree[obj].ob_flags & OF_DEFAULT)
 				line++;
-			if (tree[obj].ob_flags & EXIT)
+			if (tree[obj].ob_flags & OF_EXIT)
 				line++;
-			if (line && tree[obj].ob_state & SHADOWED)
+			if (line && tree[obj].ob_state & OS_SHADOWED)
 				shadow = 2 * line;
 			break;
 
 		case G_TEXT:
 		case G_FTEXT:
 			line = -(tree[obj].ob_spec.tedinfo->te_thickness);
-			if (line && (tree[obj].ob_state & SHADOWED))
+			if (line && (tree[obj].ob_state & OS_SHADOWED))
 				shadow = abs (line * 2);
 			else
 				line = 0;
@@ -71,7 +71,7 @@ get_objframe (OBJECT * tree, int obj, GRECT * r)
 		case G_BOXTEXT:
 		case G_FBOXTEXT:
 			line = -(tree[obj].ob_spec.tedinfo->te_thickness);
-			if (line && (tree[obj].ob_state & SHADOWED))
+			if (line && (tree[obj].ob_state & OS_SHADOWED))
 				shadow = abs (line * 2);
 			break;
 
@@ -79,7 +79,7 @@ get_objframe (OBJECT * tree, int obj, GRECT * r)
 		case G_IBOX:
 		case G_BOXCHAR:
 			line = -(tree[obj].ob_spec.obspec.framesize);
-			if (line && tree[obj].ob_state & SHADOWED)
+			if (line && tree[obj].ob_state & OS_SHADOWED)
 				shadow = abs (line * 2);
 			break;
 
@@ -94,7 +94,7 @@ get_objframe (OBJECT * tree, int obj, GRECT * r)
 			return;
 	}
 
-	if (tree[obj].ob_state & OUTLINED)
+	if (tree[obj].ob_state & OS_OUTLINED)
 		outline = 3;
 
 	if (line > 0)
@@ -123,9 +123,9 @@ get_objframe (OBJECT * tree, int obj, GRECT * r)
 	}
 
 	if ((appl_xgetinfo (13, &d, &i, &d, &d) && i == 1) &&
-	    (tree[obj].ob_flags & FL3DACT))
+	    (tree[obj].ob_flags & OF_FL3DACT))
 	{
-		int hinc = 0, vinc = 0;
+		short hinc = 0, vinc = 0;
 
 		objc_sysvar (0, 6, 0, 0, &hinc, &vinc);
 		r->g_x -= hinc;

@@ -31,7 +31,7 @@
  * Zeichnet Dialog neu.
  */
 void
-draw_wdial (WDIALOG * wd, int obj, int depth, int x, int y, int w, int h)
+draw_wdial (WDIALOG *wd, short obj, short depth, short x, short y, short w, short h)
 {
 	GRECT r, r1;
 	OBJECT *tree;
@@ -52,12 +52,8 @@ draw_wdial (WDIALOG * wd, int obj, int depth, int x, int y, int w, int h)
 	while (r1.g_w != 0 && r1.g_h != 0)
 	{
 		if (rc_intersect (&r, &r1))
-#ifdef __MTAES__
-			objc_draw (tree, obj, depth, &r1);
-#else
 			objc_draw (tree, obj, depth, r1.g_x, r1.g_y, r1.g_w,
 				   r1.g_h);
-#endif
 		wind_get_grect (wd->win_handle, WF_NEXTXYWH, &r1);
 	}
 	graf_mouse (M_ON, NULL);

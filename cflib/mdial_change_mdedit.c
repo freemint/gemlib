@@ -28,7 +28,7 @@
 
 
 void
-change_mdedit (MDIAL * md, int new)
+change_mdedit (MDIAL * md, short new)
 {
 	int last = 0;
 

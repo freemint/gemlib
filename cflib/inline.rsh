@@ -476,28 +476,28 @@ static OBJECT rs_object[] =
   NONE, NORMAL, (long)&rs_bitblk[3],
   0x0401, 0x0801, 0x0004, 0x0002,
   AL_STR2         ,       -1,       -1, G_STRING          ,   /* Object 6 AL_STR1 */
-  NONE, NORMAL, (long)"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx40",
+  NONE, NORMAL, (long)"1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx40",
   0x0407, 0x0801, 0x0028, 0x0001,
   AL_STR3         ,       -1,       -1, G_STRING          ,   /* Object 7 AL_STR2 */
-  NONE, NORMAL, (long)"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx40",
+  NONE, NORMAL, (long)"2xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx40",
   0x0407, 0x0802, 0x0028, 0x0001,
   AL_STR4         ,       -1,       -1, G_STRING          ,   /* Object 8 AL_STR3 */
-  NONE, NORMAL, (long)"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx40",
+  NONE, NORMAL, (long)"3xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx40",
   0x0407, 0x0803, 0x0028, 0x0001,
   AL_STR5         ,       -1,       -1, G_STRING          ,   /* Object 9 AL_STR4 */
-  NONE, NORMAL, (long)"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx40",
+  NONE, NORMAL, (long)"4xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx40",
   0x0407, 0x0804, 0x0028, 0x0001,
   AL_BUT1         ,       -1,       -1, G_STRING          ,   /* Object 10 AL_STR5 */
-  NONE, NORMAL, (long)"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx40",
+  NONE, NORMAL, (long)"5xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx40",
   0x0407, 0x0805, 0x0028, 0x0001,
   AL_BUT2         ,       -1,       -1, G_BUTTON          ,   /* Object 11 AL_BUT1 */
-  SELECTABLE|EXIT|FLAGS9|FLAGS10, WHITEBAK, (long)"xxxxxxxxxxxxx15",
+  SELECTABLE|EXIT|FLAGS9|FLAGS10, WHITEBAK, (long)"1xxxxxxxxxxxx15",
   0x0006, 0x0007, 0x000F, 0x0101,
   AL_BUT3         ,       -1,       -1, G_BUTTON          ,   /* Object 12 AL_BUT2 */
-  SELECTABLE|EXIT|FLAGS9|FLAGS10, WHITEBAK, (long)"xxxxxxxxxxxxx15",
+  SELECTABLE|EXIT|FLAGS9|FLAGS10, WHITEBAK, (long)"2xxxxxxxxxxxx15",
   0x0014, 0x0007, 0x000F, 0x0101,
          0,       -1,       -1, G_BUTTON          ,   /* Object 13 AL_BUT3 */
-  SELECTABLE|EXIT|LASTOB|FLAGS9|FLAGS10, WHITEBAK, (long)"xxxxxxxxxxxxx15",
+  SELECTABLE|EXIT|LASTOB|FLAGS9|FLAGS10, WHITEBAK, (long)"3xxxxxxxxxxxx15",
   0x0022, 0x0007, 0x000F, 0x0101,
   
   /******** Tree 1 ASCIITAB ****************************************************/

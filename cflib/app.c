@@ -28,10 +28,10 @@
 #include "app.h"
 
 
-int cf_vdi_handle;
-int cf_font_anz;
-int cf_msg_cb = FALSE;
-int cf_magxPC = FALSE;
+short cf_vdi_handle;
+short cf_font_anz;
+short cf_msg_cb = FALSE;
+short cf_magxPC = FALSE;
 
-int __app_hidden;
-int __app_rsc_load = FALSE;
+short __app_hidden;
+short __app_rsc_load = FALSE;

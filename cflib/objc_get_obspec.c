@@ -28,13 +28,13 @@
 
 
 long
-get_obspec (OBJECT * tree, int obj)
+get_obspec (OBJECT *tree, short obj)
 {
 	short ud;
 
 	get_obtype (tree, obj, &ud);
 	if (ud)
 		return tree[obj].ob_spec.userblk->ub_parm;
-	else
-		return tree[obj].ob_spec.index;
+	
+	return tree[obj].ob_spec.index;
 }

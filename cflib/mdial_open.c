@@ -28,14 +28,14 @@
 
 
 MDIAL *
-open_mdial (OBJECT * tree, int edit_start)
+open_mdial (OBJECT *tree, short edit_start)
 {
 	GRECT r1, r2;
 	MDIAL *dial;
-	int center = FALSE;
+	short center = FALSE;
 
-	dial = (MDIAL *) cf_malloc (sizeof (MDIAL), "open_mdial", FALSE);
-	if (dial != NULL)
+	dial = cf_malloc (sizeof (MDIAL), "open_mdial", FALSE);
+	if (dial)
 	{
 		memset (dial, 0, sizeof (MDIAL));
 		dial->tree = tree;
@@ -50,12 +50,7 @@ open_mdial (OBJECT * tree, int edit_start)
 		/* Zentrieren, nur beim ersten Mal */
 		if (tree[0].ob_x == 0 && tree[0].ob_y == 0)
 		{
-#ifdef __MTAES__
-			form_center (tree, &r1);
-#else
-			form_center (tree, &r1.g_x, &r1.g_y, &r1.g_w,
-				     &r1.g_h);
-#endif
+			form_center (tree, &r1.g_x, &r1.g_y, &r1.g_w, &r1.g_h);
 			center = TRUE;
 		}
 
@@ -65,7 +60,7 @@ open_mdial (OBJECT * tree, int edit_start)
 			dial->win_name = (char *) get_obspec (tree, 1);
 			dial->delta_y = (tree[1].ob_y + tree[1].ob_height);
 			dial->tree[0].ob_y -= dial->delta_y;
-			set_flag (tree, 1, HIDETREE, TRUE);
+			set_flag (tree, 1, OF_HIDETREE, TRUE);
 		}
 		else
 			dial->win_name = NULL;
@@ -102,7 +97,7 @@ open_mdial (OBJECT * tree, int edit_start)
 		dial->win_handle = wind_create_grect (KIND, &r2);
 		if (dial->win_handle > 0)
 		{
-			int msg[8];
+			short msg[8];
 
 			/* Men abschalten */
 			disable_menu ();
@@ -128,5 +123,6 @@ open_mdial (OBJECT * tree, int edit_start)
 			dial = NULL;
 		}
 	}
+
 	return dial;
 }

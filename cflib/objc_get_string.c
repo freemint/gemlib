@@ -28,7 +28,7 @@
 
 
 void
-get_string (OBJECT * tree, int obj, char *text)
+get_string (OBJECT *tree, short obj, char *text)
 {
 	long spec;
 	int type;

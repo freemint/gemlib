@@ -25,6 +25,7 @@
  */
 
 #ifdef __MINT__
+#include <osbind.h>
 #include <sys/stat.h>
 #else
 #include <ext.h>
@@ -34,6 +35,7 @@
 #endif
 
 #include <ctype.h>
+#include "app.h"
 #include "intern.h"
 
 

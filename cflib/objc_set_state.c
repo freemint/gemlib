@@ -28,7 +28,7 @@
 
 
 void
-set_state (OBJECT * tree, int obj, int state, int set)
+set_state (OBJECT *tree, short obj, short state, short set)
 {
 	if (set)
 		tree[obj].ob_state |= state;	/* Status setzen */

@@ -32,11 +32,11 @@
 #include "menu.h"
 
 
-static inline int
-check_item_key (char *str, int kstate, int kreturn)
+static inline short
+check_item_key (char *str, short kstate, short kreturn)
 {
-	int found = FALSE;
-	int len, i, r, ks;
+	short found = FALSE;
+	short len, i, r, ks;
 	char s[50], ascii;
 	int scan;
 
@@ -150,12 +150,12 @@ check_item_key (char *str, int kstate, int kreturn)
 	return found;
 }
 
-int
-is_menu_key (int kreturn, int kstate, int *title, int *item)
+short
+is_menu_key (short kreturn, short kstate, short *title, short *item)
 {
-	int menu_box, i, t;
+	short menu_box, i, t;
 	char str[50];
-	int found = FALSE;
+	short found = FALSE;
 
 	if ((__menu_tree != NULL) && !__menu_disabled)
 	{
@@ -176,7 +176,7 @@ is_menu_key (int kreturn, int kstate, int *title, int *item)
 				/* FIXME...  */
 				if ((__menu_tree[i].ob_type == G_STRING)
 #endif
-				    && !(__menu_tree[i].ob_state & DISABLED))
+				    && !(__menu_tree[i].ob_state & OS_DISABLED))
 				{
 					get_string (__menu_tree, i, str);
 					if (!(str[0] == '-')

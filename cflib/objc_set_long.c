@@ -28,9 +28,9 @@
 
 
 void
-set_long (OBJECT * tree, int obj, long l)
+set_long (OBJECT *tree, short obj, long l)
 {
-	char tmp[20];
+	char tmp[32];
 
 	ltoa (l, tmp, 10);
 	set_string (tree, obj, tmp);

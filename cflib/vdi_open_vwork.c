@@ -31,12 +31,14 @@
 #include "intern.h"
 
 
-int open_vwork(int *w_out)
+short
+open_vwork (short *w_out)
 {
-	int	handle;
-	int	work_in[11] = {1,1,1,1,1,1,1,1,1,1,2};
+	short handle;
+	short work_in[11] = {1,1,1,1,1,1,1,1,1,1,2};
 
 	handle = gl_phys_handle;
-	v_opnvwk(work_in, &handle, w_out);
+	v_opnvwk (work_in, &handle, w_out);
+
 	return handle;
 }

@@ -75,7 +75,6 @@ COBJS = \
 	form_do_simple_dial.c \
 	\
 	globals.c \
-	ident.c \
 	\
 	magx_obj.c \
 	magx_shortcut.c \
@@ -113,18 +112,18 @@ COBJS = \
 	\
 	objc_find_flag.c \
 	objc_get_flag.c \
-	objc_get_int.c \
 	objc_get_long.c \
 	objc_get_objframe.c \
 	objc_get_obspec.c \
 	objc_get_obtype.c \
+	objc_get_short.c \
 	objc_get_state.c \
 	objc_get_string.c \
 	objc_redraw_obj.c \
 	objc_set_flag.c \
-	objc_set_int.c \
 	objc_set_long.c \
 	objc_set_obspec.c \
+	objc_set_short.c \
 	objc_set_state.c \
 	objc_set_string.c \
 	objc_set_ulong.c \

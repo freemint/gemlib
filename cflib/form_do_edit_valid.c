@@ -41,10 +41,10 @@
  * Editfeld suchen. Die Suche beginnt bei <obj>. Ist <obj> das erste oder 
  * letzte wird ge'wrapped, also das letzte oder das erste geliefert.
  */
-int
-edit_valid (OBJECT * tree, int obj)
+short
+edit_valid (OBJECT * tree, short obj)
 {
-	return ((tree[obj].ob_flags & EDITABLE) &&
-		!((tree[obj].ob_flags & HIDETREE) ||
-		  (tree[obj].ob_state & DISABLED)));
+	return ((tree[obj].ob_flags & OF_EDITABLE) &&
+		!((tree[obj].ob_flags & OF_HIDETREE) ||
+		  (tree[obj].ob_state & OS_DISABLED)));
 }

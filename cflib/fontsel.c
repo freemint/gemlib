@@ -30,11 +30,11 @@
  *
  */
 
-#include "intern.h"
-
-#ifdef __MINT__
+#include <osbind.h>
 #include <gemx.h>
-#endif
+
+#include "app.h"
+#include "intern.h"
 
 #include "xfsl.h"
 
@@ -113,12 +113,13 @@ static xFSL_PAR	xpar;
 static PFONTINFO	f_info;
 static EVENT		ev;
 
-static inline int do_xfsl(long v, int handle, int flags, char *title, int *id, int *pts)
+static inline short
+do_xfsl (long v, short handle, short flags, char *title, short *id, short *pts)
 {
-	xFSL		*xfsl;
-	int		ret = 0;
-	int		win;
-	int		use_win;
+	xFSL *xfsl;
+	int ret = 0;
+	int win;
+	int use_win;
 		
 	xfsl = (xFSL *)v;
 	memset(&ev, 0, sizeof(EVENT));
@@ -164,7 +165,7 @@ static inline int do_xfsl(long v, int handle, int flags, char *title, int *id, i
       if (ret == xFS_EVENT)
 		{
 #ifdef __GNUC__
-			int	m[8], i;
+			short m[8], i;
 	
 			for (i = 0; i<8; i++)
 				m[i] = ev.ev_mmgpbuf[i];
@@ -188,10 +189,11 @@ static inline int do_xfsl(long v, int handle, int flags, char *title, int *id, i
 	return (ret == xFS_OK);
 }
 
-static inline int check_for_xfsl(long *v)
+static inline short
+check_for_xfsl (long *v)
 {
-	int	ok;
-	xFSL	*xfsl;
+	short ok;
+	xFSL *xfsl;
 		
 	ok = getcookie("xFSL", v);
 	if (ok)
@@ -208,10 +210,11 @@ static inline int check_for_xfsl(long *v)
 
 /* --------------------------------------------------------------------------- */
 
-static inline int check_for_fprot(void)
+static inline short
+check_for_fprot (void)
 {
-	char	name[9], *p;
-	int	i = -1;
+	char name[9], *p;
+	short i = -1;
 
 	p = getenv("FONTSELECT");
 	if (p)
@@ -225,10 +228,11 @@ static inline int check_for_fprot(void)
 	return i;
 }
 
-static inline void do_fprotokoll(int ap_id, int id, int pts)
+static inline void
+do_fprotokoll (int ap_id, int id, int pts)
 {
-	short	msgbuff[8];
-		
+	short msgbuff[8];
+	
 	msgbuff[0] = 0x7A19;			/* FONT_SELECT */
 	msgbuff[1] = gl_apid;
 	msgbuff[2] = 0;
@@ -237,18 +241,20 @@ static inline void do_fprotokoll(int ap_id, int id, int pts)
 	msgbuff[5] = pts;
 	msgbuff[6] = 1;
 	msgbuff[7] = 0;
+
 	appl_write(ap_id, (int)sizeof(msgbuff), msgbuff);
 }
 
 /* --------------------------------------------------------------------------- */
 
-static inline int do_magx(int handle, int f_anz, int flags, int *id, int *pts)
+static inline short
+do_magx (short handle, short f_anz, short flags, short *id, short *pts)
 {
-	FNT_DIALOG	*fnt_ptr;
-	int			check, f_typ, ret, but, win, d;
-	long			ratio = 1l << 16,
-					n_id, n_pts;
-	EVNT			ev;
+	FNT_DIALOG *fnt_ptr;
+	int f_typ, ret, win;
+	long ratio = 1l << 16, n_id, n_pts;
+	short but, check, d;
+	EVNT ev;
 	
 	f_typ = FNTS_BTMP|FNTS_OUTL|FNTS_MONO;
 	if (!(flags & FS_F_MONO))
@@ -271,7 +277,7 @@ static inline int do_magx(int handle, int f_anz, int flags, int *id, int *pts)
 		while (ret == 0)
 		{
 #ifdef __GNUC__
-			int	msg[8], i, mx, my, mb, mc, ks, kr;
+			short msg[8], i, mx, my, mb, mc, ks, kr;
 
 			/*
 			 * GNU erwartet beim evnt_multi wirklich 'int', in EVNT sind aber
@@ -289,17 +295,10 @@ static inline int do_magx(int handle, int f_anz, int flags, int *id, int *pts)
 			for (i = 0; i<8; i++)
 				ev.msg[i] = msg[i];
 #else
-#ifdef __MTAES__
-			MOBLK	null = {0,0,0,0,0};
-
-			EVNT_multi((MU_KEYBD|MU_MESAG|MU_BUTTON), 2, 1, 1,
-								&null, &null, 0, &ev);
-#else
 			ev.mwhich = (short)evnt_multi(MU_KEYBD|MU_MESAG|MU_BUTTON, 2, 1, 1, 
 											0, 0, 0, 0, 0,	0, 0, 0, 0, 0,
 											(int*)ev.msg, 0, (int*)&ev.mx, (int*)&ev.my, (int*)&ev.mbutton, 
 											(int*)&ev.kstate,	(int*)&ev.key, (int*)&ev.mclicks);
-#endif
 #endif
 			if (ev.mwhich & MU_MESAG)
 			{
@@ -353,21 +352,23 @@ static inline int do_magx(int handle, int f_anz, int flags, int *id, int *pts)
 
 /* --------------------------------------------------------------------------- */
 
-int do_fontsel(int flags, char *title, int *id, int *pts)
+short
+do_fontsel (short flags, char *title, short *id, short *pts)
 {
-	int	new_id, new_pts;
-	int	fs_handle, workout[57], f_anz, d, i;
-	int	ok = FALSE;
-	long	v;
+	short new_id, new_pts;
+	short fs_handle, workout[57], f_anz, d, i;
+	short ok = FALSE;
+	long v;
 				
 	/* 
 	 * Wir machen einfach eine eigene WS auf, da MagiC am Handle rumfummelt und
 	 * alte UFSL den Demotext drucken wrden.
 	 * Wer einen Font fr den Drucker nicht fr den Bildschirm anmeldet,
 	 * hat selber schuld!
-	*/
+	 */
 	fs_handle = open_vwork(workout);
 	f_anz = workout[10];
+
 	if (gl_gdos)
 	{
 		f_anz += vst_load_fonts(fs_handle, 0);
@@ -378,22 +379,19 @@ int do_fontsel(int flags, char *title, int *id, int *pts)
 	new_pts = *pts;
 
 	if ((flags & FS_M_XFSL) && check_for_xfsl(&v))
-	{
 		ok = do_xfsl(v, fs_handle, flags, title, &new_id, &new_pts);
-	}
 
 	else if ((flags & FS_M_FPROT) && (i = check_for_fprot()) >= 0)
 	{
 		do_fprotokoll(i, *id, *pts);
-		return FALSE;				/* immer so, da neuer Font per Message kommt! */
+		return FALSE; /* immer so, da neuer Font per Message kommt! */
 	}		
 
 	else if ((flags & FS_M_MAGX) && (appl_xgetinfo(7, &i, &d, &d, &d) && (i & 0x04)))
 	{
 		ok = do_magx(fs_handle, f_anz, flags, &new_id, &new_pts);
 	}
-
-	else			/* keine der drei Methoden m”glich */
+	else /* keine der drei Methoden m”glich */
 	{
 		*id = -1;
 		*pts = -1;
@@ -402,6 +400,7 @@ int do_fontsel(int flags, char *title, int *id, int *pts)
 
 	if (gl_gdos)
 		vst_unload_fonts(fs_handle, 0);
+
 	v_clsvwk(fs_handle);
 
 	if (ok)
@@ -409,5 +408,6 @@ int do_fontsel(int flags, char *title, int *id, int *pts)
 		*id = new_id;
 		*pts = new_pts;
 	}
+
 	return ok;
 }

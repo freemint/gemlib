@@ -34,14 +34,16 @@
 /*
  * Point-H”he zu einer Pixel-H”he ermitteln.
  */
-int height2pts(int handle, int f_id, int f_height)
+short
+height2pts (short handle, short f_id, short f_height)
 {
-	int	d, w, h, asked, got, width, height;
-	int	pt = -1;
+	short d, w, h, asked, got, width, height;
+	short pt = -1;
 	
-	vst_font(handle, f_id);
-	vst_height(handle, f_height, &d, &height, &width, &d);
-   asked = 99; 
+	vst_font (handle, f_id);
+	vst_height (handle, f_height, &d, &height, &width, &d);
+
+	asked = 99; 
 	got = asked;
 	while (got <= asked)
 	{
@@ -49,14 +51,15 @@ int height2pts(int handle, int f_id, int f_height)
 		 * Schleife, solange ein kleinerer Font eingestellt werden kann;
 		 * Abbruch, wenn vst_point() einen /gr”žeren/ Font als angefordert
 		 * einstellt (und somit auch als tats„chliche Gr”že zurckliefert)
-		*/
+		 */
 		asked = got - 1; 	/* 1 kleiner als aktuelle Gr”že einstellen */
-		got = vst_point(handle, asked, &d, &h, &w, &d);
+		got = vst_point (handle, asked, &d, &h, &w, &d);
 		if ((h == height) && (w == width))
 		{
 			pt = got; 		/* Punktgr”že gefunden */
 			break;
 		}
 	}
+
 	return pt;
 }

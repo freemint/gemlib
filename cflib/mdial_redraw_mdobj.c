@@ -45,7 +45,7 @@ redraw_cursor (MDIAL * dial)
 }
 
 void
-redraw_mdobj (MDIAL * dial, int obj)
+redraw_mdobj (MDIAL * dial, short obj)
 {
 	GRECT r;
 

@@ -24,6 +24,9 @@
  * 
  */
 
+#include <mintbind.h>
+
+#include "app.h"
 #include "intern.h"
 
 

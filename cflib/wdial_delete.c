@@ -24,6 +24,7 @@
  * 
  */
 
+#include <osbind.h>
 #include "wdial.h"
 
 
@@ -54,6 +55,7 @@ delete_wdial (WDIALOG * wd)
 				p = p->next;
 			p->next = wd->next;
 		}
+
 		Mfree (wd);
 	}
 }

@@ -28,7 +28,7 @@
 
 
 void
-set_obspec (OBJECT * tree, int obj, long spec)
+set_obspec (OBJECT *tree, short obj, long spec)
 {
 	short ud;
 

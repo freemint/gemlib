@@ -28,12 +28,12 @@
 
 
 void
-norm_to_gem (unsigned int norm, int *ks, int *kr)
+norm_to_gem (unsigned long norm, short *ks, short *kr)
 {
-	long toskey;
-
-	toskey = nkc_n2tos (norm);
-	*kr = ((int) (toskey & 0x000000ffL) |	/* ascii */
-	       (int) ((toskey & 0x00ff0000L) >> 8L));	/* scan */
-	*ks = (int) ((toskey & 0xff000000L) >> 24L);	/* kstate */
+	long toskey = nkc_n2tos (norm);
+	
+	*kr = ((short) (toskey & 0x000000ffL) |	/* ascii */
+	       (short) ((toskey & 0x00ff0000L) >> 8L));	/* scan */
+	
+	*ks = (short) ((toskey & 0xff000000L) >> 24L);	/* kstate */
 }

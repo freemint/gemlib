@@ -27,10 +27,10 @@
 #include "intern.h"
 
 
-int
-get_int (OBJECT * tree, int obj)
+short
+get_short (OBJECT *tree, short obj)
 {
-	char tmp[20];
+	char tmp[32];
 
 	get_string (tree, obj, tmp);
 	return atoi (tmp);

@@ -14,6 +14,8 @@
  * signal (write on an empty pipe) is ignored
  */
 
+#include <mintbind.h>
+
 #include "dragdrop.h"
 
 

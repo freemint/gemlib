@@ -20,7 +20,7 @@
 #include "intern.h"
 
 
-char __dragdrop_pipename[];
+extern char __dragdrop_pipename[];
 
 #ifdef __MINT__
 #include <errno.h>

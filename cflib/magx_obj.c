@@ -31,10 +31,11 @@
 #include "magx.h"
 
 
-int
-get_magx_obj (OBJECT * tree, int obj)
+short
+get_magx_obj (OBJECT *tree, short obj)
 {
-	short us, typ, state, flags, ret;
+	unsigned short typ, state, flags, us;
+	short ret;
 
 	flags = tree[obj].ob_flags;
 	state = tree[obj].ob_state & 0x00ff;
@@ -44,7 +45,7 @@ get_magx_obj (OBJECT * tree, int obj)
 	if (typ == G_USERDEF)
 		typ = (tree[obj].ob_type & 0xff00) >> 8;
 
-	if (state & WHITEBAK)
+	if (state & OS_WHITEBAK)
 	{
 		ret = MX_UNKNOWN;
 		switch (typ)
@@ -59,14 +60,14 @@ get_magx_obj (OBJECT * tree, int obj)
 			case G_BUTTON:
 				if (us == 0xfe)	/* Gruppenrahmen */
 				{
-					if (state & CHECKED)
+					if (state & OS_CHECKED)
 						ret = MX_GROUPBOX2;	/* - kleine Schrift */
 					else
 						ret = MX_GROUPBOX;	/* - normal */
 				}
 				else if (us & 0x80)	/* bit15 -> MagiC-Knopf */
 				{
-					if (flags & RBUTTON)	/* Radio */
+					if (flags & OF_RBUTTON)	/* Radio */
 					{
 						if (us == 0xff)
 							ret = MX_RADIO;	/* ohne */
@@ -81,15 +82,16 @@ get_magx_obj (OBJECT * tree, int obj)
 							ret = MX_SCCHECK;	/* mit ShortCut */
 					}
 				}
-				else if (flags & EXIT)	/* Exit-Knopf */
+				else if (flags & OF_EXIT)	/* Exit-Knopf */
 					ret = MX_SCEXIT;
 				break;
 		}
 	}
-	else if ((typ == G_FTEXT) && (flags & FL3DBAK) &&
+	else if ((typ == G_FTEXT) && (flags & OF_FL3DBAK) &&
 		 (tree[obj].ob_spec.tedinfo->te_thickness == -2))
 		ret = MX_EDIT3D;
 	else
 		ret = MX_NOTXOBJ;
+	
 	return ret;
 }

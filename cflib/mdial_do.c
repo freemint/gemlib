@@ -24,14 +24,15 @@
  * 
  */
 
+#include <osbind.h>
 #include "mdial.h"
 
 
-int
-do_mdial (MDIAL * dial)
+short
+do_mdial (MDIAL *dial)
 {
-	int msg[8], mx, my, mbutton, kstate, kreturn, breturn, event, ret;
-	int cont, b, doppel = FALSE;
+	short msg[8], mx, my, mbutton, kstate, kreturn, breturn, event, ret;
+	short cont, b, doppel = FALSE;
 
 	ret = -1;
 	if (dial != NULL)
@@ -39,23 +40,10 @@ do_mdial (MDIAL * dial)
 		cont = TRUE;
 		while (cont)
 		{
-#ifdef __MTAES__
-			GRECT n = { 0, 0, 0, 0 };
-			EVNTDATA ev;
-
-			event = evnt_multi (MU_MESAG | MU_BUTTON | MU_KEYBD,
-					    2, 1, 1, 0, &n, 0, &n,
-					    msg, 0, &ev, &kreturn, &breturn);
-			mx = ev.x;
-			my = ev.y;
-			mbutton = ev.bstate;
-			kstate = ev.kstate;
-#else
 			event = evnt_multi (MU_MESAG | MU_BUTTON | MU_KEYBD,
 					    2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
 					    0, 0, msg, 0, &mx, &my, &mbutton,
 					    &kstate, &kreturn, &breturn);
-#endif
 
 			if (event & MU_MESAG)
 			{
@@ -117,7 +105,7 @@ do_mdial (MDIAL * dial)
 					else if (cont
 						 && (dial->
 						     tree[dial->next_obj].
-						     ob_flags & EDITABLE))
+						     ob_flags & OF_EDITABLE))
 					{
 						/* kein Exit-Obj aber neues Edit-Obj */
 						objc_edit (dial->tree,
@@ -153,7 +141,7 @@ do_mdial (MDIAL * dial)
 							     &dial->next_obj);
 					if (cont
 					    && (dial->tree[dial->next_obj].
-						ob_flags & EDITABLE))
+						ob_flags & OF_EDITABLE))
 					{
 						/* kein Exit-Obj aber neues Edit-Obj */
 						objc_edit (dial->tree,
@@ -188,7 +176,9 @@ do_mdial (MDIAL * dial)
 		}
 		ret = dial->next_obj;
 	}
+	
 	if (doppel)
 		ret |= 0x8000;	/* bit 15 fr Doppelklick */
+	
 	return ret;
 }

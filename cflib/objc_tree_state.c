@@ -28,12 +28,10 @@
 
 
 void
-tree_state (OBJECT * tree, int start_obj, int state, int set)
+tree_state (OBJECT *tree, short start_obj, short state, short set)
 {
 	int i;
 
 	for (i = tree[start_obj].ob_head; i <= tree[start_obj].ob_tail; i++)
-	{
 		set_state (tree, i, state, set);
-	}
 }

@@ -24,6 +24,8 @@
  * 
  */
 
+#include <osbind.h>
+
 #include <ctype.h>
 #include "intern.h"
 

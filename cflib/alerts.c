@@ -33,11 +33,12 @@
 #define AL_BUT_ANZ	3
 #define AL_BUT_LEN	14
 
-static int alert_key(OBJECT *tree, int edit_obj, int kstate, int *kreturn, int *next_obj)
+static short
+alert_key (OBJECT *tree, short edit_obj, short kstate, short *kreturn, short *next_obj)
 {
-	int	cont = TRUE;
-	int	scan;
-	int	but = 0;
+	short cont = TRUE;
+	short scan;
+	short but = 0;
 		
 	scan = *kreturn >> 8;
 	switch (scan)
@@ -52,31 +53,34 @@ static int alert_key(OBJECT *tree, int edit_obj, int kstate, int *kreturn, int *
 			but = AL_BUT3;
 			break;
 	}
-	if ((but != 0) && !get_flag(tree, but, HIDETREE))
+
+	if ((but != 0) && !get_flag (tree, but, OF_HIDETREE))
 	{
 		*next_obj = but;
 		*kreturn = 0;			/* Lib soll Key nicht mehr auswerten. */
 		cont = FALSE;
 	}
+
 	return cont;
 }
 				
-static int make_alert(int def, int undo, char *alert_str, int win)
+static short
+make_alert (short def, short undo, char *alert_str, short win)
 {
 	char	al_str[AL_STR_ANZ][AL_STR_LEN];
-	int	str_cnt;
+	short	str_cnt;
 	char	al_btn[AL_BUT_ANZ][AL_BUT_LEN];
-	int	btn_cnt,	i, str_len, btn_len, h;
+	short	btn_cnt, i, str_len, btn_len, h;
 	char	*p, str[40];
 		
 	/* erst mal alles verstecken */
 	for (i = 1; i <= AL_BUT3; i++)
-		set_flag(cf_alert_box, i, HIDETREE, TRUE);
+		set_flag (cf_alert_box, i, OF_HIDETREE, TRUE);
 
 	for (i = AL_BUT1; i <= AL_BUT3; i++)
 	{
-		set_flag(cf_alert_box, i, DEFAULT, FALSE);
-		set_flag(cf_alert_box, i, FLAG11, FALSE);
+		set_flag (cf_alert_box, i, OF_DEFAULT, FALSE);
+		set_flag (cf_alert_box, i, OF_FLAG11, FALSE);
 	}
 	
 	/* damit jedes Mal zentriert wird */
@@ -100,12 +104,13 @@ static int make_alert(int def, int undo, char *alert_str, int win)
 			i = AL_STOP;
 			break;
 		default:
-			debug("make_alert: Unbekanntes Icon: %c\n", alert_str[1]);
+			debug ("make_alert: Unbekanntes Icon: %c\n", alert_str[1]);
 			break;
 	}
+
 	if (i > 0)
 	{
-		set_flag(cf_alert_box, i, HIDETREE, FALSE);
+		set_flag (cf_alert_box, i, OF_HIDETREE, FALSE);
 		if (win)
 			cf_alert_box[i].ob_y = 2 * gl_hchar;	/* 1 tiefer wegen Titel */
 	}
@@ -128,9 +133,9 @@ static int make_alert(int def, int undo, char *alert_str, int win)
 		if (*p != ']')
 			p++;
 		str[i] = '\0';
-		if (strlen(str) > str_len)
-			str_len = (int)strlen(str);
-		strcpy(al_str[str_cnt], str);
+		if (strlen (str) > str_len)
+			str_len = strlen (str);
+		strcpy (al_str[str_cnt], str);
 		str_cnt++;
 	}
 
@@ -152,12 +157,12 @@ static int make_alert(int def, int undo, char *alert_str, int win)
 		if (*p != ']')
 			p++;
 		str[i] = '\0';
-		if (strlen(str) > btn_len)
-			btn_len = (int)strlen(str);
-		strcpy(al_btn[btn_cnt], str);
+		if (strlen (str) > btn_len)
+			btn_len = strlen (str);
+		strcpy (al_btn[btn_cnt], str);
 		btn_cnt++;
 	}
-	btn_len++;	/* immer ein breiter */
+	btn_len++; /* immer ein breiter */
 	if (btn_len < 6)
 		btn_len = 6;
 
@@ -168,6 +173,7 @@ static int make_alert(int def, int undo, char *alert_str, int win)
 		
 	/* Box anpassen */
 	cf_alert_box[0].ob_width = cf_alert_box[AL_STR1].ob_x + gl_wchar * (str_len + 2);
+
 	/* passen die Buttons auch rein? */
 	i = (1 + (btn_cnt + 1) * btn_len) * gl_wchar;
 	if (cf_alert_box[0].ob_width < i)
@@ -183,15 +189,15 @@ static int make_alert(int def, int undo, char *alert_str, int win)
 	/* Texte eintragen */
 	for (i = 0; i < str_cnt; i++)
 	{
-		set_flag(cf_alert_box, AL_STR1 + i, HIDETREE, FALSE);
-		set_string(cf_alert_box, AL_STR1 + i, al_str[i]);
+		set_flag (cf_alert_box, AL_STR1 + i, OF_HIDETREE, FALSE);
+		set_string (cf_alert_box, AL_STR1 + i, al_str[i]);
 		cf_alert_box[AL_STR1 + i].ob_y = (1 + i + h) * gl_hchar;
 	}
 	
 	for (i = 0; i < btn_cnt; i++)
 	{
-		set_flag(cf_alert_box, AL_BUT1 + i, HIDETREE, FALSE);
-		set_string(cf_alert_box, AL_BUT1 + i, al_btn[i]);
+		set_flag (cf_alert_box, AL_BUT1 + i, OF_HIDETREE, FALSE);
+		set_string (cf_alert_box, AL_BUT1 + i, al_btn[i]);
 
 		/* Position anpassen */
 		cf_alert_box[AL_BUT1 + i].ob_x = cf_alert_box[0].ob_width - (btn_cnt - i) * (btn_len + 2) * gl_wchar;
@@ -201,42 +207,48 @@ static int make_alert(int def, int undo, char *alert_str, int win)
 	}
 
 	if ((def > 0) && (def < 4))
-		set_flag(cf_alert_box, AL_BUT1 + def - 1, DEFAULT, TRUE);
+		set_flag (cf_alert_box, AL_BUT1 + def - 1, OF_DEFAULT, TRUE);
 	if ((undo > 0) && (undo < 4) && (undo != def))
-		set_flag(cf_alert_box, AL_BUT1 + undo - 1, FLAG11, TRUE);
+		set_flag (cf_alert_box, AL_BUT1 + undo - 1, OF_FLAG11, TRUE);
 
 	return TRUE;
 }
 
-static int alert(int def, int undo, char *str, char *title, int win)
+static short
+alert (short def, short undo, char *str, char *title, short win)
 {
-	int		ret = 0;
-	KEY_CB	old;
+	short ret = 0;
+	KEY_CB old;
 	
-	if (make_alert(def, undo, str, win))
+	if (make_alert (def, undo, str, win))
 	{
 		if (win && title[0] != '\0')
-			set_string(cf_alert_box, AL_TITLE, title);
+			set_string (cf_alert_box, AL_TITLE, title);
 		
-		old = set_formdo_keycb(alert_key);
-		graf_mouse(ARROW, NULL);
+		old = set_formdo_keycb (alert_key);
+		graf_mouse (ARROW, NULL);
+
 		if (win)
-			ret = simple_mdial(cf_alert_box, 0) & 0x7fff;
+			ret = simple_mdial (cf_alert_box, 0) & 0x7fff;
 		else
-			ret = simple_dial(cf_alert_box, 0) & 0x7fff;
-		set_formdo_keycb(old);
-		set_state(cf_alert_box, ret, SELECTED, FALSE);
+			ret = simple_dial (cf_alert_box, 0) & 0x7fff;
+
+		set_formdo_keycb (old);
+		set_state (cf_alert_box, ret, OS_SELECTED, FALSE);
 		ret = ret - AL_BUT1 + 1;
 	}
+
 	return ret;
 }
 
-int do_alert(int def, int undo, char *str)
+short
+do_alert (short def, short undo, char *str)
 {
-	return alert(def, undo, str, "", FALSE);
+	return alert (def, undo, str, "", FALSE);
 }
 
-int do_walert(int def, int undo, char *str, char *win_title)
+short
+do_walert (short def, short undo, char *str, char *win_title)
 {
-	return alert(def, undo, str, win_title, TRUE);
+	return alert (def, undo, str, win_title, TRUE);
 }

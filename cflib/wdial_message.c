@@ -28,7 +28,7 @@
 
 
 static inline void
-move_wdial (WDIALOG * wd, int new_x, int new_y)
+move_wdial (WDIALOG *wd, short new_x, short new_y)
 {
 	if (wd != NULL)
 	{
@@ -60,8 +60,8 @@ move_wdial (WDIALOG * wd, int new_x, int new_y)
 /*
  * Event-Verarbeitung.
  */
-int
-message_wdial (int *msg)
+short
+message_wdial (short *msg)
 {
 	int ret = TRUE;
 	WDIALOG *wd;
@@ -122,5 +122,6 @@ message_wdial (int *msg)
 	}
 	else
 		ret = FALSE;
+
 	return ret;
 }

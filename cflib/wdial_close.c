@@ -31,7 +31,7 @@
  * Dialog-Fenster schliežen.
  */
 void
-close_wdial (WDIALOG * wd)
+close_wdial (WDIALOG *wd)
 {
 	if (wd != NULL)
 	{

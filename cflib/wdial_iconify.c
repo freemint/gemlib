@@ -28,7 +28,7 @@
 
 
 void
-iconify_wdial (WDIALOG * wd, int x, int y, int w, int h)
+iconify_wdial (WDIALOG *wd, short x, short y, short w, short h)
 {
 	if (wd->icon && !(wd->mode & WD_ICON))
 	{

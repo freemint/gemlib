@@ -38,10 +38,10 @@
 
 
 void
-cf_objc_edit (OBJECT * tree, int obj, int kreturn, int *idx, int mode,
-	      int kstate, int *ctrl)
+cf_objc_edit (OBJECT *tree, short obj, short kreturn, short *idx, short mode,
+	      short kstate, short *ctrl)
 {
-	if (!(tree[obj].ob_flags & EDITABLE))
+	if (!(tree[obj].ob_flags & OF_EDITABLE))
 		return;
 
 	if (mode == ED_CHAR)

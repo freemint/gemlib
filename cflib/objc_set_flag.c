@@ -28,7 +28,7 @@
 
 
 void
-set_flag (OBJECT * tree, int obj, int flag, int set)
+set_flag (OBJECT *tree, short obj, short flag, short set)
 {
 	if (set)
 		tree[obj].ob_flags |= flag;	/* Flag setzen */

@@ -32,7 +32,7 @@ send_scchanged (void)
 {
 	static short msg[8];
 
-	int d, i;
+	short d, i;
 
 	/* gibts Broadcast? */
 	if (((appl_xgetinfo (10, &i, &d, &d, &d)) && ((i & 0x00FF) >= 7))

@@ -28,7 +28,7 @@
 
 
 void
-redraw_wdobj (WDIALOG * wd, int obj)
+redraw_wdobj (WDIALOG *wd, short obj)
 {
 	GRECT r;
 

@@ -39,12 +39,12 @@
 
 static KEY_CB key_cb = NULL;
 
-int
-cf_form_keybd (OBJECT * tree, int edit_obj, int kstate, int *kreturn,
-	       int *next_obj)
+short
+cf_form_keybd (OBJECT *tree, short edit_obj, short kstate, short *kreturn,
+	       short *next_obj)
 {
-	int cont = TRUE, obj;
-	int scan;
+	short cont = TRUE, obj;
+	short scan;
 
 	if (key_cb != NULL)
 	{

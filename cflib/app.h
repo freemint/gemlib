@@ -28,13 +28,13 @@
 #define _app_h
 
 
-extern int cf_vdi_handle;
-extern int cf_font_anz;
-extern int cf_msg_cb;
-extern int cf_magxPC;
+extern short cf_vdi_handle;
+extern short cf_font_anz;
+extern short cf_msg_cb;
+extern short cf_magxPC;
 
-extern int __app_hidden;
-extern int __app_rsc_load;
+extern short __app_hidden;
+extern short __app_rsc_load;
 
 
 #endif /* _app_h */

@@ -34,15 +34,16 @@
  *
  */
 
+#include <osbind.h>
 #include <ctype.h>
 #include "intern.h"
 
 
-int
-find_shortcut (OBJECT * tree, int kstate, int kreturn)
+short
+find_shortcut (OBJECT *tree, short kstate, short kreturn)
 {
 	static KEYTAB *keytab = NULL;
-	int ret = -1;
+	short ret = -1;
 	int scan;
 
 	if (keytab == NULL)
@@ -53,10 +54,10 @@ find_shortcut (OBJECT * tree, int kstate, int kreturn)
 	scan = (kreturn & 0xFF00) >> 8;
 
 	if (scan == 0x62)	/* HELP */
-		ret = find_flag (tree, FLAG12);
+		ret = find_flag (tree, OF_FLAG12);
 
 	else if (scan == 0x61)	/* UNDO */
-		ret = find_flag (tree, FLAG11);
+		ret = find_flag (tree, OF_FLAG11);
 
 	else if (kstate & K_ALT)	/* Shortcut */
 	{
@@ -82,10 +83,10 @@ find_shortcut (OBJECT * tree, int kstate, int kreturn)
 				}
 			}
 		}
-		while (!(tree[obj].ob_flags & LASTOB));
+		while (!(tree[obj].ob_flags & OF_LASTOB));
 	}
-	if ((tree[ret].ob_flags & HIDETREE)
-	    || (tree[ret].ob_state & DISABLED))
+	if ((tree[ret].ob_flags & OF_HIDETREE)
+	    || (tree[ret].ob_state & OS_DISABLED))
 		ret = -1;
 	return ret;
 }

@@ -28,10 +28,10 @@
 #include "app.h"
 
 
-int
-appl_xgetinfo (int type, int *out1, int *out2, int *out3, int *out4)
+short
+appl_xgetinfo (short type, short *out1, short *out2, short *out3, short *out4)
 {
-	int has_agi = FALSE;
+	short has_agi = FALSE;
 
 #ifdef __MINT__
 	has_agi = ((gl_ap_version == 0x399 && getcookie ("MagX", NULL))
@@ -44,6 +44,6 @@ appl_xgetinfo (int type, int *out1, int *out2, int *out3, int *out4)
 #endif
 	if (has_agi)
 		return (appl_getinfo (type, out1, out2, out3, out4));
-	else
-		return 0;
+
+	return 0;
 }

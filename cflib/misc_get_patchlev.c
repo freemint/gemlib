@@ -35,7 +35,7 @@ get_patchlev (char *id_str, char *pl)
 	int len;
 	int ret = FALSE;
 
-	len = (int) strlen (id_str);
+	len = strlen (id_str);
 	if (id_str[0] == '$' && id_str[len - 1] == '$')
 	{
 		p = id_str;
@@ -46,5 +46,6 @@ get_patchlev (char *id_str, char *pl)
 		*pl = '\0';
 		ret = TRUE;
 	}
+
 	return ret;
 }

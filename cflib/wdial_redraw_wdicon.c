@@ -31,7 +31,7 @@
  * Ein Objekt im iconified Dialog zeichnen.
  */
 void
-redraw_wdicon (WDIALOG * wd, int obj)
+redraw_wdicon (WDIALOG *wd, short obj)
 {
 	GRECT r;
 

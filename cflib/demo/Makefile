@@ -26,9 +26,8 @@ OBJS = $(COBJS:.c=.o) $(SOBJS:.s=.o)
 LIBS += -L.. -lcflib -L/usr/GEM/lib -lgem
 GENFILES = $(TARGET)
 
-$(TARGET): $(OBJS)
+$(TARGET): $(OBJS) ../libcflib.a
 	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS)
-	$(STRIP) $@
 
 
 include $(top_srcdir)/DEPENDENCIES

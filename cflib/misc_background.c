@@ -24,14 +24,16 @@
  * 
  */
 
+#include <osbind.h>
+#include "app.h"
 #include "intern.h"
 
 
 static void
-cf_background (GRECT * box, MFDB * buffer, int get)
+cf_background (GRECT *box, MFDB *buffer, int get)
 {
 	MFDB screen;
-	int xy[8];
+	short xy[8];
 	GRECT r;
 
 	r = *box;
@@ -82,23 +84,19 @@ cf_background (GRECT * box, MFDB * buffer, int get)
 			show_mouse ();
 		}
 		else
-#ifdef __MTAES__
-			form_dial (FMD_FINISH, &r, &r);
-#else
 			form_dial (FMD_FINISH, r.g_x, r.g_y, r.g_w, r.g_h,
 				   r.g_x, r.g_y, r.g_w, r.g_h);
-#endif
 	}
 }
 
 void
-restore_background (GRECT * box, MFDB * buffer)
+restore_background (GRECT *box, MFDB *buffer)
 {
 	cf_background (box, buffer, FALSE);
 }
 
 void
-save_background (GRECT * box, MFDB * buffer)
+save_background (GRECT *box, MFDB *buffer)
 {
 	cf_background (box, buffer, TRUE);
 }

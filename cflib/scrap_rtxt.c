@@ -28,6 +28,7 @@
  * GEM clipbrd
  */
 
+#include <osbind.h>
 #include "intern.h"
 
 

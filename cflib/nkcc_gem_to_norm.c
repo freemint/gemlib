@@ -28,7 +28,7 @@
 
 
 unsigned short
-gem_to_norm (int ks, int kr)
+gem_to_norm (short ks, short kr)
 {
 	unsigned short knorm;
 

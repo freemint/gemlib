@@ -33,5 +33,6 @@ exit_app (int ret)
 {
 	exit_gem ();
 	debug ("finish with %d\n", ret);
+
 	exit (ret);
 }

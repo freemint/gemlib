@@ -27,8 +27,8 @@
 #include "intern.h"
 
 
-int
-get_state (OBJECT * tree, int obj, int state)
+short
+get_state (OBJECT *tree, short obj, short state)
 {
 	return (tree[obj].ob_state & state);
 }

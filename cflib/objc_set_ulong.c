@@ -28,9 +28,9 @@
 
 
 void
-set_ulong (OBJECT * tree, int obj, unsigned long l)
+set_ulong (OBJECT *tree, short obj, unsigned long l)
 {
-	char tmp[20];
+	char tmp[32];
 
 	ultoa (l, tmp, 10);
 	set_string (tree, obj, tmp);

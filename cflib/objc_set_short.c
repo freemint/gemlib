@@ -27,4 +27,11 @@
 #include "intern.h"
 
 
-char __Ident_cflib[] = "$PatchLevel: CF library: "CFLIB_PATCHLEVEL" $";
+void
+set_short (OBJECT *tree, short obj, short i)
+{
+	char tmp[32];
+
+	ltoa (i, tmp, 10);
+	set_string (tree, obj, tmp);
+}

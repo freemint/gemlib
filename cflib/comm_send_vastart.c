@@ -34,7 +34,7 @@ send_vastart (int id, char *str)
 	static short msg[8];
 
 	if (!glob_str)
-		glob_str = (char *) cf_malloc (256, "send_vastart", TRUE);
+		glob_str = cf_malloc (256, "send_vastart", TRUE);
 
 	strcpy (glob_str, str);
 	msg[0] = 0x4711;	/* VA_START */

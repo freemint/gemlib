@@ -36,25 +36,19 @@
  * offset gibt den Offset zwischen Root und dem ersten Popup-String an (i.d.R.
  * ist offset 0, bei einem Farb-Popup aber z.B. nicht).
  */
-int
-cf_menu_popup (MENU * m1, int x, int y, MENU * m2, int button, int offset)
+short
+cf_menu_popup (MENU *m1, short x, short y, MENU *m2, short button, short offset)
 {
-	int i, d;
+	short i, d;
 
-	if ((button == 0) && appl_xgetinfo (9, &d, &i, &d, &d) && (i == 1))	/* gibts menu_popup? */
+	if ((button == 0) && appl_xgetinfo (9, &d, &i, &d, &d) && (i == 1))
 		return menu_popup (m1, x, y, m2);
-	else
+
 	{
 		OBJECT *tree;
-		int root, m_x, m_y, event, item,
-			msg[8], olditem, kstate, mask, clicks;
+		short root, m_x, m_y, event, item, msg[8], olditem, kstate, mask, clicks;
 		GRECT box, r;
 		MFDB save;
-
-#ifdef __MTAES__
-		EVNTDATA ev;
-		GRECT n = { 0, 0, 0, 0 };
-#endif
 
 		tree = m1->mn_tree;
 		root = m1->mn_menu;
@@ -83,14 +77,7 @@ cf_menu_popup (MENU * m1, int x, int y, MENU * m2, int button, int offset)
 		if (button == 0)
 			button = 1;
 
-#ifdef __MTAES__
-		graf_mkstate (&ev);
-		m_x = ev.x;
-		m_y = ev.y;
-		i = ev.bstate;
-#else
 		graf_mkstate (&m_x, &m_y, &i, &d);
-#endif
 
 		if (i & button)	/* Taste immer noch gedrÅckt? */
 		{
@@ -103,12 +90,8 @@ cf_menu_popup (MENU * m1, int x, int y, MENU * m2, int button, int offset)
 			mask = 3;
 		}
 
-#ifdef __MTAES__
-		objc_draw (tree, root, MAX_DEPTH, &box);
-#else
 		objc_draw (tree, root, MAX_DEPTH, box.g_x, box.g_y, box.g_w,
 			   box.g_h);
-#endif
 
 		olditem = -1;
 		do
@@ -120,34 +103,20 @@ cf_menu_popup (MENU * m1, int x, int y, MENU * m2, int button, int offset)
 			if (item != olditem)
 			{
 				if (olditem != -1)
-#ifdef __MTAES__
-					objc_change (tree, olditem, 0, &box,
-						     tree[olditem].
-						     ob_state & (~SELECTED),
-						     TRUE);
-#else
 					objc_change (tree, olditem, 0,
 						     box.g_x, box.g_y,
 						     box.g_w, box.g_h,
 						     tree[olditem].
-						     ob_state & (~SELECTED),
+						     ob_state & (~OS_SELECTED),
 						     TRUE);
-#endif
 
 				if (item != -1)
-#ifdef __MTAES__
-					objc_change (tree, item, 0, &box,
-						     tree[item].
-						     ob_state | SELECTED,
-						     TRUE);
-#else
 					objc_change (tree, item, 0, box.g_x,
 						     box.g_y, box.g_w,
 						     box.g_h,
 						     tree[item].
-						     ob_state | SELECTED,
+						     ob_state | OS_SELECTED,
 						     TRUE);
-#endif
 			}
 			if (item != -1)
 			{
@@ -163,16 +132,6 @@ cf_menu_popup (MENU * m1, int x, int y, MENU * m2, int button, int offset)
 				r.g_h = 1;
 			}
 
-#ifdef __MTAES__
-			ev.bstate = 0;
-			event = evnt_multi ((MU_BUTTON | MU_M1),
-					    clicks, mask, 0,
-					    1, &r, 0, &n,
-					    msg, 0L, &ev, &d, &d);
-			m_x = ev.x;
-			m_y = ev.y;
-			kstate = ev.kstate;
-#else
 			d = 0;
 			event = evnt_multi ((MU_BUTTON | MU_M1),
 					    clicks, mask, 0,
@@ -181,7 +140,6 @@ cf_menu_popup (MENU * m1, int x, int y, MENU * m2, int button, int offset)
 					    msg,
 					    0L,
 					    &m_x, &m_y, &d, &kstate, &d, &d);
-#endif
 
 			olditem = item;
 		}
@@ -193,7 +151,7 @@ cf_menu_popup (MENU * m1, int x, int y, MENU * m2, int button, int offset)
 		if (item == -1)
 			item = 0;
 		else
-			tree[item].ob_state &= ~SELECTED;
+			tree[item].ob_state &= ~OS_SELECTED;
 
 		if (m2 != NULL)
 		{

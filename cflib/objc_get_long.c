@@ -28,9 +28,9 @@
 
 
 long
-get_long (OBJECT * tree, int obj)
+get_long (OBJECT *tree, short obj)
 {
-	char tmp[20];
+	char tmp[32];
 
 	get_string (tree, obj, tmp);
 	return atol (tmp);

@@ -37,7 +37,8 @@
  * Kennt die Pure/GEM-Lib nicht.
  */
 
-void vqt_real_extent(int handle, int x, int y, char *string, int extent[])
+void
+vqt_real_extent (short handle, short x, short y, char *string, short extent[])
 {
 	static VDIPB vdipb =
 	{
@@ -47,17 +48,20 @@ void vqt_real_extent(int handle, int x, int y, char *string, int extent[])
 		_VDIParBlk.intout,
 		_VDIParBlk.ptsout
 	};
-	
-	int	i;
+
+	short i;
 
 	i = vdi_str2array(string, _VDIParBlk.intin);
+
 	_VDIParBlk.ptsin[0] = x;
 	_VDIParBlk.ptsin[1] = y;
 	_VDIParBlk.contrl[0] = 240;
 	_VDIParBlk.contrl[1] = 1;
 	_VDIParBlk.contrl[3] = i;
 	_VDIParBlk.contrl[6] = handle;
+
 	vdi(&vdipb);
+
 	for (i = 0; i<8; i++)
 		extent[i] = _VDIParBlk.ptsout[i];
 }

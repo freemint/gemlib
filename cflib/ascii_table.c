@@ -24,6 +24,9 @@
  * 
  */
 
+#include <osbind.h>
+
+#include "app.h"
 #include "intern.h"
 #include "inline.h"
 
@@ -31,20 +34,16 @@
 static int last_ascii;
 
 static void
-_redraw_obj (OBJECT * tree, int obj)
+_redraw_obj (OBJECT * tree, short obj)
 {
 	GRECT r;
 
 	get_objframe (tree, obj, &r);
-#ifdef __MTAES__
-	objc_draw (tree, obj, 1, &r);
-#else
 	objc_draw (tree, obj, 1, r.g_x, r.g_y, r.g_w, r.g_h);
-#endif
 }
 
 static void
-set_numbers (int code)
+set_numbers (short code)
 {
 	char str[6];
 
@@ -58,9 +57,9 @@ set_numbers (int code)
 }
 
 static void
-draw_ascii (int id, int pts)
+draw_ascii (short id, short pts)
 {
-	int wc, hc, wb, hb, d, i, x, y;
+	short wc, hc, wb, hb, d, i, x, y;
 	GRECT r;
 	char c[2] = "x";
 
@@ -89,9 +88,9 @@ draw_ascii (int id, int pts)
 }
 
 static int
-get_ascii (int x, int y)
+get_ascii (short x, short y)
 {
-	int x1, y1;
+	short x1, y1;
 
 	objc_offset (cf_ascii_tab, AT_BOX, &x1, &y1);
 	x -= x1;
@@ -108,9 +107,9 @@ get_ascii (int x, int y)
 }
 
 static void
-select_ascii (int obj)
+select_ascii (short obj)
 {
-	int pxy[4], x, y;
+	short pxy[4], x, y;
 
 	objc_offset (cf_ascii_tab, AT_BOX, &x, &y);
 	pxy[0] = x + (obj % 16) * gl_wbox;
@@ -119,7 +118,7 @@ select_ascii (int obj)
 	pxy[3] = pxy[1] + gl_hbox - 1;
 
 	graf_mouse (M_OFF, NULL);
-	vsf_color (cf_vdi_handle, BLACK);
+	vsf_color (cf_vdi_handle, OC_BLACK);
 	vsf_interior (cf_vdi_handle, FIS_SOLID);
 	vswr_mode (cf_vdi_handle, MD_XOR);
 	v_bar (cf_vdi_handle, pxy);
@@ -127,7 +126,7 @@ select_ascii (int obj)
 }
 
 static void
-jump_to (int new)
+jump_to (short new)
 {
 	if (last_ascii != -1)
 		select_ascii (last_ascii);
@@ -136,71 +135,33 @@ jump_to (int new)
 	set_numbers (new);
 }
 
-int
-ascii_table (int id, int pts)
+short
+ascii_table (short id, short pts)
 {
-	int event, mx, my, kstate, kreturn, breturn, bclicks,
-
-		d, obj, code = -1;
+	short event, mx, my, kstate, kreturn, breturn, bclicks;
+	short d, obj, code = -1;
 	MFDB background;
 	GRECT r;
 	int quit;
-
-#ifdef __MTAES__
-	GRECT null = { 0, 0, 0, 0 };
-	GRECT r3;
-	EVNTDATA ev;
-#endif
 
 	set_string (cf_ascii_tab, AT_DEZ, "000");
 	set_string (cf_ascii_tab, AT_HEX, "0x00");
 
 	wind_update (BEG_UPDATE);
 	wind_update (BEG_MCTRL);
-#ifdef __MTAES__
-	form_center (cf_ascii_tab, &r);
-#else
 	form_center (cf_ascii_tab, &r.g_x, &r.g_y, &r.g_w, &r.g_h);
-#endif
 	save_background (&r, &background);
-#ifdef __MTAES__
-	form_dial (FMD_START, &null, &r);
-#else
 	form_dial (FMD_START, 0, 0, 0, 0, r.g_x, r.g_y, r.g_w, r.g_h);
-#endif
 	graf_mouse (M_OFF, NULL);
-#ifdef __MTAES__
-	objc_draw (cf_ascii_tab, ROOT, MAX_DEPTH, &r);
-#else
 	objc_draw (cf_ascii_tab, ROOT, MAX_DEPTH, r.g_x, r.g_y, r.g_w, r.g_h);
-#endif
 	draw_ascii (id, pts);
 	graf_mouse (M_ON, NULL);
 
 	last_ascii = -1;
 	quit = FALSE;
-#ifdef __MTAES__
-	graf_mkstate (&ev);
-#else
 	graf_mkstate (&mx, &my, &d, &d);
-#endif
 	do
 	{
-#ifdef __MTAES__
-		r3.g_x = ev.x;
-		r3.g_y = ev.y;
-		r3.g_w = 1;
-		r3.g_h = 1;
-		event = evnt_multi ((MU_BUTTON | MU_KEYBD | MU_M1),
-				    1, 1, 1,
-				    1, &r3,
-				    0, &null,
-				    NULL, 0, &ev, &kreturn, &bclicks);
-		mx = ev.x;
-		my = ev.y;
-		breturn = ev.bstate;
-		kstate = ev.kstate;
-#else
 		event = evnt_multi (MU_BUTTON | MU_KEYBD | MU_M1,
 				    1, 1, 1,
 				    1, mx, my, 1, 1,
@@ -208,7 +169,6 @@ ascii_table (int id, int pts)
 				    NULL, 0,
 				    &mx, &my, &breturn, &kstate, &kreturn,
 				    &bclicks);
-#endif
 		if (event & MU_M1)
 		{
 			obj = get_ascii (mx, my);
@@ -237,7 +197,7 @@ ascii_table (int id, int pts)
 		}
 		if (event & MU_KEYBD)
 		{
-			int scan, d;
+			int scan;
 
 			scan = kreturn >> 8;
 			switch (scan)
@@ -314,11 +274,7 @@ ascii_table (int id, int pts)
 	}
 	while (!quit);
 
-#ifdef __MTAES__
-	form_dial (FMD_FINISH, &r, &null);
-#else
 	form_dial (FMD_FINISH, 0, 0, 0, 0, r.g_x, r.g_y, r.g_w, r.g_h);
-#endif
 	restore_background (&r, &background);
 	wind_update (END_MCTRL);
 	wind_update (END_UPDATE);

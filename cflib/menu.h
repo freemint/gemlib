@@ -36,8 +36,8 @@
 
 
 extern OBJECT	*__menu_tree;
-extern int	 __menu_disabled;
-extern int	 __menu_dis_cnt;
+extern short	 __menu_disabled;
+extern short	 __menu_dis_cnt;
 extern KEYTAB	*__menu_keys;
 
 

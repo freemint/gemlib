@@ -24,27 +24,27 @@
  * 
  */
 
+#include <osbind.h>
 #include "intern.h"
 
 
-int
-free_popup (POPUP * p)
+short
+free_popup (POPUP *p)
 {
-	int i;
+	int i = -1;
 
-	if (p->tree == NULL)
+	if (!p->tree)
 		return FALSE;
-	else
-	{
-		i = -1;
-		do
-		{
-			i++;
-			if (get_obtype (p->tree, i, NULL) == G_STRING)
-				Mfree ((char *) get_obspec (p->tree, i));	/* free_string freigeben */
-		}
-		while (!(p->tree[i].ob_flags & LASTOB));
-		Mfree (p->tree);
-		return TRUE;
+	
+	do {
+		i++;
+		if (get_obtype (p->tree, i, NULL) == G_STRING)
+			/* free_string freigeben */
+			Mfree ((char *) get_obspec (p->tree, i));
 	}
+	while (!(p->tree[i].ob_flags & OF_LASTOB));
+	
+	Mfree (p->tree);
+	
+	return TRUE;
 }

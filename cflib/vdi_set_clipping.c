@@ -31,13 +31,15 @@
 #include "intern.h"
 
 
-void set_clipping(int handle, int x, int y, int w, int h, int on)
+void
+set_clipping (short handle, short x, short y, short w, short h, short on)
 {
-	int clip[4];
+	short clip[4];
 
 	clip[0] = x;
 	clip[1] = y;
-	clip[2] = clip[0]+w-1;
-	clip[3] = clip[1]+h-1;
-	vs_clip(handle, on, clip);
+	clip[2] = clip[0] + w - 1;
+	clip[3] = clip[1] + h - 1;
+
+	vs_clip (handle, on, clip);
 }

@@ -28,14 +28,10 @@
 
 
 void
-redraw_obj (OBJECT * tree, int obj)
+redraw_obj (OBJECT *tree, short obj)
 {
 	GRECT r;
 
 	get_objframe (tree, obj, &r);
-#ifdef __MTAES__
-	objc_draw (tree, ROOT, MAX_DEPTH, &r);
-#else
 	objc_draw (tree, ROOT, MAX_DEPTH, r.g_x, r.g_y, r.g_w, r.g_h);
-#endif
 }

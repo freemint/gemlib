@@ -36,7 +36,7 @@ extern MDIAL_WCB __mdial_win_cb;
 extern MDIAL *__mdial_md_list;
 
 
-void redraw_mdial(MDIAL *dial, int start, int depth, int x, int y, int w, int h);
+void redraw_mdial(MDIAL *dial, short start, short depth, short x, short y, short w, short h);
 
 
 #endif /* _mdial_h */

@@ -24,11 +24,11 @@
  * 
  */
 
-#include "intern.h"
-
-#ifdef __MINT__
+#include <osbind.h>
 #include <gemx.h>
-#endif
+
+#include "app.h"
+#include "intern.h"
 
 
 /* -- Selectric -------------------------------------------------------------- */
@@ -97,7 +97,7 @@ do_magx (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 	int ok = FALSE;
 	void *fsl;
 	char def_mask[] = "*\0\0", pat[50], *p, hist_path[256] = "\0\0";
-	int num, flags = 0, but, i, j, win, ret;
+	short num, flags = 0, but, i, j, win, ret;
 	EVNT ev;
 
 	j = 0;
@@ -145,14 +145,15 @@ do_magx (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 			do
 			{
 #ifdef __GNUC__
-				int msg[8], i, mx, my, mb, mc, ks, kr;
+				short msg[8];
+				short i, mx, my, mb, mc, ks, kr;
 
 				/*
 				 * GNU erwartet beim evnt_multi wirklich 'int', in EVNT sind aber
 				 * nur 'short', so daû die Struktur nicht Åbergeben werden kann!
 				 */
 				ev.mwhich =
-					(short) evnt_multi (MU_KEYBD |
+					evnt_multi (MU_KEYBD |
 							    MU_MESAG |
 							    MU_BUTTON, 2, 1,
 							    1, 0, 0, 0, 0, 0,
@@ -168,14 +169,7 @@ do_magx (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 				ev.mclicks = mc;
 				for (i = 0; i < 8; i++)
 					ev.msg[i] = msg[i];
-#else
-#ifdef __MTAES__
-				MOBLK null = { 0, 0, 0, 0, 0 };
-
-				EVNT_multi ((MU_KEYBD | MU_MESAG | MU_BUTTON),
-					    2, 1, 1, &null, &null, 0, &ev);
-#else
-				ev.mwhich =
+#else				ev.mwhich =
 					(short) evnt_multi (MU_KEYBD |
 							    MU_MESAG |
 							    MU_BUTTON, 2, 1,
@@ -192,7 +186,6 @@ do_magx (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 							    (int *) &ev.
 							    mclicks);
 #endif
-#endif
 				if (ev.mwhich & MU_MESAG)
 				{
 					switch (ev.msg[0])
@@ -203,14 +196,9 @@ do_magx (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 							if (ev.msg[3] != win)	/* fÅr fremdes Fenster */
 							{
 #ifdef __GNUC__
-								handle_mdial_msg
-									(msg);
+								handle_mdial_msg (msg);
 #else
-								handle_mdial_msg
-									((int
-									  *)
-									 ev.
-									 msg);
+								handle_mdial_msg ((int *) ev.msg);
 #endif
 							}
 							break;
@@ -271,10 +259,11 @@ do_magx (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 int
 select_file (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 {
-	int ok = FALSE, slct_multi = FALSE;
-	int but, i, d;
+	short slct_multi = FALSE;
+	short but, i, d;
 	char *p;
 	char *files[SLCT_ANZ];
+	int ok = FALSE;
 
 	if (path[0] == '\0')	/* kein Pfad -> aktuellen holen */
 		get_path (path, 0);
@@ -287,9 +276,7 @@ select_file (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 		{
 			for (i = 0; i < SLCT_ANZ; i++)
 				files[i] =
-					(char *) cf_malloc (256,
-							    "select_file",
-							    FALSE);
+					cf_malloc (256, "select_file", FALSE);
 			slct->comm = 1;
 			slct->out_count = SLCT_ANZ;
 			slct->out_ptr = files;
@@ -297,9 +284,7 @@ select_file (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 		}
 	}
 	else if (appl_xgetinfo (7, &i, &d, &d, &d) && (i & 8))
-	{
 		return do_magx (path, name, mask, title, open_cb);
-	}
 
 	/* normale Auswahl */
 	if (mask[0] == '\0')
@@ -324,7 +309,7 @@ select_file (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 
 		if (slct_multi)	/* Mehrfach-Selectrics */
 		{
-			int cont = TRUE;
+			short cont = TRUE;
 
 			i = 0;
 			while (cont && (i < slct->out_count))

@@ -27,8 +27,8 @@
 #include "intern.h"
 
 
-int
-append_popup (POPUP * p, char *item)
+short
+append_popup (POPUP *p, char *item)
 {
 	char *text;
 	int i, state;
@@ -41,7 +41,7 @@ append_popup (POPUP * p, char *item)
 
 	/* letztes wird vorletztes */
 	p->tree[p->akt_item].ob_next = p->akt_item + 1;
-	p->tree[p->akt_item].ob_flags = SELECTABLE;
+	p->tree[p->akt_item].ob_flags = OF_SELECTABLE;
 
 	p->akt_item++;
 
@@ -60,7 +60,7 @@ append_popup (POPUP * p, char *item)
 	p->tree[p->akt_item].ob_head = -1;
 	p->tree[p->akt_item].ob_tail = -1;
 	p->tree[p->akt_item].ob_type = G_STRING;
-	p->tree[p->akt_item].ob_flags = (SELECTABLE | LASTOB);
+	p->tree[p->akt_item].ob_flags = (OF_SELECTABLE | OF_LASTOB);
 	p->tree[p->akt_item].ob_state = state;
 	p->tree[p->akt_item].ob_spec.free_string = text;
 	p->tree[p->akt_item].ob_x = 0;

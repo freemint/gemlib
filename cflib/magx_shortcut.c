@@ -31,10 +31,10 @@
 #include "magx.h"
 
 
-int
-get_magx_shortcut (OBJECT * tree, int obj, char *c)
+short
+get_magx_shortcut (OBJECT *tree, short obj, char *c)
 {
-	int pos = -1, us, mtyp;
+	short pos = -1, us, mtyp;
 	char *p;
 
 	if (c != NULL)
@@ -56,5 +56,6 @@ get_magx_shortcut (OBJECT * tree, int obj, char *c)
 				*c = p[pos];
 		}
 	}
+	
 	return pos;
 }

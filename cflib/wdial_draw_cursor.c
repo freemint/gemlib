@@ -33,7 +33,7 @@
  * oder ganz von einem anderen Fenster verdeckt wird.
  */
 void
-wdial_draw_cursor (WDIALOG * wd, int mode)
+wdial_draw_cursor (WDIALOG *wd, short mode)
 {
 	GRECT r;
 
@@ -41,8 +41,7 @@ wdial_draw_cursor (WDIALOG * wd, int mode)
 	{
 		objc_edit (wd->tree, wd->edit_obj, 0, &wd->edit_idx, mode);
 		get_objframe (wd->tree, wd->edit_obj, &r);
-		draw_wdial (wd, ROOT, MAX_DEPTH, r.g_x, r.g_y - 3, r.g_w + 1,
-			    r.g_h + 6);
+		draw_wdial (wd, ROOT, MAX_DEPTH, r.g_x, r.g_y - 3, r.g_w + 1, r.g_h + 6);
 		objc_edit (wd->tree, wd->edit_obj, 0, &wd->edit_idx, mode);
 	}
 }

@@ -31,27 +31,24 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef __MINT__			/* MiNT/GEM-Lib */
-#include <osbind.h>
-#include <mintbind.h>
 #include <gem.h>
-#else				/* PureLIB/MT_AES */
-#include <tos.h>
-#include <mt_aes.h>
-#include <vdi.h>
-#endif
 
 
 /*******************************************************************************
  * Version
  *******************************************************************************/
 
-#ifdef __MINT__
-#define CFLIB_PATCHLEVEL	"12m"
-#else
-#define CFLIB_PATCHLEVEL	"12p"
+/* Major and minor version number of the GEMLib package.  Use these macros 
+   to test for features in specific releases.  */
+#define __CFLIB__		__CFLIB_MAJOR__
+#define	__CFLIB_MAJOR__		0
+#define	__CFLIB_MINOR__		20
+#define __CFLIB_REVISION__	0
+#define __CFLIB_BETATAG__	""
+
+#if !defined(__GEMLIB__)
+#error This cflib version require an up-to-date GEMLib
 #endif
-extern char __Ident_cflib[];
 
 /*******************************************************************************
  * spezielle Typen der CF-Lib
@@ -67,30 +64,30 @@ typedef struct _popup POPUP;
 struct _popup
 {
 	OBJECT	*tree;			/* der Objektbaum */
-	int	max_item;		/* maximal mîgliche Anzahl */
-	int	akt_item;		/* aktuelle Anzahl */
-	int	item_len;		/* LÑnge eines Eintrages */
+	short	max_item;		/* maximal mîgliche Anzahl */
+	short	akt_item;		/* aktuelle Anzahl */
+	short	item_len;		/* LÑnge eines Eintrages */
 };
 
-typedef int (*KEY_CB)(OBJECT *tree, int edit_obj, int kstate, int *kreturn, int *next_obj);
+typedef short (*KEY_CB)(OBJECT *tree, short edit_obj, short kstate, short *kreturn, short *next_obj);
 
 
 typedef struct _mdial MDIAL;
 struct _mdial
 {
 	OBJECT	*tree;
-	int	win_handle;
+	short	win_handle;
 	char	*win_name;
-	int	edit_obj,
+	short	edit_obj,
 		edit_idx,
 		next_obj;
-	int	save_frame, 
+	short	save_frame, 
 		delta_y;
-	int	is_shaded;
+	short	is_shaded;
 	MDIAL	*next;
 };
 
-typedef void (*MDIAL_WCB)(int *msg);
+typedef void (*MDIAL_WCB)(short *msg);
 
 
 typedef struct _wdial WDIALOG;
@@ -100,24 +97,24 @@ struct _wdial
 
 	OBJECT	*tree;			/* Objektbaum */
 	OBJECT	*icon;			/* Icon fÅr Iconify */
-	int	mode;			/* aktueller Status */
-	int	win_handle;		/* Fensterhandle */
+	short	mode;			/* aktueller Status */
+	short	win_handle;		/* Fensterhandle */
 	char	win_name[80];		/* Fenstertitel */
-	int	win_kind;		/* Elemente */
+	short	win_kind;		/* Elemente */
 	GRECT	work;			/* Fenstergrîûe */
-	int	title_obj;		/* Objektnummer des Titelobjektes */
-	int	cancel_obj;		/*       "      des Abbruchbuttons */
-	int	delta_y;		/* Offset bis zum Titelobjekt */
-	int	edit_idx,		/* Objektnummern fÅr die Editfelder */
+	short	title_obj;		/* Objektnummer des Titelobjektes */
+	short	cancel_obj;		/*       "      des Abbruchbuttons */
+	short	delta_y;		/* Offset bis zum Titelobjekt */
+	short	edit_idx,		/* Objektnummern fÅr die Editfelder */
 		next_obj,
 		edit_obj;
 
-	void	(*open_cb) (struct _wdial *dial);	
-	int	(*exit_cb) (struct _wdial *dial, int exit_obj);	
+	void	(*open_cb) (WDIALOG *dial);	
+	int	(*exit_cb) (WDIALOG *dial, short exit_obj);	
 };
 
-typedef void 	(*WDIAL_OCB)(WDIALOG *dial);
-typedef int	(*WDIAL_XCB)(WDIALOG *dial, int exit_obj);
+typedef void (*WDIAL_OCB)(WDIALOG *dial);
+typedef int  (*WDIAL_XCB)(WDIALOG *dial, short exit_obj);
 
 #define WOCB_NULL	(WDIAL_OCB)NULL
 #define WXCB_NULL	(WDIAL_XCB)NULL
@@ -129,23 +126,23 @@ typedef int (*FSEL_CB)(char *path, char *name);
  * globals.c
  *******************************************************************************/
 
-extern int	gl_apid, gl_phys_handle;
+extern short	gl_phys_handle;
 extern GRECT	gl_desk;	
 
-extern int	sys_big_id, sys_big_height, sys_big_pts,
+extern short	sys_big_id, sys_big_height, sys_big_pts,
 		sys_sml_id, sys_sml_height, sys_sml_pts,
 		sys_wchar, sys_hchar, sys_wbox, sys_hbox;
 
-extern int	gl_wchar, gl_hchar, gl_wbox, gl_hbox;
+extern short	gl_wchar, gl_hchar, gl_wbox, gl_hbox;
 
-extern int	gl_gdos;
-extern int	gl_planes;
+extern short	gl_gdos;
+extern short	gl_planes;
 
-extern int	gl_gem;
-extern int	gl_mint;
-extern int	gl_naes;
-extern int	gl_magx;
-extern int	gl_nvdi;
+extern short	gl_gem;
+extern short	gl_mint;
+extern short	gl_naes;
+extern short	gl_magx;
+extern short	gl_nvdi;
 
 extern char 	gl_appdir[];
 
@@ -153,8 +150,8 @@ extern char 	gl_appdir[];
  * alerts functions
  *******************************************************************************/
 
-int	do_alert	(int def, int undo, char *str);
-int	do_walert	(int def, int undo, char *str, char *win_title);
+short	do_alert	(short def, short undo, char *str);
+short	do_walert	(short def, short undo, char *str, char *win_title);
 
 /*******************************************************************************
  * app functions
@@ -164,15 +161,15 @@ void	init_app	(char *rsc);
 void	exit_gem	(void);
 void	exit_app	(int ret);
 void	hide_mouse	(void);
-int  	hide_mouse_if_needed (GRECT *rect);
+short  	hide_mouse_if_needed (GRECT *rect);
 void	show_mouse	(void);
-int	appl_xgetinfo	(int type, int *out1, int *out2, int *out3, int *out4);
+short	appl_xgetinfo	(short type, short *out1, short *out2, short *out3, short *out4);
 
 /*******************************************************************************
  * asciitable functions
  *******************************************************************************/
 
-int 	ascii_table (int id, int pts);
+short 	ascii_table (short id, short pts);
 void	set_asciitable_strings (char *title, char *button);
 
 /*******************************************************************************
@@ -181,15 +178,15 @@ void	set_asciitable_strings (char *title, char *button);
 
 #define MAX_COLORPOP 10 /* Maximale Anzahl von Farb-Objekten in einem Programm */
 
-int	init_colorpop	(int maxplanes);
+short	init_colorpop	(short maxplanes);
 void	exit_colorpop	(void);
 
-void	fix_colorpopobj	(OBJECT *tree, int obj, int color);
-void	set_popobjcolor	(OBJECT *tree, int obj, int color);
-int	get_popobjcolor	(OBJECT *tree, int obj);
+void	fix_colorpopobj	(OBJECT *tree, short obj, short color);
+void	set_popobjcolor	(OBJECT *tree, short obj, short color);
+short	get_popobjcolor	(OBJECT *tree, short obj);
 
-int	do_colorpop	(int x, int y, int item, int planes, int show_noncolor);
-int	handle_colorpop	(OBJECT *dial, int dial_obj, int mode, int planes, int show_noncolor);
+short	do_colorpop	(short x, short y, short item, short planes, short show_noncolor);
+short	handle_colorpop	(OBJECT *dial, short dial_obj, short mode, short planes, short show_noncolor);
 
 /*******************************************************************************
  * comm functions
@@ -278,14 +275,14 @@ int select_file (char *path, char *name, char *mask, char *title, FSEL_CB open_c
 
 #define FS_F_MONO		8		/* nur monospaced */
 
-int do_fontsel (int flags, char *title, int *id, int *pts);
+short do_fontsel (short flags, char *title, short *id, short *pts);
 
 /*******************************************************************************
  * form_do functions
  *******************************************************************************/
 
-int	cf_form_do (OBJECT *tree, int *ed_start);
-int 	simple_dial (OBJECT *tree, int start_edit);
+short	cf_form_do (OBJECT *tree, short *ed_start);
+short 	simple_dial (OBJECT *tree, short start_edit);
 KEY_CB	set_formdo_keycb (KEY_CB keycb);
 
 /*******************************************************************************
@@ -308,35 +305,35 @@ extern int	get_magx_version(void);
 
 #define MX_UNKNOWN		-1		/* Unbekanntes WHITEBACK-Obj */
 
-int	get_magx_obj (OBJECT *tree, int obj);
-int	get_magx_shortcut (OBJECT *tree, int obj, char *c);
+short	get_magx_obj (OBJECT *tree, short obj);
+short	get_magx_shortcut (OBJECT *tree, short obj, char *c);
 
 /*******************************************************************************
  * mdial functions
  *******************************************************************************/
 
-MDIAL *	open_mdial	(OBJECT *tree, int edit_start);
+MDIAL *	open_mdial	(OBJECT *tree, short edit_start);
 void	close_mdial	(MDIAL *mdial);
-int	do_mdial	(MDIAL *mdial);
+short	do_mdial	(MDIAL *mdial);
 
-int 	simple_mdial	(OBJECT *tree, int edit_start);
+short 	simple_mdial	(OBJECT *tree, short edit_start);
 
 void 	set_mdial_wincb(MDIAL_WCB cb);
 
-void	redraw_mdobj	(MDIAL *mdial, int obj);
-void 	change_mdedit	(MDIAL *mdial, int new);
+void	redraw_mdobj	(MDIAL *mdial, short obj);
+void 	change_mdedit	(MDIAL *mdial, short new);
 
 /*******************************************************************************
  * menu functions
  *******************************************************************************/
 
-int	create_menu (OBJECT *tree);
+short	create_menu (OBJECT *tree);
 void 	delete_menu (void);
 
 void 	disable_menu (void);
 void 	enable_menu (void);
 
-int	is_menu_key (int kreturn, int kstate, int *title, int *item);
+short	is_menu_key (short kreturn, short kstate, short *title, short *item);
 
 /*******************************************************************************
  * misc functions
@@ -351,11 +348,6 @@ void 	restore_background (GRECT *box, MFDB *buffer);
 void *	malloc_global (long size);
 
 int	get_patchlev (char *id_str, char *pl);
- 
-#ifndef _GEMLIB_H_
-int *	grect_to_array (GRECT *g, int *pxy);
-void 	array_to_grect (int *pxy, GRECT *g);
-#endif
 
 /*******************************************************************************
  * nkcc functions
@@ -406,14 +398,14 @@ void 	array_to_grect (int *pxy, GRECT *g);
 #define NK_RVD1E     0x1e           /* reserved!         */
 #define NK_DEL       0x1f           /* Delete            */
 
-int		nkc_init	(void);
+short		nkc_init	(void);
 unsigned short	nkc_tos2n	(long toskey);
-long		nkc_n2tos	(unsigned short nkcode);
+long		nkc_n2tos	(long nkcode);
 unsigned char	nkc_toupper	(unsigned char chr);
 unsigned char	nkc_tolower	(unsigned char chr);
 
-unsigned short	gem_to_norm	(int ks, int kr);
-void 		norm_to_gem	(unsigned int norm, int *ks, int *kr);
+unsigned short	gem_to_norm	(short ks, short kr);
+void 		norm_to_gem	(unsigned long norm, short *ks, short *kr);
 
 void 		str_toupper	(char *str);
 void 		str_tolower	(char *str);
@@ -422,46 +414,46 @@ void 		str_tolower	(char *str);
  * objc functions
  *******************************************************************************/
 
-void 	set_obspec	(OBJECT *tree, int obj, long spec);
-long 	get_obspec	(OBJECT *tree, int obj);
+void 	set_obspec	(OBJECT *tree, short obj, long spec);
+long 	get_obspec	(OBJECT *tree, short obj);
 	
-int 	get_obtype	(OBJECT *tree, int obj, short *ud);
-void 	get_objframe	(OBJECT *tree, int obj, GRECT *r);
+short 	get_obtype	(OBJECT *tree, short obj, short *ud);
+void 	get_objframe	(OBJECT *tree, short obj, GRECT *r);
 
-void 	set_flag	(OBJECT *tree, int obj, int flag, int set);
-int	get_flag	(OBJECT *tree, int obj, int flag);
-int	find_flag	(OBJECT *tree, int flag);
+void 	set_flag	(OBJECT *tree, short obj, short flag, short set);
+short	get_flag	(OBJECT *tree, short obj, short flag);
+short	find_flag	(OBJECT *tree, short flag);
 
-void	set_state	(OBJECT *tree, int obj, int state, int set);
-int	get_state	(OBJECT *tree, int obj, int state);
-void	tree_state	(OBJECT *tree, int start_obj, int state, int set);
+void	set_state	(OBJECT *tree, short obj, short state, short set);
+short	get_state	(OBJECT *tree, short obj, short state);
+void	tree_state	(OBJECT *tree, short start_obj, short state, short set);
 
-void	set_string	(OBJECT *tree, int obj, char *text);
-void 	get_string	(OBJECT *tree, int obj, char *text);
+void	set_string	(OBJECT *tree, short obj, char *text);
+void 	get_string	(OBJECT *tree, short obj, char *text);
 
-void 	set_int		(OBJECT *tree, int obj, int i);
-int  	get_int		(OBJECT *tree, int obj);
+void 	set_short	(OBJECT *tree, short obj, short i);
+short  	get_short	(OBJECT *tree, short obj);
 
-void 	set_long	(OBJECT *tree, int obj, long l);
-void 	set_ulong	(OBJECT *tree, int obj, unsigned long l);
-long 	get_long	(OBJECT *tree, int obj);
+void 	set_long	(OBJECT *tree, short obj, long l);
+void 	set_ulong	(OBJECT *tree, short obj, unsigned long l);
+long 	get_long	(OBJECT *tree, short obj);
 
-void 	redraw_obj	(OBJECT *tree, int obj);
+void 	redraw_obj	(OBJECT *tree, short obj);
 
 /*******************************************************************************
  * popup functions
  *******************************************************************************/
  
-int	create_popup	(POPUP *p, int anz, int maxlen, char *item);
-int	free_popup	(POPUP *p);
-int	append_popup	(POPUP *p, char *item);
+short	create_popup	(POPUP *p, short anz, short maxlen, char *item);
+short	free_popup	(POPUP *p);
+short	append_popup	(POPUP *p, char *item);
 
-int	do_popup	(POPUP *p, int button);
-int	cf_menu_popup	(MENU *m1, int x, int y, MENU *m2, int button, int offset);
+short	do_popup	(POPUP *p, short button);
+short	cf_menu_popup	(MENU *m1, short x, short y, MENU *m2, short button, short offset);
 
 #define POP_OPEN	1
 #define POP_CYCLE	2
-int	handle_popup	(OBJECT *dial, int dial_obj, OBJECT *pop, int pop_obj, int mode);
+short	handle_popup	(OBJECT *dial, short dial_obj, OBJECT *pop, short pop_obj, short mode);
 
 /*******************************************************************************
  * scrap functions
@@ -478,15 +470,15 @@ void	scrap_wtxt	(char *buf);
 
 void	fix_dial	(OBJECT *tree);
 void	fix_menu	(OBJECT *tree);
-void	fix_popup	(OBJECT *tree, int thin_line);
+void	fix_popup	(OBJECT *tree, short thin_line);
 
 /*******************************************************************************
  * vdi functions
  *******************************************************************************/
 
-int	open_vwork	(int *w_out);
-void	set_clipping	(int handle, int x, int y, int w, int h, int on);
-int 	height2pts	(int handle, int f_id, int f_height);
+short	open_vwork	(short *w_out);
+void	set_clipping	(short handle, short x, short y, short w, short h, short on);
+short 	height2pts	(short handle, short f_id, short f_height);
 
 /*******************************************************************************
  * wdial functions
@@ -499,19 +491,19 @@ int 	height2pts	(int handle, int f_id, int f_height);
 
 #define WD_CLOSER	0xFF
 
-WDIALOG	*create_wdial	(OBJECT *tree, OBJECT *icon, int edit_obj,
+WDIALOG	*create_wdial	(OBJECT *tree, OBJECT *icon, short edit_obj,
 			 WDIAL_OCB open_cb, WDIAL_XCB exit_cb);
 void	delete_wdial	(WDIALOG *wd);
-void	open_wdial	(WDIALOG *wd, int pos_x, int pos_y);
+void	open_wdial	(WDIALOG *wd, short pos_x, short pos_y);
 void	close_wdial	(WDIALOG *wd);
 
-void	redraw_wdobj	(WDIALOG *wd, int obj);
-void	redraw_wdicon	(WDIALOG *wd, int obj);
-void	change_wdedit	(WDIALOG *wd, int new);
+void	redraw_wdobj	(WDIALOG *wd, short obj);
+void	redraw_wdicon	(WDIALOG *wd, short obj);
+void	change_wdedit	(WDIALOG *wd, short new);
 
-int	message_wdial	(int *msg);
-int	click_wdial	(int clicks, int x, int y, int kshift, int mbutton);
-int	key_wdial	(int kreturn, int kstate);
+short	message_wdial	(short *msg);
+short	click_wdial	(short clicks, short x, short y, short kshift, short mbutton);
+short	key_wdial	(short kreturn, short kstate);
 
 /*******************************************************************************
  * end

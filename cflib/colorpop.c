@@ -31,18 +31,6 @@
 #include "intern.h"
 #include <assert.h>
 
-#ifdef __MTAES__
-#undef graf_mkstate
-#define graf_mkstate( mx, my, mb, ks ) \
-	{ \
-		EVNTDATA ev; \
-		MT_graf_mkstate( &ev, 0L ); \
-		*(mx)=ev.x; \
-		*(my)=ev.y; \
-		*(mb)=ev.bstate; \
-		*(ks)=ev.kstate; \
-	}
-#endif
 
 /* Gr”žen der einzelnen Farbfelder
  */
@@ -52,8 +40,8 @@
 
 /* flags fr ub_parm */
 #define F_USEROBJ 0x10000L	/* Objekt ist User-Objekt (durch fix_colorpopobj() umgewandelt) */
-			    /* (wird etwas anders dargestellt als die Objekte im Farbpopup, */
-			    /* gr”žerer Schatten */
+				/* (wird etwas anders dargestellt als die Objekte im Farbpopup, */
+				/* gr”žerer Schatten */
 
 /* Spezielle Werte in ub_parm: (statt Farbindex) */
 #define T_COLPOP -1		/* Farbe wird je nach Index im Baum dargestellt */
@@ -61,17 +49,16 @@
 
 /* Lokale Variablen
  */
-static OBJECT *poptree = NULL;	/* Objekbaum Farb-Popup, wird bei init angelegt */
-static int max_displayable_planes;	/* Maximal darstellbare Planes in dieser Aufl”sung */
-static int framewidth;		/* Berechnung des Abstands zwischen Farbfeldern */
-static int fattrib[5], lattrib[6];	/* Sicherung fr Fll- und Linienattribute */
-static USERBLK userblk;		/* Ein Userblock fr alle Eintr„ge im Popup-Men */
-static USERBLK noncolor_userblk;	/* Userblock fr "Nichtfarbe"-Eintrag */
-static USERBLK popobj_userblk[MAX_COLORPOP] = { NULL, 0 };	/* Userblock-Liste fr alle Farbobjekte */
+static OBJECT *poptree = NULL;			/* Objekbaum Farb-Popup, wird bei init angelegt */
+static int max_displayable_planes;		/* Maximal darstellbare Planes in dieser Aufl”sung */
+static int framewidth;				/* Berechnung des Abstands zwischen Farbfeldern */
+static short fattrib[5], lattrib[6];		/* Sicherung fr Fll- und Linienattribute */
+static USERBLK userblk;				/* Ein Userblock fr alle Eintr„ge im Popup-Men */
+static USERBLK noncolor_userblk;		/* Userblock fr "Nichtfarbe"-Eintrag */
+static USERBLK popobj_userblk[MAX_COLORPOP];	/* Userblock-Liste fr alle Farbobjekte */
 static int nocolor_sub;
 static int handle, use_3D;
 
-void	vql_attribute		(int handle, int atrib[]);
 
 /* VDI- Attribute sichern und neue einstellen
  */
@@ -114,33 +101,33 @@ restore_attribs (void)
 static void
 draw_non_3d (PARMBLK * parmblk)
 {
-	int pxy[12];
+	short pxy[12];
 	int color = (int) parmblk->pb_parm;
 	int state = parmblk->pb_currstate;
 
 
 	/* Rahmen zeichnen */
-	if (state & SELECTED)	/* selektierter Rahmen ist 2 Pixel dick und schwarz */
+	if (state & OS_SELECTED) /* selektierter Rahmen ist 2 Pixel dick und schwarz */
 	{
-		vsf_color (handle, BLACK);
-		grect_to_array ((GRECT *) & (parmblk->pb_x), pxy);
+		vsf_color (handle, OC_BLACK);
+		grect_to_array ((GRECT *) &(parmblk->pb_x), pxy);
 		v_bar (handle, pxy);
 		parmblk->pb_x += 2;
 		parmblk->pb_y += 2;
 		parmblk->pb_w -= 4;
 		parmblk->pb_h -= 4;
 	}
-	else			/* nichtselektierter Rahmen ist 1 Pixel dick und schwarz */
+	else /* nichtselektierter Rahmen ist 1 Pixel dick und schwarz */
 	{
-		vsf_color (handle, WHITE);	/* erst ggf. vorher vorhandene Selektion weiž bermalen */
-		grect_to_array ((GRECT *) & (parmblk->pb_x), pxy);
+		vsf_color (handle, OC_WHITE);	/* erst ggf. vorher vorhandene Selektion weiž bermalen */
+		grect_to_array ((GRECT *) &(parmblk->pb_x), pxy);
 		v_bar (handle, pxy);
 
 		parmblk->pb_x++;
 		parmblk->pb_y++;
 		parmblk->pb_w -= 2;
 		parmblk->pb_h -= 2;
-		vsf_color (handle, BLACK);
+		vsf_color (handle, OC_BLACK);
 		grect_to_array ((GRECT *) & (parmblk->pb_x), pxy);
 		v_bar (handle, pxy);
 		parmblk->pb_x++;
@@ -153,17 +140,17 @@ draw_non_3d (PARMBLK * parmblk)
 	if (color == T_COLPOP)	/* Eintrag im Farbpopup: Objektindex bestimmt die Farbe */
 		vsf_color (handle, parmblk->pb_obj - 1 - nocolor_sub);
 	else if (color == T_NOCOLOR)	/* Nichtfarbobjekt wird dargestellt */
-		vsf_color (handle, WHITE);
+		vsf_color (handle, OC_WHITE);
 	else			/* sonst Farbe aus ub_parm darstellen */
 		vsf_color (handle, color);
 
-	grect_to_array ((GRECT *) & (parmblk->pb_x), pxy);
+	grect_to_array ((GRECT *) &(parmblk->pb_x), pxy);
 	v_bar (handle, pxy);
 
 	/* Kreuz fr Nichtfarbobjekt zeichnen */
 	if (color == T_NOCOLOR)
 	{
-		vsl_color (handle, BLACK);
+		vsl_color (handle, OC_BLACK);
 		pxy[0] = parmblk->pb_x;
 		pxy[1] = parmblk->pb_y;
 		pxy[2] = parmblk->pb_x + parmblk->pb_w - 1;
@@ -181,9 +168,9 @@ draw_non_3d (PARMBLK * parmblk)
 
 /* 3d-Darstellung fr Farbobjekt */
 static void
-draw_3d (PARMBLK * parmblk)
+draw_3d (PARMBLK *parmblk)
 {
-	int pxy[12];
+	short pxy[12];
 	int color = (int) parmblk->pb_parm;
 	long flags = parmblk->pb_parm;
 	int state = parmblk->pb_currstate;
@@ -199,7 +186,7 @@ draw_3d (PARMBLK * parmblk)
 	}
 	else if (color == T_NOCOLOR)	/* Nichtfarbobjekt wird dargestellt */
 	{
-		vsf_color (handle, WHITE);
+		vsf_color (handle, OC_WHITE);
 		parmblk->pb_x += framewidth >> 1;
 		parmblk->pb_y += framewidth >> 1;
 		parmblk->pb_w -= framewidth;
@@ -208,18 +195,19 @@ draw_3d (PARMBLK * parmblk)
 	else			/* sonst Farbe aus ub_parm darstellen */
 		vsf_color (handle, color);
 
-	grect_to_array ((GRECT *) & (parmblk->pb_x), pxy);
+	grect_to_array ((GRECT *) &(parmblk->pb_x), pxy);
 	v_bar (handle, pxy);
 
 	/* Schatten (selektiert) oder Licht (nicht selektiert) links und oben zeichnen */
-	vsl_color (handle, state & SELECTED ? BLACK : WHITE);
+	vsl_color (handle, state & OS_SELECTED ? OC_BLACK : OC_WHITE);
 	pxy[0] = parmblk->pb_x;
 	pxy[1] = parmblk->pb_y + parmblk->pb_h - 1;
 	pxy[2] = parmblk->pb_x;
 	pxy[3] = parmblk->pb_y;
 	pxy[4] = parmblk->pb_x + parmblk->pb_w - 1;
 	pxy[5] = parmblk->pb_y;
-	if (state & SELECTED)	/* der Schatten ist dicker als das Licht */
+
+	if (state & OS_SELECTED) /* der Schatten ist dicker als das Licht */
 	{
 		pxy[6] = pxy[4] - 1;
 		pxy[7] = pxy[5] + 1;
@@ -233,13 +221,14 @@ draw_3d (PARMBLK * parmblk)
 		v_pline (handle, 3, pxy);
 
 	/* Schatten (nicht selektiert) oder Licht (selektiert) rechts und unten zeichnen */
-	vsl_color (handle, state & SELECTED ? WHITE : BLACK);
+	vsl_color (handle, state & OS_SELECTED ? OC_WHITE : OC_BLACK);
 	pxy[0] = parmblk->pb_x + parmblk->pb_w - 1;
 	pxy[1] = parmblk->pb_y;
 	pxy[2] = parmblk->pb_x + parmblk->pb_w - 1;
 	pxy[3] = parmblk->pb_y + parmblk->pb_h - 1;
 	pxy[4] = parmblk->pb_x;
 	pxy[5] = parmblk->pb_y + parmblk->pb_h - 1;
+
 	if (flags & F_USEROBJ)	/* Benutzerobjekte haben dickeren Schatten (da sie meist gr”žer sind) */
 	{
 		pxy[6] = pxy[4] + 1;
@@ -258,14 +247,16 @@ draw_3d (PARMBLK * parmblk)
 	{
 		int movewidth = flags & F_USEROBJ ? 1 : 2;
 
-		if (state & SELECTED)	/* Das selektierte Kreuz ist weiter nach rechts unten verschoben, "eingedrckt" */
+		if (state & OS_SELECTED) /* Das selektierte Kreuz ist weiter nach rechts unten verschoben, "eingedrckt" */
 		{
-			vsl_color (handle, BLACK);
+			vsl_color (handle, OC_BLACK);
+
 			pxy[0] = parmblk->pb_x + movewidth;
 			pxy[1] = parmblk->pb_y + movewidth;
 			pxy[2] = parmblk->pb_x + parmblk->pb_w - 1 - 1;
 			pxy[3] = parmblk->pb_y + parmblk->pb_h - 1 - 1;
 			v_pline (handle, 2, pxy);
+
 			pxy[0] = parmblk->pb_x + parmblk->pb_w - 1 - 1;
 			pxy[1] = parmblk->pb_y + movewidth;
 			pxy[2] = parmblk->pb_x + movewidth;
@@ -274,20 +265,18 @@ draw_3d (PARMBLK * parmblk)
 		}
 		else
 		{
-			vsl_color (handle, BLACK);
+			vsl_color (handle, OC_BLACK);
+
 			pxy[0] = parmblk->pb_x;
 			pxy[1] = parmblk->pb_y;
-			pxy[2] =
-				parmblk->pb_x + parmblk->pb_w - 1 - movewidth;
-			pxy[3] =
-				parmblk->pb_y + parmblk->pb_h - 1 - movewidth;
+			pxy[2] = parmblk->pb_x + parmblk->pb_w - 1 - movewidth;
+			pxy[3] = parmblk->pb_y + parmblk->pb_h - 1 - movewidth;
 			v_pline (handle, 2, pxy);
-			pxy[0] =
-				parmblk->pb_x + parmblk->pb_w - 1 - movewidth;
+
+			pxy[0] = parmblk->pb_x + parmblk->pb_w - 1 - movewidth;
 			pxy[1] = parmblk->pb_y;
 			pxy[2] = parmblk->pb_x;
-			pxy[3] =
-				parmblk->pb_y + parmblk->pb_h - 1 - movewidth;
+			pxy[3] = parmblk->pb_y + parmblk->pb_h - 1 - movewidth;
 			v_pline (handle, 2, pxy);
 		}
 	}
@@ -297,16 +286,16 @@ draw_3d (PARMBLK * parmblk)
 /* Die Userdef-Routine, welche die einzelnen Farbfelder
  * darstellt
  */
-static int cdecl
-colorpop_userdef (PARMBLK * parmblk)
+static short cdecl
+colorpop_userdef (PARMBLK *parmblk)
 {
-	int pxy[4];
+	short pxy[4];
 	long flags = parmblk->pb_parm;
 
 	if (flags & F_USEROBJ)
 		save_and_init_attribs ();
 
-	grect_to_array ((GRECT *) & (parmblk->pb_xc), pxy);
+	grect_to_array ((GRECT *) &(parmblk->pb_xc), pxy);
 	vs_clip (handle, 1, pxy);
 
 	if (use_3D)
@@ -317,15 +306,15 @@ colorpop_userdef (PARMBLK * parmblk)
 	if (flags & F_USEROBJ)
 		restore_attribs ();
 
-	return parmblk->pb_currstate & ~SELECTED;
+	return parmblk->pb_currstate & ~OS_SELECTED;
 
 }
 
 /* šberprfen, ob Objekt Farb-Popup-Objekt ist
  * (nur fr Assertion in set_popobjcolor() / get_popobjcolor()
  */
-static int
-is_colorpop_object (OBJECT * tree, int obj)
+static short
+is_colorpop_object (OBJECT *tree, short obj)
 {
 	return (tree[obj].ob_type & 0xff) == G_USERDEF
 		&& ((tree[obj].ob_spec.userblk == &userblk)
@@ -337,7 +326,7 @@ is_colorpop_object (OBJECT * tree, int obj)
 
 /* Farb-Popub-Objektfarbe setzen */
 void
-set_popobjcolor (OBJECT * tree, int obj, int color)
+set_popobjcolor (OBJECT *tree, short obj, short color)
 {
 	assert (is_colorpop_object (tree, obj));
 	tree[obj].ob_spec.userblk->ub_parm &= 0xffff0000L;
@@ -345,23 +334,25 @@ set_popobjcolor (OBJECT * tree, int obj, int color)
 }
 
 /* Farb-Popup-Objektfarbe abfragen */
-int
-get_popobjcolor (OBJECT * tree, int obj)
+short
+get_popobjcolor (OBJECT *tree, short obj)
 {
 	assert (is_colorpop_object (tree, obj));
-	return (int) (tree[obj].ob_spec.userblk->ub_parm & 0xffff);
+	return (tree[obj].ob_spec.userblk->ub_parm & 0xffff);
 }
 
 /* Farbobjekt auf Userdef umstellen
  */
 void
-fix_colorpopobj (OBJECT * tree, int obj, int color)
+fix_colorpopobj (OBJECT *tree, short obj, short color)
 {
 	USERBLK *userblkp = popobj_userblk;
 
 	while (userblkp->ub_code)
 		userblkp++;
-	tree[obj].ob_type = G_USERDEF;	/* FIXME: Zur Zeit funzt das wg. get_objframe() nicht mit altem Typ im hibyte. */
+
+	/* FIXME: Zur Zeit funzt das wg. get_objframe() nicht mit altem Typ im hibyte. */
+	tree[obj].ob_type = G_USERDEF;
 	tree[obj].ob_spec.userblk = userblkp;
 	userblkp->ub_code = colorpop_userdef;
 	userblkp->ub_parm = F_USEROBJ | (long) color;
@@ -371,12 +362,12 @@ fix_colorpopobj (OBJECT * tree, int obj, int color)
 
 /* Initialisierung
  */
-int
-init_colorpop (int maxplanes)
+short
+init_colorpop (short maxplanes)
 {
-	int workout[57];
-	int maxcolors;
-	int i, d;
+	short workout[57];
+	short i, d;
+	short maxcolors;
 
 	handle = open_vwork (workout);
 
@@ -395,20 +386,13 @@ init_colorpop (int maxplanes)
 	maxcolors = min (1 << max_displayable_planes, 1 << maxplanes);
 
 	if (poptree)
-	{
-		if (
-		    (poptree =
-		     (OBJECT *) realloc ((void *) poptree,
-					 (maxcolors +
-					  2) * sizeof (OBJECT))) == NULL)
-			return FALSE;	/* error message? */
-	}
+		poptree = realloc (poptree, (maxcolors + 2) * sizeof (OBJECT));
 	else
-		if (
-		    (poptree =
-		     (OBJECT *) calloc (maxcolors + 2,
-					sizeof (OBJECT))) == NULL)
-		return FALSE;	/* error message? */
+		poptree = calloc (maxcolors + 2, sizeof (OBJECT));
+
+	if (!poptree)
+		/* error message? */
+		return FALSE;
 
 	poptree[0].ob_next = -1;
 	poptree[0].ob_head = 1;
@@ -416,8 +400,8 @@ init_colorpop (int maxplanes)
 	poptree[0].ob_y = 0;
 	poptree[0].ob_type = G_BOX;
 	poptree[0].ob_spec.index = 0x00ff1100L;
-	poptree[0].ob_flags = FL3DBAK;
-	poptree[0].ob_state = SHADOWED;
+	poptree[0].ob_flags = OF_FL3DBAK;
+	poptree[0].ob_state = OS_SHADOWED;
 
 	return TRUE;
 }
@@ -441,14 +425,14 @@ exit_colorpop (void)
  * fr unterschiedliche Farbanzahl zu initialisieren
  */
 static void
-ini_colorpop (int planes, int show_noncolor)
+ini_colorpop (short planes, short show_noncolor)
 {
-	int colors;
-	int i;
-	int x = 0, y = 0;
-	int size;
-	int maxx;
-	int startframe = 0;
+	short colors;
+	short i;
+	short x = 0, y = 0;
+	short size = 0;
+	short maxx = 0;
+	short startframe = 0;
 
 	planes = min (planes, max_displayable_planes);
 	colors = 1 << planes;
@@ -493,19 +477,23 @@ ini_colorpop (int planes, int show_noncolor)
 		poptree[i].ob_height = size;
 		poptree[i].ob_type = G_USERDEF;
 		poptree[i].ob_spec.userblk = &userblk;
-		poptree[i].ob_flags = SELECTABLE;
+		poptree[i].ob_flags = OF_SELECTABLE;
 		poptree[i].ob_state = 0;
+		
 		x += 1;
+		
 		if (x == maxx || y == 0 && show_noncolor)
 		{
 			x = 0;
 			y++;
 		}
 	}
+	
 	if (show_noncolor)
 		poptree[1].ob_spec.userblk = &noncolor_userblk;
+	
 	poptree[colors].ob_next = 0;
-	poptree[colors].ob_flags |= LASTOB;
+	poptree[colors].ob_flags |= OF_LASTOB;
 
 
 }
@@ -513,8 +501,8 @@ ini_colorpop (int planes, int show_noncolor)
 
 /* Farbpopup ausfhren
  */
-int
-do_colorpop (int x, int y, int act_color, int planes, int show_noncolor)
+short
+do_colorpop (short x, short y, short act_color, short planes, short show_noncolor)
 {
 	MENU menu, cmenu;
 	GRECT r;
@@ -571,14 +559,14 @@ do_colorpop (int x, int y, int act_color, int planes, int show_noncolor)
 
 /* Farbpopup fr gegebenes Farbobjekt ausfhren
  */
-int
-handle_colorpop (OBJECT * dial, int dial_obj, int mode, int planes,
-		 int show_noncolor)
+short
+handle_colorpop (OBJECT *dial, short dial_obj, short mode, short planes,
+		 short show_noncolor)
 {
-	int ret;
-	int mx, my, mb;
-	int act_color, max_color;
-	int di;			/* dummy */
+	short ret;
+	short act_color, max_color;
+	short mx, my, mb;
+	short di; /* dummy */
 
 	graf_mkstate (&mx, &my, &mb, &di);
 

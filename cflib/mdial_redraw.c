@@ -28,7 +28,7 @@
 
 
 void
-redraw_mdial (MDIAL * dial, int start, int depth, int x, int y, int w, int h)
+redraw_mdial (MDIAL * dial, short start, short depth, short x, short y, short w, short h)
 {
 	GRECT r, r1;
 
@@ -42,12 +42,8 @@ redraw_mdial (MDIAL * dial, int start, int depth, int x, int y, int w, int h)
 	while (r1.g_w != 0 && r1.g_h != 0)
 	{
 		if (rc_intersect (&r, &r1))
-#ifdef __MTAES__
-			objc_draw (dial->tree, start, depth, &r1);
-#else
 			objc_draw (dial->tree, start, depth, r1.g_x, r1.g_y,
 				   r1.g_w, r1.g_h);
-#endif
 		wind_get_grect (dial->win_handle, WF_NEXTXYWH, &r1);
 	}
 	show_mouse ();

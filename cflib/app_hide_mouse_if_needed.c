@@ -28,32 +28,20 @@
 #include "app.h"
 
 
-int
-hide_mouse_if_needed (GRECT * rect)
+short
+hide_mouse_if_needed (GRECT *rect)
 {
 	if (!__app_hidden)
 	{
 		GRECT mouse;
+		short mx, my, d;
 
 		mouse.g_w = 63;
 		mouse.g_h = 31;
-#ifdef __MTAES__
-		{
-			EVNTDATA ev;
-
-			graf_mkstate (&ev);
-			mouse.g_x = ev.x - (mouse.g_w / 2);
-			mouse.g_y = ev.y - (mouse.g_h / 2);
-		}
-#else
-		{
-			int mx, my, d;
-
-			graf_mkstate (&mx, &my, &d, &d);
-			mouse.g_x = mx - (mouse.g_w / 2);
-			mouse.g_y = my - (mouse.g_h / 2);
-		}
-#endif
+		
+		graf_mkstate (&mx, &my, &d, &d);
+		mouse.g_x = mx - (mouse.g_w / 2);
+		mouse.g_y = my - (mouse.g_h / 2);
 
 		if (rc_intersect (rect, &mouse))
 		{
@@ -61,5 +49,6 @@ hide_mouse_if_needed (GRECT * rect)
 			return TRUE;
 		}
 	}
+	
 	return FALSE;
 }

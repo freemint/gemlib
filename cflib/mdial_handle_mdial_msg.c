@@ -24,11 +24,12 @@
  * 
  */
 
+#include <osbind.h>
 #include "mdial.h"
 
 
 static inline void
-redraw_cursor (MDIAL * dial)
+redraw_cursor (MDIAL *dial)
 {
 	if (dial->edit_obj > 0)
 	{
@@ -45,7 +46,7 @@ redraw_cursor (MDIAL * dial)
 }
 
 static inline void
-move_dial (MDIAL * dial, int x, int y)
+move_dial (MDIAL *dial, short x, short y)
 {
 	GRECT r;
 
@@ -58,11 +59,11 @@ move_dial (MDIAL * dial, int x, int y)
 	dial->tree[0].ob_y = r.g_y - dial->delta_y;
 }
 
-static int
-handle_msg (int *msg)
+static short
+handle_msg (short *msg)
 {
 	MDIAL *md;
-	int ret = FALSE;
+	short ret = FALSE;
 
 	md = __mdial_md_list;
 	while (md)
@@ -92,7 +93,7 @@ handle_msg (int *msg)
 }
 
 void
-handle_mdial_msg (int *msg)
+handle_mdial_msg (short *msg)
 {
 	if (!handle_msg (msg) && __mdial_win_cb)
 	{

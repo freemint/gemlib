@@ -34,20 +34,17 @@
  *
  */
 
+#include <osbind.h>
+
 #include "intern.h"
 
 
-int
-cf_form_do (OBJECT * tree, int *ed_start)
+short
+cf_form_do (OBJECT *tree, short *ed_start)
 {
-	int edit_obj, cont, idx, next_obj;
-	int m_x, m_y, m_button, breturn, kstate, kreturn, which, msg[8];
-	int b, doppel = FALSE;
-
-#ifdef __MTAES__
-	EVNTDATA ev;
-	GRECT null = { 0, 0, 0, 0 };
-#endif
+	short idx, m_x, m_y, m_button, breturn, kstate, kreturn, which, msg[8];
+	short edit_obj, cont, next_obj;
+	short b, doppel = FALSE;
 
 	wind_update (BEG_MCTRL);
 	if ((ed_start == NULL) || (*ed_start == 0)
@@ -65,16 +62,6 @@ cf_form_do (OBJECT * tree, int *ed_start)
 			next_obj = 0;
 			objc_edit (tree, edit_obj, 0, &idx, ED_INIT);
 		}
-#ifdef __MTAES__
-		which = evnt_multi (MU_KEYBD | MU_BUTTON,
-				    2, 1, 1,
-				    0, &null, 0, &null,
-				    msg, 0L, &ev, &kreturn, &breturn);
-		m_x = ev.x;
-		m_y = ev.y;
-		m_button = ev.bstate;
-		kstate = ev.kstate;
-#else
 		which = evnt_multi (MU_KEYBD | MU_BUTTON,
 				    2, 1, 1,
 				    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -82,7 +69,6 @@ cf_form_do (OBJECT * tree, int *ed_start)
 				    0L,
 				    &m_x, &m_y,
 				    &m_button, &kstate, &kreturn, &breturn);
-#endif
 
 		if (which & MU_KEYBD)
 		{

@@ -30,15 +30,13 @@
 /*
  * Popup zur Laufzeit erzeugen.
  */
-int
-create_popup (POPUP * p, int anz, int maxlen, char *item)
+short
+create_popup (POPUP *p, short anz, short maxlen, char *item)
 {
 	char *text;
 	int i;
 
-	p->tree =
-		(OBJECT *) cf_malloc ((anz + 1) * sizeof (OBJECT),
-				      "create_popup", FALSE);
+	p->tree = cf_malloc ((anz + 1) * sizeof (OBJECT), "create_popup", FALSE);
 	if (p->tree == NULL)
 		return FALSE;
 
@@ -53,8 +51,8 @@ create_popup (POPUP * p, int anz, int maxlen, char *item)
 	p->tree[0].ob_head = 1;
 	p->tree[0].ob_tail = 1;
 	p->tree[0].ob_type = G_BOX;
-	p->tree[0].ob_flags = FL3DBAK;
-	p->tree[0].ob_state = SHADOWED;
+	p->tree[0].ob_flags = OF_FL3DBAK;
+	p->tree[0].ob_state = OS_SHADOWED;
 	p->tree[0].ob_spec.index = 0x00ff1100L;	/* Rahmen, Farbe ... */
 	p->tree[0].ob_x = 0;
 	p->tree[0].ob_y = 0;
@@ -71,7 +69,7 @@ create_popup (POPUP * p, int anz, int maxlen, char *item)
 	p->tree[1].ob_head = -1;
 	p->tree[1].ob_tail = -1;
 	p->tree[1].ob_type = G_STRING;
-	p->tree[1].ob_flags = (SELECTABLE | LASTOB);
+	p->tree[1].ob_flags = (OF_SELECTABLE | OF_LASTOB);
 	p->tree[1].ob_state = 0;
 	p->tree[1].ob_spec.free_string = text;
 	p->tree[1].ob_x = 0;

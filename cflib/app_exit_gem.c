@@ -33,9 +33,13 @@ exit_gem (void)
 {
 	if (gl_gdos)
 		vst_unload_fonts (cf_vdi_handle, 0);
+
 	v_clsvwk (cf_vdi_handle);
+
 	exit_userdef ();
+
 	if (__app_rsc_load)
 		rsrc_free ();
+
 	appl_exit ();
 }
