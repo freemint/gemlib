@@ -25,20 +25,13 @@
  */
 
 #include <cflib.h>
+#include <gemx.h>
 #include "demo.h"
 #include "pdlg.h"
 
-#ifdef __MTAES__
-#include <prdialog.h>
-#include <prsettng.h>
-#define __CDECL cdecl
-#else
-#include <gemx.h>
-#endif
-
 
 /* Event-Routine der MDials */
-extern void handle_mdial_msg (int *msg);
+extern void handle_mdial_msg (short *msg);
 
 #ifndef FALSE
 #define FALSE	0
@@ -54,7 +47,7 @@ extern OBJECT *popups;
  * Callbacks fÅr Sub-Dialog
  */
 static long __CDECL
-init_qed_sub (PRN_SETTINGS * settings, PDLG_SUB * sub_dialog)
+init_qed_sub (PRN_SETTINGS *settings, PDLG_SUB *sub_dialog)
 {
 	OBJECT *tree;
 	int offset;
@@ -63,25 +56,21 @@ init_qed_sub (PRN_SETTINGS * settings, PDLG_SUB * sub_dialog)
 	offset = sub_dialog->index_offset;
 
 	set_string (tree, PS_WPNAME + offset, "<unbekannt>");
-	set_int (tree, PS_WPSL + offset, 65);
-	set_int (tree, PS_WPZL + offset, 80);
+	set_short (tree, PS_WPSL + offset, 65);
+	set_short (tree, PS_WPZL + offset, 80);
 
 	set_string (tree, PS_GFNAME + offset, "6x6 system font");
-	set_int (tree, PS_GFPTS + offset, 10);
+	set_short (tree, PS_GFPTS + offset, 10);
 
 	return 1;
 }
 
 static long __CDECL
-#ifdef __MTAES__
-do_qed_sub (PRN_SETTINGS * settings, PDLG_SUB * sub_dialog, int exit_obj)
-#else
-do_qed_sub (PRN_SETTINGS * settings, PDLG_SUB * sub_dialog, short exit_obj)
-#endif
+do_qed_sub (PRN_SETTINGS *settings, PDLG_SUB *sub_dialog, short exit_obj)
 {
 	OBJECT *tree;
-	int offset;
-	int id = 1, pts = 10;
+	short offset;
+	short id = 1, pts = 10;
 
 	tree = sub_dialog->tree;
 	offset = sub_dialog->index_offset;
@@ -98,14 +87,14 @@ do_qed_sub (PRN_SETTINGS * settings, PDLG_SUB * sub_dialog, short exit_obj)
 			break;
 
 		case PS_WPSEL:
-			set_state (tree, exit_obj, SELECTED, FALSE);
+			set_state (tree, exit_obj, OS_SELECTED, FALSE);
 			redraw_obj (tree, exit_obj);
 			break;
 
 		case PS_GFSEL:
 			do_fontsel ((FS_M_XFSL | FS_M_MAGX),
 				    "Druckerfont wÑhlen", &id, &pts);
-			set_state (tree, exit_obj, SELECTED, FALSE);
+			set_state (tree, exit_obj, OS_SELECTED, FALSE);
 			redraw_obj (tree, exit_obj);
 			break;
 	}
@@ -113,7 +102,7 @@ do_qed_sub (PRN_SETTINGS * settings, PDLG_SUB * sub_dialog, short exit_obj)
 }
 
 static long __CDECL
-reset_qed_sub (PRN_SETTINGS * settings, PDLG_SUB * sub_dialog)
+reset_qed_sub (PRN_SETTINGS *settings, PDLG_SUB *sub_dialog)
 {
 	/*
 	 * OBJECT       *tree;
@@ -163,19 +152,18 @@ create_sub_dialog (void)
 static int
 wlfp_available (void)
 {
-	int ag1, ag2, ag3, ag4;
+	short ag1, ag2, ag3, ag4;
 
 	if (appl_xgetinfo (7, &ag1, &ag2, &ag3, &ag4))
-	{
 		if ((ag1 & 0x17) == 0x17)
 			return 1;
-	}
+	
 	return 0;
 }
 
 /* --------------------------------------------------------------------------- */
 static void
-save_settings (PRN_SETTINGS * settings)
+save_settings (PRN_SETTINGS *settings)
 {
 	/*
 	 * fd = fopen("i:\\pdlg.set", "wb");
@@ -188,7 +176,7 @@ save_settings (PRN_SETTINGS * settings)
 }
 
 static PRN_SETTINGS *
-load_settings (PRN_DIALOG * prn_dialog)
+load_settings (PRN_DIALOG *prn_dialog)
 {
 	PRN_SETTINGS *set = NULL;
 
@@ -206,6 +194,7 @@ load_settings (PRN_DIALOG * prn_dialog)
 		 */
 		pdlg_dflt_settings (prn_dialog, set);
 	}
+	
 	return set;
 }
 #endif
@@ -225,12 +214,8 @@ test_pdlg (int in_win)
 	{
 		PRN_SETTINGS *prn_settings;
 		PRN_DIALOG *prn_dialog;
-		int d, button, ret, handle;
+		short d, button, ret, handle;
 		EVNT ev;
-
-#ifdef __MTAES__
-		MOBLK n = { 0, 0, 0, 0, 0 };
-#endif
 
 		prn_dialog = pdlg_create (PDLG_3D);
 		if (prn_dialog)
@@ -257,38 +242,28 @@ test_pdlg (int in_win)
 						   "qed", 0x0000, -1, -1);
 
 				/* ob das wohl erlaubt ist?? :-)) */
-#ifdef __MTAES__
-				wind_set_string (handle, WF_NAME,
-						 " Drucker-Konfiguration ");
-#else
 				wind_set_str (handle, WF_NAME,
 					      " Drucker-Konfiguration ");
-#endif
-				do
-				{
-#ifdef __MTAES__
-					EVNT_multi (MU_KEYBD | MU_MESAG |
-						    MU_BUTTON, 2, 1, 1, &n,
-						    &n, 0L, &ev);
-#else
+
+				do {
 					ev.mwhich =
-						(short) evnt_multi (MU_KEYBD |
-								    MU_MESAG |
-								    MU_BUTTON,
-								    2, 1, 1,
-								    0, 0, 0,
-								    0, 0, 0,
-								    0, 0, 0,
-								    0,
-								    (int *) ev.msg,
-								    0,
-								    (int *) &ev.mx,
-								    (int *) &ev.my,
-								    (int *) &ev.mbutton,
-								    (int *) &ev.kstate,
-								    (int *) &ev.key,
-								    (int *) &ev.mclicks);
-#endif
+						evnt_multi (MU_KEYBD |
+							    MU_MESAG |
+							    MU_BUTTON,
+							    2, 1, 1,
+							    0, 0, 0,
+							    0, 0, 0,
+							    0, 0, 0,
+							    0,
+							    ev.msg,
+							    0,
+							    &ev.mx,
+							    &ev.my,
+							    &ev.mbutton,
+							    &ev.kstate,
+							    &ev.key,
+							    &ev.mclicks);
+
 					if (ev.mwhich & MU_MESAG)
 					{
 						switch (ev.msg[0])
@@ -296,10 +271,9 @@ test_pdlg (int in_win)
 							case WM_REDRAW:
 							case WM_MOVED:
 							case WM_SIZED:
-								if (ev.msg[3] != handle)	/* fÅr fremdes Fenster */
-								{
-									handle_mdial_msg ((int *) ev.msg);
-								}
+								/* fÅr fremdes Fenster */
+								if (ev.msg[3] != handle)
+									handle_mdial_msg (ev.msg);
 								break;
 
 								case
@@ -309,9 +283,9 @@ test_pdlg (int in_win)
 							case WM_TOPPED:
 							case WM_NEWTOP:
 							case WM_ONTOP:
-								ev.msg[0] = WM_TOPPED;	/* immer Druckerbox toppen! */
-								ev.msg[3] =
-									handle;
+								/* immer Druckerbox toppen! */
+								ev.msg[0] = WM_TOPPED;
+								ev.msg[3] = handle;
 								break;
 						}
 
