@@ -8,8 +8,8 @@
  *	the mouse enters or leaves a specified area of the screen.
  *
  *  @param flag specifies the event to wait for as follows:
- *             - \p MO_ENTER (0)   Wait for mouse to enter rectangle
- *             - \p MO_LEAVE (1)   Wait for mouse to leave rectangle
+ *             - #MO_ENTER   Wait for mouse to enter rectangle
+ *             - #MO_LEAVE   Wait for mouse to leave rectangle
  *  @param x
  *  @param y
  *  @param w

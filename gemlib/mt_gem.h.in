@@ -727,8 +727,8 @@ typedef struct pEvntrec
 #define SMC_HIDEACT		8    /* MagiC 3.1	*/   /**< TODO */
 
 /* evnt_mouse modes */
-#define MO_ENTER		0	/**< TODO */
-#define MO_LEAVE		1	/**< TODO */
+#define MO_ENTER		0	/**< Wait for mouse to enter rectangle, see mt_evnt_mouse() */
+#define MO_LEAVE		1	/**< Wait for mouse to leave rectangle, see mt_evnt_mouse() */
 
 /* evnt_multi flags */
 #define MU_KEYBD			0x0001	/**< TODO */

@@ -28,7 +28,7 @@
  *  @sa mt_evnt_multi()
  *
  *  Here is a list of system messages. You may refer to their documentation for more details
- *  about the content of the msg[] buffer.
+ *  about the content of the \a msg[] buffer.
  *               - #MN_SELECTED
  *               - #WM_REDRAW
  *               - #WM_TOPPED
