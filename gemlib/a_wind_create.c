@@ -25,6 +25,7 @@
  *         - #BACKDROP (0x2000)   Window has a backdrop box.
  *         - #SMALLER  (0x4000)   Window has an iconifier.
  *         - #BORDER   (0x8000)   Window has border-resize capability (XaAES).
+ *         .
  *         The parameter \a Parts is created by OR'ing together any desired
  *         elements.
  *  @param Wx X-position of the maximum extents of the window.

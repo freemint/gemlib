@@ -1151,7 +1151,7 @@ typedef  struct
 #define WF_NTOOLBAR		 32 	/**< get     the next rectangle of the toolbar area, see mt_wind_get() */
 #define WF_MENU			 33 	/**<         TODO (XaAES) */
 #define WF_WHEEL		 40 	/**<     set window feature on mouse wheel event, see mt_wind_set() */
-#define WF_OPTS			 41	/**< set window options. See mt_wind_set() and mt_wind_get() for details. */
+#define WF_OPTS			 41		/**< get/set window options. See mt_wind_set() and mt_wind_get() for details. */
 #define WF_M_BACKDROP	100 	/**<		 TODO (KAOS 1.4) */
 #define WF_M_OWNER		101 	/**<		 TODO (KAOS 1.4) */
 #define WF_M_WINDLIST	102 	/**<		 TODO (KAOS 1.4) */
@@ -1170,7 +1170,7 @@ typedef  struct
 #define BEVENT_WORK     0x0001    /**< window not topped when click on the work area, see #WF_BEVENT */
 #define BEVENT_INFO     0x0002    /**< ?????, see #WF_BEVENT */
 
-/* wind_set(WF_OPTIONS) bitmask flags*/
+/* wind_set(WF_OPTS) bitmask flags*/
 #define WO_WHEEL	0x00000001
 #define WO_FULLREDRAW	0x00000002
 #define WO_NOBLITW	0x00000004
