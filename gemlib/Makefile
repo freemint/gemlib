@@ -1,36 +1,47 @@
 #
-# Toplevel Makefile for GEM lib
+# Makefile for gemlib, the VDI & AES bindings
+# gemxlib, bindings for VDI & AES extensions
 #
 
-all: gem gemx gem16 gemx16
+SHELL = /bin/sh
+SUBDIRS = 
 
-gem:
-	@echo "Making gem"
-	@LIB="-f Makefile.gem libgem.a"; OUT_DIR=32bit; XFLAGS=""; \
-	 export LIB OUT_DIR XFLAGS; $(MAKE) dir
+srcdir = .
+top_srcdir = ..
+subdir = gemlib
 
-gemx:
-	@echo "Making gemx"
-	@LIB="-f Makefile.gemx libgemx.a"; OUT_DIR=32bit; XFLAGS=""; \
-	 export LIB OUT_DIR XFLAGS; $(MAKE) dir
+default: all
 
-gem16:
-	@echo "Making gem 16"
-	@LIB="-f Makefile.gem libgem16.a"; OUT_DIR=16bit; XFLAGS="-mshort"; \
-	 export LIB OUT_DIR XFLAGS; $(MAKE) dir
+include $(top_srcdir)/CONFIGVARS
+include $(top_srcdir)/RULES
+include $(top_srcdir)/PHONY
 
-gemx16:
-	@echo "Making gemx 16"
-	@LIB="-f Makefile.gemx libgemx16.a"; OUT_DIR=16bit; XFLAGS="-mshort"; \
-	 export LIB OUT_DIR XFLAGS; $(MAKE) dir
+all-here: libs
 
-dir:
-	@ if test ! -d $(OUT_DIR);\
-        then\
-	  echo "Creating object target directory $(OUT_DIR)";\
-          mkdir $(OUT_DIR);\
-        fi
-	@$(MAKE) $(LIB)
+# default overwrites
 
-clean :
-	rm -rf 16bit/* 32bit/*
+# default definitions
+GENFILES = .lib* libgem*.a
+
+
+libs: normal mshort
+
+normal:
+	$(MAKE) libgem.a TARGET=""
+
+mshort:
+	$(MAKE) libgem16.a TARGET="16"
+
+libgem$(TARGET).a: objs
+	$(RM) $@
+	$(AR) rc $@ \
+		$(shell for file in `cat .lib$(TARGET)/objs` ; \
+			do echo .lib$(TARGET)/$$file ; done)
+	$(RANLIB) $@
+
+objs: .lib$(TARGET)
+	cd .lib$(TARGET); $(MAKE)
+
+.lib$(TARGET):
+	$(MKDIR) $@
+	$(CP) Makefile.objs $@/Makefile
