@@ -38,7 +38,7 @@ void
 mt_edit_get_pos( OBJECT *tree, short obj, short *xscroll, long *yscroll,
 				 char **cyscroll, char **cursorpos, short *cx, short *cy, short *global_aes)
 {
-	AES_PARAMS(216,2,6,1,0);
+	AES_PARAMS(216,2,6,1,2);
 
 	aes_intin[0]  = obj;
 	aes_intin[1]  = 5;
