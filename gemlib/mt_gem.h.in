@@ -1475,6 +1475,9 @@ short vq_tray_names     (VdiHdl , char *input_name, char *output_name,
 short vs_calibrate      (VdiHdl , short flag, short *rgb);
 short vs_palette        (VdiHdl , short palette);
 
+void  v_sound		(VdiHdl, short freq, short duration);
+short vs_mute		(VdiHdl, short action);
+
 void vq_tdimensions (VdiHdl , short *xdimension, short *ydimension);
 void vt_alignment   (VdiHdl , short dx, short dy);
 void vt_axis        (VdiHdl , short xres, short yres, short *xset, short *yset);
@@ -1489,8 +1492,12 @@ void vm_coords      (VdiHdl , short llx, short lly, short urx, short ury);
 void vm_filename    (VdiHdl , const char *filename);
 void vm_pagesize    (VdiHdl , short pgwidth, short pgheight);
 
-void vsc_expose (VdiHdl , short state);
-void vsp_film   (VdiHdl , short color_idx, short lightness);
+void  vsc_expose	(VdiHdl , short state);
+void  vsp_film		(VdiHdl , short color_idx, short lightness);
+short vqp_filmname	(VdiHdl , short index, char * name);
+
+void v_offset		(VdiHdl , short offset);
+void v_fontinit		(VdiHdl , const void * font_header);
 
 void v_escape2000 (VdiHdl , short times);
 

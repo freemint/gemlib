@@ -72,15 +72,18 @@ _VDI_ESCAPE = \
 	v_enter_cur.c \
 	v_escape2000.c \
 	v_exit_cur.c \
+	v_fontinit.c \
 	v_form_adv.c \
 	v_hardcopy.c \
 	v_meta_extents.c \
+	v_offset.c \
 	v_orient.c \
 	v_output_window.c \
 	v_page_size.c \
 	v_rmcur.c \
 	v_rvoff.c \
 	v_rvon.c \
+	v_sound.c \
 	v_trays.c \
 	v_write_meta.c \
 	vm_coords.c \
@@ -94,8 +97,10 @@ _VDI_ESCAPE = \
 	vq_tabstatus.c \
 	vq_tdimensions.c \
 	vq_tray_names.c \
+	vqp_filmname.c \
 	vs_curaddress.c \
 	vs_palette.c \
+	vs_mute.c \
 	vsc_expose.c \
 	vsp_film.c \
 	vt_alignment.c \

@@ -277,6 +277,7 @@ OBJ = \
  v_exit_cur.o	\
  v_fillarea.o	\
  v_flushcache.o	\
+ v_fontinit.o	\
  v_form_adv.o	\
  v_get_pixel.o	\
  v_gtext.o	\
@@ -287,6 +288,7 @@ OBJ = \
  v_justified.o	\
  v_loadcache.o	\
  v_meta_extents.o	\
+ v_offset.o	\
  v_opnvwk.o	\
  v_opnwk.o	\
  v_orient.o	\
@@ -303,6 +305,7 @@ OBJ = \
  v_savecache.o	\
  v_set_app_buff.o	\
  v_show_c.o	\
+ v_sound.o	\
  v_trays.o	\
  v_updwk.o	\
  v_write_meta.o	\
@@ -334,6 +337,7 @@ OBJ = \
  vqin_mode.o	\
  vql_attributes.o	\
  vqm_attributes.o	\
+ vqp_filmname.o \
  vqt_attributes.o	\
  vqt_cachesize.o	\
  vqt_extent.o	\
@@ -358,6 +362,7 @@ OBJ = \
  vs_color.o	\
  vs_curaddress.o	\
  vs_palette.o	\
+ vs_mute.o	\
  vsc_expose.o	\
  vsc_form.o	\
  vsf_color.o	\
