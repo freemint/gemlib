@@ -19,7 +19,7 @@
 void *
 mt_lbox_get_udata( LIST_BOX *box, short *global_aes )
 {
-	AES_PARAMS(174,1,0,1,0);
+	AES_PARAMS(174,1,0,1,1);
 
 	aes_intin[0]	= 3;
 
