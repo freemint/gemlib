@@ -1,504 +1,876 @@
-2004-11-03 20:00  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+2005-04-01 21:35  'Arnaud BERCEGEAY'
 
-	* VERSION: Bumped to release 0.43.3
+	* VERSION, gemlib.spec.in:
 
-2004-11-03 20:00  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	bumped to version 0.43.4
+	
+2005-04-01 21:34  'Arnaud BERCEGEAY'
 
-	* Makefile: pc target added (pure c compiler)
+	* doxydoc.c:
 
-2004-10-29 09:57  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	doc: replaced include by verbinclude for changelog(s)
+	
+2005-04-01 20:24  'Arnaud BERCEGEAY'
+
+	* HOWTO_RELEASE:
+
+	new file (name is self-explanatory)
+	
+2005-04-01 20:12  'Arnaud BERCEGEAY'
+
+	* users:
+
+	removed email addresses (protection against spam)
+	
+2005-04-01 20:11  'Arnaud BERCEGEAY'
+
+	* files.mak, zip.mak:
+
+	Changed creation of zip files. Now, "make zip" generates the archives (zip
+	or tgz files) with filenames ready to use in gemlib www site or various ftp
+	servers.
+	
+	Added creation of SRC and DOC archives (by using "make zip").
+	
+	See new file HOWTO_RELEASE for details.
+	
+2005-03-29 22:29  'Arnaud BERCEGEAY'
+
+	* a_wind_set.c, mt_gem.h.in:
+
+	renamed some constants (as discussed in the mint ML)
+	- WHL_REALWHEEL ==> WHEEL_MESAG
+	- WHL_ARROWWHEEL ==> WHEEL_ARROWED
+	- WHL_SLDRWHEEL ==> WHEEL_SLIDER
+	
+2005-03-25 20:39  'Arnaud BERCEGEAY'
+
+	* Makefile, zip.mak:
+
+	It was a very bad idea to use the variable ZIP in the makefile
+	(it's similar to ZIP_OPT in most systems). "$(ZIP)" has been replaced by
+	"zip" everywhere and now "make zip" works as expected.
+	
+2005-03-25 20:35  'Arnaud BERCEGEAY'
+
+	* users:
+
+	added ggs in list of commiters (for localy generated ChangeLog)
+	
+2005-03-23 22:31  'Arnaud BERCEGEAY'
+
+	* Makefile:
+
+	ChangeLog is now pretty printed (similar to sparemint site)
+	
+2005-02-23 22:10  'Arnaud BERCEGEAY'
+
+	* SRCFILES, files.mak, n_v_create_driver_info.c,
+	n_v_delete_driver_info.c, n_v_read_default_settings.c,
+	n_v_write_default_settings.c:
+
+	New function for the printer dialog from WDialog (fixes)
+	
+2005-02-22 17:59  'Gerhard Stoll'
+
+	* n_v_create_driver_info.c, n_v_delete_driver_info.c,
+	n_v_read_default_settings.c, n_v_write_default_settings.c:
+
+	New function for the printer dialog from WDialog
+	
+2005-02-21 17:53  'Gerhard Stoll'
+
+	* mt_gemx.h:
+
+	New function for the printer dialog from WDialog
+	
+2005-02-18 23:14  'Arnaud BERCEGEAY'
+
+	* a_graf_xhandle.c:
+
+	doc updated
+	
+2005-02-16 22:36  'Arnaud BERCEGEAY'
+
+	* mt_gem.h.in:
+
+	- customised /**@file*/ comment (workaround for doxygen 1.4.1-20050210)
+	- added WM_WHEEL message
+	- renamed WHL_AROWWHEEL to WHL_ARROWWHEEL (maybe WHL_ARROWED is better...
+	  i don't think we have to add the WHEEL suffix for WHL_xxx constants)
+	- updated WF_OPTS option bitmask (WO0_xxx instead of WO_xxx)
+	- marked WA_WHEEL as deprecated
+	
+2005-02-16 22:27  'Arnaud BERCEGEAY'
+
+	* a_wind_set.c:
+
+	updated documentation of mt_wind_set(WF_WHEEL) and mt_wind_set(WF_OPTS)
+	
+2005-02-16 22:24  'Arnaud BERCEGEAY'
+
+	* a_appl_search.c, a_shel_write.c:
+
+	fixed tab/space issues to make doxygen auto-list detector happy
+	
+2005-02-16 22:22  'Arnaud BERCEGEAY'
+
+	* doxydoc.c:
+
+	main page of the documentation refreshed
+	
+2005-01-28 21:32  'Arnaud BERCEGEAY'
+
+	* a_appl_getinfo.c, mt_gem.h.in:
+
+	added constants AES_EXTENDED and AES_NAES for modes 64 and 65 of
+	mt_appl_getinfo(), as suggested by Martin Elsaesser.
+	
+2004-12-18 23:44  'Arnaud BERCEGEAY'
+
+	* SRCFILES, a_appl_getinfo.c, a_appl_getinfo_str.c, files.mak,
+	gem.h, mt_gem.h.in:
+
+	added appl_getinfo_str() and updated doc for AES_VERSION mode
+	
+2004-12-14 22:42  'Arnaud BERCEGEAY'
+
+	* a_wind_xget_grect.c, mt_gem.h.in:
+
+	extended WF_FIRSTXYWH replaced by WF_FIRSTAREAXYWH
+	
+2004-11-09 23:18  'Arnaud BERCEGEAY'
+
+	* a_wind_set.c, mt_gem.h.in:
+
+	documentation updated for mt_wind_set() and WF_OPTS options
+	
+2004-11-08 18:58  'Arnaud BERCEGEAY'
+
+	* SRCFILES, a_wind_xget_grect.c, gem.h, mt_gem.h.in:
+
+	restore mt_wind_xget_grect() (was deleted by accident ?)
+	
+2004-11-08 15:23  'Odd Skancke'
+
+	* a_wind_xset_grect.c:
+
+	fixed wind_xset_grect(), wrong function number used.
+	
+2004-11-08 07:11  'Odd Skancke'
+
+	* SRCFILES, a_wind_xget_grect.c, a_wind_xset_grect.c, gem.h,
+	mt_gem.h.in:
+
+	wind_set is NOT wind_get. Fixed wrong documentation, removed a_wind_xget_grect.
+	Now my version of HighWire compiles again :)
+	
+2004-11-07 22:24  'Arnaud BERCEGEAY'
+
+	* a_wind_xget_grect.c, SRCFILES, gem.h, mt_gem.h.in:
+
+	added extension of wind_get(WF_FIRSTXYWH) for MyAES
+	
+2004-11-07 22:16  'Arnaud BERCEGEAY'
+
+	* a_wind_create.c, mt_gem.h.in:
+
+	fix some comments
+	
+2004-11-07 22:13  'Arnaud BERCEGEAY'
+
+	* a_glue.c:
+
+	remove wind_xset_grect (useless, see comment in top of a_glue.c)
+	
+2004-11-07 01:47  'Odd Skancke'
+
+	* mt_gem.h.in:
+
+	Now I think I got it right
+	
+2004-11-07 01:25  'Odd Skancke'
+
+	* mt_gem.h.in:
+
+	Found out mt_get.h is generated from mt_gem.h.in
+	
+2004-11-07 00:41  'Odd Skancke'
+
+	* SRCFILES, a_glue.c, a_wind_create.c, a_wind_xset_grect.c, gem.h:
+
+	Added wind_xset_grect() XaAES specific call. Added new XaAES definitons
+	WF_OPTS, WO_NOBLITW, WO_NOBLITH, WO_WHEEL, WO_FULLREDRAW, WO_SENDREPOS,
+	WM_REPOSED.
+	
+2004-11-03 22:21  'Arnaud BERCEGEAY'
+
+	* gemlib.spec.in:
+
+	updated for release 0.43.3-1
+	
+2004-11-03 20:06  'Arnaud BERCEGEAY'
+
+	* ChangeLog:
+
+	update
+	
+2004-11-03 20:00  'Arnaud BERCEGEAY'
+
+	* VERSION:
+
+	Bumped to release 0.43.3
+	
+2004-11-03 20:00  'Arnaud BERCEGEAY'
+
+	* Makefile:
+
+	pc target added (pure c compiler)
+	
+2004-10-29 09:57  'Arnaud BERCEGEAY'
 
 	* a_wind_calc.c, a_wind_create.c, a_wind_delete.c, a_wind_find.c,
 	a_wind_get.c, a_wind_get_grect.c, a_wind_open.c, mt_gem.h.in:
+
 	documentation updated
+	
+2004-10-27 22:09  'Arnaud BERCEGEAY'
 
-2004-10-27 22:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_shel_write.c, mt_gem.h.in:
 
-	* a_shel_write.c, mt_gem.h.in: - added constants to manage AES
-	threads: SWM_THREXIT, SWM_THRKILL, SHW_THR_EXIT   and SHW_THR_KILL
+	- added constants to manage AES threads: SWM_THREXIT, SWM_THRKILL, SHW_THR_EXIT
+	  and SHW_THR_KILL
 	- documentation updated
-
-2004-10-23 12:24  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	
+2004-10-23 12:24  'Arnaud BERCEGEAY'
 
 	* a_wind_set.c, a_wind_set_grect.c, a_wind_set_str.c,
-	a_wind_update.c, mt_gem.h.in: added constant NO_BLOCK for
-	mt_wind_update() documentation updated
+	a_wind_update.c, mt_gem.h.in:
 
-2004-10-22 18:42  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	added constant NO_BLOCK for mt_wind_update()
+	documentation updated
+	
+2004-10-22 18:42  'Arnaud BERCEGEAY'
 
-	* mt_gem.h.in: fix comment about SHELW extensions
+	* mt_gem.h.in:
 
-2004-10-21 20:50  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix comment about SHELW extensions
+	
+2004-10-21 20:50  'Arnaud BERCEGEAY'
 
-	* a_shel_write.c, mt_gem.h.in: documentation updated
+	* a_shel_write.c, mt_gem.h.in:
 
-2004-10-20 20:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	documentation updated
+	
+2004-10-20 20:33  'Arnaud BERCEGEAY'
 
-	* mt_gem.h.in: add XaAES/oAESis extended modes for shel_write(): -
-	uid and gid are added to the SHELW structure - SW_UID and SW_GID
-	constants added add MagiC6 extended mode for shel_write(): - flags
-	added to XSHW_COMMAND structure SHELTAIL structure is now
-	compatible with 32 bits compilers (int -> short)
+	* mt_gem.h.in:
 
-2004-10-18 22:50  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add XaAES/oAESis extended modes for shel_write():
+	- uid and gid are added to the SHELW structure
+	- SW_UID and SW_GID constants added
+	add MagiC6 extended mode for shel_write():
+	- flags added to XSHW_COMMAND structure
+	SHELTAIL structure is now compatible with 32 bits compilers (int -> short)
+	
+2004-10-18 22:50  'Arnaud BERCEGEAY'
 
-	* mt_gem.h.in: documentation updated
+	* mt_gem.h.in:
 
-2004-10-18 22:20  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	documentation updated
+	
+2004-10-18 22:20  'Arnaud BERCEGEAY'
 
 	* a_scrp_read.c, a_shel_rdef.c, a_shel_wdef.c, a_shel_write.c:
+
 	documentation: some fixes
+	
+2004-10-17 09:28  'Arnaud BERCEGEAY'
 
-2004-10-17 09:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_shel_write.c, mt_gem.h.in:
 
-	* a_shel_write.c, mt_gem.h.in: documentation updated
-
-2004-10-15 22:55  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	documentation updated
+	
+2004-10-15 22:55  'Arnaud BERCEGEAY'
 
 	* a_appl_getinfo.c, a_shel_envrn.c, a_shel_get.c, a_shel_help.c,
-	a_shel_rdef.c, a_shel_wdef.c, mt_gem.h.in: - added constant
-	SHP_HELP (for mt_shel_help()) - documentation updated
+	a_shel_rdef.c, a_shel_wdef.c, mt_gem.h.in:
 
-2004-10-14 22:37  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	- added constant SHP_HELP (for mt_shel_help())
+	- documentation updated
+	
+2004-10-14 22:37  'Arnaud BERCEGEAY'
 
 	* a_rsrc_free.c, a_rsrc_gaddr.c, a_rsrc_load.c, a_rsrc_rcfix.c,
 	a_rsrc_saddr.c, a_scrp_clear.c, a_scrp_read.c, a_scrp_write.c,
-	mt_gem.h.in: - added constants SCRAP_XXX for mt_scrap_read(). They
-	are return values for	MagiC-PC 2.0 (information taken from
-	TOS.HYP) - documentation updated
+	mt_gem.h.in:
 
-2004-10-14 20:58  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	- added constants SCRAP_XXX for mt_scrap_read(). They are return values for
+	  MagiC-PC 2.0 (information taken from TOS.HYP)
+	- documentation updated
+	
+2004-10-14 20:58  'Arnaud BERCEGEAY'
 
-	* rc_array_to_grect.c: fixed array_to_grect() : the width and
-	height were always 1
+	* rc_array_to_grect.c:
 
-2004-10-12 22:35  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fixed array_to_grect() : the width and height were always 1
+	
+2004-10-12 22:35  'Arnaud BERCEGEAY'
 
 	* a_objc_edit.c, a_objc_find.c, a_objc_sysvar.c, mt_gem.h.in,
-	x_objc_wdraw.c, x_objc_xedit.c: documentation updated
+	x_objc_wdraw.c, x_objc_xedit.c:
 
-2004-10-09 21:11  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	documentation updated
+	
+2004-10-09 21:11  'Arnaud BERCEGEAY'
 
 	* a_objc_add.c, a_objc_change.c, a_objc_draw.c,
 	a_objc_draw_grect.c, a_objc_edit.c, a_objc_find.c, a_objc_offset.c,
 	a_objc_order.c, a_objc_sysvar.c, a_objc_xfind.c, mt_gem.h.in:
-	documentation updated (cosmetic)
 
-2004-10-05 23:08  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	documentation updated (cosmetic)
+	
+2004-10-05 23:08  'Arnaud BERCEGEAY'
 
 	* a_menu_attach.c, a_menu_bar.c, a_menu_icheck.c, a_menu_ienable.c,
 	a_menu_istart.c, a_menu_popup.c, a_menu_register.c,
-	a_menu_settings.c, a_menu_tnormal.c, mt_gem.h.in: - add MN_INQUIRE
-	and MN_CHANGE (constants for mt_menu_settings()) - documentation
-	updated (cosmetic)
+	a_menu_settings.c, a_menu_tnormal.c, mt_gem.h.in:
 
-2004-10-04 22:12  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	- add MN_INQUIRE and MN_CHANGE (constants for mt_menu_settings())
+	- documentation updated (cosmetic)
+	
+2004-10-04 22:12  'Arnaud BERCEGEAY'
 
-	* a_menu_click.c, a_menu_unregister.c: documentation added
+	* a_menu_click.c, a_menu_unregister.c:
 
-2004-10-04 20:53  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	documentation added
+	
+2004-10-04 20:53  'Arnaud BERCEGEAY'
 
-	* a_graf_xhandle.c: variable device now contains 0 if AES doesnt
-	support this extension
+	* a_graf_xhandle.c:
 
-2004-10-04 20:51  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	variable device now contains 0 if AES doesnt support this extension
+	
+2004-10-04 20:51  'Arnaud BERCEGEAY'
 
 	* a_graf_multirubber.c, a_graf_rubbox.c, a_graf_shrinkbox.c,
 	a_graf_shrinkbox_grect.c, a_graf_slidebox.c, a_graf_watchbox.c,
-	a_graf_wwatchbox.c, mt_gem.h.in: documentation updated (cosmetic)
+	a_graf_wwatchbox.c, mt_gem.h.in:
 
-2004-09-29 21:18  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	documentation updated (cosmetic)
+	
+2004-09-29 21:18  'Arnaud BERCEGEAY'
 
 	* a_graf_dragbox.c, a_graf_handle.c, a_graf_mbox.c,
-	a_graf_mkstate.c, a_graf_mouse.c, mt_gem.h.in: documentation
-	updated (cosmetic)
+	a_graf_mkstate.c, a_graf_mouse.c, mt_gem.h.in:
 
-2004-09-28 22:12  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	documentation updated (cosmetic)
+	
+2004-09-28 22:12  'Arnaud BERCEGEAY'
 
 	* a_graf_dragbox.c, a_graf_growbox.c, a_graf_growbox_grect.c:
+
 	documentation updated (cosmetic)
+	
+2004-09-28 21:22  'Arnaud BERCEGEAY'
 
-2004-09-28 21:22  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_fsel_boxinput.c, mt_gem.h.in:
 
-	* a_fsel_boxinput.c, mt_gem.h.in: add FSEL_CALLBACK callback
-	function type for mt_fsel_boxinput
-
-2004-09-27 22:59  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add FSEL_CALLBACK callback function type for mt_fsel_boxinput
+	
+2004-09-27 22:59  'Arnaud BERCEGEAY'
 
 	* a_fsel_boxinput.c, a_fsel_exinput.c, a_fsel_input.c, mt_gem.h.in:
+
 	documentation updated
+	
+2004-09-27 22:23  'Arnaud BERCEGEAY'
 
-2004-09-27 22:23  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_getinfo.c:
 
-	* a_appl_getinfo.c: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-09-24 22:33  'Arnaud BERCEGEAY'
 
-2004-09-24 22:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* gemlib.todo:
 
-	* gemlib.todo: remove unused file (unused since gemlib43)
+	remove unused file (unused since gemlib43)
+	
+2004-09-23 23:27  'Arnaud BERCEGEAY'
 
-2004-09-23 23:27  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* mt_gem.h.in:
 
-	* mt_gem.h.in: documentation updated (WA_WHEEL)
+	documentation updated (WA_WHEEL)
+	
+2004-09-23 20:10  'Arnaud BERCEGEAY'
 
-2004-09-23 20:10  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* x_form_xerr.c:
 
-	* x_form_xerr.c: documentation updated
+	documentation updated
+	
+2004-09-21 22:41  'Arnaud BERCEGEAY'
 
-2004-09-21 22:41  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* x_form_popup.c:
 
-	* x_form_popup.c: fix docu (typo)
-
-2004-09-21 22:05  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix docu (typo)
+	
+2004-09-21 22:05  'Arnaud BERCEGEAY'
 
 	* x_form_popup.c, x_form_xdial.c, x_form_xdo.c, x_form_xerr.c:
+
 	documentation added
+	
+2004-09-17 20:54  'Arnaud BERCEGEAY'
 
-2004-09-17 20:54  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_form_center.c, a_form_keybd.c:
 
-	* a_form_center.c, a_form_keybd.c: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-09-17 20:32  'Arnaud BERCEGEAY'
 
-2004-09-17 20:32  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_form_error.c, mt_gem.h.in:
 
-	* a_form_error.c, mt_gem.h.in: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-09-17 20:19  'Arnaud BERCEGEAY'
 
-2004-09-17 20:19  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_form_dial.c, a_form_do.c, mt_gem.h.in:
 
-	* a_form_dial.c, a_form_do.c, mt_gem.h.in: documentation updated
-	(cosmetic)
+	documentation updated (cosmetic)
+	
+2004-09-16 22:39  'Arnaud BERCEGEAY'
 
-2004-09-16 22:39  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_form_button.c:
 
-	* a_form_button.c: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-09-16 21:21  'Arnaud BERCEGEAY'
 
-2004-09-16 21:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_form_alert.c, mt_gem.h.in:
 
-	* a_form_alert.c, mt_gem.h.in: - add FA_xxx constants for
-	mt_form_alert icon (moved from windom) - update documentation
+	- add FA_xxx constants for mt_form_alert icon (moved from windom)
+	- update documentation
+	
+2004-09-14 23:00  'Arnaud BERCEGEAY'
 
-2004-09-14 23:00  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_evnt_multi.c, a_evnt_timer.c, mt_gem.h.in:
 
-	* a_evnt_multi.c, a_evnt_timer.c, mt_gem.h.in: documentation
-	updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-09-13 20:55  'Arnaud BERCEGEAY'
 
-2004-09-13 20:55  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_evnt_mesag.c, a_evnt_mouse.c, mt_gem.h.in:
 
-	* a_evnt_mesag.c, a_evnt_mouse.c, mt_gem.h.in: documentation
-	updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-09-13 20:43  'Arnaud BERCEGEAY'
 
-2004-09-13 20:43  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_evnt_mesag.c, mt_gem.h.in:
 
-	* a_evnt_mesag.c, mt_gem.h.in: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-09-11 12:38  'Arnaud BERCEGEAY'
 
-2004-09-11 12:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_evnt_keybd.c, a_evnt_mesag.c, mt_gem.h.in:
 
-	* a_evnt_keybd.c, a_evnt_mesag.c, mt_gem.h.in: documentation
-	updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-09-08 21:38  'Arnaud BERCEGEAY'
 
-2004-09-08 21:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_evnt_button.c, a_evnt_dclick.c, mt_gem.h.in:
 
-	* a_evnt_button.c, a_evnt_dclick.c, mt_gem.h.in: documentation
-	updated (cosmetics)
+	documentation updated (cosmetics)
+	
+2004-09-03 14:33  'Arnaud BERCEGEAY'
 
-2004-09-03 14:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_search.c:
 
-	* a_appl_search.c: update documentation for APP_DESK command
+	update documentation for APP_DESK command
+	
+2004-08-18 22:43  'Arnaud BERCEGEAY'
 
-2004-08-18 22:43  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_write.c, a_appl_yield.c:
 
-	* a_appl_write.c, a_appl_yield.c: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-08-18 22:32  'Arnaud BERCEGEAY'
 
-2004-08-18 22:32  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_trecord.c, mt_gem.h.in:
 
-	* a_appl_trecord.c, mt_gem.h.in: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-08-18 22:14  'Arnaud BERCEGEAY'
 
-2004-08-18 22:14  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_tplay.c, mt_gem.h.in:
 
-	* a_appl_tplay.c, mt_gem.h.in: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-08-18 21:45  'Arnaud BERCEGEAY'
 
-2004-08-18 21:45  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_search.c, mt_gem.h.in:
 
-	* a_appl_search.c, mt_gem.h.in: documentation updated
+	documentation updated
+	
+2004-08-18 21:21  'Arnaud BERCEGEAY'
 
-2004-08-18 21:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_init.c:
 
-	* a_appl_init.c: documentation updated
+	documentation updated
+	
+2004-08-18 20:56  'Arnaud BERCEGEAY'
 
-2004-08-18 20:56  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_getinfo.c:
 
-	* a_appl_getinfo.c: documentation updated
+	documentation updated
+	
+2004-08-18 19:45  'Arnaud BERCEGEAY'
 
-2004-08-18 19:45  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* mt_gem.h.in:
 
-	* mt_gem.h.in: add mt_AESxxx macro (similar to _AESxxx from gem.h)
+	add mt_AESxxx macro (similar to _AESxxx from gem.h)
+	
+2004-08-17 23:21  'Arnaud BERCEGEAY'
 
-2004-08-17 23:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_getinfo.c, mt_gem.h.in:
 
-	* a_appl_getinfo.c, mt_gem.h.in: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-08-17 21:48  'Arnaud BERCEGEAY'
 
-2004-08-17 21:48  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_read.c, mt_gem.h.in:
 
-	* a_appl_read.c, mt_gem.h.in: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-08-16 22:38  'Arnaud BERCEGEAY'
 
-2004-08-16 22:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_control.c:
 
-	* a_appl_control.c: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-08-16 22:02  'Arnaud BERCEGEAY'
 
-2004-08-16 22:02  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* mt_gem.h.in:
 
-	* mt_gem.h.in: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-08-16 21:30  'Arnaud BERCEGEAY'
 
-2004-08-16 21:30  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* mt_gem.h.in:
 
-	* mt_gem.h.in: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-08-16 19:44  'Arnaud BERCEGEAY'
 
-2004-08-16 19:44  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_control.c:
 
-	* a_appl_control.c: documentation updated (cosmetic)
+	documentation updated (cosmetic)
+	
+2004-08-16 19:31  'Arnaud BERCEGEAY'
 
-2004-08-16 19:31  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* Doxyfile.in:
 
-	* Doxyfile.in: update configuration for doxygen 1.3.8 set quiet
-	option to ON
+	update configuration for doxygen 1.3.8
+	set quiet option to ON
+	
+2004-07-25 14:29  'Frank Naumann'
 
-2004-07-25 14:29  'Frank Naumann <fnaumann@freemint.de>'
+	* Makefile:
 
-	* Makefile: Changed to be /bin/sh compatible.
+	Changed to be /bin/sh compatible.
+	
+2004-07-20 15:54  'Standa Opichal'
 
-2004-07-20 15:54  'Standa Opichal <opichals@seznam.cz>'
+	* vs_clip.c, vswr_mode.c:
 
-	* vs_clip.c, vswr_mode.c: Adjusting documentation typos and
-	indentation.
+	Adjusting documentation typos and indentation.
+	
+2004-07-18 21:48  'Arnaud BERCEGEAY'
 
-2004-07-18 21:48  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_glue.c, gem.h:
 
-	* a_glue.c, gem.h: the dirty appl_init() macro defined in gem.h has
-	been replaced by a nice appl_init() static inline function.  This
-	should fix the "gl_ap_version not initialised" bug.
+	the dirty appl_init() macro defined in gem.h has been replaced by a
+	nice appl_init() static inline function.
+	This should fix the "gl_ap_version not initialised" bug.
+	
+2004-07-12 20:28  'Arnaud BERCEGEAY'
 
-2004-07-12 20:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* ChangeLog:
 
-	* ChangeLog: update
+	update
+	
+2004-07-12 20:14  'Arnaud BERCEGEAY'
 
-2004-07-12 20:14  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* x_evnt_multi.c:
 
-	* x_evnt_multi.c: quiet a gcc warning
+	quiet a gcc warning
+	
+2004-06-28 08:49  'Frank Naumann'
 
-2004-06-28 08:49  'Frank Naumann <fnaumann@freemint.de>'
+	* VERSION:
 
-	* VERSION: Bumped version to 0.43.2 to reflect the corrections and
-	enhancements.
+	Bumped version to 0.43.2 to reflect the corrections and enhancements.
+	
+2004-06-27 23:04  'Arnaud BERCEGEAY'
 
-2004-06-27 23:04  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* mt_gemx.h, x_xfrm_popup.c:
 
-	* mt_gemx.h, x_xfrm_popup.c: WDLG callback function prototype are
-	now compatible with 32-bits compilers
+	WDLG callback function prototype are now compatible with 32-bits compilers
+	
+2004-06-27 22:30  'Arnaud BERCEGEAY'
 
-2004-06-27 22:30  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* mt_gem.h.in:
 
-	* mt_gem.h.in: rename (unused?) MOUSE structure to MOUSE_EVENT to
-	avoid conflict with gemdos MOUSE structure (2nd parameter of gemdos
-	call Initmouse()) used in some tos libraries (pure C and lattice C
-	at least).
+	rename (unused?) MOUSE structure to MOUSE_EVENT to avoid conflict with
+	gemdos MOUSE structure (2nd parameter of gemdos call Initmouse()) used
+	in some tos libraries (pure C and lattice C at least).
+	
+2004-06-27 22:23  'Arnaud BERCEGEAY'
 
-2004-06-27 22:23  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* mt_gemx.h:
 
-	* mt_gemx.h: add (partial) support for Lattice C compiler
+	add (partial) support for Lattice C compiler
+	
+2004-06-21 18:17  'Arnaud BERCEGEAY'
 
-2004-06-21 18:17  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* SRCFILES, files.mak, gemx.h, x_evnt_multi.c, mt_gemx.h:
 
-	* SRCFILES, files.mak, gemx.h, x_evnt_multi.c, mt_gemx.h: new
-	function mt_EVNT_multi() added
-
-2004-06-21 12:36  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	new function mt_EVNT_multi() added
+	
+2004-06-21 12:36  'Arnaud BERCEGEAY'
 
 	* SRCFILES, a_form_center_grect.c, a_graf_growbox_grect.c,
 	a_graf_shrinkbox_grect.c, a_objc_draw_grect.c, files.mak, gem.h,
-	gemx.h, mt_gem.h.in, mt_gemx.h, x_form_xdial_grect.c: new functions
-	added: mt_form_center_grect(), mt_graf_growbox_grect(),
-	mt_graf_shrinkbox_grect(), mt_objc_draw_grect() and
-	mt_form_xdial_grect()
+	gemx.h, mt_gem.h.in, mt_gemx.h, x_form_xdial_grect.c:
 
-2004-06-21 11:44  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	new functions added:
+	mt_form_center_grect(), mt_graf_growbox_grect(), mt_graf_shrinkbox_grect(),
+	mt_objc_draw_grect() and mt_form_xdial_grect()
+	
+2004-06-21 11:44  'Arnaud BERCEGEAY'
 
 	* SRCFILES, files.mak, gemx.h, mt_gemx.h, x_xfrm_popup.c:
+
 	xfrm_popup added (doc wanted)
+	
+2004-05-11 20:58  'Arnaud BERCEGEAY'
 
-2004-05-11 20:58  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_tplay.c:
 
-	* a_appl_tplay.c: fix typo in doc (mt_appl_record replaced by
-	mt_appl_trecord)
+	fix typo in doc (mt_appl_record replaced by mt_appl_trecord)
+	
+2004-05-11 20:34  'Arnaud BERCEGEAY'
 
-2004-05-11 20:34  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_tplay.c, a_appl_trecord.c:
 
-	* a_appl_tplay.c, a_appl_trecord.c: fix appl_play/record doc (thx
-	to Olivier Landemarre and Francois Lecoat)
+	fix appl_play/record doc (thx to Olivier Landemarre and Francois Lecoat)
+	
+2004-01-16 10:55  'Frank Naumann'
 
-2004-01-16 10:55  'Frank Naumann <fnaumann@freemint.de>'
+	* Makefile:
 
-	* Makefile: Added the generated files to the clean target.
+	Added the generated files to the clean target.
+	
+2004-01-06 08:59  'Standa Opichal'
 
-2004-01-06 08:59  'Standa Opichal <opichals@seznam.cz>'
+	* Makefile, Makefile.objs, gemlib.spec.in:
 
-	* Makefile, Makefile.objs, gemlib.spec.in: Change in Makefiles and
-	.spec file for RPM release.
+	Change in Makefiles and .spec file for RPM release.
+	
+2004-01-03 01:31  'Arnaud BERCEGEAY'
 
-2004-01-03 01:31  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* VERSION:
 
-	* VERSION: this is now gemlib 0.43.1
+	this is now gemlib 0.43.1
+	
+2004-01-02 23:31  'Arnaud BERCEGEAY'
 
-2004-01-02 23:31  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_wind_set.c:
 
-	* a_wind_set.c: fix doc for wind_set(WF_TOP)
+	fix doc for wind_set(WF_TOP)
+	
+2004-01-02 23:29  'Arnaud BERCEGEAY'
 
-2004-01-02 23:29  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_graf_mouse.c, mt_gem.h.in:
 
-	* a_graf_mouse.c, mt_gem.h.in: swap M_LAST and M_RESTORE; add
-	M_PREVIOUS
+	swap M_LAST and M_RESTORE; add M_PREVIOUS
+	
+2003-12-22 16:09  'Arnaud BERCEGEAY'
 
-2003-12-22 16:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* vs_clip_pxy.c:
 
-	* vs_clip_pxy.c: fix dirty bug: vs_clip_pxy works now
-
-2003-12-08 14:25  'Standa Opichal <opichals@seznam.cz>'
+	fix dirty bug: vs_clip_pxy works now
+	
+2003-12-08 14:25  'Standa Opichal'
 
 	* n_vqt_ext_name.c, n_vqt_name_and_id.c, n_vqt_xfntinfo.c,
-	n_vst_name.c: Even though these functions should probably be only
-	called after NVDI cookie check, some apps doesn't do the check
-	explicitely.
+	n_vst_name.c:
+
+	Even though these functions should probably be only called after NVDI
+	cookie check, some apps doesn't do the check explicitely.
 	
-	Since now the font id returned is 0 in case NVDI is not present. 
+	Since now the font id returned is 0 in case NVDI is not present.
 	It makes the use of these functions more failproof.
-
-2003-12-08 14:21  'Standa Opichal <opichals@seznam.cz>'
-
-	* a_fsel_boxinput.c, a_fsel_exinput.c, a_fsel_input.c: exit_but
-	renamed to exit_button
-
-2003-12-08 14:21  'Standa Opichal <opichals@seznam.cz>'
-
-	* mt_gem.h.in, mt_gemx.h: Appl_search's APP_DESK constant added. 
-	Some argument name and indentation beautifying.
-
-2003-10-23 12:38  'Frank Naumann <fnaumann@freemint.de>'
-
-	* .cvsignore: Ignore the html directory (generated by doxygen).
-
-2003-10-22 11:05  'Frank Naumann <fnaumann@freemint.de>'
-
-	* ChangeLog: Added missing Changelog for changes from 0.42.0 to
-	0.43.0.
-
-2003-10-22 10:18  'Standa Opichal <opichals@seznam.cz>'
-
-	* gemlib.spec.in: 0.43.0 release update.
-
-2003-10-20 21:05  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
-
-	* VERSION: this is now gemlib 0.43.0
-
-2003-09-22 21:07  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
-
-	* gem_aesP.h, gem_vdiP.h: fixed some warnings with gcc3 (patch
-	supplied by Patrice Mandin)
-
-2003-08-19 13:40  'Standa Opichal <opichals@seznam.cz>'
-
-	* Makefile, Makefile.objs: Adjusted to be able to propagate
-	CVS/CONFIGVARS GLOBAL variable setting.
 	
-	This is usefull e.g. when you have the libc in other than default
-	directory on your system to specify the -I and -L paths.
+2003-12-08 14:21  'Standa Opichal'
 
-2003-08-07 09:49  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_fsel_boxinput.c, a_fsel_exinput.c, a_fsel_input.c:
 
-	* gem_vdiP.h: remove USE_LOCAL_VDIPB option: the default setting
-	has always been USE_LOCAL_VDIPB=1, and the case USE_LOCAL_VDIPB=0
-	never worked (some piece of code is missing). Furthermore the
-	option USE_LOCAL_VDIPB=1 is the only way to have safe thread VDI
-	bindings... so the code specific to USE_LOCAL_VDIPB=0 is now
-	removed and the option USE_LOCAL_VDIPB no more exist.
+	exit_but renamed to exit_button
+	
+2003-12-08 14:21  'Standa Opichal'
 
-2003-08-07 09:44  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* mt_gem.h.in, mt_gemx.h:
 
-	* v_opnvwk.c: - remove USE_LOCAL_VDIPB option - replace dummy
-	variable by 0L if option CHECK_NULLPTR is set
+	Appl_search's APP_DESK constant added.
+	Some argument name and indentation beautifying.
+	
+2003-10-23 12:38  'Frank Naumann'
 
-2003-08-07 09:41  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* .cvsignore:
+
+	Ignore the html directory (generated by doxygen).
+	
+2003-10-22 11:05  'Frank Naumann'
+
+	* ChangeLog:
+
+	Added missing Changelog for changes from 0.42.0 to 0.43.0.
+	
+2003-10-22 10:18  'Standa Opichal'
+
+	* gemlib.spec.in:
+
+	0.43.0 release update.
+	
+2003-10-20 21:05  'Arnaud BERCEGEAY'
+
+	* VERSION:
+
+	this is now gemlib 0.43.0
+	
+2003-09-22 21:07  'Arnaud BERCEGEAY'
+
+	* gem_aesP.h, gem_vdiP.h:
+
+	fixed some warnings with gcc3 (patch supplied by Patrice Mandin)
+	
+2003-08-19 13:40  'Standa Opichal'
+
+	* Makefile, Makefile.objs:
+
+	Adjusted to be able to propagate CVS/CONFIGVARS GLOBAL variable setting.
+	
+	This is usefull e.g. when you have the libc in other than default directory
+	on your system to specify the -I and -L paths.
+	
+2003-08-07 09:49  'Arnaud BERCEGEAY'
+
+	* gem_vdiP.h:
+
+	remove USE_LOCAL_VDIPB option:
+	the default setting has always been USE_LOCAL_VDIPB=1, and the case
+	USE_LOCAL_VDIPB=0 never worked (some piece of code is missing). Furthermore
+	the option USE_LOCAL_VDIPB=1 is the only way to have safe thread VDI
+	bindings... so the code specific to USE_LOCAL_VDIPB=0 is now removed and
+	the option USE_LOCAL_VDIPB no more exist.
+	
+2003-08-07 09:44  'Arnaud BERCEGEAY'
+
+	* v_opnvwk.c:
+
+	- remove USE_LOCAL_VDIPB option
+	- replace dummy variable by 0L if option CHECK_NULLPTR is set
+	
+2003-08-07 09:41  'Arnaud BERCEGEAY'
 
 	* vst_point.c, vst_rotation.c, vst_scratch.c, vst_unload_fonts.c,
 	vswr_mode.c, vt_alignment.c, vt_axis.c, vt_origin.c,
-	vt_resolution.c: remove USE_LOCAL_VDIPB option
+	vt_resolution.c:
 
-2003-08-07 09:35  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 09:35  'Arnaud BERCEGEAY'
 
 	* vsm_choice.c, vsm_color.c, vsm_height.c, vsm_locator.c,
 	vsm_string.c, vsm_type.c, vsm_valuator.c, vsp_film.c,
 	vst_alignment.c, vst_color.c, vst_effects.c, vst_error.c,
-	vst_font.c, vst_height.c, vst_load_fonts.c: remove USE_LOCAL_VDIPB
-	option
+	vst_font.c, vst_height.c, vst_load_fonts.c:
 
-2003-08-07 09:32  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 09:32  'Arnaud BERCEGEAY'
 
 	* n_v_bez_off.c, vsin_mode.c, vsl_color.c, vsl_ends.c, vsl_type.c,
-	vsl_udsty.c, vsl_width.c: remove USE_LOCAL_VDIPB option
+	vsl_udsty.c, vsl_width.c:
 
-2003-08-07 09:23  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 09:23  'Arnaud BERCEGEAY'
 
 	* vs_color.c, vs_curaddress.c, vs_mute.c, vs_palette.c,
 	vsc_expose.c, vsc_form.c, vsf_color.c, vsf_interior.c,
-	vsf_perimeter.c, vsf_style.c, vsf_udpat.c, vsf_xperimeter.c: remove
-	USE_LOCAL_VDIPB option
+	vsf_perimeter.c, vsf_style.c, vsf_udpat.c, vsf_xperimeter.c:
 
-2003-08-07 09:19  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 09:19  'Arnaud BERCEGEAY'
 
 	* vr_recfl.c, vr_trnfm.c, vro_cpyfm.c, vrq_choice.c, vrq_locator.c,
 	vrq_string.c, vrq_valuator.c, vrt_cpyfm.c, vs_calibrate.c,
-	vs_clip.c, vs_clip_off.c, vs_clip_pxy.c: remove USE_LOCAL_VDIPB
-	option
+	vs_clip.c, vs_clip_off.c, vs_clip_pxy.c:
 
-2003-08-07 09:15  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 09:15  'Arnaud BERCEGEAY'
 
 	* vql_attributes.c, vqm_attributes.c, vqp_filmname.c,
 	vqt_attributes.c, vqt_cachesize.c, vqt_extent.c, vqt_extent16.c,
 	vqt_extent16n.c, vqt_fontinfo.c, vqt_get_table.c, vqt_name.c,
-	vqt_width.c: remove USE_LOCAL_VDIPB option
+	vqt_width.c:
 
-2003-08-07 09:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 09:09  'Arnaud BERCEGEAY'
 
 	* v_write_meta.c, vex_butv.c, vex_curv.c, vex_motv.c, vex_timv.c,
 	vex_wheelv.c, vm_coords.c, vm_filename.c, vm_pagesize.c,
 	vq_calibrate.c, vq_cellarray.c, vq_chcells.c, vq_color.c,
 	vq_curaddress.c, vq_extnd.c, vq_key_s.c, vq_mouse.c,
 	vq_page_name.c, vq_scan.c, vq_tabstatus.c, vq_tdimensions.c,
-	vq_tray_names.c, vqf_attributes.c, vqin_mode.c: remove
-	USE_LOCAL_VDIPB option
+	vq_tray_names.c, vqf_attributes.c, vqin_mode.c:
 
-2003-08-07 09:05  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 09:05  'Arnaud BERCEGEAY'
 
 	* v_pmarker.c, v_rbox.c, v_rfbox.c, v_rmcur.c, v_rvoff.c, v_rvon.c,
 	v_savecache.c, v_set_app_buff.c, v_show_c.c, v_sound.c, v_trays.c,
-	v_updwk.c: remove USE_LOCAL_VDIPB option
+	v_updwk.c:
 
-2003-08-07 08:59  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 08:59  'Arnaud BERCEGEAY'
 
 	* v_ellpie.c, v_enter_cur.c, v_escape2000.c, v_exit_cur.c,
 	v_fillarea.c, v_flushcache.c, v_fontinit.c, v_form_adv.c,
 	v_get_pixel.c, v_gtext.c, v_gtext16.c, v_gtext16n.c, v_hardcopy.c,
 	v_hide_c.c, v_justified.c, v_loadcache.c, v_meta_extents.c,
 	v_offset.c, v_opnwk.c, v_orient.c, v_output_window.c,
-	v_page_size.c, v_pieslice.c, v_pline.c: remove USE_LOCAL_VDIPB
-	option
+	v_page_size.c, v_pieslice.c, v_pline.c:
 
-2003-08-07 08:54  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 08:54  'Arnaud BERCEGEAY'
 
 	* n_vst_width.c, v_alpha_text.c, v_arc.c, v_bar.c, v_bit_image.c,
 	v_cellarray.c, v_circle.c, v_clear_disp_list.c, v_clrwk.c,
 	v_clsvwk.c, v_clswk.c, v_contourfill.c, v_copies.c, v_curdown.c,
 	v_curhome.c, v_curleft.c, v_curright.c, v_curtext.c, v_curup.c,
-	v_dspcur.c, v_eeol.c, v_eeos.c, v_ellarc.c, v_ellipse.c: remove
-	USE_LOCAL_VDIPB option
+	v_dspcur.c, v_eeol.c, v_eeos.c, v_ellarc.c, v_ellipse.c:
 
-2003-08-07 08:48  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 08:48  'Arnaud BERCEGEAY'
 
 	* n_vs_hilite_color.c, n_vs_max_color.c, n_vs_min_color.c,
 	n_vs_weight_color.c, n_vsf_bg_color.c, n_vsf_fg_color.c,
@@ -507,9 +879,11 @@
 	n_vst_arbpt.c, n_vst_arbpt32.c, n_vst_bg_color.c, n_vst_charmap.c,
 	n_vst_fg_color.c, n_vst_kern.c, n_vst_map_mode.c, n_vst_name.c,
 	n_vst_setsize.c, n_vst_setsize32.c, n_vst_skew.c,
-	n_vst_track_offset.c: remove USE_LOCAL_VDIPB option
+	n_vst_track_offset.c:
 
-2003-08-07 08:43  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 08:43  'Arnaud BERCEGEAY'
 
 	* n_vqt_advance.c, n_vqt_advance32.c, n_vqt_bg_color.c,
 	n_vqt_char_index.c, n_vqt_ext_name.c, n_vqt_f_extent.c,
@@ -517,272 +891,350 @@
 	n_vqt_fontheader.c, n_vqt_name_and_id.c, n_vqt_pairkern.c,
 	n_vqt_real_extent.c, n_vqt_trackkern.c, n_vqt_xfntinfo.c,
 	n_vr_transfer_bits.c, n_vs_ctab.c, n_vs_ctab_entry.c,
-	n_vs_dflt_ctab.c, n_vs_document_info.c: remove USE_LOCAL_VDIPB
-	option
+	n_vs_dflt_ctab.c, n_vs_document_info.c:
 
-2003-08-07 08:40  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 08:40  'Arnaud BERCEGEAY'
 
 	* n_vq_weight_color.c, n_vqf_bg_color.c, n_vqf_fg_color.c,
 	n_vql_bg_color.c, n_vql_fg_color.c, n_vqm_bg_color.c,
-	n_vqm_fg_color.c, n_vqr_bg_color.c, n_vqr_fg_color.c: remove
-	USE_LOCAL_VDIPB option
+	n_vqm_fg_color.c, n_vqr_bg_color.c, n_vqr_fg_color.c:
 
-2003-08-07 08:36  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 08:36  'Arnaud BERCEGEAY'
 
 	* n_v_value2color.c, n_vq_ctab.c, n_vq_ctab_entry.c,
 	n_vq_ctab_id.c, n_vq_devinfo.c, n_vq_dflt_ctab.c,
 	n_vq_ext_devinfo.c, n_vq_hilite_color.c, n_vq_margins.c,
 	n_vq_max_color.c, n_vq_min_color.c, n_vq_prn_scaling.c,
-	n_vq_px_format.c, n_vq_scrninfo.c: remove USE_LOCAL_VDIPB option
+	n_vq_px_format.c, n_vq_scrninfo.c:
 
-2003-08-07 08:31  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 08:31  'Arnaud BERCEGEAY'
 
 	* n_v_ftext.c, n_v_ftext16.c, n_v_ftext16n.c, n_v_ftext_offset.c,
 	n_v_ftext_offset16.c, n_v_get_ctab_id.c, n_v_get_outline.c,
 	n_v_getbitmap_info.c, n_v_getoutline.c, n_v_open_bm.c, n_v_opnbm.c,
-	n_v_opnprn.c, n_v_resize_bm.c, n_v_setrgb.c: remove USE_LOCAL_VDIPB
-	option
+	n_v_opnprn.c, n_v_resize_bm.c, n_v_setrgb.c:
 
-2003-08-07 08:26  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-08-07 08:26  'Arnaud BERCEGEAY'
 
 	* n_v_bez.c, n_v_bez_on.c, n_v_bez_qual.c, n_v_clsbm.c,
 	n_v_color2nearest.c, n_v_color2value.c, n_v_create_ctab.c,
 	n_v_create_itab.c, n_v_ctab_idx2value.c, n_v_ctab_idx2vdi.c,
-	n_v_ctab_vdi2idx.c, n_v_delete_ctab.c, n_v_delete_itab.c: remove
-	USE_LOCAL_VDIPB option
+	n_v_ctab_vdi2idx.c, n_v_delete_ctab.c, n_v_delete_itab.c:
 
-2003-07-29 22:31  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove USE_LOCAL_VDIPB option
+	
+2003-07-29 22:31  'Arnaud BERCEGEAY'
 
-	* n_vqt_ext_name.c: set font_format to 1 (bitmap font) instead of 0
-	if vdi_control[4]=34 and vdi_intout[33] (=name[32]) says that it's
-	a bitmap font.
+	* n_vqt_ext_name.c:
 
-2003-07-28 22:00  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	set font_format to 1 (bitmap font) instead of 0 if vdi_control[4]=34
+	and vdi_intout[33] (=name[32]) says that it's a bitmap font.
+	
+2003-07-28 22:00  'Arnaud BERCEGEAY'
 
-	* x_edit_get_pos.c: fix binding (ctrl4=2, not 0)
+	* x_edit_get_pos.c:
 
-2003-07-22 19:48  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix binding (ctrl4=2, not 0)
+	
+2003-07-22 19:48  'Arnaud BERCEGEAY'
 
 	* SRCFILES, files.mak, mt_gem.h.in, vsf_perimeter3.c,
-	vsf_xperimeter.c: rename vsf_perimeter3 to vsf_xperimeter (contr.
-	Gerhard Stoll)
+	vsf_xperimeter.c:
 
-2003-07-22 19:43  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	rename vsf_perimeter3 to vsf_xperimeter (contr. Gerhard Stoll)
+	
+2003-07-22 19:43  'Arnaud BERCEGEAY'
 
-	* a_graf_multirubber.c: fix binding: it's AES#69, it's not AES#70
-	(contr. Gerhard Stoll)
+	* a_graf_multirubber.c:
 
-2003-07-22 19:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix binding: it's AES#69, it's not AES#70 (contr. Gerhard Stoll)
+	
+2003-07-22 19:38  'Arnaud BERCEGEAY'
 
-	* a_appl_getinfo.c: [DOC] add note: Magic2 not supported
+	* a_appl_getinfo.c:
 
-2003-07-21 22:22  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[DOC] add note: Magic2 not supported
+	
+2003-07-21 22:22  'Arnaud BERCEGEAY'
 
-	* a_appl_trecord.c: [DOC] fix EVNTREC struct: ap_event is a LONG
-	(contrib Gerhard Stoll)
+	* a_appl_trecord.c:
 
-2003-07-14 18:52  'Frank Naumann <fnaumann@freemint.de>'
+	[DOC] fix EVNTREC struct: ap_event is a LONG (contrib Gerhard Stoll)
+	
+2003-07-14 18:52  'Frank Naumann'
 
-	* EXTRAFILES: Added missing source file mt_gem.h.in.
+	* EXTRAFILES:
 
-2003-07-14 18:45  'Frank Naumann <fnaumann@freemint.de>'
+	Added missing source file mt_gem.h.in.
+	
+2003-07-14 18:45  'Frank Naumann'
 
-	* EXTRAFILES: Added missing VERSION file.
+	* EXTRAFILES:
 
-2003-07-14 10:17  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	Added missing VERSION file.
+	
+2003-07-14 10:17  'Arnaud BERCEGEAY'
 
-	* VERSION: this is release 0.42.99-20030714 (last beta release
-	before 0.43.0 ?)
+	* VERSION:
 
-2003-07-14 10:14  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	this is release 0.42.99-20030714 (last beta release before 0.43.0 ?)
+	
+2003-07-14 10:14  'Arnaud BERCEGEAY'
 
-	* n_vq_devinfo.c: lot of changes (almost rewritten from scratch)
+	* n_vq_devinfo.c:
 
-2003-07-14 10:11  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	lot of changes (almost rewritten from scratch)
+	
+2003-07-14 10:11  'Arnaud BERCEGEAY'
 
-	* mt_gemx.h: - add new type GEMLIB_XATTR (defined to XATTR or void)
-	for XFSL_FILTER - 2nd parameter of vq_devinfo is now named
-	"dev_exists" instead of "dev_open" - add vqt_devinfo
+	* mt_gemx.h:
 
-2003-07-14 10:06  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	- add new type GEMLIB_XATTR (defined to XATTR or void) for XFSL_FILTER
+	- 2nd parameter of vq_devinfo is now named "dev_exists" instead of "dev_open"
+	- add vqt_devinfo
+	
+2003-07-14 10:06  'Arnaud BERCEGEAY'
 
-	* SRCFILES, files.mak, n_vqt_devinfo.c: add vqt_devinfo
+	* SRCFILES, files.mak, n_vqt_devinfo.c:
 
-2003-06-24 23:01  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add vqt_devinfo
+	
+2003-06-24 23:01  'Arnaud BERCEGEAY'
 
-	* doxydoc.c: [DOC] add history sections (ChangeLog* files)
+	* doxydoc.c:
 
-2003-06-24 21:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[DOC] add history sections (ChangeLog* files)
+	
+2003-06-24 21:21  'Arnaud BERCEGEAY'
 
-	* ChangeLog.422: add old ChangeLog files (ChangeLog.422 and
-	ChangeLog.MGL) from gemlib38 (after the split) up to gemlib 0.42.99
-	(before the merge), for both branches of the lib: - ChangeLog.422
-	for gemlib from 0.41.0 to 0.42.2 - ChangeLog.MGL for mgemlib from
-	PL39 to PL41
+	* ChangeLog.422:
 
-2003-06-24 21:15  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add old ChangeLog files (ChangeLog.422 and ChangeLog.MGL) from gemlib38
+	(after the split) up to gemlib 0.42.99 (before the merge), for both
+	branches of the lib:
+	- ChangeLog.422 for gemlib from 0.41.0 to 0.42.2
+	- ChangeLog.MGL for mgemlib from PL39 to PL41
+	
+2003-06-24 21:15  'Arnaud BERCEGEAY'
 
-	* ChangeLog.MGL: ChangeLog.422
+	* ChangeLog.MGL:
 
-2003-06-24 21:12  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	ChangeLog.422
+	
+2003-06-24 21:12  'Arnaud BERCEGEAY'
 
-	* Makefile, cvs2cl.pl, users: add rules and tools to build the
-	ChangeLog file
+	* Makefile, cvs2cl.pl, users:
 
-2003-06-24 20:58  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add rules and tools to build the ChangeLog file
+	
+2003-06-24 20:58  'Arnaud BERCEGEAY'
 
-	* mt_gem.h.in, mt_gemx.h: [DOC] add (dummy) doc to undocumented
-	struct/macro
+	* mt_gem.h.in, mt_gemx.h:
 
-2003-06-24 20:55  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[DOC] add (dummy) doc to undocumented struct/macro
+	
+2003-06-24 20:55  'Arnaud BERCEGEAY'
 
-	* a_graf_multirubber.c: [DOC] fix doc: the parameter name is 'rec',
-	it's not 'rect'
+	* a_graf_multirubber.c:
 
-2003-06-24 20:51  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[DOC] fix doc: the parameter name is 'rec', it's not 'rect'
+	
+2003-06-24 20:51  'Arnaud BERCEGEAY'
 
-	* v_fontinit.c: cast vdi_intin to quiet gcc warnings
+	* v_fontinit.c:
 
-2003-06-24 20:49  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	cast vdi_intin to quiet gcc warnings
+	
+2003-06-24 20:49  'Arnaud BERCEGEAY'
 
-	* x_edit_get_format.c: [DOC] fixed doxygen syntax
+	* x_edit_get_format.c:
 
-2003-06-18 20:27  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[DOC] fixed doxygen syntax
+	
+2003-06-18 20:27  'Arnaud BERCEGEAY'
 
-	* .cvsignore: add Doxyfile and gemlib.spec, now generated files
+	* .cvsignore:
 
-2003-06-17 20:53  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add Doxyfile and gemlib.spec, now generated files
+	
+2003-06-17 20:53  'Arnaud BERCEGEAY'
 
-	* v_orient.c: v_orient now returns O (portrait) instead of 1
-	(landscape) as default value
+	* v_orient.c:
 
-2003-06-17 20:51  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	v_orient now returns O (portrait) instead of 1 (landscape) as default value
+	
+2003-06-17 20:51  'Arnaud BERCEGEAY'
 
-	* mt_gemx.h: add vqt_is_char_available (macro)
+	* mt_gemx.h:
 
-2003-06-17 20:50  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add vqt_is_char_available (macro)
+	
+2003-06-17 20:50  'Arnaud BERCEGEAY'
 
-	* mt_gem.h.in: add VINMODE_ prefix for vqin_mode/vsin_mode mode
-	values
+	* mt_gem.h.in:
 
-2003-06-17 17:28  'Frank Naumann <fnaumann@freemint.de>'
+	add VINMODE_ prefix for vqin_mode/vsin_mode mode values
+	
+2003-06-17 17:28  'Frank Naumann'
 
-	* .cvsignore, mt_gem.h.in: Ignore mt_gem.h and changed parameter
-	name so it don't conflict with MiNTLib head (just avoid some
-	warnings).
+	* .cvsignore, mt_gem.h.in:
 
-2003-06-09 20:57  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	Ignore mt_gem.h and changed parameter name so it don't conflict with
+	MiNTLib head (just avoid some warnings).
+	
+2003-06-09 20:57  'Arnaud BERCEGEAY'
 
-	* mt_gem.h.in: - add other names for vsl_ends modes (LE_SQUARED,
-	LE_ARROWED, LE_ROUNDED) - add other names for vsl_type modes
-	(LT_SOLID, LT_LONGDASH, LT_DOTTED,   LT_DASHDOT, LT_DASHED,
-	LT_DASHDOTDOT, LT_USERDEF, LONGDASH, DOT, DASH2DOT) - add other
-	names for vsm_type modes (MT_DOT, MT_PLUS, MT_ASTERISK,  
-	MT_SQUARE, MT_DCROSS, MT_DIAMOND) - add other names for vst_effects
-	modes (TF_NORMAL, TF_THICKENED,   TF_LIGHTENED, TF_SLANTED,
-	TF_UNDERLINED, TF_OUTLINED, TF_SHADOWED)
+	* mt_gem.h.in:
 
-2003-06-09 18:04  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	- add other names for vsl_ends modes (LE_SQUARED, LE_ARROWED, LE_ROUNDED)
+	- add other names for vsl_type modes (LT_SOLID, LT_LONGDASH, LT_DOTTED,
+	  LT_DASHDOT, LT_DASHED, LT_DASHDOTDOT, LT_USERDEF, LONGDASH, DOT, DASH2DOT)
+	- add other names for vsm_type modes (MT_DOT, MT_PLUS, MT_ASTERISK,
+	  MT_SQUARE, MT_DCROSS, MT_DIAMOND)
+	- add other names for vst_effects modes (TF_NORMAL, TF_THICKENED,
+	  TF_LIGHTENED, TF_SLANTED, TF_UNDERLINED, TF_OUTLINED, TF_SHADOWED)
+	
+2003-06-09 18:04  'Arnaud BERCEGEAY'
 
-	* a_shel_envrn.c: add patch for TOSes 'PATH=' bug
+	* a_shel_envrn.c:
 
-2003-06-03 22:13  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add patch for TOSes 'PATH=' bug
+	
+2003-06-03 22:13  'Arnaud BERCEGEAY'
 
-	* mt_gem.h.in: add MENUCOL and fix MFORM (swap mf_bg and mf_fg)
+	* mt_gem.h.in:
 
-2003-06-02 22:44  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add MENUCOL and fix MFORM (swap mf_bg and mf_fg)
+	
+2003-06-02 22:44  'Arnaud BERCEGEAY'
 
-	* vqt_name.c: [DOC] add doc (contrib. Rainer Seitel) fixed name
-	filling: the vdi_array2str function added a NULL byte at the end of
-	the string, so vdi_array2str can't be used here (contrib. Rainer
-	Seitel)
+	* vqt_name.c:
 
-2003-06-02 22:39  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[DOC] add doc (contrib. Rainer Seitel)
+	fixed name filling: the vdi_array2str function added a NULL byte at the end
+	of the string, so vdi_array2str can't be used here (contrib. Rainer Seitel)
+	
+2003-06-02 22:39  'Arnaud BERCEGEAY'
 
-	* a_shel_read.c, a_wind_get.c: [DOC] some fixes (contrib. Rainer
-	Seitel)
+	* a_shel_read.c, a_wind_get.c:
 
-2003-06-02 22:36  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[DOC] some fixes (contrib. Rainer Seitel)
+	
+2003-06-02 22:36  'Arnaud BERCEGEAY'
 
-	* a_shel_find.c: [DOC] expand buffer size to 260 bytes (contrib.
-	Rainer Seitel)
+	* a_shel_find.c:
 
-2003-06-02 22:32  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[DOC] expand buffer size to 260 bytes (contrib. Rainer Seitel)
+	
+2003-06-02 22:32  'Arnaud BERCEGEAY'
 
-	* a_rsrc_saddr.c: [DOC] add doc (contrib. Rainer Seitel)
+	* a_rsrc_saddr.c:
 
-2003-06-02 22:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[DOC] add doc (contrib. Rainer Seitel)
+	
+2003-06-02 22:28  'Arnaud BERCEGEAY'
 
-	* a_objc_offset.c: [DOC] add note (contrib. Rainer Seitel)
+	* a_objc_offset.c:
 
-2003-06-02 22:23  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[DOC] add note (contrib. Rainer Seitel)
+	
+2003-06-02 22:23  'Arnaud BERCEGEAY'
 
-	* a_fsel_exinput.c: GEM 2 doesn't have extended fileselector... so
-	fixed the global_aes[] check.  [DOC] change buffer size to 260
-	bytes (VFAT or mint domain)
+	* a_fsel_exinput.c:
 
-2003-06-02 22:16  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	GEM 2 doesn't have extended fileselector... so fixed the
+	global_aes[] check.
+	[DOC] change buffer size to 260 bytes (VFAT or mint domain)
+	
+2003-06-02 22:16  'Arnaud BERCEGEAY'
 
-	* a_appl_trecord.c: [DOC] add note: the LONG value seems to have
-	words swapped
+	* a_appl_trecord.c:
 
-2003-05-24 20:27  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[DOC] add note: the LONG value seems to have words swapped
+	
+2003-05-24 20:27  'Arnaud BERCEGEAY'
 
-	* mt_gem.h.in: - remove SHW_RESCHANGE - add structure SHELTAIL -
-	fix structure THREADINFO
+	* mt_gem.h.in:
 
-2003-05-19 13:47  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	- remove SHW_RESCHANGE
+	- add structure SHELTAIL
+	- fix structure THREADINFO
+	
+2003-05-19 13:47  'Arnaud BERCEGEAY'
 
-	* mt_gem.h.in: - add some appl_control constants (APC_INFO,
-	APC_MENU, APC_WIDGETS,	 APCI_HIDDEN, APCI_HASMBAR, APCI_HASDESK) -
-	add some appl_getinfo constants (AES_MESSAGE, AES_OBJECT, AES_FORM)
+	* mt_gem.h.in:
+
+	- add some appl_control constants (APC_INFO, APC_MENU, APC_WIDGETS,
+	  APCI_HIDDEN, APCI_HASMBAR, APCI_HASDESK)
+	- add some appl_getinfo constants (AES_MESSAGE, AES_OBJECT, AES_FORM)
 	- add some menu_bar modes (MENU_GETMODE, MENU_SETMODE, MENU_UPDATE,
-	  MENU_INSTL, MENU_HIDDEN, MENU_PULLDOWN, MENU_SHADOWED) - add
-	shel_write structures (SHELW, XSHW_COMMAND, THREADINFO) - add
-	shel_write constant SWM_THRCREATE - add shel_write alternative
-	constants (SHW_NOEXEC, SHW_EXEC, SHW_EXEC_ACC,	 SHW_SHUTDOWN,
-	SHW_RESCHNG, SHW_BROADCAST, SHW_INFRECGN, SHW_AESSEND,	
-	SHW_THR_CREATE) - add shel_write constants (where do theses
-	constant come from and mean ?)	 SHW_IMMED, SHW_CHAIN, SHW_DOS,
-	SHW_RESCHANGE, SHW_PARALLEL, SHW_SINGLE - add shel_write constants
-	for parameter 'isover' (CL_NORMAL, CL_PARSE) - add shel_write
-	constants for parameter 'isover' (ENVIRON_SIZE,   ENVIRON_CHANGE,
-	ENVIRON_COPY) - add shel_write constants (NM_APTERM, AP_AESTERM) -
-	add extended shel_write modes and parameters (SHW_XMDLIMIT,
-	SHW_XMDNICE,   SHW_XMDDEFDIR, SHW_XMDENV) - add WF_WIDGETS - add
-	W_HIDER
+	  MENU_INSTL, MENU_HIDDEN, MENU_PULLDOWN, MENU_SHADOWED)
+	- add shel_write structures (SHELW, XSHW_COMMAND, THREADINFO)
+	- add shel_write constant SWM_THRCREATE
+	- add shel_write alternative constants (SHW_NOEXEC, SHW_EXEC, SHW_EXEC_ACC,
+	  SHW_SHUTDOWN, SHW_RESCHNG, SHW_BROADCAST, SHW_INFRECGN, SHW_AESSEND,
+	  SHW_THR_CREATE)
+	- add shel_write constants (where do theses constant come from and mean ?)
+	  SHW_IMMED, SHW_CHAIN, SHW_DOS, SHW_RESCHANGE, SHW_PARALLEL, SHW_SINGLE
+	- add shel_write constants for parameter 'isover' (CL_NORMAL, CL_PARSE)
+	- add shel_write constants for parameter 'isover' (ENVIRON_SIZE,
+	  ENVIRON_CHANGE, ENVIRON_COPY)
+	- add shel_write constants (NM_APTERM, AP_AESTERM)
+	- add extended shel_write modes and parameters (SHW_XMDLIMIT, SHW_XMDNICE,
+	  SHW_XMDDEFDIR, SHW_XMDENV)
+	- add WF_WIDGETS
+	- add W_HIDER
+	
+2003-05-19 13:30  'Arnaud BERCEGEAY'
 
-2003-05-19 13:30  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_wind_get.c, a_wind_set.c:
 
-	* a_wind_get.c, a_wind_set.c: [DOC] add doc for WF_WIDGETS
+	[DOC] add doc for WF_WIDGETS
+	
+2003-05-19 13:25  'Arnaud BERCEGEAY'
 
-2003-05-19 13:25  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_shel_write.c:
 
-	* a_shel_write.c: [DOC] add item SWM_THRCREATE (doc wanted)
+	[DOC] add item SWM_THRCREATE (doc wanted)
+	
+2003-05-19 13:22  'Arnaud BERCEGEAY'
 
-2003-05-19 13:22  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_control.c:
 
-	* a_appl_control.c: [DOC] add doc for APC_INFO, APC_MENU and
-	APC_WIDGETS
+	[DOC] add doc for APC_INFO, APC_MENU and APC_WIDGETS
+	
+2003-05-17 19:38  'Arnaud BERCEGEAY'
 
-2003-05-17 19:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* mt_gemx.h:
 
-	* mt_gemx.h: add FNTS_OPTION (another name for FNTS_OPT) add
-	SORTDEFAULT (for extended fileselector) add COLOR_TAB_MAGIC (value
-	of the COLOR_TAB.magic field) fix _gcbitmap structure (replace
-	"CTAB_REF * ctab" and "ITAB_REF * itab" by "CTAB_REF ctab" and
-	"ITAB_REF itab")
+	add FNTS_OPTION (another name for FNTS_OPT)
+	add SORTDEFAULT (for extended fileselector)
+	add COLOR_TAB_MAGIC (value of the COLOR_TAB.magic field)
+	fix _gcbitmap structure (replace "CTAB_REF * ctab" and "ITAB_REF * itab"
+	by "CTAB_REF ctab" and "ITAB_REF itab")
+	
+2003-05-12 18:36  'Arnaud BERCEGEAY'
 
-2003-05-12 18:36  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* gem_aesP.h:
 
-	* gem_aesP.h: fix asm inline trap (add 'memory' keyword) and remove
-	previous workaround ('volatile' keyword for intout and ptsout)
+	fix asm inline trap (add 'memory' keyword)
+	and remove previous workaround ('volatile' keyword for intout and ptsout)
+	
+2003-05-12 18:31  'Arnaud BERCEGEAY'
 
-2003-05-12 18:31  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* gem_vdiP.h:
 
-	* gem_vdiP.h: fix asm inline trap (add 'memory' keyword)
-
-2003-05-11 20:32  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix asm inline trap (add 'memory' keyword)
+	
+2003-05-11 20:32  'Arnaud BERCEGEAY'
 
 	* vsf_interior.c, vsf_perimeter.c, vsf_perimeter3.c, vsf_style.c,
 	vsf_udpat.c, vsin_mode.c, vsl_color.c, vsl_ends.c, vsl_type.c,
@@ -791,28 +1243,33 @@
 	vst_alignment.c, vst_color.c, vst_effects.c, vst_font.c,
 	vst_height.c, vst_load_fonts.c, vst_rotation.c, vst_unload_fonts.c,
 	vswr_mode.c, vt_alignment.c, vt_axis.c, vt_origin.c,
-	vt_resolution.c: add vdi_dummy feature
+	vt_resolution.c:
 
-2003-05-11 20:29  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add vdi_dummy feature
+	
+2003-05-11 20:29  'Arnaud BERCEGEAY'
 
 	* vq_tray_names.c, vqf_attributes.c, vqin_mode.c, vqp_filmname.c,
 	vqt_extent.c, vqt_extent16.c, vqt_extent16n.c, vqt_name.c,
 	vr_recfl.c, vr_trnfm.c, vro_cpyfm.c, vrq_choice.c, vrq_string.c,
 	vrq_valuator.c, vrt_cpyfm.c, vs_calibrate.c, vs_clip.c,
 	vs_clip_off.c, vs_clip_pxy.c, vs_color.c, vs_curaddress.c,
-	vs_mute.c, vs_palette.c, vsc_expose.c, vsc_form.c, vsf_color.c: add
-	vdi_dummy feature
+	vs_mute.c, vs_palette.c, vsc_expose.c, vsc_form.c, vsf_color.c:
 
-2003-05-11 20:25  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add vdi_dummy feature
+	
+2003-05-11 20:25  'Arnaud BERCEGEAY'
 
 	* v_rvon.c, v_savecache.c, v_set_app_buff.c, v_show_c.c, v_sound.c,
 	v_trays.c, v_updwk.c, v_write_meta.c, vex_butv.c, vex_curv.c,
 	vex_motv.c, vex_timv.c, vex_wheelv.c, vm_coords.c, vm_filename.c,
 	vm_pagesize.c, vq_calibrate.c, vq_cellarray.c, vq_chcells.c,
 	vq_color.c, vq_curaddress.c, vq_key_s.c, vq_page_name.c, vq_scan.c,
-	vq_tabstatus.c, vq_tdimensions.c: add vdi_dummy feature
+	vq_tabstatus.c, vq_tdimensions.c:
 
-2003-05-11 20:22  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add vdi_dummy feature
+	
+2003-05-11 20:22  'Arnaud BERCEGEAY'
 
 	* v_ellpie.c, v_enter_cur.c, v_escape2000.c, v_exit_cur.c,
 	v_fillarea.c, v_flushcache.c, v_fontinit.c, v_form_adv.c,
@@ -820,18 +1277,21 @@
 	v_hide_c.c, v_justified.c, v_meta_extents.c, v_offset.c,
 	v_orient.c, v_output_window.c, v_page_size.c, v_pieslice.c,
 	v_pline.c, v_pmarker.c, v_rbox.c, v_rfbox.c, v_rmcur.c, v_rvoff.c:
-	add vdi_dummy feature
 
-2003-05-11 20:18  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add vdi_dummy feature
+	
+2003-05-11 20:18  'Arnaud BERCEGEAY'
 
 	* n_vst_name.c, n_vst_skew.c, n_vst_track_offset.c, n_vst_width.c,
 	v_alpha_text.c, v_arc.c, v_bar.c, v_bit_image.c, v_cellarray.c,
 	v_circle.c, v_clear_disp_list.c, v_clrwk.c, v_clsvwk.c, v_clswk.c,
 	v_contourfill.c, v_copies.c, v_curdown.c, v_curhome.c, v_curleft.c,
 	v_curright.c, v_curtext.c, v_curup.c, v_dspcur.c, v_eeol.c,
-	v_eeos.c, v_ellarc.c, v_ellipse.c: add vdi_dummy feature
+	v_eeos.c, v_ellarc.c, v_ellipse.c:
 
-2003-05-11 20:14  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add vdi_dummy feature
+	
+2003-05-11 20:14  'Arnaud BERCEGEAY'
 
 	* n_vs_dflt_ctab.c, n_vs_document_info.c, n_vs_hilite_color.c,
 	n_vs_max_color.c, n_vs_min_color.c, n_vs_weight_color.c,
@@ -839,9 +1299,10 @@
 	n_vsl_fg_color.c, n_vsm_bg_color.c, n_vsm_fg_color.c,
 	n_vsr_bg_color.c, n_vsr_fg_color.c, n_vst_bg_color.c,
 	n_vst_charmap.c, n_vst_fg_color.c, n_vst_kern.c, n_vst_map_mode.c:
-	add vdi_dummy feature
 
-2003-05-11 20:08  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add vdi_dummy feature
+	
+2003-05-11 20:08  'Arnaud BERCEGEAY'
 
 	* n_vq_max_color.c, n_vq_min_color.c, n_vq_prn_scaling.c,
 	n_vq_px_format.c, n_vq_scrninfo.c, n_vq_weight_color.c,
@@ -853,13 +1314,17 @@
 	n_vqt_f_extent16n.c, n_vqt_fg_color.c, n_vqt_fontheader.c,
 	n_vqt_name_and_id.c, n_vqt_pairkern.c, n_vqt_real_extent.c,
 	n_vqt_trackkern.c, n_vqt_xfntinfo.c, n_vr_transfer_bits.c,
-	n_vs_ctab.c, n_vs_ctab_entry.c: add vdi_dummy feature
+	n_vs_ctab.c, n_vs_ctab_entry.c:
 
-2003-05-11 20:06  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add vdi_dummy feature
+	
+2003-05-11 20:06  'Arnaud BERCEGEAY'
 
-	* n_vq_margins.c: add vdi_dummy feature; update doc
+	* n_vq_margins.c:
 
-2003-05-11 20:03  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add vdi_dummy feature; update doc
+	
+2003-05-11 20:03  'Arnaud BERCEGEAY'
 
 	* n_v_bez_off.c, n_v_bez_on.c, n_v_bez_qual.c, n_v_clsbm.c,
 	n_v_color2nearest.c, n_v_color2value.c, n_v_create_ctab.c,
@@ -870,549 +1335,728 @@
 	n_v_getbitmap_info.c, n_v_getoutline.c, n_v_open_bm.c,
 	n_v_resize_bm.c, n_v_setrgb.c, n_v_value2color.c, n_vq_ctab.c,
 	n_vq_ctab_entry.c, n_vq_ctab_id.c, n_vq_dflt_ctab.c,
-	n_vq_ext_devinfo.c, n_vq_hilite_color.c: add vdi_dummy feature
+	n_vq_ext_devinfo.c, n_vq_hilite_color.c:
 
-2003-05-11 20:01  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
-
-	* gem_vdiP.h: add USE_VDI_DUMMY option: if USE_VDI_DUMMY=1, when
-	VDIPB.intout and/or VDIPB.ptsout are unused in a binding, they are
-	set to a dummy array (vdi_dummy) instead of NULL to avoid crash
-	when a buggy VDI driver tries to write data in intout or in ptsout.
-
-2003-05-11 19:54  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
-
-	* SRCFILES, files.mak: add vdi_dummy
-
-2003-05-11 19:52  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
-
-	* vdi_dummy.c: initial checkin
-
-2003-05-11 16:35  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
-
-	* gem_aesP.h: add 'volatile' keywords for aes_intout[] and
-	aes_ptsout[].
+	add vdi_dummy feature
 	
-	Is there another way to tell GCC that AES_TRAP(aespb) may alter
-	data in aespb (aespb.intout and aespb.ptsout) ?
+2003-05-11 20:01  'Arnaud BERCEGEAY'
 
-2003-05-11 16:31  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* gem_vdiP.h:
 
-	* a_wind_draw.c: remove unsused 'ptr' variable
+	add USE_VDI_DUMMY option:
+	if USE_VDI_DUMMY=1, when VDIPB.intout and/or VDIPB.ptsout are unused in
+	a binding, they are set to a dummy array (vdi_dummy) instead of NULL to
+	avoid crash when a buggy VDI driver tries to write data in intout or in
+	ptsout.
+	
+2003-05-11 19:54  'Arnaud BERCEGEAY'
 
-2003-05-11 16:30  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* SRCFILES, files.mak:
 
-	* a_graf_multirubber.c: cast 'rec' to (long) to quiet GCC warnings
+	add vdi_dummy
+	
+2003-05-11 19:52  'Arnaud BERCEGEAY'
 
-2003-05-11 16:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* vdi_dummy.c:
 
-	* a_graf_handle.c, a_graf_mkstate.c: add 'if CHECK_NULLPTR'
-	preprocessor test to quiet GCC warnings
+	initial checkin
+	
+2003-05-11 16:35  'Arnaud BERCEGEAY'
 
-2003-05-08 19:52  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* gem_aesP.h:
 
-	* v_get_pixel.c: add CHECK_NULLPTR option
+	add 'volatile' keywords for aes_intout[] and aes_ptsout[].
+	
+	Is there another way to tell GCC that AES_TRAP(aespb) may
+	alter data in aespb (aespb.intout and aespb.ptsout) ?
+	
+2003-05-11 16:31  'Arnaud BERCEGEAY'
 
-2003-05-08 19:50  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_wind_draw.c:
 
-	* SRCFILES, files.mak, mt_gem.h.in: add v_sound, vs_mute,
-	vqp_filmname, v_offset and v_fontinit
+	remove unsused 'ptr' variable
+	
+2003-05-11 16:30  'Arnaud BERCEGEAY'
 
-2003-05-08 19:47  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_graf_multirubber.c:
+
+	cast 'rec' to (long) to quiet GCC warnings
+	
+2003-05-11 16:28  'Arnaud BERCEGEAY'
+
+	* a_graf_handle.c, a_graf_mkstate.c:
+
+	add 'if CHECK_NULLPTR' preprocessor test to quiet GCC warnings
+	
+2003-05-08 19:52  'Arnaud BERCEGEAY'
+
+	* v_get_pixel.c:
+
+	add CHECK_NULLPTR option
+	
+2003-05-08 19:50  'Arnaud BERCEGEAY'
+
+	* SRCFILES, files.mak, mt_gem.h.in:
+
+	add v_sound, vs_mute, vqp_filmname, v_offset and v_fontinit
+	
+2003-05-08 19:47  'Arnaud BERCEGEAY'
 
 	* v_fontinit.c, v_offset.c, v_sound.c, vqp_filmname.c, vs_mute.c:
+
 	add new bindings
+	
+2003-05-08 16:50  'Arnaud BERCEGEAY'
 
-2003-05-08 16:50  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* vsf_perimeter3.c:
 
-	* vsf_perimeter3.c: some fixes (hmmm... :-/)
+	some fixes (hmmm... :-/)
+	
+2003-05-08 16:47  'Arnaud BERCEGEAY'
 
-2003-05-08 16:47  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* mt_gem.h.in, v_trays.c, vq_tray_names.c:
 
-	* mt_gem.h.in, v_trays.c, vq_tray_names.c: v_trays and
-	vq_tray_names are now short function (return >0 value is call
-	supported)
+	v_trays and vq_tray_names are now short function (return >0 value is call supported)
+	
+2003-05-08 15:55  'Arnaud BERCEGEAY'
 
-2003-05-08 15:55  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* SRCFILES, files.mak, mt_gem.h.in, vsf_perimeter3.c:
 
-	* SRCFILES, files.mak, mt_gem.h.in, vsf_perimeter3.c: add
-	vsf_perimeter3()
+	add vsf_perimeter3()
+	
+2003-05-08 15:52  'Arnaud BERCEGEAY'
 
-2003-05-08 15:52  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* vrq_valuator.c:
 
-	* vrq_valuator.c: add CHECK_NULLPTR option
+	add CHECK_NULLPTR option
+	
+2003-05-08 13:42  'Arnaud BERCEGEAY'
 
-2003-05-08 13:42  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* mt_gemx.h:
 
-	* mt_gemx.h: add names mt_edit_get_color and mt_edit_set_color
-	(with color instead of colour)
-
-2003-05-08 11:24  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add names mt_edit_get_color and mt_edit_set_color (with color instead of colour)
+	
+2003-05-08 11:24  'Arnaud BERCEGEAY'
 
 	* SRCFILES, a_graf_multirubber.c, files.mak, gem.h, mt_gem.h.in:
+
 	add graf_multirubber()
+	
+2003-05-03 20:37  'Arnaud BERCEGEAY'
 
-2003-05-03 20:37  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* vqm_attributes.c:
 
-	* vqm_attributes.c: add optimisation (for USE_LOCAL_VDIPB option
-	only)
+	add optimisation (for USE_LOCAL_VDIPB option only)
+	
+2003-05-03 20:35  'Arnaud BERCEGEAY'
 
-2003-05-03 20:35  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* v_pieslice.c:
 
-	* v_pieslice.c: fix zeroing of ptsin[2..5]
+	fix zeroing of ptsin[2..5]
+	
+2003-05-03 20:33  'Arnaud BERCEGEAY'
 
-2003-05-03 20:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* vq_cellarray.c, vqt_fontinfo.c, vqt_width.c:
 
-	* vq_cellarray.c, vqt_fontinfo.c, vqt_width.c: add CHECK_NULLPTR
-	option
-
-2003-05-03 20:30  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
-
-	* n_vqt_advance32.c: fix binding: ctrl3=1 (just 1 entry in intin);
 	add CHECK_NULLPTR option
+	
+2003-05-03 20:30  'Arnaud BERCEGEAY'
 
-2003-05-03 20:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* n_vqt_advance32.c:
 
-	* n_vqt_xfntinfo.c: fill fields format, id, and index of info using
-	values returned in intout[0..2]
+	fix binding: ctrl3=1 (just 1 entry in intin); add CHECK_NULLPTR option
+	
+2003-05-03 20:28  'Arnaud BERCEGEAY'
 
-2003-05-03 20:25  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* n_vqt_xfntinfo.c:
 
-	* n_vqt_advance.c, n_vqt_pairkern.c, n_vqt_trackkern.c: add
-	CHECK_NULLPTR option
+	fill fields format, id, and index of info using values returned in intout[0..2]
+	
+2003-05-03 20:25  'Arnaud BERCEGEAY'
 
-2003-05-03 20:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* n_vqt_advance.c, n_vqt_pairkern.c, n_vqt_trackkern.c:
+
+	add CHECK_NULLPTR option
+	
+2003-05-03 20:21  'Arnaud BERCEGEAY'
 
 	* n_v_getbitmap_info.c, n_vq_hilite_color.c, n_vq_max_color.c,
-	n_vq_min_color.c, n_vq_weight_color.c: add CHECK_NULLPTR option
+	n_vq_min_color.c, n_vq_weight_color.c:
 
-2003-05-03 20:18  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-05-03 20:18  'Arnaud BERCEGEAY'
 
-	* n_v_bez_on.c: fix binding: ctrl1=1 (here, ctrl doesnt mean nb of
-	entries in ptsin, ctrl1=1 means bez_ON and ctrl1=0 means bez_OFF)
+	* n_v_bez_on.c:
 
-2003-04-29 22:18  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix binding: ctrl1=1 (here, ctrl doesnt mean nb of entries in ptsin, ctrl1=1 means bez_ON and ctrl1=0 means bez_OFF)
+	
+2003-04-29 22:18  'Arnaud BERCEGEAY'
 
-	* mt_gem.h.in: add v_curaddress (another name for vs_curaddress)
+	* mt_gem.h.in:
 
-2003-04-29 22:14  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add v_curaddress (another name for vs_curaddress)
+	
+2003-04-29 22:14  'Arnaud BERCEGEAY'
 
-	* mt_gemx.h: add vst_kern_info (another name for vst_track_offset)
+	* mt_gemx.h:
 
-2003-04-29 22:05  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add vst_kern_info (another name for vst_track_offset)
+	
+2003-04-29 22:05  'Arnaud BERCEGEAY'
 
-	* n_vst_map_mode.c: vst_map_mode now returns -1 if the VDI doesnt
-	support this call, or if the VDI doesnt return anything
+	* n_vst_map_mode.c:
 
-2003-04-27 15:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	vst_map_mode now returns -1 if the VDI doesnt support this call, or if the VDI doesnt return anything
+	
+2003-04-27 15:28  'Arnaud BERCEGEAY'
 
 	* vq_page_name.c, vq_scan.c, vq_tdimensions.c, vt_axis.c,
-	vt_resolution.c: add CHECK_NULLPTR option
+	vt_resolution.c:
 
-2003-04-27 15:22  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-27 15:22  'Arnaud BERCEGEAY'
 
-	* vq_chcells.c, vq_curaddress.c: add CHECK_NULLPTR option
+	* vq_chcells.c, vq_curaddress.c:
 
-2003-04-27 15:16  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-27 15:16  'Arnaud BERCEGEAY'
 
 	* n_vqf_bg_color.c, n_vqf_fg_color.c, n_vql_bg_color.c,
 	n_vql_fg_color.c, n_vqm_bg_color.c, n_vqm_fg_color.c,
 	n_vqr_bg_color.c, n_vqr_fg_color.c, n_vqt_bg_color.c,
-	n_vqt_fg_color.c, v_trays.c: add CHECK_NULLPTR option
+	n_vqt_fg_color.c, v_trays.c:
 
-2003-04-27 15:13  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-27 15:13  'Arnaud BERCEGEAY'
 
-	* n_vq_ctab_entry.c, n_vq_px_format.c: add CHECK_NULLPTR option
+	* n_vq_ctab_entry.c, n_vq_px_format.c:
 
-2003-04-27 15:08  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-27 15:08  'Arnaud BERCEGEAY'
 
-	* n_v_color2nearest.c, n_v_value2color.c: add CHECK_NULLPTR option
+	* n_v_color2nearest.c, n_v_value2color.c:
 
-2003-04-23 17:26  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-23 17:26  'Arnaud BERCEGEAY'
 
-	* vst_alignment.c, vst_height.c, vst_point.c: add CHECK_NULLPTR
-	option
+	* vst_alignment.c, vst_height.c, vst_point.c:
 
-2003-04-23 17:20  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-23 17:20  'Arnaud BERCEGEAY'
 
-	* v_loadcache.c: fix binding: nb elt in intin have to be put in
-	ctrl3 (not ctrl1)
+	* v_loadcache.c:
 
-2003-04-23 17:08  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix binding: nb elt in intin have to be put in ctrl3 (not ctrl1)
+	
+2003-04-23 17:08  'Arnaud BERCEGEAY'
 
 	* n_vst_setsize.c, n_vst_setsize32.c, n_vst_track_offset.c,
-	n_vst_width.c: add CHECK_NULLPTR option
+	n_vst_width.c:
 
-2003-04-23 17:04  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-23 17:04  'Arnaud BERCEGEAY'
 
-	* n_vst_arbpt.c, n_vst_arbpt32.c, n_vst_kern.c, n_vst_name.c: add
-	CHECK_NULLPTR option
+	* n_vst_arbpt.c, n_vst_arbpt32.c, n_vst_kern.c, n_vst_name.c:
 
-2003-04-23 17:01  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-23 17:01  'Arnaud BERCEGEAY'
 
-	* gem_vdiP.h: enable option CHECK_NULLPTR for VDI bindings
+	* gem_vdiP.h:
 
-2003-04-21 21:22  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	enable option CHECK_NULLPTR for VDI bindings
+	
+2003-04-21 21:22  'Arnaud BERCEGEAY'
 
-	* a_appl_init.c: initialise some variable that may be used to check
-	if an AES is loaded
+	* a_appl_init.c:
 
-2003-04-19 18:49  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	initialise some variable that may be used to check if an AES is loaded
+	
+2003-04-19 18:49  'Arnaud BERCEGEAY'
 
-	* a_wind_get.c: add doc for WF_KIND, WF_NAME, WF_INFO; extent
-	binding for WF_INFO and WF_NAME
+	* a_wind_get.c:
 
-2003-04-19 18:47  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add doc for WF_KIND, WF_NAME, WF_INFO; extent binding for WF_INFO and WF_NAME
+	
+2003-04-19 18:47  'Arnaud BERCEGEAY'
 
-	* SRCFILES: add new files a_fsel_boxinput.c a_graf_wwatchbox.c
-	a_graf_xhandle.c a_objc_xfind.c and a_wind_draw.c
+	* SRCFILES:
 
-2003-04-19 18:44  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add new files a_fsel_boxinput.c a_graf_wwatchbox.c a_graf_xhandle.c a_objc_xfind.c and a_wind_draw.c
+	
+2003-04-19 18:44  'Arnaud BERCEGEAY'
 
-	* gem.h, mt_gem.h.in: add mt_fsel_boxinput, mt_graf_xhandle,
-	mt_graf_wwatchbox, mt_objc_xfind, and mt_wind_draw
+	* gem.h, mt_gem.h.in:
 
-2003-04-19 18:40  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add mt_fsel_boxinput, mt_graf_xhandle, mt_graf_wwatchbox, mt_objc_xfind, and mt_wind_draw
+	
+2003-04-19 18:40  'Arnaud BERCEGEAY'
 
 	* a_fsel_boxinput.c, a_graf_wwatchbox.c, a_graf_xhandle.c,
-	a_objc_xfind.c, a_wind_draw.c: new function (thanks to Martin
-	Elsaesser for the bindings)
+	a_objc_xfind.c, a_wind_draw.c:
 
-2003-04-18 21:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	new function (thanks to Martin Elsaesser for the bindings)
+	
+2003-04-18 21:09  'Arnaud BERCEGEAY'
 
-	* mt_gem.h.in: add constants APC_xxx for appl_control mode
+	* mt_gem.h.in:
 
-2003-04-17 22:45  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add constants APC_xxx for appl_control mode
+	
+2003-04-17 22:45  'Arnaud BERCEGEAY'
 
-	* Makefile: add Doxyfile as dependency for doc; add mt_gem.h as
-	dependency for objs
+	* Makefile:
 
-2003-04-16 20:29  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add Doxyfile as dependency for doc; add mt_gem.h as dependency for objs
+	
+2003-04-16 20:29  'Arnaud BERCEGEAY'
 
-	* a_glue.c, gem.h: add graf_rubbox (another name for
-	graf_rubberbox)
+	* a_glue.c, gem.h:
 
-2003-04-15 21:11  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add graf_rubbox (another name for graf_rubberbox)
+	
+2003-04-15 21:11  'Arnaud BERCEGEAY'
 
-	* Makefile: add targets gemlib.spec, mt_gem.h and Doxyfile
+	* Makefile:
 
-2003-04-15 21:10  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add targets gemlib.spec, mt_gem.h and Doxyfile
+	
+2003-04-15 21:10  'Arnaud BERCEGEAY'
 
-	* VERSION: contain release numbers used to build gemlib.spec,
-	mt_gem.h and Doxyfile
+	* VERSION:
 
-2003-04-15 21:05  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	contain release numbers used to build gemlib.spec, mt_gem.h and Doxyfile
+	
+2003-04-15 21:05  'Arnaud BERCEGEAY'
 
-	* gemlib.spec, gemlib.spec.in: gemlib.spec is now generated from
-	gemlib.spec.in
+	* gemlib.spec, gemlib.spec.in:
 
-2003-04-15 21:01  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	gemlib.spec is now generated from gemlib.spec.in
+	
+2003-04-15 21:01  'Arnaud BERCEGEAY'
 
-	* mt_gem.h, mt_gem.h.in: mt_gem.h is now generated from mt_gem.h.in
+	* mt_gem.h, mt_gem.h.in:
 
-2003-04-15 20:55  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	mt_gem.h is now generated from mt_gem.h.in
+	
+2003-04-15 20:55  'Arnaud BERCEGEAY'
 
-	* Doxyfile.in: Doxyfile is now generated from Doxyfile.in
+	* Doxyfile.in:
 
-2003-04-15 20:51  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	Doxyfile is now generated from Doxyfile.in
+	
+2003-04-15 20:51  'Arnaud BERCEGEAY'
 
-	* Doxyfile: Doxyfile is now generated from Doxyfile.in
+	* Doxyfile:
 
-2003-04-08 23:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	Doxyfile is now generated from Doxyfile.in
+	
+2003-04-08 23:38  'Arnaud BERCEGEAY'
 
-	* x_wdlg_close.c: [doc] update (pointer to returned parameters may
-	be NULL)
+	* x_wdlg_close.c:
 
-2003-04-08 23:35  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] update (pointer to returned parameters may be NULL)
+	
+2003-04-08 23:35  'Arnaud BERCEGEAY'
 
-	* x_wdlg_get_edit.c: add CHECK_NULLPTR option
+	* x_wdlg_get_edit.c:
 
-2003-04-08 23:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-08 23:33  'Arnaud BERCEGEAY'
 
-	* x_wdlg_create.c, x_wdlg_get_udata.c: fix: ctrl[4]=1, it's not 0
+	* x_wdlg_create.c, x_wdlg_get_udata.c:
 
-2003-04-08 23:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix: ctrl[4]=1, it's not 0
+	
+2003-04-08 23:28  'Arnaud BERCEGEAY'
 
-	* pdlg_close.c, pdlg_evnt.c: add CHECK_NULLPTR option
+	* pdlg_close.c, pdlg_evnt.c:
 
-2003-04-08 23:26  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-08 23:26  'Arnaud BERCEGEAY'
 
-	* a_wind_get.c: add CHECK_NULLPTR option and fix init of
-	aes_control[3,4]
+	* a_wind_get.c:
 
-2003-04-08 23:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option and fix init of aes_control[3,4]
+	
+2003-04-08 23:21  'Arnaud BERCEGEAY'
 
-	* a_rsrc_gaddr.c, a_wind_calc.c: add CHECK_NULLPTR option
+	* a_rsrc_gaddr.c, a_wind_calc.c:
 
-2003-04-06 19:13  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-06 19:13  'Arnaud BERCEGEAY'
 
-	* a_objc_offset.c, a_objc_sysvar.c: add CHECK_NULLPTR option
+	* a_objc_offset.c, a_objc_sysvar.c:
 
-2003-04-06 18:16  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-06 18:16  'Arnaud BERCEGEAY'
 
-	* x_lbox_get_udata.c: fix: ctrl[4]=1, not 0
+	* x_lbox_get_udata.c:
 
-2003-04-06 18:10  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix: ctrl[4]=1, not 0
+	
+2003-04-06 18:10  'Arnaud BERCEGEAY'
 
 	* x_lbox_get_items.c, x_lbox_get_slct_item.c, x_lbox_get_tree.c:
+
 	fix: ctrl[4]=1, not 0
+	
+2003-04-06 18:02  'Arnaud BERCEGEAY'
 
-2003-04-06 18:02  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* x_lbox_create.c, x_lbox_get_item.c:
 
-	* x_lbox_create.c, x_lbox_get_item.c: fix: ctrl[4]=1, not 0
-
-2003-04-06 13:03  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix: ctrl[4]=1, not 0
+	
+2003-04-06 13:03  'Arnaud BERCEGEAY'
 
 	* x_form_wbutton.c, x_form_wkeybd.c, x_form_xdo.c, x_fslx_do.c,
-	x_fslx_evnt.c, x_fslx_open.c, x_fslx_set_flags.c: add CHECK_NULLPTR
-	option
+	x_fslx_evnt.c, x_fslx_open.c, x_fslx_set_flags.c:
 
-2003-04-06 13:00  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-06 13:00  'Arnaud BERCEGEAY'
 
 	* a_graf_dragbox.c, a_graf_handle.c, a_graf_mkstate.c,
-	a_graf_rubbox.c: add CHECK_NULLPTR option
+	a_graf_rubbox.c:
 
-2003-04-06 12:52  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-06 12:52  'Arnaud BERCEGEAY'
 
-	* a_fsel_exinput.c, a_fsel_input.c: add CHECK_NULLPTR option
+	* a_fsel_exinput.c, a_fsel_input.c:
 
-2003-04-06 12:48  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-06 12:48  'Arnaud BERCEGEAY'
 
-	* a_form_button.c, a_form_center.c, a_form_keybd.c: add
-	CHECK_NULLPTR option
+	* a_form_button.c, a_form_center.c, a_form_keybd.c:
 
-2003-04-05 19:34  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-05 19:34  'Arnaud BERCEGEAY'
 
-	* x_fnts_do.c, x_fnts_evnt.c, x_fnts_get_info.c: add CHECK_NULLPTR
-	option
+	* x_fnts_do.c, x_fnts_evnt.c, x_fnts_get_info.c:
 
-2003-04-05 19:29  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-05 19:29  'Arnaud BERCEGEAY'
 
-	* x_fnts_create.c: fix: ctrl[3]=2, not 4
+	* x_fnts_create.c:
 
-2003-04-05 19:25  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix: ctrl[3]=2, not 4
+	
+2003-04-05 19:25  'Arnaud BERCEGEAY'
 
-	* x_fnts_close.c: add CHECK_NULLPTR option
+	* x_fnts_close.c:
 
-2003-04-03 22:02  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 22:02  'Arnaud BERCEGEAY'
 
 	* a_appl_getinfo.c, a_appl_search.c, x_edit_evnt.c,
 	x_edit_get_buf.c, x_edit_get_colour.c, x_edit_get_font.c,
 	x_edit_get_format.c, x_edit_get_pos.c, x_edit_get_scrollinfo.c,
-	x_edit_get_sel.c, x_edit_resized.c: [doc] fix some doxygen layout
+	x_edit_get_sel.c, x_edit_resized.c:
 
-2003-04-03 21:14  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] fix some doxygen layout
+	
+2003-04-03 21:14  'Arnaud BERCEGEAY'
 
-	* a_evnt_multi.c: add CHECK_NULLPTR option
+	* a_evnt_multi.c:
 
-2003-04-03 21:10  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 21:10  'Arnaud BERCEGEAY'
 
-	* a_evnt_mouse.c: add CHECK_NULLPTR option
+	* a_evnt_mouse.c:
 
-2003-04-03 20:51  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 20:51  'Arnaud BERCEGEAY'
 
-	* a_evnt_button.c: add CHECK_NULLPTR option
+	* a_evnt_button.c:
 
-2003-04-03 20:37  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 20:37  'Arnaud BERCEGEAY'
 
-	* x_edit_set_dirty.c: fix: ctrl[1]=3 instead of 2 and ctrl[3]=1
-	instead of 2
+	* x_edit_set_dirty.c:
 
-2003-04-03 20:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix: ctrl[1]=3 instead of 2 and ctrl[3]=1 instead of 2
+	
+2003-04-03 20:33  'Arnaud BERCEGEAY'
 
-	* x_edit_resized.c: add CHECK_NULLPTR option
+	* x_edit_resized.c:
 
-2003-04-03 20:27  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 20:27  'Arnaud BERCEGEAY'
 
-	* x_edit_get_scrollinfo.c: add CHECK_NULLPTR option
+	* x_edit_get_scrollinfo.c:
 
-2003-04-03 20:24  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 20:24  'Arnaud BERCEGEAY'
 
-	* x_edit_get_scrollinfo.c: fix: ctrl[2]=10 instead of 6
+	* x_edit_get_scrollinfo.c:
 
-2003-04-03 20:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix: ctrl[2]=10 instead of 6
+	
+2003-04-03 20:21  'Arnaud BERCEGEAY'
 
-	* x_edit_get_sel.c: add CHECK_NULLPTR option
+	* x_edit_get_sel.c:
 
-2003-04-03 20:18  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 20:18  'Arnaud BERCEGEAY'
 
-	* x_edit_get_sel.c: fix: ctrl[4]=2 instead of 0
+	* x_edit_get_sel.c:
 
-2003-04-03 20:12  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix: ctrl[4]=2 instead of 0
+	
+2003-04-03 20:12  'Arnaud BERCEGEAY'
 
-	* x_edit_get_cursor.c, x_edit_get_pos.c: add CHECK_NULLPTR option
+	* x_edit_get_cursor.c, x_edit_get_pos.c:
 
-2003-04-03 20:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 20:09  'Arnaud BERCEGEAY'
 
-	* x_edit_get_cursor.c: fix: ctrl[4]=1 instead of 0
+	* x_edit_get_cursor.c:
 
-2003-04-03 20:07  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix: ctrl[4]=1 instead of 0
+	
+2003-04-03 20:07  'Arnaud BERCEGEAY'
 
-	* x_edit_get_font.c: add CHECK_NULLPTR option
+	* x_edit_get_font.c:
 
-2003-04-03 19:58  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 19:58  'Arnaud BERCEGEAY'
 
-	* x_edit_get_format.c, x_edit_get_colour.c: add CHECK_NULLPTR
-	option
+	* x_edit_get_format.c, x_edit_get_colour.c:
 
-2003-04-03 19:55  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 19:55  'Arnaud BERCEGEAY'
 
-	* x_edit_get_buf.c: add CHECK_NULLPTR option
+	* x_edit_get_buf.c:
 
-2003-04-03 19:51  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 19:51  'Arnaud BERCEGEAY'
 
-	* x_edit_get_buf.c: fix: ctrl[4]=1 instead of 0
+	* x_edit_get_buf.c:
 
-2003-04-03 19:46  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix: ctrl[4]=1 instead of 0
+	
+2003-04-03 19:46  'Arnaud BERCEGEAY'
 
-	* x_edit_evnt.c: add CHECK_NULLPTR option
+	* x_edit_evnt.c:
 
-2003-04-03 19:37  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 19:37  'Arnaud BERCEGEAY'
 
-	* x_edit_create.c: fix: ctrl[4]=1 instead of 0
+	* x_edit_create.c:
 
-2003-04-03 19:17  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix: ctrl[4]=1 instead of 0
+	
+2003-04-03 19:17  'Arnaud BERCEGEAY'
 
-	* a_appl_init.c: move initialisation of gl_apid and gl_ap_version
-	from mt_appl_init() to appl_init()
+	* a_appl_init.c:
 
-2003-04-03 19:14  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	move initialisation of gl_apid and gl_ap_version from mt_appl_init() to appl_init()
+	
+2003-04-03 19:14  'Arnaud BERCEGEAY'
 
-	* a_glue.c: move initialisation of gl_apid and gl_ap_version from
-	mt_appl_init() to appl_init()
+	* a_glue.c:
 
-2003-04-03 19:12  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	move initialisation of gl_apid and gl_ap_version from mt_appl_init() to appl_init()
+	
+2003-04-03 19:12  'Arnaud BERCEGEAY'
 
-	* gem.h: move initialisation of gl_apid and gl_ap_version from
-	mt_appl_init() to the appl_init() macro
+	* gem.h:
 
-2003-04-03 18:58  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	move initialisation of gl_apid and gl_ap_version from mt_appl_init() to the appl_init() macro
+	
+2003-04-03 18:58  'Arnaud BERCEGEAY'
 
-	* a_appl_getinfo.c, a_appl_search.c: add CHECK_NULLPTR option
+	* a_appl_getinfo.c, a_appl_search.c:
 
-2003-04-03 18:49  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add CHECK_NULLPTR option
+	
+2003-04-03 18:49  'Arnaud BERCEGEAY'
 
-	* gem_aesP.h: add CHECK_NULLPTR (nice idea by Martin Elsasser
-	against dummy variables)
+	* gem_aesP.h:
 
-2003-03-25 11:18  'Frank Naumann <fnaumann@freemint.de>'
+	add CHECK_NULLPTR (nice idea by Martin Elsasser against dummy variables)
+	
+2003-03-25 11:18  'Frank Naumann'
 
-	* gemlib.spec: Corrected URL and packager too.
+	* gemlib.spec:
 
-2003-03-25 10:28  'Frank Naumann <fnaumann@freemint.de>'
+	Corrected URL and packager too.
+	
+2003-03-25 10:28  'Frank Naumann'
 
-	* gemlib.spec: Updated specfile with new release too. Btw. is maybe
-	a good idea to sort out the version numbering in one file and
-	update all other dependencies automatically.
+	* gemlib.spec:
 
-2003-03-24 23:51  'Standa Opichal <opichals@seznam.cz>'
+	Updated specfile with new release too. Btw. is maybe a good idea
+	to sort out the version numbering in one file and update all
+	other dependencies automatically.
+	
+2003-03-24 23:51  'Standa Opichal'
 
-	* vsl_ends.c: Note about the TOS4.04 added into the documentation.
+	* vsl_ends.c:
 
-2003-03-24 23:49  'Standa Opichal <opichals@seznam.cz>'
+	Note about the TOS4.04 added into the documentation.
+	
+2003-03-24 23:49  'Standa Opichal'
 
-	* vsl_ends.c: The TOS4.04 VDI requires the intout array to be set.
-	Otherwise it crashes.
+	* vsl_ends.c:
 
-2003-03-23 18:39  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	The TOS4.04 VDI requires the intout array to be set. Otherwise it crashes.
+	
+2003-03-23 18:39  'Arnaud BERCEGEAY'
 
-	* mt_gem.h: this is now release 0.42.99-20030323
+	* mt_gem.h:
 
-2003-03-23 18:36  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	this is now release 0.42.99-20030323
+	
+2003-03-23 18:36  'Arnaud BERCEGEAY'
 
-	* files.mak: add vex_wheelv.o module for sozobon, purec and gcc281
-	makefiles
+	* files.mak:
 
-2003-03-19 15:41  'Frank Naumann <fnaumann@freemint.de>'
+	add vex_wheelv.o module for sozobon, purec and gcc281 makefiles
+	
+2003-03-19 15:41  'Frank Naumann'
 
-	* SRCFILES, mt_gem.h, vex_wheelv.c: Added new binding vex_wheelv.
-	Hope it's correct so.
+	* SRCFILES, mt_gem.h, vex_wheelv.c:
 
-2003-03-18 22:06  'Frank Naumann <fnaumann@freemint.de>'
+	Added new binding vex_wheelv. Hope it's correct so.
+	
+2003-03-18 22:06  'Frank Naumann'
 
-	* vsf_udpat.c: Corrected binding, planes are in cntrl_3 and not
-	cntrl_1!
+	* vsf_udpat.c:
 
-2003-03-16 15:52  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	Corrected binding, planes are in cntrl_3 and not cntrl_1!
+	
+2003-03-16 15:52  'Arnaud BERCEGEAY'
 
-	* mt_gem.h: XaAES extensions: fix MU_MX, add MU_WHEEL, add MU_MX,
-	add MU_NORM_KEYBD, add MU_DYNAMIC_KEYBD, add MENUBAR, add WF_MENU,
-	add WF_WHEEL, add WF_XAAES, add WA_WHEEL
+	* mt_gem.h:
 
-2003-03-15 20:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	XaAES extensions: fix MU_MX, add MU_WHEEL, add MU_MX, add MU_NORM_KEYBD, add MU_DYNAMIC_KEYBD, add MENUBAR, add WF_MENU, add WF_WHEEL, add WF_XAAES, add WA_WHEEL
+	
+2003-03-15 20:38  'Arnaud BERCEGEAY'
 
-	* x_lbox_create.c, x_lbox_set_items.c: [doc] fix some comments
-	(doxygen syntax)
+	* x_lbox_create.c, x_lbox_set_items.c:
 
-2003-03-15 20:35  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] fix some comments (doxygen syntax)
+	
+2003-03-15 20:35  'Arnaud BERCEGEAY'
 
-	* v_page_size.c, vro_cpyfm.c: [doc] fix some comments (doxygen
-	syntax)
+	* v_page_size.c, vro_cpyfm.c:
 
-2003-03-15 20:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] fix some comments (doxygen syntax)
+	
+2003-03-15 20:33  'Arnaud BERCEGEAY'
 
-	* mt_gemx.h: swap mt_lbox_get_avis and mt_lbox_get_visible
-	(mt_lbox_get_visible is the real function, mt_lbox_get_avis is a
-	macro to mt_lbox_get_visible); [doc] fix some doxygen syntax in
-	comments; [doc] add /** TODO */ comment to undocumented data
+	* mt_gemx.h:
 
-2003-03-15 20:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	swap mt_lbox_get_avis and mt_lbox_get_visible (mt_lbox_get_visible is the real function, mt_lbox_get_avis is a macro to mt_lbox_get_visible); [doc] fix some doxygen syntax in comments; [doc] add /** TODO */ comment to undocumented data
+	
+2003-03-15 20:28  'Arnaud BERCEGEAY'
 
-	* mt_gem.h: [doc] add some /** TODO */ comments to undocumented
-	data
+	* mt_gem.h:
 
-2003-03-15 20:25  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] add some /** TODO */ comments to undocumented data
+	
+2003-03-15 20:25  'Arnaud BERCEGEAY'
 
-	* gemx.h: fix lbox_get_avis and lbox_get_visible macro: the real
-	function name is mt_lbox_get_visible (it's not mt_lbox_get_avis)
+	* gemx.h:
 
-2003-03-15 20:23  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix lbox_get_avis and lbox_get_visible macro: the real function name is mt_lbox_get_visible (it's not mt_lbox_get_avis)
+	
+2003-03-15 20:23  'Arnaud BERCEGEAY'
 
-	* doxydoc.c: [doc] add doxygen group x_wdlg
+	* doxydoc.c:
 
-2003-03-15 20:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] add doxygen group x_wdlg
+	
+2003-03-15 20:21  'Arnaud BERCEGEAY'
 
-	* Doxyfile: [doc] add VdiHdl=short predefined macro for doxygen
+	* Doxyfile:
 
-2003-03-14 21:47  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] add VdiHdl=short predefined macro for doxygen
+	
+2003-03-14 21:47  'Arnaud BERCEGEAY'
 
-	* x_fslx_open.c: [doc] fix some doxy-comment syntax
+	* x_fslx_open.c:
 
-2003-03-14 21:45  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] fix some doxy-comment syntax
+	
+2003-03-14 21:45  'Arnaud BERCEGEAY'
 
-	* mt_gemx.h: [doc] add dummy /** TODO */ comment to undocumented
-	data
+	* mt_gemx.h:
 
-2003-03-14 21:43  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] add dummy /** TODO */ comment to undocumented data
+	
+2003-03-14 21:43  'Arnaud BERCEGEAY'
 
-	* mt_gem.h: [doc] add VDI groups; add dummy /** TODO */ comment to
-	undocumented data
+	* mt_gem.h:
 
-2003-03-14 21:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] add VDI groups; add dummy /** TODO */ comment to undocumented data
+	
+2003-03-14 21:38  'Arnaud BERCEGEAY'
 
-	* x_fnts_create.c, x_fnts_get_style.c: [doc] fix some doxy-comment
-	syntax
+	* x_fnts_create.c, x_fnts_get_style.c:
 
-2003-03-14 21:35  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] fix some doxy-comment syntax
+	
+2003-03-14 21:35  'Arnaud BERCEGEAY'
 
-	* doxydoc.c: [doc] create groups for VDI API
+	* doxydoc.c:
 
-2003-03-14 21:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] create groups for VDI API
+	
+2003-03-14 21:33  'Arnaud BERCEGEAY'
 
-	* a_objc_sysvar.c: remove extra antislash-p keyword before EOL
+	* a_objc_sysvar.c:
 
-2003-03-14 21:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove extra antislash-p keyword before EOL
+	
+2003-03-14 21:28  'Arnaud BERCEGEAY'
 
-	* a_evnt_mesag.c: [doc] add missing parameter global_aes
+	* a_evnt_mesag.c:
 
-2003-03-14 21:26  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] add missing parameter global_aes
+	
+2003-03-14 21:26  'Arnaud BERCEGEAY'
 
-	* a_appl_getinfo.c: [doc] remove the 4 antislash-0, uneeded here
+	* a_appl_getinfo.c:
 
-2003-03-14 21:23  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] remove the 4 antislash-0, uneeded here
+	
+2003-03-14 21:23  'Arnaud BERCEGEAY'
 
-	* Doxyfile: [doc] exclude a_glue.c gem.h and gemx.h
+	* Doxyfile:
 
-2003-02-28 21:46  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	[doc] exclude a_glue.c gem.h and gemx.h
+	
+2003-02-28 21:46  'Arnaud BERCEGEAY'
 
 	* Doxyfile, EXTRAFILES, MISCFILES, Makefile, SRCFILES, _sx_asm.s,
 	a_appl_bvset.c, a_appl_control.c, a_appl_exit.c, a_appl_find.c,
@@ -1543,139 +2187,184 @@
 	x_wdlg_set_edit.c, x_wdlg_set_iconify.c, x_wdlg_set_size.c,
 	x_wdlg_set_tree.c, x_wdlg_set_uniconify.c, zip.mak, include/README,
 	include/gcc281/compiler.h, include/purec/compiler.h,
-	include/sozobon/compiler.h: merge branch mgemlib-gemlib-0_42_2
+	include/sozobon/compiler.h:
 
-2003-02-27 20:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge branch mgemlib-gemlib-0_42_2
+	
+2003-02-27 20:21  'Arnaud BERCEGEAY'
 
-	* zip.mak: add sources target to built gemlib-src.tgz
+	* zip.mak:
 
-2003-02-26 11:42  'Frank Naumann <fnaumann@freemint.de>'
+	add sources target to built gemlib-src.tgz
+	
+2003-02-26 11:42  'Frank Naumann'
 
-	* gemlib.spec: Removed special bash feature use, install primary to
-	/usr and provide symbolic links in /usr/GEM for backward
-	compatibility.
+	* gemlib.spec:
 
-2003-02-26 11:28  'Frank Naumann <fnaumann@freemint.de>'
+	Removed special bash feature use, install primary to /usr and provide
+	symbolic links in /usr/GEM for backward compatibility.
+	
+2003-02-26 11:28  'Frank Naumann'
 
-	* gemlib.spec: Removed bash feature use (work now with sh).
+	* gemlib.spec:
 
-2003-02-25 11:34  'Standa Opichal <opichals@seznam.cz>'
+	Removed bash feature use (work now with sh).
+	
+2003-02-25 11:34  'Standa Opichal'
 
-	* gemlib.spec: The beta release RPM spec file.
+	* gemlib.spec:
 
-2003-02-24 23:15  'Standa Opichal <opichals@seznam.cz>'
+	The beta release RPM spec file.
+	
+2003-02-24 23:15  'Standa Opichal'
 
-	* EXTRAFILES, SRCFILES: make dist working - adding/removing files.
+	* EXTRAFILES, SRCFILES:
 
-2003-02-20 21:10  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	make dist working - adding/removing files.
+	
+2003-02-20 21:10  'Arnaud BERCEGEAY'
 
-	* pc.mak: remove hard-coded PUREC variables; add option -P to
-	PCC.TTP; cosmetic changes
+	* pc.mak:
 
-2003-02-20 21:08  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove hard-coded PUREC variables; add option -P to PCC.TTP; cosmetic changes
+	
+2003-02-20 21:08  'Arnaud BERCEGEAY'
 
-	* zip.mak: cosmetic changes
+	* zip.mak:
 
-2003-02-20 21:03  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	cosmetic changes
+	
+2003-02-20 21:03  'Arnaud BERCEGEAY'
 
-	* gcc.mak, sox.mak, gcc281.mak, gcc281-16.mak: add Id CVS keyword;
-	remove -Iinclude from CFLAGS
+	* gcc.mak, sox.mak, gcc281.mak, gcc281-16.mak:
 
-2003-02-20 21:03  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add Id CVS keyword; remove -Iinclude from CFLAGS
+	
+2003-02-20 21:03  'Arnaud BERCEGEAY'
 
-	* files.mak: remove unused variables
+	* files.mak:
 
-2003-02-19 20:59  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove unused variables
+	
+2003-02-19 20:59  'Arnaud BERCEGEAY'
 
-	* zip.mak: add missing parenthesis for gcc target
+	* zip.mak:
 
-2003-02-19 20:02  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add missing parenthesis for gcc target
+	
+2003-02-19 20:02  'Arnaud BERCEGEAY'
 
 	* include/: gcc281/compiler.h, purec/compiler.h,
-	sozobon/compiler.h: file compiler.h was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	sozobon/compiler.h:
 
-2003-02-19 20:02  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file compiler.h was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-02-19 20:02  'Arnaud BERCEGEAY'
 
 	* include/: gcc281/compiler.h, purec/compiler.h,
-	sozobon/compiler.h: initial checkin
+	sozobon/compiler.h:
 
-2003-02-19 20:01  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	initial checkin
+	
+2003-02-19 20:01  'Arnaud BERCEGEAY'
 
-	* include/README: file README was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* include/README:
 
-2003-02-19 20:01  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file README was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-02-19 20:01  'Arnaud BERCEGEAY'
 
-	* include/README: inital checkin
+	* include/README:
 
-2003-02-19 20:00  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	inital checkin
+	
+2003-02-19 20:00  'Arnaud BERCEGEAY'
 
-	* zip.mak: add automatic packager for purec, sozobon and gcc lib
+	* zip.mak:
 
-2003-02-19 19:57  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add automatic packager for purec, sozobon and gcc lib
+	
+2003-02-19 19:57  'Arnaud BERCEGEAY'
 
-	* files.mak: fixe path for headers files; add gcc 16bits lib;
-	rename gemlib.lib to gem.lib
+	* files.mak:
 
-2003-02-19 19:51  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fixe path for headers files; add gcc 16bits lib; rename gemlib.lib to gem.lib
+	
+2003-02-19 19:51  'Arnaud BERCEGEAY'
 
-	* GEMLIB.PRJ: pure c project replaced by makefile
+	* GEMLIB.PRJ:
 
-2003-02-16 22:03  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	pure c project replaced by makefile
+	
+2003-02-16 22:03  'Arnaud BERCEGEAY'
 
-	* pc.mak: file pc.mak was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* pc.mak:
 
-2003-02-16 22:03  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file pc.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-02-16 22:03  'Arnaud BERCEGEAY'
 
-	* pc.mak: initial checkin of makefile for purec
+	* pc.mak:
 
-2003-02-16 22:01  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	initial checkin of makefile for purec
+	
+2003-02-16 22:01  'Arnaud BERCEGEAY'
 
-	* a_appl_init.c: add include gem.h for global data
+	* a_appl_init.c:
 
-2003-02-16 22:00  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add include gem.h for global data
+	
+2003-02-16 22:00  'Arnaud BERCEGEAY'
 
-	* a_fsel_exinput.c, a_appl_getinfo.c: replace globale variable
-	gl_ap_version by local mt_aes-compliant variable global_aes[0]
+	* a_fsel_exinput.c, a_appl_getinfo.c:
 
-2003-02-16 21:58  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	replace globale variable gl_ap_version by local mt_aes-compliant variable global_aes[0]
+	
+2003-02-16 21:58  'Arnaud BERCEGEAY'
 
-	* a_glue.c: replace include gem_aesP.h by mt_gem.h and gem.h
+	* a_glue.c:
 
-2003-02-16 21:58  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	replace include gem_aesP.h by mt_gem.h and gem.h
+	
+2003-02-16 21:58  'Arnaud BERCEGEAY'
 
-	* gem_aesP.h: remove include gem.h
+	* gem_aesP.h:
 
-2003-02-16 21:57  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove include gem.h
+	
+2003-02-16 21:57  'Arnaud BERCEGEAY'
 
-	* gem_vdiP.h: add new VDI_PARAMS macro; remove include gem.h
+	* gem_vdiP.h:
 
-2003-02-16 21:56  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add new VDI_PARAMS macro; remove include gem.h
+	
+2003-02-16 21:56  'Arnaud BERCEGEAY'
 
-	* mt_gem.h: this is now release 0.42.99-20030216 (use new
-	VDI_PARAMS macro)
+	* mt_gem.h:
 
-2003-02-16 21:54  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	this is now release 0.42.99-20030216 (use new VDI_PARAMS macro)
+	
+2003-02-16 21:54  'Arnaud BERCEGEAY'
 
 	* n_v_color2nearest.c, n_v_color2value.c, n_v_create_ctab.c,
 	n_v_create_itab.c, n_v_ctab_idx2value.c, n_v_ctab_idx2vdi.c,
 	n_v_ctab_vdi2idx.c, n_v_bez.c, n_v_bez_off.c, n_v_bez_on.c,
-	n_v_bez_qual.c, n_v_clsbm.c: change the way vdi_params is declared
-	and initialized to make purec happy
+	n_v_bez_qual.c, n_v_clsbm.c:
 
-2003-02-16 21:51  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:51  'Arnaud BERCEGEAY'
 
 	* n_v_resize_bm.c, n_v_setrgb.c, n_v_value2color.c, n_vq_ctab.c,
 	n_vq_ctab_entry.c, n_vq_ctab_id.c, n_vq_devinfo.c,
 	n_v_get_ctab_id.c, n_v_get_outline.c, n_v_getbitmap_info.c,
 	n_v_getoutline.c, n_v_open_bm.c, n_v_opnbm.c, n_v_opnprn.c,
 	n_v_delete_ctab.c, n_v_delete_itab.c, n_v_ftext.c, n_v_ftext16.c,
-	n_v_ftext16n.c, n_v_ftext_offset.c, n_v_ftext_offset16.c: change
-	the way vdi_params is declared and initialized to make purec happy
+	n_v_ftext16n.c, n_v_ftext_offset.c, n_v_ftext_offset16.c:
 
-2003-02-16 21:47  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:47  'Arnaud BERCEGEAY'
 
 	* n_vqm_bg_color.c, n_vqm_fg_color.c, n_vqr_bg_color.c,
 	n_vqr_fg_color.c, n_vqt_advance.c, n_vqt_advance32.c,
@@ -1683,19 +2372,21 @@
 	n_vq_weight_color.c, n_vqf_bg_color.c, n_vqf_fg_color.c,
 	n_vql_bg_color.c, n_vql_fg_color.c, n_vq_dflt_ctab.c,
 	n_vq_ext_devinfo.c, n_vq_hilite_color.c, n_vq_margins.c,
-	n_vq_max_color.c, n_vq_min_color.c, n_vq_prn_scaling.c: change the
-	way vdi_params is declared and initialized to make purec happy
+	n_vq_max_color.c, n_vq_min_color.c, n_vq_prn_scaling.c:
 
-2003-02-16 21:44  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:44  'Arnaud BERCEGEAY'
 
 	* n_vqt_name_and_id.c, n_vqt_pairkern.c, n_vqt_real_extent.c,
 	n_vqt_trackkern.c, n_vqt_xfntinfo.c, n_vr_transfer_bits.c,
 	n_vs_ctab.c, n_vqt_char_index.c, n_vqt_ext_name.c,
 	n_vqt_f_extent.c, n_vqt_f_extent16.c, n_vqt_f_extent16n.c,
-	n_vqt_fg_color.c, n_vqt_fontheader.c: change the way vdi_params is
-	declared and initialized to make purec happy
+	n_vqt_fg_color.c, n_vqt_fontheader.c:
 
-2003-02-16 21:40  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:40  'Arnaud BERCEGEAY'
 
 	* n_vsr_fg_color.c, n_vst_arbpt.c, n_vst_arbpt32.c,
 	n_vst_bg_color.c, n_vst_charmap.c, n_vst_fg_color.c, n_vst_kern.c,
@@ -1703,108 +2394,125 @@
 	n_vsl_fg_color.c, n_vsm_bg_color.c, n_vsm_fg_color.c,
 	n_vsr_bg_color.c, n_vs_ctab_entry.c, n_vs_dflt_ctab.c,
 	n_vs_document_info.c, n_vs_hilite_color.c, n_vs_max_color.c,
-	n_vs_min_color.c, n_vs_weight_color.c: change the way vdi_params is
-	declared and initialized to make purec happy
+	n_vs_min_color.c, n_vs_weight_color.c:
 
-2003-02-16 21:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:38  'Arnaud BERCEGEAY'
 
-	* rc_intersect.c: add macros min and max for purec
+	* rc_intersect.c:
 
-2003-02-16 21:36  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add macros min and max for purec
+	
+2003-02-16 21:36  'Arnaud BERCEGEAY'
 
 	* v_clear_disp_list.c, v_clrwk.c, v_clsvwk.c, v_clswk.c,
 	v_contourfill.c, v_copies.c, v_curdown.c, v_alpha_text.c, v_arc.c,
 	v_bar.c, v_bit_image.c, v_cellarray.c, v_circle.c,
 	n_vst_map_mode.c, n_vst_name.c, n_vst_setsize.c, n_vst_setsize32.c,
-	n_vst_skew.c, n_vst_track_offset.c, n_vst_width.c: change the way
-	vdi_params is declared and initialized to make purec happy
+	n_vst_skew.c, n_vst_track_offset.c, n_vst_width.c:
 
-2003-02-16 21:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:33  'Arnaud BERCEGEAY'
 
 	* v_fillarea.c, v_flushcache.c, v_form_adv.c, v_get_pixel.c,
 	v_gtext.c, v_gtext16.c, v_gtext16n.c, v_eeos.c, v_ellarc.c,
 	v_ellipse.c, v_ellpie.c, v_enter_cur.c, v_escape2000.c,
 	v_exit_cur.c, v_curhome.c, v_curleft.c, v_curright.c, v_curtext.c,
-	v_curup.c, v_dspcur.c, v_eeol.c: change the way vdi_params is
-	declared and initialized to make purec happy
+	v_curup.c, v_dspcur.c, v_eeol.c:
 
-2003-02-16 21:29  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:29  'Arnaud BERCEGEAY'
 
 	* v_rfbox.c, v_rmcur.c, v_rvoff.c, v_rvon.c, v_savecache.c,
 	v_set_app_buff.c, v_show_c.c, v_orient.c, v_output_window.c,
 	v_page_size.c, v_pieslice.c, v_pline.c, v_pmarker.c, v_rbox.c,
 	v_hardcopy.c, v_hide_c.c, v_justified.c, v_loadcache.c,
-	v_meta_extents.c, v_opnvwk.c, v_opnwk.c: change the way vdi_params
-	is declared and initialized to make purec happy
+	v_meta_extents.c, v_opnvwk.c, v_opnwk.c:
 
-2003-02-16 21:26  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:26  'Arnaud BERCEGEAY'
 
 	* vq_curaddress.c, vq_extnd.c, vq_key_s.c, vq_mouse.c,
 	vq_page_name.c, vq_scan.c, vq_tabstatus.c, vm_coords.c,
 	vm_filename.c, vm_pagesize.c, vq_calibrate.c, vq_cellarray.c,
 	vq_chcells.c, vq_color.c, v_trays.c, v_updwk.c, v_write_meta.c,
-	vex_butv.c, vex_curv.c, vex_motv.c, vex_timv.c: change the way
-	vdi_params is declared and initialized to make purec happy
+	vex_butv.c, vex_curv.c, vex_motv.c, vex_timv.c:
 
-2003-02-16 21:23  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:23  'Arnaud BERCEGEAY'
 
 	* vqt_width.c, vr_recfl.c, vr_trnfm.c, vro_cpyfm.c, vrq_choice.c,
 	vrq_locator.c, vrq_string.c, vqt_cachesize.c, vqt_extent.c,
 	vqt_extent16.c, vqt_extent16n.c, vqt_fontinfo.c, vqt_get_table.c,
 	vqt_name.c, vq_tdimensions.c, vq_tray_names.c, vqf_attributes.c,
 	vqin_mode.c, vql_attributes.c, vqm_attributes.c, vqt_attributes.c:
-	change the way vdi_params is declared and initialized to make purec
-	happy
 
-2003-02-16 21:20  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:20  'Arnaud BERCEGEAY'
 
 	* vs_curaddress.c, vs_palette.c, vsc_expose.c, vsc_form.c,
 	vsf_color.c, vsf_interior.c, vsf_perimeter.c, vrq_valuator.c,
 	vrt_cpyfm.c, vs_calibrate.c, vs_clip.c, vs_clip_off.c,
-	vs_clip_pxy.c, vs_color.c: change the way vdi_params is declared
-	and initialized to make purec happy
+	vs_clip_pxy.c, vs_color.c:
 
-2003-02-16 21:16  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:16  'Arnaud BERCEGEAY'
 
 	* vsm_valuator.c, vsp_film.c, vst_alignment.c, vst_color.c,
 	vst_effects.c, vst_error.c, vst_font.c, vsl_width.c, vsm_choice.c,
 	vsm_color.c, vsm_height.c, vsm_locator.c, vsm_string.c, vsm_type.c,
 	vsf_style.c, vsf_udpat.c, vsin_mode.c, vsl_color.c, vsl_ends.c,
-	vsl_type.c, vsl_udsty.c: change the way vdi_params is declared and
-	initialized to make purec happy
+	vsl_type.c, vsl_udsty.c:
 
-2003-02-16 21:11  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:11  'Arnaud BERCEGEAY'
 
 	* vswr_mode.c, vt_alignment.c, vt_axis.c, vt_origin.c,
 	vst_rotation.c, vst_scratch.c, vst_unload_fonts.c, vst_point.c,
-	vst_load_fonts.c, vst_height.c: change the way vdi_params is
-	declared and initialized to make purec happy
+	vst_load_fonts.c, vst_height.c:
 
-2003-02-16 21:08  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way vdi_params is declared and initialized to make purec happy
+	
+2003-02-16 21:08  'Arnaud BERCEGEAY'
 
-	* vt_resolution.c: change the way VDIPB is declared and initialized
-	to make purec happy
+	* vt_resolution.c:
 
-2003-02-11 20:41  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change the way VDIPB is declared and initialized to make purec happy
+	
+2003-02-11 20:41  'Arnaud BERCEGEAY'
 
 	* rc_array_to_grect.c, rc_copy.c, rc_equal.c, rc_grect_to_array.c,
-	rc_intersect.c, vdi_array2str.c, vdi_str2array.c, vdi_wstrlen.c: no
-	more include gem.h (replaced by mt_gem.h)
+	rc_intersect.c, vdi_array2str.c, vdi_str2array.c, vdi_wstrlen.c:
 
-2003-02-11 20:37  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	no more include gem.h (replaced by mt_gem.h)
+	
+2003-02-11 20:37  'Arnaud BERCEGEAY'
 
-	* globals.c: remove global VDI array/structure (unused now)
+	* globals.c:
 
-2003-02-08 20:49  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove global VDI array/structure (unused now)
+	
+2003-02-08 20:49  'Arnaud BERCEGEAY'
 
-	* MISCFILES, Makefile, SRCFILES, files.mak: add mt_gem.h and
-	mt_gemx.h
+	* MISCFILES, Makefile, SRCFILES, files.mak:
 
-2003-02-08 20:46  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add mt_gem.h and mt_gemx.h
+	
+2003-02-08 20:46  'Arnaud BERCEGEAY'
 
-	* globals.c, gem_aesP.h, gem_vdiP.h: add include of mt_gem.h
+	* globals.c, gem_aesP.h, gem_vdiP.h:
 
-2003-02-08 20:44  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add include of mt_gem.h
+	
+2003-02-08 20:44  'Arnaud BERCEGEAY'
 
 	* n_v_bez.c, n_v_bez_off.c, n_v_bez_on.c, n_v_bez_qual.c,
 	n_v_clsbm.c, n_v_color2nearest.c, n_v_color2value.c,
@@ -1835,25 +2543,29 @@
 	n_vsr_fg_color.c, n_vst_arbpt.c, n_vst_arbpt32.c, n_vst_bg_color.c,
 	n_vst_charmap.c, n_vst_fg_color.c, n_vst_kern.c, n_vst_map_mode.c,
 	n_vst_name.c, n_vst_setsize.c, n_vst_setsize32.c, n_vst_skew.c,
-	n_vst_track_offset.c, n_vst_width.c: include mt_gemx.h instead of
-	gemx.h
+	n_vst_track_offset.c, n_vst_width.c:
 
-2003-02-08 20:40  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	include mt_gemx.h instead of gemx.h
+	
+2003-02-08 20:40  'Arnaud BERCEGEAY'
 
 	* rc_array_to_grect.c, rc_copy.c, rc_equal.c, rc_grect_to_array.c,
 	rc_intersect.c, vdi_array2str.c, vdi_str2array.c, vdi_wstrlen.c:
-	add include mt_gemx.h
 
-2003-02-08 20:39  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add include mt_gemx.h
+	
+2003-02-08 20:39  'Arnaud BERCEGEAY'
 
 	* pdlg_add_printers.c, pdlg_add_sub_dlgs.c, pdlg_close.c,
 	pdlg_create.c, pdlg_delete.c, pdlg_dflt_sett.c, pdlg_do.c,
 	pdlg_evnt.c, pdlg_free_sett.c, pdlg_get_setsize.c, pdlg_new_sett.c,
 	pdlg_open.c, pdlg_rmv_printers.c, pdlg_rmv_sub_dlgs.c,
 	pdlg_save_dflt_sett.c, pdlg_update.c, pdlg_use_sett.c,
-	pdlg_validate_sett.c: include mt_gemx.h instead of gemx.h
+	pdlg_validate_sett.c:
 
-2003-02-08 20:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	include mt_gemx.h instead of gemx.h
+	
+2003-02-08 20:38  'Arnaud BERCEGEAY'
 
 	* x_edit_close.c, x_edit_create.c, x_edit_cursor.c,
 	x_edit_delete.c, x_edit_evnt.c, x_edit_get_buf.c,
@@ -1862,10 +2574,11 @@
 	x_edit_get_scrollinfo.c, x_edit_get_sel.c, x_edit_open.c,
 	x_edit_resized.c, x_edit_scroll.c, x_edit_set_buf.c,
 	x_edit_set_colour.c, x_edit_set_cursor.c, x_edit_set_dirty.c,
-	x_edit_set_font.c, x_edit_set_format.c, x_edit_set_pos.c: include
-	mt_gemx.h instead of gemx.h, and after gem_aesP.h
+	x_edit_set_font.c, x_edit_set_format.c, x_edit_set_pos.c:
 
-2003-02-08 20:35  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	include mt_gemx.h instead of gemx.h, and after gem_aesP.h
+	
+2003-02-08 20:35  'Arnaud BERCEGEAY'
 
 	* x_fslx_close.c, x_fslx_do.c, x_fslx_evnt.c, x_fslx_getnxtfile.c,
 	x_fslx_open.c, x_fslx_set_flags.c, x_form_popup.c,
@@ -1873,10 +2586,11 @@
 	x_form_xerr.c, x_fnts_add.c, x_fnts_close.c, x_fnts_create.c,
 	x_fnts_delete.c, x_fnts_do.c, x_fnts_evnt.c, x_fnts_get_info.c,
 	x_fnts_get_name.c, x_fnts_get_no_styles.c, x_fnts_get_style.c,
-	x_fnts_open.c, x_fnts_remove.c, x_fnts_update.c: include mt_gemx.h
-	instead of gemx.h, and after gem_aesP.h
+	x_fnts_open.c, x_fnts_remove.c, x_fnts_update.c:
 
-2003-02-08 20:32  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	include mt_gemx.h instead of gemx.h, and after gem_aesP.h
+	
+2003-02-08 20:32  'Arnaud BERCEGEAY'
 
 	* x_objc_wchange.c, x_objc_wdraw.c, x_objc_wedit.c, x_objc_xedit.c,
 	x_lbox_ascroll_to.c, x_lbox_bscroll_to.c, x_lbox_cnt_items.c,
@@ -1886,212 +2600,277 @@
 	x_lbox_get_item.c, x_lbox_get_items.c, x_lbox_get_slct_idx.c,
 	x_lbox_get_slct_item.c, x_lbox_get_tree.c, x_lbox_get_udata.c,
 	x_lbox_get_visible.c, x_lbox_set_asldr.c, x_lbox_set_bentries.c,
-	x_lbox_set_bsldr.c, x_lbox_set_items.c, x_lbox_update.c: include
-	mt_gemx.h instead of gemx.h, and after gem_aesP.h
+	x_lbox_set_bsldr.c, x_lbox_set_items.c, x_lbox_update.c:
 
-2003-02-08 20:29  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	include mt_gemx.h instead of gemx.h, and after gem_aesP.h
+	
+2003-02-08 20:29  'Arnaud BERCEGEAY'
 
 	* x_wdlg_close.c, x_wdlg_create.c, x_wdlg_delete.c, x_wdlg_evnt.c,
 	x_wdlg_get_edit.c, x_wdlg_get_handle.c, x_wdlg_get_tree.c,
 	x_wdlg_get_udata.c, x_wdlg_open.c, x_wdlg_redraw.c,
 	x_wdlg_set_edit.c, x_wdlg_set_iconify.c, x_wdlg_set_size.c,
-	x_wdlg_set_tree.c, x_wdlg_set_uniconify.c: include mt_gemx.h
-	instead of gemx.h
+	x_wdlg_set_tree.c, x_wdlg_set_uniconify.c:
 
-2003-02-08 20:27  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	include mt_gemx.h instead of gemx.h
+	
+2003-02-08 20:27  'Arnaud BERCEGEAY'
 
-	* gemx.h: gemx.h only keep the single-thread definitions (defines
-	to mt_ functions) -- see mt_gemx.h
+	* gemx.h:
 
-2003-02-08 20:26  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	gemx.h only keep the single-thread definitions (defines to mt_ functions) -- see mt_gemx.h
+	
+2003-02-08 20:26  'Arnaud BERCEGEAY'
 
-	* gem.h: gem.h only keep the single-thread definitions (global
-	array and defines to mt_ functions)
+	* gem.h:
 
-2003-02-08 20:23  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	gem.h only keep the single-thread definitions (global array and defines to mt_ functions)
+	
+2003-02-08 20:23  'Arnaud BERCEGEAY'
 
-	* mt_gem.h: file mt_gem.h was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* mt_gem.h:
 
-2003-02-08 20:23  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file mt_gem.h was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-02-08 20:23  'Arnaud BERCEGEAY'
 
-	* mt_gemx.h: file mt_gemx.h was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* mt_gemx.h:
 
-2003-02-08 20:23  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file mt_gemx.h was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-02-08 20:23  'Arnaud BERCEGEAY'
 
-	* mt_gem.h, mt_gemx.h: intial checkin
+	* mt_gem.h, mt_gemx.h:
 
-2003-01-14 20:58  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	intial checkin
+	
+2003-01-14 20:58  'Arnaud BERCEGEAY'
 
-	* a_appl_init.c: remove zero-ing of local array
+	* a_appl_init.c:
 
-2003-01-13 20:32  'Standa Opichal <opichals@seznam.cz>'
+	remove zero-ing of local array
+	
+2003-01-13 20:32  'Standa Opichal'
 
-	* a_appl_yield.c: documentation added.
+	* a_appl_yield.c:
 
-2003-01-13 12:01  'Standa Opichal <opichals@seznam.cz>'
+	documentation added.
+	
+2003-01-13 12:01  'Standa Opichal'
 
-	* a_shel_write.c: The aes_global changed to global_aes (just to
-	have in consistent against grep checks)
+	* a_shel_write.c:
 
-2003-01-13 12:01  'Standa Opichal <opichals@seznam.cz>'
+	The aes_global changed to global_aes (just to have in consistent against grep checks)
+	
+2003-01-13 12:01  'Standa Opichal'
 
-	* a_appl_init.c: zeroing of global_aes removed.  The aes_global
-	should not be used within the mt_XXX functions!
+	* a_appl_init.c:
 
-2003-01-13 12:00  'Standa Opichal <opichals@seznam.cz>'
+	zeroing of global_aes removed.
+	The aes_global should not be used within the mt_XXX functions!
+	
+2003-01-13 12:00  'Standa Opichal'
 
-	* gemlib.todo: a typo fix
+	* gemlib.todo:
 
-2003-01-13 08:41  'Standa Opichal <opichals@seznam.cz>'
+	a typo fix
+	
+2003-01-13 08:41  'Standa Opichal'
 
-	* a_appl_init.c: The aes_control should _not_ be zeroed as it is
-	set by the AES_PARAMS() macro above.
+	* a_appl_init.c:
 
-2003-01-12 09:48  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	The aes_control should _not_ be zeroed as it is set by the AES_PARAMS()
+	macro above.
+	
+2003-01-12 09:48  'Arnaud BERCEGEAY'
 
-	* GEMLIB.PRJ: file GEMLIB.PRJ was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* GEMLIB.PRJ:
 
-2003-01-12 09:48  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file GEMLIB.PRJ was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 09:48  'Arnaud BERCEGEAY'
 
-	* GEMLIB.PRJ: project file pour purec
+	* GEMLIB.PRJ:
 
-2003-01-12 09:46  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	project file pour purec
+	
+2003-01-12 09:46  'Arnaud BERCEGEAY'
 
-	* Makefile: add targets for doxygen doc, and for other compilers
+	* Makefile:
 
-2003-01-12 09:45  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add targets for doxygen doc, and for other compilers
+	
+2003-01-12 09:45  'Arnaud BERCEGEAY'
 
-	* _sx_asm.s: add asm code for sozobon
+	* _sx_asm.s:
 
-2003-01-12 09:45  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add asm code for sozobon
+	
+2003-01-12 09:45  'Arnaud BERCEGEAY'
 
-	* _sx_asm.s: file _sx_asm.s was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* _sx_asm.s:
 
-2003-01-12 09:44  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file _sx_asm.s was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 09:44  'Arnaud BERCEGEAY'
 
-	* zip.mak: file zip.mak was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* zip.mak:
 
-2003-01-12 09:44  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file zip.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 09:44  'Arnaud BERCEGEAY'
 
-	* zip.mak: makefile to build archive (sip file)
+	* zip.mak:
 
-2003-01-12 09:42  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	makefile to build archive (sip file)
+	
+2003-01-12 09:42  'Arnaud BERCEGEAY'
 
-	* gcc.mak: file gcc.mak was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* gcc.mak:
 
-2003-01-12 09:42  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file gcc.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 09:42  'Arnaud BERCEGEAY'
 
-	* gcc281-16.mak: file gcc281-16.mak was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* gcc281-16.mak:
 
-2003-01-12 09:42  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file gcc281-16.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 09:42  'Arnaud BERCEGEAY'
 
-	* gcc281.mak: file gcc281.mak was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* gcc281.mak:
 
-2003-01-12 09:42  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file gcc281.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 09:42  'Arnaud BERCEGEAY'
 
-	* sox.mak: file sox.mak was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* sox.mak:
 
-2003-01-12 09:42  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file sox.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 09:42  'Arnaud BERCEGEAY'
 
-	* gcc.mak, gcc281-16.mak, gcc281.mak, sox.mak: makefiles for gcc,
-	gcc281 and sozobonx
+	* gcc.mak, gcc281-16.mak, gcc281.mak, sox.mak:
 
-2003-01-12 09:41  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	makefiles for gcc, gcc281 and sozobonx
+	
+2003-01-12 09:41  'Arnaud BERCEGEAY'
 
-	* files.mak: common part of the makefile for other compilers than
-	gcc
+	* files.mak:
 
-2003-01-12 09:41  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	common part of the makefile for other compilers than gcc
+	
+2003-01-12 09:41  'Arnaud BERCEGEAY'
 
-	* files.mak: file files.mak was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* files.mak:
 
-2003-01-12 09:40  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file files.mak was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2003-01-12 09:40  'Arnaud BERCEGEAY'
 
-	* gemx.h: replace last remaining INT16 by short; proto with VdiHdl
-	compiled only if __GEMLIB_VDI is defined
+	* gemx.h:
 
-2003-01-12 09:37  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	replace last remaining INT16 by short; proto with VdiHdl compiled only if __GEMLIB_VDI is defined
+	
+2003-01-12 09:37  'Arnaud BERCEGEAY'
 
-	* gem.h: this is release 0.42.99-20030111
+	* gem.h:
 
-2003-01-12 09:36  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	this is release 0.42.99-20030111
+	
+2003-01-12 09:36  'Arnaud BERCEGEAY'
 
-	* globals.c: dirty hack for stringify under sozobon
+	* globals.c:
 
-2003-01-12 09:31  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	dirty hack for stringify under sozobon
+	
+2003-01-12 09:31  'Arnaud BERCEGEAY'
 
 	* pdlg_add_printers.c, pdlg_add_sub_dlgs.c, pdlg_close.c,
 	pdlg_create.c, pdlg_delete.c, pdlg_dflt_sett.c, pdlg_do.c,
 	pdlg_evnt.c, pdlg_free_sett.c, pdlg_get_setsize.c, pdlg_new_sett.c,
 	pdlg_open.c, pdlg_rmv_printers.c, pdlg_rmv_sub_dlgs.c,
 	pdlg_save_dflt_sett.c, pdlg_update.c, pdlg_use_sett.c,
-	pdlg_validate_sett.c: swap include gemx.h and gem_aesP.h
+	pdlg_validate_sett.c:
 
-2003-01-08 20:15  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	swap include gemx.h and gem_aesP.h
+	
+2003-01-08 20:15  'Arnaud BERCEGEAY'
 
-	* gemx.h: merge mgemx.h and gemx.h
+	* gemx.h:
 
-2003-01-05 13:20  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgemx.h and gemx.h
+	
+2003-01-05 13:20  'Arnaud BERCEGEAY'
 
-	* gem.h: merge mgem.h and gem.h
+	* gem.h:
 
-2002-12-29 01:17  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgem.h and gem.h
+	
+2002-12-29 01:17  'Arnaud BERCEGEAY'
 
-	* gem.h: this is release 0.42.99-20021228; fix evnt_ macro (replace
-	event_ by evnt_); fix graf_dragbox macro; fix graf_slidebox macro;
-	fix graf_watchbox macro
+	* gem.h:
 
-2002-12-29 01:14  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	this is release 0.42.99-20021228; fix evnt_ macro (replace event_ by evnt_); fix graf_dragbox macro; fix graf_slidebox macro; fix graf_watchbox macro
+	
+2002-12-29 01:14  'Arnaud BERCEGEAY'
 
-	* gemx.h: fix fslx_open macro
+	* gemx.h:
 
-2002-12-29 01:13  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix fslx_open macro
+	
+2002-12-29 01:13  'Arnaud BERCEGEAY'
 
-	* a_glue.c: rename event_button to evnt_button; call mt_evnt_button
-	instead of mt_event_button
+	* a_glue.c:
 
-2002-12-29 01:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	rename event_button to evnt_button; call mt_evnt_button instead of mt_event_button
+	
+2002-12-29 01:09  'Arnaud BERCEGEAY'
 
 	* n_vst_setsize32.c, v_gtext16n.c, vs_clip_pxy.c,
 	n_v_delete_ctab.c, n_v_delete_itab.c, n_v_ftext16n.c,
 	n_v_value2color.c, n_vq_ctab.c, n_vq_dflt_ctab.c,
-	n_vqt_fontheader.c, n_vst_arbpt32.c: cast to remove warnings
+	n_vqt_fontheader.c, n_vst_arbpt32.c:
 
-2002-12-28 19:59  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	cast to remove warnings
+	
+2002-12-28 19:59  'Arnaud BERCEGEAY'
 
-	* gem_aesP.h: remove comments in AES_PARAMS macro
+	* gem_aesP.h:
 
-2002-12-28 19:58  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove comments in AES_PARAMS macro
+	
+2002-12-28 19:58  'Arnaud BERCEGEAY'
 
-	* gem_vdiP.h: define USE_LOCAL_VDIPB to 1
+	* gem_vdiP.h:
 
-2002-12-28 19:57  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	define USE_LOCAL_VDIPB to 1
+	
+2002-12-28 19:57  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes about (n)vdi functions
+	* gemlib.todo:
 
-2002-12-28 19:56  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes about (n)vdi functions
+	
+2002-12-28 19:56  'Arnaud BERCEGEAY'
 
-	* gemx.h: fix mt_fslx proto; add doc
+	* gemx.h:
 
-2002-12-28 19:55  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix mt_fslx proto; add doc
+	
+2002-12-28 19:55  'Arnaud BERCEGEAY'
 
-	* globals.c: remove global VDI variables
+	* globals.c:
 
-2002-12-28 19:52  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove global VDI variables
+	
+2002-12-28 19:52  'Arnaud BERCEGEAY'
 
-	* gem.h: remove global VDI variables; vst_height in a void function
+	* gem.h:
 
-2002-12-28 19:48  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	remove global VDI variables; vst_height in a void function
+	
+2002-12-28 19:48  'Arnaud BERCEGEAY'
 
 	* v_alpha_text.c, v_arc.c, v_bar.c, v_bit_image.c, v_cellarray.c,
 	v_circle.c, v_clear_disp_list.c, v_clrwk.c, v_clsvwk.c, v_clswk.c,
@@ -2155,112 +2934,149 @@
 	n_vsr_bg_color.c, n_vsr_fg_color.c, n_vst_arbpt.c, n_vst_arbpt32.c,
 	n_vst_bg_color.c, n_vst_charmap.c, n_vst_fg_color.c, n_vst_kern.c,
 	n_vst_map_mode.c, n_vst_name.c, n_vst_setsize.c, n_vst_setsize32.c,
-	n_vst_skew.c, n_vst_track_offset.c, n_vst_width.c: merge mgemlib
-	and gemlib; add doc; add local VDIPB
+	n_vst_skew.c, n_vst_track_offset.c, n_vst_width.c:
 
-2002-12-21 22:00  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgemlib and gemlib; add doc; add local VDIPB
+	
+2002-12-21 22:00  'Arnaud BERCEGEAY'
 
-	* gemx.h: add mt_wdlg_ functions; add doc; add mt_lbox_ functions
-	with 1 slider
+	* gemx.h:
 
-2002-12-21 21:57  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add mt_wdlg_ functions; add doc; add mt_lbox_ functions with 1 slider
+	
+2002-12-21 21:57  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes about wdlg_ functions
+	* gemlib.todo:
 
-2002-12-21 21:55  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes about wdlg_ functions
+	
+2002-12-21 21:55  'Arnaud BERCEGEAY'
 
 	* x_wdlg_close.c, x_wdlg_create.c, x_wdlg_delete.c, x_wdlg_evnt.c,
 	x_wdlg_get_edit.c, x_wdlg_get_handle.c, x_wdlg_get_tree.c,
 	x_wdlg_get_udata.c, x_wdlg_open.c, x_wdlg_redraw.c,
 	x_wdlg_set_edit.c, x_wdlg_set_iconify.c, x_wdlg_set_size.c,
-	x_wdlg_set_tree.c, x_wdlg_set_uniconify.c: merge gemlib and
-	mgemlib; add doc
+	x_wdlg_set_tree.c, x_wdlg_set_uniconify.c:
 
-2002-12-21 17:02  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge gemlib and mgemlib; add doc
+	
+2002-12-21 17:02  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes on a_menu files
+	* gemlib.todo:
 
-2002-12-21 17:01  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes on a_menu files
+	
+2002-12-21 17:01  'Arnaud BERCEGEAY'
 
-	* a_glue.c: add menu_ functions
+	* a_glue.c:
 
-2002-12-21 17:01  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add menu_ functions
+	
+2002-12-21 17:01  'Arnaud BERCEGEAY'
 
-	* x_edit_set_font.c: merge fix
+	* x_edit_set_font.c:
 
-2002-12-21 17:00  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge fix
+	
+2002-12-21 17:00  'Arnaud BERCEGEAY'
 
-	* x_edit_get_font.c: merge fix (remove unused edit_get_font
-	function)
+	* x_edit_get_font.c:
 
-2002-12-21 16:59  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge fix (remove unused edit_get_font function)
+	
+2002-12-21 16:59  'Arnaud BERCEGEAY'
 
-	* x_form_xerr.c: merge fix (remaining INT16 is now replaced by
-	short)
+	* x_form_xerr.c:
 
-2002-12-21 16:57  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge fix (remaining INT16 is now replaced by short)
+	
+2002-12-21 16:57  'Arnaud BERCEGEAY'
 
-	* gem.h: add m_menu functions; fix mt_objc functions; add doc
+	* gem.h:
 
-2002-12-21 16:56  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add m_menu functions; fix mt_objc functions; add doc
+	
+2002-12-21 16:56  'Arnaud BERCEGEAY'
 
 	* a_menu_attach.c, a_menu_bar.c, a_menu_click.c, a_menu_icheck.c,
 	a_menu_ienable.c, a_menu_istart.c, a_menu_popup.c,
 	a_menu_register.c, a_menu_settings.c, a_menu_text.c,
-	a_menu_tnormal.c, a_menu_unregister.c: merge gemlib and mgemlib;
-	add doc
+	a_menu_tnormal.c, a_menu_unregister.c:
 
-2002-12-21 09:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge gemlib and mgemlib; add doc
+	
+2002-12-21 09:09  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes about a_fsel files
+	* gemlib.todo:
 
-2002-12-21 09:08  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes about a_fsel files
+	
+2002-12-21 09:08  'Arnaud BERCEGEAY'
 
-	* a_glue.c: add fsel_ functions
+	* a_glue.c:
 
-2002-12-21 09:08  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add fsel_ functions
+	
+2002-12-21 09:08  'Arnaud BERCEGEAY'
 
-	* gem.h: add mt_fsel functions
+	* gem.h:
 
-2002-12-21 09:07  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add mt_fsel functions
+	
+2002-12-21 09:07  'Arnaud BERCEGEAY'
 
-	* a_fsel_exinput.c, a_fsel_input.c: merge mgemlib and gemlib; add
-	doc
+	* a_fsel_exinput.c, a_fsel_input.c:
 
-2002-12-19 22:10  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgemlib and gemlib; add doc
+	
+2002-12-19 22:10  'Arnaud BERCEGEAY'
 
-	* doxydoc.c: add x_pdlg group
+	* doxydoc.c:
 
-2002-12-19 22:10  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add x_pdlg group
+	
+2002-12-19 22:10  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes about pdlg files
+	* gemlib.todo:
 
-2002-12-19 22:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes about pdlg files
+	
+2002-12-19 22:09  'Arnaud BERCEGEAY'
 
-	* gemx.h: add mt_pdlg functions; add english doc
+	* gemx.h:
 
-2002-12-19 22:08  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add mt_pdlg functions; add english doc
+	
+2002-12-19 22:08  'Arnaud BERCEGEAY'
 
 	* pdlg_add_printers.c, pdlg_add_sub_dlgs.c, pdlg_close.c,
 	pdlg_create.c, pdlg_delete.c, pdlg_dflt_sett.c, pdlg_do.c,
 	pdlg_evnt.c, pdlg_free_sett.c, pdlg_get_setsize.c, pdlg_new_sett.c,
 	pdlg_open.c, pdlg_rmv_printers.c, pdlg_rmv_sub_dlgs.c,
 	pdlg_save_dflt_sett.c, pdlg_update.c, pdlg_use_sett.c,
-	pdlg_validate_sett.c: merge gemlib and mgemlib; add doc
+	pdlg_validate_sett.c:
 
-2002-12-18 23:20  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge gemlib and mgemlib; add doc
+	
+2002-12-18 23:20  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes about x_lbox functions
+	* gemlib.todo:
 
-2002-12-18 23:19  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes about x_lbox functions
+	
+2002-12-18 23:19  'Arnaud BERCEGEAY'
 
-	* gemx.h: add mt_lbox functions
+	* gemx.h:
 
-2002-12-18 23:17  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add mt_lbox functions
+	
+2002-12-18 23:17  'Arnaud BERCEGEAY'
 
-	* doxydoc.c: add x_lbox group
+	* doxydoc.c:
 
-2002-12-18 23:15  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add x_lbox group
+	
+2002-12-18 23:15  'Arnaud BERCEGEAY'
 
 	* x_lbox_ascroll_to.c, x_lbox_bscroll_to.c, x_lbox_cnt_items.c,
 	x_lbox_create.c, x_lbox_delete.c, x_lbox_do.c, x_lbox_free_items.c,
@@ -2269,19 +3085,23 @@
 	x_lbox_get_item.c, x_lbox_get_items.c, x_lbox_get_slct_idx.c,
 	x_lbox_get_slct_item.c, x_lbox_get_tree.c, x_lbox_get_udata.c,
 	x_lbox_get_visible.c, x_lbox_set_asldr.c, x_lbox_set_bentries.c,
-	x_lbox_set_bsldr.c, x_lbox_set_items.c, x_lbox_update.c: merge
-	mgemlib and gemlib; add doc
+	x_lbox_set_bsldr.c, x_lbox_set_items.c, x_lbox_update.c:
 
-2002-12-18 23:14  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgemlib and gemlib; add doc
+	
+2002-12-18 23:14  'Arnaud BERCEGEAY'
 
-	* SRCFILES: add a_glue.c
+	* SRCFILES:
 
-2002-12-18 20:40  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add a_glue.c
+	
+2002-12-18 20:40  'Arnaud BERCEGEAY'
 
-	* a_glue.c: file a_glue.c was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* a_glue.c:
 
-2002-12-18 20:40  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	file a_glue.c was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2002-12-18 20:40  'Arnaud BERCEGEAY'
 
 	* a_appl_bvset.c, a_appl_control.c, a_appl_exit.c, a_appl_find.c,
 	a_appl_getinfo.c, a_appl_init.c, a_appl_read.c, a_appl_search.c,
@@ -2304,87 +3124,119 @@
 	a_wind_create_grect.c, a_wind_delete.c, a_wind_find.c,
 	a_wind_get.c, a_wind_get_grect.c, a_wind_new.c, a_wind_open.c,
 	a_wind_open_grect.c, a_wind_set.c, a_wind_set_grect.c,
-	a_wind_set_str.c, a_wind_update.c: move non-mt function to new
-	a_glue.c file
+	a_wind_set_str.c, a_wind_update.c:
 
-2002-12-17 22:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	move non-mt function to new a_glue.c file
+	
+2002-12-17 22:09  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes about x_objc_ files
+	* gemlib.todo:
 
-2002-12-17 22:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes about x_objc_ files
+	
+2002-12-17 22:09  'Arnaud BERCEGEAY'
 
-	* gemx.h: add mt_objc_w/x extended functions
+	* gemx.h:
 
-2002-12-17 22:08  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add mt_objc_w/x extended functions
+	
+2002-12-17 22:08  'Arnaud BERCEGEAY'
 
 	* x_objc_wchange.c, x_objc_wdraw.c, x_objc_wedit.c, x_objc_xedit.c:
+
 	merge mgemlib and gemlib; add doc
+	
+2002-12-17 21:44  'Standa Opichal'
 
-2002-12-17 21:44  'Standa Opichal <opichals@seznam.cz>'
+	* a_appl_getinfo.c:
 
-	* a_appl_getinfo.c: The appl_xgetinfo #undef added. Prototypes
-	added to let compiler not generate warnings.
+	The appl_xgetinfo #undef added. Prototypes added to let compiler not
+	generate warnings.
+	
+2002-12-17 20:52  'Arnaud BERCEGEAY'
 
-2002-12-17 20:52  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* SRCFILES:
 
-	* SRCFILES: remove a_appl_xgetinfo.c
+	remove a_appl_xgetinfo.c
+	
+2002-12-17 20:47  'Arnaud BERCEGEAY'
 
-2002-12-17 20:47  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* gemlib.todo:
 
-	* gemlib.todo: add fslx_functions
+	add fslx_functions
+	
+2002-12-17 20:47  'Arnaud BERCEGEAY'
 
-2002-12-17 20:47  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* doxydoc.c:
 
-	* doxydoc.c: add x_fslx group
+	add x_fslx group
+	
+2002-12-17 20:44  'Arnaud BERCEGEAY'
 
-2002-12-17 20:44  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* gemx.h:
 
-	* gemx.h: add mt_fslx_xx functions
-
-2002-12-17 20:43  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add mt_fslx_xx functions
+	
+2002-12-17 20:43  'Arnaud BERCEGEAY'
 
 	* x_fslx_close.c, x_fslx_do.c, x_fslx_evnt.c, x_fslx_getnxtfile.c,
-	x_fslx_open.c, x_fslx_set_flags.c: merge gemlib and mgemlib; add
-	doc
+	x_fslx_open.c, x_fslx_set_flags.c:
 
-2002-12-17 20:21  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge gemlib and mgemlib; add doc
+	
+2002-12-17 20:21  'Arnaud BERCEGEAY'
 
-	* a_appl_getinfo.c: fix mt_appl_find call
+	* a_appl_getinfo.c:
 
-2002-12-14 20:59  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix mt_appl_find call
+	
+2002-12-14 20:59  'Arnaud BERCEGEAY'
 
 	* x_form_popup.c, x_form_wbutton.c, x_form_wkeybd.c,
-	x_form_xdial.c, x_form_xdo.c, x_form_xerr.c: merge gemlib and
-	mgemlib; add doc
+	x_form_xdial.c, x_form_xdo.c, x_form_xerr.c:
 
-2002-12-14 20:58  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge gemlib and mgemlib; add doc
+	
+2002-12-14 20:58  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes about x_form_xx files
+	* gemlib.todo:
 
-2002-12-14 20:57  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes about x_form_xx files
+	
+2002-12-14 20:57  'Arnaud BERCEGEAY'
 
-	* gemx.h: merge x_form_xx functions
+	* gemx.h:
 
-2002-12-14 12:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge x_form_xx functions
+	
+2002-12-14 12:38  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes about x_fnts_ functions
+	* gemlib.todo:
 
-2002-12-14 12:37  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes about x_fnts_ functions
+	
+2002-12-14 12:37  'Arnaud BERCEGEAY'
 
 	* x_fnts_add.c, x_fnts_close.c, x_fnts_create.c, x_fnts_delete.c,
 	x_fnts_do.c, x_fnts_evnt.c, x_fnts_get_info.c, x_fnts_get_name.c,
 	x_fnts_get_no_styles.c, x_fnts_get_style.c, x_fnts_open.c,
-	x_fnts_remove.c, x_fnts_update.c: merge mgemlib and gemlib; add doc
+	x_fnts_remove.c, x_fnts_update.c:
 
-2002-12-14 12:36  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgemlib and gemlib; add doc
+	
+2002-12-14 12:36  'Arnaud BERCEGEAY'
 
-	* gemx.h: update fnts_xx functions
+	* gemx.h:
 
-2002-12-14 12:35  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	update fnts_xx functions
+	
+2002-12-14 12:35  'Arnaud BERCEGEAY'
 
-	* doxydoc.c: add x_fnts group
+	* doxydoc.c:
 
-2002-12-13 22:29  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add x_fnts group
+	
+2002-12-13 22:29  'Arnaud BERCEGEAY'
 
 	* x_edit_close.c, x_edit_create.c, x_edit_cursor.c,
 	x_edit_delete.c, x_edit_evnt.c, x_edit_get_buf.c,
@@ -2393,282 +3245,382 @@
 	x_edit_get_scrollinfo.c, x_edit_get_sel.c, x_edit_open.c,
 	x_edit_resized.c, x_edit_scroll.c, x_edit_set_buf.c,
 	x_edit_set_colour.c, x_edit_set_cursor.c, x_edit_set_dirty.c,
-	x_edit_set_font.c, x_edit_set_format.c, x_edit_set_pos.c: merge
-	gemlib and mgemlib; add doc
+	x_edit_set_font.c, x_edit_set_format.c, x_edit_set_pos.c:
 
-2002-12-13 22:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge gemlib and mgemlib; add doc
+	
+2002-12-13 22:28  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes form x_edit functions
+	* gemlib.todo:
 
-2002-12-13 22:27  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes form x_edit functions
+	
+2002-12-13 22:27  'Arnaud BERCEGEAY'
 
-	* gemx.h: merging gemlib and mgemlib for x_edit functions
+	* gemx.h:
 
-2002-12-13 22:26  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merging gemlib and mgemlib for x_edit functions
+	
+2002-12-13 22:26  'Arnaud BERCEGEAY'
 
-	* doxydoc.c: add x_edit group
+	* doxydoc.c:
 
-2002-12-12 21:44  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add x_edit group
+	
+2002-12-12 21:44  'Arnaud BERCEGEAY'
 
 	* a_objc_add.c, a_objc_change.c, a_objc_delete.c, a_objc_draw.c,
 	a_objc_edit.c, a_objc_find.c, a_objc_offset.c, a_objc_order.c,
-	a_objc_sysvar.c: merge mgemlib and gemlib; add doc
+	a_objc_sysvar.c:
 
-2002-12-12 21:43  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgemlib and gemlib; add doc
+	
+2002-12-12 21:43  'Arnaud BERCEGEAY'
 
-	* gem.h: add objc_ functions; redirect appl_xgetinfo
+	* gem.h:
 
-2002-12-12 21:41  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add objc_ functions; redirect appl_xgetinfo
+	
+2002-12-12 21:41  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: update item a_appl_xgetinfo and items a_objc_xx
+	* gemlib.todo:
 
-2002-12-12 21:39  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	update item a_appl_xgetinfo and items a_objc_xx
+	
+2002-12-12 21:39  'Arnaud BERCEGEAY'
 
-	* a_appl_xgetinfo.c: appl_xgetinfo is now in a_appl_getinfo for
-	backward compatibility only
+	* a_appl_xgetinfo.c:
 
-2002-12-12 21:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	appl_xgetinfo is now in a_appl_getinfo for backward compatibility only
+	
+2002-12-12 21:38  'Arnaud BERCEGEAY'
 
-	* a_appl_getinfo.c: add appl_xgetinfo for backward compatibilty
+	* a_appl_getinfo.c:
 
-2002-12-12 21:38  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add appl_xgetinfo for backward compatibilty
+	
+2002-12-12 21:38  'Arnaud BERCEGEAY'
 
-	* a_appl_find.c: update doc
+	* a_appl_find.c:
 
-2002-12-11 23:04  'Standa Opichal <opichals@seznam.cz>'
+	update doc
+	
+2002-12-11 23:04  'Standa Opichal'
 
 	* a_form_alert.c, a_graf_mouse.c, a_graf_watchbox.c, gem.h,
-	gemlib.todo: The gem.h updated. The *.c files synced with the gem.h
-	prototypes.
+	gemlib.todo:
 
-2002-12-11 23:03  'Standa Opichal <opichals@seznam.cz>'
+	The gem.h updated. The *.c files synced with the gem.h prototypes.
+	
+2002-12-11 23:03  'Standa Opichal'
 
-	* a_appl_write.c: The app_buff renamed to ap_pbuff.
+	* a_appl_write.c:
 
-2002-12-11 22:01  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	The app_buff renamed to ap_pbuff.
+	
+2002-12-11 22:01  'Arnaud BERCEGEAY'
 
-	* gem.h: use GNU convention for variable naming rule for a_appl
-	functions
+	* gem.h:
 
-2002-12-11 21:56  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	use GNU convention for variable naming rule for a_appl functions
+	
+2002-12-11 21:56  'Arnaud BERCEGEAY'
 
 	* a_appl_read.c, a_appl_tplay.c, a_appl_trecord.c, a_appl_write.c:
+
 	use GNU convention for variable naming rule; update doc
+	
+2002-12-11 21:54  'Arnaud BERCEGEAY'
 
-2002-12-11 21:54  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_find.c:
 
-	* a_appl_find.c: use GNU convention for variable naming rule
+	use GNU convention for variable naming rule
+	
+2002-12-11 21:53  'Arnaud BERCEGEAY'
 
-2002-12-11 21:53  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_exit.c:
 
-	* a_appl_exit.c: update doc
+	update doc
+	
+2002-12-11 21:49  'Arnaud BERCEGEAY'
 
-2002-12-11 21:49  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_bvset.c, a_appl_control.c:
 
-	* a_appl_bvset.c, a_appl_control.c: add doc
-
-2002-12-11 21:36  'Standa Opichal <opichals@seznam.cz>'
+	add doc
+	
+2002-12-11 21:36  'Standa Opichal'
 
 	* a_appl_getinfo.c, a_evnt_button.c, a_form_alert.c,
 	a_form_button.c, a_form_center.c, a_form_dial.c, a_form_do.c,
 	a_form_error.c, a_form_keybd.c, a_graf_dragbox.c, a_graf_growbox.c,
 	a_graf_handle.c, a_graf_mbox.c, a_graf_mkstate.c, a_graf_mouse.c,
 	a_graf_rubbox.c, a_graf_shrinkbox.c, a_graf_slidebox.c,
-	a_graf_watchbox.c, gemlib.todo: The a_form*.c, a_graf*.c functions
-	updated.
+	a_graf_watchbox.c, gemlib.todo:
 
-2002-12-10 09:36  'Standa Opichal <opichals@seznam.cz>'
+	The a_form*.c, a_graf*.c functions updated.
+	
+2002-12-10 09:36  'Standa Opichal'
 
-	* a_evnt_multi.c: The aes() changed to AES_TRAP()
+	* a_evnt_multi.c:
 
-2002-12-10 09:33  'Standa Opichal <opichals@seznam.cz>'
+	The aes() changed to AES_TRAP()
+	
+2002-12-10 09:33  'Standa Opichal'
 
 	* a_evnt_button.c, a_evnt_keybd.c, a_evnt_mouse.c, a_evnt_multi.c,
-	a_evnt_multi_fast.c: The argument names adjusted.
+	a_evnt_multi_fast.c:
 
-2002-12-10 09:32  'Standa Opichal <opichals@seznam.cz>'
+	The argument names adjusted.
+	
+2002-12-10 09:32  'Standa Opichal'
 
-	* gem.h: EVMULT_* structure documentation added (useful for
-	mt_evnt_multi_fast())
+	* gem.h:
 
-2002-12-10 08:55  'Standa Opichal <opichals@seznam.cz>'
+	EVMULT_* structure documentation added (useful for mt_evnt_multi_fast())
+	
+2002-12-10 08:55  'Standa Opichal'
 
 	* a_evnt_button.c, a_evnt_dclick.c, a_evnt_keybd.c, a_evnt_mesag.c,
 	a_evnt_mouse.c, a_evnt_multi.c, a_evnt_multi_fast.c,
-	a_evnt_timer.c, gemlib.todo: The evnt_ functions merged.
+	a_evnt_timer.c, gemlib.todo:
 
-2002-12-10 08:12  'Standa Opichal <opichals@seznam.cz>'
+	The evnt_ functions merged.
+	
+2002-12-10 08:12  'Standa Opichal'
 
 	* a_appl_bvset.c, a_appl_control.c, a_appl_exit.c, a_appl_find.c,
 	a_appl_init.c, a_appl_read.c, a_appl_search.c, a_appl_tplay.c,
-	a_appl_trecord.c, a_appl_write.c, a_appl_yield.c: The trailing
-	whitespace removed.
+	a_appl_trecord.c, a_appl_write.c, a_appl_yield.c:
 
-2002-12-09 21:11  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	The trailing whitespace removed.
+	
+2002-12-09 21:11  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes about rc_ function merge
+	* gemlib.todo:
 
-2002-12-09 21:11  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes about rc_ function merge
+	
+2002-12-09 21:11  'Arnaud BERCEGEAY'
 
-	* gem.h: cosmetic changes
+	* gem.h:
 
-2002-12-09 21:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	cosmetic changes
+	
+2002-12-09 21:09  'Arnaud BERCEGEAY'
 
 	* rc_array_to_grect.c, rc_copy.c, rc_equal.c, rc_grect_to_array.c,
-	rc_intersect.c: add doc
+	rc_intersect.c:
 
-2002-12-08 20:11  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add doc
+	
+2002-12-08 20:11  'Arnaud BERCEGEAY'
 
 	* a_rsrc_free.c, a_rsrc_gaddr.c, a_rsrc_load.c, a_rsrc_obfix.c,
-	a_rsrc_rcfix.c, a_rsrc_saddr.c: merge mgemlib and gemlib; add doc
+	a_rsrc_rcfix.c, a_rsrc_saddr.c:
 
-2002-12-08 20:09  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgemlib and gemlib; add doc
+	
+2002-12-08 20:09  'Arnaud BERCEGEAY'
 
-	* gem.h: merge mgemlib and gemlib for rsrc_ functions
+	* gem.h:
 
-2002-12-08 20:08  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgemlib and gemlib for rsrc_ functions
+	
+2002-12-08 20:08  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: a_rsrc functions updated
+	* gemlib.todo:
 
-2002-12-08 19:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	a_rsrc functions updated
+	
+2002-12-08 19:28  'Arnaud BERCEGEAY'
 
-	* gem.h: merge mgemlib and gemlib for scrp_ functions
+	* gem.h:
 
-2002-12-08 19:28  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgemlib and gemlib for scrp_ functions
+	
+2002-12-08 19:28  'Arnaud BERCEGEAY'
 
-	* a_scrp_clear.c, a_scrp_read.c, a_scrp_write.c: merge mgemlib and
-	gemlib; add doc
+	* a_scrp_clear.c, a_scrp_read.c, a_scrp_write.c:
 
-2002-12-08 19:27  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgemlib and gemlib; add doc
+	
+2002-12-08 19:27  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes about a_scrp functions
+	* gemlib.todo:
 
-2002-12-08 18:42  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes about a_scrp functions
+	
+2002-12-08 18:42  'Arnaud BERCEGEAY'
 
 	* a_shel_envrn.c, a_shel_find.c, a_shel_get.c, a_shel_help.c,
 	a_shel_put.c, a_shel_rdef.c, a_shel_read.c, a_shel_wdef.c,
-	a_shel_write.c: merge mgemlib and gemlib; add doc
+	a_shel_write.c:
 
-2002-12-08 18:42  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgemlib and gemlib; add doc
+	
+2002-12-08 18:42  'Arnaud BERCEGEAY'
 
-	* gem.h: merging mgemlib and gemlib for shel_ functions
+	* gem.h:
 
-2002-12-08 18:40  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merging mgemlib and gemlib for shel_ functions
+	
+2002-12-08 18:40  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add notes for a_shel functions merge
+	* gemlib.todo:
 
-2002-12-08 15:58  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add notes for a_shel functions merge
+	
+2002-12-08 15:58  'Arnaud BERCEGEAY'
 
-	* gem.h: add doxygen comments; add mt_wind calls
+	* gem.h:
 
-2002-12-08 15:57  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add doxygen comments; add mt_wind calls
+	
+2002-12-08 15:57  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add comment for a_wind function merge
+	* gemlib.todo:
 
-2002-12-08 15:56  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add comment for a_wind function merge
+	
+2002-12-08 15:56  'Arnaud BERCEGEAY'
 
-	* gem_aesP.h: fix AES_PARAM macro
+	* gem_aesP.h:
 
-2002-12-08 15:55  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	fix AES_PARAM macro
+	
+2002-12-08 15:55  'Arnaud BERCEGEAY'
 
 	* a_wind_calc.c, a_wind_calc_grect.c, a_wind_close.c,
 	a_wind_create.c, a_wind_create_grect.c, a_wind_delete.c,
 	a_wind_find.c, a_wind_get.c, a_wind_get_grect.c, a_wind_new.c,
 	a_wind_open.c, a_wind_open_grect.c, a_wind_set.c,
-	a_wind_set_grect.c, a_wind_set_str.c, a_wind_update.c: merge
-	mgemlib and gemlib; add doc
+	a_wind_set_grect.c, a_wind_set_str.c, a_wind_update.c:
 
-2002-12-08 15:53  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	merge mgemlib and gemlib; add doc
+	
+2002-12-08 15:53  'Arnaud BERCEGEAY'
 
 	* a_appl_bvset.c, a_appl_control.c, a_appl_exit.c, a_appl_find.c,
 	a_appl_getinfo.c, a_appl_init.c, a_appl_read.c, a_appl_search.c,
 	a_appl_tplay.c, a_appl_trecord.c, a_appl_write.c, a_appl_yield.c:
+
 	fix AES_PARAM macro call
+	
+2002-12-07 23:40  'Arnaud BERCEGEAY'
 
-2002-12-07 23:40  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* a_appl_getinfo.c, a_appl_init.c, a_appl_read.c:
 
-	* a_appl_getinfo.c, a_appl_init.c, a_appl_read.c: use if AES_PARAMS
-	macro; add doc
-
-2002-12-07 23:37  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	use if AES_PARAMS macro; add doc
+	
+2002-12-07 23:37  'Arnaud BERCEGEAY'
 
 	* a_appl_write.c, a_appl_trecord.c, a_appl_tplay.c,
-	a_appl_search.c, a_appl_find.c: use if AES_PARAMS macro; add doc
+	a_appl_search.c, a_appl_find.c:
 
-2002-12-07 23:36  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	use if AES_PARAMS macro; add doc
+	
+2002-12-07 23:36  'Arnaud BERCEGEAY'
 
-	* a_appl_yield.c: use if AES_PARAMS macro
+	* a_appl_yield.c:
 
-2002-12-07 23:36  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	use if AES_PARAMS macro
+	
+2002-12-07 23:36  'Arnaud BERCEGEAY'
 
-	* gem.h: update doxygen doc (use of sub-group)
+	* gem.h:
 
-2002-12-07 23:34  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	update doxygen doc (use of sub-group)
+	
+2002-12-07 23:34  'Arnaud BERCEGEAY'
 
-	* gemlib.todo: add remark for appl_init
+	* gemlib.todo:
 
-2002-12-07 23:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	add remark for appl_init
+	
+2002-12-07 23:33  'Arnaud BERCEGEAY'
 
-	* a_appl_exit.c: use of AES_PARAMS macro; add doc
+	* a_appl_exit.c:
 
-2002-12-07 23:31  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	use of AES_PARAMS macro; add doc
+	
+2002-12-07 23:31  'Arnaud BERCEGEAY'
 
-	* a_appl_bvset.c, a_appl_control.c: use of AES_PARAMS macro
+	* a_appl_bvset.c, a_appl_control.c:
 
-2002-12-07 23:30  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	use of AES_PARAMS macro
+	
+2002-12-07 23:30  'Arnaud BERCEGEAY'
 
-	* Doxyfile: change TAB_SIZE to 4
+	* Doxyfile:
 
-2002-12-07 23:29  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	change TAB_SIZE to 4
+	
+2002-12-07 23:29  'Arnaud BERCEGEAY'
 
-	* doxydoc.c: definition of GROUP and other stuff for doxygen only
+	* doxydoc.c:
 
-2002-12-07 23:29  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	definition of GROUP and other stuff for doxygen only
+	
+2002-12-07 23:29  'Arnaud BERCEGEAY'
 
-	* doxydoc.c: file doxydoc.c was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	* doxydoc.c:
 
-2002-12-06 02:13  'Standa Opichal <opichals@seznam.cz>'
+	file doxydoc.c was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2002-12-06 02:13  'Standa Opichal'
 
 	* a_evnt_button.c, a_evnt_dclick.c, a_evnt_keybd.c, a_evnt_mesag.c,
-	gem.h, gem_aesP.h: The first attempts from me here. The docs need
-	more tunning.
+	gem.h, gem_aesP.h:
 
-2002-12-05 21:42  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	The first attempts from me here. The docs need more tunning.
+	
+2002-12-05 21:42  'Arnaud BERCEGEAY'
 
 	* a_appl_bvset.c, a_appl_control.c, a_appl_exit.c, a_appl_find.c,
 	a_appl_getinfo.c, a_appl_init.c, a_appl_read.c, a_appl_search.c,
 	a_appl_tplay.c, a_appl_trecord.c, a_appl_write.c, a_appl_yield.c:
+
 	merge mgemlib 41 and gemlib 0.42.2
+	
+2002-12-05 21:40  'Arnaud BERCEGEAY'
 
-2002-12-05 21:40  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* gemlib.todo:
 
-	* gemlib.todo: file gemlib.todo was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	file gemlib.todo was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2002-12-05 21:40  'Arnaud BERCEGEAY'
 
-2002-12-05 21:40  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* gemlib.todo:
 
-	* gemlib.todo: note while merging gemlib and mgemlib
+	note while merging gemlib and mgemlib
+	
+2002-12-05 21:39  'Arnaud BERCEGEAY'
 
-2002-12-05 21:39  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* Doxyfile:
 
-	* Doxyfile: add a doxyfile for doxygen documentation generator
+	add a doxyfile for doxygen documentation generator
+	
+2002-12-05 21:39  'Arnaud BERCEGEAY'
 
-2002-12-05 21:39  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* Doxyfile:
 
-	* Doxyfile: file Doxyfile was initially added on branch
-	mgemlib-gemlib-0_42_2.
+	file Doxyfile was initially added on branch mgemlib-gemlib-0_42_2.
+	
+2002-12-05 21:37  'Arnaud BERCEGEAY'
 
-2002-12-05 21:37  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* gem.h:
 
-	* gem.h: remove aes_params and	_GemParBlk; add _AESxxx macros; add
-	declaration of aes_global; change appl() call to mt_appl() calls
+	remove aes_params and  _GemParBlk; add _AESxxx macros; add declaration of aes_global; change appl() call to mt_appl() calls
+	
+2002-12-05 21:35  'Arnaud BERCEGEAY'
 
-2002-12-05 21:35  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* gem_aesP.h:
 
-	* gem_aesP.h: modify inline aes trap: only one parameter (AESPB)
+	modify inline aes trap: only one parameter (AESPB)
+	
+2002-12-05 21:33  'Arnaud BERCEGEAY'
 
-2002-12-05 21:33  'Arnaud BERCEGEAY <arnaud.bercegeay@free.fr>'
+	* globals.c:
 
-	* globals.c: remove global AES arrays except aes_global
-
+	remove global AES arrays except aes_global
+	
