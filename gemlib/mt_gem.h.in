@@ -1072,7 +1072,7 @@ typedef struct {
  * @note For undocumented members consult the mt_evnt_multi() documentation.
  */
 typedef struct {
-	short emo_events;                          /**< the bitfield of events occured (also a return value of mt_evnt_multi_fast() */
+	short emo_events;	/**< the bitfield of events occured (also a return value of mt_evnt_multi_fast() */
 	PXY   emo_mouse;	/**< TODO */
 	short emo_mbutton;	/**< TODO */
 	short emo_kmeta;	/**< TODO */
@@ -1297,6 +1297,30 @@ short * grect_to_array (const GRECT *area, short *array);
 #define AES_ADDRINMAX		16
 /** size of the aes_addrout[] array */
 #define AES_ADDROUTMAX		16
+
+/** AES version number */
+#define mt_AESversion(aes_global)   (aes_global[0])
+
+/** Number of concurrent applications possible (normally 1).
+    MultiTOS will return -1. */
+#define mt_AESnumapps(aes_global)   (aes_global[1])
+
+/** Application identifier (same as mt_appl_init() return value). */
+#define mt_AESapid(aes_global)          (aes_global[2])
+
+/** LONG global available for use by the application */
+#define mt_AESappglobal(aes_global) (*((long *)&aes_global[3]))
+
+/** Pointer to the base of the resource loaded via mt_rsrc_load(). */
+#define mt_AESrscfile(aes_global)   ((OBJECT **)(*((long *)&aes_global[5])))
+
+/** Current maximum character used by the AES to do vst_height() prior to
+    writing to the screen. This entry is only present as of AES version 0x0400.*/
+#define mt_AESmaxchar(aes_global)   (aes_global[13])
+
+/** Current minimum character used by the AES to do vst_height() prior to
+    writing to the screen. This entry is only present as of AES version 0x0400.*/
+#define mt_AESminchar(aes_global)   (aes_global[14])
 
 /** AES parameter block structure */
 typedef struct
