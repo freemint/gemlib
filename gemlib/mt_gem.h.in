@@ -731,16 +731,16 @@ typedef struct pEvntrec
 #define MO_LEAVE		1	/**< Wait for mouse to leave rectangle, see mt_evnt_mouse() */
 
 /* evnt_multi flags */
-#define MU_KEYBD			0x0001	/**< TODO */
-#define MU_BUTTON			0x0002	/**< TODO */
-#define MU_M1				0x0004	/**< TODO */
-#define MU_M2				0x0008	/**< TODO */
-#define MU_MESAG			0x0010	/**< TODO */
-#define MU_TIMER			0x0020	/**< TODO */
-#define MU_WHEEL			0x0040		/* XaAES */	/**< TODO */
-#define MU_MX				0x0080		/* XaAES */	/**< TODO */
-#define MU_NORM_KEYBD		0x0100		/* XaAES */	/**< TODO */
-#define MU_DYNAMIC_KEYBD	0x0200	/* XaAES */	/**< TODO */
+#define MU_KEYBD			0x0001	/**< Wait for a user keypress, see mt_evnt_multi() */
+#define MU_BUTTON			0x0002	/**< Wait for the specified mouse button state, see mt_evnt_multi() */
+#define MU_M1				0x0004	/**< Wait for a mouse/rectangle event as specified, see mt_evnt_multi() */
+#define MU_M2				0x0008	/**< Wait for a mouse/rectangle event as specified, see mt_evnt_multi()  */
+#define MU_MESAG			0x0010	/**< Wait for a message, see mt_evnt_multi() */
+#define MU_TIMER			0x0020	/**< Wait the specified amount of time, see mt_evnt_multi() */
+#define MU_WHEEL			0x0040	/**< TODO (XaAES) */
+#define MU_MX				0x0080	/**< TODO (XaAES) */
+#define MU_NORM_KEYBD		0x0100	/**< TODO (XaAES) */
+#define MU_DYNAMIC_KEYBD	0x0200	/**< TODO (XaAES) */
 
 /* form_dial opcodes */
 #define FMD_START 			0	/**< TODO */
