@@ -6,8 +6,8 @@
 
 /** see mt_graf_growbox()
  *
- *  @param in see mt_graf_growbox()
- *  @param out see mt_graf_growbox()
+ *  @param in starting rectangle (where the outline will grow from).
+ *  @param out ending rectangle (where the outline will grow to).
  *  @param global_aes global AES array
  *
  *  @return  see mt_graf_growbox()
