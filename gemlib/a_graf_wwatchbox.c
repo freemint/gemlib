@@ -9,7 +9,7 @@
  *  bounds of  the object or outside the bounds of the object
  *  as long as the left mouse button is held down.
  *
- *  @param tree is a pointer to the ROOT object of the tree which
+ *  @param tree is a pointer to the #ROOT object of the tree which
  *               contains the object you wish to watch.
  *  @param object is the object
  *               index of the object to watch.

@@ -785,10 +785,8 @@ typedef struct pEvntrec
 #define FERR_NOFILES 		18	/**< No More Files (GEMDOS error -49), see mt_form_error() */
 
 /* fsel_(ex)input return values */
-#define FSEL_CANCEL		 0	/**< the fileselector has been closed by using the CANCEL
-                                  button, see mt_fsel_exinput() */
-#define FSEL_OK			 1	/**< the fileselector has been closed by using the OK
-                                  button, see mt_fsel_exinput()  */
+#define FSEL_CANCEL		 0	/**< the fileselector has been closed by using the CANCEL button, see mt_fsel_exinput() */
+#define FSEL_OK			 1	/**< the fileselector has been closed by using the OK button, see mt_fsel_exinput()  */
 
 /* menu_attach modes */
 #define ME_INQUIRE		0	/**< TODO */
@@ -1091,8 +1089,8 @@ typedef  struct
 #define ARROW			 0	/**< see mt_graf_mouse() */
 #define TEXT_CRSR 		 1	/**< see mt_graf_mouse() */
 #define BEE 			 2	/**< see mt_graf_mouse() */
-#define BUSY_BEE	  BEE 	/**< alias for BEE */
-#define BUSYBEE		  BEE 	/**< alias for BEE */
+#define BUSY_BEE	  BEE 	/**< alias for #BEE */
+#define BUSYBEE		  BEE 	/**< alias for #BEE */
 #define HOURGLASS 		 2	/**< see mt_graf_mouse() */
 #define POINT_HAND		 3	/**< see mt_graf_mouse() */
 #define FLAT_HAND 		 4	/**< see mt_graf_mouse() */
@@ -1105,11 +1103,11 @@ typedef  struct
 #define M_SAVE 			  258	/**< see mt_graf_mouse() */
 #define M_RESTORE 		  259	/**< see mt_graf_mouse() */
 #define M_LAST 			  260	/**< see mt_graf_mouse() */
-#define M_PREVIOUS        M_LAST /**< alias for M_LAST */
+#define M_PREVIOUS        M_LAST /**< alias for #M_LAST */
 #define M_FORCE			0x8000	/**< see mt_graf_mouse() */
 
 /* objects - general */
-#define ROOT		 	0 	 /* index of ROOT */	/**< TODO */
+#define ROOT		 	0 	 /**< index of the root object of a formular */
 #define MAX_LEN			81 	 /* max string length */	/**< TODO */
 #define MAX_DEPTH		8 	 /* max depth of search or draw */	/**< TODO */
 
@@ -1548,15 +1546,15 @@ typedef struct rshdr
 	unsigned short	rsh_rssize;			/**< total bytes in resource */
 } RSHDR;
 
-/** MENU structure, used by a_menu functions */
+/** MENU structure, used by mt_menu_attach() and mt_menu_popup() */
 typedef struct _menu
 {
 	OBJECT *mn_tree;    /**< Points to the OBJECT tree of the sub-menu */ 
-	short  mn_menu;     /**< Is an index to the parent object of the menu
-                             items. */
+	short  mn_menu;     /**< Is an index to the parent object of the menu items. */
 	short  mn_item;     /**< Is the starting menu item */
-	short  mn_scroll;   /**< If SCROLL_NO (0), the menu will not scroll.
-                             If SCROLL_YES (1), and the number of menu
+	short  mn_scroll;   /**< contains one of the following values:
+	                         - #SCROLL_NO (0), the menu will not scroll.
+                             - #SCROLL_YES (1), if the number of menu
                              items exceed the menu scroll height, arrows
                              will appear which allow the user to scroll
                              selections.*/
