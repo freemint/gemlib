@@ -19,7 +19,10 @@
 # include <errno.h>
 # include <string.h>
 
+# include <mint/mintbind.h>	/* Pterm() */
+
 # include "gemma.h"
+# include "appl.h"
 # include "dosproto.h"
 # include "gemproto.h"
 # include "alert.h"
@@ -32,41 +35,41 @@
 
 static ushort RSIB0MASK[] =
 {
-  0x0000, 0x0000, 0x0000, 0x0000, 
-  0x0000, 0x0000, 0x0000, 0x0000, 
-  0x0FFF, 0xFFF0, 0x0FFF, 0xFFF0, 
-  0x0C00, 0x0030, 0x0C00, 0x0030, 
-  0x0CFF, 0xFF30, 0x0CFF, 0xFF30, 
-  0x0CC0, 0x0330, 0x0CC0, 0x0330, 
-  0x0CCF, 0xF330, 0x0CCF, 0xF330, 
-  0x0CCC, 0x3330, 0x0CCC, 0x3330, 
-  0x0CCC, 0x3330, 0x0CCC, 0x3330, 
-  0x0CCF, 0xF330, 0x0CCF, 0xF330, 
-  0x0CC0, 0x0330, 0x0CC0, 0x0330, 
-  0x0CFF, 0xFF30, 0x0CFF, 0xFF30, 
-  0x0C00, 0x0030, 0x0C00, 0x0030, 
-  0x0FFF, 0xFFF0, 0x0FFF, 0xFFF0, 
-  0x0000, 0x0000, 0x0000, 0x0000, 
+  0x0000, 0x0000, 0x0000, 0x0000,
+  0x0000, 0x0000, 0x0000, 0x0000,
+  0x0FFF, 0xFFF0, 0x0FFF, 0xFFF0,
+  0x0C00, 0x0030, 0x0C00, 0x0030,
+  0x0CFF, 0xFF30, 0x0CFF, 0xFF30,
+  0x0CC0, 0x0330, 0x0CC0, 0x0330,
+  0x0CCF, 0xF330, 0x0CCF, 0xF330,
+  0x0CCC, 0x3330, 0x0CCC, 0x3330,
+  0x0CCC, 0x3330, 0x0CCC, 0x3330,
+  0x0CCF, 0xF330, 0x0CCF, 0xF330,
+  0x0CC0, 0x0330, 0x0CC0, 0x0330,
+  0x0CFF, 0xFF30, 0x0CFF, 0xFF30,
+  0x0C00, 0x0030, 0x0C00, 0x0030,
+  0x0FFF, 0xFFF0, 0x0FFF, 0xFFF0,
+  0x0000, 0x0000, 0x0000, 0x0000,
   0x0000, 0x0000, 0x0000, 0x0000
 };
 
 static ushort RSIB0DATA[] =
 {
-  0x0000, 0x0000, 0x0000, 0x0000, 
-  0x0000, 0x0000, 0x0000, 0x0000, 
-  0x0FFF, 0xFFF0, 0x0FFF, 0xFFF0, 
-  0x0C00, 0x0030, 0x0C00, 0x0030, 
-  0x0CFF, 0xFF30, 0x0CFF, 0xFF30, 
-  0x0CC0, 0x0330, 0x0CC0, 0x0330, 
-  0x0CCF, 0xF330, 0x0CCF, 0xF330, 
-  0x0CCC, 0x3330, 0x0CCC, 0x3330, 
-  0x0CCC, 0x3330, 0x0CCC, 0x3330, 
-  0x0CCF, 0xF330, 0x0CCF, 0xF330, 
-  0x0CC0, 0x0330, 0x0CC0, 0x0330, 
-  0x0CFF, 0xFF30, 0x0CFF, 0xFF30, 
-  0x0C00, 0x0030, 0x0C00, 0x0030, 
-  0x0FFF, 0xFFF0, 0x0FFF, 0xFFF0, 
-  0x0000, 0x0000, 0x0000, 0x0000, 
+  0x0000, 0x0000, 0x0000, 0x0000,
+  0x0000, 0x0000, 0x0000, 0x0000,
+  0x0FFF, 0xFFF0, 0x0FFF, 0xFFF0,
+  0x0C00, 0x0030, 0x0C00, 0x0030,
+  0x0CFF, 0xFF30, 0x0CFF, 0xFF30,
+  0x0CC0, 0x0330, 0x0CC0, 0x0330,
+  0x0CCF, 0xF330, 0x0CCF, 0xF330,
+  0x0CCC, 0x3330, 0x0CCC, 0x3330,
+  0x0CCC, 0x3330, 0x0CCC, 0x3330,
+  0x0CCF, 0xF330, 0x0CCF, 0xF330,
+  0x0CC0, 0x0330, 0x0CC0, 0x0330,
+  0x0CFF, 0xFF30, 0x0CFF, 0xFF30,
+  0x0C00, 0x0030, 0x0C00, 0x0030,
+  0x0FFF, 0xFFF0, 0x0FFF, 0xFFF0,
+  0x0000, 0x0000, 0x0000, 0x0000,
   0x0000, 0x0000, 0x0000, 0x0000
 };
 
@@ -261,7 +264,7 @@ kstroke(PROC_ARRAY *proc, WINDIAL *wd, short key)
 					newst = oldst | OS_SELECTED;
 			}
 
-			objc_xchange(proc->base, 15L, 5, wd, wd->wb_object, newst, 1, proc);
+			objc_xchange(proc->base, OB_XCHANGE, 5, wd, wd->wb_object, newst, 1, proc);
 
 			return 0;
 		}
@@ -447,6 +450,9 @@ windial_center(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 	return 0;
 }
 
+/* Link the specified window into the window chain.
+ * Called automatically on each windial_create()
+ */
 long
 windial_link(BASEPAGE *bp, long fn, short nargs, WINDIAL *old, WINDIAL *new, PROC_ARRAY *p)
 {
@@ -470,6 +476,8 @@ windial_link(BASEPAGE *bp, long fn, short nargs, WINDIAL *old, WINDIAL *new, PRO
 	return 0;
 }
 
+/* Unlink the specified window from the window chain.
+ */
 long
 windial_unlink(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 {
@@ -559,7 +567,7 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 	{
 		if (icon)
 		{
-			r = rsrc_xgaddr(bp, 16L, 3, R_TREE, icon, proc);
+			r = rsrc_xgaddr(bp, RSRC_XGADDR, 3, R_TREE, icon, proc);
 			if (r > 0)
 			{
 				TOUCH(r);
@@ -616,7 +624,7 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 		{
 			if (o[so].ob_flags & OF_EDITABLE)
 			{
-				r = ftext_fix(bp, 29L, 3, wd->wb_box, so, proc);
+				r = ftext_fix(bp, FT_FIX, 3, wd->wb_box, so, proc);
 				if (r) break;
 			}
 			if (o[so].ob_flags & OF_LASTOB)
@@ -677,7 +685,7 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 	wd->wb_magic = WINDIAL_MAGIC;
 
 	if (proc->wchain != wd)
-		windial_link(bp, 20L, 3, proc->wchain, wd, proc);
+		windial_link(bp, WD_LINK, 3, proc->wchain, wd, proc);
 
 	DEBUGMSG("complete");
 
@@ -691,6 +699,7 @@ fatal:	if (m)
 	return -EINVAL;
 }
 
+/* Open the window created above */
 long
 windial_open(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 {
@@ -726,6 +735,7 @@ windial_open(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 	return 0;
 }
 
+/* Close the specified window */
 long
 windial_close(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 {
@@ -757,12 +767,41 @@ windial_close(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 
 		wd->wb_ontop = 0;
 	}
-	
+
 	DEBUGMSG("complete");
 
 	return 0;
 }
 
+/* Close all windows attached to the calling process */
+long
+windial_close_all(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
+{
+	PROC_ARRAY *proc = 0;
+	WINDIAL *wd;
+
+	if (nargs) proc = p;
+	if ((nargs < 1) || !proc) proc = get_contrl(bp);
+
+	if (!proc->gem.global[0])
+		return -EACCES;
+
+	DEBUGMSG("enter");
+
+	wd = proc->wchain;
+
+	while (wd)
+	{
+		windial_close(bp, WD_CLOSE, 2, wd, proc);
+		wd = wd->wb_next;
+	}
+
+	DEBUGMSG("complete");
+
+	return 0;
+}
+
+/* Delete the specified window. If it is open, close it previously */
 long
 windial_delete(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 {
@@ -780,7 +819,7 @@ windial_delete(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 	DEBUGMSG("enter");
 
 	if (wd->wb_ontop)
-		windial_close(bp, 6L, 2, wd, proc);
+		windial_close(bp, WD_CLOSE, 2, wd, proc);
 
 	_wind_delete(proc, wd->wb_handle);
 
@@ -801,6 +840,46 @@ windial_delete(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 	return 0;
 }
 
+/* Delete all windows attached to the process
+ */
+long
+windial_delete_all(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
+{
+	PROC_ARRAY *proc = 0;
+	WINDIAL *wd;
+
+	if (nargs) proc = p;
+	if ((nargs < 1) || !proc) proc = get_contrl(bp);
+
+	if (!proc->gem.global[0])
+		return -EACCES;
+
+	DEBUGMSG("enter");
+
+	wd = proc->wchain;
+
+	while (wd)
+	{
+		windial_delete(bp, WD_DELETE, 2, wd, proc);
+		wd = wd->wb_next;
+	}
+
+	DEBUGMSG("complete");
+
+	return 0;
+}
+
+static void
+do_termination(BASEPAGE *bp, PROC_ARRAY *proc)
+{
+	windial_delete_all(bp, WD_DELALL, 1, proc);
+	appl_close(bp, AP_CLOSE, 1, proc);
+	Pterm(0);
+}
+
+/* Handle all move/top/untop/iconify etc. standard operations on the open
+ * windowed dialog.
+ */
 long
 windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 {
@@ -928,8 +1007,12 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 				if (r > 0)
 					key = (short)r;
 			}
+
 			if (r >= 0)
 			{
+				if ((key & 0x007f) == 0x0011)		/* Ctrl/Q */
+					do_termination(bp, proc);
+
 				r = kstroke(proc, wd, key);
 				if (!r)
 					break;
@@ -997,6 +1080,10 @@ windial_formdo(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 
 				switch (msg)
 				{
+					case AP_TERM:
+						{
+							do_termination(bp, proc);	/* does not return */
+						}
 					case WM_CLOSED:
 						{
 							if (proc->alert)

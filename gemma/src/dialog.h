@@ -25,6 +25,8 @@ long windial_center(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY 
 long _rc_intersect(BASEPAGE *bp, long fn, short nargs, GRECT *rc1, GRECT *rc2);
 long windial_link(BASEPAGE *bp, long fn, short nargs, WINDIAL *old, WINDIAL *new, PROC_ARRAY *p);
 long windial_unlink(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p);
+long windial_close_all(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p);
+long windial_delete_all(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p);
 
 /* EOF */
 

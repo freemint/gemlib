@@ -96,7 +96,7 @@ lib_control(BASEPAGE *bp, long fn, short nargs, \
 		case	0x0002:	/* get version */
 		{
 			return (long)
-			"Gemma shared library version 1.10, "
+			"Gemma shared library version 1.11, "
 			"compiled " __DATE__ ". "
 			"Copyright (c) 1999-2003 Draco/YC. "
 			"Dedicated with love to Magda.";		

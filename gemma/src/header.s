@@ -18,7 +18,7 @@
 
 	.long	0x70004afc	| magic value (clr.l d0, illegal)
 	.long	_slbname	| pointer to library's (file)name
-	.long	0x010a	| version number
+	.long	0x010b	| version number
 	.long	0	| flags, currently 0L
 	.long	_gemma_init	| called when the library's been loaded
 	.long	_gemma_exit	| called before the library is removed
@@ -27,7 +27,7 @@
 	.long	0	| pointer to function names, optional
 	.long	0,0,0,0,0,0,0,0	| unused, always 0L
 
-	.long	44	| number of functions
+	.long	46	| number of functions
 
 	.long	_gem_control	| function table
 	.long	_call_aes
@@ -77,6 +77,8 @@
 	.long	_proc_exec
 	.long	_get_version
 	.long	_get_users
+	.long	_windial_close_all
+	.long	_windial_delete_all
 
 	.long	0
 	.long	0x070cffd6

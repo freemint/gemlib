@@ -146,7 +146,7 @@ extern short menu_height;		/* in appl.c */
 #  define DEBUGMSG(p)					\
 {							\
 	if (sflags.debug && proc->debug)		\
-		debug_print(__FUNCTION__,p);	\
+		debug_print(__FUNCTION__,p);		\
 }
 # else
 #  define DEBUGMSG(p)
