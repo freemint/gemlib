@@ -35,6 +35,9 @@
  *  This function does not work correctly on AES versions less
  *  than 1.40 without a patch program available from Atari
  *  Corp.
+ *
+ *  @note \p ap_value seems to have words swapped (APPEVNT_MOUSE: X pos is in the high
+ *  word and Y pos is in the low word).
  */
 
 short
