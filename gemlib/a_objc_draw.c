@@ -28,9 +28,6 @@
  *
  *  @sa mt_objc_draw()
  *
- *  In general, if not redrawing the object, it is usually
- *  quicker to manipulate the object tree directly.
- *
  */
 
 short 

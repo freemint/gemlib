@@ -10,9 +10,9 @@
  *  @param tree specifies the object tree
  *  @param object is the object to be moved
  *  @param new_pos specifies the new position of the object as
- *         follows:\n
- *         - OO_LAST (-1) : Make object the last child.
- *         - OO_FIRST (0) : Make object the first child.
+ *         follow:\n
+ *         - #OO_LAST (-1) : Make object the last child.
+ *         - #OO_FIRST (0) : Make object the first child.
  *         - 1 : Make object the second child.
  *         - 2 : etc...
  *  @param global_aes global AES array
