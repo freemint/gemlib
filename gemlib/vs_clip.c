@@ -10,9 +10,10 @@
  *
  *  @param handle Device handle
  *  @param clip_flag turn on/off the clipping as follow:
- *         - 0 : turn clipping off. Warning: Do not switch off clipping because a graphic object which is
- *           drawn outside of the visible screen area will overwrite memory
- *           or cause a bus error.
+ *         - 0 : turn clipping off.
+ *           Warning: Do not switch off clipping because a graphic object
+ *           which is drawn outside of the visible screen area will overwrite
+ *           memory or cause a bus error.
  *         - 1 (or any nonzero value) : turn clipping on
  *  @param pxy clipping rectangle
  *

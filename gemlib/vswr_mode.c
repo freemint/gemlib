@@ -19,7 +19,7 @@
  *         - MD_XOR (3)
  *         - MD_ERASE (4)
  *         .
- *         If you try toselect a mode number which is out of range,
+ *         If you try to select a mode number which is out of range,
  *         mode 1 (MD_REPLACE) will be selected.
  *
  *  @return selected writing mode
