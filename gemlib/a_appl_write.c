@@ -9,7 +9,7 @@
  *  @param ap_id is the application identifier of the process to which
  *         you wish to send the message.
  *  @param length specifies the number of bytes present in the message.
- *  @param app_buff is a pointer to a memory buffer with at least
+ *  @param ap_pbuff is a pointer to a memory buffer with at least
  *         \p length bytes available
  *  @param global_aes global AES array
  *
@@ -35,13 +35,13 @@
  */
 
 short
-mt_appl_write(short ap_id, short length, void *app_buff, short *global_aes)
+mt_appl_write(short ap_id, short length, void *ap_pbuff, short *global_aes)
 {
 	AES_PARAMS(12,2,1,1,0);
 
 	aes_intin[0]  = ap_id;
 	aes_intin[1]  = length;
-	aes_addrin[0] = (long)app_buff;
+	aes_addrin[0] = (long)ap_pbuff;
 
 	AES_TRAP(aes_params);
 
@@ -52,7 +52,7 @@ mt_appl_write(short ap_id, short length, void *app_buff, short *global_aes)
 #undef appl_write
 #endif
 short
-appl_write(short ap_id, short length, void *app_buff)
+appl_write(short ap_id, short length, void *ap_pbuff)
 {
-	return(mt_appl_write( ap_id, length, app_buff, aes_global));
+	return(mt_appl_write( ap_id, length, ap_pbuff, aes_global));
 }
