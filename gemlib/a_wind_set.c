@@ -184,9 +184,9 @@
  *          - \a WindowHandle handle of the window, or -1 to apply the setting to all windows
               that will be created later by the application.
  *			- \a W1 may be one of the following value:
- *             -  #WHL_REALWHEEL : AES will send #WM_WHEEL messages
- *             -  #WHL_ARROWWHEEL : AES will send #WM_ARROWED messages
- *             -  #WHL_SLDRWHEEL : AES will convert mouse wheel events to slider events
+ *             -  #WHEEL_MESAG : AES will send #WM_WHEEL messages
+ *             -  #WHEEL_ARROWED : AES will send #WM_ARROWED messages
+ *             -  #WHEEL_SLIDER : AES will convert mouse wheel events to slider events
  *
  *         mt_appl_getinfo() with parameter #AES_WINDOW returns the availability of this mode.
  *					   					
