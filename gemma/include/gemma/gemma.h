@@ -870,9 +870,251 @@ struct windial {
 	long	scratch5[16];
 };
 
+/* SLB bindings for libgemma.a */
+
+extern long _startup(void);
+extern short call_aes(GEM_ARRAY *gem, short fn);
+extern GEM_ARRAY *gem_control(void);
+extern long appl_open(char *file, short thread, char *pname);
+extern long appl_close(void);
+
 /* SLB macros */
 
 # ifndef GEMMA_MULTIPROC
+
+# ifdef __GNUC__
+
+static inline
+long appl_top(void)
+{
+	return (gemma.exec)(gemma.handle, (long)AP_TOP, (short)0);
+}
+
+static inline
+long rsrc_xload(char *file)
+{
+	return (gemma.exec)(gemma.handle, (long)RSRC_XLOAD, (short)1, file);
+}
+
+static inline
+long rsrc_xalloc(void)
+{
+	return (gemma.exec)(gemma.handle, (long)RSRC_XALLOC, (short)0);
+}
+
+static inline
+long rsrc_xfree(void)
+{
+	return (gemma.exec)(gemma.handle, (long)RSRC_XFREE, (short)0);
+}
+
+static inline
+long rsrc_xgaddr(short type, short obj)
+{
+	return (gemma.exec)(gemma.handle, (long)RSRC_XGADDR, (short)2, type, obj);
+}
+
+static inline
+char *env_get(const char *var)
+{
+	return (char *)(gemma.exec)(gemma.handle, (long)ENV_GET, (short)1, var);
+}
+
+static inline
+char *env_eval(const char *var)
+{
+	return (char *)(gemma.exec)(gemma.handle, (long)ENV_EVAL, (short)1, var);
+}
+
+static inline
+long env_getargc(void)
+{
+	return (gemma.exec)(gemma.handle, (long)ENV_GETARGC, (short)0);
+}
+
+static inline
+char *env_getargv(long argc)
+{
+	return (char *)(gemma.exec)(gemma.handle, (long)ENV_GETARGV, (short)1, argc);
+}
+
+static inline
+long windial_size(void)
+{
+	return (gemma.exec)(gemma.handle, (long)WD_FIELD, (short)0);
+}
+
+static inline
+WINDIAL *windial_create(WINDIAL *wd, short box, short icon, short ftext, char *title)
+{
+	return (WINDIAL *)(gemma.exec)(gemma.handle, (long)WD_CREATE, (short)5, wd, box, icon, ftext, title);
+}
+
+static inline
+WINDIAL *windial_xcreate(WINDIAL *wd, short box, short icon, short ftext, char *title, short gadgets)
+{
+	return (WINDIAL *)(gemma.exec)(gemma.handle, (long)WD_CREATE, (short)6, wd, box, icon, ftext, title, gadgets);
+}
+
+static inline
+long windial_open(WINDIAL *wd)
+{
+	return (gemma.exec)(gemma.handle, (long)WD_OPEN, (short)1, wd);
+}
+
+static inline
+long windial_formdo(WINDIAL *wd)
+{
+	return (gemma.exec)(gemma.handle, (long)WD_FORMDO, (short)1, wd);
+}
+
+static inline
+long windial_close(WINDIAL *wd)
+{
+	return (gemma.exec)(gemma.handle, (long)WD_CLOSE, (short)1, wd);
+}
+
+static inline
+long windial_delete(WINDIAL *wd)
+{
+	return (gemma.exec)(gemma.handle, (long)WD_DELETE, (short)1, wd);
+}
+
+static inline
+long windial_center(WINDIAL *wd)
+{
+	return (gemma.exec)(gemma.handle, (long)WD_CENTER, (short)1, wd);
+}
+
+static inline
+long windial_link(WINDIAL *from, WINDIAL *to)
+{
+	return (gemma.exec)(gemma.handle, (long)WD_LINK, (short)2, from, to);
+}
+
+static inline
+long windial_unlink(WINDIAL *wd)
+{
+	return (gemma.exec)(gemma.handle, (long)WD_UNLINK, (short)1, wd);
+}
+
+static inline void windial_longjmp(WINDIAL *wd, short vec)  __attribute__((__noreturn__));
+
+static inline
+void windial_longjmp(WINDIAL *wd, short vec)
+{
+	(gemma.exec)(gemma.handle, (long)WD_RETURN, (short)2, wd, vec);
+}
+
+static inline
+long windial_setjmp(WINDIAL *wd, short vec, void *adr)
+{
+	return (gemma.exec)(gemma.handle, (long)WD_HANDLER, (short)4, wd, vec, adr);
+}
+
+static inline
+long windial_alert(short button, char *str)
+{
+	return (gemma.exec)(gemma.handle, (long)WD_ALERT, (short)2, button, str);
+}
+
+static inline
+void windial_error(long error, char *msg)
+{
+	(gemma.exec)(gemma.handle, (long)WD_ERROR, (short)2, error, msg);
+}
+
+static inline
+long thread_fork(void *addr, char *ptitle, long stack, long mode)
+{
+	return (gemma.exec)(gemma.handle, (long)TFORK, (short)5, _startup, addr, ptitle, stack, mode);
+}
+
+static inline
+long thread_overlay(void *addr, char *ptitle, long stack, long mode)
+{
+	return (gemma.exec)(gemma.handle, (long)TOVL, (short)5, _startup, addr, ptitle, stack, mode);
+}
+
+static inline
+void objc_xdraw(WINDIAL *wd, short obj)
+{
+	(gemma.exec)(gemma.handle, (long)OB_XDRAW, (short)2, wd, obj);
+}
+
+static inline
+long av_dir_update(short drive)
+{
+	return (gemma.exec)(gemma.handle, (long)AV_DIR_UPD, (short)1, drive);
+}
+
+static inline
+long av_view(char *pathname)
+{
+	return (gemma.exec)(gemma.handle, (long)AV_XVIEW, (short)1, pathname);
+}
+
+static inline
+long av_help(char *fname)
+{
+	return (gemma.exec)(gemma.handle, (long)AV_HELP, (short)1, fname);
+}
+
+static inline
+long open_url(char *url)
+{
+	return (gemma.exec)(gemma.handle, (long)NET_URL, (short)1, url);
+}
+
+static inline
+short rc_intersect(GRECT *src, GRECT *dest)
+{
+	return (gemma.exec)(gemma.handle, (long)RC_INTERSECT, (short)2, src, dest);
+}
+
+static inline
+long objc_xchange(WINDIAL *wd, short obj, short newst, short redraw)
+{
+	return (gemma.exec)(gemma.handle, (long)OB_XCHANGE, (short)4, wd, obj, newst, redraw);
+}
+
+static inline
+void ftext_init(short tree, short obj)
+{
+	(gemma.exec)(gemma.handle, (long)FT_FIX, (short)2, tree, obj);
+}
+
+static inline
+char *file_select(char *title, char *mask, short flag)
+{
+	return (char *)(gemma.exec)(gemma.handle, (long)FSELINPUT, (short)3, title, mask, flag);
+}
+
+static inline
+long menu_xpop(WINDIAL *wd, short obj, MENU *menu)
+{
+	return (gemma.exec)(gemma.handle, (long)MN_XPOP, (short)3, wd, obj, menu);
+}
+
+static inline
+long proc_exec(short mode, long flag, char *cmd, char *tail, char *env)
+{
+	return (gemma.exec)(gemma.handle, (long)PROC_EXEC, (short)5, mode, flag, cmd, tail, env);
+}
+
+static inline
+char *get_version(void)
+{
+	return (char *)(gemma.exec)(gemma.handle, (long)GET_VERSION, (short)0);
+}
+
+static inline
+long get_users(void)
+{
+	return (gemma.exec)(gemma.handle, (long)GET_USERS, (short)0);
+}
+
+# else
 
 # define appl_top() (gemma.exec)(gemma.handle, (long)AP_TOP, (short)0)
 # define rsrc_xload(file) (gemma.exec)(gemma.handle, (long)RSRC_XLOAD, (short)1, (char *)file)
@@ -891,15 +1133,14 @@ struct windial {
 # define windial_close(wd) (gemma.exec)(gemma.handle, (long)WD_CLOSE, (short)1, (WINDIAL *)wd)
 # define windial_delete(wd) (gemma.exec)(gemma.handle, (long)WD_DELETE, (short)1, (WINDIAL *)wd)
 # define windial_center(wd) (gemma.exec)(gemma.handle, (long)WD_CENTER, (short)1, (WINDIAL *)wd)
-# define windial_dup(old, new) (gemma.exec)(gemma.handle, (long)WD_DUP, (short)2, (WINDIAL *)old, (WINDIAL *)new)
 # define windial_link(from, to) (gemma.exec)(gemma.handle, (long)WD_LINK, (short)2, (WINDIAL *)from, (WINDIAL *)to)
-# define windial_longjmp(wd, vec) (gemma.exec)(gemma.handle, (long)WD_RETURN, (short)2, (WINDIAL *)wd, (short)vec);
+# define windial_longjmp(wd, vec) (gemma.exec)(gemma.handle, (long)WD_RETURN, (short)2, (WINDIAL *)wd, (short)vec)
 # define windial_unlink(wd) (gemma.exec)(gemma.handle, (long)WD_UNLINK, (short)1, (WINDIAL *)wd)
 # define windial_setjmp(wd, vec, adr) (gemma.exec)(gemma.handle, (long)WD_HANDLER, (short)4, (WINDIAL *)wd, (short)vec, (void *)adr)
 # define windial_alert(button, str) (gemma.exec)(gemma.handle, (long)WD_ALERT, (short)2, (short)button, (char *)str)
 # define windial_error(error, msg) (gemma.exec)(gemma.handle, (long)WD_ERROR, (short)2, (long)error, (char *)msg)
 # define thread_fork(addr, ptitle, stack, mode) (gemma.exec)(gemma.handle, (long)TFORK, (short)5, _startup, (void *)addr, (char *)ptitle, (long)stack, (long)mode)
-# define objc_xdraw(wd, obj) (gemma.exec)(gemma.handle, (long)OB_XDRAW, (short)2, (WINDIAL *)wd, (short)obj);
+# define objc_xdraw(wd, obj) (gemma.exec)(gemma.handle, (long)OB_XDRAW, (short)2, (WINDIAL *)wd, (short)obj)
 # define thread_overlay(addr, ptitle, stack, mode) (gemma.exec)(gemma.handle, (long)TOVL, (short)5, _startup, (void *)addr, (char *)ptitle, (long)stack, (long)mode)
 # define av_dir_update(drive) (gemma.exec)(gemma.handle, (long)AV_DIR_UPD, (short)1, (short)drive)
 # define av_view(pathname) (gemma.exec)(gemma.handle, (long)AV_XVIEW, (short)1, (char *)pathname)
@@ -911,22 +1152,16 @@ struct windial {
 # define file_select(title, mask, flag) (char *)(gemma.exec)(gemma.handle, (long)FSELINPUT, (short)3, (char *)title, (char *)mask, (short)flag)
 # define menu_xpop(wd, obj, menu) (gemma.exec)(gemma.handle, (long)MN_XPOP, (short)3, (WINDIAL *)wd, (short)obj, (MENU *)menu)
 # define proc_exec(mode, flag, cmd, tail, env) (gemma.exec)(gemma.handle, (long)PROC_EXEC, (short)5, (short)mode, (long)flag, (char *)cmd, (char *)tail, (char *)env)
-# define get_version() (gemma.exec)(gemma.handle), (long)GET_VERSION, (short)0)
+# define get_version() (gemma.exec)(gemma.handle, (long)GET_VERSION, (short)0)
 # define get_users() (gemma.exec)(gemma.handle, (long)GET_USERS, (short)0)
+
+# endif /* __GNUC__ */
 
 # else /* MULTIPROC */
 
 # error "MULTIPROC flag not yet available"
 
 # endif /* MULTIPROC */
-
-/* SLB bindings for libgemma.a */
-
-extern long _startup(void);
-extern short call_aes(GEM_ARRAY *gem, short fn);
-extern GEM_ARRAY *gem_control(void);
-extern long appl_open(char *file, short thread, char *pname);
-extern long appl_close(void);
 
 /* AES bindings for libgemma.a */
 
