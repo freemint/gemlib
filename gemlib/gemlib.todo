@@ -24,6 +24,7 @@ a_appl_init.c		    -- use of bzero to clear the arrays [gemlib] or use of a for(
 					       What's the best one ???
 					       I've choosen bzero() if __MINT__ is defined (mintlib have bzero),
 					       and the for()-loop in other cases.
+						   BTW, why must we zero-ed local array ??? Seems stupid !
 a_appl_read.c		    -- idem
 a_appl_search.c 	    -- idem
 a_appl_tplay.c		    -- idem
