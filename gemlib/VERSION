@@ -1,0 +1,5 @@
+# $Id$
+#
+
+# Define this to the version of the package.
+VERSION=0.42.99-20030415
