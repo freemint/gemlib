@@ -453,12 +453,12 @@ x_fnts_get_style.c      -- idem
 x_fnts_open.c           -- idem
 x_fnts_remove.c         -- idem
 x_fnts_update.c         -- idem
-x_form_popup.c
-x_form_wbutton.c
-x_form_wkeybd.c
-x_form_xdial.c
-x_form_xdo.c
-x_form_xerr.c
+x_form_popup.c          -- idem
+x_form_wbutton.c        -- idem
+x_form_wkeybd.c         -- idem
+x_form_xdial.c          -- idem
+x_form_xdo.c            -- idem
+x_form_xerr.c           -- idem
 x_fslx_close.c
 x_fslx_do.c
 x_fslx_evnt.c
