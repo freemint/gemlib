@@ -91,5 +91,9 @@ _vdi_trap_00 (VDIPB * vdipb, long cntrl_0_1, short handle)
 	vdi_params.intout  = d;   \
 	vdi_params.ptsout  = e;
 
+/* special feature for VDI bindings: pointer in parameters (for return values)
+ * could be NULL (nice idea by Martin Elsasser against dummy variables) 
+ */
+#define CHECK_NULLPTR 1
 
 # endif /* _GEM_VDI_P_ */
