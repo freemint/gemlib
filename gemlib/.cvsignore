@@ -8,3 +8,4 @@ lib*.a
 mt_gem.h
 Doxyfile
 gemlib.spec
+html
