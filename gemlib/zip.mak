@@ -1,6 +1,8 @@
 #
-# build the ZIP archive
+# $Id$
 #
+
+# makefile for gemlib distrib
 
 # note:
 # ZIP must point to your zip.ttp program
