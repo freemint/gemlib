@@ -3,6 +3,8 @@
  * gem.h - main header file for new gem-lib
  */
 
+/** @file */
+
 #ifndef _GEMLIB_H_
 # define _GEMLIB_H_
 
@@ -842,21 +844,37 @@ typedef struct {
  * The AES bindings from old aesbind.h
  */
 	 
-short	appl_bvset   (short bvdisk, short bvhard);
-short	appl_control (short ap_cid, short ap_cwhat, void *ap_cout);
-short	appl_exit    (void);
-short	appl_find    (const char *Name);
-short	appl_getinfo (short type,
-                    short *out1, short *out2, short *out3, short *out4);
+/** @defgroup AES AES bindings
+ *  @{
+ */
+ 
+short	mt_appl_bvset  (short bvdisk, short bvhard, short *global_aes);
+short	mt_appl_control (short ap_cid, short ap_cwhat, void *ap_cout, short *global_aes);
+short	mt_appl_exit    (short *global_aes);
+short	mt_appl_find    (const char *Name, short *global_aes);
+short	mt_appl_getinfo (short type,
+                    short *out1, short *out2, short *out3, short *out4, short *global_aes);
 short	appl_xgetinfo(short type,
                     short *out1, short *out2, short *out3, short *out4);
-short	appl_init    (void);
-short	appl_read    (short ApId, short Length, void *ApPbuff);
-short	appl_search  (short mode, char *fname, short *type, short *ap_id);
-short	appl_tplay   (void *Mem, short Num, short Scale);
-short	appl_trecord (void *Mem, short Count);
-short	appl_write   (short ApId, short Length, void *ApPbuff);
-short appl_yield   (void);
+short	mt_appl_init    (short *global_aes);
+short	mt_appl_read    (short ApId, short Length, void *ApPbuff, short *global_aes);
+short	mt_appl_search  (short mode, char *fname, short *type, short *ap_id, short *global_aes);
+short	mt_appl_tplay   (void *Mem, short Num, short Scale, short *global_aes);
+short	mt_appl_trecord (void *Mem, short Count, short *global_aes);
+short	mt_appl_write   (short ApId, short Length, void *ApPbuff, short *global_aes);
+short	mt_appl_yield   (short *global_aes);
+#define appl_bvset(a,b) mt_appl_bvset(a,b,aes_global)
+#define appl_control(a,b,c) mt_appl_control(a,b,c,aes_global)
+#define appl_exit() mt_appl_exit(aes_global)
+#define appl_find(a) mt_appl_find(a,aes_global)
+#define appl_getinfo(a,b,c,d,e) mt_appl_getinfo(a,b,c,d,e,aes_global)
+#define appl_init() mt_appl_init(aes_global)
+#define appl_read(a,b,c) mt_appl_read(a,b,c,aes_global)
+#define appl_search(a,b,c,d) mt_appl_search(a,b,c,d,aes_global)
+#define appl_tplay(a,b,c) mt_appl_tplay(a,b,c,aes_global)
+#define appl_trecord(a,b) mt_appl_trecord(a,b,aes_global)
+#define appl_write(a,b,c) mt_appl_write(a,b,c,aes_global)
+#define appl_yield() mt_appl_yield(aes_global)  
 
 short	evnt_button (short Clicks, short WhichButton, short WhichState,
                    short *Mx, short *My, short *ButtonState, short *KeyState); 
@@ -992,19 +1010,27 @@ short * grect_to_array (const GRECT *area, short *array);
 typedef struct
 {
 	short       *control;
-	short	      *global;
+	short       *global;
 	const short *intin;
 	short       *intout;
 	const long  *addrin;
 	long        *addrout;
 } AESPB;
 
-extern AESPB       aes_params;
-#define _GemParBlk aes_params
 extern short gl_apid, gl_ap_version;			/* initialized in appl_init */
 
-void aes (AESPB *pb);
+extern short aes_global[];
+#define	_AESversion   (aes_global[0])
+#define	_AESnumapps   (aes_global[1])
+#define	_AESapid 	  (aes_global[2])
+#define	_AESappglobal (*((long *)&aes_global[3]))
+#define	_AESrscfile   ((OBJECT **)(*((long *)&aes_global[5])))
+#define	_AESmaxchar   (aes_global[13])
+#define	_AESminchar   (aes_global[14])
 
+extern void aes (AESPB *pb);
+
+/**@}*/
 #endif /* AES */
 
 
