@@ -9,7 +9,8 @@
  *
  *  @param handle Device handle
  *  @param index 
- *  @param color 
+ *  @param color  \n
+ *         [option CHECK_NULLPTR] color may be NULL
  *
  *  @return 
  *
@@ -32,6 +33,9 @@ vq_ctab_entry (short handle, short index, COLOR_ENTRY * color)
 
 	VDI_TRAP_ESC (vdi_params, handle, 206,1, 0,1);
 
+#if CHECK_NULLPTR
+	if (color)
+#endif
 	*color = *(COLOR_ENTRY*)&vdi_intout[2];
 	
 	return vdi_intout_long(0);
