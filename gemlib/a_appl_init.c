@@ -52,34 +52,14 @@
  *
  *  @since All AES versions.
  *
- *  @sa mt_appl_init()
+ *  @sa mt_appl_exit()
  *
- *  @note
- *  Why should we zero-ed local array ? This seems very stupid !
  */
 
 short
 mt_appl_init(short *global_aes)
 {
-#ifndef __MINT__
-	int ff;
-	short *pts;
-	long *ptl;
-#endif
 	AES_PARAMS(10,0,1,0,0);
-
-	/* clear all binding arrays */
-#ifdef __MINT__  /* mintlib have bzero() */
-	bzero (&aes_intin[0], AES_INTINMAX * sizeof (short));
-	bzero (&aes_intout[0], AES_INTOUTMAX * sizeof (short));
-	bzero (&aes_addrin[0], AES_ADDRINMAX * sizeof (short));
-	bzero (&aes_addrout[0], AES_ADDROUTMAX * sizeof (short));
-#else
-	for(ff=0,pts=&aes_intin[0];ff<AES_INTINMAX;ff++) *(pts++)=0;
-	for(ff=0,pts=&aes_intout[0];ff<AES_INTOUTMAX;ff++) *(pts++)=0;
-	for(ff=0,ptl=&aes_addrin[0];ff<AES_ADDRINMAX;ff++) *(ptl++)=0L;
-	for(ff=0,ptl=&aes_addrout[0];ff<AES_ADDROUTMAX;ff++) *(ptl++)=0L;
-#endif
 
 	AES_TRAP(aes_params);
 
