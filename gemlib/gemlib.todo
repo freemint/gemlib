@@ -440,19 +440,19 @@ x_edit_set_dirty.c      -- idem
 x_edit_set_font.c       -- idem
 x_edit_set_format.c     -- idem
 x_edit_set_pos.c        -- idem
-x_fnts_add.c
-x_fnts_close.c
-x_fnts_create.c
-x_fnts_delete.c
-x_fnts_do.c
-x_fnts_evnt.c
-x_fnts_get_info.c
-x_fnts_get_name.c
-x_fnts_get_no_styles.c
-x_fnts_get_style.c
-x_fnts_open.c
-x_fnts_remove.c
-x_fnts_update.c
+x_fnts_add.c            -- idem
+x_fnts_close.c          -- idem
+x_fnts_create.c         -- idem
+x_fnts_delete.c         -- idem
+x_fnts_do.c             -- idem
+x_fnts_evnt.c           -- idem
+x_fnts_get_info.c       -- idem
+x_fnts_get_name.c       -- idem
+x_fnts_get_no_styles.c  -- idem
+x_fnts_get_style.c      -- idem
+x_fnts_open.c           -- idem
+x_fnts_remove.c         -- idem
+x_fnts_update.c         -- idem
 x_form_popup.c
 x_form_wbutton.c
 x_form_wkeybd.c
