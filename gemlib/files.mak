@@ -495,7 +495,8 @@ OBJ = \
  x_wdlg_set_iconify.o	\
  x_wdlg_set_size.o	\
  x_wdlg_set_tree.o	\
- x_wdlg_set_uniconify.o
+ x_wdlg_set_uniconify.o \
+ x_xfrm_popup.o
 
 # object file specific to compiler
 
