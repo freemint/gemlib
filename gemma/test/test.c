@@ -17,8 +17,8 @@
  */
 
 # include <string.h>
-# include <mint/slb.h>
-# include <gemma/gemma.h>
+# include "../include/mint/slb.h"
+# include "../include/gemma/gemma.h"
 
 # include "test.h"
 

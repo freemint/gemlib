@@ -5,7 +5,6 @@
 CPU= -m68020-60
 CC= gcc
 RM= rm -f
-AT= asmtrans
 DEFS=
 LIB= -lgemma -lslb
 CFLAGS= -Wall -O2 $(CPU) -mshort -fomit-frame-pointer $(DEFS)
@@ -18,14 +17,11 @@ all: $(TARGET)
 $(TARGET): $(OBJ)
 	$(CC) $(LFLAGS) $(OBJ) $(LIB) -o $@
 
-startup.o: startup.s
-	$(CC) $(CFLAGS) -c startup.s -o $@
-
-startup.s: startup.spp
-	$(AT) $(DEFS) -gas -o $@ startup.spp
+startup.o: startup.S
+	$(CC) $(CFLAGS) -c startup.S -o $@
 
 clean:
-	$(RM) *.o *.s
+	$(RM) *.o
 
 veryclean:
-	$(RM) *.o *.s $(TARGET)
+	$(RM) *.o $(TARGET)
