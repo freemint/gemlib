@@ -23,12 +23,11 @@ void
 vst_track_offset (short handle, long offset, short pairmode,
                   short *tracks, short *pairs)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[4];   
 	short vdi_intout[2]; 
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
-#endif
 	
 	vdi_intin[0]          = 255;
 	vdi_intin[1]          = pairmode;

@@ -28,15 +28,12 @@
 short
 vst_name (short handle, short font_format, char *font_name, char *ret_name)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_intout[VDI_INTOUTMAX]; 
-#endif
 	register short n = 1 + vdi_str2array (font_name, vdi_intin + 1);
-#if USE_LOCAL_VDIPB
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
-#endif
 
 	vdi_intin[0] = font_format;
 	

@@ -30,14 +30,11 @@ long
 vst_setsize32 (short handle, long point, short *wchar, short *hchar,
                short *wcell, short *hcell)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[2]; 
 	short vdi_ptsout[4]; 
+
 	VDI_PARAMS(vdi_control, (short*)&point, 0L, vdi_intout, vdi_ptsout);
-#else
-	*(long*)&vdi_intin[0] = point;
-#endif
 
 	VDI_TRAP (vdi_params, handle, 252, 0,2);
 
