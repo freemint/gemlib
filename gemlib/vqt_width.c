@@ -34,14 +34,7 @@ vqt_width (short handle, short chr, short *cw, short *ldelta, short *rdelta)
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[1]; 
 	short vdi_ptsout[6]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&chr,                        /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		&vdi_intout[0],              /* vdi_intout  */
-		&vdi_ptsout[0]               /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, &chr, 0L, vdi_intout, vdi_ptsout );
 #else
 	vdi_intin[0] = chr;
 #endif

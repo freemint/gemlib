@@ -26,14 +26,7 @@ vq_tray_names (short handle, char *input_name, char *output_name,
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[4];   
 	short vdi_intout[2]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&vdi_intin[0],               /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		&vdi_intout[0],              /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L );
 #endif
 	
 	vdi_intin_ptr(0) = input_name;

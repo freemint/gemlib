@@ -36,14 +36,7 @@ vq_cellarray (short handle, short pxy[], short row_len, short nrows,
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		0L,                          /* vdi_intin   */
-		pxy,                         /* vdi_ptsin   */
-		color,                       /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, 0L, pxy, color, 0L );
 #else
 	vdi_params.ptsin  = pxy;
 	vdi_params.intout = color;

@@ -18,14 +18,7 @@ vqt_extent16n (short handle, const short *wstr, short num, short extent[])
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		wstr,                        /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		0L,                          /* vdi_intout  */
-		extent                       /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, wstr, 0L, 0L, extent );
 #else
 	vdi_params.intin  = wstr;
 	vdi_params.ptsout = extent;

@@ -30,14 +30,7 @@ vqt_attributes (short handle, short attrib[])
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		0L,                          /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		&attrib[0],                  /* vdi_intout  */
-		&attrib[6]                   /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, 0L, 0L, &attrib[0], &attrib[6] );
 #else
 	vdi_params.intout = &attrib[0];
 	vdi_params.ptsout = &attrib[6];

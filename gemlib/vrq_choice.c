@@ -19,14 +19,7 @@ vrq_choice (short handle, short cin, short *cout)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDIPB vdi_params =               
-	{                                
-		&vdi_control[0],             /* vdi_control */
-		&cin,                        /* vdi_intin   */
-		0L,                          /* vdi_ptsin   */
-		cout,                        /* vdi_intout  */
-		0L                           /* vdi_ptsout  */
-	};
+	VDI_PARAMS(vdi_control, &cin, 0L, cout, 0L );
 #else
 	vdi_intin[0] = cin;
 #endif
