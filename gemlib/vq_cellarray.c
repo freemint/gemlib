@@ -10,12 +10,15 @@
  *  @param pxy 
  *  @param row_len Length of each row in color index array.
  *  @param nrows Number of rows in color index array
- *  @param el_used Number of elements used in each row of color index array
- *  @param rows_used Number of rows used in color index array
+ *  @param el_used Number of elements used in each row of color index array \n
+ *         [option CHECK_NULLPTR] el_used may be NULL
+ *  @param rows_used Number of rows used in color index array \n
+ *         [option CHECK_NULLPTR] rows_used may be NULL
  *  @param status Invalid value flag:
  *         - 0 if no errors
  *         - 1 if a color value could not be determined for some pixel
- *         - 
+ *         .
+ *         [option CHECK_NULLPTR] status may be NULL
  *  @param color Color index array, stored one row at time \n
  *         (-1)	indicates that a color index could not be determined for that
  *         particular pixel
@@ -51,8 +54,17 @@ vq_cellarray (short handle, short pxy[], short row_len, short nrows,
 	vdi_params.intout = vdi_intout;
 #endif
 	
+#if CHECK_NULLPTR
+	if (el_used)
+#endif
 	*el_used   = vdi_control[9];
+#if CHECK_NULLPTR
+	if (rows_used)
+#endif
 	*rows_used = vdi_control[10];
+#if CHECK_NULLPTR
+	if (status)
+#endif
 	*status    = vdi_control[11];
 }
 
