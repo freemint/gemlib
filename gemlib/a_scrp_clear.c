@@ -4,15 +4,18 @@
 
 #include "gem_aesP.h"
 
-/** 
+/** clear the content of the clipboard directory
  *
  *  @param global_aes global AES array
  *
- *  @return 
+ *  @return 0 if an error occurred or non-zero otherwise.
  *
- *  @since 
+ *  @since All AES versions.
  *
- *  @sa 
+ *  @sa mt_scrp_read(), mt_scrp_write()
+ *
+ *  This function deletes all the files in the clipboard directory,
+ *  (not only files named \c 'SCRAP.*').
  *
  */
 

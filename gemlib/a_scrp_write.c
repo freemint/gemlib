@@ -9,7 +9,7 @@
  *  @param Scrappath points to a NULL-terminated path string containing
  *         a valid drive and path specification with a closing
  *         backslash. The following is an example of a correctly
- *         formatted Scrappath argument: \c C:\\CLIPBRD\\
+ *         formatted \a Scrappath argument: \c C:\\CLIPBRD\\
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.
@@ -23,8 +23,6 @@
  *  set the default location of the scrap directory using a CPX
  *  or accessory at bootup or by the user's request.
  *
- *  when scrp_read() returns an error value and you need to
- *  create the clipboard to write information to it.
  */
 
 short 

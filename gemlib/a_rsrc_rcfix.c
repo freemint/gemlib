@@ -15,7 +15,7 @@
  *
  *  @since Available only in AES versions 4.0 and greater. The
  *         presence of this call should also be checked for using
- *         mt_appl_getinfo().
+ *         mt_appl_getinfo() with #AES_PROCESS mode.
  *
  *  @sa mt_rsrc_obfix()
  *

@@ -4,7 +4,7 @@
 
 #include "gem_aesP.h"
 
-/** releases memory allocated by rsrc_load() for an
+/** releases memory allocated by mt_rsrc_load() for an
  *  application's resource.
  *
  *  @param global_aes global AES array
@@ -16,7 +16,7 @@
  *  @sa mt_rsrc_load()
  *
  *  mt_rsrc_free() should be called before an application which
- *  loaded a resource using rsrc_load() exits.
+ *  loaded a resource using mt_rsrc_load() exits.
  */
 
 short 

@@ -18,7 +18,7 @@
  *  @sa mt_rsrc_free()
  *
  *  In addition to loading the resource, all OBJECT coordinates
- *  are converted from character based coordinates to screen
+ *  are converted from character based coordinates to pixels based
  *  coordinates.
  *
  */
