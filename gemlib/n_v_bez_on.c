@@ -1,15 +1,48 @@
 /*
- *   NOTE: requires NVDI version 2.10 or higher
+ *  $Id$
  */
 
 #include "gem_vdiP.h"
 #include "gemx.h"
 
+/** After calling v_bez_on(), you can call v_bez()/v_bez_fill() without a 
+ *  sub-opcode in contrl[5]. This function exists only for compatibility reasons 
+ *  and usually it is only used in old GEM/3 metafiles.
+ *
+ *  @param handle Device handle
+ *
+ *  @return bezier depth, is a value between 0 (no beziers) and 7 (maximum quality) and 
+ *          represents the bezier depth. You should only use this value to determine if 
+ *          the driver is able to draw bezier curves.
+ *
+ *  @since NVDI 2.10
+ *
+ *  Applications should only use this call to determine, if the driver is able
+ *  to draw bezier curves (check 
+ *  if the return value indicates bezier support).
+ *  
+ *
+ */
 
 short
 v_bez_on (short handle)
 {
-	VDI_TRAP_ESC (vdi_params, handle, 11,13, 1,0);
+#if USE_LOCAL_VDIPB
+	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_intout[1]; 
+	VDIPB vdi_params =               
+	{                                
+		&vdi_control[0],             /* vdi_control */
+		0L, 						 /* vdi_intin	*/
+		0L, 						 /* vdi_ptsin	*/
+		&vdi_intout[0],              /* vdi_intout  */
+		0L							 /* vdi_ptsout  */
+	};
+#endif
+	
+	vdi_intout[0] = 0;
+	
+	VDI_TRAP_ESC (vdi_params, handle, 11,13, 0,0);
 
 	return vdi_intout[0];
 }

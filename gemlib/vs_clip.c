@@ -1,14 +1,46 @@
+/*
+ *  $Id$
+ */
+
 #include "gem_vdiP.h"
 
+/** You can limit the area for graphic operations by calling this function. If 
+ *  you enable clipping graphic operations will only take place in the clipping 
+ *  rectangle.
+ *
+ *  @param handle Device handle
+ *  @param clip_flag turn on/off the clipping as follow:
+ *         - 0 : turn clipping off. Warning: Do not switch off clipping because a graphic object which is
+ *           drawn outside of the visible screen area will overwrite memory
+ *           or cause a bus error.
+ *         - 1 (or any nonzero value) : turn clipping on
+ *  @param pxy clipping rectangle
+ *
+ *  @since all VDI versions
+ *
+ */
 
 void
 vs_clip (short handle, short clip_flag, short pxy[])
 {
+#if USE_LOCAL_VDIPB
+	short vdi_control[VDI_CNTRLMAX]; 
+	VDIPB vdi_params =               
+	{                                
+		&vdi_control[0],             /* vdi_control */
+		&clip_flag,                  /* vdi_intin   */
+		pxy,                         /* vdi_ptsin   */
+		0L,                          /* vdi_intout  */
+		0L                           /* vdi_ptsout  */
+	};
+#else
 	vdi_params.ptsin = pxy;
-
 	vdi_intin[0] = clip_flag;
-
+#endif
+	
 	VDI_TRAP (vdi_params, handle, 129, 2,1);
 
+#if !(USE_LOCAL_VDIPB)
 	vdi_params.ptsin = vdi_ptsin;
+#endif
 }

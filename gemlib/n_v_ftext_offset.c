@@ -1,15 +1,47 @@
 /*
- *   NOTE: requires NVDI version 3.x or higher
+ *  $Id$
  */
 
 #include "gem_vdiP.h"
 #include "gemx.h"
 
+/** This text function uses track and pair kerning and works with an internal 
+ *  resolution of 1/65536 pixels to maintain accurate character placement.
+ *  This variant of v_ftext() which allows your application to specifiy 
+ *  the offset of each character relative to the previous one
+ *
+ *  @param handle Device handle
+ *  @param x 
+ *  @param y 
+ *  @param str 
+ *  @param offset 
+ *         - offset[0] : x-offset of the first character
+ *         - offset[1] : y-offset of the first character
+ *         - offset[2..(2*n)-1] : x-offset, y-offset of the next characters
+ *
+ *  @since NVDI 3.00
+ *
+ *
+ */
 
 void
 v_ftext_offset (short handle, short x, short y,
                 const char *str, const short *offset)
 {
+#if USE_LOCAL_VDIPB
+	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_intin[VDI_INTINMAX];   
+	short vdi_ptsin[VDI_PTSINMAX];   
+	VDIPB vdi_params =               
+	{                                
+		&vdi_control[0],             /* vdi_control */
+		&vdi_intin[0],               /* vdi_intin   */
+		&vdi_ptsin[0],               /* vdi_ptsin   */
+		0L,                          /* vdi_intout  */
+		0L                           /* vdi_ptsout  */
+	};
+#endif
+	
 	const long * src = (const long*)offset;
 	long       * dst =       (long*)vdi_ptsin;
 	short     i, len = vdi_str2array (str, vdi_intin);

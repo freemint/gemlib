@@ -1,9 +1,45 @@
+/*
+ *  $Id$
+ */
+
 #include "gem_vdiP.h"
 
+/** On a device with up to 8 planes (256 simultaneously displayable colors) this 
+ *  function returns the value and the color index of a pixel.
+ *
+ *  @param handle Device handle
+ *  @param x 
+ *  @param y 
+ *  @param pel pixel value
+ *  @param index color index
+ *
+ *  @since all VDI versions (screen drivers only)
+ *
+ *
+ *  In HiColor (15 or 16 bits) \p pel contains the pixel value and \p index is 
+ *  usually -1.
+ *  
+ *  In TrueColor \p pel ist the low word and \p index the high word of the pixel value.
+ *  
+ */
 
 void
 v_get_pixel (short handle, short x, short y, short *pel, short *index)
 {
+#if USE_LOCAL_VDIPB
+	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_ptsin[2];   
+	short vdi_intout[2]; 
+	VDIPB vdi_params =               
+	{                                
+		&vdi_control[0],             /* vdi_control */
+		0L,                          /* vdi_intin   */
+		&vdi_ptsin[0],               /* vdi_ptsin   */
+		&vdi_intout[0],              /* vdi_intout  */
+		0L                           /* vdi_ptsout  */
+	};
+#endif
+	
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;
 

@@ -1,14 +1,42 @@
 /*
- *   NOTE: requires NVDI version 5.x or higher
+ *  $Id$
  */
 
 #include "gem_vdiP.h"
 #include "gemx.h"
 
+/** 
+ *
+ *  @param handle Device handle
+ *  @param type 
+ *  @param s 
+ *  @param wchar 
+ *
+ *  @return 
+ *
+ *  @since NVDI 5 ?
+ *
+ *
+ *
+ */
 
 short
 vs_document_info (short handle, short type, char *s, short wchar)
 {
+#if USE_LOCAL_VDIPB
+	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_intin[VDI_INTINMAX];   
+	short vdi_intout[1]; 
+	VDIPB vdi_params =               
+	{                                
+		&vdi_control[0],             /* vdi_control */
+		&vdi_intin[0],               /* vdi_intin   */
+		0L,                          /* vdi_ptsin   */
+		&vdi_intout[0],              /* vdi_intout  */
+		0L                           /* vdi_ptsout  */
+	};
+#endif
+	
 	register short n = 1;
 
 	vdi_intout[0] = 0;

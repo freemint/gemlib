@@ -1,9 +1,44 @@
+/*
+ *  $Id$
+ */
+
 #include "gem_vdiP.h"
 
+/** sets the input mode for the specified device
+ *
+ *  @param handle Device handle
+ *  @param dev input device
+ *         - 1: Mouse
+ *         - 2: Cursor
+ *         - 3: Function keys
+ *         - 4: Keyboard
+ *  @param mode requested input mode
+ *         - REQUEST MODE (1): wait until input data is available
+ *         - SAMPLE MODE  (2): return device status and input data (if available)
+ *
+ *  @return selected input mode
+ *
+ *  @since all VDI versions
+ *
+ */
 
 short
 vsin_mode (short handle, short dev, short mode)
 {
+#if USE_LOCAL_VDIPB
+	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_intin[2];   
+	short vdi_intout[1]; 
+	VDIPB vdi_params =               
+	{                                
+		&vdi_control[0],             /* vdi_control */
+		&vdi_intin[0],               /* vdi_intin   */
+		0L,                          /* vdi_ptsin   */
+		&vdi_intout[0],              /* vdi_intout  */
+		0L                           /* vdi_ptsout  */
+	};
+#endif
+	
 	vdi_intin[0] = dev;
 	vdi_intin[1] = mode;
 	

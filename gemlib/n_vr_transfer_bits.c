@@ -1,16 +1,44 @@
 /*
- *   NOTE: requires NVDI version 5.x or higher
+ *  $Id$
  */
 
 #include "gem_vdiP.h"
 #include "gemx.h"
 #include <stddef.h>
 
+/** 
+ *
+ *  @param handle Device handle
+ *  @param src_bm 
+ *  @param dst_bm 
+ *  @param src_rect 
+ *  @param dst_rect 
+ *  @param mode 
+ *
+ *  @since NVDI 5 ?
+ *
+ *
+ *
+ */
 
 void
 vr_transfer_bits (short handle, GCBITMAP * src_bm, GCBITMAP * dst_bm,
                   short *src_rect, short *dst_rect, short mode)
 {
+#if USE_LOCAL_VDIPB
+	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_intin[4];   
+	short vdi_ptsin[8];   
+	VDIPB vdi_params =               
+	{                                
+		&vdi_control[0],             /* vdi_control */
+		&vdi_intin[0],               /* vdi_intin   */
+		&vdi_ptsin[0],               /* vdi_ptsin   */
+		0L,                          /* vdi_intout  */
+		0L                           /* vdi_ptsout  */
+	};
+#endif
+	
 	vdi_intin[0] = mode;
 	vdi_intin[1] = 0;
 	vdi_intin[2] = 0;
