@@ -27,7 +27,7 @@
 #include "intern.h"
 #include "app.h"
 
-#if ! (( __GEMLIB_MAJOR__ > 0 ) || ( __GEMLIB_MINOR__ > 42 ) || ( __GEMLIB_REVISION__ > 2 ))
+#if ! (( __GEMLIB_MAJOR__ > 0 ) || ( __GEMLIB_MINOR__ > 42 ) || (( __GEMLIB_MINOR__ == 42 ) && ( __GEMLIB_REVISION__ > 2 )))
 /* note: The new gemlib plXX (after the mgemlib->gemlib merge)
  * contains correct appl_xgetinfo() binding already */
 
