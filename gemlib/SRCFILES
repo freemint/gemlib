@@ -432,6 +432,8 @@ COBJS = \
 	x_edit_set_format.c \
 	x_edit_set_pos.c \
 	\
+	x_evnt_multi.c\
+	\
 	x_fnts_add.c \
 	x_fnts_close.c \
 	x_fnts_create.c \

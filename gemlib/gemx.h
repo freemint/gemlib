@@ -21,6 +21,13 @@
 __BEGIN_DECLS
 
 
+/** @addtogroup a_evnt
+ *  @{
+ */
+#define EVNT_multi(a,b,c,d,e,f,g,h)		mt_EVNT_multi(a,b,c,d,e,f,g,h,aes_global)
+/**@}*/
+
+
 /** @addtogroup a_form
  *  @{
  */
