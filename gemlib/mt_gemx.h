@@ -332,20 +332,25 @@ struct _drv_entry
 	 DRV_ENTRY	*next; /**< TODO */
 };
 
-#define	PDLG_CHG_SUB	0x80000000L
-#define	PDLG_IS_BUTTON	0x40000000L
+#define	PDLG_CHG_SUB	0x80000000L 	/**< TODO */
+#define	PDLG_IS_BUTTON	0x40000000L 	/**< TODO */
 
-#define	PDLG_PREBUTTON	0x20000000L
-#define	PDLG_PB_OK		1
-#define	PDLG_PB_CANCEL	2
-#define	PDLG_PB_DEVICE	3
+#define	PDLG_PREBUTTON	0x20000000L 	/**< TODO */
+#define	PDLG_PB_OK		1 				/**< TODO */
+#define	PDLG_PB_CANCEL	2 				/**< TODO */
+#define	PDLG_PB_DEVICE	3 				/**< TODO */
 
-#define	PDLG_BUT_OK 	(PDLG_PREBUTTON + PDLG_PB_OK)
-#define	PDLG_BUT_CNCL	(PDLG_PREBUTTON + PDLG_PB_CANCEL)
-#define	PDLG_BUT_DEV	(PDLG_PREBUTTON + PDLG_PB_DEVICE)
+#define	PDLG_BUT_OK 	(PDLG_PREBUTTON + PDLG_PB_OK) 		/**< TODO */
+#define	PDLG_BUT_CNCL	(PDLG_PREBUTTON + PDLG_PB_CANCEL) 	/**< TODO */
+#define	PDLG_BUT_DEV	(PDLG_PREBUTTON + PDLG_PB_DEVICE) 	/**< TODO */
 
+/** TODO */
 typedef long __CDECL (*PDLG_INIT)(PRN_SETTINGS *settings, PDLG_SUB *sub);
+
+/** TODO */
 typedef long __CDECL (*PDLG_HNDL)(PRN_SETTINGS *settings, PDLG_SUB *sub, short exit_obj);
+
+/** TODO */
 typedef long __CDECL (*PDLG_RESET)(PRN_SETTINGS *settings, PDLG_SUB *sub);
 
 /** Sub-dialog for setting device */
@@ -395,23 +400,23 @@ struct _pdlg_sub
 #define	CC_65K_GREY 	0x0040		/**< 65536 Farben in Graut”ne wandeln */
 #define	CC_16M_GREY 	0x0080		/**< 16777216 Farben in Graut”ne wandeln */
 
-#define	CC_2_COLOR		0x0100		/* *<2 Farben */
+#define	CC_2_COLOR		0x0100		/**< 2 Farben */
 #define	CC_4_COLOR		0x0200		/**< 4 Farben */
-#define	CC_8_COLOR		0x0400		/* *<8 Farben */
+#define	CC_8_COLOR		0x0400		/**< 8 Farben */
 #define	CC_16_COLOR 	0x0800		/**< 16 Farben */
 #define	CC_256_COLOR	0x1000		/**< 256 Farben */
 #define	CC_32K_COLOR	0x2000		/**< 32768 Farben */
 #define	CC_65K_COLOR	0x4000		/**< 65536 Farben */
 #define	CC_16M_COLOR	0x8000		/**< 16777216 Farben */
 
-#define	NO_CC_BITS		16
+#define	NO_CC_BITS		16			/**< TODO */
 
 /*----------------------------------------------------------------------------------------*/ 
 /* einstellbare Rasterverfahren																				*/
 /*----------------------------------------------------------------------------------------*/ 
 #define	DC_NONE			0			/**< keine Rasterverfahren */
 #define	DC_FLOYD 		1			/**< einfacher Floyd-Steinberg */
-#define	NO_DC_BITS		1
+#define	NO_DC_BITS		1			/**< TODO */
 
 /*----------------------------------------------------------------------------------------*/ 
 /* Druckereigenschaften 																						*/
@@ -434,7 +439,7 @@ struct _pdlg_sub
 #define	MC_LANDSCAPE	0x0002		/**< Seite kann im Querformat ausgegeben werden */
 #define	MC_REV_PTRT 	0x0004		/**< Seite kann um 180 Grad gedreht im Hochformat ausgegeben werden */
 #define	MC_REV_LNDSCP	0x0008		/**< Seite kann um 180 Grad gedreht im Querformat ausgegeben werden */
-#define	MC_ORIENTATION	0x000f
+#define	MC_ORIENTATION	0x000f		/**< TODO */
 
 #define	MC_SLCT_CMYK	0x0400		/**< Treiber kann bestimmte Farbebenen ausgeben */
 #define	MC_CTRST_BRGHT	0x0800		/**< Treiber kann Kontrast und Helligkeit ver„ndern */
@@ -442,10 +447,10 @@ struct _pdlg_sub
 /*----------------------------------------------------------------------------------------*/ 
 /* plane_flags 																									*/
 /*----------------------------------------------------------------------------------------*/ 
-#define	PLANE_BLACK 	0x0001
-#define	PLANE_YELLOW	0x0002
-#define	PLANE_MAGENTA	0x0004
-#define	PLANE_CYAN		0x0008
+#define	PLANE_BLACK 	0x0001		/**< TODO */
+#define	PLANE_YELLOW	0x0002		/**< TODO */
+#define	PLANE_MAGENTA	0x0004		/**< TODO */
+#define	PLANE_CYAN		0x0008		/**< TODO */
 
 
 /* <driver_mode> */
@@ -458,8 +463,8 @@ struct _pdlg_sub
 #define  PG_ODD_PAGES   0x0002  	/**< Only output pages with odd page numbers */
 
 /* <first_page/last_page> */
-#define	PG_MIN_PAGE 	1
-#define	PG_MAX_PAGE 	9999
+#define	PG_MIN_PAGE 	1			/**< TODO */
+#define	PG_MAX_PAGE 	9999		/**< TODO */
 
 /* <orientation> */
 #define  PG_UNKNOWN     0x0000  	/**< Orientation unknown and not adjustable */
@@ -630,7 +635,7 @@ short		mt_lbox_do (LIST_BOX *box, short obj, short *global);
 short		mt_lbox_delete (LIST_BOX *box, short *global);
 short		mt_lbox_cnt_items (LIST_BOX *box, short *global);
 OBJECT *	mt_lbox_get_tree (LIST_BOX *box, short *global);
-short		mt_lbox_get_avis (LIST_BOX *box, short *global);
+short		mt_lbox_get_visible (LIST_BOX *box, short *global);
 void *		mt_lbox_get_udata (LIST_BOX *box, short *global);
 short		mt_lbox_get_afirst (LIST_BOX *box, short *global);
 short		mt_lbox_get_slct_idx (LIST_BOX *box, short *global);
@@ -653,7 +658,7 @@ void		mt_lbox_bscroll_to (LIST_BOX *box, short first, GRECT *box_rect,
    		    GRECT *slider_rect, short *global);
 
 /* #defines for listboxes with only one slider */
-#define	mt_lbox_get_visible			mt_lbox_get_avis	/**< another name for mt_lbox_get_visible */
+#define	mt_lbox_get_avis			mt_lbox_get_visible	/**< another name for mt_lbox_get_avis */
 #define	mt_lbox_get_first			mt_lbox_get_afirst	/**< another name for mt_lbox_get_first */
 #define	mt_lbox_set_slider			mt_lbox_set_asldr	/**< another name for mt_lbox_set_slider */
 #define	mt_lbox_scroll_to			mt_lbox_ascroll_to	/**< another name for mt_lbox_scroll_to */
@@ -741,7 +746,7 @@ typedef void * DIALOG;
  *  .
  *  Of these function numbers one only has to react to HNDL_CLSD. All other 
  *  events need only be paid attention to when needed.\n
- *  If handle_exit is called with an unknown function number in <obj>, or 
+ *  If handle_exit is called with an unknown function number in \p obj, or 
  *  one of the above function numbers is to be ignored, then 1 has to be 
  *  returned.
  * 
