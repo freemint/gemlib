@@ -41,8 +41,6 @@ COBJS = \
 	fsel_exinput.c \
 	fsel_input.c \
 	\
-	gem_control.c \
-	\
 	graf_dragbox.c \
 	graf_growbox.c \
 	graf_handle.c \
