@@ -1,7 +1,9 @@
 #
-# makefile for mgemlib 
-# gcc 2.81 version (16 bits)
+# $Id$
 #
+
+# makefile for gemlib 
+# gcc 2.81 version (16 bits)
 
 # note:
 # CC_GCC281 must point to your gcc.ttp program
@@ -9,7 +11,8 @@
 
 CC     = $(CC_GCC281)
 AR     = $(AR_GCC281)
-CFLAGS = -O2 -Wall -m68000 -mshort -Iinclude
+
+CFLAGS = -O2 -Wall -m68000 -mshort
 
 include files.mak
 

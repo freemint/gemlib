@@ -1,7 +1,9 @@
 #
-# makefile for mgemlib 
-# sozobon version
+# $Id$
 #
+
+# makefile for gemlib 
+# sozobon version
 
 # note:
 # CC_SOX must point to your cc.ttp program
@@ -10,7 +12,8 @@
 CC     = $(CC_SOX)
 AS     = $(AS_SOX)
 AR     = $(AR_SOX)
-CFLAGS = -O -Iinclude
+
+CFLAGS = -O
 
 include files.mak
 

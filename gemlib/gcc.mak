@@ -1,7 +1,9 @@
 #
-# makefile for mgemlib 
-# gcc >= 2.95.3 (sparemint) version
+# $Id$
 #
+
+# makefile for gemlib 
+# gcc >= 2.95.3 (sparemint) version
 
 ifeq ($(CROSS),yes)
 CC     = m68k-atari-mint-gcc
@@ -11,7 +13,7 @@ CC     = gcc
 AR     = ar
 endif
 
-CFLAGS = -O2 -Wall -fomit-frame-pointer -Iinclude
+CFLAGS = -O2 -Wall -fomit-frame-pointer
 
 include files.mak
 
