@@ -1088,25 +1088,25 @@ typedef  struct
 #define BEG_MCTRL		3	/**< TODO */
 
 /* graf_mouse mouse types */
-#define ARROW			 0	/**< TODO */
-#define TEXT_CRSR 		 1	/**< TODO */
-#define BEE 			 2	/**< TODO */
-#define BUSY_BEE	  BEE 	/* alias */	/**< TODO */
-#define BUSYBEE		  BEE 	/* alias */	/**< TODO */
-#define HOURGLASS 		 2	/**< TODO */
-#define POINT_HAND		 3	/**< TODO */
-#define FLAT_HAND 		 4	/**< TODO */
-#define THIN_CROSS		 5	/**< TODO */
-#define THICK_CROSS		 6	/**< TODO */
-#define OUTLN_CROSS		 7	/**< TODO */
-#define USER_DEF		  255	/**< TODO */
-#define M_OFF			  256	/**< TODO */
-#define M_ON			  257	/**< TODO */
-#define M_SAVE 			  258	/**< TODO */
-#define M_RESTORE 		  259	/**< TODO */
-#define M_LAST 			  260	/**< TODO */
-#define M_PREVIOUS        M_LAST  /* alias */	/**< TODO */
-#define M_FORCE			0x8000	/**< TODO */
+#define ARROW			 0	/**< see mt_graf_mouse() */
+#define TEXT_CRSR 		 1	/**< see mt_graf_mouse() */
+#define BEE 			 2	/**< see mt_graf_mouse() */
+#define BUSY_BEE	  BEE 	/**< alias for BEE */
+#define BUSYBEE		  BEE 	/**< alias for BEE */
+#define HOURGLASS 		 2	/**< see mt_graf_mouse() */
+#define POINT_HAND		 3	/**< see mt_graf_mouse() */
+#define FLAT_HAND 		 4	/**< see mt_graf_mouse() */
+#define THIN_CROSS		 5	/**< see mt_graf_mouse() */
+#define THICK_CROSS		 6	/**< see mt_graf_mouse() */
+#define OUTLN_CROSS		 7	/**< see mt_graf_mouse() */
+#define USER_DEF		  255	/**< see mt_graf_mouse() */
+#define M_OFF			  256	/**< see mt_graf_mouse() */
+#define M_ON			  257	/**< see mt_graf_mouse() */
+#define M_SAVE 			  258	/**< see mt_graf_mouse() */
+#define M_RESTORE 		  259	/**< see mt_graf_mouse() */
+#define M_LAST 			  260	/**< see mt_graf_mouse() */
+#define M_PREVIOUS        M_LAST /**< alias for M_LAST */
+#define M_FORCE			0x8000	/**< see mt_graf_mouse() */
 
 /* objects - general */
 #define ROOT		 	0 	 /* index of ROOT */	/**< TODO */
@@ -1318,16 +1318,45 @@ typedef  struct
 #define MX_ENABLE3D		10      /* MagiC 3.0   */	/**< TODO */
 #define MENUCOL			11      /* MagiC 6     */	/**< TODO */
 
-/** Mouse Form Definition Block */
+/** Mouse Form Definition Block, see mt_graf_mouse() */
 typedef struct mouse_form
 {
-	short		mf_xhot;		/**< TODO */
-	short		mf_yhot;		/**< TODO */
-	short		mf_nplanes;		/**< TODO */
-	short		mf_fg;			/**< TODO */
-	short		mf_bg;			/**< TODO */
-	short		mf_mask[16];	/**< TODO */
-	short		mf_data[16];	/**< TODO */
+	/** x-location of the mouse hot-spot. 
+	 * This value should be in the range 0 to 15 and defines what offset
+	 * into the bitmap is actually the 'point'.
+	 */
+	short		mf_xhot;
+
+	/** y-location of the mouse hot-spot. 
+	 * This value should be in the range 0 to 15 and defines what offset
+	 * into the bitmap is actually the 'point'.
+	 */
+	short		mf_yhot;
+	
+	/** the number of bit-planes used by the mouse pointer.
+	 * Currently, the value of 1 is the only legal value.
+	 */
+	short		mf_nplanes;
+	
+	/** palette index of the color used for the data.
+	 *  this data is usually 1.
+	 */
+	short		mf_fg;
+	
+	/** palette index of the color used for the mask
+	 *  this data is usually 0.
+	 */
+	short		mf_bg;
+	
+	/** array of 16 WORD's which define the mask
+     *  portion of the mouse form
+	 */
+	short		mf_mask[16];
+	
+	/** array of 16 WORD's which define the data
+     *  portion of the mouse form
+	 */
+	short		mf_data[16];
 } MFORM;
 
 #ifndef __PXY
