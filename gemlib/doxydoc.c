@@ -230,3 +230,33 @@
  */
 
 /**@}*/
+
+
+/** @mainpage
+ *
+ *  Official home of gemlib is http://sparemint.atariforge.net/sparemint
+ *
+ *  History:
+ *  - \link Changelog.old up to gemlib PL38 \endlink
+ *  - from gemlib PL38 to Dec 2002 (before merging gemlib and mgemlib)
+ *    - \link Changelog.MGL MGEMLIB branch (mgemlib 39 -> mgemlib 41) \endlink
+ *    - \link Changelog.422 GEMLIB branch (gemlib 0.40.0 -> gemlib 0.42.2) \endlink
+ *  - \link Changelog from Dec 2002 (up to now) \endlink
+ */
+
+/** @page Changelog.old
+ * \include ChangeLog.old
+ */
+
+/** @page Changelog.MGL
+ * \include ChangeLog.MGL
+ */
+
+/** @page Changelog.422
+ * \include ChangeLog.422
+ */
+
+/** @page Changelog
+ * \include ChangeLog
+ */
+
