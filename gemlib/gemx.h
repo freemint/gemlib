@@ -104,7 +104,7 @@ __BEGIN_DECLS
 #define lbox_delete(a)				mt_lbox_delete(a,aes_global)
 #define lbox_cnt_items(a)			mt_lbox_cnt_items(a,aes_global)
 #define lbox_get_tree(a)			mt_lbox_get_tree(a,aes_global)
-#define lbox_get_avis(a)			mt_lbox_get_avis(a,aes_global)
+#define lbox_get_avis(a)			mt_lbox_get_visible(a,aes_global)
 #define lbox_get_udata(a)			mt_lbox_get_udata(a,aes_global)
 #define lbox_get_afirst(a)			mt_lbox_get_afirst(a,aes_global)
 #define lbox_get_slct_idx(a)		mt_lbox_get_slct_idx(a,aes_global)
@@ -124,7 +124,7 @@ __BEGIN_DECLS
 #define lbox_set_bentries(a,b)		mt_lbox_set_bentries(a,b,aes_global)
 #define lbox_bscroll_to(a,b,c,d)	mt_lbox_bscroll_to(a,b,c,d,aes_global)
 /* #defines for listboxes with only one slider */
-#define	lbox_get_visible(a)			mt_lbox_get_avis(a,aes_global)
+#define	lbox_get_visible(a)			mt_lbox_get_visible(a,aes_global)
 #define	lbox_get_first(a)			mt_lbox_get_afirst(a,aes_global)
 #define	lbox_set_slider(a,b,c)		mt_lbox_set_asldr(a,b,c,aes_global)
 #define	lbox_scroll_to(a,b,c,d)		mt_lbox_ascroll_to(a,b,c,d,aes_global)
