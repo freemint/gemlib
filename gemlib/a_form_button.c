@@ -5,7 +5,7 @@
 #include "gem_aesP.h"
 
 /** is a utility function designed to aid in the
- *  creation of a custom form_do() handler.
+ *  creation of a custom mt_form_do() handler.
  *
  *  @param tree is a pointer to a valid object tree in memory you wish
  *               to process button events for.
@@ -14,14 +14,14 @@
  *  @param clicks is the number of times the mouse button needs to be
  *               clicked.
  *  @param nextobj the next object to gain edit focus or 0 if
- *               there are no editable objects. If the top bit of \p nextobj is
- *               set, this indicates that a TOUCHEXIT object was
+ *               there are no editable objects. If the top bit of \a nextobj is
+ *               set, this indicates that a #OF_TOUCHEXIT object was
  *               double-clicked. \n
- *             [option CHECK_NULLPTR] nextobj may be NULL
+ *             [option CHECK_NULLPTR] \a nextobj may be NULL
  *  @param global_aes global AES array
  *
- *  @return 0 if it exits finding an EXIT or
- *               TOUCHEXIT object selected or 1 otherwise.
+ *  @return 0 if it exits finding an #OF_EXIT or
+ *               #OF_TOUCHEXIT object selected or 1 otherwise.
  *
  *  @since All AES versions.
  *
@@ -29,10 +29,10 @@
  *
  *  To use this function properly, the application should take
  *  the following steps:
- *    1. Monitor mouse clicks with mt_evnt_multi() or mt_evnt_button().
- *    2. When a click occurs, use mt_objc_find() to determine if
+ *    -# Monitor mouse clicks with mt_evnt_multi() or mt_evnt_button().
+ *    -# When a click occurs, use mt_objc_find() to determine if
  *       the click occurred over the object.
- *    3. If so, call mt_form_button() with the appropriate
+ *    -# If so, call mt_form_button() with the appropriate
  *       values.
  *
  *  @note This function was not originally documented by Atari.
