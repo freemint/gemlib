@@ -58,16 +58,16 @@
  *  Why should we zero-ed local array ? This seems very stupid !
  */
 
-short 
+short
 mt_appl_init(short *global_aes)
 {
 #ifndef __MINT__
 	int ff;
 	short *pts;
 	long *ptl;
-#endif		
+#endif
 	AES_PARAMS(10,0,1,0,0);
-                    
+
 	/* clear all binding arrays */
 #ifdef __MINT__  /* mintlib have bzero() */
 	bzero (&aes_control[0], AES_CTRLMAX * sizeof (short));
@@ -88,14 +88,14 @@ mt_appl_init(short *global_aes)
 
 	gl_ap_version = aes_global[0];
 	gl_apid 	  = aes_intout[0];
-	
+
 	return aes_intout[0];
 }
 
 #ifdef appl_init
 #undef appl_init
 #endif
-short 
+short
 appl_init(void)
 {
 	return(mt_appl_init(aes_global));

@@ -34,11 +34,11 @@
  *  above and mt_appl_getinfo() indicates that it is available.
  */
 
-short 
+short
 mt_appl_find(const char *Name, short *global_aes)
 {
 	AES_PARAMS(13,0,1,1,0);
-                    
+
 	aes_addrin[0] = (long)Name;
 
 	AES_TRAP(aes_params);
@@ -49,7 +49,7 @@ mt_appl_find(const char *Name, short *global_aes)
 #ifdef appl_find
 #undef appl_find
 #endif
-short 
+short
 appl_find(const char *Name)
 {
 	return(mt_appl_find(Name, aes_global));

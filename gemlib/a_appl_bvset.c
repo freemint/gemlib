@@ -4,21 +4,21 @@
 
 #include "gem_aesP.h"
 
-/** 
+/**
  *
- *  @param bvdisk 
- *  @param bvhard 
+ *  @param bvdisk
+ *  @param bvhard
  *  @param global_aes global AES array
  *
  *  @return
  *
- *  @since 
+ *  @since
  *
- *  @sa 
- *  
+ *  @sa
+ *
  */
 
-short 
+short
 mt_appl_bvset(short bvdisk, short bvhard, short *global_aes)
 {
 	AES_PARAMS(16,2,1,0,0);

@@ -34,7 +34,7 @@
  *
  */
 
-short 
+short
 mt_appl_write(short ApId, short Length, void *ApPbuff, short *global_aes)
 {
 	AES_PARAMS(12,2,1,1,0);
@@ -51,7 +51,7 @@ mt_appl_write(short ApId, short Length, void *ApPbuff, short *global_aes)
 #ifdef appl_write
 #undef appl_write
 #endif
-short 
+short
 appl_write(short ApId, short Length, void *ApPbuff)
 {
 	return(mt_appl_write( ApId, Length, ApPbuff, aes_global));

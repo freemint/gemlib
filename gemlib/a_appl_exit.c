@@ -20,11 +20,11 @@
  *
  */
 
-short 
+short
 mt_appl_exit(short *global_aes)
 {
 	AES_PARAMS(19,0,1,0,0);
-                    
+
 	AES_TRAP(aes_params);
 
 	return aes_intout[0];
@@ -33,7 +33,7 @@ mt_appl_exit(short *global_aes)
 #ifdef appl_exit
 #undef appl_exit
 #endif
-short 
+short
 appl_exit(void)
 {
 	return(mt_appl_exit(aes_global));

@@ -26,7 +26,7 @@
  *  indicates that this feature is supported, ap_id takes on an
  *  additional meaning. If APR_NOWAIT (-1) is passed instead of
  *  ap_id, appl_read() will return immediately if no message is
- *  currently waiting. 
+ *  currently waiting.
  *
  *  Normally this call is not used. evnt_multi() or
  *  evnt_mesag() is used instead for standard message
@@ -36,11 +36,11 @@
  *  bytes be used.
  */
 
-short 
+short
 mt_appl_read(short ApId, short Length, void *ApPbuff, short *global_aes)
 {
 	AES_PARAMS(11,2,1,1,0);
-                    
+
 	aes_intin[0]  = ApId;
 	aes_intin[1]  = Length;
 	aes_addrin[0] = (long)ApPbuff;
@@ -53,7 +53,7 @@ mt_appl_read(short ApId, short Length, void *ApPbuff, short *global_aes)
 #ifdef appl_read
 #undef appl_read
 #endif
-short 
+short
 appl_read(short ApId, short Length, void *ApPbuff)
 {
 	return(mt_appl_read(ApId, Length, ApPbuff, aes_global));
