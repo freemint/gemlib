@@ -27,11 +27,10 @@
 short
 v_bez_on (short handle)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[1]; 
+
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_dummy);
-#endif
 	
 	vdi_intout[0] = 0;
 	

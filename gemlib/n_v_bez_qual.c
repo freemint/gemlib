@@ -21,19 +21,14 @@
 void
 v_bez_qual (short handle, short percent, short *actual)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[3];   
+
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, actual, vdi_dummy);
-#endif
 	
 	vdi_intin[0] = 32;
 	vdi_intin[1] = 1;
 	vdi_intin[2] = percent;
 	
 	VDI_TRAP_ESC (vdi_params, handle, 5,99, 0,3);
-	
-#if !(USE_LOCAL_VDIPB)
-	*actual = vdi_intout[0];
-#endif
 }
