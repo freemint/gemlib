@@ -167,12 +167,23 @@ short		mt_fnts_update		(FNT_DIALOG *fnt_dialog, short button_flags, long id, lon
  * fslx_* file selection (MagiC only)
  */
 
+#ifndef GEMLIB_XATTR
+/* purec pctoslib defined __TOS in the file that defines the structure XATTR */
+/* sozobonx xdlibs defined _file_h_ or _filesys_h_ in both files where the structure XATTR is defined */
+/* in other case (XATTR not defined at this point), we go the old way and use "void" instead */
+#  if defined(__TOS) || defined(_file_h_) || defined(_filesys_h_)
+#    define GEMLIB_XATTR XATTR
+#  else /* struct XATTR defined */
+#    define GEMLIB_XATTR void
+#  endif /* struct XATTR defined */
+#endif /* GEMLIB_XATTR */
+
 /** @addtogroup x_fslx
  *  @{
  */
 
 /** TODO */
-typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, void *xattr);
+typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, GEMLIB_XATTR *xattr);
 
 /* Sortiermodi */
 #define SORTBYNAME		0			/**< TODO */
@@ -892,7 +903,9 @@ void	v_getbitmap_info(VdiHdl, short ch, long *advancex, long *advancey,
 void	v_getoutline    (VdiHdl, short ch, short *xyarray, char *bezarray,
                                short maxverts, short *numverts);
 
-void	vq_devinfo     (VdiHdl, short device, short *dev_open,
+short	vq_devinfo     (VdiHdl, short device, short *dev_exists,
+                              char *file_name, char *device_name);
+void	vqt_devinfo    (VdiHdl, short device, short *dev_busy,
                               char *file_name, char *device_name);
 short	vq_ext_devinfo (VdiHdl, short device, short *dev_exists,
                               char *file_path, char *file_name, char *name);
