@@ -1,8 +1,0 @@
-*~
-.deps
-*.o
-lib*.a
-.lib
-.lib020
-.lib020_mt
-.lib_mt
