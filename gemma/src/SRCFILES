@@ -3,30 +3,30 @@
 
 HEADER = \
 	alert.h \
+	dosproto.h \
+	emu.h \
 	gemma.h \
 	gemproto.h \
 	rsrc.h \
-	user.h \
-	xattr.h
+	user.h
 
 COBJS = \
 	alert.c \
 	appl.c \
 	av.c \
-	ctrl_list.c \
+	callout.c \
 	dialog.c \
+	dosproto.c \
+	emu.c \
 	env.c \
-	errlist.c \
 	fselect.c \
 	gemma.c \
 	gemproto.c \
 	misc.c \
 	proc.c \
-	rsrc.c \
-	sflags.c \
-	version.c
+	rsrc.c 
 
 SOBJS = \
-	header.s
+	header.S
 
 SRCFILES = $(HEADER) $(COBJS) $(SOBJS)

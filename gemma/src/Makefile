@@ -19,7 +19,7 @@ include $(top_srcdir)/PHONY
 all-here: $(TARGET)
 
 # default overwrites
-INCLUDES += -I/usr/GEM/include
+INCLUDES += 
 GENERAL = -mshort
 
 # default definitions
