@@ -113,6 +113,13 @@
  *
  */
 
+/** @defgroup x_wdlg MagiC extension: Window Dialog
+ *
+ *  @brief AES extended dialog in window
+ *
+ *  TODO
+ */
+
 /** @defgroup x_edit MagiC extension: Edit Library
  *
  *  @brief AES extended edit functions
