@@ -35,7 +35,9 @@
 short
 mt_graf_handle (short *wcell, short *hcell, short *wbox, short *hbox, short *global_aes)
 {
+#if !(CHECK_NULLPTR)
 	short *ptr;
+#endif
 
 	AES_PARAMS(77,0,5,0,0);
 
