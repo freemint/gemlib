@@ -113,7 +113,7 @@
  *
  */
 
-/** @defgroup x_edit extended Edit Library
+/** @defgroup x_edit MagiC extension: Edit Library
  *
  *  @brief AES extended edit functions
  *
@@ -123,6 +123,15 @@
  *  <pre>Slbopen("EDITOBJC.SLB", NULL, 0L, &slb, &slbexec);</pre>
  *  The library installs a new AES object-type G_EDIT (37)
  *  as well as the AES functions mt_edit_xx().
+ */
+
+/** @defgroup x_fnts MagiC/WDIALOG extension: Font selector Library
+ *
+ *  @brief font selector functions
+ *
+ *  This Font Selector library availability can be found calling
+ *  mt_appl_getinfo(7). Bit 2 of \p ap_gout1, if equal to 1,
+ *  says that mt_fnts_xx() functions are available.
  */
 
 /**@}*/
