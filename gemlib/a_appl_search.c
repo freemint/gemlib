@@ -22,7 +22,7 @@
  *         .
  *         [option CHECK_NULLPTR] type may be NULL
  *  @param ap_id is a pointer to a word into which will be placed the
- *	       processes' application identifier.\p
+ *	       processes' application identifier. \n
  *         [option CHECK_NULLPTR] ap_id may be NULL
  *  @param global_aes global AES array
  *

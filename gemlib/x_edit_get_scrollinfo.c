@@ -9,19 +9,19 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param nlines will be filled with the Number of lines in text \p
+ *  @param nlines will be filled with the Number of lines in text \n
  *         [option CHECK_NULLPTR] nlines may be NULL
- *  @param yscroll will be filled with the First visible line \p
+ *  @param yscroll will be filled with the First visible line \n
  *         [option CHECK_NULLPTR] yscroll may be NULL
- *  @param yvis will be filled with the Number of max. visible lines \p
+ *  @param yvis will be filled with the Number of max. visible lines \n
  *         [option CHECK_NULLPTR] yvis may be NULL
- *  @param yval will be filled with the Number of currently visible lines \p
+ *  @param yval will be filled with the Number of currently visible lines \n
  *         [option CHECK_NULLPTR] yval may be NULL
- *  @param ncols will be filled with the Number of columns, or -1 (unknown) \p
+ *  @param ncols will be filled with the Number of columns, or -1 (unknown) \n
  *         [option CHECK_NULLPTR] ncols may be NULL
- *  @param xscroll will be filled with the Horiz. scroll offset in pixels \p
+ *  @param xscroll will be filled with the Horiz. scroll offset in pixels \n
  *         [option CHECK_NULLPTR] xscroll may be NULL
- *  @param xvis will be filled with the Number of visible columns (in pixels) \p
+ *  @param xvis will be filled with the Number of visible columns (in pixels) \n
  *         [option CHECK_NULLPTR] xvis may be NULL
  *  @param global_aes global AES array
  *

@@ -9,9 +9,9 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param tcolour will be filled with the Text colour \p
+ *  @param tcolour will be filled with the Text colour \n
  *         [option CHECK_NULLPTR] tcolour may be NULL
- *  @param bcolour will be filled with the Background colour \p
+ *  @param bcolour will be filled with the Background colour \n
  *         [option CHECK_NULLPTR] bcolour may be NULL
  *  @param global_aes global AES array
  *
