@@ -8,8 +8,10 @@
  *
  *  @param handle Device handle
  *  @param in Initial value
- *  @param out Output value
- *  @param term Terminator
+ *  @param out Output value \n
+ *         [option CHECK_NULLPTR] out may be NULL
+ *  @param term Terminator \n
+ *         [option CHECK_NULLPTR] term may be NULL
  *
  *  @since all VDI versions
  *
@@ -47,6 +49,12 @@ vrq_valuator (short handle, short in, short *out, short *term)
 	
 	VDI_TRAP (vdi_params, handle, 29, 0,1);
 	
+#if CHECK_NULLPTR
+	if (out)
+#endif
 	*out  = vdi_intout[0];
+#if CHECK_NULLPTR
+	if (term)
+#endif
 	*term = vdi_intout[1];
 }
