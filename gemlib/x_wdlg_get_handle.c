@@ -1,21 +1,31 @@
+/*
+ *  $Id$
+ */
+
 #include "gemx.h"
 #include "gem_aesP.h"
 
+/** returns the handle of the dialog window
+ *
+ *  @param dialog Pointer to the dialog structure
+ *  @param global_aes global AES array
+ *
+ *  @return Window handle
+ *
+ *  @since mt_appl_getinfo(7) give informations on mt_wdlg_xx() functions availability
+ *
+ */
 
 short
-wdlg_get_handle (DIALOG *dialog)
+mt_wdlg_get_handle( DIALOG *dialog, short *global_aes )
 {
-	aes_intin[0]	= 3;
-	
-	aes_addrin[0]	= (long) dialog;
-	
-	aes_control[0] = 164;
-	aes_control[1] = 1;
-	aes_control[2] = 1;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
-	
+	AES_PARAMS(164,1,1,1,0);
+
+	aes_intin[0] = 3;
+
+	aes_addrin[0] = (long)dialog;
+
+	AES_TRAP(aes_params);
+
 	return aes_intout[0];
 }
