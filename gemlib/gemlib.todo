@@ -245,24 +245,24 @@ n_vst_setsize32.c
 n_vst_skew.c
 n_vst_track_offset.c
 n_vst_width.c
-pdlg_add_printers.c
-pdlg_add_sub_dlgs.c
-pdlg_close.c
-pdlg_create.c
-pdlg_delete.c
-pdlg_dflt_sett.c
-pdlg_do.c
-pdlg_evnt.c
-pdlg_free_sett.c
-pdlg_get_setsize.c
-pdlg_new_sett.c
-pdlg_open.c
-pdlg_rmv_printers.c
-pdlg_rmv_sub_dlgs.c
-pdlg_save_dflt_sett.c
-pdlg_update.c
-pdlg_use_sett.c
-pdlg_validate_sett.c
+pdlg_add_printers.c     -- idem
+pdlg_add_sub_dlgs.c     -- idem
+pdlg_close.c            -- idem
+pdlg_create.c           -- idem
+pdlg_delete.c           -- idem
+pdlg_dflt_sett.c        -- idem
+pdlg_do.c               -- idem
+pdlg_evnt.c             -- idem
+pdlg_free_sett.c        -- idem
+pdlg_get_setsize.c      -- idem
+pdlg_new_sett.c         -- idem
+pdlg_open.c             -- idem
+pdlg_rmv_printers.c     -- idem
+pdlg_rmv_sub_dlgs.c     -- idem
+pdlg_save_dflt_sett.c   -- idem
+pdlg_update.c           -- idem
+pdlg_use_sett.c         -- idem
+pdlg_validate_sett.c    -- idem
 rc_array_to_grect.c     -- add optimisation [gemlib->mgemlib]
 rc_copy.c               -- idem
 rc_equal.c              -- add optimisation [gemlib->mgemlib]
