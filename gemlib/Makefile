@@ -15,6 +15,7 @@ default: all
 include $(top_srcdir)/CONFIGVARS
 include $(top_srcdir)/RULES
 include $(top_srcdir)/PHONY
+include VERSION
 
 all-here: libs
 
@@ -33,7 +34,7 @@ mshort:
 	$(MAKE) libgem16.a TARGET="16"
 
 .PHONY: doc
-doc:
+doc: 
 	doxygen Doxyfile
 # 	udo -s -l -W -y doc/udo/index.u -o doc/stg/gemlib.stg
 # 	udo -h -l -W -y doc/udo/index.u -o doc/html/index.htm
@@ -77,6 +78,36 @@ objs: .lib$(TARGET)
 .lib$(TARGET):
 	$(MKDIR) $@
 	$(CP) Makefile.objs $@/Makefile
+
+gemlib.spec: gemlib.spec.in VERSION
+	rm -f $@
+	sed 's,@VERSION@,$(VERSION),g' $@.in >$@
+
+Doxyfile: Doxyfile.in VERSION
+	rm -f $@
+	sed 's,@VERSION@,$(VERSION),g' $@.in >$@
+
+# Special rule for mt_gem.h.  We build that automatically from
+# mt_gem.h.in.
+# If mt_gem.h would not change we won't replace it because that
+# would cause a global rebuild.
+mt_gem.h: mt_gem.h.in VERSION
+	@echo Updating mt_gem.h ...
+	@rm -f $(srcdir)/mt_gem.tmp
+	@betatag=`echo $(VERSION) | sed 's,[^A-Za-z]*\.[0-9][0-9]*,,'`; \
+	major=`echo $(VERSION) | sed 's,\..*,,'`; \
+	minor=`echo $(VERSION) | sed -e "s,^$$major\.,," -e 's,\..*,,' \
+		-e 's,[^0-9]*$$,,'`; \
+	revision=`echo $(VERSION) | sed -e "s,^$$major\.$$minor\.*,,"  \
+		-e "s,$$betatag,,"`; \
+	test "$$revision" = "" && revision="0"; \
+	betatag=\"$$betatag\"; \
+	sed -e "s,@MAJOR@,$$major,g" -e "s,@MINOR@,$$minor,g" \
+		-e "s,@REVISION@,$$revision,g" -e "s,@BETATAG@,$$betatag,g" \
+		$(srcdir)/mt_gem.h.in >$(srcdir)/mt_gem.tmp \
+	|| exit 1;
+	mv $(srcdir)/mt_gem.tmp $(srcdir)/mt_gem.h
+#	$(MOVEIFCHANGE) $(srcdir)/mt_gem.tmp $(srcdir)/mt_gem.h
 
 install:
 	install -m 644 -o root -g wheel lib{gem,gem16}.a $(PREFIX)/lib
