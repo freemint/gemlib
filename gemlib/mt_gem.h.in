@@ -575,8 +575,9 @@ typedef  struct
 #define M_OFF			  256
 #define M_ON			  257
 #define M_SAVE 			  258
-#define M_LAST 			  259
-#define M_RESTORE 		  260
+#define M_RESTORE 		  259
+#define M_LAST 			  260
+#define M_PREVIOUS        M_LAST  /* alias */
 #define M_FORCE			0x8000
 
 /* objects - general */
