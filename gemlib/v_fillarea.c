@@ -3,21 +3,17 @@
 
 
 void
-v_fillarea (short handle, short count, short pxyarray[])
+v_fillarea (short handle, short count, short pxy[])
 {
-	register short i;
-	register short *pts = &vdi_ptsin[0];
-	register short *pxy = &pxyarray[0];
-
-	for (i = count; i != 0; i--)
-	{
-		*pts++ = *pxy++;
-		*pts++ = *pxy++;
-	}
-
 	vdi_control[0] = 9;
 	vdi_control[1] = count;
 	vdi_control[3] = 0;
+	vdi_control[5] = 0;
 	vdi_control[6] = handle;
+
+	vdi_params.ptsin = pxy;
+
 	vdi (&vdi_params);
+
+	vdi_params.ptsin = vdi_ptsin;
 }

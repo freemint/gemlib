@@ -3,18 +3,19 @@
 
 
 void
-v_output_window (short handle, short *pxyarray)
+v_output_window (short handle, short *pxy)
 {
-	vdi_ptsin[0] = pxyarray[0];
-	vdi_ptsin[1] = pxyarray[1];
-	vdi_ptsin[2] = pxyarray[2];
-	vdi_ptsin[3] = pxyarray[3];
 	vdi_control[0] = 5;
 	vdi_control[1] = 2;
 	vdi_control[3] = 0;
 	vdi_control[5] = 21;
 	vdi_control[6] = handle;
+
+	vdi_params.ptsin = pxy;
+
 	vdi (&vdi_params);
+
+	vdi_params.ptsin = vdi_ptsin;
 }
 
 /*

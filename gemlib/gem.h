@@ -504,22 +504,22 @@ typedef struct _mn_set
 #define OS_STATE15		0x8000
 
 /* Object colors - default pall. */
-#define OC_WHITE		0
-#define OC_BLACK		1
-#define OC_RED			2
-#define OC_GREEN		3
-#define OC_BLUE			4
-#define OC_CYAN			5
-#define OC_YELLOW		6
-#define OC_MAGENTA		7
-#define OC_LWHITE		8
-#define OC_LBLACK		9
-#define OC_LRED			10
-#define OC_LGREEN		11
-#define OC_LBLUE		12
-#define OC_LCYAN		13
-#define OC_LYELLOW		14
-#define OC_LMAGENTA		15
+#define G_WHITE			0
+#define G_BLACK			1
+#define G_RED			2
+#define G_GREEN			3
+#define G_BLUE			4
+#define G_CYAN			5
+#define G_YELLOW		6
+#define G_MAGENTA		7
+#define G_LWHITE		8
+#define G_LBLACK		9
+#define G_LRED			10
+#define G_LGREEN		11
+#define G_LBLUE			12
+#define G_LCYAN			13
+#define G_LYELLOW		14
+#define G_LMAGENTA		15
 
 
 #ifdef __GEMLIB_OLDNAMES
@@ -1198,21 +1198,21 @@ void	v_opnwk			(short work_in[], short *handle, short work_out[]);
 short	v_savecache		(short handle, const char *filename);
 void	v_set_app_buff		(short handle, void *buf_p, short size);
 void	v_updwk			(short handle);
-void	vs_clip			(short handle, short clip_flag, short pxyarray[]);
-short	vst_load_fonts		(short handle, short select);
-void	vst_unload_fonts	(short handle, short select);
+void	vs_clip			(short handle, short clip_flag, short pxy[]);
+short	vst_load_fonts		(short handle, short /* select */);
+void	vst_unload_fonts	(short handle, short /* select */);
 
 /*
  * escape functions
  */
-void	v_bit_image		(short handle, const char *filename, short aspect, short x_scale, short y_scale, short h_align, short v_align, short *pxyarray);
+void	v_bit_image		(short handle, const char *filename, short aspect, short x_scale, short y_scale, short h_align, short v_align, short *pxy);
 void	v_clear_disp_list	(short handle);
 short	v_copies		(short handle, short count);
 void	v_dspcur		(short handle, short x, short y);
 void	v_form_adv		(short handle);
 void	v_hardcopy		(short handle);
 short	v_orient		(short handle, short orientation);
-void	v_output_window		(short handle, short *pxyarray);
+void	v_output_window		(short handle, short *pxy);
 short	v_page_size		(short handle, short page_id);
 void	v_rmcur			(short handle);
 void	v_trays			(short handle, short input, short output, short *set_input, short *set_output);
@@ -1262,7 +1262,7 @@ void	vs_curaddress		(short handle, short row, short col);
 /*
  * inquiry functions
  */
-void	vq_cellarray		(short handle, short pxyarray[], short row_len, short nrows, short *el_used, short *rows_used, short *status, short color[]);
+void	vq_cellarray		(short handle, short pxy[], short row_len, short nrows, short *el_used, short *rows_used, short *status, short color[]);
 short	vq_color		(short handle, short color_idx, short flag, short rgb[]);
 void	vq_extnd		(short handle, short flag, short work_out[]);
 void	vqf_attributes		(short handle, short atrib[]);
@@ -1308,30 +1308,31 @@ void	vsm_valuator		(short handle, short in, short *out, short *term, short *stat
  * output functions
  */
 void	v_arc			(short handle, short x, short y, short radius, short begang, short endang);
-void	v_bar			(short handle, short pxyarray[]);
-void	v_cellarray		(short handle, short pxyarray[], short row_length, short elements, short nrows, short write_mode, short colarray[]);
+void	v_bar			(short handle, short pxy[]);
+void	v_cellarray		(short handle, short pxy[], short row_length, short elements, short nrows, short write_mode, short colarray[]);
 void	v_circle		(short handle, short x, short y, short radius);
 void	v_contourfill		(short handle, short x, short y, short color_idx);
 void	v_ellarc		(short handle, short x, short y, short xrad, short yrad, short begang, short endang);
 void	v_ellipse		(short handle, short x, short y, short xrad, short yrad);
 void	v_ellpie		(short handle, short x, short y, short xrad, short yrad, short begang, short endang);
-void	v_fillarea		(short handle, short count, short pxyarray[]);
+void	v_fillarea		(short handle, short count, short pxy[]);
 void	v_gtext			(short handle, short x, short y, const char *str) ;
+void	v_gtext16		(short handle, short x, short y, const short *wstr) ;
 void	v_justified		(short handle, short x, short y, const char *str, short len, short word_space, short char_space);
 void	v_pieslice		(short handle, short x, short y, short radius, short begang, short endang);
-void	v_pline			(short handle, short count, short pxyarray[]);
-void	v_pmarker		(short handle, short count, short pxyarray[]);
-void	v_rbox			(short handle, short pxyarray[]);
-void	v_rfbox			(short handle, short pxyarray[]);
-void	vr_recfl		(short handle, short pxyarray[]);
+void	v_pline			(short handle, short count, short pxy[]);
+void	v_pmarker		(short handle, short count, short pxy[]);
+void	v_rbox			(short handle, short pxy[]);
+void	v_rfbox			(short handle, short pxy[]);
+void	vr_recfl		(short handle, short pxy[]);
 
 /*
  * raster functions
  */
 void	v_get_pixel		(short handle, short x, short y, short *pel, short *color_idx);
 void	vr_trnfm		(short handle, MFDB *src, MFDB *dst);
-void	vro_cpyfm		(short handle, short mode, short pxyarray[], MFDB *src, MFDB *dst);
-void	vrt_cpyfm		(short handle, short mode, short pxyarray[], MFDB *src, MFDB *dst, short color[]);
+void	vro_cpyfm		(short handle, short mode, short pxy[], MFDB *src, MFDB *dst);
+void	vrt_cpyfm		(short handle, short mode, short pxy[], MFDB *src, MFDB *dst, short color[]);
 
 
 /*

@@ -11,6 +11,7 @@ vqt_extent (short handle, const char *str, short extent[])
 	vdi_control[0] = 116;
 	vdi_control[1] = 0;
 	vdi_control[3] = i;
+	vdi_control[5] = 0;
 	vdi_control[6] = handle;
 	vdi (&vdi_params);
 

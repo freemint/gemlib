@@ -3,9 +3,9 @@
 
 
 short
-vqt_xfntinfo (short handle, short flags, short id, short index, XFNT_INFO * info)
+vqt_xfntinfo (short handle, short flags, short id, short index, XFNT_INFO *info)
 {
-	info->size = (long) sizeof (XFNT_INFO);
+	info->size = sizeof (XFNT_INFO);
 	vdi_intin[0] = flags;
 	vdi_intin[1] = id;
 	vdi_intin[2] = index;

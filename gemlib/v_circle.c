@@ -17,5 +17,6 @@ v_circle (short handle, short x, short y, short radius)
 	vdi_control[3] = 0;
 	vdi_control[5] = 4;
 	vdi_control[6] = handle;
+
 	vdi (&vdi_params);
 }

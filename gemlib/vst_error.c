@@ -10,7 +10,9 @@ vst_error (short handle, short mode, short *errorvar)
 	vdi_control[0] = 245;
 	vdi_control[1] = 0;
 	vdi_control[3] = 3;
+	vdi_control[5] = 0;
 	vdi_control[6] = handle;
+
 	vdi (&vdi_params);
 }
 

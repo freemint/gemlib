@@ -3,16 +3,18 @@
 
 
 void
-vr_recfl (short handle, short pxyarray[])
+vr_recfl (short handle, short pxy[])
 {
-	register short i;
-
-	for (i = 0; i < 4; i++)
-		vdi_ptsin[i] = pxyarray[i];
-
 	vdi_control[0] = 114;
-	vdi_control[1] = 4;
+	vdi_control[1] = 2;
 	vdi_control[3] = 0;
+	vdi_control[5] = 0;
 	vdi_control[6] = handle;
+
+	vdi_params.ptsin = pxy;
+
 	vdi (&vdi_params);
+
+	vdi_params.ptsin = vdi_ptsin;
 }
+

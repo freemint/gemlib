@@ -5,7 +5,7 @@
 void
 vsc_form (short handle, short form[])
 {
-	vdi_params.intin = &form[0];
+	vdi_params.intin = form;
 
 	vdi_control[0] = 111;
 	vdi_control[1] = 0;
@@ -15,5 +15,5 @@ vsc_form (short handle, short form[])
 
 	vdi (&vdi_params);
 
-	vdi_params.intin = &vdi_intin[0];
+	vdi_params.intin = vdi_intin;
 }

@@ -22,5 +22,6 @@ v_justified (short handle, short x, short y, const char *str, short len,
 	vdi_control[3] = i + 2;
 	vdi_control[5] = 10;
 	vdi_control[6] = handle;
+
 	vdi (&vdi_params);
 }

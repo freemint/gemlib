@@ -3,7 +3,7 @@
 
 
 void
-v_ftext (short handle, short x, short y, char *str)
+v_ftext (short handle, short x, short y, const char *str)
 {
 	short i;
 
@@ -12,9 +12,11 @@ v_ftext (short handle, short x, short y, char *str)
 	vdi_ptsin[1] = y;
 
 	vdi_control[0] = 241;
-	vdi_control[1] = 2;
+	vdi_control[1] = 1;
 	vdi_control[3] = i;
+	vdi_control[5] = 0;
 	vdi_control[6] = handle;
+
 	vdi (&vdi_params);
 }
 

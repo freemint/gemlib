@@ -32,7 +32,7 @@ typedef struct
 
 /*
  * Extensions to the form library (MagiC only)
-*/
+ */
 typedef struct
 {
 	char		scancode;
@@ -128,7 +128,7 @@ short		fnts_evnt		(FNT_DIALOG *fnt_dialog, EVNT *events, short *button, short *c
 short		fnts_get_info		(FNT_DIALOG *fnt_dialog, long id, short *mono, short *outline);
 short		fnts_get_name		(FNT_DIALOG *fnt_dialog, long id, char *full_name, char *family_name, char *style_name);
 short		fnts_get_no_styles	(FNT_DIALOG *fnt_dialog, long id);
-long		fnts_get_style		(FNT_DIALOG *fnt_dialog, long id, short index);
+long		fnts_get_style		(FNT_DIALOG *fnt_dialog, long id, short __index);
 short		fnts_open		(FNT_DIALOG *fnt_dialog, short button_flags, short x, short y, long id, long pt, long ratio);
 void		fnts_remove		(FNT_DIALOG *fnt_dialog);
 short		fnts_update		(FNT_DIALOG *fnt_dialog, short button_flags, long id, long pt, long ratio);
@@ -527,6 +527,147 @@ short		pdlg_use_settings 		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
 short		pdlg_validate_settings		(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings);
 
 
+/******************************************************************************
+ * Listbox definitions
+ */
+
+typedef void * LIST_BOX;
+
+typedef struct lbox_item LBOX_ITEM;
+struct lbox_item
+{
+	LBOX_ITEM	*next;		/* Pointer to the next entry in the list */
+	short		selected;	/* Specifies if the object is selected */
+
+	short		data1;		/* Data for the program... */
+	void		*data2;
+	void		*data3;
+
+};
+
+typedef void  (__CDECL *SLCT_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, void *user_data, short obj_index, short last_state);
+typedef short (__CDECL *SET_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item *item, short obj_index, void *user_data, GRECT *rect, short first);
+
+#define	LBOX_VERT		1	/* Listbox with vertical slider */
+#define	LBOX_AUTO		2	/* Auto-scrolling */
+#define	LBOX_AUTOSLCT		4	/* Automatic display during auto-scrolling */
+#define	LBOX_REAL		8	/* Real-time slider */
+#define	LBOX_SNGL		16	/* Only a selectable entry */
+#define	LBOX_SHFT		32	/* Multi-selection with Shift */
+#define	LBOX_TOGGLE		64	/* Toggle status of an entry at selection */
+#define	LBOX_2SLDRS		128	/* Listbox has a horiz. and a vertical slider */
+
+/* #defines for listboxes with only one slider */
+#define	lbox_get_visible	lbox_get_avis
+#define	lbox_get_first		lbox_get_afirst
+#define	lbox_set_slider		lbox_set_asldr
+#define	lbox_scroll_to		lbox_ascroll_to
+
+LIST_BOX *	lbox_create (OBJECT *tree, SLCT_ITEM slct, SET_ITEM set,
+			     LBOX_ITEM *items, short visible_a, short first_a,
+			     short *ctrl_objs, short *objs, short flags,
+			     short pause_a, void *user_data, void *dialog,
+			     short visible_b, short first_b, short entries_b,
+			     short pause_b);
+
+void		lbox_update (LIST_BOX *box, GRECT *rect);
+short		lbox_do (LIST_BOX *box, short obj);
+short		lbox_delete (LIST_BOX *box);
+
+short		lbox_cnt_items (LIST_BOX *box);
+OBJECT *	lbox_get_tree (LIST_BOX *box);
+short		lbox_get_avis (LIST_BOX *box);
+void *		lbox_get_udata (LIST_BOX *box);
+short		lbox_get_afirst (LIST_BOX *box);
+short		lbox_get_slct_idx (LIST_BOX *box);
+LBOX_ITEM *	lbox_get_items (LIST_BOX *box);
+LBOX_ITEM *	lbox_get_item (LIST_BOX *box, short n);
+LBOX_ITEM *	lbox_get_slct_item (LIST_BOX *box);
+short		lbox_get_idx (LBOX_ITEM *items, LBOX_ITEM *search);
+short		lbox_get_bvis (LIST_BOX *box);
+short		lbox_get_bentries (LIST_BOX *box);
+short		lbox_get_bfirst (LIST_BOX *box);
+
+void		lbox_set_asldr (LIST_BOX *box, short first, GRECT *rect);
+void		lbox_set_items (LIST_BOX *box, LBOX_ITEM *items);
+void		lbox_free_items (LIST_BOX *box);
+void		lbox_free_list (LBOX_ITEM *items);
+void		lbox_ascroll_to (LIST_BOX *box, short first, GRECT *box_rect,
+				 GRECT *slider_rect);
+void		lbox_set_bsldr (LIST_BOX *box, short first, GRECT *rect);
+void		lbox_set_bentries (LIST_BOX *box, short entries);
+void		lbox_bscroll_to (LIST_BOX *box, short first, GRECT *box_rect,
+				 GRECT *slider_rect);
+
+
+/******************************************************************************
+ * Wdialog definitions
+ */
+
+typedef void * DIALOG;
+typedef short (__CDECL *HNDL_OBJ)(DIALOG *dialog, EVNT *events, short obj, short clicks, void *data);
+
+DIALOG *wdlg_create (HNDL_OBJ handle_exit, OBJECT *tree, void *user_data, short code, void *data, short flags);
+short	wdlg_open (DIALOG *dialog, char *title, short kind, short x, short y, short code, void *data);
+short	wdlg_close (DIALOG *dialog, short *x, short *y);
+short	wdlg_delete (DIALOG *dialog);
+short	wdlg_get_tree (DIALOG *dialog, OBJECT **tree, GRECT *r);
+short	wdlg_get_edit (DIALOG *dialog, short *cursor);
+void *	wdlg_get_udata (DIALOG *dialog);
+short	wdlg_get_handle (DIALOG *dialog);
+short	wdlg_set_edit (DIALOG *dialog, short obj);
+short	wdlg_set_tree (DIALOG *dialog, OBJECT *tree);
+short	wdlg_set_size (DIALOG *dialog, GRECT *size);
+short	wdlg_set_iconify (DIALOG *dialog, GRECT *g, char *title, OBJECT *tree, short obj);
+short	wdlg_set_uniconify (DIALOG *dialog, GRECT *g, char *title, OBJECT *tree);
+short	wdlg_evnt (DIALOG *dialog, EVNT *events );
+void	wdlg_redraw (DIALOG *dialog, GRECT *rect, short obj, short depth);
+
+
+/* Definitions for <flags> */
+#define  WDLG_BKGD   1           /* Permit background operation */
+
+/* Function numbers for <obj> with handle_exit(...) */
+#define  HNDL_INIT   -1          /* Initialise dialog */
+#define  HNDL_MESG   -2          /* Initialise dialog */
+#define  HNDL_CLSD   -3          /* Dialog window was closed */
+#define  HNDL_OPEN   -5          /* End of dialog initialisation (second  call at end of wdlg_init) */
+#define  HNDL_EDIT   -6          /* Test characters for an edit-field */
+#define  HNDL_EDDN   -7          /* Character was entered in edit-field */
+#define  HNDL_EDCH   -8          /* Edit-field was changed */
+#define  HNDL_MOVE   -9          /* Dialog was moved */
+#define  HNDL_TOPW   -10         /* Dialog-window has been topped */
+#define  HNDL_UNTP   -11         /* Dialog-window is not active */
+
+
+/******************************************************************************
+ * Editor extensions for Magic
+ */
+
+void *	edit_create 	(void);
+void	edit_delete	(void *xi);
+short	edit_open	(OBJECT *tree, short obj);
+void	edit_close	(OBJECT *tree, short obj);
+short	edit_cursor	(OBJECT *tree, short obj, short whdl, short show);
+short	edit_evnt	(OBJECT *tree, short obj, short whdl,	EVNT *ev, long *errc);
+short	edit_get_buf	(OBJECT *tree, short obj, char **buf, long *buflen, long *txtlen);
+short	edit_get_format	(OBJECT *tree, short obj, short *tabwidth, short *autowrap);
+short	edit_get_colour	(OBJECT *tree, short obj, short *tcolour, short *bcolour);
+short	edit_get_cursor	(OBJECT *tree, short obj, char **cursorpos);
+short	edit_get_font	(OBJECT *tree, short obj, short *fontID, short *fontH, short *fontPix, short *mono);
+void	edit_set_buf	(OBJECT *tree, short obj, char *buf, long buflen);
+void	edit_set_format	(OBJECT *tree, short obj, short tabwidth, short autowrap);
+void	edit_set_font	(OBJECT *tree, short obj, short fontID, short fontH, short fontPix, short mono);
+void	edit_set_colour	(OBJECT *tree, short obj, short tcolour, short bcolour);
+void	edit_set_cursor	(OBJECT *tree, short obj, char *cursorpos);
+short	edit_resized	(OBJECT *tree, short obj, short *oldrh, short *newrh);
+short	edit_get_dirty	(OBJECT *tree, short obj);
+void	edit_set_dirty	(OBJECT *tree, short obj, short dirty);
+void	edit_get_sel	(OBJECT *tree, short obj, char **bsel, char **esel);
+void	edit_get_pos	(OBJECT *tree, short obj, short *xscroll, long *yscroll, char **cyscroll, char **cursorpos, short *cx, short *cy);
+void	edit_set_pos	(OBJECT *tree, short obj, short xscroll, long yscroll, char *cyscroll, char *cursorpos, short cx, short cy);
+short	edit_scroll	(OBJECT *tree, short obj, short whdl, long yscroll, short xscroll);
+void	edit_get_scrollinfo (OBJECT *tree, short obj, long *nlines, long *yscroll, short *yvis, short *yval, short *ncols, short *xscroll, short *xvis);
 
 
 /*******************************************************************************
@@ -570,8 +711,10 @@ typedef struct
 	short		pt_sizes[64];
 } XFNT_INFO;
 
-void	v_ftext		(short handle, short x, short y, char *str) ;
-void	v_ftext_offset	(short handle, short x, short y, char *str, short *offset);
+void	v_ftext		(short handle, short x, short y, const char *str) ;
+void	v_ftext16	(short handle, short x, short y, const short *wstr) ;
+void	v_ftext_offset	(short handle, short x, short y, const char *str, short *offset);
+void	v_ftext_offset16(short handle, short x, short y, const short *wstr, short *offset);
 void	v_getbitmap_info(short handle, short ch, long *advancex, long *advancey, long *xoffset, long *yoffset, short *width, short *height, short **bitmap);
 void	v_getoutline	(short handle, short ch, short *xyarray, char *bezarray, short maxverts, short *numverts);
 
@@ -579,20 +722,23 @@ void	vq_devinfo	(short handle, short device, short *dev_open, char *file_name, c
 short	vq_ext_devinfo	(short handle, short device, short *dev_exists, char *file_path, char *file_name, char *name);
 
 void	vqt_advance	(short handle, short ch, long *advx, long *advy);
-short	vqt_ext_name	(short handle, short index, char *name, short *font_format, short *flags);
-void	vqt_f_extent	(short handle, char *str, short extent[]);
+short	vqt_ext_name	(short handle, short __index, char *name, short *font_format, short *flags);
+void	vqt_f_extent	(short handle, const char *str, short extent[]);
+void	vqt_f_extent16	(short handle, const short *str, short extent[]);
 void	vqt_fontheader	(short handle, char *buffer, char *pathname);
 short	vqt_name_and_id	(short handle, short font_format, char *font_name, char *ret_name);
 void	vqt_pairkern	(short handle, short ch1, short ch2, long *x, long *y);
 void	vqt_real_extent	(short handle, short x, short y, char *string, short extent[]);
 void	vqt_trackkern	(short handle, long *x, long *y);
-short	vqt_xfntinfo	(short handle, short flags, short id, short index, XFNT_INFO *info);
+short	vqt_xfntinfo	(short handle, short flags, short id, short __index, XFNT_INFO *info);
 
-long 	vst_arbpt 	(short handle, long point, short *wchar, short *hchar, short *wcell, short *hcell);
+short 	vst_arbpt 	(short handle, short point, short *wchar, short *hchar, short *wcell, short *hcell);
+long 	vst_arbpt32 	(short handle, long point, short *wchar, short *hchar, short *wcell, short *hcell);
 short 	vst_charmap 	(short handle, short mode);
 void 	vst_kern	(short handle, short tmode, short pmode, short *tracks, short *pairs);
 short 	vst_name 	(short handle, short font_format, char *font_name, char *ret_name);
-long 	vst_setsize 	(short handle, long point, short *wchar, short *hchar, short *wcell, short *hcell);
+short 	vst_setsize 	(short handle, short point, short *wchar, short *hchar, short *wcell, short *hcell);
+long 	vst_setsize32 	(short handle, long point, short *wchar, short *hchar, short *wcell, short *hcell);
 short 	vst_skew 	(short handle, short skew);
 void 	vst_track_offset(short handle, long offset, short pairmode, short *tracks, short *pairs);
 void 	vst_width	(short handle, short width, short *char_width, short *char_height, short *cell_width, short *cell_height);
@@ -690,20 +836,20 @@ long		v_color2nearest		(short handle, long color_space, COLOR_ENTRY *color, COLO
 unsigned long	v_color2value		(short handle, long color_space, COLOR_ENTRY *color);
 COLOR_TAB *	v_create_ctab		(short handle, long color_space, unsigned long px_format);
 ITAB_REF	v_create_itab		(short handle, COLOR_TAB *ctab, short bits );
-unsigned long	v_ctab_idx2value	(short handle, short index );
-short		v_ctab_idx2vdi		(short handle, short index);
+unsigned long	v_ctab_idx2value	(short handle, short __index );
+short		v_ctab_idx2vdi		(short handle, short __index);
 short		v_ctab_vdi2idx		(short handle, short vdi_index);
 short		v_delete_ctab		(short handle, COLOR_TAB *ctab);
 short		v_delete_itab		(short handle, ITAB_REF itab);
 long		v_get_ctab_id		(short handle);
-short		v_get_outline		(short handle, short index, short x_offset, short y_offset, short *pts, char *flags, short max_pts);
+short		v_get_outline		(short handle, short __index, short x_offset, short y_offset, short *pts, char *flags, short max_pts);
 short		v_opnprn		(short aes_handle, PRN_SETTINGS *settings, short work_out[]);
 short		v_open_bm		(short base_handle, GCBITMAP *bitmap, short color_flags, short unit_flags, short pixel_width, short pixel_height);
 short		v_resize_bm		(short handle, short width, short height, long b_width, unsigned char *addr);
 void		v_setrgb		(short handle, short type, short r, short g, short b);
 long		v_value2color		(short handle, unsigned long value, COLOR_ENTRY *color);
 short		vq_ctab			(short handle, long ctab_length, COLOR_TAB *ctab);
-long		vq_ctab_entry		(short handle, short index, COLOR_ENTRY *color);
+long		vq_ctab_entry		(short handle, short __index, COLOR_ENTRY *color);
 long		vq_ctab_id		(short handle);
 short		vq_dflt_ctab		(short handle, long ctab_length, COLOR_TAB *ctab);
 long		vq_hilite_color		(short handle, COLOR_ENTRY *hilite_color);
@@ -725,7 +871,7 @@ long		vqt_bg_color		(short handle, COLOR_ENTRY *fg_color);
 long		vqt_fg_color		(short handle, COLOR_ENTRY *fg_color);
 void		vr_transfer_bits	(short handle, GCBITMAP *src_bm, GCBITMAP *dst_bm, short *src_rect, short *dst_rect, short mode);
 short		vs_ctab			(short handle, COLOR_TAB *ctab);
-short		vs_ctab_entry		(short handle, short index, long color_space, COLOR_ENTRY *color);
+short		vs_ctab_entry		(short handle, short __index, long color_space, COLOR_ENTRY *color);
 short		vs_dflt_ctab		(short handle);
 short		vs_document_info	(short vdi_handle, short type, char *s, short wchar);
 short		vs_hilite_color		(short handle, long color_space, COLOR_ENTRY *hilite_color);
