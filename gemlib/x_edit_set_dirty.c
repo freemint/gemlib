@@ -26,7 +26,7 @@
 void 
 mt_edit_set_dirty( OBJECT *tree, short obj, short dirty, short *global_aes)
 {
-	AES_PARAMS(217,2,0,2,0);
+	AES_PARAMS(217,3,0,1,0);
 
 	aes_intin[0] = obj;
 	aes_intin[1] = 7;
