@@ -109,7 +109,7 @@ draw_non_3d (PARMBLK * parmblk)
 	/* Rahmen zeichnen */
 	if (state & OS_SELECTED) /* selektierter Rahmen ist 2 Pixel dick und schwarz */
 	{
-		vsf_color (handle, OC_BLACK);
+		vsf_color (handle, G_BLACK);
 		grect_to_array ((GRECT *) &(parmblk->pb_x), pxy);
 		v_bar (handle, pxy);
 		parmblk->pb_x += 2;
@@ -119,7 +119,7 @@ draw_non_3d (PARMBLK * parmblk)
 	}
 	else /* nichtselektierter Rahmen ist 1 Pixel dick und schwarz */
 	{
-		vsf_color (handle, OC_WHITE);	/* erst ggf. vorher vorhandene Selektion weiž bermalen */
+		vsf_color (handle, G_WHITE);	/* erst ggf. vorher vorhandene Selektion weiž bermalen */
 		grect_to_array ((GRECT *) &(parmblk->pb_x), pxy);
 		v_bar (handle, pxy);
 
@@ -127,7 +127,7 @@ draw_non_3d (PARMBLK * parmblk)
 		parmblk->pb_y++;
 		parmblk->pb_w -= 2;
 		parmblk->pb_h -= 2;
-		vsf_color (handle, OC_BLACK);
+		vsf_color (handle, G_BLACK);
 		grect_to_array ((GRECT *) & (parmblk->pb_x), pxy);
 		v_bar (handle, pxy);
 		parmblk->pb_x++;
@@ -140,7 +140,7 @@ draw_non_3d (PARMBLK * parmblk)
 	if (color == T_COLPOP)	/* Eintrag im Farbpopup: Objektindex bestimmt die Farbe */
 		vsf_color (handle, parmblk->pb_obj - 1 - nocolor_sub);
 	else if (color == T_NOCOLOR)	/* Nichtfarbobjekt wird dargestellt */
-		vsf_color (handle, OC_WHITE);
+		vsf_color (handle, G_WHITE);
 	else			/* sonst Farbe aus ub_parm darstellen */
 		vsf_color (handle, color);
 
@@ -150,7 +150,7 @@ draw_non_3d (PARMBLK * parmblk)
 	/* Kreuz fr Nichtfarbobjekt zeichnen */
 	if (color == T_NOCOLOR)
 	{
-		vsl_color (handle, OC_BLACK);
+		vsl_color (handle, G_BLACK);
 		pxy[0] = parmblk->pb_x;
 		pxy[1] = parmblk->pb_y;
 		pxy[2] = parmblk->pb_x + parmblk->pb_w - 1;
@@ -186,7 +186,7 @@ draw_3d (PARMBLK *parmblk)
 	}
 	else if (color == T_NOCOLOR)	/* Nichtfarbobjekt wird dargestellt */
 	{
-		vsf_color (handle, OC_WHITE);
+		vsf_color (handle, G_WHITE);
 		parmblk->pb_x += framewidth >> 1;
 		parmblk->pb_y += framewidth >> 1;
 		parmblk->pb_w -= framewidth;
@@ -199,7 +199,7 @@ draw_3d (PARMBLK *parmblk)
 	v_bar (handle, pxy);
 
 	/* Schatten (selektiert) oder Licht (nicht selektiert) links und oben zeichnen */
-	vsl_color (handle, state & OS_SELECTED ? OC_BLACK : OC_WHITE);
+	vsl_color (handle, state & OS_SELECTED ? G_BLACK : G_WHITE);
 	pxy[0] = parmblk->pb_x;
 	pxy[1] = parmblk->pb_y + parmblk->pb_h - 1;
 	pxy[2] = parmblk->pb_x;
@@ -221,7 +221,7 @@ draw_3d (PARMBLK *parmblk)
 		v_pline (handle, 3, pxy);
 
 	/* Schatten (nicht selektiert) oder Licht (selektiert) rechts und unten zeichnen */
-	vsl_color (handle, state & OS_SELECTED ? OC_WHITE : OC_BLACK);
+	vsl_color (handle, state & OS_SELECTED ? G_WHITE : G_BLACK);
 	pxy[0] = parmblk->pb_x + parmblk->pb_w - 1;
 	pxy[1] = parmblk->pb_y;
 	pxy[2] = parmblk->pb_x + parmblk->pb_w - 1;
@@ -249,7 +249,7 @@ draw_3d (PARMBLK *parmblk)
 
 		if (state & OS_SELECTED) /* Das selektierte Kreuz ist weiter nach rechts unten verschoben, "eingedrckt" */
 		{
-			vsl_color (handle, OC_BLACK);
+			vsl_color (handle, G_BLACK);
 
 			pxy[0] = parmblk->pb_x + movewidth;
 			pxy[1] = parmblk->pb_y + movewidth;
@@ -265,7 +265,7 @@ draw_3d (PARMBLK *parmblk)
 		}
 		else
 		{
-			vsl_color (handle, OC_BLACK);
+			vsl_color (handle, G_BLACK);
 
 			pxy[0] = parmblk->pb_x;
 			pxy[1] = parmblk->pb_y;

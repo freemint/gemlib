@@ -110,8 +110,8 @@ __extension__ \
 
 
 static xFSL_PAR	xpar;
-static PFONTINFO	f_info;
-static EVENT		ev;
+static PFONTINFO f_info;
+static EVENT ev;
 
 static inline short
 do_xfsl (long v, short handle, short flags, char *title, short *id, short *pts)

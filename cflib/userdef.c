@@ -425,13 +425,13 @@ draw_menuline (PARMBLK *p)
 	if (use_3D)
 	{
 		vsf_interior (handle, FIS_SOLID);
-		vsf_color (handle, OC_LBLACK);
+		vsf_color (handle, G_LBLACK);
 	}
 	else
 	{
 		vsf_interior (handle, FIS_PATTERN);
 		vsf_style (handle, 4);
-		vsf_color (handle, OC_BLACK);
+		vsf_color (handle, G_BLACK);
 	}
 	vr_recfl (handle, pxy);
 
@@ -456,20 +456,20 @@ draw_popupline (PARMBLK *p)
 
 	if (use_3D)
 	{
-		vsl_color (handle, OC_LBLACK);
+		vsl_color (handle, G_LBLACK);
 		v_pline (handle, 2, pxy);
 
 		pxy[1] = p->pb_y + (p->pb_h / 2);
 		pxy[3] = pxy[1];
 
-		vsl_color (handle, OC_WHITE);
+		vsl_color (handle, G_WHITE);
 		v_pline (handle, 2, pxy);
 	}
 	else
 	{
 		vsf_interior (handle, FIS_PATTERN);
 		vsf_style (handle, 4);
-		vsf_color (handle, OC_BLACK);
+		vsf_color (handle, G_BLACK);
 		vr_recfl (handle, pxy);
 	}
 

@@ -118,7 +118,7 @@ select_ascii (short obj)
 	pxy[3] = pxy[1] + gl_hbox - 1;
 
 	graf_mouse (M_OFF, NULL);
-	vsf_color (cf_vdi_handle, OC_BLACK);
+	vsf_color (cf_vdi_handle, G_BLACK);
 	vsf_interior (cf_vdi_handle, FIS_SOLID);
 	vswr_mode (cf_vdi_handle, MD_XOR);
 	v_bar (cf_vdi_handle, pxy);
