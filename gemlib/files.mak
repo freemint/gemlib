@@ -184,6 +184,7 @@ OBJ = \
  n_vqt_advance32.o	\
  n_vqt_bg_color.o	\
  n_vqt_char_index.o	\
+ n_vqt_devinfo.o	\
  n_vqt_ext_name.o	\
  n_vqt_f_extent.o	\
  n_vqt_f_extent16.o	\
