@@ -270,7 +270,20 @@
                        subsequent rectangles until \p W3 and
                        \p W4 are found to be 0.
                        This mode is only available as of AES
-                       version 4.1.</pre>
+                       version 4.1.
+
+    WF_WIDGETS    200  Gets the actual positions of the slider
+                       widgets (W_UPARROW, W_DNARROW, and so on)
+					   of the window with the handle 'wi_ghandle'.
+					   The parameters wi_gw1 and wi_gw2 are the
+					   vertical elements of type rightwidget, the
+                       parameters wi_gw3 and wi_gw4 are the
+					   horizontal elements of type bottomwidgets.
+					   wi_g1 is the top, wi_gw2 the bottom widget
+					   of the vertical slider, wi_g3 the left, 
+					   wi_g4 the right widget of the horizotal
+					   slider.	</pre>
+				   
  *
  *  @note aes_intout[3,4] are initialized to 0 before the AES trap.
  *        It's usefull under NAES for WF_FIRST/NEXTXYWH since lot
