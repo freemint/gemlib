@@ -104,7 +104,7 @@ __BEGIN_DECLS
 #define AESLANG_SWEDISH 	6	/**< TODO */
 
 /* appl_read modes */
-#define APR_NOWAIT			-1	/**< TODO */
+#define APR_NOWAIT			-1	/**< Do not wait for message -- see mt_appl_read() */
 
 /* appl_search modes */
 #define APP_FIRST 			0	/**< TODO */

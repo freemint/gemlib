@@ -23,9 +23,9 @@
  *  @sa mt_appl_write()
  *
  *  If the AES version is 4.0 or higher and mt_appl_getinfo()
- *  indicates that this feature is supported, ap_id takes on an
- *  additional meaning. If APR_NOWAIT (-1) is passed instead of
- *  ap_id, mt_appl_read() will return immediately if no message is
+ *  indicates that this feature is supported, \a ap_id takes on an
+ *  additional meaning. If #APR_NOWAIT (-1) is passed instead of
+ *  \a ap_id, mt_appl_read() will return immediately if no message is
  *  currently waiting.
  *
  *  Normally this call is not used. mt_evnt_multi() or
