@@ -3,7 +3,8 @@
 #
 
 SHELL = /bin/sh
-SUBDIRS = cflib gemlib gemma
+SUBDIRS = gemlib \
+		cflib gemma
 
 srcdir = .
 top_srcdir = .

@@ -1,12 +1,11 @@
 /* Resource file related functions
  */
 
-# include <ostruct.h>
 # include <fcntl.h>
 # include <string.h>
 # include <sys/stat.h>
-# include <mintbind.h>
 # include <mint/dcntl.h>
+# include <mint/mintbind.h>
 # include <errno.h>
 
 # include "gemma.h"

@@ -1,6 +1,6 @@
 /* Constant definitions for gemma.c & other modules */
 
-# include <basepage.h>
+# include <mint/basepage.h>
 # include <gem.h>
 # include "gemma/struct.h"
 

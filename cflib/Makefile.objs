@@ -18,7 +18,6 @@ include $(top_srcdir)/PHONY
 all-here: objs
 
 # default overwrites
-INCLUDES = -I/usr/GEM/include
 DEFINITIONS = -fwritable-strings
 
 ifeq ($(TARGET),16)

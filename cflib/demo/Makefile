@@ -19,11 +19,11 @@ include $(top_srcdir)/PHONY
 all-here: $(TARGET)
 
 # default overwrites
-INCLUDES += -I.. -I/usr/GEM/include
+INCLUDES += -I..
 
 # default definitions
 OBJS = $(COBJS:.c=.o) $(SOBJS:.s=.o)
-LIBS += -L.. -lcflib -L/usr/GEM/lib -lgem
+LIBS += -L.. -lcflib -lgem
 GENFILES = $(TARGET)
 
 $(TARGET): $(OBJS) ../libcflib.a
