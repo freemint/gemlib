@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** releases the memory allocated for the font selector.
  *

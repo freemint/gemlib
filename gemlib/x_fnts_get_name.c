@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** returns the full name, the family name and the style for the font given in parameter
  *

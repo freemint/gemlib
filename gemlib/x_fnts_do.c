@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** opens a modal dialog and only returns to the caller when 
  *  one of the exit buttons ("Cancel", "OK", "Set", "Mark" or "Options") 

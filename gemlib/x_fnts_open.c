@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "mt_gemx.h"
 
 /** opens a window dialog with the font selector
  *
