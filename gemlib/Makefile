@@ -15,7 +15,7 @@ default: all
 include $(top_srcdir)/CONFIGVARS
 include $(top_srcdir)/RULES
 include $(top_srcdir)/PHONY
-include VERSION
+include $(srcdir)/VERSION
 
 all-here: libs
 

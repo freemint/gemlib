@@ -82,6 +82,9 @@ ln -s %{_prefix}/include/mt_gemx.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include/
 
 
 %changelog
+* Mon Jan  5 2004 Standa Opichal <opichals@seznam.cz>
+- updated to version 0.43.1
+
 * Tue Oct 21 2003 Standa Opichal <opichals@seznam.cz>
 - version 0.43.0 - new generation gemlib
 
