@@ -889,7 +889,7 @@ typedef struct
 	short gid;
 } SHELW;
 
-/** similar to ::SHELW, with MagiC 6 only specificity, and without XaAES/oAESis extensions */
+/** similar to ::SHELW, with MagiC 6 only specificity, and without XaAES extensions */
 typedef struct
 {
 	char	*command;	/**< see SHELW::newcmd */
@@ -989,7 +989,7 @@ typedef  struct
 #define SW_DEFDIR 		0x0400	/**< Default Directory */
 #define SW_ENVIRON		0x0800	/**< Environment */
 
-/* XaAES/oAESis extensions for shel_write() extended modes*/
+/* XaAES extensions for shel_write() extended modes*/
 #define SW_UID			0x1000	/**< Set user id of launched child */
 #define	SW_GID			0x2000	/**< Set group id of launched child */
 
