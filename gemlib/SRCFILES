@@ -448,6 +448,7 @@ COBJS = \
 	x_form_xdial.c \
 	x_form_xdo.c \
 	x_form_xerr.c \
+	x_xfrm_popup.c \
 	\
 	x_fslx_close.c \
 	x_fslx_do.c \
