@@ -4,10 +4,12 @@ long
 evnt_mouse(short mof, short mox, short moy, short mow, short moh, \
 		short *momx, short *momy, short *mobutton, short *mokstate)
 {
-	GEM_ARRAY *gem;
 	long r;
+# ifdef GEMMA_MULTIPROC
+	GEM_ARRAY *gem;
 
 	gem = gem_control();
+# endif
 	gem->int_in[0] = mof;
 	gem->int_in[1] = mox;
 	gem->int_in[2] = moy;
@@ -16,10 +18,14 @@ evnt_mouse(short mof, short mox, short moy, short mow, short moh, \
 
 	r = call_aes(gem, 22);
 
-	*momx = gem->int_out[1];
-	*momy = gem->int_out[2];
-	*mobutton = gem->int_out[3];
-	*mokstate = gem->int_out[4];
+	if (momx)
+		*momx = gem->int_out[1];
+	if (momy)
+		*momy = gem->int_out[2];
+	if (mobutton)
+		*mobutton = gem->int_out[3];
+	if (mokstate)
+		*mokstate = gem->int_out[4];
 
 	return r;
 }

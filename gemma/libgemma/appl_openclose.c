@@ -1,52 +1,98 @@
-# include <mintbind.h>
+# include <mint/mintbind.h>
 # include <gemma/gemma.h>
+
+GEM_ARRAY *gem;
 
 # ifndef GEMMA_MULTIPROC
 
 SLB gemma;
 
-long	appl_open(char *file, short thread, char *pname)
+GEM_ARRAY *
+gem_control(void)
+{
+	return (GEM_ARRAY *)(gemma.exec)(gemma.handle, (long)GEM_CTRL, (short)0);
+}
+
+long
+appl_open(char *file, short thread, char *pname)
 {
 	long r;
 
-	r = _slbopen("gemma.slb", 0L, GEMMA_VERSION, &gemma.handle, &gemma.exec);
+	r = Slbopen("gemma.slb", 0L, GEMMA_VERSION, &gemma.handle, &gemma.exec);
 	if (r < 0)
 		return r;
 
-	return (gemma.exec)(gemma.handle, (long)AP_OPEN, (short)3, (char *)file, (short)thread, (char *)pname);
+	r = (gemma.exec)(gemma.handle, (long)AP_OPEN, (short)3, (char *)file, (short)thread, (char *)pname);
+	if (r > 0)
+	{
+		(gemma.exec)(gemma.handle, (long)34, (short)2, 0x0003, (long)&gemma);
+		gem = gem_control();
+	}
+	else
+	{
+		Slbclose((long)gemma.handle);
+		gemma.exec = gemma.handle = 0;
+	}
+
+	return r;
 }
 
-long	appl_close()
+long
+appl_close()
 {
-	long r;
+	long r = 0;
 
-	r = (gemma.exec)(gemma.handle, (long)AP_CLOSE, (short)0);
-	(void)Slbclose((long)gemma.handle);
+	if (gemma.handle)
+	{
+		r = (gemma.exec)(gemma.handle, (long)AP_CLOSE, (short)0);
+		Slbclose((long)gemma.handle);
+		gemma.handle = 0;
+	}
+
+	gem = 0;
 
 	return r;
 }
 
 # else /* MULTIPROC */
 
+short _pid;
 SLB gemma[1000];
 
-long	appl_open(char *file, short thread, char *pname)
+GEM_ARRAY *
+gem_control(void)
 {
-	long r, pid = Pgetpid();
+	return (GEM_ARRAY *)(gemma[_pid].exec)(gemma[_pid].handle, (long)GEM_CTRL, (short)0);
+}
 
-	r = _slbopen("gemma.slb", 0L, GEMMA_VERSION, &gemma[pid].handle, &gemma[pid].exec);
+long
+appl_open(char *file, short thread, char *pname)
+{
+	long r;
+
+	_pid = Pgetpid();
+	r = Slbopen("gemma.slb", 0L, GEMMA_VERSION, &gemma[_pid].handle, &gemma[_pid].exec);
 	if (r < 0)
 		return r;
 
-	return (gemma[pid].exec)(gemma[pid].handle, (long)AP_OPEN, (short)3, (char *)file, (short)thread, (char *)pname);
+	r = (gemma[_pid].exec)(gemma[_pid].handle, (long)AP_OPEN, (short)3, (char *)file, (short)thread, (char *)pname);
+	if (r > 0)
+		gem = gem_control();
+	else
+		Slbclose((long)gemma[_pid].handle);
+
+	return r;
 }
 
-long	appl_close()
+long
+appl_close()
 {
-	long r, pid = Pgetpid();
+	long r;
 
-	r = (gemma[pid].exec)(gemma[pid].handle, (long)AP_CLOSE, (short)0);
-	(void)Slbclose((long)gemma[pid].handle);
+	r = (gemma[_pid].exec)(gemma[_pid].handle, (long)AP_CLOSE, (short)0);
+	Slbclose((long)gemma[_pid].handle);
+
+	gem = 0;
 
 	return r;
 }

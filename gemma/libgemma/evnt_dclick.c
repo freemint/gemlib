@@ -3,9 +3,11 @@
 long
 evnt_dclick(short dnew, short dset)
 {
+# ifdef GEMMA_MULTIPROC
 	GEM_ARRAY *gem;
 
 	gem = gem_control();
+# endif
 	gem->int_in[0] = dnew;
 	gem->int_in[1] = dset;
 

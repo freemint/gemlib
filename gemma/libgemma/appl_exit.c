@@ -3,10 +3,9 @@
 long
 appl_exit(void)
 {
-	GEM_ARRAY *gem;
-
+# ifdef GEMMA_MULTIPROC
 	gem = gem_control();
-
+# endif
 	return call_aes(gem, 19);
 }
 

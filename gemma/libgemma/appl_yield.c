@@ -1,22 +1,14 @@
-# ifdef FAST_YIELD
-#  include <mintbind.h>
-# else
-#  include "extdef.h"
-# endif
-
+# include "extdef.h"
 
 long
 appl_yield(void)
 {
-# ifdef FAST_YIELD
-	return Syield();
-# else
+# ifdef GEMMA_MULTIPROC
 	GEM_ARRAY *gem;
 
 	gem = gem_control();
-
-	return call_aes(gem, 17);
 # endif
+	return call_aes(gem, 17);
 }
 
 /* EOF */

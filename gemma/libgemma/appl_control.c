@@ -1,11 +1,13 @@
 # include "extdef.h"
 
+/* as of AES 4.0 when appl_getinfo() indicates */
+
 long
 appl_control(short cid, short cwhat, void *out)
 {
-	GEM_ARRAY *gem;
-
+# ifdef GEMMA_MULTIPROC
 	gem = gem_control();
+# endif
 	gem->int_in[0] = cid;
 	gem->int_in[1] = cwhat;
 	gem->addr_in[0] = (long)out;

@@ -3,10 +3,11 @@
 long
 objc_draw(void *tree, short obj, short depth, short wx, short wy, short ww, short wh)
 {
+# ifdef GEMMA_MULTIPROC
 	GEM_ARRAY *gem;
 
 	gem = gem_control();
-
+# endif
 	gem->addr_in[0] = (long)tree;
 	gem->int_in[0] = obj;
 	gem->int_in[1] = depth;

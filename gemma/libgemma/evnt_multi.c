@@ -7,10 +7,12 @@ evnt_multi(short mflags, short mbclicks, short mbmask, short mbstate, \
 	short *mmgpbuff, unsigned long count, short *mmox, short *mmoy, \
 	short *mmobut, short *mmokstate, short *mkreturn, short *mbreturn)
 {
-	GEM_ARRAY *gem;
 	long r;
+# ifdef GEMMA_MULTIPROC
+	GEM_ARRAY *gem;
 
 	gem = gem_control();
+# endif
 	gem->int_in[0] = mflags;
 	gem->int_in[1] = mbclicks;
 	gem->int_in[2] = mbmask;
@@ -32,12 +34,18 @@ evnt_multi(short mflags, short mbclicks, short mbmask, short mbstate, \
 
 	r = call_aes(gem, 25);
 
-	*mmox = gem->int_out[1];
-	*mmoy = gem->int_out[2];
-	*mmobut = gem->int_out[3];
-	*mmokstate = gem->int_out[4];
-	*mkreturn = gem->int_out[5];
-	*mbreturn = gem->int_out[6];
+	if (mmox)
+		*mmox = gem->int_out[1];
+	if (mmoy)
+		*mmoy = gem->int_out[2];
+	if (mmobut)
+		*mmobut = gem->int_out[3];
+	if (mmokstate)
+		*mmokstate = gem->int_out[4];
+	if (mkreturn)
+		*mkreturn = gem->int_out[5];
+	if (mbreturn)
+		*mbreturn = gem->int_out[6];
 
 	return r;
 }

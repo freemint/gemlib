@@ -3,9 +3,11 @@
 long
 appl_trecord(void *mem, short count)
 {
+# ifdef GEMMA_MULTIPROC
 	GEM_ARRAY *gem;
 
 	gem = gem_control();
+# endif
 	gem->addr_in[0] = (long)mem;
 	gem->int_in[0] = count;
 
