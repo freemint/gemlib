@@ -1,3 +1,9 @@
+# Gemlib specfile
+
+# Please note this file is maintained in the freemint CVS repository as
+# "lib/gemlib/gemlib.spec". Most current version is avaible there and
+# any modification should be stored there.
+
 Summary       : GEM libraries and header files
 Name          : gemlib
 Version       : 0.42.2
