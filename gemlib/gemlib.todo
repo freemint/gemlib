@@ -89,15 +89,15 @@ a_rsrc_saddr.c
 a_scrp_clear.c
 a_scrp_read.c
 a_scrp_write.c
-a_shel_envrn.c
-a_shel_find.c
-a_shel_get.c
-a_shel_help.c
-a_shel_put.c
-a_shel_rdef.c
-a_shel_read.c
-a_shel_wdef.c
-a_shel_write.c
+a_shel_envrn.c		    -- add "const" keyword [gemlib->mgemlib]
+a_shel_find.c		    -- idem
+a_shel_get.c		    -- idem
+a_shel_help.c		    -- add "const" keyword [gemlib->mgemlib]
+a_shel_put.c		    -- add "const" keyword [gemlib->mgemlib]
+a_shel_rdef.c		    -- idem
+a_shel_read.c		    -- idem
+a_shel_wdef.c		    -- add "const" keyword [gemlib->mgemlib]
+a_shel_write.c		    -- idem
 a_wind_calc.c           -- add optimisations to set intin array, and to
                            get values from intout array [mgemlib->gemlib]
 a_wind_calc_grect.c     -- add optimisation to set intin array, and to
