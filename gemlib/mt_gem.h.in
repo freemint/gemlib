@@ -1113,6 +1113,7 @@ typedef  struct
 #define MENUBAR			0x1000	/**< Window has a menu bar (XaAES) */
 #define BACKDROP		0x2000	/**< Window has a backdrop box */
 #define SMALLER			0x4000	/**< Window has an iconifier */
+#define BORDER			0x8000	/**< Window has border-resizable capability (XaAES newer than Nov 8 2004) */
 #define ICONIFIER		SMALLER	/**< Window has an iconifier */
 
 /* wind_create flags */
@@ -1150,6 +1151,7 @@ typedef  struct
 #define WF_NTOOLBAR		 32 	/**< get     the next rectangle of the toolbar area, see mt_wind_get() */
 #define WF_MENU			 33 	/**<         TODO (XaAES) */
 #define WF_WHEEL		 40 	/**<     set window feature on mouse wheel event, see mt_wind_set() */
+#define WF_OPTS			 41	/**< set window options. See mt_wind_set() and mt_wind_get() for details. */
 #define WF_M_BACKDROP	100 	/**<		 TODO (KAOS 1.4) */
 #define WF_M_OWNER		101 	/**<		 TODO (KAOS 1.4) */
 #define WF_M_WINDLIST	102 	/**<		 TODO (KAOS 1.4) */
@@ -1173,7 +1175,7 @@ typedef  struct
 #define WO_FULLREDRAW	0x00000002
 #define WO_NOBLITW	0x00000004
 #define WO_NOBLITH	0x00000008
-#define WO_MOVEREPOS	0x00000010
+#define WO_SENDREPOS	0x00000010
 
 /* wind_set(WF_WHEEL) modes */
 #define WHL_REALWHEEL	0	/* */
@@ -1935,6 +1937,7 @@ short	mt_wind_create_grect (short Parts, const GRECT *r, short *global_aes);
 short	mt_wind_get_grect    (short WindowHandle, short What, GRECT *r, short *global_aes);
 short	mt_wind_open_grect   (short WindowHandle, const GRECT *r, short *global_aes);
 short	mt_wind_set_grect    (short WindowHandle, short What, const GRECT *r, short *global_aes);
+short	mt_wind_xset_grect   (short WindowHandle, short What, const GRECT *s, GRECT *r, short *global_aes);
 short	mt_wind_set_str      (short WindowHandle, short What, const char *str, short *global_aes);
 /**@}*/
 
