@@ -5,6 +5,98 @@ HEADER = \
 	gem.h \
 	gemx.h
 
+
+_VDI_ATTRIB = \
+	vs_color.c \
+	vsf_color.c  vsf_interior.c vsf_perimeter.c vsf_style.c vsf_udpat.c \
+	vsl_color.c  vsl_ends.c     vsl_type.c      vsl_udsty.c vsl_width.c \
+	vsm_color.c  vsm_height.c   vsm_type.c      vst_alignment.c \
+	vst_color.c  vst_effects.c  vst_error.c     vst_font.c  vst_height.c \
+	vst_point.c  vst_rotation.c vst_scratch.c \
+	vswr_mode.c
+
+_VDI_CONTRL = \
+	v_opnwk.c  v_opnvwk.c  v_clsvwk.c  v_clswk.c  v_clrwk.c  v_updwk.c \
+	v_flushcache.c v_loadcache.c v_savecache.c \
+	v_set_app_buff.c \
+	vs_clip.c \
+	vst_load_fonts.c vst_unload_fonts.c
+
+_VDI_ESCAPE = \
+	v_alpha_text.c \
+	v_bit_image.c \
+	v_clear_disp_list.c \
+	v_copies.c \
+	v_curdown.c \
+	v_curhome.c \
+	v_curleft.c \
+	v_curright.c \
+	v_curtext.c \
+	v_curup.c \
+	v_dspcur.c \
+	v_eeol.c \
+	v_eeos.c \
+	v_enter_cur.c \
+	v_escape2000.c \
+	v_exit_cur.c \
+	v_form_adv.c \
+	v_hardcopy.c \
+	v_meta_extents.c \
+	v_orient.c \
+	v_output_window.c \
+	v_page_size.c \
+	v_rmcur.c \
+	v_rvoff.c \
+	v_rvon.c \
+	v_trays.c \
+	v_write_meta.c \
+	vm_coords.c \
+	vm_filename.c \
+	vm_pagesize.c \
+	vq_chcells.c \
+	vq_curaddress.c \
+	vq_page_name.c \
+	vq_scan.c \
+	vq_tabstatus.c \
+	vq_tdimensions.c \
+	vq_tray_names.c \
+	vs_curaddress.c \
+	vs_palette.c \
+	vsc_expose.c \
+	vsp_film.c \
+	vt_alignment.c \
+	vt_axis.c \
+	vt_origin.c \
+	vt_resolution.c
+
+_VDI_INPUT = \
+	v_hide_c.c   v_show_c.c \
+	vex_butv.c   vex_curv.c    vex_motv.c   vex_timv.c \
+	vq_key_s.c   vq_mouse.c \
+	vrq_choice.c vrq_locator.c vrq_string.c vrq_valuator.c \
+	vsc_form.c \
+	vsin_mode.c \
+	vsm_choice.c vsm_locator.c vsm_string.c vsm_valuator.c
+
+_VDI_INQUIRE = \
+	vq_cellarray.c vq_color.c vq_extnd.c \
+	vqf_attributes.c \
+	vqin_mode.c \
+	vql_attributes.c \
+	vqm_attributes.c \
+	vqt_attributes.c vqt_cachesize.c vqt_extent.c vqt_fontinfo.c \
+	vqt_get_table.c  vqt_name.c      vqt_width.c
+
+_VDI_OUTPUT = \
+	v_arc.c       v_bar.c      v_cellarray.c v_circle.c   v_contourfill.c \
+	v_ellarc.c    v_ellipse.c  v_ellpie.c    v_fillarea.c v_gtext.c \
+	v_justified.c v_pieslice.c v_pline.c     v_pmarker.c  v_rbox.c \
+	v_rfbox.c     vr_recfl.c
+
+_VDI_RASTER = \
+	v_get_pixel.c vr_trnfm.c vro_cpyfm.c vrt_cpyfm.c
+
+
 COBJS = \
 	a_appl_bvset.c \
 	a_appl_control.c \
@@ -109,150 +201,9 @@ COBJS = \
 	globals_ident.c \
 	globals_vdi.c \
 	\
-	v_attrib_vs_color.c \
-	v_attrib_vsf_color.c \
-	v_attrib_vsf_interior.c \
-	v_attrib_vsf_perimeter.c \
-	v_attrib_vsf_style.c \
-	v_attrib_vsf_udpat.c \
-	v_attrib_vsl_color.c \
-	v_attrib_vsl_ends.c \
-	v_attrib_vsl_type.c \
-	v_attrib_vsl_udsty.c \
-	v_attrib_vsl_width.c \
-	v_attrib_vsm_color.c \
-	v_attrib_vsm_height.c \
-	v_attrib_vsm_type.c \
-	v_attrib_vst_alignment.c \
-	v_attrib_vst_color.c \
-	v_attrib_vst_effects.c \
-	v_attrib_vst_error.c \
-	v_attrib_vst_font.c \
-	v_attrib_vst_height.c \
-	v_attrib_vst_point.c \
-	v_attrib_vst_rotation.c \
-	v_attrib_vst_scratch.c \
-	v_attrib_vswr_mode.c \
-	\
-	v_contrl_v_clrwk.c \
-	v_contrl_v_clsvwk.c \
-	v_contrl_v_clswk.c \
-	v_contrl_v_flushcache.c \
-	v_contrl_v_loadcache.c \
-	v_contrl_v_opnvwk.c \
-	v_contrl_v_opnwk.c \
-	v_contrl_v_savecache.c \
-	v_contrl_v_set_app_buff.c \
-	v_contrl_v_updwk.c \
-	v_contrl_vs_clip.c \
-	v_contrl_vst_load_fonts.c \
-	v_contrl_vst_unload_fonts.c \
-	\
-	v_escape_v_alpha_text.c \
-	v_escape_v_bit_image.c \
-	v_escape_v_clear_disp_list.c \
-	v_escape_v_copies.c \
-	v_escape_v_curdown.c \
-	v_escape_v_curhome.c \
-	v_escape_v_curleft.c \
-	v_escape_v_curright.c \
-	v_escape_v_curtext.c \
-	v_escape_v_curup.c \
-	v_escape_v_dspcur.c \
-	v_escape_v_eeol.c \
-	v_escape_v_eeos.c \
-	v_escape_v_enter_cur.c \
-	v_escape_v_escape2000.c \
-	v_escape_v_exit_cur.c \
-	v_escape_v_form_adv.c \
-	v_escape_v_hardcopy.c \
-	v_escape_v_meta_extents.c \
-	v_escape_v_orient.c \
-	v_escape_v_output_window.c \
-	v_escape_v_page_size.c \
-	v_escape_v_rmcur.c \
-	v_escape_v_rvoff.c \
-	v_escape_v_rvon.c \
-	v_escape_v_trays.c \
-	v_escape_v_write_meta.c \
-	v_escape_vm_coords.c \
-	v_escape_vm_filename.c \
-	v_escape_vm_pagesize.c \
-	v_escape_vq_chcells.c \
-	v_escape_vq_curaddress.c \
-	v_escape_vq_page_name.c \
-	v_escape_vq_scan.c \
-	v_escape_vq_tabstatus.c \
-	v_escape_vq_tdimensions.c \
-	v_escape_vq_tray_names.c \
-	v_escape_vs_curaddress.c \
-	v_escape_vs_palette.c \
-	v_escape_vsc_expose.c \
-	v_escape_vsp_film.c \
-	v_escape_vt_alignment.c \
-	v_escape_vt_axis.c \
-	v_escape_vt_origin.c \
-	v_escape_vt_resolution.c \
-	\
-	v_input_v_hide_c.c \
-	v_input_v_show_c.c \
-	v_input_vex_butv.c \
-	v_input_vex_curv.c \
-	v_input_vex_motv.c \
-	v_input_vex_timv.c \
-	v_input_vq_key_s.c \
-	v_input_vq_mouse.c \
-	v_input_vrq_choice.c \
-	v_input_vrq_locator.c \
-	v_input_vrq_string.c \
-	v_input_vrq_valuator.c \
-	v_input_vsc_form.c \
-	v_input_vsin_mode.c \
-	v_input_vsm_choice.c \
-	v_input_vsm_locator.c \
-	v_input_vsm_string.c \
-	v_input_vsm_valuator.c \
-	\
-	v_inquire_vq_cellarray.c \
-	v_inquire_vq_color.c \
-	v_inquire_vq_extnd.c \
-	v_inquire_vqf_attributes.c \
-	v_inquire_vqin_mode.c \
-	v_inquire_vql_attributes.c \
-	v_inquire_vqm_attributes.c \
-	v_inquire_vqt_attributes.c \
-	v_inquire_vqt_cachesize.c \
-	v_inquire_vqt_extent.c \
-	v_inquire_vqt_fontinfo.c \
-	v_inquire_vqt_get_table.c \
-	v_inquire_vqt_name.c \
-	v_inquire_vqt_width.c \
-	\
-	v_misc_vdi_array2str.c \
-	v_misc_vdi_str2array.c \
-	\
-	v_output_v_arc.c \
-	v_output_v_bar.c \
-	v_output_v_cellarray.c \
-	v_output_v_circle.c \
-	v_output_v_contourfill.c \
-	v_output_v_ellarc.c \
-	v_output_v_ellipse.c \
-	v_output_v_ellpie.c \
-	v_output_v_fillarea.c \
-	v_output_v_gtext.c \
-	v_output_v_justified.c \
-	v_output_v_pieslice.c \
-	v_output_v_pline.c \
-	v_output_v_pmarker.c \
-	v_output_v_rbox.c \
-	v_output_v_rfbox.c \
-	v_output_vr_recfl.c \
-	\
-	v_raster_v_get_pixel.c \
-	v_raster_vr_trnfm.c \
-	v_raster_vro_cpyfm.c \
-	v_raster_vrt_cpyfm.c \
+	$(_VDI_ATTRIB)  $(_VDI_CONTRL) $(_VDI_ESCAPE) $(_VDI_INPUT) \
+	$(_VDI_INQUIRE) $(_VDI_OUTPUT) $(_VDI_RASTER) \
+	vdi_array2str.c vdi_str2array.c \
 	\
 	x_fnts_add.c \
 	x_fnts_close.c \
@@ -284,115 +235,115 @@ COBJS = \
 	\
 	x_lbox.c \
 	\
-	x_nvdi_v_bez.c \
-	x_nvdi_v_bez_fill.c \
-	x_nvdi_v_bez_off.c \
-	x_nvdi_v_bez_on.c \
-	x_nvdi_v_bez_qual.c \
-	x_nvdi_v_clsbm.c \
-	x_nvdi_v_color2nearest.c \
-	x_nvdi_v_color2value.c \
-	x_nvdi_v_create_ctab.c \
-	x_nvdi_v_create_itab.c \
-	x_nvdi_v_ctab_idx2value.c \
-	x_nvdi_v_ctab_idx2vdi.c \
-	x_nvdi_v_ctab_vdi2idx.c \
-	x_nvdi_v_delete_ctab.c \
-	x_nvdi_v_delete_itab.c \
-	x_nvdi_v_ftext.c \
-	x_nvdi_v_ftext_offset.c \
-	x_nvdi_v_get_ctab_id.c \
-	x_nvdi_v_get_outline.c \
-	x_nvdi_v_getbitmap_info.c \
-	x_nvdi_v_getoutline.c \
-	x_nvdi_v_open_bm.c \
-	x_nvdi_v_opnbm.c \
-	x_nvdi_v_opnprn.c \
-	x_nvdi_v_resize_bm.c \
-	x_nvdi_v_setrgb.c \
-	x_nvdi_v_value2color.c \
-	x_nvdi_vq_ctab.c \
-	x_nvdi_vq_ctab_entry.c \
-	x_nvdi_vq_ctab_id.c \
-	x_nvdi_vq_devinfo.c \
-	x_nvdi_vq_dflt_ctab.c \
-	x_nvdi_vq_hilite_color.c \
-	x_nvdi_vq_margins.c \
-	x_nvdi_vq_max_color.c \
-	x_nvdi_vq_min_color.c \
-	x_nvdi_vq_prn_scaling.c \
-	x_nvdi_vq_px_format.c \
-	x_nvdi_vq_scrninfo.c \
-	x_nvdi_vq_weight_color.c \
-	x_nvdi_vqf_bg_color.c \
-	x_nvdi_vqf_fg_color.c \
-	x_nvdi_vql_bg_color.c \
-	x_nvdi_vql_fg_color.c \
-	x_nvdi_vqm_bg_color.c \
-	x_nvdi_vqm_fg_color.c \
-	x_nvdi_vqr_bg_color.c \
-	x_nvdi_vqr_fg_color.c \
-	x_nvdi_vqt_advance.c \
-	x_nvdi_vqt_bg_color.c \
-	x_nvdi_vqt_char_index.c \
-	x_nvdi_vqt_f_extent.c \
-	x_nvdi_vqt_fg_color.c \
-	x_nvdi_vqt_fontheader.c \
-	x_nvdi_vqt_pairkern.c \
-	x_nvdi_vqt_real_extent.c \
-	x_nvdi_vqt_trackkern.c \
-	x_nvdi_vqt_xfntinfo.c \
-	x_nvdi_vr_transfer_bits.c \
-	x_nvdi_vs_ctab.c \
-	x_nvdi_vs_ctab_entry.c \
-	x_nvdi_vs_dflt_ctab.c \
-	x_nvdi_vs_document_info.c \
-	x_nvdi_vs_hilite_color.c \
-	x_nvdi_vs_max_color.c \
-	x_nvdi_vs_min_color.c \
-	x_nvdi_vs_weight_color.c \
-	x_nvdi_vsf_bg_color.c \
-	x_nvdi_vsf_fg_color.c \
-	x_nvdi_vsl_bg_color.c \
-	x_nvdi_vsl_fg_color.c \
-	x_nvdi_vsm_bg_color.c \
-	x_nvdi_vsm_fg_color.c \
-	x_nvdi_vsr_bg_color.c \
-	x_nvdi_vsr_fg_color.c \
-	x_nvdi_vst_arbpt.c \
-	x_nvdi_vst_bg_color.c \
-	x_nvdi_vst_charmap.c \
-	x_nvdi_vst_fg_color.c \
-	x_nvdi_vst_kern.c \
-	x_nvdi_vst_name.c \
-	x_nvdi_vst_setsize.c \
-	x_nvdi_vst_skew.c \
-	x_nvdi_vst_track_offset.c \
-	x_nvdi_vst_width.c \
+	n_v_bez.c \
+	n_v_bez_fill.c \
+	n_v_bez_off.c \
+	n_v_bez_on.c \
+	n_v_bez_qual.c \
+	n_v_clsbm.c \
+	n_v_color2nearest.c \
+	n_v_color2value.c \
+	n_v_create_ctab.c \
+	n_v_create_itab.c \
+	n_v_ctab_idx2value.c \
+	n_v_ctab_idx2vdi.c \
+	n_v_ctab_vdi2idx.c \
+	n_v_delete_ctab.c \
+	n_v_delete_itab.c \
+	n_v_ftext.c \
+	n_v_ftext_offset.c \
+	n_v_get_ctab_id.c \
+	n_v_get_outline.c \
+	n_v_getbitmap_info.c \
+	n_v_getoutline.c \
+	n_v_open_bm.c \
+	n_v_opnbm.c \
+	n_v_opnprn.c \
+	n_v_resize_bm.c \
+	n_v_setrgb.c \
+	n_v_value2color.c \
+	n_vq_ctab.c \
+	n_vq_ctab_entry.c \
+	n_vq_ctab_id.c \
+	n_vq_devinfo.c \
+	n_vq_dflt_ctab.c \
+	n_vq_hilite_color.c \
+	n_vq_margins.c \
+	n_vq_max_color.c \
+	n_vq_min_color.c \
+	n_vq_prn_scaling.c \
+	n_vq_px_format.c \
+	n_vq_scrninfo.c \
+	n_vq_weight_color.c \
+	n_vqf_bg_color.c \
+	n_vqf_fg_color.c \
+	n_vql_bg_color.c \
+	n_vql_fg_color.c \
+	n_vqm_bg_color.c \
+	n_vqm_fg_color.c \
+	n_vqr_bg_color.c \
+	n_vqr_fg_color.c \
+	n_vqt_advance.c \
+	n_vqt_bg_color.c \
+	n_vqt_char_index.c \
+	n_vqt_f_extent.c \
+	n_vqt_fg_color.c \
+	n_vqt_fontheader.c \
+	n_vqt_pairkern.c \
+	n_vqt_real_extent.c \
+	n_vqt_trackkern.c \
+	n_vqt_xfntinfo.c \
+	n_vr_transfer_bits.c \
+	n_vs_ctab.c \
+	n_vs_ctab_entry.c \
+	n_vs_dflt_ctab.c \
+	n_vs_document_info.c \
+	n_vs_hilite_color.c \
+	n_vs_max_color.c \
+	n_vs_min_color.c \
+	n_vs_weight_color.c \
+	n_vsf_bg_color.c \
+	n_vsf_fg_color.c \
+	n_vsl_bg_color.c \
+	n_vsl_fg_color.c \
+	n_vsm_bg_color.c \
+	n_vsm_fg_color.c \
+	n_vsr_bg_color.c \
+	n_vsr_fg_color.c \
+	n_vst_arbpt.c \
+	n_vst_bg_color.c \
+	n_vst_charmap.c \
+	n_vst_fg_color.c \
+	n_vst_kern.c \
+	n_vst_name.c \
+	n_vst_setsize.c \
+	n_vst_skew.c \
+	n_vst_track_offset.c \
+	n_vst_width.c \
 	\
 	x_objc_wchange.c \
 	x_objc_wdraw.c \
 	x_objc_wedit.c \
 	x_objc_xedit.c \
 	\
-	x_pdlg_add_printers.c \
-	x_pdlg_add_sub_dialogs.c \
-	x_pdlg_close.c \
-	x_pdlg_create.c \
-	x_pdlg_delete.c \
-	x_pdlg_dflt_settings.c \
-	x_pdlg_do.c \
-	x_pdlg_evnt.c \
-	x_pdlg_free_settings.c \
-	x_pdlg_get_setsize.c \
-	x_pdlg_new_settings.c \
-	x_pdlg_open.c \
-	x_pdlg_remove_printers.c \
-	x_pdlg_remove_sub_dialogs.c \
-	x_pdlg_save_default_settings.c \
-	x_pdlg_update.c \
-	x_pdlg_use_settings.c \
-	x_pdlg_validate_settings.c \
+	pdlg_add_printers.c \
+	pdlg_add_sub_dlgs.c \
+	pdlg_close.c \
+	pdlg_create.c \
+	pdlg_delete.c \
+	pdlg_dflt_sett.c \
+	pdlg_do.c \
+	pdlg_evnt.c \
+	pdlg_free_sett.c \
+	pdlg_get_setsize.c \
+	pdlg_new_sett.c \
+	pdlg_open.c \
+	pdlg_rmv_printers.c \
+	pdlg_rmv_sub_dlgs.c \
+	pdlg_save_dflt_sett.c \
+	pdlg_update.c \
+	pdlg_use_sett.c \
+	pdlg_validate_sett.c \
 	\
 	x_wdlg.c
 
