@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "gemx.h"
 
 /** returns the length of the PRN_SETTINGS structure
  *

@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "gemx.h"
 
 /** removes the printers installed with mt_pdlg_add_printers() from the binding.
  *

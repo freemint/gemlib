@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "gemx.h"
 
 /** releases the memory for the print dialog
  *

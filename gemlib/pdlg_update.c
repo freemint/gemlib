@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "gemx.h"
 
 /** This function sets a new window name. It should be called when the 
  *  window dialog lies in the background and the user tops a new document 

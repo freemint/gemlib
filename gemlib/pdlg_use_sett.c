@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "gemx.h"
 
 /** This function should be called if a program wants to print immediately 
  *  and it is not possible to call mt_pdlg_do() or mt_pdlg_open() and mt_pdlg_evnt() 

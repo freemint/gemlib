@@ -2,8 +2,8 @@
  *  $Id$
  */
 
-#include "gemx.h"
 #include "gem_aesP.h"
+#include "gemx.h"
 
 /** evaluates the passed EVNT structure and calls mt_wdlg_evnt() internally.
  *
