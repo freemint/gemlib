@@ -35,12 +35,18 @@
  *  @param m2_h see mt_evnt_mouse()
  *  @param msg see mt_evnt_mesag()
  *  @param interval see mt_evnt_timer()
- *  @param mx
- *  @param my
- *  @param mbutton
- *  @param kmeta see mt_evnt_button()
- *  @param kreturn the return value of the mt_evnt_keybd()
- *  @param mbclicks see mt_evnt_button()
+ *  @param mx \n
+ *         [option CHECK_NULLPTR] mx may be NULL
+ *  @param my \n
+ *         [option CHECK_NULLPTR] my may be NULL
+ *  @param mbutton \n
+ *         [option CHECK_NULLPTR] mbutton may be NULL
+ *  @param kmeta see mt_evnt_button() \n
+ *         [option CHECK_NULLPTR] kmeta may be NULL
+ *  @param kreturn the return value of the mt_evnt_keybd() \n
+ *         [option CHECK_NULLPTR] kreturn may be NULL
+ *  @param mbclicks see mt_evnt_button() \n
+ *         [option CHECK_NULLPTR] mbclicks may be NULL
  *  @param global_aes global AES array
  *
  *  @return a bit mask of which events actually happened as in events.
@@ -101,6 +107,14 @@ mt_evnt_multi (short events, short bclicks, short bmask, short bstate,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (mx) *mx = aes_intout[1];
+	if (my) *my = aes_intout[2];
+	if (mbutton) *mbutton = aes_intout[3];
+	if (kmeta) *kmeta = aes_intout[4];
+	if (kreturn) *kreturn = aes_intout[5];
+	if (mbclicks) *mbclicks = aes_intout[6];
+#else
 	ptr = &aes_intout[1];
 	*mx = *(ptr ++);									/* [1] */
 	*my = *(ptr ++);									/* [2] */
@@ -108,6 +122,7 @@ mt_evnt_multi (short events, short bclicks, short bmask, short bstate,
 	*kmeta = *(ptr ++);								/* [4] */
 	*kreturn = *(ptr ++);									/* [5] */
 	*mbclicks = *(ptr);								    /* [6] */
+#endif
 
 	return (aes_intout[0]);
 }

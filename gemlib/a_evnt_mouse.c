@@ -17,13 +17,16 @@
  *
  *  @param mx
  *  @param my WORD pointers which will be filled in with the final
- *                position of the mouse.
+ *                position of the mouse. \n
+ *         [option CHECK_NULLPTR] mx and my may be NULL
  *  @param mbutton is a WORD pointer which will be filled in upon
  *                return with the final state of the mouse button as defined
- *                in mt_evnt_button().
+ *                in mt_evnt_button(). \n
+ *         [option CHECK_NULLPTR] mbutton may be NULL
  *  @param kmeta is a WORD pointer which will be filled in upon
  *                return with the final state of the keyboard shift keys as
- *                defined in mt_evnt_button().
+ *                defined in mt_evnt_button(). \n
+ *         [option CHECK_NULLPTR] kmeta may be NULL
  *  @param global_aes global AES array
  *
  *  @return should be reserved (and should always be 1). Actually it depends
@@ -52,9 +55,21 @@ mt_evnt_mouse(short flag, short x, short y, short w, short h,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (mx)
+#endif
 	*mx = aes_intout[1];
+#if CHECK_NULLPTR
+	if (my)
+#endif
 	*my = aes_intout[2];
+#if CHECK_NULLPTR
+	if (mbutton)
+#endif
 	*mbutton = aes_intout[3];
+#if CHECK_NULLPTR
+	if (kmeta)
+#endif
 	*kmeta = aes_intout[4];
 	return aes_intout[0];
 }
