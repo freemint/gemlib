@@ -8,8 +8,8 @@
  *  parent and the command tail used to call it.
  *
  *  @param Command points to a buffer which upon exit will be filled in
- *         with the complete file specification of the application
- *         which launched the current process.
+ *         with the complete file specification of the application.
+ *         the buffer should have at least 260 bytes.
  *  @param Tail will likewise be filled in with the initial command
  *         line. The first BYTE of the command line indicates the
  *         length of the string which actually begins at &Tail[1].
