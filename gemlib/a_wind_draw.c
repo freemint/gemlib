@@ -24,8 +24,6 @@
 short 
 mt_wind_draw (short whandle, short startob, short *global_aes)
 {
-	short *ptr;
-	
 	AES_PARAMS(99,2,1,0,0);
 
 	aes_intin[0] = whandle;
