@@ -7,25 +7,30 @@
 /** returns important information regarding the
  *  physical workstation currently in use by the AES.
  *
- *  @param wcell
- *  @param hcell are WORD pointers which on function exit
- *               will be filled in with the width and height, respectively,
- *               of the current system character set. \n
- *             [option CHECK_NULLPTR] wcell and/or hcell may be NULL
- *  @param  wbox
- *  @param  hbox are WORD pointers which on function exit
- *               will be filled in with the width and height, respectively,
- *               of the minimum bounding box of a BOXCHAR character. \n
- *             [option CHECK_NULLPTR] wbox and/or hbox may be NULL
- *  @param  device (TODO: doc wanted). \n
- *             [option CHECK_NULLPTR] device may be NULL
+ *  @param wcell pointer to a short int which will contain (on function exit)
+ *               the width of the current system character set. \n
+ *               [option CHECK_NULLPTR] \a wcell may be NULL
+ *  @param hcell  pointer to a short int which will contain (on function exit)
+ *               the height of the current system character set. \n
+ *               [option CHECK_NULLPTR] \a hcell may be NULL
+ *  @param wbox pointer to a short int which will contain (on function exit)
+ *               the width of the minimum bounding box of a BOXCHAR character. \n
+ *               [option CHECK_NULLPTR] \a wbox may be NULL
+ *  @param hbox pointer to a short int which will contain (on function exit)
+ *               the height of the minimum bounding box of a BOXCHAR character. \n
+ *               [option CHECK_NULLPTR] \a hbox may be NULL
+ *  @param  device pointer to a short integer which will contain (on function exit)
+ *               the device ID of the physical workstation used by the AES.
+ *               This is the value to put in work_in[0] when invoking v_opnvwk()
+ *               (TO BE CONFIRMED!!!). \n
+ *             [option CHECK_NULLPTR] \a device may be NULL
  *  @param global_aes global AES array
  *
  *  @return the VDI handle for the current physical workstation used
  *          by the AES which is required to open a virtual screen
  *          workstation.
  *
- *  @since All AES versions.
+ *  @since MagiC ???.
  *
  *  @sa v_opnvwk()
  *
@@ -42,6 +47,9 @@ mt_graf_xhandle (short *wcell, short *hcell, short *wbox, short *hbox, short *de
 #endif
 
 	AES_PARAMS(77,0,6,0,0);
+	
+	/* initialise aes_intout[5] for AES that doesn't support this extension */
+	aes_intout[5] = 0;
 
 	AES_TRAP(aes_params);
 
