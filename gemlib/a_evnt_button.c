@@ -41,8 +41,8 @@
  *             - \p K_ALT            (0x08)     Alternate
  *  @param global_aes global AES array
  *
- *  @return returns a WORD indicating the number of times the mouse
- *             button state matched state.
+ *  @return a WORD indicating the number of times the mouse
+ *          button state matched state.
  *
  *  @since All AES versions.
  *

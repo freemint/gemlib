@@ -40,25 +40,25 @@ a_evnt_mouse.c			-- idem
 a_evnt_multi.c			-- idem
 a_evnt_multi_fast.c		-- idem
 a_evnt_timer.c			-- idem
-a_form_alert.c
-a_form_button.c
-a_form_center.c
-a_form_dial.c
-a_form_do.c
-a_form_error.c
-a_form_keybd.c
+a_form_alert.c          -- idem
+a_form_button.c         -- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
+a_form_center.c         -- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
+a_form_dial.c			-- idem
+a_form_do.c				-- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
+a_form_error.c			-- idem
+a_form_keybd.c			-- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
 a_fsel_exinput.c
 a_fsel_input.c
-a_graf_dragbox.c
-a_graf_growbox.c
-a_graf_handle.c
-a_graf_mbox.c
-a_graf_mkstate.c
-a_graf_mouse.c
-a_graf_rubbox.c
-a_graf_shrinkbox.c
-a_graf_slidebox.c
-a_graf_watchbox.c
+a_graf_dragbox.c		-- idem
+a_graf_growbox.c		-- idem
+a_graf_handle.c			-- idem
+a_graf_mbox.c			-- idem
+a_graf_mkstate.c		-- idem
+a_graf_mouse.c			-- const MFORM * -> void* [gemlib->mgemlib] ... why???
+a_graf_rubbox.c			-- idem
+a_graf_shrinkbox.c		-- idem
+a_graf_slidebox.c		-- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
+a_graf_watchbox.c		-- idem
 a_menu_attach.c
 a_menu_bar.c
 a_menu_click.c

@@ -1,7 +1,7 @@
 /*
  *  $Id$
  */
- 
+
 #include "gem_aesP.h"
 
 /** returns information about the AES.
@@ -12,7 +12,8 @@
  *  @param out1 1st return value
  *  @param out2 2nd return value
  *  @param out3 3rd return value
- *  @param out4 4th return value<pre>
+ *  @param out4 4th return value
+\verbatim
     Name      Value               Returns
 
 AES_LARGEFONT  0    AES Large Font Information:
@@ -231,9 +232,10 @@ AES_FORM       14    AES Form Support
                     out3 is 0 if the last cursor
                          position from objc_edit() is not
                          returned or 1 if it is.
-                    out4 is currently reserved.</pre>
+                    out4 is currently reserved.
+\endverbatim
  *  @param global_aes global AES array
-
+ *
  *  @return 0 if an error occurred or non-zero otherwise.
  *
  *  @since Available as of AES version 4.00.
@@ -241,24 +243,24 @@ AES_FORM       14    AES Form Support
  *  @sa mt_appl_init()
  *
  *  Using an ap_gtype value of 4 and above is only supported as
- *  of AES version 4.1 
+ *  of AES version 4.1
  *
  *  Many of the ap_gtype return values identify features of TOS
  *  not supported by Atari but for the benefit of third-party
  *  vendors. You should contact the appropriate third-party for
  *  documentation on these functions.
- *  
+ *
  *  @note
  *  If mt_appl_getinfo() is not implemented (gl_ap_version < 0X0401 and the
  *  application "?AGI\0\0\0\0" (Winx) is not found), the trap is not performed
  *  (may crash on some system).
  */
 
-short 
+short
 mt_appl_getinfo (short type, short *out1, short *out2, short *out3, short *out4, short *global_aes)
 {
 	static int first = 1;
-	static int is_appl_getinfo_avaible = 0;	
+	static int is_appl_getinfo_avaible = 0;
 
 	AES_PARAMS(130,1,5,0,0);
 
@@ -292,7 +294,7 @@ mt_appl_getinfo (short type, short *out1, short *out2, short *out3, short *out4,
 #ifdef appl_getinfo
 #undef appl_getinfo
 #endif
-short 
+short
 appl_getinfo(short type, short *out1, short *out2, short *out3, short *out4)
 {
 	return(mt_appl_getinfo(type,out1, out2, out3, out4, aes_global));
