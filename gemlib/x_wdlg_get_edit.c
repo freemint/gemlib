@@ -9,7 +9,8 @@
  *  result is 0, then no edit object is active at the present time.
  *
  *  @param dialog Pointer to the dialog structure
- *  @param cursor Index of the character
+ *  @param cursor Index of the character \n
+ *         [option CHECK_NULLPTR] cursor may be NULL
  *  @param global_aes global AES array
  *
  *  @return Number of the current edit object (or 0, if none is active)
@@ -34,6 +35,9 @@ mt_wdlg_get_edit( DIALOG *dialog, short *cursor, short *global_aes )
 	
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (cursor)
+#endif
 	*cursor	= aes_intout[1];
 	
 	return aes_intout[0];
