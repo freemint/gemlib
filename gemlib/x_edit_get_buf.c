@@ -9,12 +9,12 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param buf this pointer will be filled with the address of buffer\p
+ *  @param buf this pointer will be filled with the address of buffer \n
  *         [option CHECK_NULLPTR] buf may be NULL
- *  @param buflen this pointer will be filled with the buffer length\p
+ *  @param buflen this pointer will be filled with the buffer length \n
  *         [option CHECK_NULLPTR] buflen may be NULL
  *  @param txtlen this pointer will be filled with the current
- *         text length without EOS\p
+ *         text length without EOS \n
  *         [option CHECK_NULLPTR] txtlen may be NULL
  *  @param global_aes global AES array
  *

@@ -9,7 +9,7 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param tabwidth will be filled by the tabulator width.\p
+ *  @param tabwidth will be filled by the tabulator width.\n
  *         [option CHECK_NULLPTR] tabwidth may be NULL
  *  @param autowrap will be filled by the autowrap information:
  *         - \p autowrap > 0: Pixel width for auto line wrap (generally == object width)

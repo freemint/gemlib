@@ -14,7 +14,7 @@
  *         mt_fnts_evnt(). The events are serviced by 
  *         the dialog if they are intended for the 
  *         associated window.
- *  @param errc Error code (-200 = text buffer full)\p
+ *  @param errc Error code (-200 = text buffer full) \n
  *         [option CHECK_NULLPTR] errc may be NULL
  *  @param global_aes global AES array
  *

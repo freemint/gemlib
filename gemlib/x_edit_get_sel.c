@@ -10,10 +10,10 @@
  *  @param tree RSC-tree of object
  *  @param obj Object number
  *  @param bsel will be filled with a pointer to the start of selected region,
- *         or NULL if no region is selected. \p
+ *         or NULL if no region is selected. \n
  *         [option CHECK_NULLPTR] bsel may be NULL
  *  @param esel will be filled with a pointer to the character after the end
- *         of the selected region \p
+ *         of the selected region \n
  *         [option CHECK_NULLPTR] esel may be NULL
  *  @param global_aes global AES array
  *

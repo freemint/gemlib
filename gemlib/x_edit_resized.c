@@ -9,9 +9,9 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param oldrh Old net height of object \p
+ *  @param oldrh Old net height of object \n
  *         [option CHECK_NULLPTR] oldrh may be NULL
- *  @param newrh New net height of object \p
+ *  @param newrh New net height of object \n
  *         [option CHECK_NULLPTR] newrh may be NULL
  *  @param global_aes global AES array
  *

@@ -9,11 +9,11 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param font_id will be filled with the Font-ID \p
+ *  @param font_id will be filled with the Font-ID \n
  *         [option CHECK_NULLPTR] font_id may be NULL
- *  @param font_h will be filled with the Height for vst_point() \p
+ *  @param font_h will be filled with the Height for vst_point() \n
  *         [option CHECK_NULLPTR] font_h may be NULL
- *  @param mono will be filled with the Flag for equidistant font \p
+ *  @param mono will be filled with the Flag for equidistant font \n
  *         [option CHECK_NULLPTR] mono may be NULL
  *  @param font_pix will be filled with:
  *         - 0=points, 

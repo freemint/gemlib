@@ -9,13 +9,13 @@
  *  @param type specifies the type of information to be returned
  *         in the shorts pointed to by \p out1, \p out2, \p out3
  *         and \p out4.
- *  @param out1 1st return value\p
+ *  @param out1 1st return value \n
  *         [option CHECK_NULLPTR] out1 may be NULL
- *  @param out2 2nd return value\p
+ *  @param out2 2nd return value \n
  *         [option CHECK_NULLPTR] out2 may be NULL
- *  @param out3 3rd return value\p
+ *  @param out3 3rd return value \n
  *         [option CHECK_NULLPTR] out3 may be NULL
- *  @param out4 4th return value\p
+ *  @param out4 4th return value \n
  *         [option CHECK_NULLPTR] out4 may be NULL
 \verbatim
     Name      Value               Returns

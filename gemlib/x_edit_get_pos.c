@@ -9,17 +9,17 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param xscroll  \p
+ *  @param xscroll  \n
  *         [option CHECK_NULLPTR] xscroll may be NULL
- *  @param yscroll  \p
+ *  @param yscroll  \n
  *         [option CHECK_NULLPTR] yscroll may be NULL
- *  @param cyscroll  \p
+ *  @param cyscroll  \n
  *         [option CHECK_NULLPTR] cyscroll may be NULL
- *  @param cursorpos  \p
+ *  @param cursorpos  \n
  *         [option CHECK_NULLPTR] cursorpos may be NULL
- *  @param cx  \p
+ *  @param cx  \n
  *         [option CHECK_NULLPTR] cx may be NULL
- *  @param cy  \p
+ *  @param cy  \n
  *         [option CHECK_NULLPTR] cy may be NULL
  *  @param global_aes global AES array
  *
