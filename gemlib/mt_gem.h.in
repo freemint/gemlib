@@ -281,7 +281,7 @@ typedef struct pEvntrec
  *  amount than with the row or column messages.
  *
  *  If the application manage itself wheel event on a particular window (see
- *  mt_wind_set()  with #WF_WHEEL parameter and #WHL_ARROWWHEEL mode), then on mouse
+ *  mt_wind_set()  with #WF_WHEEL parameter and #WHEEL_ARROWED mode), then on mouse
  *  wheel events, the window receives the following message:
  *
  * - msg[0] = #WM_ARROWED
@@ -1219,9 +1219,9 @@ typedef  struct
 #define WO2_NONE        0x0000  /**< see mt_wind_set() with #WF_OPTS mode */
 
 /* wind_set(WF_WHEEL) modes */
-#define WHL_REALWHEEL	0	/**< AES will send #WM_WHEEL messages */
-#define WHL_ARROWWHEEL	1   /**< AES will send #WM_ARROWED messages */
-#define WHL_SLDRWHEEL	2   /**< AES will convert mouse wheel events to slider events */
+#define WHEEL_MESAG		0	/**< AES will send #WM_WHEEL messages */
+#define WHEEL_ARROWED	1   /**< AES will send #WM_ARROWED messages */
+#define WHEEL_SLIDER	2   /**< AES will convert mouse wheel events to slider events */
 
 /* window elements */
 #define W_BOX			0	/**< widget index of ???, see #WF_COLOR */
