@@ -5,25 +5,37 @@
 #include "gem_aesP.h"
 #include "mt_gemx.h"
 
-/** 
+/** form xdialog space
  *
- *  @param fo_diflag 
+ *  @param fo_diflag specifies the action to take and the meaning of
+ *               other parameters, as specified in mt_form_dial()
+ *               documentation. This function performs some additionnal
+ *               actions (compared to mt_form_dial()) when called with
+ *               the following values (this is
+ *               related to the extra \a flydial parameter) :
+ *         - #FMD_START memory is reserved to save the background covered by the dialog
+ *         - #FMD_FINISH restore the screen background and free the memory 
+ *           previously reserved
  *  @param fo_dilittlx 
  *  @param fo_dilittly 
  *  @param fo_dilittlw 
- *  @param fo_dilittlh 
+ *  @param fo_dilittlh position and dimension of the little rectangle
  *  @param fo_dibigx 
  *  @param fo_dibigy 
  *  @param fo_dibigw 
- *  @param fo_dibigh 
- *  @param flydial 
+ *  @param fo_dibigh position and dimension of the big rectangle
+ *  @param flydial 0 if you don't want to use the flydial feature, or a pointer
+ *           to a (void*) variable. See below.
  *  @param global_aes global AES array
  *
- *  @return 
+ *  @return non-zero if succeeded.
  *
- *  @since 
+ *  @since The presence of the flydial support can be checked by calling mt_appl_getinfo()
+ *         with parameter #AES_FORM.
  *
- *
+ *  If \a flydial is not equal to 0, it is tested whether sufficiant memory is available
+ *  in order to save the background of the dialog box. A pointer on the saved data (screen
+ *  memory under the dialog) is then saved in \a flydial.
  *
  */
 

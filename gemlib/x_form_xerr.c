@@ -5,17 +5,25 @@
 #include "gem_aesP.h"
 #include "mt_gemx.h"
 
-/** 
+/** extended function that display a pre-defined error alert box to the user.
  *
- *  @param errcode 
- *  @param errfile 
+ *  @param errcode is the error code. This code may be either in MS-DOS format
+ *         (a positive interger, as expected by mt_form_error()), or directly
+ *         the GEMDOS/BIOS error code (negative value returned by a GEMDOS or
+ *         a BIOS function)
+ *  @param errfile path of the file that causes the error (this string will
+ *         appear in the alert box), or 0L (the parameter will be ignored),
+ *         or -1L (the alert box will display "program returned:" in place of
+ *         the filename).
  *  @param global_aes global AES array
  *
- *  @return 
+ *  @return the exit button clicked as in
+ *          mt_form_alert(). It is, however, insignifigant as all of the
+ *          error alerts have only one button.
  *
- *  @since 
+ *  @since MagiC 2.0
  *
- *
+ *  @sa mt_form_error()
  *
  */
 

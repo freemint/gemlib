@@ -7,15 +7,27 @@
 
 /** 
  *
- *  @param tree
+ *  @param tree is a pointer to a valid object tree 
  *  @param x
- *  @param y
+ *  @param y coordinates around which the tree will be centered, or 0
+ *         (the position of the tree is not changed).
  *  @param global_aes global AES array
  *
- *  @return 
+ *  @return the index of the object which has been clicked by the user
+ *          to close the popup, or -1.
  *
- *  @since 
+ *  @since the availability of this function can be checked by calling
+ *         mt_appl_getinfo() with the parameter #AES_MENU
  *
+ *  Selectable objects of this dialog don't need to have the #OF_SELECTABLE
+ *  flag set. If an object don't have to be selectable, then set the
+ *  flag #OF_DISABLED.
+ *
+ *  The object type of the root object (index 0) shall be either #G_BOX or
+ *  #G_IBOX.
+ *
+ *  @note  One shall ensure that the tree object fit entierely in the 
+ *         screen.
  */
 
 short 
