@@ -3,12 +3,16 @@
 #
 
 SHELL = /bin/sh
-SUBDIRS = gemlib \
-		cflib gemma
+ifndef BUILDLIB
+SUBDIRS = gemlib cflib gemma
+else
+SUBDIRS = $(BUILDLIB)
+endif
 
 srcdir = .
 top_srcdir = .
 subdir = 
+top_builddir = .
 
 default: all
 
@@ -17,6 +21,21 @@ include $(top_srcdir)/RULES
 include $(top_srcdir)/PHONY
 
 all-here: 
+
+dist-gemlib:
+	make dist BUILDLIB=gemlib VERSION="0.42.99"
+
+dist-cflib:
+	make dist BUILDLIB=cflib VERSION="0.20"
+
+dist-gemma:
+	make dist BUILDLIB=gemma VERSION="dist"
+
+dist: distdir
+	-chmod -R a+r $(distdir) 
+	GZIP=$(GZIP) $(TAR) chzf $(distdir).tar.gz $(distdir)
+	-rm -rf $(distdir)
+
 
 # default overwrites
 
