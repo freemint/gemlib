@@ -6,7 +6,8 @@
 # define _GEM_AES_P_
 
 # ifndef _GEMLIB_H_
-# include "gem.h"
+#  include "mt_gem.h"
+#  include "gem.h"
 # endif
 
 

@@ -6,6 +6,7 @@
 # define _GEM_VDI_P_
 
 # ifndef _GEMLIB_H_
+#  include "mt_gem.h"
 #  include "gem.h"
 # endif
 

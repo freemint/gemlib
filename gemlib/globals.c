@@ -3,6 +3,7 @@
  */
 
 
+#include "mt_gem.h"
 # include "gem.h"
 
 /* i don't know any way to stringify using sozobonx built-in preprocessor */
