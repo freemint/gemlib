@@ -10,7 +10,8 @@
  *  @param tree as for mt_objc_draw()
  *  @param start  as for mt_objc_draw()
  *  @param depth  as for mt_objc_draw()
- *  @param clip NULL => whole window
+ *  @param clip clipping area applied when drawing the \a tree. If \a clip is NULL, then
+ *         this function will take the work area of the window as clipping area.
  *  @param whandle window handle
  *  @param global_aes global AES array
  *

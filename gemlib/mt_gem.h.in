@@ -1317,7 +1317,7 @@ typedef  struct
 #define ACTBUTCOL 		4	/**< default color for activator objects, see mt_objc_sysvar() */
 #define BACKGRCOL 		5	/**< default color for background objects, see mt_objc_sysvar()  */
 #define AD3DVAL			6	/**< number of extra pixels to accomodate 3D effects, see mt_objc_sysvar() */
-#define MX_ENABLE3D		10  /**< TO BE COMPLETED (MagiC 3.0), see mt_objc_sysvar() */
+#define MX_ENABLE3D		10  /**< enable or disable the 3D look (MagiC 3), see mt_objc_sysvar() */
 #define MENUCOL			11  /**< TO BE COMPLETED (MagiC 6), see mt_objc_sysvar() */
 
 /** Mouse Form Definition Block, see mt_graf_mouse() */

@@ -7,12 +7,12 @@
 
 /** 
  *
- *  @param tree 
- *  @param obj 
- *  @param key 
- *  @param xpos 
- *  @param subfn
- *  @param r
+ *  @param tree see mt_objc_edit()
+ *  @param obj  see mt_objc_edit()
+ *  @param key  see mt_objc_edit()
+ *  @param xpos  see mt_objc_edit()
+ *  @param subfn see mt_objc_edit()
+ *  @param r is the clipping area used when drawing
  *  @param global_aes global AES array
  *
  *  @return 
