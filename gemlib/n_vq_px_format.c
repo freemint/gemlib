@@ -8,7 +8,8 @@
 /** 
  *
  *  @param handle Device handle
- *  @param px_format 
+ *  @param px_format  \n
+ *         [option CHECK_NULLPTR] px_format may be NULL
  *
  *  @return 
  *
@@ -29,6 +30,9 @@ vq_px_format (short handle, unsigned long *px_format)
 	
 	VDI_TRAP_ESC (vdi_params, handle, 204,3, 0,0);
 
+#if CHECK_NULLPTR
+	if (px_format)
+#endif
 	*px_format = *(unsigned long *)&vdi_intout[2];
 	
 	return vdi_intout_long(0);

@@ -10,7 +10,8 @@
  *  @param handle Device handle
  *  @param color_space 
  *  @param color 
- *  @param nearest_color 
+ *  @param nearest_color  \n
+ *         [option CHECK_NULLPTR] nearest_color may be NULL
  *
  *  @return 
  *
@@ -36,6 +37,9 @@ v_color2nearest (short handle, long color_space, COLOR_ENTRY * color,
 
 	VDI_TRAP_ESC (vdi_params, handle, 204,2, 0,6);
 
+#if CHECK_NULLPTR
+	if (nearest_color)
+#endif
 	*nearest_color = *(COLOR_ENTRY*)&vdi_intout[2];
 	
 	return vdi_intout_long(0);
