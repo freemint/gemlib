@@ -1,0 +1,22 @@
+#
+# Sub makefile for xgem lib
+#
+CC = gcc
+CFLAGS = -Wall -O2 -fomit-frame-pointer -I./include
+
+SRC = x_fnts.c x_form.c x_fslx.c x_nvdi.c x_objc.c x_pdlg.c
+OBJS = $(SRC:%.c=$(OUT_DIR)/%.o)
+ARFILES = $(SRC:%.c=%.o)
+
+libgemx.a : $(OBJS)
+	cd $(OUT_DIR);\
+	ar cru ../$@ $(ARFILES)
+	ranlib $@
+	
+libgemx16.a : $(OBJS)
+	cd $(OUT_DIR);\
+	ar cru ../$@ $(ARFILES)
+	ranlib $@
+
+$(OUT_DIR)/%.o: %.c
+	$(CC) $(CFLAGS) $(XFLAGS) -c $< -o $@
