@@ -28,11 +28,10 @@ short
 vq_margins (short handle, short *top_margin, short *bottom_margin,
             short *left_margin, short *right_margin, short *hdpi, short *vdpi)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[7]; 
+
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_dummy);
-#endif
 	
 	vdi_intout[0] = 0;
 

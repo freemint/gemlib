@@ -22,11 +22,10 @@
 long
 vq_weight_color (short handle, COLOR_ENTRY * hilite_color)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[6]; 
+
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_dummy);
-#endif
 	
 	VDI_TRAP_ESC (vdi_params, handle, 209,3, 0,0);
 
