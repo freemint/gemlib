@@ -1,21 +1,31 @@
+/*
+ *  $Id$
+ */
+
 #include "gemx.h"
 #include "gem_aesP.h"
 
+/** returns a pointer to the list of the LBOX_ITEMs
+ *
+ *  @param box Pointer to the list box structure
+ *  @param global_aes global AES array
+ *
+ *  @return Pointer to the chained list
+ *
+ *  @since mt_appl_getinfo(7) give informations on mt_lbox_xx() functions availability
+ *
+ */
 
-LBOX_ITEM *
-lbox_get_items (LIST_BOX *box)
+LBOX_ITEM  *
+mt_lbox_get_items( LIST_BOX *box, short *global_aes )
 {
-	aes_intin[0] = 6;
+	AES_PARAMS(174,1,0,1,0);
+
+	aes_intin[0]	= 6;
 	
-	aes_addrin[0] = (long) box;
-	
-	aes_control[0] = 174;
-	aes_control[1] = 1;
-	aes_control[2] = 0;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
-	
+	aes_addrin[0]	= (long)box;
+
+	AES_TRAP(aes_params);
+
 	return (LBOX_ITEM *) aes_addrout[0];
 }

@@ -1,21 +1,31 @@
+/*
+ *  $Id$
+ */
+
 #include "gemx.h"
 #include "gem_aesP.h"
 
+/** returns the number of visible items
+ *
+ *  @param box Pointer to the list box structure
+ *  @param global_aes global AES array
+ *
+ *  @return Number of visible items
+ *
+ *  @since mt_appl_getinfo(7) give informations on mt_lbox_xx() functions availability
+ *
+ */
 
-short
-lbox_get_visible (LIST_BOX *box)
+short	
+mt_lbox_get_visible( LIST_BOX *box, short *global_aes )
 {
-	aes_intin[0] = 2;
-	
-	aes_addrin[0] = (long) box;
-	
-	aes_control[0] = 174;
-	aes_control[1] = 1;
-	aes_control[2] = 1;
-	aes_control[3] = 1;
-	aes_control[4] = 0;
-	
-	aes (&aes_params);
-	
-	return aes_intout[0];
+	AES_PARAMS(174,1,1,1,0);
+
+	aes_intin[0]	= 2;
+
+	aes_addrin[0]	= (long)box;
+
+	AES_TRAP(aes_params);
+
+	return(aes_intout[0]);
 }
