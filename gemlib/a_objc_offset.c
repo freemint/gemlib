@@ -8,8 +8,10 @@
  *
  *  @param tree specifies the object tree 
  *  @param object is an object of \p tree.
- *  @param x will be filled with the true X screen position of \p object
- *  @param y will be filled with the true Y screen position of \p object
+ *  @param x will be filled with the true X screen position of \p object \n
+ *         [option CHECK_NULLPTR] x may be NULL
+ *  @param y will be filled with the true Y screen position of \p object \n
+ *         [option CHECK_NULLPTR] y may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.
@@ -41,7 +43,13 @@ mt_objc_offset(OBJECT *tree, short object, short *x, short *y, short *global_aes
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (x)
+#endif
 	*x = aes_intout[1];
+#if CHECK_NULLPTR
+	if (y)
+#endif
 	*y = aes_intout[2];
 	
 	return aes_intout[0];

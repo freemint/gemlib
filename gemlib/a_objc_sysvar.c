@@ -15,8 +15,10 @@
  *         read or modify.
  *  @param in1 specifies the 1st new value when modifying values, unused otherwise.
  *  @param in2 specifies the 2nd new value when modifying values, unused otherwise.
- *  @param out1 will be filled by the 1st value when reading value, unused otherwise.
- *  @param out2 will be filled by the 2st value when reading value, unused otherwise. \p
+ *  @param out1 will be filled by the 1st value when reading value, unused otherwise. \n
+ *         [option CHECK_NULLPTR] out1 may be NULL
+ *  @param out2 will be filled by the 2st value when reading value, unused otherwise. \n
+ *         [option CHECK_NULLPTR] out2 may be NULL \n
  *          Here is the meanings of the two input/output values referred to as
  *          \p val1 and \p val2 are as follows:
  *          - LK3DIND (1) :   If \p val1 is 1, the text of indicator objects
@@ -67,7 +69,13 @@ mt_objc_sysvar(short mode, short which, short in1, short in2,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (out1)
+#endif
 	*out1 = aes_intout[1];
+#if CHECK_NULLPTR
+	if (out2)
+#endif
 	*out2 = aes_intout[2];
 	
 	return aes_intout[0];
