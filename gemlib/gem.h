@@ -1422,7 +1422,7 @@ short vst_color     (VdiHdl , short color_idx);
 short vst_effects   (VdiHdl , short effects);
 void  vst_error     (VdiHdl , short mode, short *errorvar);
 short vst_font      (VdiHdl , short font);
-short vst_height    (VdiHdl , short height, short *charw, short *charh,
+void  vst_height    (VdiHdl , short height, short *charw, short *charh,
                                             short *cellw, short *cellh);
 short vst_point     (VdiHdl , short point, short *charw, short *charh,
                                            short *cellw, short *cellh);
@@ -1633,12 +1633,14 @@ typedef struct
  short       *ptsout;
 } VDIPB;
 
+#if 0
 extern short vdi_intin[];
 extern short vdi_intout[];
 extern short vdi_ptsin[];
 extern short vdi_ptsout[];
 extern short vdi_control[];
 extern VDIPB vdi_params;
+#endif
 
 void vdi (VDIPB *pb);
 
