@@ -8,7 +8,7 @@
 /** This function initialises the font selector
  *
  *  @param vdi_handle Handle of the workstation to be used
- *  @param no_fonts Number of available fonts or 0. If <no_fonts> is 0, 
+ *  @param no_fonts Number of available fonts or 0. If \p no_fonts is 0, 
  *         vst_load_fonts() is called with \p vdi_handle. Otherwise an assumption is 
  *         made that \p no_fonts is the number of all fonts available via \p vdi_handle, 
  *         i.e. the number of all system fonts (work_out[10] for v_opnvwk()/vq_extnd())
