@@ -90,11 +90,6 @@ _vdi_trap_00 (VDIPB * vdipb, long cntrl_0_1, short handle)
 	vdi_params.ptsout  = e;
 
 
-/* special feature for VDI bindings: VDIPB data are locally created in each binding,
- * in order to make this library thread safe. 
- */
-#define USE_LOCAL_VDIPB 1
-
 /* special feature for VDI bindings: pointer in parameters (for return values)
  * could be NULL (nice idea by Martin Elsasser against dummy variables) 
  */
