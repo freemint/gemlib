@@ -26,7 +26,9 @@ __BEGIN_DECLS
 #define appl_find(a) mt_appl_find(a,aes_global)
 #define appl_getinfo(a,b,c,d,e) mt_appl_getinfo(a,b,c,d,e,aes_global)
 #define appl_xgetinfo(a,b,c,d,e) mt_appl_getinfo(a,b,c,d,e,aes_global)
-#define appl_init() mt_appl_init(aes_global)
+/* dirty hack to have gl_apid and gl_ap_version initialised. Note: aes_global[2] is the value returned 
+ * by mt_appl_init... so, the define always returns gl_apid */
+#define appl_init() ( ((gl_apid=mt_appl_init(aes_global)) && (gl_ap_version=aes_global[0])) ? gl_apid : aes_global[2])
 #define appl_read(a,b,c) mt_appl_read(a,b,c,aes_global)
 #define appl_search(a,b,c,d) mt_appl_search(a,b,c,d,aes_global)
 #define appl_tplay(a,b,c) mt_appl_tplay(a,b,c,aes_global)
