@@ -6,3 +6,5 @@ lib*.a
 *.prg
 .lib*
 mt_gem.h
+Doxyfile
+gemlib.spec
