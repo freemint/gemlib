@@ -49,5 +49,9 @@ vqt_xfntinfo (short handle, short flags, short id, short index, XFNT_INFO *info)
 	
 	VDI_TRAP (vdi_params, handle, 229, 0,5);
 	
+	info->format	= vdi_intout[0];
+	info->id		= vdi_intout[1];
+	info->index		= vdi_intout[2];
+	
 	return vdi_intout[1];
 }
