@@ -1,9 +1,8 @@
-
 #include "gem.h"
 
 
-int
-graf_slidebox (void *Tree, int Parent, int Object, int Direction)
+short
+graf_slidebox (OBJECT *Tree, short Parent, short Object, short Direction)
 {
 	aes_addrin[0] = (long) Tree;
 	aes_intin[0] = Parent;

@@ -1,9 +1,8 @@
-
 #include "gem.h"
 
 
-int
-objc_add (void *Tree, int Parent, int Child)
+short
+objc_add (OBJECT *Tree, short Parent, short Child)
 {
 	aes_intin[0] = Parent;
 	aes_intin[1] = Child;

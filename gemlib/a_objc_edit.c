@@ -1,9 +1,8 @@
-
 #include "gem.h"
 
 
-int
-objc_edit (void *Tree, int Object, int Char, int *Index, int Kind)
+short
+objc_edit (OBJECT *Tree, short Object, short Char, short *Index, short Kind)
 {
 	aes_intin[0] = Object;
 	aes_intin[1] = Char;

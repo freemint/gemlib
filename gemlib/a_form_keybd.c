@@ -1,10 +1,9 @@
-
 #include "gem.h"
 
 
-int
-form_keybd (void *Ktree, int Kobject, int Kobnext, int Kchar, int *Knxtobject,
-	    int *Knxtchar)
+short
+form_keybd (OBJECT *Ktree, short Kobject, short Kobnext, short Kchar,
+            short *Knxtobject, short *Knxtchar)
 {
 	aes_addrin[0] = (long) Ktree;
 	aes_intin[0] = Kobject;

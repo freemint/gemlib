@@ -1,9 +1,8 @@
-
 #include "gem.h"
 
 
-int
-rsrc_obfix (void *Tree, int Index)
+short
+rsrc_obfix (OBJECT *Tree, short Index)
 {
 	aes_intin[0] = Index;
 	aes_addrin[0] = (long) Tree;

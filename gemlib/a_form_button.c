@@ -1,9 +1,8 @@
-
 #include "gem.h"
 
 
-int
-form_button (void *Btree, int Bobject, int Bclicks, int *Bnxtobj)
+short
+form_button (OBJECT *Btree, short Bobject, short Bclicks, short *Bnxtobj)
 {
 	aes_addrin[0] = (long) Btree;
 	aes_intin[0] = Bobject;
