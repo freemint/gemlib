@@ -23,12 +23,11 @@ void
 v_ellpie (short handle, short x, short y,
           short xrad, short yrad, short begang, short endang)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[2];   
 	short vdi_ptsin[4];   
+
 	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy );
-#endif
 	
 	vdi_intin[0] = begang;
 	vdi_intin[1] = endang;

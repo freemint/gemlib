@@ -22,13 +22,10 @@
 short
 v_copies (short handle, short count)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[1]; 
+
 	VDI_PARAMS(vdi_control, &count, 0L, vdi_intout, vdi_dummy);
-#else
-	vdi_intin[0] = count;
-#endif
 	
 	VDI_TRAP_ESC (vdi_params, handle, 5,28, 0,1);
 	

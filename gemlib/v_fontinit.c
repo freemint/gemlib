@@ -20,12 +20,9 @@
 void
 v_fontinit (short handle, const void * font_header)
 {
-#if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
+
 	VDI_PARAMS(vdi_control, (const short*)&font_header, 0L, vdi_dummy, vdi_dummy );
-#else
-	*(void**)vdi_intin = font_header;
-#endif
 		
 	VDI_TRAP_ESC (vdi_params, handle, 5,102, 0,2);
 }

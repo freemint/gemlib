@@ -21,12 +21,10 @@
 short
 v_flushcache (short handle)
 {
-#if USE_LOCAL_VDIPB
-	/* todo (doc wanted) */
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intout[VDI_INTOUTMAX]; 
+	short vdi_intout[VDI_INTOUTMAX]; /* todo (doc wanted) */
+
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_dummy );
-#endif
 	
 	VDI_TRAP_00 (vdi_params, handle, 251);
 	
