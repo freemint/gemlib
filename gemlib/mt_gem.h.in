@@ -77,31 +77,32 @@ __BEGIN_DECLS
 #define APCI_HASDESK		0x04  /**< the application has a own desk -- subopcode for #APC_INFO */
 
 /* appl_getinfo modes */
-#define AES_LARGEFONT		0	/**< TODO */
-#define AES_SMALLFONT		1	/**< TODO */
-#define AES_SYSTEM			2	/**< TODO */
-#define AES_LANGUAGE 		3	/**< TODO */
-#define AES_PROCESS 		4	/**< TODO */
-#define AES_PCGEM			5	/**< TODO */
-#define AES_INQUIRE 		6	/**< TODO */
-#define AES_MOUSE			8	/**< TODO */
-#define AES_MENU			9	/**< TODO */
-#define AES_SHELL			10	/**< TODO */
-#define AES_WINDOW			11	/**< TODO */
-#define AES_MESSAGE			12	/**< TODO */
-#define AES_OBJECT			13	/**< TODO */
-#define AES_FORM			14	/**< TODO */
+#define AES_LARGEFONT		0	/**< see  mt_appl_getinfo() */
+#define AES_SMALLFONT		1	/**< see  mt_appl_getinfo() */
+#define AES_SYSTEM			2	/**< see  mt_appl_getinfo() */
+#define AES_LANGUAGE 		3	/**< see  mt_appl_getinfo() */
+#define AES_PROCESS 		4	/**< see  mt_appl_getinfo() */
+#define AES_PCGEM			5	/**< see  mt_appl_getinfo() */
+#define AES_INQUIRE 		6	/**< see  mt_appl_getinfo() */
+#define AES_MOUSE			8	/**< see  mt_appl_getinfo() */
+#define AES_MENU			9	/**< see  mt_appl_getinfo() */
+#define AES_SHELL			10	/**< see  mt_appl_getinfo() */
+#define AES_WINDOW			11	/**< see  mt_appl_getinfo() */
+#define AES_MESSAGE			12	/**< see  mt_appl_getinfo() */
+#define AES_OBJECT			13	/**< see  mt_appl_getinfo() */
+#define AES_FORM			14	/**< see  mt_appl_getinfo() */
 
-/* appl_getinfo return values */
-#define SYSTEM_FONT			0	/**< TODO */
-#define OUTLINE_FONT 		1	/**< TODO */
+/* appl_getinfo return values (AES_LARGEFONT, AES_SMALLFONT) */
+#define SYSTEM_FONT			0	/**< see  mt_appl_getinfo() */
+#define OUTLINE_FONT 		1	/**< see  mt_appl_getinfo() */
 
-#define AESLANG_ENGLISH		0	/**< TODO */
-#define AESLANG_GERMAN		1	/**< TODO */
-#define AESLANG_FRENCH		2	/**< TODO */
-#define AESLANG_SPANISH 	4	/**< TODO */
-#define AESLANG_ITALIAN 	5	/**< TODO */
-#define AESLANG_SWEDISH 	6	/**< TODO */
+/* appl_getinfo return values (AES_LANGUAGE) */
+#define AESLANG_ENGLISH		0	/**< see  mt_appl_getinfo() */
+#define AESLANG_GERMAN		1	/**< see  mt_appl_getinfo() */
+#define AESLANG_FRENCH		2	/**< see  mt_appl_getinfo() */
+#define AESLANG_SPANISH 	4	/**< see  mt_appl_getinfo() */
+#define AESLANG_ITALIAN 	5	/**< see  mt_appl_getinfo() */
+#define AESLANG_SWEDISH 	6	/**< see  mt_appl_getinfo() */
 
 /* appl_read modes */
 #define APR_NOWAIT			-1	/**< Do not wait for message -- see mt_appl_read() */
@@ -145,7 +146,23 @@ typedef struct pEvntrec
 #define EDC_SET			1	/**< TODO */
 
 /* event message values */
-#define MN_SELECTED	 	10	/**< TODO */
+
+/** message received when a menu entry has been selected
+ *
+ * - msg[0] = #MN_SELECTED
+ * - msg[1] = AES application ID
+ * - msg[2] = 0
+ * - msg[3] = title menu index
+ * - msg[4] = item menu index
+ * - msg[5] = address of the menu root object (most significant bits)
+ * - msg[6] = address of the menu root object (less significant bits)
+ * - msg[7] = index of object parent's selected item
+ *
+ *  Values of word 5, 6 and 7 are an extension of AES 3.3. This feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *
+ */
+#define MN_SELECTED	 	10
 #define WM_REDRAW 	 	20	/**< TODO */
 #define WM_TOPPED 	 	21	/**< TODO */
 #define WM_CLOSED 	 	22	/**< TODO */
