@@ -18,8 +18,10 @@
  *  @param pmode pair kerning on (1) or off (0)
  *         - 0: no pair kerning
  *         - 1: do pair kerning
- *  @param tracks track kerning mode
- *  @param pairs number of kerning pairs
+ *  @param tracks track kerning mode \n
+ *         [option CHECK_NULLPTR] tracks may be NULL
+ *  @param pairs number of kerning pairs \n
+ *         [option CHECK_NULLPTR] pairs may be NULL
  *
  *  @since NVDI 3.00
  *
@@ -44,6 +46,12 @@ vst_kern (short handle, short tmode, short pmode, short *tracks, short *pairs)
 	
 	VDI_TRAP (vdi_params, handle, 237, 0,2);
 	
+#if CHECK_NULLPTR
+	if (tracks)
+#endif
 	*tracks = vdi_intout[0];
+#if CHECK_NULLPTR
+	if (pairs)
+#endif
 	*pairs  = vdi_intout[1];
 }

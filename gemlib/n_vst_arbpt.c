@@ -9,10 +9,14 @@
  *
  *  @param handle Device handle
  *  @param point 
- *  @param wchar 
- *  @param hchar 
- *  @param wcell 
- *  @param hcell 
+ *  @param wchar  \n
+ *         [option CHECK_NULLPTR] wchar may be NULL
+ *  @param hchar  \n
+ *         [option CHECK_NULLPTR] hchar may be NULL
+ *  @param wcell  \n
+ *         [option CHECK_NULLPTR] wcell may be NULL
+ *  @param hcell  \n
+ *         [option CHECK_NULLPTR] hcell may be NULL
  *
  *  @return 
  *
@@ -37,9 +41,21 @@ vst_arbpt (short handle, short point,
 	
 	VDI_TRAP (vdi_params, handle, 246, 0,1);
 
+#if CHECK_NULLPTR
+	if (wchar)
+#endif
 	*wchar = vdi_ptsout[0];
+#if CHECK_NULLPTR
+	if (hchar)
+#endif
 	*hchar = vdi_ptsout[1];
+#if CHECK_NULLPTR
+	if (wcell)
+#endif
 	*wcell = vdi_ptsout[2];
+#if CHECK_NULLPTR
+	if (hcell)
+#endif
 	*hcell = vdi_ptsout[3];
 	
 	return vdi_intout[0];

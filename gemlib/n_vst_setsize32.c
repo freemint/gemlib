@@ -11,10 +11,14 @@
  *
  *  @param handle Device handle
  *  @param point relative width in 1/65536 points
- *  @param wchar selected character width
- *  @param hchar selected character height
- *  @param wcell selected character cell width
- *  @param hcell selected character cell height
+ *  @param wchar selected character width \n
+ *         [option CHECK_NULLPTR] wchar may be NULL
+ *  @param hchar selected character height \n
+ *         [option CHECK_NULLPTR] hchar may be NULL
+ *  @param wcell selected character cell width \n
+ *         [option CHECK_NULLPTR] wcell may be NULL
+ *  @param hcell selected character cell height \n
+ *         [option CHECK_NULLPTR] hcell may be NULL
  *
  *  @return selected width in 1/65536 points
  *
@@ -37,9 +41,21 @@ vst_setsize32 (short handle, long point, short *wchar, short *hchar,
 
 	VDI_TRAP (vdi_params, handle, 252, 0,2);
 
+#if CHECK_NULLPTR
+	if (wchar)
+#endif
 	*wchar = vdi_ptsout[0];
+#if CHECK_NULLPTR
+	if (hchar)
+#endif
 	*hchar = vdi_ptsout[1];
+#if CHECK_NULLPTR
+	if (wcell)
+#endif
 	*wcell = vdi_ptsout[2];
+#if CHECK_NULLPTR
+	if (hcell)
+#endif
 	*hcell = vdi_ptsout[3];
 	
 	return vdi_intout_long(0);
