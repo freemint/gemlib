@@ -1,5 +1,8 @@
+/*
+ *  graphic table function
+ */
 
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
@@ -7,14 +10,7 @@ vt_origin (short handle, short xorigin, short yorigin)
 {
 	vdi_intin[0] = xorigin;
 	vdi_intin[1] = yorigin;
-	vdi_control[0] = 5;
-	vdi_control[1] = 0;
-	vdi_control[3] = 2;
-	vdi_control[5] = 83;
-	vdi_control[6] = handle;
+	
 	vdi (&vdi_params);
+	VDI_TRAP_ESC (vdi_params, handle, 5,83, 0,2);
 }
-
-/*
- * * graphic table function
- */

@@ -1,19 +1,14 @@
+/*
+ *   special graphic funkcion
+ */
 
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 short
 vq_tabstatus (short handle)
 {
-	vdi_control[0] = 5;
-	vdi_control[1] = 0;
-	vdi_control[3] = 0;
-	vdi_control[5] = 16;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	VDI_TRAP_ESC (vdi_params, handle, 5,16, 0,0);
+	
 	return vdi_intout[0];
 }
-
-/*
- * * special graphic funkcion
- */

@@ -1,9 +1,9 @@
-
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
-v_pieslice (short handle, short x, short y, short radius, short begang, short endang)
+v_pieslice (short handle,
+            short x, short y, short radius, short begang, short endang)
 {
 	vdi_intin[0] = begang;
 	vdi_intin[1] = endang;
@@ -16,10 +16,5 @@ v_pieslice (short handle, short x, short y, short radius, short begang, short en
 	vdi_ptsin[6] = radius;
 	vdi_ptsin[7] = 0;
 
-	vdi_control[0] = 11;
-	vdi_control[1] = 4;
-	vdi_control[3] = 2;
-	vdi_control[5] = 3;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	VDI_TRAP_ESC (vdi_params, handle, 11,3, 4,2);
 }

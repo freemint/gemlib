@@ -1,15 +1,10 @@
-
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
 vq_key_s (short handle, short *state)
 {
-	vdi_control[0] = 128;
-	vdi_control[1] = 0;
-	vdi_control[3] = 0;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	VDI_TRAP (vdi_params, handle, 128, 0,0);
+	
 	*state = vdi_intout[0];
 }

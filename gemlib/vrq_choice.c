@@ -1,16 +1,12 @@
-
-#include "gem.h"
+#include "gem_vdiP.h"
 
 
 void
 vrq_choice (short handle, short cin, short *cout)
 {
 	vdi_intin[0] = cin;
-	vdi_control[0] = 30;
-	vdi_control[1] = 0;
-	vdi_control[3] = 1;
-	vdi_control[5] = 0;
-	vdi_control[6] = handle;
-	vdi (&vdi_params);
+	
+	VDI_TRAP (vdi_params, handle, 30, 0,1);
+	
 	*cout = vdi_intout[0];
 }
