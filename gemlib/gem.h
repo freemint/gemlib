@@ -1076,27 +1076,27 @@ typedef struct
 /*
  * attribute functions 
  */
-void	vs_color		(int handle, int index, int rgb[]);
+void	vs_color		(int handle, int color_idx, int rgb[]);
 int 	vswr_mode		(int handle, int mode);
 
-int 	vsf_color 		(int handle, int index);
+int 	vsf_color 		(int handle, int color_idx);
 int 	vsf_interior 		(int handle, int style);
 int 	vsf_perimeter 		(int handle, int vis);
 int 	vsf_style 		(int handle, int style);
 void	vsf_udpat 		(int handle, int pat[], int planes);
 
-int 	vsl_color 		(int handle, int index);
+int 	vsl_color 		(int handle, int color_idx);
 void	vsl_ends 		(int handle, int begstyle, int endstyle);
 int 	vsl_type 		(int handle, int style);
 void	vsl_udsty 		(int handle, int pat);
 int 	vsl_width 		(int handle, int width);
 
-int 	vsm_color 		(int handle, int index);
+int 	vsm_color 		(int handle, int color_idx);
 int 	vsm_height 		(int handle, int height);
 int 	vsm_type 		(int handle, int symbol);
 
 void	vst_alignment 		(int handle, int hin, int vin, int *hout, int *vout);
-int 	vst_color	 	(int handle, int index);
+int 	vst_color	 	(int handle, int color_idx);
 int 	vst_effects		(int handle, int effects);
 void	vst_error		(int handle, int mode, short *errorvar);
 int 	vst_font 		(int handle, int font);
@@ -1157,7 +1157,7 @@ void	vm_filename		(int handle, const char *filename);
 void	vm_pagesize		(int handle, int pgwidth, int pgheight);
 
 void	vsc_expose		(int handle, int state);
-void	vsp_film		(int handle, int index, int lightness);
+void	vsp_film		(int handle, int color_idx, int lightness);
 
 void	v_escape2000		(int handle, int times);
 
@@ -1183,7 +1183,7 @@ void	vs_curaddress		(int handle, int row, int col);
  * inquiry functions
  */
 void	vq_cellarray		(int handle, int pxyarray[], int row_len, int nrows, int *el_used, int *rows_used, int *status, int color[]);
-int	vq_color		(int handle, int index, int flag, int rgb[]);
+int	vq_color		(int handle, int color_idx, int flag, int rgb[]);
 void	vq_extnd		(int handle, int flag, int work_out[]);
 void	vqf_attributes		(int handle, int atrib[]);
 void	vqin_mode		(int handle, int dev, int *mode);
@@ -1231,7 +1231,7 @@ void	v_arc			(int handle, int x, int y, int radius, int begang, int endang);
 void	v_bar			(int handle, int pxyarray[]);
 void	v_cellarray		(int handle, int pxyarray[], int row_length, int elements, int nrows, int write_mode, int colarray[]);
 void	v_circle		(int handle, int x, int y, int radius);
-void	v_contourfill		(int handle, int x, int y, int index);
+void	v_contourfill		(int handle, int x, int y, int color_idx);
 void	v_ellarc		(int handle, int x, int y, int xrad, int yrad, int begang, int endang);
 void	v_ellipse		(int handle, int x, int y, int xrad, int yrad);
 void	v_ellpie		(int handle, int x, int y, int xrad, int yrad, int begang, int endang);
@@ -1248,7 +1248,7 @@ void	vr_recfl		(int handle, int pxyarray[]);
 /*
  * raster functions
  */
-void	v_get_pixel		(int handle, int x, int y, int *pel, int *index);
+void	v_get_pixel		(int handle, int x, int y, int *pel, int *color_idx);
 void	vr_trnfm		(int handle, MFDB *src, MFDB *dst);
 void	vro_cpyfm		(int handle, int mode, int pxyarray[], MFDB *src, MFDB *dst);
 void	vrt_cpyfm		(int handle, int mode, int pxyarray[], MFDB *src, MFDB *dst, int color[]);
