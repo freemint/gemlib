@@ -12,7 +12,7 @@
  *
  *  @return 0 if the clipboard path had not been
  *          set or non-zero if \a Scrappath was properly updated. \n
- *          since MagiC-PC 2.0, this function returns -1 if the clipboard
+ *          since PC-GEM 2.0, this function returns -1 if the clipboard
  *          path had not been set, or a value >= 0 which is a bitmap value
  *          with one bit per type of file found in the clipboard, defined as
  *          follow:

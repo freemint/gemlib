@@ -13,9 +13,9 @@
  *  @return The return value is not at present well-known.
  *
  *  @since The presence of this function can be determined by mt_appl_getinfo() with mode
- *        #AES_PCGEM. Under MagiC-PC, this function is available since release 2.0
+ *        #AES_PCGEM. Under PC-GEM, this function is available since release 2.0
  *
- *  @sa 
+ *  @sa mt_shel_wdef()
  *
  *  The function makes it possible to inquire the program which is started
  *  after completion of the current (f.e. the Desktop).
