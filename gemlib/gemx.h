@@ -713,8 +713,8 @@ typedef struct
 
 void	v_ftext		(short handle, short x, short y, const char *str) ;
 void	v_ftext16	(short handle, short x, short y, const short *wstr) ;
-void	v_ftext_offset	(short handle, short x, short y, const char *str, short *offset);
-void	v_ftext_offset16(short handle, short x, short y, const short *wstr, short *offset);
+void	v_ftext_offset	(short handle, short x, short y, const char *str, const short *offset);
+void	v_ftext_offset16(short handle, short x, short y, const short *wstr, const short *offset);
 void	v_getbitmap_info(short handle, short ch, long *advancex, long *advancey, long *xoffset, long *yoffset, short *width, short *height, short **bitmap);
 void	v_getoutline	(short handle, short ch, short *xyarray, char *bezarray, short maxverts, short *numverts);
 
@@ -733,22 +733,23 @@ void	vqt_real_extent	(short handle, short x, short y, char *string, short extent
 void	vqt_trackkern	(short handle, long *x, long *y);
 short	vqt_xfntinfo	(short handle, short flags, short id, short __index, XFNT_INFO *info);
 
-short 	vst_arbpt 	(short handle, short point, short *wchar, short *hchar, short *wcell, short *hcell);
-long 	vst_arbpt32 	(short handle, long point, short *wchar, short *hchar, short *wcell, short *hcell);
-short 	vst_charmap 	(short handle, short mode);
-void 	vst_kern	(short handle, short tmode, short pmode, short *tracks, short *pairs);
-short 	vst_name 	(short handle, short font_format, char *font_name, char *ret_name);
-short 	vst_setsize 	(short handle, short point, short *wchar, short *hchar, short *wcell, short *hcell);
-long 	vst_setsize32 	(short handle, long point, short *wchar, short *hchar, short *wcell, short *hcell);
-short 	vst_skew 	(short handle, short skew);
-void 	vst_track_offset(short handle, long offset, short pairmode, short *tracks, short *pairs);
-void 	vst_width	(short handle, short width, short *char_width, short *char_height, short *cell_width, short *cell_height);
+short vst_arbpt 	(short handle, short point, short *wchar, short *hchar, short *wcell, short *hcell);
+long  vst_arbpt32 	(short handle, long point, short *wchar, short *hchar, short *wcell, short *hcell);
+void  vst_charmap 	(short handle, short mode);
+void  vst_kern	(short handle, short tmode, short pmode, short *tracks, short *pairs);
+short vst_name 	(short handle, short font_format, char *font_name, char *ret_name);
+short vst_setsize 	(short handle, short point, short *wchar, short *hchar, short *wcell, short *hcell);
+long  vst_setsize32 	(short handle, long point, short *wchar, short *hchar, short *wcell, short *hcell);
+short vst_skew 	(short handle, short skew);
+void  vst_track_offset(short handle, long offset, short pairmode, short *tracks, short *pairs);
+void  vst_width	(short handle, short width, short *char_width, short *char_height, short *cell_width, short *cell_height);
 
 
 /*
  * The following functions requires NVDI version 4.x or higher
  */
-short	vqt_char_index		(short handle, short scr_index, short scr_mode, short dst_mode);
+short	vqt_char_index (short handle, short scr_index, short scr_mode, short dst_mode);
+short vst_map_mode   (short handle, short mode);
 
 
 /*
