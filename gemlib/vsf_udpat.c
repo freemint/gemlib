@@ -46,7 +46,7 @@ vsf_udpat (short handle, short pat[], short planes)
 	vdi_params.intin = pat;
 #endif
 		
-	VDI_TRAP (vdi_params, handle, 112, planes *16,0);
+	VDI_TRAP (vdi_params, handle, 112, 0, planes * 16);
 
 #if !(USE_LOCAL_VDIPB)
 	vdi_params.intin = vdi_intin;
