@@ -74,18 +74,16 @@ mt_appl_init(short *global_aes)
 	bzero (&aes_intout[0], AES_INTOUTMAX * sizeof (short));
 	bzero (&aes_addrin[0], AES_ADDRINMAX * sizeof (short));
 	bzero (&aes_addrout[0], AES_ADDROUTMAX * sizeof (short));
-/*	bzero (&aes_global[0], AES_GLOBMAX * sizeof (short));*/
 #else
 	for(ff=0,pts=&aes_intin[0];ff<AES_INTINMAX;ff++) *(pts++)=0;
 	for(ff=0,pts=&aes_intout[0];ff<AES_INTOUTMAX;ff++) *(pts++)=0;
 	for(ff=0,ptl=&aes_addrin[0];ff<AES_ADDRINMAX;ff++) *(ptl++)=0L;
 	for(ff=0,ptl=&aes_addrout[0];ff<AES_ADDROUTMAX;ff++) *(ptl++)=0L;
-	for(ff=0,pts=&global_aes[0];ff<AES_GLOBMAX;ff++) *(pts++)=0;
 #endif
 
 	AES_TRAP(aes_params);
 
-	gl_ap_version = aes_global[0];
+	gl_ap_version = global_aes[0];
 	gl_apid 	  = aes_intout[0];
 
 	return aes_intout[0];
