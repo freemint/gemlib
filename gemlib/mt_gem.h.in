@@ -1012,6 +1012,7 @@ short mt_form_keybd  (OBJECT *, short Kobject, short Kobnext, short Kchar,
  */
 short 	mt_fsel_exinput	(char *Path, char *File, short *ExitButton, const char *title, short *global);
 short 	mt_fsel_input	(char *Path, char *File, short *ExitButton, short *global);
+short 	mt_fsel_boxinput(char *Path, char *File, short *ExitButton, const char *title, void *callback, short *global);
 /**@}*/
 
 /** @addtogroup a_graf
@@ -1020,6 +1021,7 @@ short 	mt_fsel_input	(char *Path, char *File, short *ExitButton, short *global);
 short	mt_graf_dragbox	(short Sw, short Sh, short Sx, short Sy, short Bx, short By, short Bw, short Bh, short *Fw, short *Fh, short *global_aes);
 short	mt_graf_growbox	(short Sx, short Sy, short Sw, short Sh, short Fx, short Fy, short Fw, short Fh, short *global_aes);
 short	mt_graf_handle	(short *Wchar, short *Hchar, short *Wbox, short *Hbox, short *global_aes);
+short	mt_graf_xhandle	(short *Wchar, short *Hchar, short *Wbox, short *Hbox, short * device, short *global_aes);
 short	mt_graf_mbox	(short Sw, short Sh, short Sx, short Sy, short Dx, short Dy, short *global_aes);
 short	mt_graf_mkstate	(short *Mx, short *My, short *ButtonState, short *KeyState, short *global_aes);
 short	mt_graf_mouse	(short Form, const MFORM *FormAddress, short *global_aes);
@@ -1027,6 +1029,7 @@ short	mt_graf_rubberbox	(short Ix, short Iy, short Iw, short Ih, short *Fw, shor
 short	mt_graf_shrinkbox	(short Fx, short Fy, short Fw, short Fh, short Sx, short Sy, short Sw, short Sh, short *global_aes);
 short	mt_graf_slidebox	(OBJECT *, short Parent, short Object, short Direction, short *global_aes);
 short	mt_graf_watchbox	(OBJECT *, short Object, short InState, short OutState, short *global_aes);
+short	mt_graf_wwatchbox	(OBJECT *, short Object, short InState, short OutState, short whandle, short *global_aes);
 /**@}*/
 
 /** @addtogroup a_menu
@@ -1058,6 +1061,7 @@ short	mt_objc_draw	(OBJECT *, short Start, short Depth,
 						 short Cx, short Cy, short Cw, short Ch, short *global_aes);
 short	mt_objc_edit	(OBJECT *, short Object, short Char, short *Index, short Kind, short *global_aes); 
 short	mt_objc_find	(OBJECT *, short Start, short Depth, short Mx, short My, short *global_aes);
+short	mt_objc_xfind	(OBJECT *, short Start, short Depth, short Mx, short My, short *global_aes);
 short	mt_objc_offset	(OBJECT *, short Object, short *X, short *Y, short *global_aes);
 short	mt_objc_order	(OBJECT *, short Object, short NewPos, short *global_aes);
 short	mt_objc_sysvar	(short mode, short which, short in1, short in2, short *out1, short *out2, short *global_aes);
@@ -1103,6 +1107,7 @@ short	mt_wind_calc 	(short Type, short Parts, short InX, short InY, short InW, s
 short	mt_wind_close 	(short WindowHandle, short *global_aes);
 short	mt_wind_create 	(short Parts, short Wx, short Wy, short Ww, short Wh, short *global_aes); 
 short	mt_wind_delete 	(short WindowHandle, short *global_aes);
+short	mt_wind_draw 	(short WindowHandle, short startob, short *global_aes);
 short	mt_wind_find 	(short X, short Y, short *global_aes);
 short	mt_wind_get 	(short WindowHandle, short What, short *W1, short *W2, short *W3, short *W4, short *global_aes);
 short	mt_wind_new 	(short *global_aes);
