@@ -9,7 +9,8 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param cursorpos will be filled with the Cursor position in text
+ *  @param cursorpos will be filled with the Cursor position in text \p
+ *         [option CHECK_NULLPTR] cursorpos may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 (error) or 1 (OK)
@@ -34,6 +35,9 @@ mt_edit_get_cursor( OBJECT *tree, short obj, char **cursorpos, short *global_aes
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (cursorpos)
+#endif
 	*cursorpos = (char *)aes_addrout[0];
 	
 	return(aes_intout[0]);

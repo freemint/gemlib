@@ -9,12 +9,17 @@
  *
  *  @param tree RSC-tree of object
  *  @param obj Object number
- *  @param font_id will be filled with the Font-ID
- *  @param font_h will be filled with the Height for vst_point()
- *  @param mono will be filled with the Flag for equidistant font
+ *  @param font_id will be filled with the Font-ID \p
+ *         [option CHECK_NULLPTR] font_id may be NULL
+ *  @param font_h will be filled with the Height for vst_point() \p
+ *         [option CHECK_NULLPTR] font_h may be NULL
+ *  @param mono will be filled with the Flag for equidistant font \p
+ *         [option CHECK_NULLPTR] mono may be NULL
  *  @param font_pix will be filled with:
  *         - 0=points, 
- *         - 1=pixels (from 3.5.98 on)
+ *         - 1=pixels (from 3.5.98 on) 
+ *         .
+ *         [option CHECK_NULLPTR] font_pix may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 for error, else 1
@@ -44,9 +49,21 @@ mt_edit_get_font( OBJECT *tree, short obj, short *font_id, short *font_h,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (font_id)
+#endif
 	*font_id  = aes_intout[1];
+#if CHECK_NULLPTR
+	if (font_h)
+#endif
 	*font_h   = aes_intout[2];
+#if CHECK_NULLPTR
+	if (font_pix)
+#endif
 	*font_pix = aes_intout[4];
+#if CHECK_NULLPTR
+	if (mono)
+#endif
 	*mono     = aes_intout[3];
 	
 	return(aes_intout[0]);
