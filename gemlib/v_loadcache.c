@@ -37,7 +37,7 @@ v_loadcache (short handle, const char *filename, short mode)
 	
 	vdi_intin[0] = mode;
 
-	VDI_TRAP (vdi_params, handle, 250, n,0);
+	VDI_TRAP (vdi_params, handle, 250, 0, n);
 	
 	return vdi_intout[0];
 }
