@@ -152,6 +152,15 @@
  *  says that mt_lbox_xx() functions are available.
  */
 
+/** @defgroup x_pdlg MagiC/WDIALOG extension: Printer Dialog Library
+ *
+ *  @brief printer dialog functions
+ *
+ *  This Printer Dialog library availability can be found calling
+ *  mt_appl_getinfo(7). Bit 4 of \p ap_gout1, if equal to 1,
+ *  says that mt_pdlg_xx() functions are available.
+ */
+
 /**@}*/
 
 /** @defgroup VDI VDI  Function Reference
