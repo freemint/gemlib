@@ -10,8 +10,10 @@
  *  @param handle Device handle
  *  @param x 
  *  @param y 
- *  @param pel pixel value
- *  @param index color index
+ *  @param pel pixel value \n
+ *         [option CHECK_NULLPTR] pel may be NULL
+ *  @param index color index \n
+ *         [option CHECK_NULLPTR] index may be NULL
  *
  *  @since all VDI versions (screen drivers only)
  *
@@ -38,6 +40,12 @@ v_get_pixel (short handle, short x, short y, short *pel, short *index)
 
 	VDI_TRAP (vdi_params, handle, 105, 1,0);
 
+#if CHECK_NULLPTR
+	if (pel)
+#endif
 	*pel   = vdi_intout[0];
+#if CHECK_NULLPTR
+	if (index)
+#endif
 	*index = vdi_intout[1];
 }
