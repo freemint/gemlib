@@ -253,18 +253,18 @@
  */
 
 /** @page Changelog.old
- * \include ChangeLog.old
+ * \verbinclude ChangeLog.old
  */
 
 /** @page Changelog.MGL
- * \include ChangeLog.MGL
+ * \verbinclude ChangeLog.MGL
  */
 
 /** @page Changelog.422
- * \include ChangeLog.422
+ * \verbinclude ChangeLog.422
  */
 
 /** @page Changelog
- * \include ChangeLog
+ * \verbinclude ChangeLog
  */
 
