@@ -11,7 +11,7 @@
  *  @param global_aes global AES array
  *
  *  @return the handle of the uppermost window
- *          found at location \p x, \p y. If no window is found, the function
+ *          found at location \a X, \a Y. If no window is found, the function
  *          returns 0 meaning the Desktop window.
  *
  *  @since All AES versions.

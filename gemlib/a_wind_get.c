@@ -9,281 +9,278 @@
  *  @param WindowHandle specifies the handle of the window to return
  *         information about (0 is the desktop window)
  *  @param What specifies the information to return and the values
- *         placed into the WORDs pointed to by \p W1 to \p W4.
+ *         placed into the WORDs pointed to by \a W1 to \a W4.
  *  @param W1 1st returned value \n
- *         [option CHECK_NULLPTR] W1 may be NULL
+ *         [option CHECK_NULLPTR] \a W1 may be NULL
  *  @param W2 2nd returned value \n
- *         [option CHECK_NULLPTR] W2 may be NULL
+ *         [option CHECK_NULLPTR] \a W2 may be NULL
  *  @param W3 3rd returned value \n
- *         [option CHECK_NULLPTR] W3 may be NULL
+ *         [option CHECK_NULLPTR] \a W3 may be NULL
  *  @param W4 4th returned value \n
- *         [option CHECK_NULLPTR] W4 may be NULL
+ *         [option CHECK_NULLPTR] \a W4 may be NULL
  *  @param global_aes global AES array
  *
  *  @return a 0 if an error occurred or non-zero otherwise.
  *
- *  @since All AES versions. WF_KIND, WF_NAME and WF_INFO since NAES (release?).
+ *  @since All AES versions. \n
+ *         #WF_KIND, #WF_NAME and #WF_INFO since NAES (release?).
  *
  *  @sa mt_wind_set()
  *
-<pre>
-    Name         mode  Meaning
-
- 	WF_KIND        1   \p W1 contains the actual window elements
-	                   with N.AES or MagiC.
- 
- 	WF_NAME        2   Gets the actual title of the window
-	                   and copies the title in the buffer 
-					   with the address in \p W1.
- 
- 			           If the window has no title, the return
-					   value of the function equals 0, the buffer
-					   remains unchanged.
- 
- 			           Since a title may have a length of 128
-					   chars, the buffer must be large enough!
- 
- 	WF_INFO        3   Gets the actual infoline of the window
-	                   and copies the infoline in the buffer with
-					   the address \p W1.
- 
- 					   If the window has no infoline, the return
-					   value of the function equals 0, the buffer 
-					   remains unchanged.
- 
- 					   Since an infoline may have a length of 128
-					   chars, the buffer must be large enough!
-
-    WF_WORKXYWH    4   \p W1, \p W2, \p W3 and \p W4 are
-                       filled in with the x, y, w, and h of the
-                       current coordinates of the window's work
-                       area.
-
-    WF_CURRXYWH    5   \p W1, \p W2, \p W3 and \p W4 are
-                       filled in with the x, y, w, and h of the
-                       current coordinates of the full extent
-                       of the window.
-
-    WF_PREVXYWH    6   \p W1, \p W2, \p W3 and \p W4 are
-                       filled in with the x, y, w, and h of the
-                       previous coordinates of the full extent
-                       of the window prior to the last
-                       mt_wind_set() call.
-
-    WF_FULLXYWH    7   \p W1, \p W2, \p W3 and \p W4 are
-                       filled in with the x, y, w, and h values
-                       specified in the mt_wind_create() call.
-
-    WF_HSLIDE      8   \p W1 is filled in with the current
-                       position of the horizontal slider
-                       between 0 and 1000. A value of one
-                       indicates that the slider is in its
-                       leftmost position.
-
-    WF_VSLIDE      9   \p W1 is filled in with the current
-                       position of the vertical slider between
-                       0 and 1000. A value of one indicates
-                       that the slider is in its uppermost
-                       position.
-
-    WF_TOP        10   \p W1 is filled in with the window
-                       handle of the window currently on top.
-                       As of AES version 4.0 (and when
-                       mt_appl_getinfo() indicates), \p W2 is
-                       filled in with the owners AES id, and
-                       \p W3 is filled in with the handle of
-                       the window directly below it.
-
-    WF_FIRSTXYWH  11   \p W1, \p W2, \p W3 and \p W4 are
-                       filled in with the x, y, w, and h of the
-                       first AES rectangle in the window's
-                       rectangle list. If \p W3 and \p W4 are
-                       both 0, the window is completely
-                       covered.
-
-    WF_NEXTXYWH   12   \p W1, \p W2, \p W3 and \p W4 are
-                       filled in with subsequent AES rectangles
-                       for each time this function is called
-                       until \p W3 and \p W4 are 0 to signify
-                       the end of the list.
-
-    WF_NEWDESK    14   As of AES versions 4.0 (and when
-                       mt_appl_getinfo() indicates), this mode
-                       returns a pointer to the current desktop
-                       background OBJECT tree. \p W1 contains
-                       the high WORD of the address and \p W2
-                       contains the low WORD.
-
-    WF_HSLSIZE    15   \p W1 contains the size of the current
-                       slider relative to the size of the
-                       scroll bar as a value from 0 to 1000.
-                       A value of 1000 indicates that the
-                       slider is at its maximum size.
-
-    WF_VSLSIZE    16   \p W1 contains the size of the current
-                       slider relative to the size of the
-                       scroll bar as a value from 0 to 1000.
-                       A value of 1000 indicates that the
-                       slider is at its maximum size.
-
-    WF_SCREEN     17   This mode returns a pointer to the
-                       current AES menu/alert buffer and its
-                       size. The pointer's high WORD is
-                       returned in \p W1 and the pointer's low
-                       WORD is returned in \p W2. The length of
-                       the buffer is returned as a LONG with
-                       the upper WORD being in \p W3 and the
-                       lower WORD being in \p W4. Note that GEM
-                       1.2 returns 0 in w and h by mistake.
-                       The menu/alert buffer is used by the
-                       AES to save the screen area hidden by
-                       menus and alert boxes. It is not
-                       recommended that applications use this
-                       area as its usage is not guaranteed in
-                       future versions of the OS.
-
-    WF_COLOR      18   This mode gets the current color of the
-                       window widget specified on entry to the
-                       function in the WORD pointed to by
-                       \p W1. Valid window widget indexes are
-                       as follows (W_SMALLER is only valid as
-                       of AES 4.1):
-
-                       parm1     Value ob_type
-                       W_BOX       0   IBOX
-                       W_TITLE     1   BOX
-                       W_CLOSER    2   BOXCHAR
-                       W_NAME      3   BOXTEXT
-                       W_FULLER    4   BOXCHAR
-                       W_INFO      5   BOXTEXT
-                       W_DATA      6   IBOX
-                       W_WORK      7   IBOX
-                       W_SIZER     8   BOXCHAR
-                       W_VBAR      9   BOX
-                       W_UPARROW  10   BOXCHAR
-                       W_DNARROW  11   BOXCHAR
-                       W_VSLIDE   12   BOX
-                       W_VELEV    13   BOX
-                       W_HBAR     14   BOX
-                       W_LFARROW  15   BOXCHAR
-                       W_RTARROW  16   BOXCHAR
-                       W_HSLIDE   17   BOX
-                       W_HELEV    18   BOX
-                       W_SMALLER  19   BOXCHAR
-
-                       The ob_spec field (containing the
-                       color information) used for the object
-
-                       when not selected is returned in the
-                       WORD pointed to by \p W2. The ob_spec
-                       field used for the object when selected
-                       is returned in \p W3.
-                       This mode under mt_wind_get() is only
-                       valid as of AES version 3.30. From AES
-                       versions 4.0 and above, mt_appl_getinfo()
-                       should be used to determine if this mode
-                       is supported.
-
-    WF_DCOLOR     19   This mode gets the default color of
-                       newly created windows as with WF_COLOR
-                       above. As above, this mode under
-                       mt_wind_get() only works as of AES
-                       version 3.30.
-                       As of AES version 4.1, WF_DCOLOR
-                       changes the color of open windows unless
-                       they have had their colors explicitly
-                       set with WF_COLOR.
-
-    WF_OWNER      20   \p W1 is filled in with the AES id of
-                       the owner of the specified window. \p W2
-                       is filled in with its open status
-                       (0 = closed, 1 = open). \p W3 is filled
-                       in with the handle of the window directly
-                       above it (in the window order list) and
-                       \p W4 is filled in with the handle of
-                       the window below it (likewise, in the
-                       window order list).
-                       This mode is only available as of AES
-                       version 4.0 (and when indicated by
-                       mt_appl_getinfo()).
-
-    WF_BEVENT     24   \p W1, \p W2, \p W3 and \p W4 are each
-                       interpreted as bit arrays whose bits
-                       indicate supported window features.
-                       Currently only one bit is supported. If
-                       bit 0 of the value returned in \p W1 is
-                       1, that window has been set to be
-                       'un-toppable' and it will never receive
-                       WM_TOPPED messages, only button clicks.
-                       This mode is only available as of AES
-                       version 4.0 (and when indicated by
-                       mt_appl_getinfo() ).
-
-    WF_BOTTOM     25   \p W1 will be filled in with the handle
-                       of the window currently on the bottom of
-                       the window list (it may actually be on
-                       top if there is only one window). Note
-                       also that this does not include the
-                       desktop window.
-                       This mode is only available as of AES
-                       version 4.0 (and when indicated by
-                       mt_appl_getinfo()).
-
-    WF_ICONIFY    26   \p W1 will be filled in with 0 if the
-                       window is not iconified or non-zero if
-                       it is. \p W2 and \p W3 contain the width
-                       and height of the icon. \p W4 is
-                       unused.
-                       This mode is only available as of AES
-                       version 4.1 (and when indicated by
-                       mt_appl_getinfo() ).
-
-    WF_UNICONIFY  27   \p W1, \p W2, \p W3 and \p W4, are
-                       filled in with the x, y, w, and h of the
-                       original coordinates of the iconified
-                       window.
-                       This mode is only available as of AES
-                       version 4.1 (and when indicated by
-                       mt_appl_getinfo()).
-
-    WF_TOOLBAR    30   \p W1 and \p W2 contain the high and low
-                       WORD respectively of the pointer to the
-                       current toolbar object tree (or NULL if
-                       none).
-                       This mode is only available as of AES
-                       version 4.1.
-
-    WF_FTOOLBAR   31   \p W1, \p W2, \p W3 and \p W4, are
-                       filled in with the x, y, w, and h,
-                       respectively of the first uncovered
-                       rectangle of the toolbar region of the
-                       window. If \p W3 and \p W4 are 0, the
-                       toolbar is completely covered.
-                       This mode is only available as of AES
-                       version 4.1.
-
-    WF_NTOOLBAR   32   \p W1, \p W2, \p W3 and \p W4, are
-                       filled in with the x, y, w, and h,
-                       respectively of subsequent uncovered
-                       rectangles of the toolbar region. This
-                       mode should be repeated to reveal
-                       subsequent rectangles until \p W3 and
-                       \p W4 are found to be 0.
-                       This mode is only available as of AES
-                       version 4.1.
-
-    WF_WIDGETS    200  Gets the actual positions of the slider
-                       widgets (W_UPARROW, W_DNARROW, and so on)
-					   of the window with the handle 'wi_ghandle'.
-					   The parameters wi_gw1 and wi_gw2 are the
-					   vertical elements of type rightwidget, the
-                       parameters wi_gw3 and wi_gw4 are the
-					   horizontal elements of type bottomwidgets.
-					   wi_g1 is the top, wi_gw2 the bottom widget
-					   of the vertical slider, wi_g3 the left, 
-					   wi_g4 the right widget of the horizotal
-					   slider.	</pre>
-				   
+ *  <table><tr><td>Name<td>Value<td>  Meaning
+ *  <tr><td> #WF_KIND <td> 1 <td>
+ *           Gets the actual window elements
+ * 	         - \a W1 contains the actual window elements
+ *	                   with N.AES or MagiC.
+ * 
+ *  <tr><td> #WF_NAME <td> 2 <td>
+ * 	         Gets the actual title of the window
+ *           - copies the title in the buffer pointed by \a W1.
+ * 
+ *			 If the window has no title, the return
+ *			 value of the function equals 0, the buffer
+ *			 remains unchanged.
+ * 
+ *			 Since a title may have a length of 128
+ *			 chars, the buffer must be large enough!
+ *
+ *  <tr><td> #WF_INFO <td> 3 <td>
+ * 	         Gets the actual infoline of the window
+ *	         - copies the infoline in the buffer pointed by \a W1.
+ * 
+ *			 If the window has no infoline, the return
+ *			 value of the function equals 0, the buffer
+ *			 remains unchanged.
+ * 
+ *			 Since an infoline may have a length of 128
+ *			 chars, the buffer must be large enough!
+ *
+ *   <tr><td> #WF_WORKXYWH <td> 4 <td>
+ *            Gets the work area coordinates of the window
+ *            - \a W1, \a W2, \a W3 and \a W4 are filled in with
+ *               the x, y, w, and h of the current coordinates of
+ *               the window's work area.
+ *
+ *  <tr><td> #WF_CURRXYWH <td> 5 <td>
+ *           Gets the coordinates of the window (external area)
+ *           - \a W1, \a W2, \a W3 and \a W4 are filled in with
+ *             the x, y, w, and h of the current coordinates of
+ *             the full extent of the window.
+ *
+ *  <tr><td> #WF_PREVXYWH <td> 6 <td>
+ *           Gets the previous coordinates of the window
+ *           - \a W1, \a W2, \a W3 and \a W4 are filled in with
+ *             the x, y, w, and h of the previous coordinates of
+ *             the full extent of the window prior to the last
+ *             mt_wind_set() call.
+ *
+ *  <tr><td> #WF_FULLXYWH <td> 7 <td>
+ *           Gets the coordinates of the window when "fulled" the screen
+ *           - \a W1, \a W2, \a W3 and \a W4 are filled in with 
+ *             the x, y, w, and h values specified in the mt_wind_create() call.
+ *
+ *  <tr><td> #WF_HSLIDE <td> 8 <td>
+ *           Gets the current position of the horizontal slider
+ *           - \a W1 is filled in with the current position of the
+ *             horizontal slider between 0 and 1000. A value of one
+ *             indicates that the slider is in its leftmost position.
+ *
+ *  <tr><td> #WF_VSLIDE <td> 9 <td>
+ *           Gets the current position of the vertical slider
+ *           - \a W1 is filled in with the current position of the 
+ *             vertical slider between 0 and 1000. A value of one
+ *             indicates that the slider is in its uppermost
+ *             position.
+ *
+ *  <tr><td> #WF_TOP <td> 10 <td>
+ *           Gets the handle of the top window
+ *           - \a W1 is filled in with the window handle of the window
+ *             currently on top.
+ *           - \a W2 is filled in with the owners AES id
+ *           - \a W3 is filled in with the handle of the window directly
+ *             below it.
+ *
+ *           \a W2 and \a W3 are only filled by the AES since AES version 4.0,
+ *           and when mt_appl_getinfo() with mode #AES_WINDOW indicates the
+ *           availability of this feature.
+ *
+ *  <tr><td> #WF_FIRSTXYWH <td> 11 <td>
+ *           Gets the first rectangle in the list of rectangles for this window
+ *           - \a W1, \a W2, \a W3 and \a W4 are filled in with the
+ *              x, y, w, and h of the first AES rectangle in the window's
+ *              rectangle list.
+ *
+ *           If \a W3 and \a W4 are both 0, the window is completely covered.
+ *
+ *  <tr><td> #WF_NEXTXYWH <td> 12 <td>
+ *           Gets the next rectangle in the list of rectangles for this window
+ *           - \a W1, \a W2, \a W3 and \a W4 are filled in with subsequent
+ *             AES rectangles for each time this function is called
+ *             until \a W3 and \a W4 are 0 to signify the end of the list.
+ *
+ *  <tr><td> #WF_NEWDESK <td> 14 <td>
+ *           Gets the OBJECT tree installed as desktop
+ *           - \a W1 contains the high WORD of the address and \a W2
+ *             contains the low WORD of the address of the current
+ *             desktop background OBJECT tree.
+ *
+ *           Available as of AES versions 4.0, and when mt_appl_getinfo()
+ *           with mode #AES_WINDOW indicates.
+ *
+ *  <tr><td> #WF_HSLSIZE <td> 15 <td>
+ *           Gets the size of the horizontal slider
+ *           - \a W1 contains the size of the current slider relative to
+ *             the size of the scroll bar as a value from 0 to 1000.
+ *             A value of 1000 indicates that the slider is at its maximum size.
+ *
+ *  <tr><td> #WF_VSLSIZE <td> 16 <td>
+ *           Gets the size of the vertical slider
+ *           - \a W1 contains the size of the current slider relative to 
+ *             the size of the scroll bar as a value from 0 to 1000.
+ *             A value of 1000 indicates that the slider is at its maximum size.
+ *
+ *  <tr><td> #WF_SCREEN <td> 17 <td>
+ *           Gets current AES menu/alert buffer and its size
+ *           - \a W1 contains the high WORD of the pointer to the AES buffer
+ *           - \a W2 contains the low  WORD of the pointer to the AES buffer
+ *           - The length of the buffer is returned as a LONG with
+ *             the upper WORD being in \a W3 and the lower WORD being in \a W4.
+ *
+ *           Note that GEM 1.2 returns 0 in \a W3 and \a W4 by mistake.
+ *
+ *           The menu/alert buffer is used by the AES to save the screen area
+ *           hidden by menus and alert boxes. It is not recommended that
+ *           applications use this area as its usage is not guaranteed in
+ *           future versions of the OS.
+ *
+ *  <tr><td> #WF_COLOR <td> 18 <td>
+ *           Gets current color of widget
+ *          - \a W1 point to a WORD that specify the index of the widget.
+ *            Valid window widget indexes are as follows :
+ *             - #W_BOX      (0)    ob_type : #G_IBOX
+ *             - #W_TITLE    (1)    ob_type : #G_BOX								 		   
+ *             - #W_CLOSER   (2)    ob_type : #G_BOXCHAR							 		   
+ *             - #W_NAME	 (3)    ob_type : #G_BOXTEXT							 		   
+ *             - #W_FULLER   (4)    ob_type : #G_BOXCHAR							 		   
+ *             - #W_INFO	 (5)    ob_type : #G_BOXTEXT							 		   
+ *             - #W_DATA	 (6)    ob_type : #G_IBOX 							 		   
+ *             - #W_WORK	 (7)    ob_type : #G_IBOX 							 		   
+ *             - #W_SIZER    (8)    ob_type : #G_BOXCHAR							 		   
+ *             - #W_VBAR	 (9)    ob_type : #G_BOX								 		   
+ *             - #W_UPARROW  (10)   ob_type : #G_BOXCHAR							 		   
+ *             - #W_DNARROW  (11)   ob_type : #G_BOXCHAR							 		   
+ *             - #W_VSLIDE   (12)   ob_type : #G_BOX								 		   
+ *             - #W_VELEV    (13)   ob_type : #G_BOX								 		   
+ *             - #W_HBAR	 (14)   ob_type : #G_BOX								 		   
+ *             - #W_LFARROW  (15)   ob_type : #G_BOXCHAR							 		   
+ *             - #W_RTARROW  (16)   ob_type : #G_BOXCHAR							 		   
+ *             - #W_HSLIDE   (17)   ob_type : #G_BOX								 		   
+ *             - #W_HELEV    (18)   ob_type : #G_BOX								 		   
+ *             - #W_SMALLER  (19)   ob_type : #G_BOXCHAR (only valid as of AES 4.1)		   
+ *          - \a W2 contains the ob_spec field of the object
+ *            (containing the color information) while the window is on top.
+ *          - \a W3 contains the ob_spec field of the object
+ *            (containing the color information) while the window is not on top
+ *
+ *          This mode is only valid as of AES version 0x0300. From AES
+ *          versions 4.0 and above, mt_appl_getinfo() with mode #AES_WINDOW
+ *          should be used to determine if this mode is supported.
+ *
+ *
+ *  <tr><td> #WF_DCOLOR <td> 19 <td>
+ *          This mode gets the default color of newly created windows as with
+ *          #WF_COLOR above.
+ *
+ *          This mode only works as of AES version 0x0300.
+ *
+ *
+ *  <tr><td> #WF_OWNER <td> 20 <td>
+ *           Gets the owner of the window
+ *           - \a W1 is filled in with the AES id of the owner of the specified window.
+ *           - \a W2 is filled in with its open status (0 = closed, 1 = open).
+ *           - \a W3 is filled in with the handle of the window directly
+ *             above it (in the window order list) 
+ *           - \a W4 is filled in with the handle of the window below it (likewise, in the
+ *              window order list)
+ *
+ *           This mode is only available as of AES version 4.0 (and when indicated by
+ *           mt_appl_getinfo() with mode #AES_WINDOW).
+ *
+ *  <tr><td> #WF_BEVENT <td> 24 <td>
+ *           Gets window feature on mouse button event
+ *           - \a W1 is interpreted as bit arrays whose bits indicate supported
+ *             window features. These bits are:
+ *              - #BEVENT_WORK : window not topped when click on the work area
+ *              - #BEVENT_INFO : ???
+ *
+ *           This mode is only available as of AES version 4.0 (and when indicated by
+ *           mt_appl_getinfo() with mode #AES_WINDOW).
+ *
+ *  <tr><td> #WF_BOTTOM <td> 25 <td>
+ *           Gets bottom window
+ *           - \a W1 will be filled in with the handle of the window currently on
+ *             the bottom of the window list (it may actually be on top if there
+ *             is only one window). Note also that this does not include the
+ *             desktop window.
+ *
+ *           This mode is only available as of AES version 4.0 (and when indicated by
+ *           mt_appl_getinfo() with mode #AES_WINDOW).
+ *
+ *  <tr><td> #WF_ICONIFY <td> 26 <td>
+ *           Gets iconification of the window
+ *           - \a W1 will be filled in with 0 if the window is not iconified or
+ *             non-zero if it is.
+ *           - \a W2 and \a W3 contain the width and height of the icon.
+ *           - \a W4 is unused.
+ *
+ *           This mode is only available as of AES version 4.1 (and when indicated by
+ *           mt_appl_getinfo() with mode #AES_WINDOW).
+ *
+ *  <tr><td> #WF_UNICONIFY <td> 27 <td>
+ *           Gets un-iconification of the window
+ *           - \a W1, \a W2, \a W3 and \a W4, are filled in with the x, y, w, and h
+ *             of the original coordinates of the iconified window.
+ *
+ *           This mode is only available as of AES version 4.1 (and when indicated by
+ *           mt_appl_getinfo() with mode #AES_WINDOW).
+ *
+ *  <tr><td> #WF_TOOLBAR <td> 30 <td>
+ *           Gets tool bar attached to a window
+ *           - \a W1 and \a W2 contain the high and low WORD respectively of the pointer
+ *             to the current toolbar object tree (or NULL if none).
+ *
+ *           This mode is only available as of AES version 4.1.
+ *
+ *  <tr><td> #WF_FTOOLBAR <td> 31 <td>
+ *           Gets the first rectangle of the toolbar area
+ *           - \a W1, \a W2, \a W3 and \a W4, are filled in with the x, y, w, and h,
+ *             respectively of the first uncovered rectangle of the toolbar region
+ *             of the window.
+ *
+ *           If \a W3 and \a W4 are 0, the toolbar is completely covered.
+ *
+ *           This mode is only available as of AES version 4.1.
+ *
+ *  <tr><td> #WF_NTOOLBAR <td> 32 <td>
+ *           Gets the next rectangle of the toolbar area
+ *           - \a W1, \a W2, \a W3 and \a W4, are filled in with the x, y, w, and h,
+ *             respectively of subsequent uncovered rectangles of the toolbar region.
+ *
+ *           This mode should be repeated to reveal subsequent rectangles until \a W3
+ *           and \a W4 are found to be 0.
+ *
+ *           This mode is only available as of AES version 4.1.
+ *
+ *  <tr><td> #WF_WIDGETS <td> 200 <td>
+ *          Gets the actual positions of the slider widgets
+ *          (#W_UPARROW, #W_DNARROW, and so on)
+ *          - \a W1 and \a W2 are the vertical elements of type rightwidget (\a W1 is
+ *            the top and \a W2 is the bottom widget of the vertical slider)
+ *          - \a W3 and \a W4 are the horizontal elements of type bottomwidgets.
+ *            (\a W3 is the left and \a W4 is the right widget of the horizotal
+ *		      slider).
+ *	</table>
+ *
  *
  *  @note aes_intout[3,4] are initialized to 0 before the AES trap.
  *        It's usefull under NAES for WF_FIRST/NEXTXYWH since lot

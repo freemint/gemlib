@@ -15,13 +15,13 @@
  *  @param InW  Width of the input area
  *  @param InH  Height of the input area
  *  @param OutX X-position of the output area \n
- *         [option CHECK_NULLPTR] OutX may be NULL
+ *         [option CHECK_NULLPTR] \a OutX may be NULL
  *  @param OutY Y-position of the output area \n
- *         [option CHECK_NULLPTR] OutY may be NULL
+ *         [option CHECK_NULLPTR] \a OutY may be NULL
  *  @param OutW Width of the output area \n
- *         [option CHECK_NULLPTR] OutW may be NULL
+ *         [option CHECK_NULLPTR] \a OutW may be NULL
  *  @param OutH Height of the output area \n
- *         [option CHECK_NULLPTR] OutH may be NULL
+ *         [option CHECK_NULLPTR] \a OutH may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.
@@ -30,13 +30,14 @@
  *
  *  @sa mt_wind_create()
  *
- *  If \p Type is WC_BORDER (0), \p InX, \p InY, \p InW, and \p  InH specify
- *  the work area of a window of type \p Parts. The call then fills
- *  in the WORDs pointed to by \p OutX, \p OutY, \p OutW, and \p OutH with the full
+ *  If \a Type is #WC_BORDER (0), \a InX, \a InY, \a InW, and \a InH specify
+ *  the work area of a window of type \a Parts. The call then fills
+ *  in the WORDs pointed to by \a OutX, \a OutY, \a OutW, and \a OutH with the full
  *  extent of the window.
- *  If \p Type is WC_WORK (1), \p InX, \p InY, \p InW, and \p  InH specify the
- *  full extent of a window of type \p Parts. The call fills in the
- *  WORDs pointed to by \p OutX, \p OutY, \p OutW, and \p OutH with the work area
+ *
+ *  If \a Type is #WC_WORK (1), \a InX, \a InY, \a InW, and \a  InH specify the
+ *  full extent of a window of type \a Parts. The call fills in the
+ *  WORDs pointed to by \a OutX, \a OutY, \a OutW, and \a OutH with the work area
  *  of the window.
  *
  *  mt_wind_calc() is unable to calculate correct values when

@@ -16,7 +16,7 @@
  *
  *  @sa mt_wind_create(), mt_wind_open(), mt_wind_close(), mt_wind_new()
  *
- *  A window should by closed with wind_close() before deleting
+ *  A window should by closed with mt_wind_close() before deleting
  *  it.
  *
  */

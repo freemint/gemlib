@@ -9,7 +9,7 @@
  *  @param WindowHandle specifies the handle of the window to return
  *         information about (0 is the desktop window)
  *  @param What specifies the information to return and the values
- *         placed into \p r.
+ *         placed into \a r.
  *  @param r
  *  @param global_aes global AES array
  *
