@@ -2,6 +2,8 @@
  *  $Id$
  */
 
+/**@file*/
+
 #ifndef _MT_GEMLIB_H_
 # define _MT_GEMLIB_H_
 
@@ -60,19 +62,19 @@ __BEGIN_DECLS
 #define DESKTOP_HANDLE		0
 #define DESK			 	DESKTOP_HANDLE
 
-/* appl_control mode */
-#define APC_HIDE			10
-#define APC_SHOW			11
-#define APC_TOP 			12
-#define APC_HIDENOT 			13
-#define APC_INFO			14
-#define APC_MENU			15
-#define APC_WIDGETS			16
+/* mt_appl_control() mode */
+#define APC_HIDE			10  /**< Hide application -- see mt_appl_control() */
+#define APC_SHOW			11  /**< Show application -- see mt_appl_control() */
+#define APC_TOP 			12  /**< Bring application to front -- see mt_appl_control() */
+#define APC_HIDENOT 		13  /**< Hide all applications except the one referred to by ap_cid -- see mt_appl_control() */
+#define APC_INFO			14  /**< Get the application parameter -- see mt_appl_control() */
+#define APC_MENU			15  /**< The last used menu tree is returned -- see mt_appl_control() */
+#define APC_WIDGETS			16  /**< Inquires or sets the 'default' positions of the window widgets -- see mt_appl_control() */
 
 /* APC_INFO bits */
-#define APCI_HIDDEN			0x01
-#define APCI_HASMBAR		0x02
-#define APCI_HASDESK		0x04
+#define APCI_HIDDEN			0x01  /**< the application is hidden -- subopcode for #APC_INFO */
+#define APCI_HASMBAR		0x02  /**< the application has a menu bar -- subopcode for #APC_INFO */
+#define APCI_HASDESK		0x04  /**< the application has a own desk -- subopcode for #APC_INFO */
 
 /* appl_getinfo modes */
 #define AES_LARGEFONT		0
@@ -188,41 +190,49 @@ typedef struct pEvntrec
 #define PA_EXIT 			89
 #define CH_EXIT 			90
 #define WM_M_BDROPPED		100		/* KAOS 1.4  */
-#define SM_M_SPECIAL		101		/* MAG!X     */
-#define SM_M_RES2			102		/* MAG!X     */
-#define SM_M_RES3			103		/* MAG!X     */
-#define SM_M_RES4			104		/* MAG!X     */
-#define SM_M_RES5			105		/* MAG!X     */
-#define SM_M_RES6			106		/* MAG!X     */
-#define SM_M_RES7			107		/* MAG!X     */
-#define SM_M_RES8			108		/* MAG!X     */
-#define SM_M_RES9			109		/* MAG!X     */
-#define WM_SHADED			22360	/* [WM_SHADED apid 0 win 0 0 0 0] */
+
+/** MAG!X screen manager extension
+ *
+ *	Applications may send such message to the MagiC Screen Manager
+ *	(SCREENMGR, application ID = 1) to control AES applications.
+ *	The message is [SM_M_SPECIAL apid 0 0 'MA' 'GX' SMC_XXX 0]
+ *	where SMC_XXX contains the action SCREENMGR has to perform.
+ *
+ *	SMC_XXX may be one of the following value:
+ *	-  #SMC_TIDY_UP	
+ *	-  #SMC_TERMINATE 
+ *	-  #SMC_SWITCH	 
+ *	-  #SMC_FREEZE	 
+ *	-  #SMC_UNFREEZE  
+ *	-  #SMC_RES5 	 
+ *	-  #SMC_UNHIDEALL 
+ *	-  #SMC_HIDEOTHERS
+ *	-  #SMC_HIDEACT
+ *
+ *  @sa mt_appl_control()
+ */
+#define SM_M_SPECIAL		101
+#define SM_M_RES2			102		/**< MAG!X screen manager extension */
+#define SM_M_RES3			103		/**< MAG!X screen manager extension */
+#define SM_M_RES4			104		/**< MAG!X screen manager extension */
+#define SM_M_RES5			105		/**< MAG!X screen manager extension */
+#define SM_M_RES6			106		/**< MAG!X screen manager extension */
+#define SM_M_RES7			107		/**< MAG!X screen manager extension */
+#define SM_M_RES8			108		/**< MAG!X screen manager extension */
+#define SM_M_RES9			109		/**< MAG!X screen manager extension */
+#define WM_SHADED			22360	/* [WM_SHADED apid 0 win 0 0 0 0]   */
 #define WM_UNSHADED 		22361	/* [WM_UNSHADED apid 0 win 0 0 0 0] */
 
-/* subcodes for SM_M_SPECIAL message for the SCREENMGR 
-	used:
-	INT16 msg[8];
-
-	msg[0] = SM_M_SPECIAL;	 101 
-	msg[1] = ap_id;	 ap_id, with SMC_TIDY_UP and SMC_UNHIDEALL own 
-	msg[2] = 0;		 No overrun 
-	msg[3] = 0;
-	msg[4] = 'MA';
-	msg[5] = 'GX';
-	msg[6] = ..subcode..;
-	msg[7] = 0;
-	appl_write(msg, 16, 1);		 apid #1 is the SCREENMGR 
-*/
-#define SMC_TIDY_UP		0			/* MagiC 2  */
-#define SMC_TERMINATE	1			/* MagiC 2  */
-#define SMC_SWITCH		2			/* MagiC 2  */
-#define SMC_FREEZE		3			/* MagiC 2  */
-#define SMC_UNFREEZE	4			/* MagiC 2  */
-#define SMC_RES5		5			/* MagiC 2  */
-#define SMC_UNHIDEALL	6			/* MagiC 3.1   */
-#define SMC_HIDEOTHERS	7			/* MagiC 3.1   */
-#define SMC_HIDEACT		8			/* MagiC 3.1   */
+/* SM_M_SPECIAL sub-opcode */
+#define SMC_TIDY_UP		0    /* MagiC 2  */ 	 /**< TODO */
+#define SMC_TERMINATE	1    /* MagiC 2  */ 	 /**< TODO */
+#define SMC_SWITCH		2    /* MagiC 2  */ 	 /**< TODO */
+#define SMC_FREEZE		3    /* MagiC 2  */ 	 /**< TODO */
+#define SMC_UNFREEZE	4    /* MagiC 2  */ 	 /**< TODO */
+#define SMC_RES5		5    /* MagiC 2  */ 	 /**< TODO */
+#define SMC_UNHIDEALL	6    /* MagiC 3.1	*/   /**< TODO */
+#define SMC_HIDEOTHERS	7    /* MagiC 3.1	*/   /**< TODO */
+#define SMC_HIDEACT		8    /* MagiC 3.1	*/   /**< TODO */
 
 /* evnt_mouse modes */
 #define MO_ENTER		0
