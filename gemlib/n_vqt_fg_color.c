@@ -8,7 +8,8 @@
 /** 
  *
  *  @param handle Device handle
- *  @param fg_color 
+ *  @param fg_color  \n
+ *         [option CHECK_NULLPTR] fg_color may be NULL
  *
  *  @return 
  *
@@ -29,6 +30,9 @@ vqt_fg_color (short handle, COLOR_ENTRY * fg_color)
 	
 	VDI_TRAP_ESC (vdi_params, handle, 202,0, 0,0);
 
+#if CHECK_NULLPTR
+	if (fg_color)
+#endif
 	*fg_color = *(COLOR_ENTRY*)&vdi_intout[2];
 	
 	return vdi_intout_long(0);
