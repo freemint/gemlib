@@ -10,8 +10,10 @@
  *  @param handle Device handle
  *  @param ch1 first character
  *  @param ch2 following character
- *  @param x x-adjustment in 1/65536 pixels
- *  @param y y-adjustment in 1/65536 pixels
+ *  @param x x-adjustment in 1/65536 pixels \n
+ *         [option CHECK_NULLPTR] x may be NULL
+ *  @param y y-adjustment in 1/65536 pixels \n
+ *         [option CHECK_NULLPTR] y may be NULL
  *
  *  @since NVDI 3.00
  *
@@ -32,6 +34,12 @@ vqt_pairkern (short handle, short ch1, short ch2, long *x, long *y)
 	
 	VDI_TRAP (vdi_params, handle, 235, 0,2);
 	
+#if CHECK_NULLPTR
+	if (x)
+#endif
 	*x = *(long*)&vdi_intout[0];
+#if CHECK_NULLPTR
+	if (y)
+#endif
 	*y = *(long*)&vdi_intout[2];
 }
