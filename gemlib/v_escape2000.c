@@ -23,7 +23,7 @@ v_escape2000 (short handle, short times)
 {
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDI_PARAMS(vdi_control, &times, 0L, 0L, 0L );
+	VDI_PARAMS(vdi_control, &times, 0L, vdi_dummy, vdi_dummy );
 #else
 	vdi_intin[0] = times;
 #endif

@@ -23,7 +23,7 @@ v_curtext (short handle, const char *str)
 #endif
 	register short n = vdi_str2array (str, vdi_intin);
 #if USE_LOCAL_VDIPB
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, 0L, 0L );
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_dummy, vdi_dummy );
 #endif
 	
 	VDI_TRAP_ESC (vdi_params, handle, 5,12, 0,n);

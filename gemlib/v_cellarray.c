@@ -48,7 +48,7 @@ v_cellarray (short handle, short pxy[], short row_length, short elements,
 	register short n = row_length * nrows;
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
-	VDI_PARAMS(vdi_control, colarray, pxy, 0L, 0L );
+	VDI_PARAMS(vdi_control, colarray, pxy, vdi_dummy, vdi_dummy );
 #endif
 	
 #if !(USE_LOCAL_VDIPB)
