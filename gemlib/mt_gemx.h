@@ -630,7 +630,7 @@ typedef short __CDECL (*SET_ITEM)(LIST_BOX *box, OBJECT *tree, struct lbox_item 
 
 #define	LBOX_VERT		1	/**< Listbox with vertical slider */
 #define	LBOX_AUTO		2	/**< Auto-scrolling */
-#define	LBOX_AUTOSLCT	4	/**< Automatic display during auto-scrolling */
+#define	LBOX_AUTOSLCT		4	/**< Automatic display during auto-scrolling */
 #define	LBOX_REAL		8	/**< Real-time slider */
 #define	LBOX_SNGL		16	/**< Only a selectable entry */
 #define	LBOX_SHFT		32	/**< Multi-selection with Shift */
