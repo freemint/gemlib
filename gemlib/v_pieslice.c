@@ -36,9 +36,9 @@ v_pieslice (short handle,
 	ptr = vdi_ptsin;
 	*(ptr ++) = x;		    /* vdi_ptsin[0] = x; */
 	*(ptr ++) = y;		    /* vdi_ptsin[1] = y; */
-	*(ptr ++) = 		    /* vdi_ptsin[2] = 0; */
-	*(ptr ++) = 		    /* vdi_ptsin[3] = 0; */
-	*(ptr ++) = 		    /* vdi_ptsin[4] = 0; */
+	*(ptr ++) = 0;		    /* vdi_ptsin[2] = 0; */
+	*(ptr ++) = 0;		    /* vdi_ptsin[3] = 0; */
+	*(ptr ++) = 0;		    /* vdi_ptsin[4] = 0; */
 	*(ptr ++) = 0;		    /* vdi_ptsin[5] = 0; */
 	*(ptr ++) = radius;	    /* vdi_ptsin[6] = radius; */
 	*(ptr   ) = 0;			/* vdi_ptsin[7] = 0; */
