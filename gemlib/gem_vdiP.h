@@ -1,7 +1,5 @@
 /*
- * gem_vdiP.h -- VDI trap interface
- *
- *    <AltF4@freemint.de>
+ *  $Id$
  */
 
 #ifndef _GEM_VDI_P_
@@ -16,6 +14,7 @@
 #define vdi_intin_ptr(n)     *((void**)(vdi_intin   +n))
 #define vdi_intout_long(n)   *((long*) (vdi_intout  +n))
 
+#define USE_LOCAL_VDIPB 1
 
 #if defined(__GNUC_INLINE__) && (__GNUC__ > 2 || __GNUC_MINOR__ > 5)
 
