@@ -14,7 +14,8 @@
  *         mt_fnts_evnt(). The events are serviced by 
  *         the dialog if they are intended for the 
  *         associated window.
- *  @param errc Error code (-200 = text buffer full)
+ *  @param errc Error code (-200 = text buffer full)\p
+ *         [option CHECK_NULLPTR] errc may be NULL
  *  @param global_aes global AES array
  *
  *  @return 0 if the passed events were not all
@@ -50,6 +51,9 @@ mt_edit_evnt(OBJECT *tree, short obj, short whdl,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (errc)
+#endif
 	*errc = *((long *) (aes_intout+1));
 
 	return(aes_intout[0]);
