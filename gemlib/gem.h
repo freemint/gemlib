@@ -896,7 +896,7 @@ short	mt_evnt_timer  (unsigned long Interval, short *global_aes);
 #define event_keybd() mt_event_keybd(aes_global)
 #define event_mesag(a) mt_event_mesag(a,aes_global)
 #define event_mouse(a,b,c,d,e,f,g,h,i) mt_event_mouse(a,b,c,d,e,f,g,h,i,aes_global)
-#define event_multi(a,b,c,d, e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v) mt_event_multi(a,b,c,d, e,f,g,h,i, j,k,l,m,n, o,p,q,r, s,t,u,v,aes_global)
+#define event_multi(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v) mt_event_multi(a,b,c,d, e,f,g,h,i, j,k,l,m,n, o,p,q,r, s,t,u,v,aes_global)
 #define event_multi_fast(a,b,c) mt_event_multi_fast(a,b,c,aes_global)
 #define event_timer(a) mt_event_timer(a,aes_global)
 /**@}*/
@@ -1071,9 +1071,9 @@ short	mt_wind_set_str      (short WindowHandle, short What, const char *str, sho
 /** @addtogroup a_util
  *  @{
  */
-short	rc_copy      (const GRECT *src, GRECT *dst);
-short	rc_equal     (const GRECT *r1,  const GRECT *r2);
-short rc_intersect (const GRECT *src, GRECT *dst);
+short	rc_copy        (const GRECT *src, GRECT *dst);
+short	rc_equal       (const GRECT *r1,  const GRECT *r2);
+short	rc_intersect   (const GRECT *src, GRECT *dst);
 GRECT * array_to_grect (const short *array, GRECT *area);
 short * grect_to_array (const GRECT *area, short *array);
 /**@}*/
