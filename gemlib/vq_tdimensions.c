@@ -7,8 +7,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param xdimension 
- *  @param ydimension 
+ *  @param xdimension  \n
+ *         [option CHECK_NULLPTR] xdimension may be NULL
+ *  @param ydimension  \n
+ *         [option CHECK_NULLPTR] ydimension may be NULL
  *
  *  @since 
  *
@@ -29,6 +31,12 @@ vq_tdimensions (short handle, short *xdimension, short *ydimension)
 	
 	VDI_TRAP_ESC (vdi_params, handle, 5,84, 0,0);
 	
+#if CHECK_NULLPTR
+	if (xdimension)
+#endif
 	*xdimension = vdi_intout[0];
+#if CHECK_NULLPTR
+	if (ydimension)
+#endif
 	*ydimension = vdi_intout[1];
 }
