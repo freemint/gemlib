@@ -853,17 +853,17 @@ typedef struct {
 short	mt_appl_bvset  (short bvdisk, short bvhard, short *global_aes);
 short	mt_appl_control (short ap_cid, short ap_cwhat, void *ap_cout, short *global_aes);
 short	mt_appl_exit    (short *global_aes);
-short	mt_appl_find    (const char *Name, short *global_aes);
+short	mt_appl_find    (const char *name, short *global_aes);
 short	mt_appl_getinfo (short type,
 						 short *out1, short *out2, short *out3, short *out4, short *global_aes);
 short	appl_xgetinfo(short type,
 					  short *out1, short *out2, short *out3, short *out4);
 short	mt_appl_init    (short *global_aes);
-short	mt_appl_read    (short ApId, short Length, void *ApPbuff, short *global_aes);
+short	mt_appl_read    (short ap_id, short length, void *ap_pbuff, short *global_aes);
 short	mt_appl_search  (short mode, char *fname, short *type, short *ap_id, short *global_aes);
-short	mt_appl_tplay   (void *Mem, short Num, short Scale, short *global_aes);
-short	mt_appl_trecord (void *Mem, short Count, short *global_aes);
-short	mt_appl_write   (short ApId, short Length, void *ApPbuff, short *global_aes);
+short	mt_appl_tplay   (void *mem, short num, short scale, short *global_aes);
+short	mt_appl_trecord (void *mem, short count, short *global_aes);
+short	mt_appl_write   (short ap_id, short length, void *ap_pbuff, short *global_aes);
 short	mt_appl_yield   (short *global_aes);
 #define appl_bvset(a,b) mt_appl_bvset(a,b,aes_global)
 #define appl_control(a,b,c) mt_appl_control(a,b,c,aes_global)
