@@ -4,6 +4,7 @@
 
 #include <string.h>
 #include "gem_aesP.h"
+#include "gem.h" /* for global data */
 
 /** should be the first function called in any application that intends
  *  to use GEM calls.
