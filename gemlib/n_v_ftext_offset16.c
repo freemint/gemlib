@@ -28,7 +28,7 @@ v_ftext_offset16 (short handle, short x, short y,
 	long       * dst =       (long*)vdi_ptsin;
 	short     i, len = vdi_wstrlen ((const short *)wstr);
 #if USE_LOCAL_VDIPB
-	VDI_PARAMS(vdi_control, (const short *)wstr, vdi_ptsin, 0L, 0L);
+	VDI_PARAMS(vdi_control, (const short *)wstr, vdi_ptsin, vdi_dummy, vdi_dummy);
 #endif
 	
 #if !(USE_LOCAL_VDIPB)

@@ -24,7 +24,7 @@ v_bez_qual (short handle, short percent, short *actual)
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[3];   
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, actual, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, actual, vdi_dummy);
 #endif
 	
 	vdi_intin[0] = 32;

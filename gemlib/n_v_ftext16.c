@@ -25,7 +25,7 @@ v_ftext16 (short handle, short x, short y, const WCHAR * wstr)
 #endif
 	register short n = vdi_wstrlen ((const short *)wstr);
 #if USE_LOCAL_VDIPB
-	VDI_PARAMS(vdi_control, (const short *)wstr, vdi_ptsin, 0L, 0L);
+	VDI_PARAMS(vdi_control, (const short *)wstr, vdi_ptsin, vdi_dummy, vdi_dummy);
 #endif
 	
 #if !(USE_LOCAL_VDIPB)

@@ -35,7 +35,7 @@ v_getoutline (short handle, short ch, short *xyarray, char *bezarray,
 #if USE_LOCAL_VDIPB
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[6];   
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, numverts, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, numverts, vdi_dummy);
 #endif
 	
 	vdi_intin    [0] = ch;

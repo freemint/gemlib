@@ -26,7 +26,7 @@ v_create_itab (short handle, COLOR_TAB * ctab, short bits)
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[5];   
 	short vdi_intout[2]; 
-	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 #endif
 	
 	vdi_intin_ptr(0) = ctab;
