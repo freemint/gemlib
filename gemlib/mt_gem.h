@@ -103,11 +103,11 @@ __BEGIN_DECLS
 #define APPEVNT_MOUSE	 	2
 #define APPEVNT_KEYBOARD 	3
 
-/* struct used by appl_trecord and appl_tplay */
+/** struct used by mt_appl_trecord and mt_appl_tplay */
 typedef struct pEvntrec
 {
-	long ap_event;
-	long ap_value;
+	long ap_event;		/**< TODO */
+	long ap_value;		/**< TODO */
 } EVNTREC;
 
 /* evnt_button flags */
@@ -668,185 +668,205 @@ typedef struct _mn_set
 #define AD3DVAL			6
 #define MX_ENABLE3D		10      /* MagiC 3.0   */
 
-/* Mouse Form Definition Block */
+/** Mouse Form Definition Block */
 typedef struct mouse_form
 {
-	short		mf_xhot;
-	short		mf_yhot;
-	short		mf_nplanes;
-	short		mf_bg;
-	short		mf_fg;
-	short		mf_mask[16];
-	short		mf_data[16];
+	short		mf_xhot;		/**< TODO */
+	short		mf_yhot;		/**< TODO */
+	short		mf_nplanes;		/**< TODO */
+	short		mf_bg;			/**< TODO */
+	short		mf_fg;			/**< TODO */
+	short		mf_mask[16];	/**< TODO */
+	short		mf_data[16];	/**< TODO */
 } MFORM;
 
 #ifndef __PXY
 # define __PXY
+/** TODO */
 typedef struct point_coord
 {
-	short p_x;
-	short p_y;
+	short p_x;			/**< TODO */
+	short p_y;			/**< TODO */
 } PXY;
 #endif
 
 #ifndef __GRECT
 # define __GRECT
+/** TODO */
 typedef struct graphic_rectangle
 {
-	short g_x;
-	short g_y;
-	short g_w;
-	short g_h;
+	short g_x;			/**< TODO */
+	short g_y;			/**< TODO */
+	short g_w;			/**< TODO */
+	short g_h;			/**< TODO */
 } GRECT;
 #endif
 
+/** TODO */
 typedef struct objc_colorword 
 {
-	unsigned	borderc : 4;
-	unsigned	textc   : 4;
-	unsigned	opaque  : 1;
-	unsigned	pattern : 3;
-	unsigned	fillc   : 4;
+	unsigned	borderc : 4;			/**< TODO */
+	unsigned	textc   : 4;			/**< TODO */
+	unsigned	opaque  : 1;			/**< TODO */
+	unsigned	pattern : 3;			/**< TODO */
+	unsigned	fillc   : 4;			/**< TODO */
 } OBJC_COLORWORD;
 
+/** TODO */
 typedef struct text_edinfo
 {
-	char		*te_ptext;		/* ptr to text */
-	char		*te_ptmplt;		/* ptr to template */
-	char		*te_pvalid;		/* ptr to validation chrs. */
-	short		te_font; 		/* font */
-	short		te_fontid;		/* font id */
-	short		te_just; 		/* justification */
-	short		te_color;		/* color information word */
-	short		te_fontsize;		/* font size */
-	short		te_thickness;		/* border thickness */
-	short		te_txtlen;		/* length of text string */
-	short		te_tmplen;		/* length of template string */
+	char		*te_ptext;		/**< ptr to text */
+	char		*te_ptmplt;		/**< ptr to template */
+	char		*te_pvalid;		/**< ptr to validation chrs. */
+	short		te_font; 		/**< font */
+	short		te_fontid;		/**< font id */
+	short		te_just; 		/**< justification */
+	short		te_color;		/**< color information word */
+	short		te_fontsize;	/**< font size */
+	short		te_thickness;	/**< border thickness */
+	short		te_txtlen;		/**< length of text string */
+	short		te_tmplen;		/**< length of template string */
 } TEDINFO;
 
+/** TODO */
 typedef struct icon_block
 {
-	short		*ib_pmask;
-	short		*ib_pdata;
-	char		*ib_ptext;
-	short		ib_char;
-	short		ib_xchar;
-	short		ib_ychar;
-	short		ib_xicon;
-	short		ib_yicon;
-	short		ib_wicon;
-	short		ib_hicon;
-	short		ib_xtext;
-	short		ib_ytext;
-	short		ib_wtext;
-	short		ib_htext;
+	short		*ib_pmask;			/**< TODO */
+	short		*ib_pdata;			/**< TODO */
+	char		*ib_ptext;			/**< TODO */
+	short		ib_char;			/**< TODO */
+	short		ib_xchar;			/**< TODO */
+	short		ib_ychar;			/**< TODO */
+	short		ib_xicon;			/**< TODO */
+	short		ib_yicon;			/**< TODO */
+	short		ib_wicon;			/**< TODO */
+	short		ib_hicon;			/**< TODO */
+	short		ib_xtext;			/**< TODO */
+	short		ib_ytext;			/**< TODO */
+	short		ib_wtext;			/**< TODO */
+	short		ib_htext;			/**< TODO */
 } ICONBLK;
 
+/** TODO */
 typedef struct bit_block
 {
-	short		*bi_pdata;	/* ptr to bit forms data  */
-	short		bi_wb;		/* width of form in bytes */
-	short		bi_hl;		/* height in lines */
-	short		bi_x; 		/* source x in bit form */
-	short		bi_y; 		/* source y in bit form */
-	short		bi_color;	/* fg color of blt */
+	short		*bi_pdata;	/**< ptr to bit forms data  */
+	short		bi_wb;		/**< width of form in bytes */
+	short		bi_hl;		/**< height in lines */
+	short		bi_x; 		/**< source x in bit form */
+	short		bi_y; 		/**< source y in bit form */
+	short		bi_color;	/**< fg color of blt */
 } BITBLK;
 
+/** TODO */
 typedef struct cicon_data
 {
-	short 		num_planes;
-	short 		*col_data;
-	short 		*col_mask;
-	short 		*sel_data;
-	short 		*sel_mask;
-	struct cicon_data *next_res;
+	short 		num_planes;			/**< TODO */
+	short 		*col_data;			/**< TODO */
+	short 		*col_mask;			/**< TODO */
+	short 		*sel_data;			/**< TODO */
+	short 		*sel_mask;			/**< TODO */
+	struct cicon_data *next_res;	/**< TODO */
 } CICON;
 
+/** TODO */
 typedef struct cicon_blk
 {
-	ICONBLK		monoblk;
-	CICON 		*mainlist;
+	ICONBLK		monoblk;			/**< TODO */
+	CICON 		*mainlist;			/**< TODO */
 } CICONBLK;
 
+/** TODO */
 typedef struct
 {
-	 unsigned	character   :  8;
-	 signed		framesize   :  8;
-	 unsigned	framecol    :  4;
-	 unsigned	textcol	    :  4;
-	 unsigned	textmode    :  1;
-	 unsigned	fillpattern :  3;
-	 unsigned	interiorcol :  4;
+	 unsigned	character   :  8;			/**< TODO */
+	 signed		framesize   :  8;			/**< TODO */
+	 unsigned	framecol    :  4;			/**< TODO */
+	 unsigned	textcol	    :  4;			/**< TODO */
+	 unsigned	textmode    :  1;			/**< TODO */
+	 unsigned	fillpattern :  3;			/**< TODO */
+	 unsigned	interiorcol :  4;			/**< TODO */
 } BFOBSPEC;
 
+/** TODO */
 struct user_block;	/* forward declaration */
 
+/** TODO */
 typedef union obspecptr
 {
-	long		index;
-	union obspecptr	*indirect;
-	BFOBSPEC 	obspec;
-	TEDINFO		*tedinfo;
-	BITBLK		*bitblk;
-	ICONBLK		*iconblk;
-	CICONBLK 	*ciconblk;
-	struct user_block *userblk;
-	char		*free_string;
+	long		index;				/**< TODO */
+	union obspecptr	*indirect;		/**< TODO */
+	BFOBSPEC 	obspec;				/**< TODO */
+	TEDINFO		*tedinfo;			/**< TODO */
+	BITBLK		*bitblk;			/**< TODO */
+	ICONBLK		*iconblk;			/**< TODO */
+	CICONBLK 	*ciconblk;			/**< TODO */
+	struct user_block *userblk;		/**< TODO */
+	char		*free_string;		/**< TODO */
 } OBSPEC;
 
+/** TODO */
 typedef struct object
 {
-	short 		ob_next;	/* -> object's next sibling */
-	short 		ob_head; 	/* -> head of object's children */
-	short 		ob_tail; 	/* -> tail of object's children */
-	unsigned short	ob_type; 	/* type of object */
-	unsigned short	ob_flags;	/* flags */
-	unsigned short	ob_state;	/* state */
-	OBSPEC		ob_spec; 	/* object-specific data */
-	short 		ob_x; 		/* upper left corner of object */
-	short 		ob_y; 		/* upper left corner of object */
-	short 		ob_width;	/* width of obj */
-	short 		ob_height;	/* height of obj */
+	short 		ob_next;		/**< object's next sibling */
+	short 		ob_head; 		/**< head of object's children */
+	short 		ob_tail; 		/**< tail of object's children */
+	unsigned short	ob_type; 	/**< type of object */
+	unsigned short	ob_flags;	/**< flags */
+	unsigned short	ob_state;	/**< state */
+	OBSPEC		ob_spec; 		/**< object-specific data */
+	short 		ob_x; 			/**< upper left corner of object */
+	short 		ob_y; 			/**< upper left corner of object */
+	short 		ob_width;		/**< width of obj */
+	short 		ob_height;		/**< height of obj */
 } OBJECT;
 
+/** TODO */
 typedef struct parm_block
 {
-	OBJECT		*pb_tree;
-	short		pb_obj;
-	short		pb_prevstate;
-	short		pb_currstate;
-	short		pb_x, pb_y, pb_w, pb_h;
-	short		pb_xc, pb_yc, pb_wc, pb_hc;
-	long		pb_parm;
+	OBJECT	*pb_tree;		/**< TODO */
+	short	pb_obj;			/**< TODO */
+	short	pb_prevstate;	/**< TODO */
+	short	pb_currstate;	/**< TODO */
+	short	pb_x;			/**< TODO */
+	short	pb_y;			/**< TODO */
+	short	pb_w;			/**< TODO */
+	short	pb_h;			/**< TODO */
+	short	pb_xc;			/**< TODO */
+	short	pb_yc;			/**< TODO */
+	short	pb_wc;			/**< TODO */
+	short	pb_hc;			/**< TODO */
+	long	pb_parm;		/**< TODO */
 } PARMBLK;
 
+/** TODO */
 typedef struct user_block
 {
-	short __CDECL (*ub_code)(PARMBLK *parmblock);
-	long ub_parm;
+	short __CDECL (*ub_code)(PARMBLK *parmblock);	/**< TODO */
+	long ub_parm;									/**< TODO */
 } USERBLK;
 
-
+/** TODO */
 typedef struct rshdr
 {
-	short		rsh_vrsn;
-	unsigned short	rsh_object;
-	unsigned short	rsh_tedinfo;
-	unsigned short	rsh_iconblk;		/* list of ICONBLKS */
-	unsigned short	rsh_bitblk;
-	unsigned short	rsh_frstr;
-	unsigned short	rsh_string;
-	unsigned short	rsh_imdata;		/* image data */
-	unsigned short	rsh_frimg;
-	unsigned short	rsh_trindex;
-	short		rsh_nobs;		/* counts of various structs */
-	short		rsh_ntree;
-	short		rsh_nted;
-	short		rsh_nib;
-	short		rsh_nbb;
-	short		rsh_nstring;
-	short		rsh_nimages;
-	unsigned short	rsh_rssize;		/* total bytes in resource */
+	short			rsh_vrsn;			/**< TODO */
+	unsigned short	rsh_object;			/**< TODO */
+	unsigned short	rsh_tedinfo;		/**< TODO */
+	unsigned short	rsh_iconblk;		/**< list of ICONBLKS */
+	unsigned short	rsh_bitblk;			/**< TODO */
+	unsigned short	rsh_frstr;			/**< TODO */
+	unsigned short	rsh_string;			/**< TODO */
+	unsigned short	rsh_imdata;			/**< image data */
+	unsigned short	rsh_frimg;			/**< TODO */
+	unsigned short	rsh_trindex;		/**< TODO */
+	short			rsh_nobs;			/**< counts of various structs */
+	short			rsh_ntree;			/**< TODO */
+	short			rsh_nted;			/**< TODO */
+	short			rsh_nib;			/**< TODO */
+	short			rsh_nbb;			/**< TODO */
+	short			rsh_nstring;		/**< TODO */
+	short			rsh_nimages;		/**< TODO */
+	unsigned short	rsh_rssize;			/**< total bytes in resource */
 } RSHDR;
 
 /** MENU structure, used by a_menu functions */
@@ -861,38 +881,43 @@ typedef struct _menu
                              items exceed the menu scroll height, arrows
                              will appear which allow the user to scroll
                              selections.*/
-	short  mn_keystate; /**< */
+	short  mn_keystate; /**< key state */
 } MENU;
 
+/** TODO */
 typedef struct
 {
-	short m_out;
-	short m_x;
-	short m_y;
-	short m_w;
-	short m_h;
+	short m_out;	/**< TODO */
+	short m_x;		/**< TODO */
+	short m_y;		/**< TODO */
+	short m_w;		/**< TODO */
+	short m_h;		/**< TODO */
 } MOBLK;
 
 #if !( defined(__PUREC__) && defined(__TOS) )
+/** TODO */
 typedef struct mouse_event_type
 {
-	short *x;
-	short *y;
-	short *b;
-	short *k;
+	short *x;	/**< TODO */
+	short *y;	/**< TODO */
+	short *b;	/**< TODO */
+	short *k;	/**< TODO */
 } MOUSE;
 #endif
 
 /** structure comprising the most of the input arguments of mt_evnt_multi()
  */
 typedef struct {
-	short emi_flags;                           /**< the event mask to watch */
-	short emi_bclicks, emi_bmask, emi_bstate;  /**< see mt_evnt_multi() */
-	short emi_m1leave;
-	GRECT emi_m1;                              /**< the first rectangle to watch */
-	short emi_m2leave;
-	GRECT emi_m2;                              /**< the second rectangle to watch */
-	short emi_tlow, emi_thigh;                 /**< the timer 32-bit value of interval split into short type member */
+	short emi_flags;          /**< the event mask to watch */
+	short emi_bclicks;		  /**< see mt_evnt_multi() */
+	short emi_bmask;		  /**< see mt_evnt_multi() */
+	short emi_bstate;		  /**< see mt_evnt_multi() */
+	short emi_m1leave;		  /**< TODO */
+	GRECT emi_m1;             /**< the first rectangle to watch */
+	short emi_m2leave;		  /**< TODO */
+	GRECT emi_m2;             /**< the second rectangle to watch */
+	short emi_tlow;		  	  /**< see mt_evnt_multi() */
+	short emi_thigh;          /**< the timer 32-bit value of interval split into short type member */
 } EVMULT_IN;
 
 /** structure comprising the output arguments of mt_evnt_multi()
@@ -901,11 +926,11 @@ typedef struct {
  */
 typedef struct {
 	short emo_events;                          /**< the bitfield of events occured (also a return value of mt_evnt_multi_fast() */
-	PXY   emo_mouse;
-	short emo_mbutton;
-	short emo_kmeta;
-	short emo_kreturn;
-	short emo_mclicks;
+	PXY   emo_mouse;	/**< TODO */
+	short emo_mbutton;	/**< TODO */
+	short emo_kmeta;	/**< TODO */
+	short emo_kreturn;	/**< TODO */
+	short emo_mclicks;	/**< TODO */
 } EVMULT_OUT;
 
 #endif
@@ -1301,25 +1326,26 @@ extern void aes (AESPB *pb);
 #define SLM_NOTONER		0x03
 #define SLM_NOPAPER		0x04
 
-/* VDI Memory Form Definition Block */
+/** VDI Memory Form Definition Block */
 typedef struct memory_form
 {
-	void	*fd_addr;
-	short 	fd_w;		/* Form Width in Pixels */
-	short 	fd_h; 		/* Form Height in Pixels */
-	short 	fd_wdwidth;	/* Form Width in shorts(fd_w/sizeof(short) */
-	short 	fd_stand;	/* Form format 0= device spec 1=standard */
-	short 	fd_nplanes;	/* Number of memory planes */
-	short 	fd_r1;		/* Reserved */
-	short 	fd_r2;		/* Reserved */
-	short 	fd_r3;		/* Reserved */
+	void	*fd_addr;	/**< TODO */
+	short 	fd_w;		/**< Form Width in Pixels */
+	short 	fd_h; 		/**< Form Height in Pixels */
+	short 	fd_wdwidth;	/**< Form Width in shorts(fd_w/sizeof(short) */
+	short 	fd_stand;	/**< Form format 0= device spec 1=standard */
+	short 	fd_nplanes;	/**< Number of memory planes */
+	short 	fd_r1;		/**< Reserved */
+	short 	fd_r2;		/**< Reserved */
+	short 	fd_r3;		/**< Reserved */
 } MFDB;
 
-/* RGB intesities in promille */
+/** RGB intesities in promille */
 typedef struct rgb_1000
-{ short  red;    /* Red-Intensity in range [0..1000] */
-  short  green;  /* Green-Intensity in range [0..1000] */
-  short  blue;   /* Blue-Intensity in range [0..1000] */
+{ 
+	short  red;    /**< Red-Intensity in range [0..1000] */
+ 	short  green;  /**< Green-Intensity in range [0..1000] */
+ 	short  blue;   /**< Blue-Intensity in range [0..1000] */
 } RGB1000;
 
 #endif 
@@ -1330,10 +1356,15 @@ typedef struct rgb_1000
  * The VDI bindings from old vdibind.h
  */
 
-typedef short VdiHdl;   /* for better readability */
+typedef short VdiHdl;   /**< for better readability */
+
 
 /*
  * attribute functions 
+ */
+
+/** @addtogroup v_attr
+ *  @{
  */
 void  vs_color  (VdiHdl , short color_idx, short rgb[]);
 short vswr_mode (VdiHdl , short mode);
@@ -1365,9 +1396,14 @@ short vst_point     (VdiHdl , short point, short *charw, short *charh,
                                            short *cellw, short *cellh);
 short vst_rotation  (VdiHdl , short ang);
 void  vst_scratch   (VdiHdl , short mode);
+/**@}*/
 
 /*
  * control functions
+ */
+
+/** @addtogroup v_ctrl
+ *  @{
  */
 void  v_clrwk          (VdiHdl );
 void  v_clsvwk         (VdiHdl );
@@ -1384,9 +1420,14 @@ void  vs_clip_pxy      (VdiHdl , PXY pxy[]);
 void  vs_clip_off      (VdiHdl );
 short vst_load_fonts   (VdiHdl , short /* select */);
 void  vst_unload_fonts (VdiHdl , short /* select */);
+/**@}*/
 
 /*
  * escape functions
+ */
+
+/** @addtogroup v_escp
+ *  @{
  */
 void  v_bit_image       (VdiHdl , const char *filename, short aspect,
                                   short x_scale, short y_scale,
@@ -1448,10 +1489,15 @@ void v_rvon        (VdiHdl );
 void vq_chcells    (VdiHdl , short *n_rows, short *n_cols);
 void vq_curaddress (VdiHdl , short *cur_row, short *cur_col);
 void vs_curaddress (VdiHdl , short row, short col);
+/**@}*/
  
 
 /*
  * inquiry functions
+ */
+
+/** @addtogroup v_inqr
+ *  @{
  */
 void  vq_cellarray   (VdiHdl , short pxy[], short row_len, short nrows,
                                short *el_used, short *rows_used,
@@ -1476,10 +1522,15 @@ short vqt_width      (VdiHdl , short chr, short *cw,
 
 short vq_gdos  (void);
 long  vq_vgdos (void);
+/**@}*/
 
 
 /*
  * input function
+ */
+
+/** @addtogroup v_inpt
+ *  @{
  */
 void  v_hide_c     (VdiHdl );
 void  v_show_c     (VdiHdl , short reset);
@@ -1502,10 +1553,15 @@ short vsm_locator  (VdiHdl , short x, short y,
                              short *xout, short *yout, short *term);
 short vsm_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
 void  vsm_valuator (VdiHdl , short in, short *out, short *term, short *status);
+/**@}*/
 
 
 /*
  * output functions
+ */
+
+/** @addtogroup v_outp
+ *  @{
  */
 void v_arc         (VdiHdl , short x, short y,
                              short radius, short begang, short endang);
@@ -1532,45 +1588,63 @@ void v_pmarker     (VdiHdl , short count, short pxy[]);
 void v_rbox        (VdiHdl , short pxy[]);
 void v_rfbox       (VdiHdl , short pxy[]);
 void vr_recfl      (VdiHdl , short pxy[]);
+/**@}*/
 
 /*
  * raster functions
+ */
+
+/** @addtogroup v_rstr
+ *  @{
  */
 void v_get_pixel (VdiHdl , short x, short y, short *pel, short *color_idx);
 void vr_trnfm    (VdiHdl , MFDB *src, MFDB *dst);
 void vro_cpyfm   (VdiHdl , short mode, short pxy[], MFDB *src, MFDB *dst);
 void vrt_cpyfm   (VdiHdl , short mode, short pxy[], MFDB *src, MFDB *dst,
                            short color[]);
+/**@}*/
 
 
 /*
  * Some usefull extensions.
  */
+
+/** @addtogroup v_util
+ *  @{
+ */
 void  vdi_array2str (const short *src, char  *des, short len);
 short vdi_str2array (const char  *src, short *des);
 short vdi_wstrlen   (const short *wstr);
+/**@}*/
 
 /*
  * vdi trap interface
  */
 
-/* Array sizes in vdi control block */
-#define VDI_CNTRLMAX     15
-#define VDI_INTINMAX   1024
-#define VDI_INTOUTMAX   256
-#define VDI_PTSINMAX    256
-#define VDI_PTSOUTMAX   256
+/** @addtogroup VDI
+ *  @{
+ */
 
+/* Array sizes in vdi control block */
+#define VDI_CNTRLMAX     15		/**< max size of vdi_control[] */
+#define VDI_INTINMAX   1024		/**< max size of vdi_intin[] */
+#define VDI_INTOUTMAX   256		/**< max size of vdi_intout[] */
+#define VDI_PTSINMAX    256		/**< max size of vdi_ptsin[] */
+#define VDI_PTSOUTMAX   256		/**< max size of vdi_ptsout[] */
+
+/** TODO */
 typedef struct
 {
- short       *control;
- const short *intin;
- const short *ptsin;
- short       *intout;
- short       *ptsout;
+	short       *control;	/**< TODO */
+	const short *intin;		/**< TODO */
+	const short *ptsin;		/**< TODO */
+	short       *intout;	/**< TODO */
+	short       *ptsout;	/**< TODO */
 } VDIPB;
 
+/** TODO */
 void vdi (VDIPB *pb);
+/**@}*/
 
 #endif /* VDI */
 
