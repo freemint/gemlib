@@ -116,8 +116,8 @@ mt_gem.h: mt_gem.h.in VERSION
 #	$(MOVEIFCHANGE) $(srcdir)/mt_gem.tmp $(srcdir)/mt_gem.h
 
 install:
-	install -m 644 -o root -g wheel lib{gem,gem16}.a $(PREFIX)/lib
-	install -m 644 -o root -g wheel {gem,gemx,mt_gem,mt_gemx}.h $(PREFIX)/include
+	install -m 644 lib{gem,gem16}.a $(PREFIX)/lib
+	install -m 644 {gem,gemx,mt_gem,mt_gemx}.h $(PREFIX)/include
 
 uninstall:
 	rm -f $(PREFIX)/lib/lib{gem,gem16}.a

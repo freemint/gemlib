@@ -21,7 +21,7 @@ all-here: objs
 INCLUDES = -I$(srcdir)
 
 ifeq ($(TARGET),16)
-GENERAL = -mshort
+GENERAL += -mshort
 endif
 
 # default definitions
