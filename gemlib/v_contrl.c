@@ -54,7 +54,7 @@ int v_flushcache(int handle)
 	return vdi_intout[0];
 }
 
-int v_loadcache(int handle, char *filename, int mode)
+int v_loadcache(int handle, const char *filename, int mode)
 {
 	short i;
 	
@@ -135,7 +135,7 @@ void v_opnwk(int work_in[], int *handle, int work_out[])
 	*handle = vdi_control[6];
 }
 
-int v_savecache(int handle, char *filename)
+int v_savecache(int handle, const char *filename)
 {
 	short i;
 	

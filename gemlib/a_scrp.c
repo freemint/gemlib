@@ -32,7 +32,7 @@ int scrp_read(char *Scrappath)
 }
 
 
-int scrp_write(char *Scrappath)
+int scrp_write(const char *Scrappath)
 {
 	aes_addrin[0] = (long)Scrappath;
    aes_control[0] = 81;

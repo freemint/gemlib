@@ -171,7 +171,7 @@ void v_fillarea(int handle, int count, int pxyarray[])
 	vdi(&vdi_params);
 }
 
-void v_gtext(int handle, int x, int y, char *str) 
+void v_gtext(int handle, int x, int y, const char *str) 
 {
 	short i;
 	
@@ -186,7 +186,7 @@ void v_gtext(int handle, int x, int y, char *str)
 	vdi(&vdi_params);
 }
 
-void v_justified(int handle, int x, int y, char *str, int len, int word_space, int char_space)
+void v_justified(int handle, int x, int y, const char *str, int len, int word_space, int char_space)
 {
 	short i;
 	

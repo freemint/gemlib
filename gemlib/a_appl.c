@@ -51,7 +51,7 @@ int appl_exit(void)
 }
 
 
-int appl_find(char *Name)
+int appl_find(const char *Name)
 {
 	aes_addrin[0] = (long)Name;
 	aes_control[0] = 13;

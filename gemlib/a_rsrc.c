@@ -36,7 +36,7 @@ int rsrc_gaddr(int Type, int Index, void *Address)
 }
 
 
-int rsrc_load(char *Name)
+int rsrc_load(const char *Name)
 {
 	aes_addrin[0] = (long)Name;
    aes_control[0] = 110;
