@@ -10,17 +10,24 @@
  *
  *  @param handle Device handle
  *  @param ch Zeichen-Index
- *  @param advancex x advance in 1/65536 pixels
+ *  @param advancex x advance in 1/65536 pixels \n
+ *         [option CHECK_NULLPTR] advancex may be NULL
  *  @param advancey y advance in 1/65536 pixels\n
- *         The advance vector represents the offset for the placement of the next character.
- *  @param xoffset x offset in 1/65536 pixels
+ *         The advance vector represents the offset for the placement of the next character. \n
+ *         [option CHECK_NULLPTR] advancey may be NULL
+ *  @param xoffset x offset in 1/65536 pixels \n
+ *         [option CHECK_NULLPTR] xoffset may be NULL
  *  @param yoffset y offset in 1/65536 pixels\n
  *         x_offset and y_offset are the offset of the bitmap relative to the position of 
  *         the character cell. This offset is necessary because most bitmaps are smaller than 
- *         the character cell.
- *  @param width bitmap width in pixels
- *  @param height bitmap height in pixels
- *  @param bitmap pointer to the bitmap
+ *         the character cell. \n
+ *         [option CHECK_NULLPTR] yoffset may be NULL
+ *  @param width bitmap width in pixels \n
+ *         [option CHECK_NULLPTR] width may be NULL
+ *  @param height bitmap height in pixels \n
+ *         [option CHECK_NULLPTR] height may be NULL
+ *  @param bitmap pointer to the bitmap \n
+ *         [option CHECK_NULLPTR] bitmap may be NULL
  *
  *  @since NVDI 3.00
  *
@@ -52,11 +59,32 @@ v_getbitmap_info (short handle, short ch, long *advancex, long *advancey,
 		
 	VDI_TRAP (vdi_params, handle, 239, 0,1);
 	
+#if CHECK_NULLPTR
+	if (width)
+#endif
 	*width    = vdi_intout     [0];
+#if CHECK_NULLPTR
+	if (height)
+#endif
 	*height   = vdi_intout     [1];
+#if CHECK_NULLPTR
+	if (advancex)
+#endif
 	*advancex = vdi_intout_long(2);
+#if CHECK_NULLPTR
+	if (advancey)
+#endif
 	*advancey = vdi_intout_long(4);
+#if CHECK_NULLPTR
+	if (xoffset)
+#endif
 	*xoffset  = vdi_intout_long(6);
+#if CHECK_NULLPTR
+	if (yoffset)
+#endif
 	*yoffset  = vdi_intout_long(8);
+#if CHECK_NULLPTR
+	if (bitmap)
+#endif
 	*bitmap   = (short*)vdi_intout_long(10);
 }
