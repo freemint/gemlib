@@ -15,9 +15,10 @@
  *  @param hdpi 
  *  @param vdpi 
  *
- *  @return 
+ *  @return 0 if this function is not supported by the driver, any other value if
+ *          the driver support this function.
  *
- *  @since NVDI 5 ?
+ *  @since depend of the driver
  *
  *
  *
@@ -28,11 +29,9 @@ vq_margins (short handle, short *top_margin, short *bottom_margin,
             short *left_margin, short *right_margin, short *hdpi, short *vdpi)
 {
 #if USE_LOCAL_VDIPB
-	/* todo (doc wanted) */
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intout[VDI_INTOUTMAX]; 
-	short vdi_ptsout[VDI_PTSOUTMAX]; 
-	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_ptsout);
+	short vdi_intout[7]; 
+	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_dummy);
 #endif
 	
 	vdi_intout[0] = 0;
