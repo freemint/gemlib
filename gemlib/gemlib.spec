@@ -6,12 +6,12 @@
 
 Summary       : GEM libraries and header files
 Name          : gemlib
-Version       : 0.42.2
-Release       : 1
+Version       : 0.42.99
+Release       : 20030216
 Copyright     : Public Domain
 Group         : Development/Libraries
 
-Packager      : Xavier Joubert <xavier.joubert@free.fr>
+Packager      : Standa Opichal <opichals@seznam.cz>
 Vendor        : Sparemint
 URL           : http://wh58-508.st.uni-magdeburg.de/sparemint/
 
@@ -52,6 +52,7 @@ cd gemlib
 mkdir -p ${RPM_BUILD_ROOT}%{_prefix}/GEM/{include,lib}
 install -m 644 lib{gem,gem16}.a ${RPM_BUILD_ROOT}%{_prefix}/GEM/lib
 install -m 644 {gem,gemx}.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
+install -m 644 {mt_gem,mt_gemx}.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
 
 
 %clean
@@ -66,6 +67,9 @@ install -m 644 {gem,gemx}.h ${RPM_BUILD_ROOT}%{_prefix}/GEM/include
 
 
 %changelog
+* Sun Feb 16 2003 Standa Opichal <opichals@seznam.cz>
+- updated to version 0.42.99, betaversion of new generation gemlib
+
 * Mon Jul 15 2002 Xavier Joubert <xavier.joubert@free.fr>
 - updated to version 0.42.2, modified version numbering
 

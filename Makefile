@@ -26,7 +26,7 @@ dist-gemlib:
 	make dist BUILDLIB=gemlib VERSION="0.42.99"
 
 dist-cflib:
-	make dist BUILDLIB=cflib VERSION="0.20"
+	make dist BUILDLIB=cflib VERSION="20"
 
 dist-gemma:
 	make dist BUILDLIB=gemma VERSION="dist"
