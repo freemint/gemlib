@@ -10,10 +10,14 @@
  *         information about (0 is the desktop window)
  *  @param What specifies the information to return and the values
  *         placed into the WORDs pointed to by \p W1 to \p W4.
- *  @param W1 1st returned value
- *  @param W2 2nd returned value
- *  @param W3 3rd returned value
- *  @param W4 4th returned value
+ *  @param W1 1st returned value \n
+ *         [option CHECK_NULLPTR] W1 may be NULL
+ *  @param W2 2nd returned value \n
+ *         [option CHECK_NULLPTR] W2 may be NULL
+ *  @param W3 3rd returned value \n
+ *         [option CHECK_NULLPTR] W3 may be NULL
+ *  @param W4 4th returned value \n
+ *         [option CHECK_NULLPTR] W4 may be NULL
  *  @param global_aes global AES array
  *
  *  @return a 0 if an error occurred or non-zero otherwise.
@@ -284,7 +288,8 @@ mt_wind_get (short WindowHandle, short What,
 		*(ptr ++) = 2;									/* aes_control[1] */
 
 	*(ptr ++) = 5;										/* aes_control[2] */
-	*(ptr ++) = *(ptr ++) = 0;							/* aes_control[3,4] */
+	*(ptr ++) = 0;										/* aes_control[3] */
+	*(ptr ++) = 0;				 						/* aes_control[4] */
 
 	/* ol: this line is required for WF_FIRSTXYWH and WF_NEXTXYWH because
 	   lot of programmers doesn't verify the return value and espect W or H
@@ -293,11 +298,18 @@ mt_wind_get (short WindowHandle, short What,
 
 	AES_TRAP(aes_params);
 
+#if CHECK_NULLPTR
+	if (W1)	*W1 = aes_intout[1];
+	if (W2)	*W2 = aes_intout[2];
+	if (W3)	*W3 = aes_intout[3];
+	if (W4)	*W4 = aes_intout[4];
+#else
 	ptr = &aes_intout[1];
 	*W1 = *(ptr ++);									/* aes_intout[1] */
 	*W2 = *(ptr ++);									/* aes_intout[2] */
 	*W3 = *(ptr ++);									/* aes_intout[3] */
 	*W4 = *(ptr);										/* aes_intout[4] */
+#endif
 
 	return (aes_intout[0]);
 }
