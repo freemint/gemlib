@@ -59,7 +59,7 @@ a_graf_mkstate.c		-- idem
 a_graf_mouse.c			-- use 'const MFORM' instead of 'void' [gemlib->mgemlib]
 a_graf_rubbox.c			-- the mt_graf_rubberbox() is the actuall implementation
 						   renamed from graf_rubbbox() [mgemlib->gemlib]
-						   Althouth the file is a_graf_rubbox.c (only double 'b')
+						   Although the file is a_graf_rubbox.c (only double 'b')
 a_graf_shrinkbox.c		-- idem
 a_graf_slidebox.c		-- use 'OBJECT' type instead of 'void' [gemlib->mgemlib]
 a_graf_watchbox.c		-- idem
