@@ -4,8 +4,7 @@
 
 #include "gem_aesP.h"
 
-/** should be called at the termination of any program initialized
- *  with appl_init().
+/** Unregister an application from the AES and free its AES ID.
  *
  *  @param global_aes global AES array
  *
@@ -15,8 +14,7 @@
  *
  *  @sa mt_appl_init()
  *
- *  The proper procedure for handling an error from this
- *  function is currently undefined.
+ *  The handling of an error (return value 0) is currently undefined.
  *
  */
 
