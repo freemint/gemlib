@@ -119,16 +119,29 @@ __BEGIN_DECLS
 #define APP_SHELL 			0x08	/**< see mt_appl_search() */
 
 /* appl_trecord types */
-#define APPEVNT_TIMER	 	0	/**< TODO */
-#define APPEVNT_BUTTON	 	1	/**< TODO */
-#define APPEVNT_MOUSE	 	2	/**< TODO */
-#define APPEVNT_KEYBOARD 	3	/**< TODO */
+#define APPEVNT_TIMER	 	0	/**< see struct pEvntrec */
+#define APPEVNT_BUTTON	 	1	/**< see struct pEvntrec */
+#define APPEVNT_MOUSE	 	2	/**< see struct pEvntrec */
+#define APPEVNT_KEYBOARD 	3	/**< see struct pEvntrec */
 
-/** struct used by mt_appl_trecord() and mt_appl_tplay() */
+/** struct used by mt_appl_trecord() and mt_appl_tplay()
+ *
+ * \a ap_event defines the required interpretation of \a ap_value
+ *  as follows:
+ *  <table>
+ *  <tr><td>\a ap_event <td> \a ap_value
+ *  <tr><td> #APPEVNT_TIMER (0) <td> Elapsed Time (in milliseconds)
+ *  <tr><td> #APPEVNT_BUTTON (1) <td> low word  = state (1 = down), high word = # of clicks
+ *  <tr><td> #APPEVNT_MOUSE (2) <td> low word  = X pos, high word = Y pos
+ *  <tr><td> #APPEVNT_KEYBOARD (3) <td> bits 0-7 = ASCII code, bits 8-15 = scan code, bits 16-31 = shift key
+ *
+ *  Please read documentation of mt_appl_trecord() and mt_appl_tplay() for more details and
+ *  known bugs related to this structure.
+ */
 typedef struct pEvntrec
 {
-	long ap_event;		/**< TODO */
-	long ap_value;		/**< TODO */
+	long ap_event;		/**< one of the APPEVNT_XXX constant */
+	long ap_value;		/**< kind of data depends on \a ap_event */
 } EVNTREC;
 
 /* evnt_button flags */
