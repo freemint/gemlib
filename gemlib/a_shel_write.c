@@ -128,13 +128,19 @@
  *			 mode is usually used prior to
  *			 a resolution change to cause system
  *			 processes to terminate.
- *			 - \a wisgr, \a cmd, and
- *			   \a tail are ignored by this call.
+ *			 - \a wisgr and \a cmd are ignored by this call.
  *			 - \a wiscr determines the action this call
  *			   takes as follows:
  *			   - #SD_ABORT : Abort shutdown mode
  *			   - #SD_PARTIAL : Partial shutdown mode
  *			   - #SD_COMPLETE : Complete shutdown mode
+ *
+ *           N.AES has the following extension:
+ *           - \a tail may point to a word value. If the function returns 0 then you can find in
+ *             \a tail the following information:
+ *             - the AES application ID of a program wich does not understand #AP_TERM.
+ *             - -1 to inform that Shutdown is started
+ *             - -2 if some of the parameters are wrong.
  *
  *			 During a shutdown, processes which
  *			 have registered themselves as accepting
@@ -153,9 +159,24 @@
  *			 versions greater than or equal to 4.0.
  *
  *  <tr><td> #SWM_REZCHANGE <td> 5 <td>
- *			 Change screen resolution.
- *           - \a wisgr is the work station ID of the new resolution.
- *           - No other parameters are utilized.
+ *			 Change screen resolution 
+ *           - if \a wiscr is 0 then \a wisgr is the VDI work
+ *             station ID of the new resolution.
+ *           - if \a wiscr is 1 then \a wisgr is video mode 
+ *             to use for the FALCON030 machine.
+ *           - others value of \a wiscr are reserved.
+ *           .
+ *           If AES accepts the resolution change
+ *           request, then it will put the system in SHUT DOWN mode. An
+ *           application can either shut down and exit or deny to shut down by
+ *           sending a #AP_TFAIL message to the AES.
+ *           
+ *           N.AES has the following extension:
+ *           - \a tail may point to a word value. If the function returns 0 then you can find in
+ *             \a tail the following information:
+ *             - the AES application ID of a program wich does not understand #AP_TERM.
+ *             - -1 to inform that Shutdown is started
+ *             - -2 if some of the parameters are wrong.
  *
  *			 This mode is only recognized as of AES
  *			 version 4.0.
