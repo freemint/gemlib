@@ -55,9 +55,13 @@
  *                         AES object library.
  *                    - \a out3 is 0 if color icons are not
  *                         supported or 1 if they are.
- *                    - \a out4 is 0 to indicate that the
- *                         extended resource file format
- *                         is not supported or 1 if it is.
+ *                    - \a out4 is a bitmap variable:
+ *                         - bit 0 (\a out4 & 0x0001) indicates that the
+ *                           extended resource file format (AES4)
+ *                           is supported.
+ *                         - bit 1 (\a out4 & 0x0002) indicates that interface
+ *                           resource file format (RSHDR::rsh_vrsn = 3)
+ *                           is supported.
  *
  *  <tr><td> #AES_LANGUAGE  <td> 3    <td>
  *     	              AES Globalization
