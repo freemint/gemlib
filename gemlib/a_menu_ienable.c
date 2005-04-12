@@ -16,6 +16,14 @@
  *
  *  @since All AES versions.
  *
+ *  @note [PC GEM 3] :
+ *	A  special calling convention has been established  for enabling
+ *	and  disabling menu titles.   If the high bit of \a me_item 
+ *	is set,  then it will be enabled/disabled and the result
+ *	will  be drawn on the screen.   This only works for  menu
+ *	titles  since they are guarenteed to be displayed on  the
+ *	screen.
+ *
  *  @sa mt_objc_change()
  *
  */
