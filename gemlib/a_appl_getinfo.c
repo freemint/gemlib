@@ -197,7 +197,9 @@
  *                         <tr><td>  10 <td> #WF_FIRSTAREAXYWH get.
  *                         <tr><td>  11 <td> #WF_OPTS set/get.
  *                         <tr><td>  12 <td> #WF_MENU set/get.
- *                         <tr><td> 13-15<td> Unused
+ *                         <tr><td>  13 <td> #WF_WORKXYWH set/get (and bug-free when AES toolbar is
+ *                                            installed)
+ *                         <tr><td> 14-15<td> Unused
  *                         </table>
  *                    - \a out2 is current unused.
  *                    - \a out3 is a bitmap of supported
