@@ -96,6 +96,7 @@ __BEGIN_DECLS
 #define AES_EXTENDED		64	/**< see  mt_appl_getinfo() */
 #define AES_NAES			65	/**< see  mt_appl_getinfo() */
 #define AES_VERSION         96  /**< see  mt_appl_getinfo() and  mt_appl_getinfo_str() */
+#define AES_WOPTS           97  /**< see  mt_appl_getinfo() */
 
 /* appl_getinfo return values (AES_LARGEFONT, AES_SMALLFONT) */
 #define SYSTEM_FONT			0	/**< see  mt_appl_getinfo() */
