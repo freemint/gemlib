@@ -297,6 +297,7 @@
  *                    - \a out2 is filled with the highest Opcode for mt_appl_control()
  *                    - \a out3 is 1 if mt_shel_help() is available, or 0 otherwise.
  *                    - \a out4 is 1 if mt_wind_draw() is available, or 0 otherwise.
+ *
  *  <tr><td> #AES_VERSION <td>  96    <td>
  *                    Additional AES functions
  *                    - \a out1 : major version of the AES (ex: 0 for version 0.992).
@@ -306,6 +307,15 @@
  *                                1 to indicate a stable version (\a out3 & 0x100),
  *                                or 0 otherwise.
  *                    - \a out4 : target platform. May only be 0 (m68k) for now.
+ *
+ *  <tr><td> #AES_WOPTS <td>  97    <td>
+ *                    return a bitmask of available #WF_OPTS settings. This bitmask
+ *                    is identical to that use by the actual wind_set/get(WF_OPTS).
+ *                    See mt_wind_set() with #WF_OPTS mode for details.
+ *                    - \a out1 : available window options 0 
+ *                    - \a out2 : available window options 1 
+ *                    - \a out3 : available window options 2 
+ *                    - \a out4 : always cleared 
  *  </table>
  *
  *  Using an \a ap_gtype value of 4 and above is only supported as
