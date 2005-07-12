@@ -32,26 +32,26 @@
  *           Gets the actual window elements
  * 	         - \a W1 contains the actual window elements
  *	                   with N.AES or MagiC.
- * 
+ *
  *  <tr><td> #WF_NAME <td> 2 <td>
  * 	         Gets the actual title of the window
  *           - copies the title in the buffer pointed by \a W1.
- * 
+ *
  *			 If the window has no title, the return
  *			 value of the function equals 0, the buffer
  *			 remains unchanged.
- * 
+ *
  *			 Since a title may have a length of 128
  *			 chars, the buffer must be large enough!
  *
  *  <tr><td> #WF_INFO <td> 3 <td>
  * 	         Gets the actual infoline of the window
  *	         - copies the infoline in the buffer pointed by \a W1.
- * 
+ *
  *			 If the window has no infoline, the return
  *			 value of the function equals 0, the buffer
  *			 remains unchanged.
- * 
+ *
  *			 Since an infoline may have a length of 128
  *			 chars, the buffer must be large enough!
  *
@@ -303,7 +303,7 @@ mt_wind_get (short WindowHandle, short What,
 
 	aes_params.control = &aes_control[0];				/* AES Control Array */
 	aes_params.global  = &global_aes[0];				/* AES Global Array */
-	aes_params.intin   = &aes_intin[0];					/* input integer array */
+	aes_params.intin   = &aes_intin[0];				/* input integer array */
 	aes_params.intout  = &aes_intout[0];				/* output integer array */
 	aes_params.addrin  = &aes_addrin[0];				/* input address array */
 	aes_params.addrout = &aes_addrout[0];				/* output address array */
