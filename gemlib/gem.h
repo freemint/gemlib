@@ -205,7 +205,7 @@ static inline short appl_init( void) {
  */
 #define wind_calc(a,b,c,d,e,f,g,h,i,j) mt_wind_calc(a,b,c,d,e,f,g,h,i,j,aes_global)	
 #define wind_close(a) mt_wind_close(a,aes_global)
-#define wind_create(a,b,c,d,e) mt_wind_create(a,b,c,d,e,aes_global) 
+#define wind_create(a,b,c,d,e) mt_wind_create(a,b,c,d,e,aes_global)
 #define wind_delete(a) mt_wind_delete(a,aes_global)
 #define wind_draw(a,b) mt_wind_draw(a,b,aes_global)
 #define wind_find(a,b) mt_wind_find(a,b,aes_global)
@@ -219,7 +219,8 @@ static inline short appl_init( void) {
  * Some useful extensions
  */
 #define wind_calc_grect(a,b,c,d) mt_wind_calc_grect(a,b,c,d,aes_global)  
-#define wind_create_grect(a,b) mt_wind_create_grect(a,b,aes_global) 
+#define wind_create_grect(a,b) mt_wind_create_grect(a,b,aes_global)
+#define wind_xcreate_grect(a,b,c) mt_wind_xcreate_grect(a,b,c,aes_global)
 #define wind_get_grect(a,b,c) mt_wind_get_grect(a,b,c,aes_global)
 #define wind_xget_grect(a,b,c,d) mt_wind_xget_grect(a,b,c,d,aes_global)
 #define wind_open_grect(a,b) mt_wind_open_grect(a,b,aes_global)

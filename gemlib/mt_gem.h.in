@@ -1192,6 +1192,11 @@ typedef  struct
 #define WF_MENU			 33 	/**<         TODO (XaAES) */
 #define WF_WHEEL		 40 	/**<     set window feature on mouse wheel event, see mt_wind_set() */
 #define WF_OPTS			 41		/**< get/set window options. See mt_wind_set() and mt_wind_get() for details. */
+#define WF_CALCF2W		 42	/**< Convert FULL coordinates to WORK coordinates */
+#define WF_CALCW2F		 43	/**< Convert WORK coordinates to FULL coordinates */
+#define WF_CALCF2U		 44	/**< Convert FULL coordinates to USER coordinates */
+#define WF_CALCU2F		 45	/**< Convert USER coordinates to FULL coordinates */
+#define WF_MAXWORKXYWH		 46	/**< Get MAX coordinates for this window - WCOWORK mode only*/
 #define WF_M_BACKDROP	100 	/**<		 TODO (KAOS 1.4) */
 #define WF_M_OWNER		101 	/**<		 TODO (KAOS 1.4) */
 #define WF_M_WINDLIST	102 	/**<		 TODO (KAOS 1.4) */
@@ -1961,6 +1966,7 @@ short	mt_shel_write	(short Exit, short Graphic, short Aes, void *Command, char *
 short	mt_wind_calc 	(short Type, short Parts, short InX, short InY, short InW, short InH, short *OutX, short *OutY, short *OutW, short *OutH, short *global_aes);
 short	mt_wind_close 	(short WindowHandle, short *global_aes);
 short	mt_wind_create 	(short Parts, short Wx, short Wy, short Ww, short Wh, short *global_aes); 
+short	mt_wind_xcreate	(short Parts, short Wx, short Wy, short Ww, short Wh, short *OutX, short *OutY, short *OutW, short *OutH, short *global_aes);
 short	mt_wind_delete 	(short WindowHandle, short *global_aes);
 short	mt_wind_draw 	(short WindowHandle, short startob, short *global_aes);
 short	mt_wind_find 	(short X, short Y, short *global_aes);
@@ -1974,7 +1980,8 @@ short	mt_wind_update 	(short Code, short *global_aes);
  * Some useful extensions
  */
 short	mt_wind_calc_grect   (short Type, short Parts, const GRECT *In, GRECT *Out, short *global_aes);  
-short	mt_wind_create_grect (short Parts, const GRECT *r, short *global_aes); 
+short	mt_wind_create_grect (short Parts, const GRECT *r, short *global_aes);
+short	mt_wind_xcreate_grect (short Parts, const GRECT *r, GRECT *ret, short *global_aes);
 short	mt_wind_get_grect    (short WindowHandle, short What, GRECT *r, short *global_aes);
 short	mt_wind_xget_grect   (short WindowHandle, short What, const GRECT *clip, GRECT *r, short *global_aes);
 short	mt_wind_open_grect   (short WindowHandle, const GRECT *r, short *global_aes);
