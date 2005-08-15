@@ -37,6 +37,17 @@
  *  that a process containing more than one characteristic will
  *  appear. For example, the desktop may return a value of
  *  #APP_APPLICATION | #APP_SHELL (0x0A).
+ *
+ *  @note  This function may be used to obtan other values if the
+ *         AES support it. The availability of this extension is given
+ *         by mt_appl_getinfo() with #AES_EXTENDED mode. This extension
+ *         is used by putting an AES-ID (with the minus sign) as
+ *         \a mode parameter. Then :
+ *         - \a fname will contain a description of the application
+ *           (previoulsy registered by the application by calling
+ *           mt_menu_register())
+ *         - \a type meaning is unchanged.
+ *         - \a ap_id will contain the process ID given by MiNT.
  */
 
 short
