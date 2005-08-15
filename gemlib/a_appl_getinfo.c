@@ -285,7 +285,7 @@
  *                    - \a out2 is 0 if extended mt_shel_write() mode
  *                         #SWM_SHUTDOWN / #SWM_REZCHANGE are not supported,
  *                         or 1 if they are.
- *                    - \a out3 is 0 if mt_appl_search() with langnamen (?)
+ *                    - \a out3 is 0 if mt_appl_search() with string description
  *                         is not supported, or 1 if it is.
  *                    - \a out4 is 0 if mt_form_error() doesn't support all
  *                         GEMDOS error codes, or 1 if it does.
