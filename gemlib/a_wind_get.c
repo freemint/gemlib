@@ -311,6 +311,11 @@ mt_wind_get (short WindowHandle, short What,
 	aes_intin[0] = WindowHandle;
 	aes_intin[1] = What;
 
+	/* ol: this line is required for WF_FIRSTXYWH and WF_NEXTXYWH because
+	   lot of programmers doesn't verify the return value and espect W or H
+	   will be 0 it's not true for NAES */
+	aes_intout[3] = aes_intout[4] = 0;
+
 	ptr = aes_control;
 	*(ptr ++) = 104;									/* aes_control[0] */
 
@@ -332,11 +337,6 @@ mt_wind_get (short WindowHandle, short What,
 	*(ptr ++) = 5;										/* aes_control[2] */
 	*(ptr ++) = 0;										/* aes_control[3] */
 	*(ptr ++) = 0;				 						/* aes_control[4] */
-
-	/* ol: this line is required for WF_FIRSTXYWH and WF_NEXTXYWH because
-	   lot of programmers doesn't verify the return value and espect W or H
-	   will be 0 it's not true for NAES */
-	aes_intout[3] = aes_intout[4] = 0;
 
 	AES_TRAP(aes_params);
 
