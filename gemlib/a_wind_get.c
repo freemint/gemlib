@@ -311,11 +311,6 @@ mt_wind_get (short WindowHandle, short What,
 	aes_intin[0] = WindowHandle;
 	aes_intin[1] = What;
 
-	/* ol: this line is required for WF_FIRSTXYWH and WF_NEXTXYWH because
-	   lot of programmers doesn't verify the return value and espect W or H
-	   will be 0 it's not true for NAES */
-	aes_intout[3] = aes_intout[4] = 0;
-
 	ptr = aes_control;
 	*(ptr ++) = 104;									/* aes_control[0] */
 
@@ -338,20 +333,29 @@ mt_wind_get (short WindowHandle, short What,
 	*(ptr ++) = 0;										/* aes_control[3] */
 	*(ptr ++) = 0;				 						/* aes_control[4] */
 
-	AES_TRAP(aes_params);
+	/* ol: this line is required for WF_FIRSTXYWH and WF_NEXTXYWH because
+	   lot of programmers doesn't verify the return value and espect W or H
+	   will be 0 it's not true for NAES */
+	aes_intout[3] = aes_intout[4] = 0;
 
+	AES_TRAP(aes_params);
+	
+	if (What == WF_INFO || What == WF_NAME) {
+		/* special case where W1 shall not be overwritten */
+	} else {
 #if CHECK_NULLPTR
-	if (W1)	*W1 = aes_intout[1];
-	if (W2)	*W2 = aes_intout[2];
-	if (W3)	*W3 = aes_intout[3];
-	if (W4)	*W4 = aes_intout[4];
+		if (W1)	*W1 = aes_intout[1];
+		if (W2)	*W2 = aes_intout[2];
+		if (W3)	*W3 = aes_intout[3];
+		if (W4)	*W4 = aes_intout[4];
 #else
-	ptr = &aes_intout[1];
-	*W1 = *(ptr ++);									/* aes_intout[1] */
-	*W2 = *(ptr ++);									/* aes_intout[2] */
-	*W3 = *(ptr ++);									/* aes_intout[3] */
-	*W4 = *(ptr);										/* aes_intout[4] */
+		ptr = &aes_intout[1];
+		*W1 = *(ptr ++);									/* aes_intout[1] */
+		*W2 = *(ptr ++);									/* aes_intout[2] */
+		*W3 = *(ptr ++);									/* aes_intout[3] */
+		*W4 = *(ptr);										/* aes_intout[4] */
 #endif
+	}
 
 	return (aes_intout[0]);
 }
