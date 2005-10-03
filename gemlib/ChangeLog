@@ -1,3 +1,102 @@
+2005-10-03 21:47  'Arnaud BERCEGEAY'
+
+	* VERSION, gemlib.spec.in:
+
+	bumped to version 0.43.5
+	
+2005-10-03 21:45  'Arnaud BERCEGEAY'
+
+	* files.mak:
+
+	added missing object file a_wind_xcreate_grect.o
+	
+2005-10-03 21:45  'Arnaud BERCEGEAY'
+
+	* mt_gem.h.in:
+
+	fixed documentation
+	
+2005-09-22 23:05  'Arnaud BERCEGEAY'
+
+	* rc_array_to_grect.c:
+
+	fix array_to_grect (hope it\'s ok now)
+	
+2005-08-16 23:38  'Arnaud BERCEGEAY'
+
+	* a_wind_get.c:
+
+	fixed mt_wind_get(WF_NAME) and mt_wind_get(WF_INFO) the right way this time
+	(parameter *W1 which is (in this particular case) the first character of the
+	string was overwritten with intout[1].)
+	
+2005-08-16 20:48  'Arnaud BERCEGEAY'
+
+	* a_wind_get.c:
+
+	fixed mt_wind_get(WF_NAME) and mt_wind_get(WF_INFO) (intin[3] was cleared too
+	early).
+	
+2005-08-15 21:09  'Arnaud BERCEGEAY'
+
+	* a_appl_getinfo.c, a_appl_search.c:
+
+	fix documentation for extended call of mt_appl_search (return of a string
+	description and process ID)
+	
+2005-08-15 21:05  'Arnaud BERCEGEAY'
+
+	* files.mak:
+
+	added a_wind_xcreate.o object file for sozobon, pure c and old GCC target
+	to be consistant with default gcc build.
+	
+2005-07-12 12:48  'Odd Skancke'
+
+	* SRCFILES, a_wind_get.c, a_wind_xcreate.c, a_wind_xcreate_grect.c,
+	gem.h, mt_gem.h.in:
+
+	wind_xcreate() added.
+	
+2005-07-11 22:54  'Arnaud BERCEGEAY'
+
+	* a_appl_getinfo.c, mt_gem.h.in:
+
+	added AES_WOPTS mode for mt_appl_getinfo()
+	
+2005-07-05 19:49  'Arnaud BERCEGEAY'
+
+	* a_appl_getinfo.c:
+
+	added documentation for bit 13 of AES_WINDOW
+	
+2005-04-12 22:37  'Arnaud BERCEGEAY'
+
+	* a_menu_ienable.c:
+
+	updated doc (high bit of me_item)
+	
+2005-04-07 21:47  'Arnaud BERCEGEAY'
+
+	* a_appl_getinfo.c:
+
+	updated documentation of mt_appl_getinfo() with mode AES_SYSTEM:
+	bit1 of out4 indicates if the AES supports Interface RSC (MyAES f.e.)
+	
+2005-04-07 19:55  'Arnaud BERCEGEAY'
+
+	* a_shel_write.c:
+
+	updated documentation of mt_shel_write() for
+	- SWM_REZCHANGE mode (added FALCON030 video mode, and tail parameter)
+	- SWM_SHUTDOWN mode (added tail parameter)
+	
+2005-04-01 21:42  'Arnaud BERCEGEAY'
+
+	* ChangeLog:
+
+	updated for release 0.43.4
+	
 2005-04-01 21:35  'Arnaud BERCEGEAY'
 
 	* VERSION, gemlib.spec.in:
