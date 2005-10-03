@@ -531,7 +531,7 @@ typedef struct pEvntrec
  * - msg[6] = w
  * - msg[7] = h of the new window location
  *  
- *  See mt_wind_set() with command #WF_OPTS, bit #WO_SENDREPOS for
+ *  See mt_wind_set() with command #WF_OPTS, bit #WO0_SENDREPOS for
  *  details about the availability of this message.
  *
  *  Use mt_wind_set() with the command #WF_CURRXYWH to change the position
