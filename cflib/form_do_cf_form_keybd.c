@@ -69,10 +69,9 @@ cf_form_keybd (OBJECT *tree, short edit_obj, short kstate, short *kreturn,
 			cont = form_button (tree, obj, 1, next_obj);
 			return cont;
 		}
-		scan = (*kreturn & 0xFF00) >> 8;
 	}
 	
-
+	scan = (*kreturn & 0xFF00) >> 8;
 	cont = form_keybd (tree, edit_obj, *next_obj, *kreturn, next_obj,
 			    kreturn);
 

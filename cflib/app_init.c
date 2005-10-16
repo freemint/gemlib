@@ -61,8 +61,14 @@ init_app (char *rsc)
 	if (getcookie ("NVDI", &l))
 		gl_nvdi = *(unsigned short *) l;
 
-	if (appl_getinfo_str(AES_VERSION, "   XaAES", NULL, NULL, NULL))
-		gl_xaaes = 1;
+	/*
+	 * Ozk: Detect XaAES
+	 */
+	if (appl_getinfo_str(AES_VERSION, s, NULL, NULL, NULL))
+	{
+		s[8] = '\0';
+		gl_xaaes = (!strcmp("   XaAES", s)) ? 1 : 0;
+	}
 
 	/* Systemzeichenstze bestimmen */
 	if (appl_xgetinfo (0, &sys_big_height, &sys_big_id, &d, &d) == 0)
