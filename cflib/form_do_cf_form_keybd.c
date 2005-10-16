@@ -55,30 +55,42 @@ cf_form_keybd (OBJECT *tree, short edit_obj, short kstate, short *kreturn,
 			cont = TRUE;
 	}
 
-	obj = find_shortcut (tree, kstate, *kreturn);
-	if (obj != -1)
+	/*
+	 * Ozk: XaAES have decent shortcut support, so we use that when XaAES
+	 *      is detected.
+	 */
+	if (!gl_xaaes)
 	{
-		*kreturn = 0;
-		cont = form_button (tree, obj, 1, next_obj);
-		return cont;
+		obj = find_shortcut (tree, kstate, *kreturn);
+
+		if (obj != -1)
+		{
+			*kreturn = 0;
+			cont = form_button (tree, obj, 1, next_obj);
+			return cont;
+		}
+		scan = (*kreturn & 0xFF00) >> 8;
 	}
+	
 
-	scan = (*kreturn & 0xFF00) >> 8;
-
-	cont =
-		form_keybd (tree, edit_obj, *next_obj, *kreturn, next_obj,
+	cont = form_keybd (tree, edit_obj, *next_obj, *kreturn, next_obj,
 			    kreturn);
 
 	/*
-	 * Den eventuellen Wechsel des Editfelds mit Cursor/TAB Åbernehmen wir
-	 * selbst, da das AES auch HIDDEN oder DISABLE Felder anspringt!
-	 * Auûerdem werten wir dann gleich noch Shift-TAB mit aus.
+	 * Ozk: This problem is not present under XaAES!
 	 */
-	if ((scan == 0x48) || ((kstate & K_SHIFT) && scan == 0x0F))	/* UP, TAB */
-		*next_obj = find_edit (tree, edit_obj, FMD_BACKWARD);
-	else if ((scan == 0x50) || (scan == 0x0F))	/* DOWN, TAB */
-		*next_obj = find_edit (tree, edit_obj, FMD_FORWARD);
-
+	if (!gl_xaaes)
+	{
+		/*
+		 * Den eventuellen Wechsel des Editfelds mit Cursor/TAB bernehmen wir
+		 * selbst, da das AES auch HIDDEN oder DISABLE Felder anspringt!
+		 * Auerdem werten wir dann gleich noch Shift-TAB mit aus.
+		 */
+		if ((scan == 0x48) || ((kstate & K_SHIFT) && scan == 0x0F))	/* UP, TAB */
+			*next_obj = find_edit (tree, edit_obj, FMD_BACKWARD);
+		else if ((scan == 0x50) || (scan == 0x0F))	/* DOWN, TAB */
+			*next_obj = find_edit (tree, edit_obj, FMD_FORWARD);
+	}
 	return cont;
 }
 

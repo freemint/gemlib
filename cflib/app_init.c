@@ -61,7 +61,10 @@ init_app (char *rsc)
 	if (getcookie ("NVDI", &l))
 		gl_nvdi = *(unsigned short *) l;
 
-	/* SystemzeichensÑtze bestimmen */
+	if (appl_getinfo_str(AES_VERSION, "   XaAES", NULL, NULL, NULL))
+		gl_xaaes = 1;
+
+	/* Systemzeichenstze bestimmen */
 	if (appl_xgetinfo (0, &sys_big_height, &sys_big_id, &d, &d) == 0)
 	{
 		sys_big_id = 1;
@@ -75,13 +78,13 @@ init_app (char *rsc)
 		sys_sml_id = 1;
 		sys_sml_height = 4;
 	}
-
+	
 	cf_vdi_handle = open_vwork (work_out);
 	cf_font_anz = work_out[10];
 	vq_extnd (cf_vdi_handle, TRUE, work_out);
 	gl_planes = work_out[4];
 
-	/* Aus den Pixel-Hîhen Point-Hîhen ermitteln */
+	/* Aus den Pixel-Hhen Point-Hhen ermitteln */
 	sys_sml_pts = height2pts (cf_vdi_handle, sys_sml_id, sys_sml_height);
 	sys_big_pts = height2pts (cf_vdi_handle, sys_big_id, sys_big_height);
 
@@ -95,7 +98,7 @@ init_app (char *rsc)
 
 	/*
 	 * Startverzeichnis ermitteln. 
-	 * Unter N.AES (Minix) kann es ungÅltige Pfade geben, daher der extra 
+	 * Unter N.AES (Minix) kann es ungltige Pfade geben, daher der extra 
 	 * path_exitst().
 	 */
 	shel_read (path, s);

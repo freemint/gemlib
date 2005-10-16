@@ -68,9 +68,9 @@ typedef struct popup POPUP;
 struct popup
 {
 	OBJECT	*tree;			/* der Objektbaum */
-	short	max_item;		/* maximal mîgliche Anzahl */
+	short	max_item;		/* maximal mgliche Anzahl */
 	short	akt_item;		/* aktuelle Anzahl */
-	short	item_len;		/* LÑnge eines Eintrages */
+	short	item_len;		/* Lnge eines Eintrages */
 };
 
 
@@ -105,16 +105,16 @@ struct wdialog
 	WDIALOG	*next;
 
 	OBJECT	*tree;			/* Objektbaum */
-	OBJECT	*icon;			/* Icon fÅr Iconify */
+	OBJECT	*icon;			/* Icon fr Iconify */
 	short	mode;			/* aktueller Status */
 	short	win_handle;		/* Fensterhandle */
 	char	win_name[80];		/* Fenstertitel */
 	short	win_kind;		/* Elemente */
-	GRECT	work;			/* Fenstergrîûe */
+	GRECT	work;			/* Fenstergre */
 	short	title_obj;		/* Objektnummer des Titelobjektes */
 	short	cancel_obj;		/*       "      des Abbruchbuttons */
 	short	delta_y;		/* Offset bis zum Titelobjekt */
-	short	edit_idx,		/* Objektnummern fÅr die Editfelder */
+	short	edit_idx,		/* Objektnummern fr die Editfelder */
 		next_obj,
 		edit_obj;
 
@@ -141,6 +141,7 @@ extern short	gl_planes;
 extern short	gl_gem;
 extern short	gl_mint;
 extern short	gl_naes;
+extern long	gl_xaaes;
 extern short	gl_magx;
 extern short	gl_nvdi;
 
@@ -299,7 +300,7 @@ KEY_CB	set_formdo_keycb (KEY_CB keycb);
 extern int	get_magx_version(void);
 
 #define MX_NOTXOBJ		0		/* kein MagiC-Objekt */
-#define MX_UNDERLINE		1		/* String als öberschrift */
+#define MX_UNDERLINE		1		/* String als berschrift */
 #define MX_RADIO		2		/* Radio ohne Shortcut */
 #define MX_SCRADIO		3		/* Radio mit Shortcut */
 #define MX_CHECK		4		/* Check ohne Shortcut */

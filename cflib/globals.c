@@ -25,7 +25,7 @@
  */
 
 /*
- * Globale Variablen fÅr die cflib.
+ * Globale Variablen fr die cflib.
  */
 
 #include "intern.h"
@@ -71,6 +71,7 @@ short	gl_planes = 1;
 short	gl_gem = 0;
 short	gl_mint = 0;
 short	gl_naes = 0;
+long	gl_xaaes = 0L;
 short	gl_magx = 0;
 short	gl_nvdi = 0;
 
