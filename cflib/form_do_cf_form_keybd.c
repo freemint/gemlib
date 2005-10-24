@@ -72,9 +72,8 @@ cf_form_keybd (OBJECT *tree, short edit_obj, short kstate, short *kreturn,
 	}
 	
 	scan = (*kreturn & 0xFF00) >> 8;
-	cont = form_keybd (tree, edit_obj, *next_obj, *kreturn, next_obj,
+	cont = form_keybd(tree, edit_obj, 0, *kreturn, next_obj,
 			    kreturn);
-
 	/*
 	 * Ozk: This problem is not present under XaAES!
 	 */

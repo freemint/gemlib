@@ -88,39 +88,26 @@ do_mdial (MDIAL *dial)
 
 			if ((event & MU_KEYBD) && (!dial->is_shaded))
 			{
-				cont =
-					cf_form_keybd (dial->tree,
+				cont =	cf_form_keybd (dial->tree,
 						       dial->edit_obj, kstate,
 						       &kreturn,
 						       &dial->next_obj);
-				if (cont)	/* kein Exit-Obj ausgelîst */
+				if (cont)	/* kein Exit-Obj ausgelst */
 				{
-					if (kreturn)
-						cf_objc_edit (dial->tree,
-							      dial->edit_obj,
-							      kreturn,
-							      &dial->edit_idx,
-							      ED_CHAR, kstate,
-							      &b);
-					else if (cont
-						 && (dial->
-						     tree[dial->next_obj].
-						     ob_flags & OF_EDITABLE))
+					if (dial->next_obj > 0 && dial->next_obj != dial->edit_obj
+					   && (dial->tree[dial->next_obj].ob_flags & OF_EDITABLE))
 					{
 						/* kein Exit-Obj aber neues Edit-Obj */
-						objc_edit (dial->tree,
-							   dial->edit_obj, 0,
-							   &dial->edit_idx,
-							   ED_END);
-						dial->edit_obj =
-							dial->next_obj;
-						objc_edit (dial->tree,
-							   dial->edit_obj, 0,
-							   &dial->edit_idx,
-							   ED_INIT);
+						objc_edit (dial->tree, dial->edit_obj, 0, &dial->edit_idx, ED_END);
+						dial->edit_obj = dial->next_obj;
+						dial->edit_idx = -1;
+						objc_edit (dial->tree, dial->edit_obj, 0, &dial->edit_idx, ED_INIT);
 					}
+					if (kreturn)
+						cf_objc_edit (dial->tree, dial->edit_obj, kreturn, &dial->edit_idx, ED_CHAR, kstate, &b);
 				}
 			}
+			
 			if (event & MU_BUTTON)
 			{
 				dial->next_obj =
@@ -178,7 +165,7 @@ do_mdial (MDIAL *dial)
 	}
 	
 	if (doppel)
-		ret |= 0x8000;	/* bit 15 fÅr Doppelklick */
+		ret |= 0x8000;	/* bit 15 fr Doppelklick */
 	
 	return ret;
 }

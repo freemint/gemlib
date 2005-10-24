@@ -38,29 +38,28 @@ key_wdial (short kreturn, short kstate)
 	wd = get_wdial (wh);
 	if (wd != NULL && wd->mode == WD_OPEN)
 	{
-		cont =
-			cf_form_keybd (wd->tree, wd->edit_obj, kstate,
+		cont = cf_form_keybd (wd->tree, wd->edit_obj, kstate,
 				       &kreturn, &wd->next_obj);
 		if (cont)
 		{
-			if (kreturn)
-				cf_objc_edit (wd->tree, wd->edit_obj, kreturn,
-					      &wd->edit_idx, ED_CHAR, kstate,
-					      &ctrl);
-			else if (cont
-				 && (wd->tree[wd->next_obj].ob_flags & OF_EDITABLE))
+			if (wd->next_obj > 0 && wd->next_obj != wd->edit_obj && (wd->tree[wd->next_obj].ob_flags & OF_EDITABLE))
 			{
 				objc_edit (wd->tree, wd->edit_obj, 0,
 					   &wd->edit_idx, ED_END);
 				wd->edit_obj = wd->next_obj;
+				wd->edit_idx = -1;
 				objc_edit (wd->tree, wd->edit_obj, 0,
 					   &wd->edit_idx, ED_INIT);
 			}
+			if (kreturn)
+				cf_objc_edit (wd->tree, wd->edit_obj, kreturn,
+					      &wd->edit_idx, ED_CHAR, kstate,
+					      &ctrl);
 		}
 		else
 			wdial_call_cb (wd);
 
-		/* alle Ctrl-Codes aužer ^X^C^V werden nicht ausgewertet */
+		/* alle Ctrl-Codes auer ^X^C^V werden nicht ausgewertet */
 		if ((kstate & K_CTRL) && !ctrl)
 			ret = FALSE;
 	}
