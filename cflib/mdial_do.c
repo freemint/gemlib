@@ -94,8 +94,7 @@ do_mdial (MDIAL *dial)
 						       &dial->next_obj);
 				if (cont)	/* kein Exit-Obj ausgelst */
 				{
-					if (dial->next_obj > 0 && dial->next_obj != dial->edit_obj
-					   && (dial->tree[dial->next_obj].ob_flags & OF_EDITABLE))
+					if (dial->next_obj != dial->edit_obj && (dial->tree[dial->next_obj].ob_flags & OF_EDITABLE))
 					{
 						/* kein Exit-Obj aber neues Edit-Obj */
 						objc_edit (dial->tree, dial->edit_obj, 0, &dial->edit_idx, ED_END);

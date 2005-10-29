@@ -25,8 +25,8 @@
  */
 
 /*
- * ACHTNG: Dieses Modul darf nicht mit -O Åbersetzt werden, da sonst der 
- *         ASM-Hack kaputt-optimiert wird!! (gilt nur fÅr gcc 2.7.2.3)
+ * ACHTNG: Dieses Modul darf nicht mit -O bersetzt werden, da sonst der 
+ *         ASM-Hack kaputt-optimiert wird!! (gilt nur fr gcc 2.7.2.3)
  *
  */
 
@@ -41,7 +41,7 @@
 
 #ifdef __GNUC__
 /*
- * Hier mÅssen wir basteln, um int-Parameter auf wortbreite umzumappen.
+ * Hier mssen wir basteln, um int-Parameter auf wortbreite umzumappen.
 */
 #define xfsl_init(f, w, l) \
 __extension__ \
@@ -111,7 +111,7 @@ __extension__ \
 
 static xFSL_PAR	xpar;
 static PFONTINFO f_info;
-static EVENT ev;
+// static EVENT ev;
 
 static inline short
 do_xfsl (long v, short handle, short flags, char *title, short *id, short *pts)
@@ -120,7 +120,8 @@ do_xfsl (long v, short handle, short flags, char *title, short *id, short *pts)
 	int ret = 0;
 	int win;
 	int use_win;
-		
+	EVENT ev;
+
 	xfsl = (xFSL *)v;
 	memset(&ev, 0, sizeof(EVENT));
 
@@ -162,7 +163,7 @@ do_xfsl (long v, short handle, short flags, char *title, short *id, short *pts)
 	do
 	{
 		ret = xfsl_event(xfsl->xfsl_event, win, &ev);
-      if (ret == xFS_EVENT)
+		if (ret == xFS_EVENT)
 		{
 #ifdef __GNUC__
 			short m[8], i;
@@ -281,7 +282,7 @@ do_magx (short handle, short f_anz, short flags, short *id, short *pts)
 
 			/*
 			 * GNU erwartet beim evnt_multi wirklich 'int', in EVNT sind aber
-			 * nur 'short', so daû die Struktur nicht Åbergeben werden kann!
+			 * nur 'short', so da die Struktur nicht bergeben werden kann!
 			*/
 			ev.mwhich = (short)evnt_multi(MU_KEYBD|MU_MESAG|MU_BUTTON, 2, 1, 1, 
 											0, 0, 0, 0, 0,	0, 0, 0, 0, 0,
@@ -307,7 +308,7 @@ do_magx (short handle, short f_anz, short flags, short *id, short *pts)
 					case WM_REDRAW :
 					case WM_MOVED :
 					case WM_SIZED:
-						if (ev.msg[3] != win)		/* fÅr fremdes Fenster */
+						if (ev.msg[3] != win)		/* fr fremdes Fenster */
 #ifdef __GNUC__
 							handle_mdial_msg(msg);
 #else
@@ -362,8 +363,8 @@ do_fontsel (short flags, char *title, short *id, short *pts)
 				
 	/* 
 	 * Wir machen einfach eine eigene WS auf, da MagiC am Handle rumfummelt und
-	 * alte UFSL den Demotext drucken wÅrden.
-	 * Wer einen Font fÅr den Drucker nicht fÅr den Bildschirm anmeldet,
+	 * alte UFSL den Demotext drucken wrden.
+	 * Wer einen Font fr den Drucker nicht fr den Bildschirm anmeldet,
 	 * hat selber schuld!
 	 */
 	fs_handle = open_vwork(workout);
@@ -391,7 +392,7 @@ do_fontsel (short flags, char *title, short *id, short *pts)
 	{
 		ok = do_magx(fs_handle, f_anz, flags, &new_id, &new_pts);
 	}
-	else /* keine der drei Methoden mîglich */
+	else /* keine der drei Methoden mglich */
 	{
 		*id = -1;
 		*pts = -1;

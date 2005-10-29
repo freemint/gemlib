@@ -72,9 +72,7 @@ cf_form_do (OBJECT *tree, short *ed_start)
 
 		if (which & MU_KEYBD)
 		{
-			cont =
-				cf_form_keybd (tree, edit_obj, kstate,
-					       &kreturn, &next_obj);
+			cont = cf_form_keybd (tree, edit_obj, kstate, &kreturn, &next_obj);
 			if (kreturn)
 				cf_objc_edit (tree, edit_obj, kreturn, &idx,
 					      ED_CHAR, kstate, &b);
@@ -106,7 +104,7 @@ cf_form_do (OBJECT *tree, short *ed_start)
 	wind_update (END_MCTRL);
 
 	if (doppel)
-		next_obj |= 0x8000;	/* bit 15 fÅr Doppelklick */
+		next_obj |= 0x8000;	/* bit 15 fr Doppelklick */
 
 	return next_obj;
 }

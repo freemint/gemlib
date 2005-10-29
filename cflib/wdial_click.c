@@ -45,29 +45,17 @@ click_wdial (short clicks, short x, short y, short kshift, short mbutton)
 			obj = cf_objc_find (wd->tree, ROOT, MAX_DEPTH, x, y);
 			if (obj > -1)
 			{
-				cont =
-					form_button (wd->tree, obj, clicks,
-						     &wd->next_obj);
-				if (cont
-				    &&
-				    (get_flag
-				     (wd->tree, wd->next_obj, OF_EDITABLE)))
+				cont = form_button (wd->tree, obj, clicks, &wd->next_obj);
+				if (cont && (get_flag (wd->tree, wd->next_obj, OF_EDITABLE)))
 				{
-					objc_edit (wd->tree, wd->edit_obj, 0,
-						   &wd->edit_idx, ED_END);
+					objc_edit (wd->tree, wd->edit_obj, 0, &wd->edit_idx, ED_END);
 					wd->edit_obj = wd->next_obj;
 #ifdef ED_CRSR
 					if (gl_magx)
-						objc_edit (wd->tree,
-							   wd->edit_obj, x,
-							   &wd->edit_idx,
-							   ED_CRSR);
+						objc_edit (wd->tree, wd->edit_obj, x, &wd->edit_idx, ED_CRSR);
 					else
 #endif
-						objc_edit (wd->tree,
-							   wd->edit_obj, 0,
-							   &wd->edit_idx,
-							   ED_INIT);
+						objc_edit (wd->tree, wd->edit_obj, 0, &wd->edit_idx, ED_INIT);
 				}
 				else if (!cont)
 				{

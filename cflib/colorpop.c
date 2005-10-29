@@ -32,16 +32,16 @@
 #include <assert.h>
 
 
-/* Grîûen der einzelnen Farbfelder
+/* Gren der einzelnen Farbfelder
  */
 #define SMALLSIZE 14
 #define BIGSIZE 22
 
 
-/* flags fÅr ub_parm */
+/* flags fr ub_parm */
 #define F_USEROBJ 0x10000L	/* Objekt ist User-Objekt (durch fix_colorpopobj() umgewandelt) */
 				/* (wird etwas anders dargestellt als die Objekte im Farbpopup, */
-				/* grîûerer Schatten */
+				/* grerer Schatten */
 
 /* Spezielle Werte in ub_parm: (statt Farbindex) */
 #define T_COLPOP -1		/* Farbe wird je nach Index im Baum dargestellt */
@@ -50,12 +50,12 @@
 /* Lokale Variablen
  */
 static OBJECT *poptree = NULL;			/* Objekbaum Farb-Popup, wird bei init angelegt */
-static int max_displayable_planes;		/* Maximal darstellbare Planes in dieser Auflîsung */
+static int max_displayable_planes;		/* Maximal darstellbare Planes in dieser Auflsung */
 static int framewidth;				/* Berechnung des Abstands zwischen Farbfeldern */
-static short fattrib[5], lattrib[6];		/* Sicherung fÅr FÅll- und Linienattribute */
-static USERBLK userblk;				/* Ein Userblock fÅr alle EintrÑge im Popup-MenÅ */
-static USERBLK noncolor_userblk;		/* Userblock fÅr "Nichtfarbe"-Eintrag */
-static USERBLK popobj_userblk[MAX_COLORPOP];	/* Userblock-Liste fÅr alle Farbobjekte */
+static short fattrib[5], lattrib[6];		/* Sicherung fr Fll- und Linienattribute */
+static USERBLK userblk;				/* Ein Userblock fr alle Eintrge im Popup-Men */
+static USERBLK noncolor_userblk;		/* Userblock fr "Nichtfarbe"-Eintrag */
+static USERBLK popobj_userblk[MAX_COLORPOP];	/* Userblock-Liste fr alle Farbobjekte */
 static int nocolor_sub;
 static int handle, use_3D;
 
@@ -97,7 +97,7 @@ restore_attribs (void)
 }
 
 
-/* nicht-3d-Darstellung fÅr Farb-Objekt */
+/* nicht-3d-Darstellung fr Farb-Objekt */
 static void
 draw_non_3d (PARMBLK * parmblk)
 {
@@ -119,7 +119,7 @@ draw_non_3d (PARMBLK * parmblk)
 	}
 	else /* nichtselektierter Rahmen ist 1 Pixel dick und schwarz */
 	{
-		vsf_color (handle, G_WHITE);	/* erst ggf. vorher vorhandene Selektion weiû Åbermalen */
+		vsf_color (handle, G_WHITE);	/* erst ggf. vorher vorhandene Selektion wei bermalen */
 		grect_to_array ((GRECT *) &(parmblk->pb_x), pxy);
 		v_bar (handle, pxy);
 
@@ -147,7 +147,7 @@ draw_non_3d (PARMBLK * parmblk)
 	grect_to_array ((GRECT *) &(parmblk->pb_x), pxy);
 	v_bar (handle, pxy);
 
-	/* Kreuz fÅr Nichtfarbobjekt zeichnen */
+	/* Kreuz fr Nichtfarbobjekt zeichnen */
 	if (color == T_NOCOLOR)
 	{
 		vsl_color (handle, G_BLACK);
@@ -166,7 +166,7 @@ draw_non_3d (PARMBLK * parmblk)
 
 }
 
-/* 3d-Darstellung fÅr Farbobjekt */
+/* 3d-Darstellung fr Farbobjekt */
 static void
 draw_3d (PARMBLK *parmblk)
 {
@@ -229,7 +229,7 @@ draw_3d (PARMBLK *parmblk)
 	pxy[4] = parmblk->pb_x;
 	pxy[5] = parmblk->pb_y + parmblk->pb_h - 1;
 
-	if (flags & F_USEROBJ)	/* Benutzerobjekte haben dickeren Schatten (da sie meist grîûer sind) */
+	if (flags & F_USEROBJ)	/* Benutzerobjekte haben dickeren Schatten (da sie meist grer sind) */
 	{
 		pxy[6] = pxy[4] + 1;
 		pxy[7] = pxy[5] - 1;
@@ -242,12 +242,12 @@ draw_3d (PARMBLK *parmblk)
 	else
 		v_pline (handle, 3, pxy);
 
-	/* Kreuz fÅr Nichtfarbobjekt zeichnen */
+	/* Kreuz fr Nichtfarbobjekt zeichnen */
 	if (color == T_NOCOLOR)
 	{
 		int movewidth = flags & F_USEROBJ ? 1 : 2;
 
-		if (state & OS_SELECTED) /* Das selektierte Kreuz ist weiter nach rechts unten verschoben, "eingedrÅckt" */
+		if (state & OS_SELECTED) /* Das selektierte Kreuz ist weiter nach rechts unten verschoben, "eingedrckt" */
 		{
 			vsl_color (handle, G_BLACK);
 
@@ -310,8 +310,8 @@ colorpop_userdef (PARMBLK *parmblk)
 
 }
 
-/* öberprÅfen, ob Objekt Farb-Popup-Objekt ist
- * (nur fÅr Assertion in set_popobjcolor() / get_popobjcolor()
+/* berprfen, ob Objekt Farb-Popup-Objekt ist
+ * (nur fr Assertion in set_popobjcolor() / get_popobjcolor()
  */
 static short
 is_colorpop_object (OBJECT *tree, short obj)
@@ -376,9 +376,9 @@ init_colorpop (short maxplanes)
 	else
 		use_3D = FALSE;
 
-	userblk.ub_code = colorpop_userdef;	/* Userblk fÅr die Farbfelder im Farb-Popup init. */
+	userblk.ub_code = colorpop_userdef;	/* Userblk fr die Farbfelder im Farb-Popup init. */
 	userblk.ub_parm = (long) T_COLPOP & 0xffffl;	/* -1: Farbe wird je nach Index im Baum dargestellt. */
-	noncolor_userblk.ub_code = colorpop_userdef;	/* Userblk fÅr das "Nichtfarb"-Feld im Farb-Popup init. */
+	noncolor_userblk.ub_code = colorpop_userdef;	/* Userblk fr das "Nichtfarb"-Feld im Farb-Popup init. */
 	noncolor_userblk.ub_parm = (long) T_NOCOLOR & 0xffffl;	/* -2: Nichtfarbe wird dargestellt. */
 
 	vq_extnd (handle, 1, workout);
@@ -419,10 +419,10 @@ exit_colorpop (void)
 }
 
 
-/* Initialisierung des Baumes fÅr
+/* Initialisierung des Baumes fr
  * das Farb-Popup; wird bei jedem Aufruf von
  * do_colorpop() erneut aufgerufen, um den Baum
- * fÅr unterschiedliche Farbanzahl zu initialisieren
+ * fr unterschiedliche Farbanzahl zu initialisieren
  */
 static void
 ini_colorpop (short planes, short show_noncolor)
@@ -482,7 +482,7 @@ ini_colorpop (short planes, short show_noncolor)
 		
 		x += 1;
 		
-		if (x == maxx || y == 0 && show_noncolor)
+		if (x == maxx || (y == 0 && show_noncolor))
 		{
 			x = 0;
 			y++;
@@ -499,7 +499,7 @@ ini_colorpop (short planes, short show_noncolor)
 }
 
 
-/* Farbpopup ausfÅhren
+/* Farbpopup ausfhren
  */
 short
 do_colorpop (short x, short y, short act_color, short planes, short show_noncolor)
@@ -557,7 +557,7 @@ do_colorpop (short x, short y, short act_color, short planes, short show_noncolo
 }
 
 
-/* Farbpopup fÅr gegebenes Farbobjekt ausfÅhren
+/* Farbpopup fr gegebenes Farbobjekt ausfhren
  */
 short
 handle_colorpop (OBJECT *dial, short dial_obj, short mode, short planes,
