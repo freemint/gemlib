@@ -44,6 +44,15 @@ cf_objc_edit (OBJECT *tree, short obj, short kreturn, short *idx, short mode,
 	if (!(tree[obj].ob_flags & OF_EDITABLE))
 		return;
 
+	/* Ozk:
+	 * We let XaAES get its hands on any keys!
+	 */
+	if (gl_xaaes)
+	{
+		objc_edit(tree, obj, kreturn, idx, mode);
+		return;
+	}
+
 	if (mode == ED_CHAR)
 	{
 		int scan, i;
@@ -53,7 +62,7 @@ cf_objc_edit (OBJECT *tree, short obj, short kreturn, short *idx, short mode,
 		char buf[80];
 
 		*ctrl = FALSE;
-
+		
 		ted = (TEDINFO *) get_obspec (tree, obj);
 		ptext = ted->te_ptext;
 
@@ -64,7 +73,7 @@ cf_objc_edit (OBJECT *tree, short obj, short kreturn, short *idx, short mode,
 			{
 				case 0x2D:	/* ^X -> Cut */
 					scrap_wtxt (ptext);
-					objc_edit (tree, obj, 0x11B, idx, ED_CHAR);	/* ESC: l”schen */
+					objc_edit (tree, obj, 0x11B, idx, ED_CHAR);	/* ESC: lschen */
 					*ctrl = TRUE;
 					break;
 
@@ -74,7 +83,7 @@ cf_objc_edit (OBJECT *tree, short obj, short kreturn, short *idx, short mode,
 					break;
 
 				case 0x2F:	/* ^V -> Paste */
-					objc_edit (tree, obj, 0x11B, idx, ED_CHAR);	/* ESC: l”schen */
+					objc_edit (tree, obj, 0x11B, idx, ED_CHAR);	/* ESC: lschen */
 					scrap_rtxt (buf, &l, 80);
 					for (i = 0;
 					     i < min (l, ted->te_txtlen - 1);

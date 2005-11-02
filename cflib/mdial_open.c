@@ -67,8 +67,7 @@ open_mdial (OBJECT *tree, short edit_start)
 
 		/* Editfeld */
 		if ((edit_start <= 0) || !edit_valid (dial->tree, edit_start))
-			dial->edit_obj =
-				find_edit (dial->tree, 0, FMD_FORWARD);
+			dial->edit_obj = find_edit (dial->tree, 0, FMD_FORWARD);
 		else
 			dial->edit_obj = edit_start;
 
@@ -86,7 +85,7 @@ open_mdial (OBJECT *tree, short edit_start)
 			d = (r2.g_h - r1.g_h) / 2 + dial->delta_y / 2;
 			r2.g_y += d;
 			tree[0].ob_y += d;
-			/* herausragen ins Men verhindern */
+			/* herausragen ins Men verhindern */
 			if (r2.g_y < gl_desk.g_y)
 			{
 				tree[0].ob_y += (gl_desk.g_y - r2.g_y);
@@ -99,7 +98,7 @@ open_mdial (OBJECT *tree, short edit_start)
 		{
 			short msg[8];
 
-			/* Men abschalten */
+			/* Men abschalten */
 			disable_menu ();
 
 			if (dial->win_name)
