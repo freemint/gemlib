@@ -1084,7 +1084,8 @@ typedef  struct
 #define ENVIRON_COPY	2	/**< copy the evironment string in a buffer, see mt_shel_write() */
 
 /* shel_write: mode SWM_NEWMSG, parameter 'wisgr' */
-#define NM_APTERM		0x0001	/**< the application understands #AP_TERM messages, see #SWM_NEWMSG */
+#define NM_APTERM		0x0001	/**< the application understands #AP_TERM messages, see mt_shel_write() and #SWM_NEWMSG */
+#define NM_INHIBIT_HIDE	0x0002	/**< the application won't be hidden, see mt_shel_write() and #SWM_NEWMSG */
 
 /* Werte fr Modus SWM_AESMSG (fr shel_write) */
 #define AP_AESTERM		52     /* Mode 10: N.AES komplett terminieren. */	/**< TODO */

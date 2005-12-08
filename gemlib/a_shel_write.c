@@ -216,12 +216,12 @@
  *			 current application understands.
  *           - \a wisgr is a bit mask which specifies which new
  *			   messages the application understands.
- *			   Currently only bit 0 (#NM_APTERM) has
- *			   a meaning. Setting this bit when calling
- *			   this function will inform the AES that
- *			   the application understands #AP_TERM
- *			   messages. 
- *           - No other parameters are used.
+ *			   - bit 0 (#NM_APTERM) informs the AES that
+ *			     the application understands #AP_TERM
+ *			     messages. 
+ *             - bit 1 (#NM_INHIBIT_HIDE) prevent the application
+ *               to be hidden. Usefull for "desktop" utilities
+ *               like taskbar. 
  *
  *			 This mode is only recognized as of AES
  *			 version 4.0.
