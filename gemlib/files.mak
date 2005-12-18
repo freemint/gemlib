@@ -133,6 +133,7 @@ OBJ = \
  a_wind_update.o	\
  a_wind_xcreate.o	\
  a_wind_xcreate_grect.o	\
+ a_wind_xget_grect.o	\
  doxydoc.o	\
  globals.o	\
  n_v_bez.o	\
