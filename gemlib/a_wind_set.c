@@ -182,11 +182,18 @@
  *          This mode allows to configure the feature of window on
  *          mouse wheel events
  *          - \a WindowHandle handle of the window, or -1 to apply the setting to all windows
-              that will be created later by the application.
- *			- \a W1 may be one of the following value:
+ *            that will be created later by the application.
+ *          - \a W1 may be one of the following value:
  *             -  #WHEEL_MESAG : AES will send #WM_WHEEL messages
  *             -  #WHEEL_ARROWED : AES will send #WM_ARROWED messages
  *             -  #WHEEL_SLIDER : AES will convert mouse wheel events to slider events
+ *         
+ *         Please note that it's not mandatory to explicitly set the #WO0_WHEEL bit of #WF_OPTS
+ *         to enable this mouse wheel feature. A simple mt_wind_set(#WF_WHEEL) is enought.
+ *         
+ *         XaAES supports these 3 values of \a W1. MyAES (xmas 2005 edition) only support
+ *         #WHEEL_MESAG value. So if you want your application to support the mouse wheel with
+ *         both MyAES and XaAES, you should use #WHEEL_MESAG.
  *
  *         mt_appl_getinfo() with parameter #AES_WINDOW returns the availability of this mode.
  *					   					
@@ -195,7 +202,7 @@
  *          mouse wheel events
  *          - \a WindowHandle may be 0 (=> all the windows of the calling
  *            application are then concerned)
- *			- \a W1 is the mode : 0 = clear, 1 = set option bits
+ *          - \a W1 is the mode : 0 = clear, 1 = set option bits
  *          - \a W2 is the the first option word bitmask. Bits are defined as
  *            follow:
  *				- #WO0_WHEEL (0x0001) : Setting this bit will enable extended mouse
@@ -213,7 +220,7 @@
  *				- #WO0_NOBLITH (0x0008) : Setting this bit will make AES send #WM_REDRAW
  *				  messages to cover the whole work-area of the window when its HEIGHT changes.
  *				  Default behaviour is to send #WM_REDRAW messages for the areas that need it.
- *				- #WO0_SENDREPOS (0x0000) : Setting this bit will make AES send a
+ *				- #WO0_SENDREPOS (0x0010) : Setting this bit will make AES send a
  *				  #WM_REPOSED message when a windows X/WIDTH and/or Y/HEIGHT coordinate pair changes.
  *				  Such changes happen when the user resizes the window using upper/left borders.
  *				  Default behaviour is to first send a #WM_MOVED followed by a #WM_SIZED
@@ -225,6 +232,7 @@
  *                yet)
  *
  *         mt_appl_getinfo() with parameter #AES_WINDOW returns the availability of this mode.
+ *         mt_appl_getinfo() with parameter #AES_WOPTS returns the support of WOx_xxx feature .
  *					   					
  * <tr><td> #WF_WIDGETS  <td>      200 <td>
  *          Sets the actual positions of the slider widgets
