@@ -537,9 +537,6 @@ typedef struct pEvntrec
  *  Use mt_wind_set() with the command #WF_CURRXYWH to change the position
  *  of the window. 
  *
- *  Available only with XaAES kernel module compiled on
- *  November 8 2004 or later.
- *
  */
 #define WM_REPOSED		38
 
@@ -816,9 +813,6 @@ typedef struct pEvntrec
  *  
  *  See mt_wind_set() with command #WF_WHEEL for
  *  details about the availability of this message.
- *
- *  Available only with XaAES kernel module compiled on
- *  November 8 2004 or later.
  *
  */
 #define WM_WHEEL		345

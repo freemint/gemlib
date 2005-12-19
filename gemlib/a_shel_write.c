@@ -219,7 +219,7 @@
  *			   - bit 0 (#NM_APTERM) informs the AES that
  *			     the application understands #AP_TERM
  *			     messages. 
- *             - bit 1 (#NM_INHIBIT_HIDE) prevent the application
+ *			   - bit 1 (#NM_INHIBIT_HIDE) prevent the application
  *               to be hidden. Usefull for "desktop" utilities
  *               like taskbar. 
  *
