@@ -1,3 +1,36 @@
+2005-12-19 21:03  'Arnaud BERCEGEAY'
+
+	* VERSION, a_form_keybd.c, a_shel_write.c, a_wind_set.c,
+	gemlib.spec.in, mt_gem.h.in:
+
+	- BUMPED to version 0.43.6
+	- refresh documentation about mouse wheel support
+	- modification of documentation layout (mainly form_keybd).
+	
+2005-12-19 00:07  'Arnaud BERCEGEAY'
+
+	* files.mak:
+
+	added missing wind_xget obj file for sox, pc and gcc281 compilers
+	
+2005-12-08 20:19  'Arnaud BERCEGEAY'
+
+	* a_shel_write.c, mt_gem.h.in:
+
+	added NM_INHIBIT_HIDE flag and its documentation
+	
+2005-10-29 21:03  'Odd Skancke'
+
+	* a_form_keybd.c:
+
+	Updated comments on form_keybd() function
+	
+2005-10-03 21:48  'Arnaud BERCEGEAY'
+
+	* ChangeLog:
+
+	updated for release 0.43.5
+	
 2005-10-03 21:47  'Arnaud BERCEGEAY'
 
 	* VERSION, gemlib.spec.in:
