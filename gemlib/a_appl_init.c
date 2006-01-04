@@ -40,7 +40,14 @@
  *                            Pointer to the base of the resource
  *		    			      loaded via mt_rsrc_load().
  *
- * <tr><td> (reserved)   <td>  7-12  <td>
+ * <tr><td> (reserved)   <td>  7-9  <td>
+ *                           Reserved
+ *                           
+ * <tr><td> (reserved)   <td>  10  <td>
+ *                           Number of planes of the VDI workstation
+ *                           opened by the AES (used by BubbleGEM)
+ *                           
+ * <tr><td> (reserved)   <td>  11-12  <td>
  *                           Reserved
  *
  * <tr><td> mt_AESmaxchar()  <td>  13	 <td>
