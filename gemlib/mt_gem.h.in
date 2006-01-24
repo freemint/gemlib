@@ -394,7 +394,7 @@ typedef struct pEvntrec
  *  use only.
  *
  *  @since AES version 4.0.  The availability of this feature could
- *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  */
 #define WM_UNTOPPED		30
 
@@ -414,7 +414,7 @@ typedef struct pEvntrec
  *  use only.
  *
  *  @since AES version 4.0.  The availability of this feature could
- *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  */
 #define WM_ONTOP		31
 
@@ -437,7 +437,7 @@ typedef struct pEvntrec
  *  configuration.
  *
  *  @since AES version 4.1.  The availability of this feature could
- *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  */
 #define WM_BOTTOM		33
 #define WM_BOTTOMED		WM_BOTTOM	/**< see #WM_BOTTOM */
@@ -457,7 +457,7 @@ typedef struct pEvntrec
  *  by calling mt_wind_set() with #WF_ICONIFY command.
  *
  *  @since AES version 4.1.  The availability of this feature could
- *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  *
  */
 #define WM_ICONIFY		34
@@ -477,7 +477,7 @@ typedef struct pEvntrec
  *  by calling mt_wind_set() with #WF_UNICONIFY command.
  *
  *  @since AES version 4.1.  The availability of this feature could
- *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  *
  */
 #define WM_UNICONIFY	35
@@ -498,7 +498,7 @@ typedef struct pEvntrec
  *  window at the position indicated which represents the application.
  *
  *  @since AES version 4.1.  The availability of this feature could
- *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  */
 #define WM_ALLICONIFY	36
 
@@ -514,7 +514,7 @@ typedef struct pEvntrec
  * - msg[7] = 
  *
  *  @since AES version 4.1.  The availability of this feature could
- *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU (BUG?FIXME!).
  *
  */
 #define WM_TOOLBAR		37
@@ -600,7 +600,7 @@ typedef struct pEvntrec
  *  #AP_TERM
  *
  *  @since AES version 4.0.  The availability of this feature could
- *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  */
 #define AP_TERM			50
 
@@ -640,14 +640,14 @@ typedef struct pEvntrec
  * - msg[7] = 
  *
  *  @since AES version 4.0.  The availability of this feature could
- *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  */
 #define SHUT_COMPLETED		60
 
 /** message received by the application which requested a resolution change,
  *  when the resolution change is complete.
  *
- * - msg[0] = #SHUT_COMPLETED
+ * - msg[0] = #RESCHG_COMPLETED
  * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] = indicate the success of the resolution change:
@@ -660,7 +660,7 @@ typedef struct pEvntrec
  *
  *
  *  @since AES version 4.0.  The availability of this feature could
- *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  */
 #define RESCHG_COMPLETED	61
 
@@ -738,7 +738,7 @@ typedef struct pEvntrec
  * - msg[7] =
  *
  *  @since AES version 4.0.  The availability of this feature could
- *  be check by calling mt_appl_getinfo() with the parameter #AES_MENU.
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  */
 #define CH_EXIT 			90
 
