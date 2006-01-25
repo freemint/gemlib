@@ -128,8 +128,8 @@
  *			 mode is usually used prior to
  *			 a resolution change to cause system
  *			 processes to terminate.
- *			 - \a wisgr and \a cmd are ignored by this call.
- *			 - \a wiscr determines the action this call
+ *			 - \a wiscr and \a cmd are ignored by this call.
+ *			 - \a wisgr determines the action this call
  *			   takes as follows:
  *			   - #SD_ABORT : Abort shutdown mode
  *			   - #SD_PARTIAL : Partial shutdown mode
