@@ -59,6 +59,7 @@ OBJ = \
  a_form_do.o	\
  a_form_error.o	\
  a_form_keybd.o	\
+ a_fsel_boxinput.o \
  a_fsel_exinput.o	\
  a_fsel_input.o	\
  a_glue.o	\
@@ -75,6 +76,8 @@ OBJ = \
  a_graf_shrinkbox_grect.o	\
  a_graf_slidebox.o	\
  a_graf_watchbox.o	\
+ a_graf_wwatchbox.o \
+ a_graf_xhandle.o \
  a_menu_attach.o	\
  a_menu_bar.o	\
  a_menu_click.o	\
@@ -97,6 +100,7 @@ OBJ = \
  a_objc_offset.o	\
  a_objc_order.o	\
  a_objc_sysvar.o	\
+ a_objc_xfind.o \
  a_rsrc_free.o	\
  a_rsrc_gaddr.o	\
  a_rsrc_load.o	\
@@ -121,6 +125,7 @@ OBJ = \
  a_wind_create.o	\
  a_wind_create_grect.o	\
  a_wind_delete.o	\
+ a_wind_draw.o \
  a_wind_find.o	\
  a_wind_get.o	\
  a_wind_get_grect.o	\
@@ -134,7 +139,7 @@ OBJ = \
  a_wind_xcreate.o	\
  a_wind_xcreate_grect.o	\
  a_wind_xget_grect.o	\
- doxydoc.o	\
+ a_wind_xset_grect.o \
  globals.o	\
  n_v_bez.o	\
  n_v_bez_fill.o	\
