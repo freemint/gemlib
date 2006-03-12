@@ -3,6 +3,7 @@
 
 SRCFILES += \
 	BINFILES \
+	ChangeLog \
 	ChangeLog.old \
 	EXTRAFILES \
 	MISCFILES \
@@ -12,4 +13,15 @@ SRCFILES += \
 	\
 	gemlib.spec \
 	VERSION \
-	mt_gem.h.in
+	mt_gem.h.in \
+	\
+	doxydoc.c \
+	Doxyfile \
+	\
+	files.mak \
+	gcc281-16.mak \
+	gcc281.mak \
+	gcc.mak \
+	pc.mak \
+	sox.mak \
+	zip.mak
