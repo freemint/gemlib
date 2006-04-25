@@ -24,4 +24,8 @@ SRCFILES += \
 	gcc.mak \
 	pc.mak \
 	sox.mak \
-	zip.mak
+	zip.mak \
+	\
+	_lc_asm.s \
+	_pc_asm.s \
+	_sx_asm.s
