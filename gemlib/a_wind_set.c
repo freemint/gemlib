@@ -242,6 +242,31 @@
  *          - \a W3 and \a W4 are the horizontal elements of type bottomwidgets.
  *            (\a W3 is the left and \a W4 is the right widget of the horizotal
  *		      slider).
+ *					   					
+ * <tr><td> #WF_TOPMOST  <td>      232 <td>
+ *          Sets the actual window at topmost level (details below).
+ *          - \a W1 should be set to one of the following values:
+ *             - 0 : remove topmost state.
+ *             - 1 : Set topmost state at global level
+ *             - 2 : Set topmost state at application level
+ *          - \a W2, \a W3 and \a W4 are reseved and should be set to 0.
+ *
+ *          Topmost windows always 'float' ontop of classical windows.
+ *          One key feature of windows in any WF_TOPMOST state is that they do not
+ *          disturb current keyboard focus, and can be used to issue important
+ *          messages, status raports, etc., without demanding user interaction. As
+ *          consequence, topmost window never get keyboard focus, and they never get
+ *          WM_TOPPED or WM_UNTOPPED AES messages
+ *
+ *          Mode 1 of topmost windows fits well for task bar applications for example
+ *          (window displayed whatever the active application)
+ *
+ *          Mode 2 of topmost windows fits well for toolbox windows: the visibility of
+ *          the window is linked to the application that has the focus. That is, when owner
+ *          is untopped the toolbox window disappears, when owner regains focus, the
+ *          window automatically reappears (no action required by the application, opening and
+ *          closing of the window is performed by the AES).
+ *         
  *	</table>
  *
  *  @since All AES versions.
