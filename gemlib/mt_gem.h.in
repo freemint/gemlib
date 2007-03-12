@@ -546,10 +546,12 @@ typedef struct pEvntrec
  * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
  * - msg[3] =  
- * - msg[4] = AES application ID of the accessory to open
+ * - msg[4] = menu ID of the accessory to open
  * - msg[5] = 
  * - msg[6] = 
  * - msg[7] = 
+ *
+ *  The menu ID is the value returned by mt_menu_register()
  *
  */
 #define AC_OPEN			40
@@ -560,11 +562,13 @@ typedef struct pEvntrec
  * - msg[0] = #AC_CLOSE
  * - msg[1] = AES application ID of the sender
  * - msg[2] = 0
- * - msg[3] = AES application ID of the accessory to close.
+ * - msg[3] = menu ID of the accessory to close.
  * - msg[4] = 
  * - msg[5] = 
  * - msg[6] = 
  * - msg[7] = 
+ *
+ *  The menu ID is the value returned by mt_menu_register()
  *
  *  Do not close any windows your accessory had open, the system will do this for you.
  *  Also, do not require any feedback from the user when this is received. Treat this
