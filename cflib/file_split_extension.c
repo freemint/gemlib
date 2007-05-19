@@ -46,7 +46,10 @@ split_extension (char *filename, char *name, char *extension)
 	}
 
 	if (name)
+	{
 		strncpy (name, filename, ptr - filename);
+		name[ptr - filename] = '\0';
+	}
 
 	if (extension)
 		strcpy (extension, ptr + 1);
