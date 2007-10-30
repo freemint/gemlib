@@ -199,7 +199,18 @@
  *                         <tr><td>  12 <td> #WF_MENU set/get.
  *                         <tr><td>  13 <td> #WF_WORKXYWH set/get (and bug-free when AES toolbar is
  *                                            installed)
- *                         <tr><td> 14-15<td> Unused
+ *                         <tr><td>  14 <td> Unused
+ *                         <tr><td>  15 <td> mt_wind_set() and mt_wind_get() can be called with the special handle -2. Then,
+ *                                           mt_wind_set() and mt_wind_get() invoked with this special handle report if the mode
+ *                                           is supported by the AES. Here is an example : \n
+ *                                           \code
+ * if (wind_set(-2,WF_TOPMOST,0,0,0,0))
+ *   topmost_supported = 1;
+ * else
+ *   topmost_supported = 0;
+ * // note: wind_set(-2,WF_TOPMOST,1,0,0) reports if
+ * // submode '1' or WF_TOPMOST is supported or not by the AES
+ *                                           \endcode
  *                         </table>
  *                    - \a out2 is current unused.
  *                    - \a out3 is a bitmap of supported
@@ -312,10 +323,10 @@
  *                    return a bitmask of available #WF_OPTS settings. This bitmask
  *                    is identical to that use by the actual wind_set/get(WF_OPTS).
  *                    See mt_wind_set() with #WF_OPTS mode for details.
- *                    - \a out1 : available window options 0 
- *                    - \a out2 : available window options 1 
- *                    - \a out3 : available window options 2 
- *                    - \a out4 : always cleared 
+ *                    - \a out1 : available window options 0
+ *                    - \a out2 : available window options 1
+ *                    - \a out3 : available window options 2
+ *                    - \a out4 : always cleared
  *  </table>
  *
  *  Using an \a ap_gtype value of 4 and above is only supported as
@@ -336,7 +347,7 @@
  *  so this call will not work as expected with Magic2. One way is to check the magx cookie
  *  but i don't want to create dependencies between gemlib and any standard libc. So ATM,
  *  mt_appl_getinfo() is not executed on Magic2. Is it a real problem ?
- *  
+ *
  */
 
 short
@@ -347,7 +358,7 @@ mt_appl_getinfo (short type, short *out1, short *out2, short *out3, short *out4,
 	AES_PARAMS(130,1,5,0,0);
 
 	if (has_agi < 0) {
-		has_agi = global_aes[0] >= 0x400 || 
+		has_agi = global_aes[0] >= 0x400 ||
 		          mt_appl_find("?AGI\0\0\0\0",global_aes) >= 0;
 	}
 	if (!has_agi) {
