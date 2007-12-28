@@ -199,7 +199,7 @@
  *                         <tr><td>  12 <td> #WF_MENU set/get.
  *                         <tr><td>  13 <td> #WF_WORKXYWH set/get (and bug-free when AES toolbar is
  *                                            installed)
- *                         <tr><td>  14 <td> Unused
+ *                         <tr><td>  14 <td> mt_wind_get(WF_CALCW2F/WF_CALCF2W) and WO0_WCOWORK mode
  *                         <tr><td>  15 <td> mt_wind_set() and mt_wind_get() can be called with the special handle -2. Then,
  *                                           mt_wind_set() and mt_wind_get() invoked with this special handle report if the mode
  *                                           is supported by the AES. Here is an example : \n
@@ -212,7 +212,15 @@
  * // submode '1' or WF_TOPMOST is supported or not by the AES
  *                                           \endcode
  *                         </table>
- *                    - \a out2 is current unused.
+ *                    - \a out2 is a bitmap of extended modes
+ *                         supported by mt_wind_get() and/or
+ *                         mt_wind_set() (if a bit is set, it is
+ *                         supported) as follows:
+ *                         <table>
+ *                         <tr><td> Bit <td> mode
+ *                         <tr><td>  0  <td> #WF_WIDGETS set/get.
+ *                         <tr><td> 1-15<td>  Unused
+ *                         </table>
  *                    - \a out3 is a bitmap of supported
  *                         window behaviors (if a bit is set,
  *                         it is supported) as follows:
