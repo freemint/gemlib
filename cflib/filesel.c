@@ -146,7 +146,7 @@ do_magx (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 			{
 #ifdef __GNUC__
 				short msg[8];
-				short i, mx, my, mb, mc, ks, kr;
+				short k, mx, my, mb, mc, ks, kr;
 
 				/*
 				 * GNU erwartet beim evnt_multi wirklich 'int', in EVNT sind aber
@@ -167,9 +167,10 @@ do_magx (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 				ev.kstate = ks;
 				ev.key = kr;
 				ev.mclicks = mc;
-				for (i = 0; i < 8; i++)
-					ev.msg[i] = msg[i];
-#else				ev.mwhich =
+				for (k = 0; k < 8; k++)
+					ev.msg[k] = msg[k];
+#else				
+				ev.mwhich =
 					(short) evnt_multi (MU_KEYBD |
 							    MU_MESAG |
 							    MU_BUTTON, 2, 1,
@@ -217,7 +218,7 @@ do_magx (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 				}
 				ret =
 					fslx_evnt (fsl, &ev, path, name, &but,
-						   &num, &i, &p);
+						   &num, &k, &p);
 			}
 			while (ret == 1);
 			enable_menu ();

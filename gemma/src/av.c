@@ -65,9 +65,11 @@ _send(PROC_ARRAY *proc, short command, short dest, char *buf, long blen)
 	long r;
 	char *msg;
 
-	avbuf = (short *)r = _rdalloc(blen + 16);
+	r = _rdalloc(blen + 16);
 	if (r < 0)
 		return r;
+
+	avbuf = (short *)r;
 	bzero(avbuf, sflags.pagesize);
 
 	msg = (char *)(avbuf+8);

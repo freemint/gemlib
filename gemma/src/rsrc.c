@@ -71,7 +71,8 @@ rsrc_xload(BASEPAGE *bp, long fn, short nargs, char *name, PROC_ARRAY *p)
 		r = _alloc(proc->rsclength);
 		if (r <= 0)
 			goto fault;
-		wrsc = (ushort *)proc->rawrscaddr = (char *)r;
+		wrsc = (ushort *)proc->rawrscaddr;
+		wrsc = (char *)r;
 
 		DEBUGMSG("loading into buffer");
 

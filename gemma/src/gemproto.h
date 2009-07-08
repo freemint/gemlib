@@ -18,13 +18,15 @@
 INLINE void
 gemsys(long sysopcode, long *params)
 {
-	__asm__ volatile("
-		move.l	%0,d0;
-		move.l	%1,d1;
-		trap	#2"
-		:
-		: "g"(sysopcode), "a"(params)
-		: "d0", "d1");
+	__asm__ volatile						\
+	(								\
+		"move.l	%0,d0\n\t"					\
+		"move.l	%1,d1\n\t"					\
+		"trap	#2\n\t"						\
+		:							\
+		: "g"(sysopcode), "a"(params)				\
+		: __CLOBBER_RETURN("d0") "d1"				\
+		);
 }
 
 /* AES */

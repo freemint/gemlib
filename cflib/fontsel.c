@@ -57,7 +57,7 @@ __extension__ \
 		addw	#6,sp " \
 	: "=r"(retvalue)				/* output */ \
 	: "r"(f), "g"(w), "g"(l)	/* input */ \
-	: "d0", "d1", "d2", "a0"	/* clobbered regs */	\
+	: __CLOBBER_RETURN("d0") "d1", "d2", "a0"	/* clobbered regs */	\
 	AND_MEMORY \
   ); \
   retvalue; \
@@ -77,7 +77,7 @@ __extension__ \
 		addw	#6,sp " \
 	: "=r"(retvalue)				/* output */ \
 	: "r"(f), "g"(w), "g"(l)	/* input */ \
-	: "d0", "d1", "a0"			/* clobbered regs */	\
+	: __CLOBBER_RETURN("d0") "d1", "a0"	/* clobbered regs */	\
 	AND_MEMORY \
   ); \
   retvalue; \

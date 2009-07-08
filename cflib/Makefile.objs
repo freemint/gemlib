@@ -19,7 +19,7 @@ include $(srcdir)/VERSION
 all-here: objs
 
 # default overwrites
-DEFINITIONS = -fwritable-strings
+DEFINITIONS =
 
 ifeq ($(TARGET),16)
 GENERAL += -mshort
