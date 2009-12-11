@@ -21,7 +21,7 @@ _aes_trap (AESPB * aespb)
 		"trap	#2"
 		:
 		: "a"(aespb)
-		: "d0","d1","memory"
+		: "d0","d1","a0","memory"
 	);
 }
 #define AES_TRAP(aespb) _aes_trap(&aespb)

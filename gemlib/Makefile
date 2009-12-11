@@ -27,13 +27,19 @@ GENFILES += mt_gem.h Doxyfile gemlib.spec
 GENFILES += html
 
 
-libs: normal mshort
+libs: normal mshort m68020 m5475
 
 normal:
 	$(MAKE) libgem.a TARGET=""
 
 mshort:
 	$(MAKE) libgem16.a TARGET="16"
+
+m68020:
+	$(MAKE) libgem020.a TARGET="020"
+
+m5475:
+	$(MAKE) libgemv4e.a TARGET="v4e"
 
 .PHONY: doc
 
@@ -121,8 +127,15 @@ mt_gem.h: mt_gem.h.in VERSION
 #	$(MOVEIFCHANGE) $(srcdir)/mt_gem.tmp $(srcdir)/mt_gem.h
 
 install:
-	install -m 644 libgem.a $(PREFIX)/lib
-	install -m 644 libgem16.a $(PREFIX)/lib
+	install -m 755 -d $(PREFIX)/lib
+	install -m 644 libgem.a $(PREFIX)/lib/libgem.a
+	install -m 755 -d $(PREFIX)/lib/mshort
+	install -m 644 libgem16.a $(PREFIX)/lib/mshort/libgem.a
+	install -m 755 -d $(PREFIX)/lib/m68020-60
+	install -m 644 libgem020.a $(PREFIX)/lib/m68020-60/libgem.a
+	install -m 755 -d $(PREFIX)/lib/m5475
+	install -m 644 libgemv4e.a $(PREFIX)/lib/m5475/libgem.a
+	install -m 755 -d $(PREFIX)/include
 	install -m 644 gem.h $(PREFIX)/include
 	install -m 644 gemx.h $(PREFIX)/include
 	install -m 644 mt_gem.h $(PREFIX)/include
