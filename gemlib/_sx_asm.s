@@ -7,17 +7,23 @@
 
 _aes:	move.l	4(sp), d1
 	move.w	#200, d0
+	movem.l	d2/a2, -(sp)	; backup registers
 	trap	#2
+	movem.l	(sp)+, d2/a2	; restore registers
 	rts
 
 _vdi:	move.l	4(sp), d1
-	move.w	#115, d0
+	moveq	#115, d0
+	movem.l	d2/a2, -(sp)	; backup registers
 	trap	#2
+	movem.l	(sp)+, d2/a2	; restore registers
 	rts
 
 _vq_gdos:
-	move.w	#-2, d0
+	moveq	#-2, d0
+	movem.l	d2/a2, -(sp)	; backup registers
 	trap	#2
+	movem.l	(sp)+, d2/a2	; restore registers
 	cmp.w	#-2, d0
 	sne	d0
 	ext.w	d0
@@ -25,5 +31,7 @@ _vq_gdos:
 
 _vq_vgdos:
 	moveq	#-2, d0
+	movem.l	d2/a2, -(sp)	; backup registers
 	trap	#2
+	movem.l	(sp)+, d2/a2	; restore registers
 	rts

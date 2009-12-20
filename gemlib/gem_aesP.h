@@ -20,8 +20,8 @@ _aes_trap (AESPB * aespb)
 		"move.w	#200,d0\n\t"
 		"trap	#2"
 		:
-		: "a"(aespb)
-		: "d0","d1","a0","memory"
+		: "g"(aespb)
+		: "d0","d1","d2","a0","a1","a2","memory"
 	);
 }
 #define AES_TRAP(aespb) _aes_trap(&aespb)
