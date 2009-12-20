@@ -24,9 +24,9 @@ gemsys(long sysopcode, long *params)
 		"move.l	%1,d1\n\t"					\
 		"trap	#2\n\t"						\
 		:							\
-		: "g"(sysopcode), "a"(params)				\
-		: __CLOBBER_RETURN("d0") "d1"				\
-		);
+		: "g"(sysopcode), "g"(params)				\
+		: "d0", "d1", "d2", "a0", "a1", "a2", "memory"		\
+	);
 }
 
 /* AES */

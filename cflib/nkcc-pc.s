@@ -119,6 +119,8 @@ nkc_init:
 
 *------------- fetch addresses of TOS' key scan code translation tables
 
+			   movem.l	d2/a2,-(sp)			 ; backup registers
+
 			   moveq.l	#-1,d0				 ; the function is also used to
 			   move.l	d0,-(sp)			 ; change the addresses; values
 			   move.l	d0,-(sp)			 ; of -1 as new addresses tell
@@ -131,6 +133,8 @@ nkc_init:
 			   move.l	(a0)+,pkey_unshift	 ; get ^unshifted table
 			   move.l	(a0)+,pkey_shift	 ; get ^shifted table
 			   move.l	(a0),pkey_caps		 ; get ^CapsLock table
+
+			   movem.l	(sp)+,d2/a2			 ; restore registers
 
 *------------- exit
 

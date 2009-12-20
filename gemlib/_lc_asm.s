@@ -15,14 +15,14 @@ _aes:
 _vdi:						;we *think* the vdi doesn't clobber a2/d2
 	move.l	4(sp),d1
 	movem.l	d2/a2,-(a7)		;but we'll do this anyway until we've got gemlib sorted out
-	move.w	#115,d0
+	moveq	#115,d0
 	trap	#2
 	movem.l	(a7)+,d2/a2
 	rts
 
 _vq_gdos:
 	movem.l	d2/a2,-(a7)		;precautionary
-	move.w	#-2,d0
+	moveq	#-2,d0
 	trap	#2
 	cmp.w	#-2,d0
 	sne		d0
