@@ -26,8 +26,17 @@ GENFILES = .lib* libgem*.a
 GENFILES += mt_gem.h Doxyfile gemlib.spec
 GENFILES += html
 
+ALL_LIBS = normal mshort
 
-libs: normal mshort m68020 m5475
+ifeq ($(WITH_020_LIB),yes)
+ALL_LIBS += m68020 m68020mshort
+endif
+
+ifeq ($(WITH_V4E_LIB),yes)
+ALL_LIBS += m5475 m5475mshort
+endif
+
+libs: $(ALL_LIBS)
 
 normal:
 	$(MAKE) libgem.a TARGET=""
@@ -38,8 +47,14 @@ mshort:
 m68020:
 	$(MAKE) libgem020.a TARGET="020"
 
+m68020mshort:
+	$(MAKE) libgem02016.a TARGET="02016"
+
 m5475:
 	$(MAKE) libgemv4e.a TARGET="v4e"
+
+m5475mshort:
+	$(MAKE) libgemv4e16.a TARGET="v4e16"
 
 .PHONY: doc
 
@@ -131,10 +146,19 @@ install:
 	install -m 644 libgem.a $(PREFIX)/lib/libgem.a
 	install -m 755 -d $(PREFIX)/lib/mshort
 	install -m 644 libgem16.a $(PREFIX)/lib/mshort/libgem.a
+	ln -s mshort/libgem.a $(PREFIX)/lib/libgem16.a
+ifeq ($(WITH_020_LIB),yes)
 	install -m 755 -d $(PREFIX)/lib/m68020-60
 	install -m 644 libgem020.a $(PREFIX)/lib/m68020-60/libgem.a
+	install -m 755 -d $(PREFIX)/lib/m68020-60/mshort
+	install -m 644 libgem02016.a $(PREFIX)/lib/m68020-60/mshort/libgem.a
+endif
+ifeq ($(WITH_V4E_LIB),yes)
 	install -m 755 -d $(PREFIX)/lib/m5475
 	install -m 644 libgemv4e.a $(PREFIX)/lib/m5475/libgem.a
+	install -m 755 -d $(PREFIX)/lib/m5475/mshort
+	install -m 644 libgemv4e16.a $(PREFIX)/lib/m5475/mshort/libgem.a
+endif
 	install -m 755 -d $(PREFIX)/include
 	install -m 644 gem.h $(PREFIX)/include
 	install -m 644 gemx.h $(PREFIX)/include

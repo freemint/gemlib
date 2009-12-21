@@ -5,6 +5,12 @@
 CROSS = no
 
 #
+# build alternate libraries for processor variants
+#
+WITH_020_LIB = no
+WITH_V4E_LIB = no
+
+#
 # target and host compiler
 # 
 ifeq ($(CROSS),yes)
