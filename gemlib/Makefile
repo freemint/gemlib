@@ -168,8 +168,16 @@ endif
 uninstall:
 	rm -f $(PREFIX)/lib/libgem.a
 	rm -f $(PREFIX)/lib/libgem16.a
+	rm -f $(PREFIX)/lib/mshort/libgem.a
+ifeq ($(WITH_020_LIB),yes)
+	rm -f $(PREFIX)/lib/m68020-60/libgem.a
+	rm -f $(PREFIX)/lib/m68020-60/mshort/libgem.a
+endif
+ifeq ($(WITH_V4E_LIB),yes)
+	rm -f $(PREFIX)/lib/m5475/libgem.a
+	rm -f $(PREFIX)/lib/m5475/mshort/libgem.a
+endif
 	rm -f $(PREFIX)/include/gem.h
 	rm -f $(PREFIX)/include/gemx.h
 	rm -f $(PREFIX)/include/mt_gem.h
 	rm -f $(PREFIX)/include/mt_gemx.h
-
