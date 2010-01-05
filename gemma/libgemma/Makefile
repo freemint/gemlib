@@ -22,8 +22,13 @@ all-here: libs
 # default definitions
 GENFILES = .lib* libgem*.a
 
+ALL_LIBS = normal
 
-libs: normal normal020
+ifeq ($(WITH_020_LIB),yes)
+ALL_LIBS += normal020
+endif
+
+libs: $(ALL_LIBS)
 
 normal:
 	$(MAKE) libgemma.a TARGET=""

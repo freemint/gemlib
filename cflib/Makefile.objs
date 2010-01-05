@@ -25,6 +25,10 @@ ifeq ($(TARGET),16)
 GENERAL += -mshort
 endif
 
+ifeq ($(TARGET),020)
+GENERAL += -m68020-60
+endif
+
 # default definitions
 OBJS = $(COBJS:.c=.o) $(SOBJS:.s=.o)
 
