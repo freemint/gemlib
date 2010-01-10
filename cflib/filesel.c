@@ -184,8 +184,7 @@ do_magx (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 							    (int *) &ev.
 							    kstate,
 							    (int *) &ev.key,
-							    (int *) &ev.
-							    mclicks);
+							    (int *) &ev.mclicks);
 #endif
 				if (ev.mwhich & MU_MESAG)
 				{
@@ -218,7 +217,7 @@ do_magx (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 				}
 				ret =
 					fslx_evnt (fsl, &ev, path, name, &but,
-						   &num, &k, &p);
+						   &num, &i, &p);
 			}
 			while (ret == 1);
 			enable_menu ();
@@ -285,7 +284,9 @@ select_file (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 		}
 	}
 	else if (appl_xgetinfo (7, &i, &d, &d, &d) && (i & 8))
+	{
 		return do_magx (path, name, mask, title, open_cb);
+	}
 
 	/* normale Auswahl */
 	if (mask[0] == '\0')

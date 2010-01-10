@@ -41,7 +41,7 @@
 
 #ifdef __GNUC__
 /*
- * Hier mssen wir basteln, um int-Parameter auf wortbreite umzumappen.
+ * Hier muessen wir basteln, um int-Parameter auf wortbreite umzumappen.
 */
 #define xfsl_init(f, w, l) \
 __extension__ \
@@ -282,7 +282,7 @@ do_magx (short handle, short f_anz, short flags, short *id, short *pts)
 
 			/*
 			 * GNU erwartet beim evnt_multi wirklich 'int', in EVNT sind aber
-			 * nur 'short', so da die Struktur nicht bergeben werden kann!
+			 * nur 'short', so dass die Struktur nicht bergeben werden kann!
 			*/
 			ev.mwhich = (short)evnt_multi(MU_KEYBD|MU_MESAG|MU_BUTTON, 2, 1, 1, 
 											0, 0, 0, 0, 0,	0, 0, 0, 0, 0,
@@ -308,7 +308,7 @@ do_magx (short handle, short f_anz, short flags, short *id, short *pts)
 					case WM_REDRAW :
 					case WM_MOVED :
 					case WM_SIZED:
-						if (ev.msg[3] != win)		/* fr fremdes Fenster */
+						if (ev.msg[3] != win)		/* fuer fremdes Fenster */
 #ifdef __GNUC__
 							handle_mdial_msg(msg);
 #else
@@ -363,8 +363,8 @@ do_fontsel (short flags, char *title, short *id, short *pts)
 				
 	/* 
 	 * Wir machen einfach eine eigene WS auf, da MagiC am Handle rumfummelt und
-	 * alte UFSL den Demotext drucken wrden.
-	 * Wer einen Font fr den Drucker nicht fr den Bildschirm anmeldet,
+	 * alte UFSL den Demotext drucken wuerden.
+	 * Wer einen Font fuer den Drucker nicht fuer den Bildschirm anmeldet,
 	 * hat selber schuld!
 	 */
 	fs_handle = open_vwork(workout);
@@ -380,7 +380,9 @@ do_fontsel (short flags, char *title, short *id, short *pts)
 	new_pts = *pts;
 
 	if ((flags & FS_M_XFSL) && check_for_xfsl(&v))
+	{
 		ok = do_xfsl(v, fs_handle, flags, title, &new_id, &new_pts);
+	}
 
 	else if ((flags & FS_M_FPROT) && (i = check_for_fprot()) >= 0)
 	{
@@ -392,7 +394,7 @@ do_fontsel (short flags, char *title, short *id, short *pts)
 	{
 		ok = do_magx(fs_handle, f_anz, flags, &new_id, &new_pts);
 	}
-	else /* keine der drei Methoden mglich */
+	else /* keine der drei Methoden moeglich */
 	{
 		*id = -1;
 		*pts = -1;
