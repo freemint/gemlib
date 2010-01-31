@@ -24,7 +24,9 @@
  * 
  */
 
-#include <osbind.h>
+#ifdef __MINT__
+  #include <osbind.h>
+#endif
 
 #include "intern.h"
 #include "app.h"
@@ -46,7 +48,7 @@ init_app (char *rsc)
 	wind_get_grect (0, WF_WORKXYWH, &gl_desk);
 	graf_mouse (ARROW, 0x0L);
 	__app_hidden = 0;
-#ifdef __MINT__
+#if defined( __MINT__ ) || defined( _GEMLIB_H_ )
 	gl_gem = _AESversion;
 #else
 	gl_gem = _GemParBlk.global[0];

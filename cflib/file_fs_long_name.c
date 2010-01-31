@@ -24,7 +24,11 @@
  * 
  */
 
-#include <mintbind.h>
+#ifdef __MINT__
+  #include <mintbind.h>
+#else
+  #include <tos.h>
+#endif
 
 #include "intern.h"
 

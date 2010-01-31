@@ -29,6 +29,12 @@
  * ACHTUNG: Nicht re-entrant, d.h. jede Applikation nur ein Kreuz, „h Men!
  */
 
+#ifdef __MINT__
+  #include <osbind.h>
+#else
+  #include <tos.h>
+#endif
+
 #include "intern.h"
 #include "menu.h"
 

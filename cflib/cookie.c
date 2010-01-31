@@ -58,6 +58,8 @@ getcookie (char *cookie, long *p_value)
 
 #else
 
+#include <tos.h>
+
 static long *my_cookiejar = NULL;
 
 static long

@@ -24,7 +24,11 @@
  * 
  */
 
-#include <osbind.h>
+#ifdef __MINT__
+  #include <osbind.h>
+#else
+  #include <tos.h>
+#endif
 
 #include <ctype.h>
 #include "intern.h"

@@ -14,7 +14,11 @@
  * signal (write on an empty pipe) is ignored
  */
 
-#include <mintbind.h>
+#ifdef __MINT__
+  #include <mintbind.h>
+#else
+  #include <tos.h>
+#endif
 
 #include "dragdrop.h"
 

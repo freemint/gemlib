@@ -31,7 +31,7 @@
 #include "intern.h"
 
 
-#ifndef __MINT__
+#if  !defined (_GEMLIB_H_)
 
 /*
  * Kennt die Pure/GEM-Lib nicht.

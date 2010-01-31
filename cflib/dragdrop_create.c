@@ -14,7 +14,11 @@
  * signal (write on an empty pipe) is ignored
  */
 
-#include <mintbind.h>
+#ifdef __MINT__
+  #include <mintbind.h>
+#else
+  #include <tos.h>
+#endif
 
 #include "dragdrop.h"
 
@@ -69,7 +73,11 @@ dd_create (int apid, int winid, int msx, int msy, int kstate, char *exts)
 #ifdef __MINT__
 	while (fd == -EACCES || fd == -EPERM);
 #else
+/* [GS] Start */
+	while (fd == EACCDN);
+/* End; old
 	while (fd == EACCDN)
+*/
 #endif
 
 	if (fd < 0)

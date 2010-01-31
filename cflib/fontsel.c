@@ -30,7 +30,11 @@
  *
  */
 
-#include <osbind.h>
+#ifdef __MINT__
+  #include <osbind.h>
+#else
+  #include <tos.h>
+#endif
 #include <gemx.h>
 
 #include "app.h"
@@ -103,15 +107,17 @@ __extension__ \
 })
 
 #else
+/* [GS] Old:
 #define xfsl_init(a,b,c)	a(b, c)
 #define xfsl_event(a,b,c)	a(b, c)
 #define xfsl_exit(a,b)		a(b)
+*/
 #endif
 
 
 static xFSL_PAR	xpar;
 static PFONTINFO f_info;
-// static EVENT ev;
+/* static EVENT ev; */
 
 static inline short
 do_xfsl (long v, short handle, short flags, char *title, short *id, short *pts)
@@ -144,8 +150,12 @@ do_xfsl (long v, short handle, short flags, char *title, short *id, short *pts)
 		xpar.control = (CC_WINDOW|CC_APPMODAL);
 		ev.ev_mflags = MU_MESAG;
 	}
-	
+
+#ifdef __GNUC__	
 	win = xfsl_init(xfsl->xfsl_init, handle, &xpar);
+#else
+ 	win = xfsl->xfsl_init (handle, &xpar);
+#endif
 	if (win == xFS_ERROR)
 		return FALSE;
 
@@ -162,7 +172,11 @@ do_xfsl (long v, short handle, short flags, char *title, short *id, short *pts)
 	ret = 0;
 	do
 	{
-		ret = xfsl_event(xfsl->xfsl_event, win, &ev);
+#ifdef __GNUC__	
+	ret = xfsl_event(xfsl->xfsl_event, win, &ev);
+#else
+ 	ret = xfsl->xfsl_event ( win, &ev);
+#endif
 		if (ret == xFS_EVENT)
 		{
 #ifdef __GNUC__
@@ -177,7 +191,11 @@ do_xfsl (long v, short handle, short flags, char *title, short *id, short *pts)
 		}
 	}
 	while (ret != xFS_OK && ret != xFS_STOP);
+#ifdef __GNUC__	
 	xfsl_exit(xfsl->xfsl_exit, win);
+#else
+ 	xfsl->xfsl_exit (win);
+#endif
 
 	if (use_win)
 		enable_menu();

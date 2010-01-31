@@ -28,7 +28,11 @@
  * GEM clipbrd
  */
 
-#include <osbind.h>
+#ifdef __MINT__
+  #include <osbind.h>
+#else
+  #include <tos.h>
+#endif
 #include "intern.h"
 
 
