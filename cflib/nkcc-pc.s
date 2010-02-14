@@ -115,7 +115,7 @@ nk_findscan:   btst.l	#NKFb_NUM,d0		 ; on numeric keypad?
 *
 ****************************************************************************
 
-nkc_init:	   
+MODULE nkc_init
 
 *------------- fetch addresses of TOS' key scan code translation tables
 
@@ -141,13 +141,17 @@ nkc_init:
 .exit:		   move 	#VERSION,d0 		 ; load version #
 			   rts							 ; bye
 
+ENDMOD
+
 ****************************************************************************
 *
 *  nkc_tconv: TOS key code converter
 *
 ****************************************************************************
 
-nkc_tos2n:	   movem.l	d3/d4,-(sp) 		 ; save registers
+MODULE nkc_tos2n
+
+			   movem.l	d3/d4,-(sp) 		 ; save registers
 
 *------------- separate TOS key code
 
@@ -368,13 +372,17 @@ nkc_tos2n:	   movem.l	d3/d4,-(sp) 		 ; save registers
 			   movem.l	(sp)+,d3/d4 		 ; restore registers
 			   rts							 ; bye
 
+ENDMOD
+
 ****************************************************************************
 *
 *  nkc_n2tos: convert normalized key codes back to TOS format
 *
 ****************************************************************************
 
-nkc_n2tos:	   move 	d0,d1				 ; normalized key code
+MODULE nkc_n2tos
+
+			   move 	d0,d1				 ; normalized key code
 			   and		#NKFf_FUNC|NKFf_ALT|NKFf_CTRL,d1 ; isolate flags
 			   cmp		#NKFf_FUNC,d1		 ; only function flag set?
 			   bne.s	.ktab0				 ; no ->
@@ -553,17 +561,21 @@ nkc_n2tos:	   move 	d0,d1				 ; normalized key code
 .exit:		   tst.l	d0					 ; set CCR
 			   rts							 ; bye
 
+ENDMOD
+
 ****************************************************************************
 *
 *  nkc_toupper: convert character to upper case
 *
 ****************************************************************************
 
-nkc_toupper:   lea      toupper,a0           ; ^upper case translation table
+MODULE nkc_toupper
+			   lea      toupper,a0           ; ^upper case translation table
                and      #$ff,d0              ; high byte = 0 for word operation
                move.b   (a0,d0),d0           ; convert
                rts                           ; bye
 
+ENDMOD
 
 ****************************************************************************
 *
@@ -571,11 +583,13 @@ nkc_toupper:   lea      toupper,a0           ; ^upper case translation table
 *
 ****************************************************************************
 
-nkc_tolower:   lea      tolower,a0           ; ^lower case translation table
+MODULE nkc_tolower
+			   lea      tolower,a0           ; ^lower case translation table
                and      #$ff,d0              ; high byte = 0 for word operation
                move.b   (a0,d0),d0           ; convert
                rts                           ; bye
 
+ENDMOD
 
 ****************************************************************************
 *							 LOCAL DATA SECTION 						   *
