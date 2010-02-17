@@ -18,11 +18,10 @@
 short *
 grect_to_array (const GRECT * area, short *array)
 {
-	long *p = (long*)array;
-	
-	p[0] = p[1] = *(const long*)area;
-	array[2] += area->g_w -1;
-	array[3] += area->g_h -1;
+	array[0] = area->g_x;
+	array[1] = area->g_y;
+	array[2] = area->g_x + area->g_w - 1;
+	array[3] = area->g_y + area->g_h - 1;
 	
 	return array;
 }
