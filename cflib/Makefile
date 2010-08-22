@@ -65,7 +65,7 @@ install:
 	install -m 644 cflib.h        ${PREFIX}/include
 	install -m 644 libcflib.a     ${PREFIX}/lib
 	install -m 644 libcflib16.a   ${PREFIX}/lib/mshort/libcflib.a
-	ln -s mshort/libcflib.a	      ${PREFIX}/lib/libcflib16.a
+	ln -sf mshort/libcflib.a	      ${PREFIX}/lib/libcflib16.a
 ifeq ($(WITH_020_LIB),yes)
 	install -m 644 libcflib020.a  ${PREFIX}/lib/m68020-60/libcflib.a
 endif

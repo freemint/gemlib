@@ -146,7 +146,7 @@ install:
 	install -m 644 libgem.a $(PREFIX)/lib/libgem.a
 	install -m 755 -d $(PREFIX)/lib/mshort
 	install -m 644 libgem16.a $(PREFIX)/lib/mshort/libgem.a
-	ln -s mshort/libgem.a $(PREFIX)/lib/libgem16.a
+	ln -sf mshort/libgem.a $(PREFIX)/lib/libgem16.a
 ifeq ($(WITH_020_LIB),yes)
 	install -m 755 -d $(PREFIX)/lib/m68020-60
 	install -m 644 libgem020.a $(PREFIX)/lib/m68020-60/libgem.a
