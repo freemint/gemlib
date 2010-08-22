@@ -7,8 +7,8 @@ CROSS = no
 #
 # build alternate libraries for processor variants
 #
-WITH_020_LIB = no
-WITH_V4E_LIB = no
+WITH_020_LIB = yes
+WITH_V4E_LIB = yes
 
 #
 # target and host compiler
