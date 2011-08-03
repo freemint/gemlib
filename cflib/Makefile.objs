@@ -29,6 +29,10 @@ ifeq ($(TARGET),020)
 GENERAL += -m68020-60
 endif
 
+ifeq ($(TARGET),v4e)
+GENERAL += -mcpu=5475
+endif
+
 # default definitions
 OBJS = $(COBJS:.c=.o) $(SOBJS:.S=.o)
 

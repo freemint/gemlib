@@ -53,15 +53,15 @@ __extension__ \
 	register long retvalue __asm__("d0"); \
  \
 	__asm__ volatile \
-	("	\
-		movl	%3,sp@-; \
-		movw	%2,sp@-; \
-		movl	%1,a0; \
-		jsr	a0@; \
-		addw	#6,sp " \
+	( \
+		"movl	%3,sp@-\n\t" \
+		"movw	%2,sp@-\n\t" \
+		"movl	%1,a0\n\t" \
+		"jsr	a0@\n\t" \
+		"addql	#6,sp" \
 	: "=r"(retvalue)				/* output */ \
-	: "r"(f), "g"(w), "g"(l)	/* input */ \
-	: __CLOBBER_RETURN("d0") "d1", "d2", "a0"	/* clobbered regs */	\
+	: "r"(f), "r"(w), "r"(l)	/* input */ \
+	: __CLOBBER_RETURN("d0") "d1", "a0", "a1"	/* clobbered regs */	\
 	AND_MEMORY \
   ); \
   retvalue; \
@@ -73,15 +73,15 @@ __extension__ \
 	register long retvalue __asm__("d0"); \
  \
 	__asm__ volatile \
-	("	\
-		movl	%3,sp@-; \
-		movw	%2,sp@-; \
-		movl	%1,a0; \
-		jsr	a0@; \
-		addw	#6,sp " \
+	( \
+		"movl	%3,sp@-\n\t" \
+		"movw	%2,sp@-\n\t" \
+		"movl	%1,a0\n\t" \
+		"jsr	a0@\n\t" \
+		"addql	#6,sp" \
 	: "=r"(retvalue)				/* output */ \
-	: "r"(f), "g"(w), "g"(l)	/* input */ \
-	: __CLOBBER_RETURN("d0") "d1", "a0"	/* clobbered regs */	\
+	: "r"(f), "r"(w), "r"(l)	/* input */ \
+	: __CLOBBER_RETURN("d0") "d1", "a0", "a1"	/* clobbered regs */	\
 	AND_MEMORY \
   ); \
   retvalue; \
@@ -93,14 +93,14 @@ __extension__ \
 	register long retvalue __asm__("d0"); \
  \
 	__asm__ volatile \
-	(" \
-		movw	%2,sp@-;	\
-		movl	%1,a0; \
-		jsr	a0@; \
-		addw	#2,sp " \
+	( \
+		"movw	%2,sp@-\n\t" \
+		"movl	%1,a0\n\t" \
+		"jsr	a0@\n\t" \
+		"addql	#2,sp" \
 	: "=r"(retvalue)		/* outputs */ \
-	: "r"(f), "g"(w)		/* inputs */ \
-	: "a0"					/* clobbered regs */	\
+	: "r"(f), "r"(w)		/* inputs */ \
+	: __CLOBBER_RETURN("d0") "d1", "a0", "a1"	/* clobbered regs */	\
 	AND_MEMORY \
   ); \
   retvalue; \

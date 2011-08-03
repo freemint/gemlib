@@ -29,6 +29,10 @@ ifeq ($(WITH_020_LIB),yes)
 ALL_LIBS += normal020
 endif
 
+ifeq ($(WITH_V4E_LIB),yes)
+ALL_LIBS += normalv4e
+endif
+
 libs: $(ALL_LIBS)
 
 normal:
@@ -39,6 +43,9 @@ mshort:
 	
 normal020:
 	$(MAKE) libcflib020.a TARGET="020"
+
+normalv4e:
+	$(MAKE) libcflibv4e.a TARGET="v4e"
 
 libcflib$(TARGET).a: objs
 	$(RM) $@
@@ -69,6 +76,9 @@ install:
 ifeq ($(WITH_020_LIB),yes)
 	install -m 644 libcflib020.a  ${PREFIX}/lib/m68020-60/libcflib.a
 endif
+ifeq ($(WITH_V4E_LIB),yes)
+	install -m 644 libcflibv4e.a  ${PREFIX}/lib/m5475/libcflib.a
+endif
 	install -m 644 cflib.hyp      ${PREFIX}/stguide
 	install -m 644 cflib.ref      ${PREFIX}/stguide
 
@@ -79,6 +89,9 @@ uninstall:
 	rm -f ${PREFIX}/lib/mshort/libcflib.a
 ifeq ($(WITH_020_LIB),yes)
 	rm -f ${PREFIX}/lib/m68020-60/libcflib.a
+endif
+ifeq ($(WITH_V4E_LIB),yes)
+	rm -f ${PREFIX}/lib/m5475/libcflib.a
 endif
 	rm -f ${PREFIX}/stguide/cflib.hyp
 	rm -f ${PREFIX}/stguide/cflib.ref
