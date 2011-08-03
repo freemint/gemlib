@@ -30,7 +30,7 @@ GENERAL += -m68020-60
 endif
 
 # default definitions
-OBJS = $(COBJS:.c=.o) $(SOBJS:.s=.o)
+OBJS = $(COBJS:.c=.o) $(SOBJS:.S=.o)
 
 VPATH = ..
 

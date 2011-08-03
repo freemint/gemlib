@@ -169,6 +169,6 @@ COBJS = \
 	wdial_uniconify.c
 
 SOBJS = \
-	nkcc-gc.s
+	nkcc-gc.S
 
 SRCFILES = $(HEADER) $(COBJS) $(SOBJS)
