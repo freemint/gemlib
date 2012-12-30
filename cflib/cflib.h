@@ -502,6 +502,8 @@ short 	height2pts	(short handle, short f_id, short f_height);
 
 WDIALOG	*create_wdial	(OBJECT *tree, OBJECT *icon, short edit_obj,
 			 WDIAL_OCB open_cb, WDIAL_XCB exit_cb);
+WDIALOG	*create_wdial_kind (OBJECT *tree, OBJECT *icon, short edit_obj,
+			 WDIAL_OCB open_cb, WDIAL_XCB exit_cb, short win_kind);
 void	delete_wdial	(WDIALOG *wd);
 void	open_wdial	(WDIALOG *wd, short pos_x, short pos_y);
 void	close_wdial	(WDIALOG *wd);

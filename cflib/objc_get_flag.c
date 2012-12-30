@@ -30,5 +30,5 @@
 short
 get_flag (OBJECT *tree, short obj, short flag)
 {
-	return (tree[obj].ob_flags & flag);
+	return( ( tree[obj].ob_flags & flag ) != 0 ? TRUE : FALSE );	/* if present, return TRUE */
 }

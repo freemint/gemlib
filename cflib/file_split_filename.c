@@ -31,9 +31,30 @@ void
 split_filename (char *fullname, char *path, char *name)
 {
 	char *str;
+	char *str1;
+	char *str2;
 
-	str = strrchr (fullname, '\\');
-
+	str1 = strrchr (fullname, '\\');
+	str2 = strrchr (fullname, '/');
+	
+	/* check for mixed name */
+	if( str1 != NULL && str2 != NULL )
+	{
+		if( strcmp( str1, str2 ) > 0 )
+		{
+			/* str1 is longer => '\' isn't the last one */
+			str = str2;
+		}
+		else
+		{
+			str = str1;
+		}
+	}
+	else
+	{
+		str = str1 != NULL ? str1 : str2;
+	}
+	
 	if (path != NULL)
 		path[0] = '\0';	/* schadet nix */
 	if (name != NULL)

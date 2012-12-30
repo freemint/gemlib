@@ -31,11 +31,16 @@
  * Dialog vorbereiten.
  */
 WDIALOG *
-create_wdial (OBJECT *tree, OBJECT *icon, short edit_obj,
-	      WDIAL_OCB open_cb, WDIAL_XCB exit_cb)
+create_wdial_kind (OBJECT *tree, OBJECT *icon, short edit_obj,
+		   WDIAL_OCB open_cb, WDIAL_XCB exit_cb, short win_kind)
 {
 	WDIALOG *new;
 	short d;
+
+	if( icon == NULL )
+	{
+		win_kind &= SMALLER;	/* remove smaller element if no icon */
+	}
 
 	new = cf_malloc (sizeof (WDIALOG), "create_wdial", FALSE);
 	if (new != NULL)
@@ -48,13 +53,10 @@ create_wdial (OBJECT *tree, OBJECT *icon, short edit_obj,
 		new->icon = icon;
 		new->mode = 0;
 		new->win_handle = -1;
-		if (new->icon == NULL)
-			new->win_kind = (NAME | MOVER | CLOSER);
-		else
-			new->win_kind = (NAME | MOVER | CLOSER | SMALLER);
+		new->win_kind = win_kind;
 
 		/*
-		 * Titelzeile suchen und als Fenstertitel merken. 
+		 * Titelzeile suchen und als Fenstertitel merken.
 		 */
 		if (get_magx_obj (tree, 1) == MX_UNDERLINE)
 		{
@@ -88,4 +90,18 @@ create_wdial (OBJECT *tree, OBJECT *icon, short edit_obj,
 	}
 
 	return new;
+}
+
+WDIALOG *
+create_wdial (OBJECT *tree, OBJECT *icon, short edit_obj,
+	      WDIAL_OCB open_cb, WDIAL_XCB exit_cb)
+{
+	short win_kind;
+
+	if (icon == NULL)
+		win_kind = (NAME | MOVER | CLOSER);
+	else
+		win_kind = (NAME | MOVER | CLOSER | SMALLER );
+
+	return create_wdial_kind (tree, icon, edit_obj, open_cb, exit_cb, win_kind);
 }

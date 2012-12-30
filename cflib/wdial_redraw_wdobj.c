@@ -32,7 +32,7 @@ redraw_wdobj (WDIALOG *wd, short obj)
 {
 	GRECT r;
 
-	if (wd != NULL && !(wd->mode & WD_ICON) && !(wd->mode & WD_SHADE))
+	if (wd != NULL && ( wd->mode & WD_OPEN ) != 0 )
 	{
 		get_objframe (wd->tree, obj, &r);
 		draw_wdial (wd, ROOT, MAX_DEPTH, r.g_x, r.g_y, r.g_w, r.g_h);

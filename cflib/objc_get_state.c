@@ -30,5 +30,5 @@
 short
 get_state (OBJECT *tree, short obj, short state)
 {
-	return (tree[obj].ob_state & state);
+	return( ( tree[obj].ob_state & state ) != 0 ? TRUE : FALSE );	/* if present, return TRUE */
 }
