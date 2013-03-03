@@ -163,14 +163,14 @@ check_item_key (char *str, short kstate, short kreturn)
 short
 is_menu_key (short kreturn, short kstate, short *title, short *item)
 {
-	short menu_box, i, t;
+	short menu_box, i, t, menu_accbox;
 	char str[50];
 	short found = FALSE;
 
 	if ((__menu_tree != NULL) && !__menu_disabled)
 	{
 		menu_box = __menu_tree[0].ob_tail;
-		menu_box = __menu_tree[menu_box].ob_head;
+		menu_accbox = menu_box = __menu_tree[menu_box].ob_head;
 		t = 3;		/* 3: Desktop-Titel */
 		do
 		{
@@ -190,8 +190,8 @@ is_menu_key (short kreturn, short kstate, short *title, short *item)
 				{
 					get_string (__menu_tree, i, str);
 					if (!(str[0] == '-')
-					    && (strncmp (str, "  Desk", 6) !=
-						0))
+					 /*   && (strncmp (str, "  Desk", 6) !=
+						0)  not need anymore the accessory menu should not be evaluated only first item this tests is not enough! */  )
 					{
 						found =
 							check_item_key (str,
@@ -209,6 +209,10 @@ is_menu_key (short kreturn, short kstate, short *title, short *item)
 					}
 				}
 				i = __menu_tree[i].ob_next;
+       if( menu_accbox == menu_box )   /* stop research for acc menu only the first item should be evaluated */
+       {
+         while (i != menu_box) i = __menu_tree[i].ob_next;
+       }
 			}
 			while (i != menu_box);
 			menu_box = __menu_tree[menu_box].ob_next;
