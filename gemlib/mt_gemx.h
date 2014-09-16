@@ -1213,12 +1213,34 @@ typedef struct
 
 } COLOR_TAB;
 
+typedef struct
+{
+	long	magic;															/* 'ctab' */
+	long	length;
+	long	format;
+	long	reserved;
+	
+	long	map_id;
+	long	color_space;
+	long	flags;
+	long	no_colors;
+
+	long	reserved1;
+	long	reserved2;
+	long	reserved3;
+	long	reserved4;
+
+	COLOR_ENTRY	colors[256];
+} COLOR_TAB256;
+
 typedef COLOR_TAB *CTAB_PTR;
 typedef COLOR_TAB *CTAB_REF;
 
 
 typedef void INVERSE_CTAB;
 typedef INVERSE_CTAB *ITAB_REF;
+
+#define	CBITMAP_MAGIC	'cbtm'
 
 typedef struct _gcbitmap GCBITMAP;
 /** TODO */
