@@ -299,6 +299,7 @@ COBJS = \
 	a_appl_trecord.c \
 	a_appl_write.c \
 	a_appl_yield.c \
+	a_appl_getcicon.c \
 	a_evnt_button.c \
 	a_evnt_dclick.c \
 	a_evnt_keybd.c \
