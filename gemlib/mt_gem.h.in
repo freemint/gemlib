@@ -2454,11 +2454,13 @@ void v_fontinit		(VdiHdl , const void * font_header);
 void v_escape2000 (VdiHdl , short times);
 
 void v_alpha_text  (VdiHdl , const char *str);
+void v_alpha_text16n  (VdiHdl , const short * wstr, short num);
 void v_curdown     (VdiHdl );
 void v_curhome     (VdiHdl );
 void v_curleft     (VdiHdl );
 void v_curright    (VdiHdl );
 void v_curtext     (VdiHdl , const char *str);
+void v_curtext16n     (VdiHdl , const short * wstr, short num);
 void v_curup       (VdiHdl );
 void v_eeol        (VdiHdl );
 void v_eeos        (VdiHdl );
@@ -2565,6 +2567,8 @@ void v_gtext       (VdiHdl , short x, short y, const char *str);
 void v_gtext16     (VdiHdl , short x, short y, const short *wstr);
 void v_gtext16n    (VdiHdl , PXY pos, const short *wstr, short num);
 void v_justified   (VdiHdl , short x, short y, const char *str,
+                             short len, short word_space, short char_space);
+void v_justified16n   (VdiHdl , short x, short y, const short * wstr, short num,
                              short len, short word_space, short char_space);
 void v_pieslice    (VdiHdl , short x, short y,
                              short radius, short begang, short endang);

@@ -975,6 +975,8 @@ void	v_ftext_offset  (VdiHdl, short x, short y,
                                const char  *str,  const short *offset);
 void	v_ftext_offset16(VdiHdl, short x, short y,
                                const WCHAR *wstr, const short *offset);
+void	v_ftext_offset16n(VdiHdl, short x, short y,
+                               const WCHAR *wstr, short num, const short *offset);
 void	v_getbitmap_info(VdiHdl, short ch, long *advancex, long *advancey,
                                long *xoffset, long *yoffset, short *width,
                                short *height, short **bitmap);
@@ -1001,6 +1003,7 @@ short	vqt_name_and_id (VdiHdl, short font_format,
                                char *font_name, char *ret_name);
 void	vqt_pairkern    (VdiHdl, short ch1, short ch2, long *x, long *y);
 void	vqt_real_extent (VdiHdl, short x, short y, char *string, short extent[]);
+void	vqt_real_extent16n (VdiHdl, short x, short y, const WCHAR *wstring, short num, short extent[]);
 void	vqt_trackkern   (VdiHdl, long *x, long *y);
 short	vqt_xfntinfo    (VdiHdl, short flags, short id,
                                short __index, XFNT_INFO *info);
