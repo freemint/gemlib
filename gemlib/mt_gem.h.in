@@ -1845,6 +1845,7 @@ short	mt_appl_tplay   (void *mem, short num, short scale, short *global_aes);
 short	mt_appl_trecord (void *mem, short count, short *global_aes);
 short	mt_appl_write   (short ap_id, short length, void *ap_pbuff, short *global_aes);
 short	mt_appl_yield   (short *global_aes);
+short   mt_appl_get_cicon (short type,const char *name,short size,short *cicon_width,short *cicon_height,CICON **cicon_data, short *global_aes);
 /**@}*/
 
 /** @addtogroup a_evnt
