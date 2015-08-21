@@ -29,11 +29,11 @@ v_ftext_offset (short handle, short x, short y,
                 const char *str, const short *offset)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intin[VDI_INTINMAX];   
-	short vdi_ptsin[VDI_PTSINMAX];   
+	short vdi_intin[VDI_PTSINMAX];   
+	short vdi_ptsin[VDI_PTSINMAX*2+2];   
 	const long * src = (const long*)offset;
 	long       * dst =       (long*)vdi_ptsin;
-	short     i, len = vdi_str2array_n (str, vdi_intin, VDI_INTINMAX);
+	short     i, len = vdi_str2array_n (str, vdi_intin, VDI_PTSINMAX);
 
 	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy);
 	

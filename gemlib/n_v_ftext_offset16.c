@@ -1,7 +1,7 @@
 /*
  *  $Id$
  */
-
+ 
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
 
@@ -21,11 +21,12 @@ v_ftext_offset16 (short handle, short x, short y,
                   const WCHAR * wstr, const short * offset)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_ptsin[VDI_PTSINMAX];   
+	short vdi_ptsin[VDI_PTSINMAX*2+2];   
 	const long * src = (const long*)offset;
 	long       * dst =       (long*)vdi_ptsin;
 	short     i, len = vdi_wstrlen ((const short *)wstr);
 
+	if(len>VDI_PTSINMAX) len=VDI_PTSINMAX;
 	VDI_PARAMS(vdi_control, (const short *)wstr, vdi_ptsin, vdi_dummy, vdi_dummy);
 	
 	vdi_ptsin[0] = x;
