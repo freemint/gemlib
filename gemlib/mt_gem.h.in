@@ -2599,6 +2599,7 @@ void vrt_cpyfm   (VdiHdl , short mode, short pxy[], MFDB *src, MFDB *dst,
  */
 void  vdi_array2str (const short *src, char  *des, short len);
 short vdi_str2array (const char  *src, short *des);
+short vdi_str2array_n (const char  *src, short *des, int nmax);
 short vdi_wstrlen   (const short *wstr);
 /**@}*/
 
@@ -2612,7 +2613,7 @@ short vdi_wstrlen   (const short *wstr);
 
 /* Array sizes in vdi control block */
 #define VDI_CNTRLMAX     15		/**< max size of vdi_control[] */
-#define VDI_INTINMAX   1024		/**< max size of vdi_intin[] */
+#define VDI_INTINMAX    512		/**< max size of vdi_intin[] */
 #define VDI_INTOUTMAX   256		/**< max size of vdi_intout[] */
 #define VDI_PTSINMAX    256		/**< max size of vdi_ptsin[] */
 #define VDI_PTSOUTMAX   256		/**< max size of vdi_ptsout[] */
