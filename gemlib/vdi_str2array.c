@@ -26,3 +26,19 @@ vdi_str2array (const char *src, short *des)
 	}
 	return len;
 }
+
+short
+vdi_str2array_n (const char *src, short *des, int nmax)
+{
+	short                 len = 0;
+	const unsigned char *c  = (const unsigned char *) src;
+
+	while (*c && (len<nmax))
+	{
+		*(des++) = *(c++);
+		len++;
+	}
+	return len;
+}
+
+

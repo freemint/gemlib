@@ -38,8 +38,8 @@ v_bit_image (short handle, const char *filename, short aspect, short x_scale,
              short y_scale, short h_align, short v_align, short *pxy)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intin[VDI_INTINMAX];   
-	register short n = 5 + vdi_str2array (filename, vdi_intin + 5);
+	short vdi_intin[VDI_INTINMAX];
+	short n = 5 + vdi_str2array_n (filename, vdi_intin + 5, VDI_INTINMAX-5);
 
 	VDI_PARAMS(vdi_control, vdi_intin, pxy, vdi_dummy, vdi_dummy);
 

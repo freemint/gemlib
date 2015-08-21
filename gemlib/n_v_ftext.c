@@ -25,7 +25,7 @@ v_ftext (short handle, short x, short y, const char *str)
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_ptsin[2];   
-	register short n = vdi_str2array (str, vdi_intin);
+	short n = vdi_str2array_n (str, vdi_intin, VDI_INTINMAX);
 
 	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy);
 	
