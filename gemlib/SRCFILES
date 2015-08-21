@@ -57,6 +57,7 @@ _VDI_CONTRL = \
 
 _VDI_ESCAPE = \
 	v_alpha_text.c \
+	v_alpha_text16n.c \
 	v_bit_image.c \
 	v_clear_disp_list.c \
 	v_copies.c \
@@ -65,6 +66,7 @@ _VDI_ESCAPE = \
 	v_curleft.c \
 	v_curright.c \
 	v_curtext.c \
+	v_curtext16n.c \
 	v_curup.c \
 	v_dspcur.c \
 	v_eeol.c \
@@ -162,6 +164,7 @@ _VDI_OUTPUT = \
 	v_gtext16.c \
 	v_gtext16n.c \
 	v_justified.c \
+	v_justified16n.c \
 	v_pieslice.c \
 	v_pline.c \
 	v_pmarker.c \
@@ -198,6 +201,7 @@ _VDI_EXTENSIONS = \
 	n_v_ftext16n.c \
 	n_v_ftext_offset.c \
 	n_v_ftext_offset16.c \
+	n_v_ftext_offset16n.c \
 	n_v_get_ctab_id.c \
 	n_v_get_outline.c \
 	n_v_getbitmap_info.c \
@@ -246,6 +250,7 @@ _VDI_EXTENSIONS = \
 	n_vqt_name_and_id.c \
 	n_vqt_pairkern.c \
 	n_vqt_real_extent.c \
+	n_vqt_real_extent16n.c \
 	n_vqt_trackkern.c \
 	n_vqt_xfntinfo.c \
 	n_vr_transfer_bits.c \
