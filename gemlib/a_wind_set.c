@@ -247,9 +247,13 @@
  *          Link a user value to the windows
  *          - \a W1 and \a W2 are the 2 value you can transmit it could be used as 32 bits pointer but any value can be provided
  *
+ *          MyAES feature
+ *
  * <tr><td> #WF_WIND_ATTACH   <td>      231 <td>
  *          attach a window to another, using it if you close the mother window other windows linked will be closed
  *          - \a W1 the window to attach
+ *
+ *          MyAES feature
  *					   					
  * <tr><td> #WF_TOPMOST  <td>      232 <td>
  *          Sets the actual window at topmost level (details below).
@@ -274,6 +278,8 @@
  *          is untopped the toolbox window disappears, when owner regains focus, the
  *          window automatically reappears (no action required by the application, opening and
  *          closing of the window is performed by the AES).
+ *
+ *          MyAES feature
  * 
  * <tr><td> #WF_OPTIONS  <td>      234 <td>
  *          Change window behavior
@@ -284,9 +290,14 @@
  *            - 1 : add option
  *            - 0 : remove option
  *
+ *          MyAES feature
+ *
  * <tr><td> #WF_FULLSCREEN   <td>      235 <td>
  *          Switch fullscreen - normal window mode. The fullscreen mode is without any widget.
- *          Hit the key ESC escape from fullscreen mode       
+ *          Hit the key ESC escape from fullscreen mode  
+ *
+ *          MyAES 0.96 feature
+ *     
  *	</table>
  *
  *  @since All AES versions.

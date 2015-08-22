@@ -279,6 +279,20 @@
  *          - \a W3 and \a W4 are the horizontal elements of type bottomwidgets.
  *            (\a W3 is the left and \a W4 is the right widget of the horizotal
  *		      slider).
+ * <tr><td> #WF_USER_POINTER  <td>      230 <td>
+ *          Get the user value of the window
+ *          - \a W1 and \a W2 are the 2 values already set by user with wind_set()
+ *
+ *          MyAES feature
+ *
+ * <tr><td> #WF_BITMAP  <td>      233 <td>
+ *          Get bitmap content of the window if MyAES "windows_backup" option is set to true, 
+ *          any windows of any application can be read
+ *
+ *          TODO
+ *
+ *          MyAES 0.96 feature
+ *
  *	</table>
  *
  *
