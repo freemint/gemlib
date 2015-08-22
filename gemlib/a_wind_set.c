@@ -242,6 +242,14 @@
  *          - \a W3 and \a W4 are the horizontal elements of type bottomwidgets.
  *            (\a W3 is the left and \a W4 is the right widget of the horizotal
  *		      slider).
+ *
+ * <tr><td> #WF_USER_POINTER  <td>      230 <td>
+ *          Link a user value to the windows
+ *          - \a W1 and \a W2 are the 2 value you can transmit it could be used as 32 bits pointer but any value can be provided
+ *
+ * <tr><td> #WF_WIND_ATTACH   <td>      231 <td>
+ *          attach a window to another, using it if you close the mother window other windows linked will be closed
+ *          - \a W1 the window to attach
  *					   					
  * <tr><td> #WF_TOPMOST  <td>      232 <td>
  *          Sets the actual window at topmost level (details below).
@@ -266,7 +274,19 @@
  *          is untopped the toolbox window disappears, when owner regains focus, the
  *          window automatically reappears (no action required by the application, opening and
  *          closing of the window is performed by the AES).
- *         
+ * 
+ * <tr><td> #WF_OPTIONS  <td>      234 <td>
+ *          Change window behavior
+ *          - \a W1 only one value available for the moment:
+ *            - 1 : request automatic close when application focus is lost and restore it when is back
+ *                  to add this feature or remove it you should use \a W2 
+ *          - \a W2  remove/add option:
+ *            - 1 : add option
+ *            - 0 : remove option
+ *
+ * <tr><td> #WF_FULLSCREEN   <td>      235 <td>
+ *          Switch fullscreen - normal window mode. The fullscreen mode is without any widget.
+ *          Hit the key ESC escape from fullscreen mode       
  *	</table>
  *
  *  @since All AES versions.

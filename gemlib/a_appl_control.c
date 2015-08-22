@@ -65,6 +65,24 @@
  *	  (from top to bottom) and the last objects of the type
  *	  bottom widgets (from the left to the right). If objects are
  *	  set doubly or wrong, an error is returned.
+ *      <tr><td> #APC_APP_CONFIG <td> With this option you are able to inform to AES how you want your application should be considered.
+ *	  \a ap_cout is a pointer to a string. At this time value supported are:
+ *	  - \p "app_debug=true" or "app_debug" : put the application in debug mode
+ *	  - \p "app_debug=false" : stop debug mode
+ *	  - \p "app_topmost=true" or "app_topmost" : Application windows will be always on top (compare to other classical application) but without focus (can be usefull for tesk bar for exemple)
+ *	  - \p "app_topmost=false" : remove previous option
+ *	  - \p "app_system" : application is a system application (used in appl_search() for type APP_SYSTEM)
+ *	  - \p "app_texticon=opaque" : background icon text is opaque
+ *	  - \p "app_texticon=transparent" : background icon text is transparent
+ *	  - \p "app_signal_mesag=true": Request receive Unix Signal when even message is waiting see APC_INFORM_MESAG as it do exactly the same
+ *	  - \p "app_signal_mesag=false": Request stop receive Unix Signal when even message is waiting
+ *	  appl_control return 1 if the request is recognize else 0
+ *      <tr><td> #APC_INFORM_MESAG <td> Request to AES to inform the application when there 
+ *	  is a AES message waiting with a Unix Signal. \a ap_cout : not used.
+ *	  When the application receive a message the AES send the Signal SIGUSR2 (30) to the application, 
+ *        to manage the message should use classical event_mesag() or event_multi() functions.
+ *	  Calling one time this call request to AES to send Signal, calling a second time remove this order.
+ *	  appl_control return 1 if take into account else 0 
  *	</table>
  *
  *  Hidden application have a '*' placed in front of their names in
