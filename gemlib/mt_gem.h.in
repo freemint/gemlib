@@ -72,6 +72,8 @@ __BEGIN_DECLS
 #define APC_INFO			14  /**< Get the application parameter -- see mt_appl_control() */
 #define APC_MENU			15  /**< The last used menu tree is returned -- see mt_appl_control() */
 #define APC_WIDGETS			16  /**< Inquires or sets the 'default' positions of the window widgets -- see mt_appl_control() */
+#define APC_APP_CONFIG			17  /**< Change some way to manage application by AES most of them can be already set in configuration file -- see mt_appl_control() */
+#define APC_INFORM_MESAG		18  /**< Request/Remove the sent an user Unix Signal to application when AES message is available -- see mt_appl_control() */
 
 /* APC_INFO bits */
 #define APCI_HIDDEN			0x01  /**< the application is hidden -- subopcode for #APC_INFO */
@@ -81,22 +83,25 @@ __BEGIN_DECLS
 /* appl_getinfo modes */
 #define AES_LARGEFONT		0	/**< see  mt_appl_getinfo() */
 #define AES_SMALLFONT		1	/**< see  mt_appl_getinfo() */
-#define AES_SYSTEM			2	/**< see  mt_appl_getinfo() */
+#define AES_SYSTEM		2	/**< see  mt_appl_getinfo() */
 #define AES_LANGUAGE 		3	/**< see  mt_appl_getinfo() */
 #define AES_PROCESS 		4	/**< see  mt_appl_getinfo() */
-#define AES_PCGEM			5	/**< see  mt_appl_getinfo() */
+#define AES_PCGEM		5	/**< see  mt_appl_getinfo() */
 #define AES_INQUIRE 		6	/**< see  mt_appl_getinfo() */
-#define AES_MOUSE			8	/**< see  mt_appl_getinfo() */
-#define AES_MENU			9	/**< see  mt_appl_getinfo() */
-#define AES_SHELL			10	/**< see  mt_appl_getinfo() */
-#define AES_WINDOW			11	/**< see  mt_appl_getinfo() */
-#define AES_MESSAGE			12	/**< see  mt_appl_getinfo() */
-#define AES_OBJECT			13	/**< see  mt_appl_getinfo() */
-#define AES_FORM			14	/**< see  mt_appl_getinfo() */
+#define AES_MOUSE		8	/**< see  mt_appl_getinfo() */
+#define AES_MENU		9	/**< see  mt_appl_getinfo() */
+#define AES_SHELL		10	/**< see  mt_appl_getinfo() */
+#define AES_WINDOW		11	/**< see  mt_appl_getinfo() */
+#define AES_MESSAGE		12	/**< see  mt_appl_getinfo() */
+#define AES_OBJECT		13	/**< see  mt_appl_getinfo() */
+#define AES_FORM		14	/**< see  mt_appl_getinfo() */
 #define AES_EXTENDED		64	/**< see  mt_appl_getinfo() */
-#define AES_NAES			65	/**< see  mt_appl_getinfo() */
-#define AES_VERSION         96  /**< see  mt_appl_getinfo() and  mt_appl_getinfo_str() */
-#define AES_WOPTS           97  /**< see  mt_appl_getinfo() */
+#define AES_NAES		65	/**< see  mt_appl_getinfo() */
+#define AES_VERSION         	96  	/**< see  mt_appl_getinfo() and  mt_appl_getinfo_str() */
+#define AES_WOPTS           	97  	/**< see  mt_appl_getinfo() */
+#define AES_WFORM		98	/**< see  mt_appl_getinfo() */
+#define AES_APPL_OPTION		99	/**< see  mt_appl_getinfo() */
+#define AES_WINX		22360	/**< AES WINX information, see  mt_appl_getinfo() */
 
 /* appl_getinfo return values (AES_LARGEFONT, AES_SMALLFONT) */
 #define SYSTEM_FONT			0	/**< see  mt_appl_getinfo() */
@@ -1202,9 +1207,12 @@ typedef  struct
 #define WF_MINXYWH		103 	/**<		 TODO (MagiC 6) */
 #define WF_INFOXYWH		104 	/**<		 TODO (MagiC 6.10) */
 #define WF_WIDGETS		200		/**< get/set actual positions of the slider widgets, see mt_wind_get() and mt_wind_set() */
-#define WF_230			230		/**< internally used by MyAES - doc TODO */
-#define WF_231			231		/**< internally used by MyAES - doc TODO */
-#define WF_TOPMOST		232		/**<     set actual window at TOPMOST level, see  mt_wind_set() */
+#define WF_USER_POINTER		230		/**< MyAES - attach a 32 bit value to window see  mt_wind_set() see  mt_wind_get() */
+#define WF_WIND_ATTACH		231		/**< MyAES - attach a window to another, see  mt_wind_set()*/
+#define WF_TOPMOST		232		/**< MyAES    set actual window at TOPMOST level, see  mt_wind_set() */
+#define WF_BITMAP		233		/**< MyAES 0.96	get bitmap of the window, see  mt_wind_get() */
+#define WF_OPTIONS		234		/**< MyAES 0.96 at this time use only to request automaticaly close if application lost focus and appear when focus is back, see  mt_wind_set() */
+#define WF_FULLSCREEN		235		/**< MyAES 0.96 set window in fullscreen without widget, see  mt_wind_set() */
 #define WF_OBFLAG		1001	/**< get/set (doc: TODO) (FreeGEM) */
 #define WF_OBTYPE		1002	/**< get     (doc: TODO) (FreeGEM) */
 #define WF_OBSPEC		1003	/**< get/set (doc: TODO) (FreeGEM) */
