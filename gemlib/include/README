@@ -5,6 +5,9 @@ to get gemlib compilable.
 For Pure C user:
 copy the file purec/compiler.h to your pure_c/include directory
 
+For VBCC user:
+copy the file vbcc/compiler.h to your vbcc/include directory
+
 For SozobonX user:
 copy the file sozobon/compiler.h to your sozobon/include directory
 
