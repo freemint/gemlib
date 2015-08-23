@@ -14,7 +14,7 @@
 #define vdi_intin_ptr(n)     *((void**)(vdi_intin   +n))
 #define vdi_intout_long(n)   *((long*) (vdi_intout  +n))
 
-#if defined(__GNUC_INLINE__) && (__GNUC__ > 2 || __GNUC_MINOR__ > 5)
+#if defined(__GNUC__) && !defined(__NO_INLINE__)
 
 static inline void
 _vdi_trap_esc (VDIPB * vdipb,
@@ -61,7 +61,47 @@ _vdi_trap_00 (VDIPB * vdipb, long cntrl_0_1, short handle)
 	_vdi_trap_00 (&vdipb, (opcode##uL<<16), handle)
 
 
-#else /* no usage of gnu inlines, go the old way */
+#else 
+
+#if defined(__VBCC__)
+
+__regsused("d0/d1/a0/a1") void _vdi_trap_esc(
+        __reg("a0")VDIPB *,__reg("d0")long,__reg("d1")long,
+        __reg("d2")long,__reg("d3")short) =
+  "\tmove.l\td2,-(sp)\n"
+  "\tmove.l\ta2,-(sp)\n"
+  "\tmove.l\t(a0),a1\n"
+  "\tmovem.l\td0-d2,(a1)\n"
+  "\tmove.w\td3,12(a1)\n"
+  "\tmove.l\ta0,d1\n"
+  "\tmoveq\t#115,d0\n"
+  "\ttrap\t#2\n"
+  "\tmove.l\t(sp)+,a2\n"
+  "\tmove.l\t(sp)+,d2";
+  
+#define VDI_TRAP_ESC(vdipb, handle, opcode, subop, cntrl_1, cntrl_3) \
+        _vdi_trap_esc (&vdipb, (opcode##uL<<16)|cntrl_1, cntrl_3, subop, handle)
+
+__regsused("d0/d1/a0/a1") void _vdi_trap_00(
+        __reg("a0")VDIPB *,__reg("d0")long,__reg("d1")short) =
+  "\tmove.l\td2,-(sp)\n"
+  "\tmove.l\ta2,-(sp)\n"
+  "\tmove.l\t(a0),a1\n"
+  "\tmove.l\td0,(a1)+\n"
+  "\tmoveq\t#0,d0\n"
+  "\tmove.l\td0,(a1)+\n"
+  "\tmove.l\td0,(a1)+\n"
+  "\tmove.w\td1,(a1)\n"
+  "\tmove.l\ta0,d1\n"
+  "\tmoveq\t#115,d0\n"
+  "\ttrap\t#2\n"
+  "\tmove.l\t(sp)+,a2\n"
+  "\tmove.l\t(sp)+,d2";  
+  
+#define VDI_TRAP_00(vdipb, handle, opcode) \
+	_vdi_trap_00 (&vdipb, (opcode##uL<<16), handle)
+ 
+#else /* no usage of inlines, go the old way */
 
 #define VDI_TRAP_ESC(vdipb, handle, opcode, subop, cntrl_1, cntrl_3) \
 	vdi_control[0] = opcode;  \
@@ -73,6 +113,7 @@ _vdi_trap_00 (VDIPB * vdipb, long cntrl_0_1, short handle)
 
 #define VDI_TRAP_00(vdipb, handle, opcode) \
 	VDI_TRAP_ESC (vdipb, handle, opcode, 0, 0, 0)
+#endif /* __VBCC */
 #endif
 
 
