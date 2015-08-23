@@ -1216,24 +1216,25 @@ typedef struct
 
 } COLOR_TAB;
 
+/** TODO */
 typedef struct
 {
-	long	magic;															/* 'ctab' */
-	long	length;
-	long	format;
-	long	reserved;
+	long	magic;			/**< set to 'ctab' */
+	long	length;			/**< TODO */
+	long	format;			/**< TODO */
+	long	reserved;			/**< TODO */
 	
-	long	map_id;
-	long	color_space;
-	long	flags;
-	long	no_colors;
+	long	map_id;			/**< TODO */
+	long	color_space;			/**< TODO */
+	long	flags;			/**< TODO */
+	long	no_colors;			/**< TODO */
 
-	long	reserved1;
-	long	reserved2;
-	long	reserved3;
-	long	reserved4;
+	long	reserved1;			/**< TODO */
+	long	reserved2;			/**< TODO */
+	long	reserved3;			/**< TODO */
+	long	reserved4;			/**< TODO */
 
-	COLOR_ENTRY	colors[256];
+	COLOR_ENTRY	colors[256];			/**< TODO */
 } COLOR_TAB256;
 
 typedef COLOR_TAB *CTAB_PTR;
