@@ -163,6 +163,7 @@ OBJ = \
  n_v_ftext16n.o	\
  n_v_ftext_offset.o	\
  n_v_ftext_offset16.o	\
+ n_v_ftext_offset16n.o	\
  n_v_get_ctab_id.o	\
  n_v_get_outline.o	\
  n_v_getbitmap_info.o	\
@@ -211,6 +212,7 @@ OBJ = \
  n_vqt_name_and_id.o	\
  n_vqt_pairkern.o	\
  n_vqt_real_extent.o	\
+ n_vqt_real_extent16n.o	\
  n_vqt_trackkern.o	\
  n_vqt_xfntinfo.o	\
  n_vr_transfer_bits.o	\
@@ -267,6 +269,7 @@ OBJ = \
  rc_grect_to_array.o	\
  rc_intersect.o	\
  v_alpha_text.o	\
+ v_alpha_text16n.o	\
  v_arc.o	\
  v_bar.o	\
  v_bit_image.o	\
@@ -283,6 +286,7 @@ OBJ = \
  v_curleft.o	\
  v_curright.o	\
  v_curtext.o	\
+ v_curtext16n.o	\
  v_curup.o	\
  v_dspcur.o	\
  v_eeol.o	\
@@ -304,6 +308,7 @@ OBJ = \
  v_hardcopy.o	\
  v_hide_c.o	\
  v_justified.o	\
+ v_justified16n.o	\
  v_loadcache.o	\
  v_meta_extents.o	\
  v_offset.o	\
@@ -522,3 +527,5 @@ OBJ = \
 SX_OBJ = _sx_asm.o
 GC_OBJ = _gc_asm_aes.o _gc_asm_vdi.o _gc_asm_vq_gdos.o _gc_asm_vq_vgdos.o
 PC_OBJ = _pc_asm.o
+VC_OBJ = _vc_asm_vq_gdos.o _vc_asm_vq_vgdos.o
+
