@@ -2,12 +2,9 @@
  *  $Id$
  */
 
-#ifdef    __PUREC__
- #define max(x,y)   	(((x)>(y))?(x):(y))
- #define	min(x,y)   	(((x)<(y))?(x):(y))
-#else  /* __PUREC__ */
- #include <macros.h>
-#endif /* __PUREC__ */
+#define max(x,y)   	(((x)>(y))?(x):(y))
+#define	min(x,y)   	(((x)<(y))?(x):(y))
+
 
 #include "mt_gem.h"
 
