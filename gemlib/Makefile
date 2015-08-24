@@ -70,7 +70,7 @@ doc: Doxyfile ChangeLog
 	
 
 # makefiles for compiler other than gcc
-.PHONY: gcc gcc281 gcc28116 sox all-compilers zip
+.PHONY: gcc gcc281 gcc28116 sox vbcc all-compilers zip
 gcc:
 	mkdir -p lib/gcc; make -f gcc.mak
 
@@ -86,15 +86,19 @@ sox:
 pc:
 	mkdir -p lib/purec; make -f pc.mak
 
+vbcc:
+	mkdir -p .vbcc68k; mkdir -p lib/vbcc; make -f vbcc.mak
+
 zip:
 	make -f zip.mak
 	
 all-compilers:
-	rm -f *.o; mkdir -p lib/sozobon lib/gcc lib/gcc281 include
+	rm -f *.o; mkdir -p lib/sozobon lib/gcc lib/gcc281 lib/vbcc include
 	make -f sox.mak; rm -f *.o; 
 	make -f gcc.mak; rm -f *.o; 
 	make -f gcc281.mak; rm -f *.o; 
-	make -f gcc281-16.mak; rm -f *.o; 
+	make -f gcc281-16.mak; rm -f *.o;
+	make -f vbcc.mak;
 	make -f zip.mak
 
 libgem$(TARGET).a: objs

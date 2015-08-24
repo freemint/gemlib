@@ -113,7 +113,7 @@ __regsused("d0/d1/a0/a1") void _vdi_trap_00(
 
 #define VDI_TRAP_00(vdipb, handle, opcode) \
 	VDI_TRAP_ESC (vdipb, handle, opcode, 0, 0, 0)
-#endif /* __VBCC */
+#endif /* __VBCC__ */
 #endif
 
 
