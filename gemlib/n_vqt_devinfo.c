@@ -2,6 +2,7 @@
  *  $Id$
  */
 
+#include "mt_gem.h"
 #include "mt_gemx.h"
 
 /** reports back, if a driver exists and if he has been opened.
