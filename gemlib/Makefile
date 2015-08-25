@@ -6,6 +6,7 @@
 SHELL = /bin/sh
 SUBDIRS = 
 
+
 srcdir = .
 top_srcdir = ..
 subdir = gemlib
@@ -87,8 +88,16 @@ pc:
 	mkdir -p lib/purec; make -f pc.mak
 
 vbcc:
-	mkdir -p .vbcc68k; mkdir -p lib/vbcc; make -f vbcc.mak
 
+#68000 target (+mint : official config for vc for 68K target and mint)
+	mkdir -p .vbcc; mkdir -p lib/vbcc; $(MAKE) -f vbcc.mak LIB_VBCC="lib/vbcc/libgem.a" MORE_CFLAGS="+mint" MORE_SFLAGS=""
+#coldfire target (+mintcf : official config for vc for coldfire target and mint)
+	$(MAKE) -f vbcc.mak LIB_VBCC="lib/vbcc/libgemv4e.a" MORE_CFLAGS="+mintcf" MORE_SFLAGS="-mv4e"
+#68030 target (+mint : official config for vc for 68K target and mint)
+	$(MAKE) -f vbcc.mak LIB_VBCC="lib/vbcc/libgem030.a" MORE_CFLAGS="+mint -cpu=68030" MORE_SFLAGS="-m68030"
+#68000 mshort target (+mint16 : unofficial config for vc for 68K target and mint with mshort option, replace "vbccm68k" by "vbccm68ks" in mint config and rename it to mint16 )
+	$(MAKE) -f vbcc.mak LIB_VBCC="lib/vbcc/libgem16.a" MORE_CFLAGS="+mint16" MORE_SFLAGS=""
+	
 zip:
 	make -f zip.mak
 	

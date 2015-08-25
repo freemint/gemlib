@@ -21,7 +21,6 @@ LIB_GCC281        = lib/gcc281/gem.olb
 LIB_GCC281_MSHORT = lib/gcc281/gem16.olb
 LIB_SOZOBON       = lib/sozobon/gem.a
 LIB_PUREC         = lib/purec/gem.lib
-LIB_VBCC	  = lib/vbcc/libgem.a
 
 # headers
 

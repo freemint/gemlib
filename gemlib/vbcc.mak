@@ -8,10 +8,15 @@ CC     = vc
 AS     = vasmm68k_mot
 AR     = ar
 
-CFLAGS = -O2 -c99 -no-trigraphs
+CFLAGS = -O1 -c99 -no-trigraphs
 SFLAGS = -Faout -quiet
+CFLAGS += $(MORE_CFLAGS)
+SFLAGS += $(MORE_SFLAGS)
 
 include files.mak
+
+
+
 
 .SUFFIXES:
 .SUFFIXES: .c .S .o
@@ -22,7 +27,7 @@ include files.mak
 .S.o:
 	$(AS) $(SFLAGS) $*.S -o .vbcc/$*.o
 
-TARGET = $(LIB_VBCC68K)
+TARGET = $(LIB_VBCC)
 
 all: $(TARGET)
 
