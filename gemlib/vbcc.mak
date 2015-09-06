@@ -31,6 +31,6 @@ TARGET = $(LIB_VBCC)
 
 all: $(TARGET)
 
-$(TARGET): $(OBJ) $(VC_OBJ)
+$(TARGET):  $(OBJ) $(VC_OBJ)
 	$(RM) $@
 	cd .vbcc; $(AR) -r ../$@ $^; $(RM) $^; cd ..
