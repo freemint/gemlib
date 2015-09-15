@@ -96,7 +96,7 @@ vbcc:
 #68030 target (+mint : official config for vc for 68K target and mint)
 	$(MAKE) -f vbcc.mak LIB_VBCC="lib/vbcc/libgem030.a" MORE_CFLAGS="+mint -cpu=68030" MORE_SFLAGS="-m68030"
 #68000 mshort target (+mint16 : unofficial config for vc for 68K target and mint with mshort option, replace "vbccm68k" by "vbccm68ks" in mint config and rename it to mint16 )
-	$(MAKE) -f vbcc.mak LIB_VBCC="lib/vbcc/libgem16.a" MORE_CFLAGS="+mint16" MORE_SFLAGS=""
+	$(MAKE) -f vbcc.mak LIB_VBCC="lib/vbcc/libgem16.a" MORE_CFLAGS="+mint16" MORE_SFLAGS="-D__MSHORT__"
 	
 zip:
 	make -f zip.mak
