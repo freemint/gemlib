@@ -23,8 +23,9 @@ v_ftext_offset16n (short handle, short x, short y,
 	long       * dst =       (long*)vdi_ptsin;
 	short     i;
 	
-	if(num>VDI_PTSINMAX) num=VDI_PTSINMAX;
 	VDI_PARAMS(vdi_control, (const short *)wstr, vdi_ptsin, vdi_dummy, vdi_dummy);
+	if(num>VDI_PTSINMAX) num=VDI_PTSINMAX;
+	
 	
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;
