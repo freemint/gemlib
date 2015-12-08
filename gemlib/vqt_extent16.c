@@ -15,7 +15,7 @@
 void
 vqt_extent16 (short handle, const short *wstr, short extent[])
 {
-	register short n = vdi_wstrlen (wstr);
+	short n = vdi_wstrlen (wstr);
 	short vdi_control[VDI_CNTRLMAX]; 
 	
 	VDI_PARAMS( vdi_control, wstr, 0L, vdi_dummy, extent);
