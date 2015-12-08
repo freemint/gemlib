@@ -22,7 +22,7 @@ short
 v_flushcache (short handle)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intout[VDI_INTOUTMAX]; /* todo (doc wanted) */
+	short vdi_intout[2]; /* todo (doc wanted) */
 
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_dummy );
 	
