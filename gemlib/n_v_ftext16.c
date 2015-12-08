@@ -21,7 +21,7 @@ v_ftext16 (short handle, short x, short y, const WCHAR * wstr)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsin[2];   
-	register short n = vdi_wstrlen ((const short *)wstr);
+	short n = vdi_wstrlen ((const short *)wstr);
 
 	VDI_PARAMS(vdi_control, (const short *)wstr, vdi_ptsin, vdi_dummy, vdi_dummy);
 	

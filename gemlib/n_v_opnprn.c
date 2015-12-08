@@ -24,7 +24,7 @@ v_opnprn (short aes_handle, PRN_SETTINGS *settings, short work_out[])
 {
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[16];   
-	register short i;
+	short i;
 
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, &work_out[0], &work_out[45] );
 	
