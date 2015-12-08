@@ -45,7 +45,7 @@ void
 v_cellarray (short handle, short pxy[], short row_length, short elements,
              short nrows, short write_mode, short colarray[])
 {
-	register short n = row_length * nrows;
+	short n = row_length * nrows;
 	short vdi_control[VDI_CNTRLMAX]; 
 
 	VDI_PARAMS(vdi_control, colarray, pxy, vdi_dummy, vdi_dummy );
