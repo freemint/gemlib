@@ -60,7 +60,7 @@ __BEGIN_DECLS
  * The AES specific stuff from old gemfast.h
  */
 
-#define NIL 				0					/**< TODO */
+#define NIL 				-1					/**< Value for no more object in object tree */
 #define DESKTOP_HANDLE		0					/**< TODO */
 #define DESK			 	DESKTOP_HANDLE		/**< TODO */
 
