@@ -21,7 +21,7 @@
  *  must be already be a member of the OBJECT array. This
  *  function simply updates the ob_next, ob_head, and ob_tail
  *  structure members of OBJECTs in the object tree. These
- *  fields should be initialized to #NIL (0) in the child to be
+ *  fields should be initialized to #NIL (-1) in the child to be
  *  added.
  *
  */
