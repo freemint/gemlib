@@ -25,6 +25,8 @@
 #ifdef appl_bvset
 #undef appl_bvset
 #endif
+short appl_bvset(short bvdisk, short bvhard);
+
 short
 appl_bvset(short bvdisk, short bvhard)
 {
@@ -34,6 +36,8 @@ appl_bvset(short bvdisk, short bvhard)
 #ifdef appl_control
 #undef appl_control
 #endif
+short appl_control(short ap_cid, short ap_cwhat, void *ap_cout);
+
 short
 appl_control(short ap_cid, short ap_cwhat, void *ap_cout)
 {
@@ -43,6 +47,8 @@ appl_control(short ap_cid, short ap_cwhat, void *ap_cout)
 #ifdef appl_exit
 #undef appl_exit
 #endif
+short appl_exit(void);
+
 short
 appl_exit(void)
 {
@@ -52,6 +58,8 @@ appl_exit(void)
 #ifdef appl_find
 #undef appl_find
 #endif
+short appl_find(const char *name);
+
 short
 appl_find(const char *name)
 {
@@ -61,6 +69,8 @@ appl_find(const char *name)
 #ifdef appl_getinfo
 #undef appl_getinfo
 #endif
+short appl_getinfo(short type, short *out1, short *out2, short *out3, short *out4);
+
 short
 appl_getinfo(short type, short *out1, short *out2, short *out3, short *out4)
 {
@@ -71,6 +81,8 @@ appl_getinfo(short type, short *out1, short *out2, short *out3, short *out4)
 #ifdef appl_xgetinfo
 #undef appl_xgetinfo
 #endif
+short appl_xgetinfo(short type, short *out1, short *out2, short *out3, short *out4);
+
 short 
 appl_xgetinfo(short type, short *out1, short *out2, short *out3, short *out4)
 {
@@ -80,6 +92,8 @@ appl_xgetinfo(short type, short *out1, short *out2, short *out3, short *out4)
 #ifdef appl_init
 #undef appl_init
 #endif
+short appl_init(void);
+
 short
 appl_init(void)
 {
@@ -91,6 +105,8 @@ appl_init(void)
 #ifdef appl_read
 #undef appl_read
 #endif
+short appl_read(short ap_id, short length, void *ap_pbuff);
+
 short
 appl_read(short ap_id, short length, void *ap_pbuff)
 {
@@ -100,6 +116,8 @@ appl_read(short ap_id, short length, void *ap_pbuff)
 #ifdef appl_search
 #undef appl_search
 #endif
+short appl_search(short mode, char *fname, short *type, short *ap_id);
+
 short
 appl_search(short mode, char *fname, short *type, short *ap_id)
 {
@@ -109,6 +127,8 @@ appl_search(short mode, char *fname, short *type, short *ap_id)
 #ifdef appl_tplay
 #undef appl_tplay
 #endif
+short appl_tplay(void *mem, short num, short scale);
+
 short
 appl_tplay(void *mem, short num, short scale)
 {
@@ -118,6 +138,8 @@ appl_tplay(void *mem, short num, short scale)
 #ifdef appl_trecord
 #undef appl_trecord
 #endif
+short appl_trecord(void *mem, short count) ;
+
 short
 appl_trecord(void *mem, short count)
 {
@@ -127,6 +149,8 @@ appl_trecord(void *mem, short count)
 #ifdef appl_write
 #undef appl_write
 #endif
+short appl_write(short ap_id, short length, void *ap_pbuff);
+
 short
 appl_write(short ap_id, short length, void *ap_pbuff)
 {
@@ -136,6 +160,8 @@ appl_write(short ap_id, short length, void *ap_pbuff)
 #ifdef appl_yield
 #undef appl_yield
 #endif
+short appl_yield(void);
+
 short
 appl_yield(void)
 {
@@ -145,6 +171,9 @@ appl_yield(void)
 #ifdef evnt_button
 #undef evnt_button
 #endif
+short evnt_button(short clicks, short mask, short state,
+				short *mx, short *my, short *mbutton, short *kmeta);
+
 short
 evnt_button(short clicks, short mask, short state,
 				short *mx, short *my, short *mbutton, short *kmeta)
@@ -156,6 +185,8 @@ evnt_button(short clicks, short mask, short state,
 #ifdef evnt_dclick
 #undef evnt_dclick
 #endif
+short evnt_dclick(short value, short sflag);
+
 short evnt_dclick(short value, short sflag)
 {
 	return(mt_evnt_dclick(value, sflag, aes_global));
@@ -164,6 +195,8 @@ short evnt_dclick(short value, short sflag)
 #ifdef evnt_keybd
 #undef evnt_keybd
 #endif
+int evnt_keybd(void);
+
 int evnt_keybd(void)
 {
 	return(mt_evnt_keybd(aes_global));
@@ -172,6 +205,8 @@ int evnt_keybd(void)
 #ifdef evnt_mesag
 #undef evnt_mesag
 #endif
+short evnt_mesag(short msg[]);
+
 short evnt_mesag(short msg[])
 {
 	return(mt_evnt_mesag(msg, aes_global));
@@ -180,6 +215,9 @@ short evnt_mesag(short msg[])
 #ifdef evnt_mouse
 #undef evnt_mouse
 #endif
+short evnt_mouse(short flag, short x, short y, short w, short h,
+				 short *mx, short *my, short *mbutton, short *kmeta);
+
 short evnt_mouse(short flag, short x, short y, short w, short h,
 				 short *mx, short *my, short *mbutton, short *kmeta)
 {
@@ -195,6 +233,15 @@ evnt_multi(short events, short bclicks, short bmask, short bstate,
 		   short m2_leave, short m2_x, short m2_y, short m2_w, short m2_h,
 		   short msg[], unsigned long interval,
 		   short *mx, short *my,
+		   short *mbutton, short *kmeta, short *kreturn, short *mbclicks);
+
+
+short
+evnt_multi(short events, short bclicks, short bmask, short bstate,
+		   short m1_leave, short m1_x, short m1_y, short m1_w, short m1_h,
+		   short m2_leave, short m2_x, short m2_y, short m2_w, short m2_h,
+		   short msg[], unsigned long interval,
+		   short *mx, short *my,
 		   short *mbutton, short *kmeta, short *kreturn, short *mbclicks)
 {
 	return(mt_evnt_multi(events, bclicks, bmask, bstate, m1_leave, m1_x, m1_y, m1_w, m1_h, m2_leave, m2_x, m2_y, m2_w, m2_h, msg, interval, mx, my, mbutton, kmeta, kreturn, mbclicks, aes_global));
@@ -203,6 +250,8 @@ evnt_multi(short events, short bclicks, short bmask, short bstate,
 #ifdef evnt_multi_fast
 #undef evnt_multi_fast
 #endif
+short evnt_multi_fast (const EVMULT_IN * em_in, short msg[], EVMULT_OUT * em_out);
+
 short
 evnt_multi_fast (const EVMULT_IN * em_in, short msg[], EVMULT_OUT * em_out)
 {
@@ -212,6 +261,8 @@ evnt_multi_fast (const EVMULT_IN * em_in, short msg[], EVMULT_OUT * em_out)
 #ifdef evnt_timer
 #undef evnt_timer
 #endif
+short evnt_timer(unsigned long interval);
+
 short
 evnt_timer(unsigned long interval)
 {
@@ -221,6 +272,8 @@ evnt_timer(unsigned long interval)
 #ifdef form_alert
 #undef form_alert
 #endif
+short form_alert(short default_button, const char *alert_string);
+
 short
 form_alert(short default_button, const char *alert_string)
 {
@@ -230,6 +283,8 @@ form_alert(short default_button, const char *alert_string)
 #ifdef form_button
 #undef form_button
 #endif
+short form_button(OBJECT *tree, short object, short clicks, short *nextobj);
+
 short
 form_button(OBJECT *tree, short object, short clicks, short *nextobj)
 {
@@ -239,6 +294,8 @@ form_button(OBJECT *tree, short object, short clicks, short *nextobj)
 #ifdef form_center
 #undef form_center
 #endif
+short form_center(OBJECT *tree, short *cx, short *cy, short *cw, short *ch);
+
 short
 form_center(OBJECT *tree, short *cx, short *cy, short *cw, short *ch)
 {
@@ -248,6 +305,10 @@ form_center(OBJECT *tree, short *cx, short *cy, short *cw, short *ch)
 #ifdef form_dial
 #undef form_dial
 #endif
+short form_dial(short mode,
+		  short x1, short y1, short w1, short h1,
+		  short x2, short y2, short w2, short h2);
+
 short
 form_dial(short mode,
 		  short x1, short y1, short w1, short h1,
@@ -259,6 +320,8 @@ form_dial(short mode,
 #ifdef form_do
 #undef form_do
 #endif
+short form_do(OBJECT *tree, short startobj);
+
 short
 form_do(OBJECT *tree, short startobj)
 {
@@ -268,6 +331,8 @@ form_do(OBJECT *tree, short startobj)
 #ifdef form_error
 #undef form_error
 #endif
+short form_error(short error_code);
+
 short
 form_error(short error_code)
 {
@@ -277,6 +342,8 @@ form_error(short error_code)
 #ifdef form_keybd
 #undef form_keybd
 #endif
+short form_keybd(OBJECT *tree, short object, short reserved, short key, short *nextobject, short *nextchar);
+
 short
 form_keybd(OBJECT *tree, short object, short reserved, short key, short *nextobject, short *nextchar)
 {
@@ -286,6 +353,8 @@ form_keybd(OBJECT *tree, short object, short reserved, short key, short *nextobj
 #ifdef fsel_exinput
 #undef fsel_exinput
 #endif
+short fsel_exinput(char *path, char *file, short *exit_but, const char *title);
+
 short
 fsel_exinput(char *path, char *file, short *exit_but, const char *title)
 {
@@ -295,6 +364,8 @@ fsel_exinput(char *path, char *file, short *exit_but, const char *title)
 #ifdef fsel_input
 #undef fsel_input
 #endif
+short fsel_input(char *path, char *file, short *exit_but);
+
 short
 fsel_input(char *path, char *file, short *exit_but)
 {
@@ -304,6 +375,9 @@ fsel_input(char *path, char *file, short *exit_but)
 #ifdef graf_dragbox
 #undef graf_dragbox
 #endif
+short graf_dragbox(short  w, short  h, short sx, short sy,
+			 short bx, short by, short bw, short bh, short *rx, short *ry);
+
 short
 graf_dragbox(short  w, short  h, short sx, short sy,
 			 short bx, short by, short bw, short bh, short *rx, short *ry)
@@ -314,6 +388,9 @@ graf_dragbox(short  w, short  h, short sx, short sy,
 #ifdef graf_growbox
 #undef graf_growbox
 #endif
+short graf_growbox(short sx, short sy, short sw, short sh,
+			 short fx, short fy, short fw, short fh);
+
 short
 graf_growbox(short sx, short sy, short sw, short sh,
 			 short fx, short fy, short fw, short fh)
@@ -324,6 +401,8 @@ graf_growbox(short sx, short sy, short sw, short sh,
 #ifdef graf_handle
 #undef graf_handle
 #endif
+short graf_handle(short *wcell, short *hcell, short *wbox, short *hbox);
+
 short
 graf_handle(short *wcell, short *hcell, short *wbox, short *hbox)
 {
@@ -333,6 +412,8 @@ graf_handle(short *wcell, short *hcell, short *wbox, short *hbox)
 #ifdef graf_watchbox
 #undef graf_watchbox
 #endif
+short graf_watchbox(OBJECT *tree, short object, short in_state, short out_state);
+
 short
 graf_watchbox(OBJECT *tree, short object, short in_state, short out_state)
 {
@@ -342,6 +423,8 @@ graf_watchbox(OBJECT *tree, short object, short in_state, short out_state)
 #ifdef graf_mbox
 #undef graf_mbox
 #endif
+short graf_mbox(short w, short h, short sx, short sy, short dx, short dy);
+
 short
 graf_mbox(short w, short h, short sx, short sy, short dx, short dy)
 {
@@ -351,6 +434,8 @@ graf_mbox(short w, short h, short sx, short sy, short dx, short dy)
 #ifdef graf_mkstate
 #undef graf_mkstate
 #endif
+short graf_mkstate(short *mx, short *my, short *mbutton, short *kmeta);
+
 short
 graf_mkstate(short *mx, short *my, short *mbutton, short *kmeta)
 {
@@ -360,6 +445,8 @@ graf_mkstate(short *mx, short *my, short *mbutton, short *kmeta)
 #ifdef graf_mouse
 #undef graf_mouse
 #endif
+short graf_mouse(short shape, const MFORM *shape_addr);
+
 short
 graf_mouse(short shape, const MFORM *shape_addr)
 {
@@ -369,6 +456,8 @@ graf_mouse(short shape, const MFORM *shape_addr)
 #ifdef graf_rubberbox
 #undef graf_rubberbox
 #endif
+short graf_rubberbox(short bx, short by, short mw, short mh, short *rw, short *rh);
+
 short
 graf_rubberbox(short bx, short by, short mw, short mh, short *rw, short *rh)
 {
@@ -378,6 +467,8 @@ graf_rubberbox(short bx, short by, short mw, short mh, short *rw, short *rh)
 #ifdef graf_rubbbox
 #undef graf_rubbbox
 #endif
+short graf_rubbbox(short bx, short by, short mw, short mh, short *rw, short *rh);
+
 short
 graf_rubbbox(short bx, short by, short mw, short mh, short *rw, short *rh)
 {
@@ -387,6 +478,8 @@ graf_rubbbox(short bx, short by, short mw, short mh, short *rw, short *rh)
 #ifdef graf_rubbox
 #undef graf_rubbox
 #endif
+short graf_rubbox(short bx, short by, short mw, short mh, short *rw, short *rh);
+
 short
 graf_rubbox(short bx, short by, short mw, short mh, short *rw, short *rh)
 {
@@ -396,6 +489,9 @@ graf_rubbox(short bx, short by, short mw, short mh, short *rw, short *rh)
 #ifdef graf_shrinkbox
 #undef graf_shrinkbox
 #endif
+short graf_shrinkbox(short fx, short fy, short fw, short fh,
+			   short sx, short sy, short sw, short sh);
+
 short
 graf_shrinkbox(short fx, short fy, short fw, short fh,
 			   short sx, short sy, short sw, short sh)
@@ -406,6 +502,8 @@ graf_shrinkbox(short fx, short fy, short fw, short fh,
 #ifdef graf_slidebox
 #undef graf_slidebox
 #endif
+short graf_slidebox(OBJECT *tree, short parent, short object, short direction);
+
 short
 graf_slidebox(OBJECT *tree, short parent, short object, short direction)
 {
@@ -415,6 +513,8 @@ graf_slidebox(OBJECT *tree, short parent, short object, short direction)
 #ifdef menu_attach
 #undef menu_attach
 #endif
+short menu_attach(short me_flag, OBJECT *me_tree, short me_item, MENU *me_mdata);
+
 short
 menu_attach(short me_flag, OBJECT *me_tree, short me_item, MENU *me_mdata)
 {
@@ -424,6 +524,8 @@ menu_attach(short me_flag, OBJECT *me_tree, short me_item, MENU *me_mdata)
 #ifdef menu_bar
 #undef menu_bar
 #endif
+short menu_bar(OBJECT *me_tree, int me_mode);
+
 short
 menu_bar(OBJECT *me_tree, int me_mode)
 {
@@ -433,6 +535,8 @@ menu_bar(OBJECT *me_tree, int me_mode)
 #ifdef menu_click
 #undef menu_click
 #endif
+short menu_click(short click, short setit);
+
 short
 menu_click(short click, short setit)
 {
@@ -442,6 +546,8 @@ menu_click(short click, short setit)
 #ifdef menu_icheck
 #undef menu_icheck
 #endif
+short menu_icheck(OBJECT *me_tree, short me_item, short me_check);
+
 short
 menu_icheck(OBJECT *me_tree, short me_item, short me_check)
 {
@@ -451,6 +557,8 @@ menu_icheck(OBJECT *me_tree, short me_item, short me_check)
 #ifdef menu_ienable
 #undef menu_ienable
 #endif
+short menu_ienable(OBJECT *me_tree, short me_item, short me_enable);
+
 short
 menu_ienable(OBJECT *me_tree, short me_item, short me_enable)
 {
@@ -460,6 +568,8 @@ menu_ienable(OBJECT *me_tree, short me_item, short me_enable)
 #ifdef menu_istart
 #undef menu_istart
 #endif
+short menu_istart(short me_flag, OBJECT *me_tree, short me_imenu, short me_item);
+
 short
 menu_istart(short me_flag, OBJECT *me_tree, short me_imenu, short me_item)
 {
@@ -469,6 +579,8 @@ menu_istart(short me_flag, OBJECT *me_tree, short me_imenu, short me_item)
 #ifdef menu_popup
 #undef menu_popup
 #endif
+short menu_popup(MENU *me_menu, short me_xpos, short me_ypos, MENU *me_mdata);
+
 short
 menu_popup(MENU *me_menu, short me_xpos, short me_ypos, MENU *me_mdata)
 {
@@ -478,6 +590,8 @@ menu_popup(MENU *me_menu, short me_xpos, short me_ypos, MENU *me_mdata)
 #ifdef menu_register
 #undef menu_register
 #endif
+short menu_register(short ap_id, char *me_text);
+
 short
 menu_register(short ap_id, char *me_text)
 {
@@ -487,6 +601,8 @@ menu_register(short ap_id, char *me_text)
 #ifdef menu_settings
 #undef menu_settings
 #endif
+short menu_settings(short me_flag, MN_SET *me_values);
+
 short
 menu_settings(short me_flag, MN_SET *me_values)
 {
@@ -496,6 +612,8 @@ menu_settings(short me_flag, MN_SET *me_values)
 #ifdef menu_text
 #undef menu_text
 #endif
+short menu_text(OBJECT *me_tree, int me_item, char *me_text);
+
 short
 menu_text(OBJECT *me_tree, int me_item, char *me_text)
 {
@@ -505,6 +623,8 @@ menu_text(OBJECT *me_tree, int me_item, char *me_text)
 #ifdef menu_tnormal
 #undef menu_tnormal
 #endif
+short menu_tnormal(OBJECT *me_tree, short me_item, short me_normal);
+
 short
 menu_tnormal(OBJECT *me_tree, short me_item, short me_normal)
 {
@@ -514,6 +634,8 @@ menu_tnormal(OBJECT *me_tree, short me_item, short me_normal)
 #ifdef menu_unregister
 #undef menu_unregister
 #endif
+short menu_unregister(int id);
+
 short
 menu_unregister(int id)
 {
@@ -523,6 +645,8 @@ menu_unregister(int id)
 #ifdef objc_add
 #undef objc_add
 #endif
+short objc_add(OBJECT *tree, short parent, short child);
+
 short 
 objc_add(OBJECT *tree, short parent, short child)
 {
@@ -532,6 +656,9 @@ objc_add(OBJECT *tree, short parent, short child)
 #ifdef objc_change
 #undef objc_change
 #endif
+short objc_change(OBJECT *tree, short object, short res, short cx, short cy,
+            short cw, short ch,  short new_state, short redraw);
+
 short 
 objc_change(OBJECT *tree, short object, short res, short cx, short cy,
             short cw, short ch,  short new_state, short redraw)
@@ -542,6 +669,8 @@ objc_change(OBJECT *tree, short object, short res, short cx, short cy,
 #ifdef objc_delete
 #undef objc_delete
 #endif
+short objc_delete(OBJECT *tree, short object);
+
 short 
 objc_delete(OBJECT *tree, short object)
 {
@@ -551,6 +680,9 @@ objc_delete(OBJECT *tree, short object)
 #ifdef objc_draw
 #undef objc_draw
 #endif
+short objc_draw(OBJECT *tree, short start, short depth,
+          short cx, short cy, short cw, short ch);
+
 short 
 objc_draw(OBJECT *tree, short start, short depth,
           short cx, short cy, short cw, short ch)
@@ -561,6 +693,8 @@ objc_draw(OBJECT *tree, short start, short depth,
 #ifdef objc_edit
 #undef objc_edit
 #endif
+short objc_edit(OBJECT *tree, short object, short ch, short *index, short kind);
+
 short 
 objc_edit(OBJECT *tree, short object, short ch, short *index, short kind)
 {
@@ -570,6 +704,8 @@ objc_edit(OBJECT *tree, short object, short ch, short *index, short kind)
 #ifdef objc_find
 #undef objc_find
 #endif
+short objc_find(OBJECT *tree, short start, short depth, short mx, short my);
+
 short 
 objc_find(OBJECT *tree, short start, short depth, short mx, short my)
 {
@@ -579,6 +715,8 @@ objc_find(OBJECT *tree, short start, short depth, short mx, short my)
 #ifdef objc_offset
 #undef objc_offset
 #endif
+short objc_offset(OBJECT *tree, short object, short *x, short *y);
+
 short 
 objc_offset(OBJECT *tree, short object, short *x, short *y)
 {
@@ -588,6 +726,8 @@ objc_offset(OBJECT *tree, short object, short *x, short *y)
 #ifdef objc_order
 #undef objc_order
 #endif
+short objc_order(OBJECT *tree, short object, short new_pos);
+
 short 
 objc_order(OBJECT *tree, short object, short new_pos)
 {
@@ -597,6 +737,9 @@ objc_order(OBJECT *tree, short object, short new_pos)
 #ifdef objc_sysvar
 #undef objc_sysvar
 #endif
+short objc_sysvar(short mode, short which, short in1, short in2,
+            short *out1, short *out2);
+
 short 
 objc_sysvar(short mode, short which, short in1, short in2,
             short *out1, short *out2)
@@ -607,6 +750,8 @@ objc_sysvar(short mode, short which, short in1, short in2,
 #ifdef rsrc_free
 #undef rsrc_free
 #endif
+short rsrc_free(void);
+
 short 
 rsrc_free(void)
 {
@@ -616,6 +761,8 @@ rsrc_free(void)
 #ifdef rsrc_gaddr
 #undef rsrc_gaddr
 #endif
+short rsrc_gaddr(short Type, short Index, void *Address);
+
 short 
 rsrc_gaddr(short Type, short Index, void *Address)
 {
@@ -625,6 +772,8 @@ rsrc_gaddr(short Type, short Index, void *Address)
 #ifdef rsrc_load
 #undef rsrc_load
 #endif
+short rsrc_load(const char *Name);
+
 short 
 rsrc_load(const char *Name)
 {
@@ -634,6 +783,8 @@ rsrc_load(const char *Name)
 #ifdef rsrc_obfix
 #undef rsrc_obfix
 #endif
+short rsrc_obfix(OBJECT *Tree, short Index);
+
 short 
 rsrc_obfix(OBJECT *Tree, short Index)
 {
@@ -643,6 +794,8 @@ rsrc_obfix(OBJECT *Tree, short Index)
 #ifdef rsrc_rcfix
 #undef rsrc_rcfix
 #endif
+short rsrc_rcfix(void *rc_header);
+
 short 
 rsrc_rcfix(void *rc_header)
 {
@@ -652,6 +805,8 @@ rsrc_rcfix(void *rc_header)
 #ifdef rsrc_saddr
 #undef rsrc_saddr
 #endif
+short rsrc_saddr(short Type, short Index, void *Address);
+
 short 
 rsrc_saddr(short Type, short Index, void *Address)
 {
@@ -661,6 +816,8 @@ rsrc_saddr(short Type, short Index, void *Address)
 #ifdef scrp_clear
 #undef scrp_clear
 #endif
+short scrp_clear(void);
+
 short 
 scrp_clear(void)
 {
@@ -670,6 +827,8 @@ scrp_clear(void)
 #ifdef scrp_read
 #undef scrp_read
 #endif
+short scrp_read(char *Scrappath);
+
 short 
 scrp_read(char *Scrappath)
 {
@@ -679,6 +838,8 @@ scrp_read(char *Scrappath)
 #ifdef scrp_write
 #undef scrp_write
 #endif
+short scrp_write(const char *Scrappath);
+
 short 
 scrp_write(const char *Scrappath)
 {
@@ -689,6 +850,8 @@ scrp_write(const char *Scrappath)
 #ifdef shel_envrn
 #undef shel_envrn
 #endif
+short shel_envrn(char **result, const char *param);
+
 short 
 shel_envrn(char **result, const char *param)
 {
@@ -698,6 +861,8 @@ shel_envrn(char **result, const char *param)
 #ifdef shel_find
 #undef shel_find
 #endif
+short shel_find(char *buf);
+
 short 
 shel_find(char *buf)
 {
@@ -707,6 +872,8 @@ shel_find(char *buf)
 #ifdef shel_get
 #undef shel_get
 #endif
+short shel_get(char *Buf, short Len);
+
 short 
 shel_get(char *Buf, short Len)
 {
@@ -716,6 +883,8 @@ shel_get(char *Buf, short Len)
 #ifdef shel_help
 #undef shel_help
 #endif
+short shel_help(short sh_hmode, const char *sh_hfile, const char *sh_hkey);
+
 short 
 shel_help(short sh_hmode, const char *sh_hfile, const char *sh_hkey)
 {
@@ -725,6 +894,8 @@ shel_help(short sh_hmode, const char *sh_hfile, const char *sh_hkey)
 #ifdef shel_put
 #undef shel_put
 #endif
+short shel_put(const char *Buf, short Len);
+
 short 
 shel_put(const char *Buf, short Len)
 {
@@ -734,6 +905,8 @@ shel_put(const char *Buf, short Len)
 #ifdef shel_rdef
 #undef shel_rdef
 #endif
+short shel_rdef(char *lpcmd, char *lpdir);
+
 short 
 shel_rdef(char *lpcmd, char *lpdir)
 {
@@ -743,6 +916,8 @@ shel_rdef(char *lpcmd, char *lpdir)
 #ifdef shel_read
 #undef shel_read
 #endif
+short shel_read(char *Command, char *Tail);
+
 short 
 shel_read(char *Command, char *Tail)
 {
@@ -752,6 +927,8 @@ shel_read(char *Command, char *Tail)
 #ifdef shel_wdef
 #undef shel_wdef
 #endif
+short shel_wdef(const char *lpcmd, const char *lpdir);
+
 short 
 shel_wdef(const char *lpcmd, const char *lpdir)
 {
@@ -761,6 +938,8 @@ shel_wdef(const char *lpcmd, const char *lpdir)
 #ifdef shel_write
 #undef shel_write
 #endif
+short shel_write(short wodex, short wisgr, short wiscr, void *cmd, char *tail);
+
 short 
 shel_write(short wodex, short wisgr, short wiscr, void *cmd, char *tail)
 {
@@ -770,6 +949,9 @@ shel_write(short wodex, short wisgr, short wiscr, void *cmd, char *tail)
 #ifdef wind_calc
 #undef wind_calc
 #endif
+short wind_calc(short Type, short Parts, short InX,  short InY, short InW, short InH,
+          short *OutX, short *OutY, short *OutW, short *OutH);
+
 short 
 wind_calc(short Type, short Parts, short InX,  short InY, short InW, short InH,
           short *OutX, short *OutY, short *OutW, short *OutH)
@@ -780,6 +962,8 @@ wind_calc(short Type, short Parts, short InX,  short InY, short InW, short InH,
 #ifdef wind_calc_grect
 #undef wind_calc_grect
 #endif
+short wind_calc_grect(short Type, short Parts, const GRECT *In, GRECT *Out);
+
 short 
 wind_calc_grect(short Type, short Parts, const GRECT *In, GRECT *Out)
 {
@@ -789,6 +973,8 @@ wind_calc_grect(short Type, short Parts, const GRECT *In, GRECT *Out)
 #ifdef wind_close
 #undef wind_close
 #endif
+short wind_close(short WindowHandle);
+
 short 
 wind_close(short WindowHandle)
 {
@@ -798,6 +984,8 @@ wind_close(short WindowHandle)
 #ifdef wind_create
 #undef wind_create
 #endif
+short wind_create(short Parts, short Wx, short Wy, short Ww, short Wh);
+
 short 
 wind_create(short Parts, short Wx, short Wy, short Ww, short Wh)
 {
@@ -807,6 +995,8 @@ wind_create(short Parts, short Wx, short Wy, short Ww, short Wh)
 #ifdef wind_create_grect
 #undef wind_create_grect
 #endif
+short wind_create_grect(short Parts, const GRECT *r);
+
 short 
 wind_create_grect(short Parts, const GRECT *r)
 {
@@ -816,6 +1006,8 @@ wind_create_grect(short Parts, const GRECT *r)
 #ifdef wind_delete
 #undef wind_delete
 #endif
+short wind_delete(short WindowHandle);
+
 short 
 wind_delete(short WindowHandle)
 {
@@ -825,6 +1017,8 @@ wind_delete(short WindowHandle)
 #ifdef wind_find
 #undef wind_find
 #endif
+short wind_find(short X, short Y);
+
 short 
 wind_find(short X, short Y)
 {
@@ -834,7 +1028,10 @@ wind_find(short X, short Y)
 #ifdef wind_get
 #undef wind_get
 #endif
-short 
+short wind_get(short WindowHandle, short What,
+         short *W1, short *W2, short *W3, short *W4);
+
+short
 wind_get(short WindowHandle, short What, 
          short *W1, short *W2, short *W3, short *W4)
 {
@@ -844,6 +1041,8 @@ wind_get(short WindowHandle, short What,
 #ifdef wind_get_grect
 #undef wind_get_grect
 #endif
+short wind_get_grect(short WindowHandle, short What, GRECT *r);
+
 short 
 wind_get_grect(short WindowHandle, short What, GRECT *r)
 {
@@ -853,6 +1052,8 @@ wind_get_grect(short WindowHandle, short What, GRECT *r)
 #ifdef wind_new
 #undef wind_new
 #endif
+short wind_new( void);
+
 short 
 wind_new( void)
 {
@@ -862,6 +1063,8 @@ wind_new( void)
 #ifdef wind_open
 #undef wind_open
 #endif
+short wind_open(short WindowHandle, short Wx, short Wy, short Ww, short Wh);
+
 short 
 wind_open(short WindowHandle, short Wx, short Wy, short Ww, short Wh)
 {
@@ -871,6 +1074,8 @@ wind_open(short WindowHandle, short Wx, short Wy, short Ww, short Wh)
 #ifdef wind_open_grect
 #undef wind_open_grect
 #endif
+short wind_open_grect(short WindowHandle, const GRECT *r);
+
 short 
 wind_open_grect(short WindowHandle, const GRECT *r)
 {
@@ -880,6 +1085,8 @@ wind_open_grect(short WindowHandle, const GRECT *r)
 #ifdef wind_set
 #undef wind_set
 #endif
+short wind_set(short WindowHandle, short What, short W1, short W2, short W3, short W4);
+
 short 
 wind_set(short WindowHandle, short What, short W1, short W2, short W3, short W4)
 {
@@ -889,7 +1096,9 @@ wind_set(short WindowHandle, short What, short W1, short W2, short W3, short W4)
 #ifdef wind_set_grect
 #undef wind_set_grect
 #endif
-short 
+short wind_set_grect(short WindowHandle, short What, const GRECT *r);
+
+short
 wind_set_grect(short WindowHandle, short What, const GRECT *r)
 {
 	return(mt_wind_set_grect(WindowHandle, What, r, aes_global));
@@ -898,6 +1107,8 @@ wind_set_grect(short WindowHandle, short What, const GRECT *r)
 #ifdef wind_set_str
 #undef wind_set_str
 #endif
+short wind_set_str(short WindowHandle, short What, const char *str);
+
 short 
 wind_set_str(short WindowHandle, short What, const char *str)
 {
@@ -907,6 +1118,8 @@ wind_set_str(short WindowHandle, short What, const char *str)
 #ifdef wind_update
 #undef wind_update
 #endif
+short wind_update(short Code);
+
 short 
 wind_update(short Code)
 {
