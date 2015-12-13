@@ -1,0 +1,14 @@
+
+
+GEMMLIB VDI call in USERDEF
+
+GEMLIB is full safe thread VDI AES lib, for this most table are include in the stack for VDI call. 
+This table are quite huge since NVDI is able to manage higher tables size.
+
+USERDEF use supervisor stack that is very small with TOS systems and absolutely not compatible with
+GEMLIB. To fix this issue we have defined new call like "udef_v_gtext()" used exactly as "v_gtext()" 
+call but not using the stack. This call is not safe thread (even if shared the code will be safe as 
+in supervisor the system will not interrupt the USERDEF!).
+New functions start with "udef_" and finish with the standard name.
+
+Olivier Landemarre - December 13 2015

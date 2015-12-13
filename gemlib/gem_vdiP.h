@@ -104,11 +104,11 @@ __regsused("d0/d1/a0/a1") void _vdi_trap_00(
 #else /* no usage of inlines, go the old way */
 
 #define VDI_TRAP_ESC(vdipb, handle, opcode, subop, cntrl_1, cntrl_3) \
-	vdi_control[0] = opcode;  \
-	vdi_control[1] = cntrl_1; \
-	vdi_control[3] = cntrl_3; \
-	vdi_control[5] = subop;   \
-	vdi_control[6] = handle;  \
+	vdipb.control[0] = opcode;  \
+	vdipb.control[1] = cntrl_1; \
+	vdipb.control[3] = cntrl_3; \
+	vdipb.control[5] = subop;   \
+	vdipb.control[6] = handle;  \
 	vdi (&vdipb);
 
 #define VDI_TRAP_00(vdipb, handle, opcode) \

@@ -31,6 +31,7 @@ _VDI_ATTRIB = \
 	vst_color.c \
 	vst_effects.c \
 	vst_error.c \
+	u_vst_error.c \
 	vst_font.c \
 	vst_height.c \
 	vst_point.c \
@@ -47,7 +48,9 @@ _VDI_CONTRL = \
 	v_updwk.c \
 	v_flushcache.c \
 	v_loadcache.c \
+	u_v_loadcache.c \
 	v_savecache.c \
+	u_v_savecache.c \
 	v_set_app_buff.c \
 	vs_clip.c \
 	vs_clip_pxy.c \
@@ -57,8 +60,10 @@ _VDI_CONTRL = \
 
 _VDI_ESCAPE = \
 	v_alpha_text.c \
+	u_v_alpha_text.c \
 	v_alpha_text16n.c \
 	v_bit_image.c \
+	u_v_bit_image.c \
 	v_clear_disp_list.c \
 	v_copies.c \
 	v_curdown.c \
@@ -66,6 +71,7 @@ _VDI_ESCAPE = \
 	v_curleft.c \
 	v_curright.c \
 	v_curtext.c \
+	u_v_curtext.c \
 	v_curtext16n.c \
 	v_curup.c \
 	v_dspcur.c \
@@ -90,6 +96,7 @@ _VDI_ESCAPE = \
 	v_write_meta.c \
 	vm_coords.c \
 	vm_filename.c \
+	u_vm_filename.c \
 	vm_pagesize.c \
 	vq_calibrate.c \
 	vq_chcells.c \
@@ -123,12 +130,14 @@ _VDI_INPUT = \
 	vrq_choice.c \
 	vrq_locator.c \
 	vrq_string.c \
+	u_vrq_string.c \
 	vrq_valuator.c \
 	vsc_form.c \
 	vsin_mode.c \
 	vsm_choice.c \
 	vsm_locator.c \
 	vsm_string.c \
+	u_vsm_string.c \
 	vsm_valuator.c
 
 _VDI_INQUIRE = \
@@ -143,6 +152,7 @@ _VDI_INQUIRE = \
 	vqt_attributes.c \
 	vqt_cachesize.c \
 	vqt_extent.c \
+	u_vqt_extent.c \
 	vqt_extent16.c \
 	vqt_extent16n.c \
 	vqt_fontinfo.c \
@@ -161,9 +171,11 @@ _VDI_OUTPUT = \
 	v_ellpie.c \
 	v_fillarea.c \
 	v_gtext.c \
+	u_v_gtext.c \
 	v_gtext16.c \
 	v_gtext16n.c \
 	v_justified.c \
+	u_v_justified.c \
 	v_justified16n.c \
 	v_pieslice.c \
 	v_pline.c \
@@ -180,6 +192,7 @@ _VDI_RASTER = \
 
 _VDI_EXTENSIONS = \
 	n_v_bez.c \
+	u_v_bez.c \
 	n_v_bez_fill.c \
 	n_v_bez_off.c \
 	n_v_bez_on.c \
@@ -197,11 +210,15 @@ _VDI_EXTENSIONS = \
 	n_v_delete_driver_info.c \
 	n_v_delete_itab.c \
 	n_v_ftext.c \
+	u_v_ftext.c \
 	n_v_ftext16.c \
 	n_v_ftext16n.c \
 	n_v_ftext_offset.c \
+	u_v_ftext_offset.c \
 	n_v_ftext_offset16.c \
+	u_v_ftext_offset16.c \
 	n_v_ftext_offset16n.c \
+	u_v_ftext_offset16n.c \
 	n_v_get_ctab_id.c \
 	n_v_get_outline.c \
 	n_v_getbitmap_info.c \
@@ -218,9 +235,11 @@ _VDI_EXTENSIONS = \
 	n_vq_ctab_entry.c \
 	n_vq_ctab_id.c \
 	n_vq_devinfo.c \
+	u_vq_devinfo.c \
 	n_vq_dflt_ctab.c \
 	n_vq_ext_devinfo.c \
 	n_vq_hilite_color.c \
+	u_vq_hilite_color.c \
 	n_vq_margins.c \
 	n_vq_max_color.c \
 	n_vq_min_color.c \
@@ -243,13 +262,17 @@ _VDI_EXTENSIONS = \
 	n_vqt_devinfo.c \
 	n_vqt_ext_name.c \
 	n_vqt_f_extent.c \
+	u_vqt_f_extent.c \
 	n_vqt_f_extent16.c \
 	n_vqt_f_extent16n.c \
 	n_vqt_fg_color.c \
 	n_vqt_fontheader.c \
+	u_vqt_fontheader.c \
 	n_vqt_name_and_id.c \
+	u_vqt_name_and_id.c \
 	n_vqt_pairkern.c \
 	n_vqt_real_extent.c \
+	u_vqt_real_extent.c \
 	n_vqt_real_extent16n.c \
 	n_vqt_trackkern.c \
 	n_vqt_xfntinfo.c \
@@ -258,6 +281,7 @@ _VDI_EXTENSIONS = \
 	n_vs_ctab_entry.c \
 	n_vs_dflt_ctab.c \
 	n_vs_document_info.c \
+	u_vs_document_info.c \
 	n_vs_hilite_color.c \
 	n_vs_max_color.c \
 	n_vs_min_color.c \
@@ -278,6 +302,7 @@ _VDI_EXTENSIONS = \
 	n_vst_kern.c \
 	n_vst_map_mode.c \
 	n_vst_name.c \
+	u_vst_name.c \
 	n_vst_setsize.c \
 	n_vst_setsize32.c \
 	n_vst_skew.c \
@@ -410,7 +435,7 @@ COBJS = \
 	vdi_array2str.c \
 	vdi_str2array.c \
 	vdi_wstrlen.c \
-	\
+	vdi_userdef.c\
 	vdi_dummy.c \
 	\
 	$(_VDI_ATTRIB) \
