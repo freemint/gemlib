@@ -4,7 +4,7 @@
 
 # makefile for gemlib 
 # gcc >= 2.95.3 (sparemint) version
-
+CROSS = yes
 ifeq ($(CROSS),yes)
 CC     = m68k-atari-mint-gcc
 AR     = m68k-atari-mint-ar

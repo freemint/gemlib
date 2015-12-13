@@ -935,7 +935,9 @@ void	vq_scrninfo	(short handle, short *work_out);
 short	v_bez_on	(short handle);
 void	v_bez_off	(short handle);
 void	v_bez		(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
+void	udef_v_bez		(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
 void	v_bez_fill	(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
+void	udef_v_bez_fill	(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
 void 	v_bez_qual	(short handle, short percent, short *actual);
 
 
@@ -969,13 +971,20 @@ typedef unsigned short WCHAR; /**< 16bit string, eg. for unicode */
 #ifdef __GEMLIB_VDI  /* defined in mt_gem.h */
 
 void	v_ftext         (VdiHdl, short x, short y, const char  *str);
+void	udef_v_ftext         (VdiHdl, short x, short y, const char  *str);
 void	v_ftext16       (VdiHdl, short x, short y, const WCHAR *wstr);
 void	v_ftext16n      (VdiHdl, PXY pos, const WCHAR *wstr, short num);
 void	v_ftext_offset  (VdiHdl, short x, short y,
                                const char  *str,  const short *offset);
+void	udef_v_ftext_offset  (VdiHdl, short x, short y,
+                               const char  *str,  const short *offset);
 void	v_ftext_offset16(VdiHdl, short x, short y,
                                const WCHAR *wstr, const short *offset);
+void	udef_v_ftext_offset16(VdiHdl, short x, short y,
+                               const WCHAR *wstr, const short *offset);
 void	v_ftext_offset16n(VdiHdl, short x, short y,
+                               const WCHAR *wstr, short num, const short *offset);
+void	udef_v_ftext_offset16n(VdiHdl, short x, short y,
                                const WCHAR *wstr, short num, const short *offset);
 void	v_getbitmap_info(VdiHdl, short ch, long *advancex, long *advancey,
                                long *xoffset, long *yoffset, short *width,
@@ -984,6 +993,8 @@ void	v_getoutline    (VdiHdl, short ch, short *xyarray, char *bezarray,
                                short maxverts, short *numverts);
 
 short	vq_devinfo     (VdiHdl, short device, short *dev_exists,
+                              char *file_name, char *device_name);
+short	udef_vq_devinfo     (VdiHdl, short device, short *dev_exists,
                               char *file_name, char *device_name);
 void	vqt_devinfo    (VdiHdl, short device, short *dev_busy,
                               char *file_name, char *device_name);
@@ -996,13 +1007,18 @@ void	vqt_advance32   (VdiHdl, short ch, long *advx, long *advy);
 short	vqt_ext_name    (VdiHdl, short __index,
                                char *name, short *font_format, short *flags);
 void	vqt_f_extent    (VdiHdl, const char  *str, short extent[]);
+void	udef_vqt_f_extent    (VdiHdl, const char  *str, short extent[]);
 void	vqt_f_extent16  (VdiHdl, const WCHAR *str, short extent[]);
 void	vqt_f_extent16n (VdiHdl, const WCHAR *str, short num, short extent[]);
 void	vqt_fontheader  (VdiHdl, char *buffer, char *pathname);
+void	udef_vqt_fontheader  (VdiHdl, char *buffer, char *pathname);
 short	vqt_name_and_id (VdiHdl, short font_format,
+                               char *font_name, char *ret_name);
+short	udef_vqt_name_and_id (VdiHdl, short font_format,
                                char *font_name, char *ret_name);
 void	vqt_pairkern    (VdiHdl, short ch1, short ch2, long *x, long *y);
 void	vqt_real_extent (VdiHdl, short x, short y, char *string, short extent[]);
+void	udef_vqt_real_extent (VdiHdl, short x, short y, char *string, short extent[]);
 void	vqt_real_extent16n (VdiHdl, short x, short y, const WCHAR *wstring, short num, short extent[]);
 void	vqt_trackkern   (VdiHdl, long *x, long *y);
 short	vqt_xfntinfo    (VdiHdl, short flags, short id,
@@ -1013,6 +1029,7 @@ long  vst_arbpt32 	(VdiHdl, long point, short *wchar, short *hchar, short *wcell
 void  vst_charmap 	(VdiHdl, short mode);
 void  vst_kern	(VdiHdl, short tmode, short pmode, short *tracks, short *pairs);
 short vst_name 	(VdiHdl, short font_format, char *font_name, char *ret_name);
+short udef_vst_name 	(VdiHdl, short font_format, char *font_name, char *ret_name);
 short vst_setsize 	(VdiHdl, short point, short *wchar, short *hchar, short *wcell, short *hcell);
 long  vst_setsize32 	(VdiHdl, long point, short *wchar, short *hchar, short *wcell, short *hcell);
 short vst_skew 	(VdiHdl, short skew);
@@ -1349,6 +1366,7 @@ long		vq_ctab_entry		(short handle, short __index, COLOR_ENTRY *color);
 long		vq_ctab_id		(short handle);
 short		vq_dflt_ctab		(short handle, long ctab_length, COLOR_TAB *ctab);
 long		vq_hilite_color		(short handle, COLOR_ENTRY *hilite_color);
+long		udef_vq_hilite_color	(short handle, COLOR_ENTRY *hilite_color);
 short		vq_margins		(short handle, short *top_margin, short *bottom_margin, short *left_margin, short *right_margin, short *hdpi, short *vdpi);
 long		vq_max_color		(short handle, COLOR_ENTRY *hilite_color);
 long		vq_min_color		(short handle, COLOR_ENTRY *hilite_color);
@@ -1370,6 +1388,7 @@ short		vs_ctab			(short handle, COLOR_TAB *ctab);
 short		vs_ctab_entry		(short handle, short __index, long color_space, COLOR_ENTRY *color);
 short		vs_dflt_ctab		(short handle);
 short		vs_document_info	(short vdi_handle, short type, char *s, short wchar);
+short		udef_vs_document_info	(short vdi_handle, short type, char *s, short wchar);
 short		vs_hilite_color		(short handle, long color_space, COLOR_ENTRY *hilite_color);
 short		vs_max_color		(short handle, long color_space, COLOR_ENTRY *min_color);
 short		vs_min_color		(short handle, long color_space, COLOR_ENTRY *min_color);

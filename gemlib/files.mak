@@ -142,6 +142,7 @@ OBJ = \
  a_wind_xset_grect.o \
  globals.o	\
  n_v_bez.o	\
+ u_v_bez.o	\
  n_v_bez_fill.o	\
  n_v_bez_off.o	\
  n_v_bez_on.o	\
@@ -159,11 +160,15 @@ OBJ = \
  n_v_delete_driver_info.o \
  n_v_delete_itab.o	\
  n_v_ftext.o	\
+ u_v_ftext.o	\
  n_v_ftext16.o	\
  n_v_ftext16n.o	\
  n_v_ftext_offset.o	\
+ u_v_ftext_offset.o	\
  n_v_ftext_offset16.o	\
+ u_v_ftext_offset16.o	\
  n_v_ftext_offset16n.o	\
+ u_v_ftext_offset16n.o	\
  n_v_get_ctab_id.o	\
  n_v_get_outline.o	\
  n_v_getbitmap_info.o	\
@@ -180,9 +185,11 @@ OBJ = \
  n_vq_ctab_entry.o	\
  n_vq_ctab_id.o	\
  n_vq_devinfo.o	\
+ u_vq_devinfo.o	\
  n_vq_dflt_ctab.o	\
  n_vq_ext_devinfo.o	\
  n_vq_hilite_color.o	\
+ u_vq_hilite_color.o	\
  n_vq_margins.o	\
  n_vq_max_color.o	\
  n_vq_min_color.o	\
@@ -205,13 +212,17 @@ OBJ = \
  n_vqt_devinfo.o	\
  n_vqt_ext_name.o	\
  n_vqt_f_extent.o	\
+ u_vqt_f_extent.o	\
  n_vqt_f_extent16.o	\
  n_vqt_f_extent16n.o	\
  n_vqt_fg_color.o	\
  n_vqt_fontheader.o	\
+ u_vqt_fontheader.o	\
  n_vqt_name_and_id.o	\
+ u_vqt_name_and_id.o	\
  n_vqt_pairkern.o	\
  n_vqt_real_extent.o	\
+ u_vqt_real_extent.o	\
  n_vqt_real_extent16n.o	\
  n_vqt_trackkern.o	\
  n_vqt_xfntinfo.o	\
@@ -220,6 +231,7 @@ OBJ = \
  n_vs_ctab_entry.o	\
  n_vs_dflt_ctab.o	\
  n_vs_document_info.o	\
+ u_vs_document_info.o	\
  n_vs_hilite_color.o	\
  n_vs_max_color.o	\
  n_vs_min_color.o	\
@@ -240,6 +252,7 @@ OBJ = \
  n_vst_kern.o	\
  n_vst_map_mode.o	\
  n_vst_name.o	\
+ u_vst_name.o	\
  n_vst_setsize.o	\
  n_vst_setsize32.o	\
  n_vst_skew.o	\
@@ -269,10 +282,12 @@ OBJ = \
  rc_grect_to_array.o	\
  rc_intersect.o	\
  v_alpha_text.o	\
+ u_v_alpha_text.o	\
  v_alpha_text16n.o	\
  v_arc.o	\
  v_bar.o	\
  v_bit_image.o	\
+ u_v_bit_image.o	\
  v_cellarray.o	\
  v_circle.o	\
  v_clear_disp_list.o	\
@@ -286,6 +301,7 @@ OBJ = \
  v_curleft.o	\
  v_curright.o	\
  v_curtext.o	\
+ u_v_curtext.o	\
  v_curtext16n.o	\
  v_curup.o	\
  v_dspcur.o	\
@@ -303,13 +319,16 @@ OBJ = \
  v_form_adv.o	\
  v_get_pixel.o	\
  v_gtext.o	\
+ u_v_gtext.o	\
  v_gtext16.o	\
  v_gtext16n.o	\
  v_hardcopy.o	\
  v_hide_c.o	\
  v_justified.o	\
+ u_v_justified.o	\
  v_justified16n.o	\
  v_loadcache.o	\
+ u_v_loadcache.o	\
  v_meta_extents.o	\
  v_offset.o	\
  v_opnvwk.o	\
@@ -326,6 +345,7 @@ OBJ = \
  v_rvoff.o	\
  v_rvon.o	\
  v_savecache.o	\
+ u_v_savecache.o	\
  v_set_app_buff.o	\
  v_show_c.o	\
  v_sound.o	\
@@ -333,6 +353,7 @@ OBJ = \
  v_updwk.o	\
  v_write_meta.o	\
  vdi_array2str.o	\
+ vdi_userdef.o	\
  vdi_dummy.o	\
  vdi_str2array.o	\
  vdi_wstrlen.o	\
@@ -343,6 +364,7 @@ OBJ = \
  vex_wheelv.o	\
  vm_coords.o	\
  vm_filename.o	\
+ u_vm_filename.o	\
  vm_pagesize.o	\
  vq_calibrate.o	\
  vq_cellarray.o	\
@@ -365,6 +387,7 @@ OBJ = \
  vqt_attributes.o	\
  vqt_cachesize.o	\
  vqt_extent.o	\
+ u_vqt_extent.o	\
  vqt_extent16.o	\
  vqt_extent16n.o	\
  vqt_fontinfo.o	\
@@ -377,6 +400,7 @@ OBJ = \
  vrq_choice.o	\
  vrq_locator.o	\
  vrq_string.o	\
+ u_vrq_string.o	\
  vrq_valuator.o	\
  vrt_cpyfm.o	\
  vs_calibrate.o	\
@@ -406,6 +430,7 @@ OBJ = \
  vsm_height.o	\
  vsm_locator.o	\
  vsm_string.o	\
+ u_vsm_string.o	\
  vsm_type.o	\
  vsm_valuator.o	\
  vsp_film.o	\
@@ -413,6 +438,7 @@ OBJ = \
  vst_color.o	\
  vst_effects.o	\
  vst_error.o	\
+ u_vst_error.o	\
  vst_font.o	\
  vst_height.o	\
  vst_load_fonts.o	\
