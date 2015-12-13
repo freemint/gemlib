@@ -8,7 +8,7 @@
  *
  *  @param handle Device handle
  *  @param x 
- *  @param y 
+ *  @param y
  *  @param wstr string, with 16 bits per character.
  *
  *  @since all VDI versions
@@ -18,7 +18,7 @@
 void
 v_gtext16 (short handle, short x, short y, const short *wstr)
 {
-	register short n = vdi_wstrlen (wstr);
+	short n = vdi_wstrlen (wstr);
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_ptsin[2];   
 
