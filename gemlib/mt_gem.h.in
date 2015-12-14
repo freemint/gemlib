@@ -2379,6 +2379,38 @@ short vst_point     (VdiHdl , short point, short *charw, short *charh,
                                            short *cellw, short *cellh);
 short vst_rotation  (VdiHdl , short ang);
 void  vst_scratch   (VdiHdl , short mode);
+
+#define udef_vs_color vs_color
+#define udef_vswr_mode vswr_mode
+
+#define udef_vsf_color vsf_color
+#define udef_vsf_interior vsf_interior
+#define udef_vsf_perimeter vsf_perimeter
+#define udef_vsf_xperimeter vsf_xperimeter
+#define udef_vsf_style vsf_style
+#define  udef_vsf_udpat vsf_udpat
+
+#define udef_vsl_color vsl_color
+#define  udef_vsl_ends vsl_ends
+#define udef_vsl_type vsl_type
+#define  udef_vsl_udsty vsl_udsty
+#define udef_vsl_width vsl_width
+
+#define udef_vsm_color vsm_color
+#define udef_vsm_height vsm_height
+#define udef_vsm_type vsm_type
+
+#define  udef_vst_alignment vst_alignment
+#define udef_vst_color vst_color
+#define udef_vst_effects vst_effects
+
+#define udef_vst_font vst_font
+#define  udef_vst_height vst_height
+#define udef_vst_point vst_point
+#define udef_vst_rotation vst_rotation
+#define udef_vst_scratch vst_scratch
+
+
 /**@}*/
 
 /*
@@ -2405,6 +2437,21 @@ void  vs_clip_pxy      (VdiHdl , PXY pxy[]);
 void  vs_clip_off      (VdiHdl );
 short vst_load_fonts   (VdiHdl , short /* select */);
 void  vst_unload_fonts (VdiHdl , short /* select */);
+
+#define udef_v_clrwk v_clrwk
+#define udef_v_clsvwk v_clsvwk
+#define udef_v_clswk v_clswk
+#define udef_v_flushcache v_flushcache
+#define udef_v_opnvwk v_opnvwk
+#define udef_v_opnwk v_opnwk
+#define udef_v_set_app_buff v_set_app_buff
+#define udef_v_updwk v_updwk
+#define udef_vs_clip vs_clip
+#define udef_vs_clip_pxy vs_clip_pxy
+#define udef_vs_clip_off vs_clip_off
+#define udef_vst_load_fonts vst_load_fonts
+#define udef_vst_unload_fonts vst_unload_fonts
+
 /**@}*/
 
 /*
@@ -2491,6 +2538,66 @@ void vq_curaddress (VdiHdl , short *cur_row, short *cur_col);
 void vs_curaddress (VdiHdl , short row, short col);
 /** alternative name for vs_curaddress */
 #define v_curaddress vs_curaddress
+
+#define udef_v_clear_disp_list v_clear_disp_list
+#define udef_v_copies v_copies
+#define udef_v_dspcur v_dspcur
+#define udef_v_form_adv v_form_adv
+#define udef_v_hardcopy v_hardcopy
+#define udef_v_orient v_orient
+#define udef_v_output_window v_output_window
+#define udef_v_page_size v_page_size
+#define udef_v_rmcur v_rmcur
+#define udef_v_trays v_trays
+#define udef_vq_calibrate vq_calibrate
+#define udef_vq_page_name vq_page_name
+#define udef_vq_scan vq_scan
+#define udef_vq_tabstatus vq_tabstatus
+#define udef_vq_tray_names vq_tray_names
+#define udef_vs_calibrate vs_calibrate
+#define udef_vs_palette vs_palette
+
+#define udef_v_sound v_sound
+#define udef_vs_mute vs_mute
+
+#define udef_vq_tdimensions vq_tdimensions
+#define udef_vt_alignment vt_alignment
+#define udef_vt_axis vt_axis
+#define udef_vt_origin vt_origin
+#define udef_vt_resolution vt_resolution
+
+#define udef_v_meta_extents v_meta_extents
+#define udef_v_write_meta v_write_meta
+#define udef_vm_coords vm_coords
+#define udef_vm_pagesize vm_pagesize
+
+#define udef_vsc_expose vsc_expose
+#define udef_vsp_film vsp_film
+#define udef_vqp_filmname vqp_filmname
+
+#define udef_v_offset v_offset
+#define udef_v_fontinit v_fontinit
+
+#define udef_v_escape2000
+
+#define udef_v_alpha_text16n v_alpha_text16n
+#define udef_v_curdown v_curdown
+#define udef_v_curhome v_curhome
+#define udef_v_curleft v_curleft
+#define udef_v_curright v_curright
+#define udef_v_curtext16n v_curtext16n
+#define udef_v_curup v_curup
+#define udef_v_eeol v_eeol
+#define udef_v_eeos v_eeos
+#define udef_v_enter_cur v_enter_cur
+#define udef_v_exit_cur v_exit_cur
+#define udef_v_rvoff v_rvoff
+#define udef_v_rvon v_rvon
+#define udef_vq_chcells vq_chcells
+#define udef_vq_curaddress vq_curaddress
+#define udef_vs_curaddress vs_curaddress
+#define udef_v_curaddress udef_vs_curaddress
+
 /**@}*/
  
 
@@ -2527,6 +2634,25 @@ short vq_gdos  (void);
 
 /** TODO */
 long  vq_vgdos (void);
+
+#define udef_vq_cellarray vq_cellarray
+#define udef_vq_color vq_color
+#define udef_vq_extnd vq_extnd
+#define udef_vqf_attributes vqf_attributes
+#define udef_vqin_mode vqin_mode
+#define udef_vql_attributes vql_attributes
+#define udef_vqm_attributes vqm_attributes
+#define udef_vqt_attributes vqt_attributes
+#define udef_vqt_cachesize vqt_cachesize
+#define udef_vqt_extent16 vqt_extent16
+#define udef_vqt_extent16n vqt_extent16n
+#define udef_vqt_fontinfo vqt_fontinfo
+#define udef_vqt_get_table vqt_get_table
+#define udef_vqt_name vqt_name
+#define udef_vqt_width vqt_width
+#define udef_vq_gdos vq_gdos
+#define udef_vq_vgdos vq_vgdos
+
 /**@}*/
 
 
@@ -2561,6 +2687,25 @@ short vsm_locator  (VdiHdl , short x, short y,
 short vsm_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
 short udef_vsm_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
 void  vsm_valuator (VdiHdl , short in, short *out, short *term, short *status);
+
+#define udef_v_hide_c v_hide_c
+#define udef_v_show_c v_show_c
+#define udef_vex_butv vex_butv
+#define udef_vex_curv vex_curv
+#define udef_vex_motv vex_motv
+#define udef_vex_wheelv vex_wheelv
+#define udef_vex_timv vex_timv
+#define udef_vq_key_s vq_key_s
+#define udef_vq_mouse vq_mouse
+#define udef_vrq_choice vrq_choice
+#define udef_vrq_locator vrq_locator
+#define udef_vrq_valuator vrq_valuator
+#define udef_vsc_form vsc_form
+#define udef_vsin_mode vsin_mode
+#define udef_vsm_choice vsm_choice
+#define udef_vsm_locator vsm_locator
+#define udef_vsm_valuator vsm_valuator
+
 /**@}*/
 
 
@@ -2601,6 +2746,28 @@ void v_pmarker     (VdiHdl , short count, short pxy[]);
 void v_rbox        (VdiHdl , short pxy[]);
 void v_rfbox       (VdiHdl , short pxy[]);
 void vr_recfl      (VdiHdl , short pxy[]);
+
+#define udef_v_arc v_arc
+#define udef_v_bar v_bar
+#define udef_v_cellarray v_cellarray
+#define udef_v_circle v_circle
+#define udef_v_contourfill v_contourfill
+#define udef_v_ellarc v_ellarc
+#define udef_v_ellipse v_ellipse
+#define udef_v_ellpie v_ellpie
+#define udef_v_fillarea v_fillarea
+
+#define udef_v_gtext16 v_gtext16
+#define udef_v_gtext16n v_gtext16n
+
+#define udef_v_justified16n v_justified16n
+#define udef_v_pieslice v_pieslice
+#define udef_v_pline v_pline
+#define udef_v_pmarker v_pmarker
+#define udef_v_rbox v_rbox
+#define udef_v_rfbox v_rfbox
+#define udef_vr_recfl vr_recfl
+
 /**@}*/
 
 /*
@@ -2615,6 +2782,12 @@ void vr_trnfm    (VdiHdl , MFDB *src, MFDB *dst);
 void vro_cpyfm   (VdiHdl , short mode, short pxy[], MFDB *src, MFDB *dst);
 void vrt_cpyfm   (VdiHdl , short mode, short pxy[], MFDB *src, MFDB *dst,
                            short color[]);
+
+#define udef_v_get_pixel v_get_pixel
+#define udef_vr_trnfm vr_trnfm
+#define udef_vro_cpyfm vro_cpyfm
+#define udef_vrt_cpyfm vrt_cpyfm
+
 /**@}*/
 
 
