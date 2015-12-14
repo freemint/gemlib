@@ -43,6 +43,7 @@ OBJ = \
  a_appl_trecord.o	\
  a_appl_write.o	\
  a_appl_yield.o	\
+ a_appl_getcicon.o	\
  a_evnt_button.o	\
  a_evnt_dclick.o	\
  a_evnt_keybd.o	\
