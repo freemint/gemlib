@@ -928,6 +928,9 @@ void	v_clsbm		(short handle);
 void	v_opnbm		(short *work_in, MFDB *bitmap, short *handle, short *work_out);
 void	vq_scrninfo	(short handle, short *work_out);
 
+#define udef_v_clsbm v_clsbm
+#define udef_v_opnbm v_opnbm
+#define udef_vq_scrninfo vq_scrninfo
 
 /*
  * The following functions requires NVDI version 2.x or higher
@@ -939,6 +942,10 @@ void	udef_v_bez		(short handle, short count, short *xyarr, char *bezarr, short *
 void	v_bez_fill	(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
 void	udef_v_bez_fill	(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
 void 	v_bez_qual	(short handle, short percent, short *actual);
+
+#define udef_v_bez_on v_bez_on
+#define udef_v_bez_off v_bez_off
+#define udef_v_bez_qual v_bez_qual
 
 
 /*
@@ -1038,6 +1045,37 @@ void  vst_track_offset(VdiHdl, long offset, short pairmode, short *tracks, short
 #define vst_kern_info vst_track_offset
 void  vst_width	(VdiHdl, short width, short *char_width, short *char_height, short *cell_width, short *cell_height);
 
+#define udef_v_ftext16 v_ftext16
+#define udef_v_ftext16n v_ftext16n
+#define udef_v_getbitmap_info v_getbitmap_info
+#define udef_v_getoutline v_getoutline
+#define udef_vqt_devinfo vqt_devinfo
+#define udef_vq_ext_devinfo vq_ext_devinfo
+
+#define udef_vqt_advance vqt_advance
+#define udef_vqt_advance32 vqt_advance32
+#define udef_vqt_ext_name vqt_ext_name
+#define udef_vqt_f_extent16 vqt_f_extent16
+#define udef_vqt_f_extent16n vqt_f_extent16n
+#define udef_vqt_pairkern vqt_pairkern
+#define udef_vqt_real_extent16n vqt_real_extent16n
+#define udef_vqt_trackkern vqt_trackkern
+#define udef_vqt_xfntinfo vqt_xfntinfo
+
+#define udef_vst_arbpt vst_arbpt
+#define udef_vst_arbpt32 vst_arbpt32
+#define udef_vst_charmap vst_charmap
+#define udef_vst_kern vst_kern
+#define udef_vst_setsize vst_setsize
+#define udef_vst_setsize32 vst_setsize32
+#define udef_vst_skew vst_skew
+#define udef_vst_track_offset vst_track_offset
+
+#define udef_vst_kern_info vst_track_offset
+
+
+#define udef_vst_width vst_width
+
 #endif 
 
 
@@ -1046,6 +1084,9 @@ void  vst_width	(VdiHdl, short width, short *char_width, short *char_height, sho
  */
 short	vqt_char_index (short handle, short scr_index, short scr_mode, short dst_mode);
 short vst_map_mode   (short handle, short mode);
+
+#define udef_vqt_char_index vqt_char_index
+#define udef_vst_map_mode vst_map_mode
 
 #define vqt_is_char_available(handle,unicode) \
 	(vqt_char_index(handle,unicode,CHARIDX_UNICODE,CHARIDX_DIRECT)!=0xFFFF)
@@ -1062,6 +1103,11 @@ DRV_INFO *v_create_driver_info( short handle, short driver_id );
 short v_delete_driver_info( short handle, DRV_INFO *drv_info );
 short v_read_default_settings( short handle, PRN_SETTINGS *settings );
 short v_write_default_settings( short handle, PRN_SETTINGS *settings );
+
+#define udef_v_create_driver_info
+#define udef_v_delete_driver_info
+#define udef_v_read_default_settings
+#define udef_v_write_default_settings
 
 
 /*----------------------------------------------------------------------------------------*/
@@ -1404,6 +1450,60 @@ short		vsr_fg_color		(short handle, long color_space, COLOR_ENTRY *fg_color);
 short		vst_bg_color		(short handle, long color_space, COLOR_ENTRY *bg_color);
 short		vst_fg_color		(short handle, long color_space, COLOR_ENTRY *fg_color);
 
+#define udef_v_color2nearest v_color2nearest
+#define udef_v_color2value v_color2value
+#define udef_v_create_ctab v_create_ctab
+#define udef_v_create_itab v_create_itab
+#define udef_v_ctab_idx2value v_ctab_idx2value
+#define udef_v_ctab_idx2vdi v_ctab_idx2vdi
+#define udef_v_ctab_vdi2idx v_ctab_vdi2idx
+#define udef_v_delete_ctab v_delete_ctab
+#define udef_v_delete_itab v_delete_itab
+#define udef_v_get_ctab_id v_get_ctab_id
+#define udef_v_get_outline v_get_outline
+#define udef_v_opnprn v_opnprn
+#define udef_v_open_bm v_open_bm
+#define udef_v_resize_bm v_resize_bm
+#define udef_v_setrgb v_setrgb
+#define udef_v_value2color v_value2color
+#define udef_vq_ctab vq_ctab
+#define udef_vq_ctab_entry vq_ctab_entry
+#define udef_vq_ctab_id vq_ctab_id
+#define udef_vq_dflt_ctab vq_dflt_ctab
+#define udef_vq_margins vq_margins
+#define udef_vq_max_color vq_max_color
+#define udef_vq_min_color vq_min_color
+#define udef_vq_prn_scaling vq_prn_scaling
+#define udef_vq_px_format vq_px_format
+#define udef_vq_weight_color vq_weight_color
+#define udef_vqf_bg_color vqf_bg_color
+#define udef_vqf_fg_color vqf_fg_color
+#define udef_vql_bg_color vql_bg_color
+#define udef_vql_fg_color vql_fg_color
+#define udef_vqm_bg_color vqm_bg_color
+#define udef_vqm_fg_color vqm_fg_color
+#define udef_vqr_bg_color vqr_bg_color
+#define udef_vqr_fg_color vqr_fg_color
+#define udef_vqt_bg_color vqt_bg_color
+#define udef_vqt_fg_color vqt_fg_color
+#define udef_vr_transfer_bits vr_transfer_bits
+#define udef_vs_ctab vs_ctab
+#define udef_vs_ctab_entry vs_ctab_entry
+#define udef_vs_dflt_ctab vs_dflt_ctab
+#define udef_vs_hilite_color vs_hilite_color
+#define udef_vs_max_color vs_max_color
+#define udef_vs_min_color vs_min_color
+#define udef_vs_weight_color vs_weight_color
+#define udef_vsf_bg_color vsf_bg_color
+#define udef_vsf_fg_color vsf_fg_color
+#define udef_vsl_bg_color vsl_bg_color
+#define udef_vsl_fg_color vsl_fg_color
+#define udef_vsm_bg_color vsm_bg_color
+#define udef_vsm_fg_color vsm_fg_color
+#define udef_vsr_bg_color vsr_bg_color
+#define udef_vsr_fg_color vsr_fg_color
+#define udef_vst_bg_color vst_bg_color
+#define udef_vst_fg_color vst_fg_color
 
 __END_DECLS
 
