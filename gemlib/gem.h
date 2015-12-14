@@ -65,6 +65,7 @@ extern short aes_global[];
 #define appl_trecord(a,b) mt_appl_trecord(a,b,aes_global)
 #define appl_write(a,b,c) mt_appl_write(a,b,c,aes_global)
 #define appl_yield() mt_appl_yield(aes_global)
+#define appl_getcicon() mt_appl_getcicon(aes_global)
 #define appl_get_cicon(a,b,c,d,e,f) mt_appl_get_cicon(a,b,c,d,e,f, aes_global)
 
 static inline short appl_init( void) {
