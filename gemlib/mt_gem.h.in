@@ -2370,8 +2370,14 @@ short vsm_type   (VdiHdl , short symbol);
 void  vst_alignment (VdiHdl , short hin, short vin, short *hout, short *vout);
 short vst_color     (VdiHdl , short color_idx);
 short vst_effects   (VdiHdl , short effects);
-void  vst_error     (VdiHdl , short mode, short *errorvar);
+
 void  udef_vst_error     (VdiHdl , short mode, short *errorvar);
+#ifdef VDI_USERDEF_COMPAT
+#define vst_error udef_vst_error
+#else
+void  vst_error     (VdiHdl , short mode, short *errorvar);
+#endif
+
 short vst_font      (VdiHdl , short font);
 void  vst_height    (VdiHdl , short height, short *charw, short *charh,
                                             short *cellw, short *cellh);
@@ -2424,12 +2430,22 @@ void  v_clrwk          (VdiHdl );
 void  v_clsvwk         (VdiHdl );
 void  v_clswk          (VdiHdl );
 short v_flushcache     (VdiHdl );
-short v_loadcache      (VdiHdl , const char *filename, short mode);
+
 short udef_v_loadcache      (VdiHdl , const char *filename, short mode);
+#ifdef VDI_USERDEF_COMPAT
+#define v_loadcache udef_v_loadcache
+#else
+short v_loadcache      (VdiHdl , const char *filename, short mode);
+#endif
 void  v_opnvwk         (short work_in[], VdiHdl *, short work_out[]);
 void  v_opnwk          (short work_in[], VdiHdl *, short work_out[]);
-short v_savecache      (VdiHdl , const char *filename);
+
 short udef_v_savecache      (VdiHdl , const char *filename);
+#ifdef VDI_USERDEF_COMPAT
+#define v_savecache udef_v_savecache
+#else
+short v_savecache      (VdiHdl , const char *filename);
+#endif
 void  v_set_app_buff   (VdiHdl , void *buf_p, short size);
 void  v_updwk          (VdiHdl );
 void  vs_clip          (VdiHdl , short clip_flag, short pxy[]);
@@ -2461,12 +2477,18 @@ void  vst_unload_fonts (VdiHdl , short /* select */);
 /** @addtogroup v_escp
  *  @{
  */
-void  v_bit_image       (VdiHdl , const char *filename, short aspect,
-                                  short x_scale, short y_scale,
-                                  short h_align, short v_align, short *pxy);
+
 void  udef_v_bit_image       (VdiHdl , const char *filename, short aspect,
                                   short x_scale, short y_scale,
                                   short h_align, short v_align, short *pxy);
+#ifdef VDI_USERDEF_COMPAT
+#define v_bit_image udef_v_bit_image
+#else
+void  v_bit_image       (VdiHdl , const char *filename, short aspect,
+                                  short x_scale, short y_scale,
+                                  short h_align, short v_align, short *pxy);
+#endif
+
 void  v_clear_disp_list (VdiHdl );
 short v_copies          (VdiHdl , short count);
 void  v_dspcur          (VdiHdl , short x, short y);
@@ -2503,8 +2525,13 @@ void v_meta_extents (VdiHdl , short min_x, short min_y,
 void v_write_meta   (VdiHdl , short numvdi_intin, short *avdi_intin,
                               short num_ptsin, short *a_ptsin);
 void vm_coords      (VdiHdl , short llx, short lly, short urx, short ury);
-void vm_filename    (VdiHdl , const char *filename);
+
 void udef_vm_filename    (VdiHdl , const char *filename);
+#ifdef VDI_USERDEF_COMPAT
+#define vm_filename udef_vm_filename
+#else
+void vm_filename    (VdiHdl , const char *filename);
+#endif
 void vm_pagesize    (VdiHdl , short pgwidth, short pgheight);
 
 void  vsc_expose	(VdiHdl , short state);
@@ -2516,15 +2543,29 @@ void v_fontinit		(VdiHdl , const void * font_header);
 
 void v_escape2000 (VdiHdl , short times);
 
-void v_alpha_text  (VdiHdl , const char *str);
+
 void udef_v_alpha_text  (VdiHdl , const char *str);
+
+#ifdef VDI_USERDEF_COMPAT
+#define v_alpha_text udef_v_alpha_text
+#else
+void v_alpha_text  (VdiHdl , const char *str);
+#endif
+
 void v_alpha_text16n  (VdiHdl , const short * wstr, short num);
 void v_curdown     (VdiHdl );
 void v_curhome     (VdiHdl );
 void v_curleft     (VdiHdl );
 void v_curright    (VdiHdl );
-void v_curtext     (VdiHdl , const char *str);
+
 void udef_v_curtext     (VdiHdl , const char *str);
+#ifdef VDI_USERDEF_COMPAT
+#define v_curtext udef_v_curtext
+#else
+void v_curtext     (VdiHdl , const char *str);
+#endif
+
+
 void v_curtext16n     (VdiHdl , const short * wstr, short num);
 void v_curup       (VdiHdl );
 void v_eeol        (VdiHdl );
@@ -2619,8 +2660,13 @@ void  vql_attributes (VdiHdl , short atrib[]);
 void  vqm_attributes (VdiHdl , short atrib[]);
 void  vqt_attributes (VdiHdl , short atrib[]);
 void  vqt_cachesize  (VdiHdl , short which_cache, long *size);
-void  vqt_extent     (VdiHdl , const char *str, short extent[]);
+
 void  udef_vqt_extent     (VdiHdl , const char *str, short extent[]);
+#ifdef VDI_USERDEF_COMPAT
+#define vqt_extent udef_vqt_extent
+#else
+void  vqt_extent     (VdiHdl , const char *str, short extent[]);
+#endif
 void  vqt_extent16   (VdiHdl , const short *wstr, short extent[]);
 void  vqt_extent16n  (VdiHdl , const short *wstr, short num, short extent[]);
 void  vqt_fontinfo   (VdiHdl , short *minade, short *maxade, short distances[],
@@ -2676,16 +2722,26 @@ void  vq_mouse     (VdiHdl , short *pstatus, short *x, short *y);
 void  vrq_choice   (VdiHdl , short cin, short *cout);
 void  vrq_locator  (VdiHdl , short x, short y,
                              short *xout, short *yout, short *term);
-void  vrq_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
+
 void  udef_vrq_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
+#ifdef VDI_USERDEF_COMPAT
+#define vrq_string udef_vrq_string
+#else
+void  vrq_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
+#endif
 void  vrq_valuator (VdiHdl , short in, short *out, short *term);
 void  vsc_form     (VdiHdl , short form[]);
 short vsin_mode    (VdiHdl , short dev, short mode);
 short vsm_choice   (VdiHdl , short *choice);
 short vsm_locator  (VdiHdl , short x, short y,
                              short *xout, short *yout, short *term);
-short vsm_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
+
 short udef_vsm_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
+#ifdef VDI_USERDEF_COMPAT
+#define vsm_string udef_vsm_string
+#else
+short vsm_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
+#endif
 void  vsm_valuator (VdiHdl , short in, short *out, short *term, short *status);
 
 #define udef_v_hide_c v_hide_c
@@ -2729,14 +2785,25 @@ void v_ellipse     (VdiHdl , short x, short y, short xrad, short yrad);
 void v_ellpie      (VdiHdl , short x, short y, short xrad, short yrad,
                              short begang, short endang);
 void v_fillarea    (VdiHdl , short count, short pxy[]);
-void v_gtext       (VdiHdl , short x, short y, const char *str);
 void udef_v_gtext       (VdiHdl , short x, short y, const char *str);
+
+#ifdef VDI_USERDEF_COMPAT
+#define v_gtext udef_v_gtext
+#else
+void v_gtext       (VdiHdl , short x, short y, const char *str);
+#endif
+
 void v_gtext16     (VdiHdl , short x, short y, const short *wstr);
 void v_gtext16n    (VdiHdl , PXY pos, const short *wstr, short num);
-void v_justified   (VdiHdl , short x, short y, const char *str,
-                             short len, short word_space, short char_space);
+
 void udef_v_justified   (VdiHdl , short x, short y, const char *str,
                              short len, short word_space, short char_space);
+#ifdef VDI_USERDEF_COMPAT
+#define v_justified udef_v_justified
+#else
+void v_justified   (VdiHdl , short x, short y, const char *str,
+                             short len, short word_space, short char_space);
+#endif
 void v_justified16n   (VdiHdl , short x, short y, const short * wstr, short num,
                              short len, short word_space, short char_space);
 void v_pieslice    (VdiHdl , short x, short y,
@@ -2812,11 +2879,11 @@ short vdi_wstrlen   (const short *wstr);
  *  @{
  */
 
-/* Array sizes in vdi control block */
+/* Array sizes in vdi control block as defined in NVDI 4 documentation */
 #define VDI_CNTRLMAX     15		/**< max size of vdi_control[] */
-#define VDI_INTINMAX    512		/**< max size of vdi_intin[] */
-#define VDI_INTOUTMAX   256		/**< max size of vdi_intout[] */
-#define VDI_PTSINMAX    256		/**< max size of vdi_ptsin[] */
+#define VDI_INTINMAX    1024		/**< max size of vdi_intin[] */
+#define VDI_INTOUTMAX   512		/**< max size of vdi_intout[] */
+#define VDI_PTSINMAX    1024		/**< max size of vdi_ptsin[] */
 #define VDI_PTSOUTMAX   256		/**< max size of vdi_ptsout[] */
 
 /** TODO */
