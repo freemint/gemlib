@@ -2619,7 +2619,7 @@ void vs_curaddress (VdiHdl , short row, short col);
 #define udef_v_offset v_offset
 #define udef_v_fontinit v_fontinit
 
-#define udef_v_escape2000
+#define udef_v_escape2000 v_escape2000
 
 #define udef_v_alpha_text16n v_alpha_text16n
 #define udef_v_curdown v_curdown
