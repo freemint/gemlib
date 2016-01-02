@@ -58,9 +58,9 @@ v_bez (short handle, short count, short *xyarr, char *bezarr,
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_ptsin[VDI_PTSINMAX];   
 	short vdi_intout[6]; 
-
-	if(count>VDI_INTINMAX) return;
 	VDI_PARAMS( vdi_control, vdi_intin, vdi_ptsin, vdi_intout, extent);
+	if(count>VDI_INTINMAX) return;
+	
 	
 	_v_bez (count, xyarr, bezarr, vdi_intin, vdi_ptsin);
 	
