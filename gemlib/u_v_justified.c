@@ -17,10 +17,21 @@
  *
  *  If you 
  *  use a vector font, the requested width of the string refers to the sum 
- *  of the character widths - characters extending beyond the left or right 
+ *  of the character widths - characters extending beyond the left or right
  *  edge of the em square are ot taken into account.
  *
  */
+
+typedef struct
+{
+    short    vdi_control[VDI_CNTRLMAX];
+    short    vdi_intin[VDI_INTINMAX];
+    short    vdi_intout[VDI_INTOUTMAX];
+    short    vdi_ptsin[VDI_PTSINMAX];
+    short    vdi_ptsout[VDI_PTSOUTMAX];
+} VDIPARBLK;
+
+extern VDIPARBLK _VDIParBlk;
 
 void
 udef_v_justified (short handle, short x, short y,
