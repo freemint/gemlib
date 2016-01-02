@@ -65,8 +65,9 @@ void
 udef_v_bez (short handle, short count, short *xyarr, char *bezarr,
        short *extent, short *totpts, short *totmoves)
 {
-	if(count>VDI_INTINMAX) return;
 	VDI_PARAMS( _VDIParBlk.vdi_control, _VDIParBlk.vdi_intin, _VDIParBlk.vdi_ptsin, _VDIParBlk.vdi_intout, extent);
+	if(count>VDI_INTINMAX) return;
+	
 	
 	_v_bez (count, xyarr, bezarr, _VDIParBlk.vdi_intin, _VDIParBlk.vdi_ptsin);
 	
