@@ -5,6 +5,17 @@
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
 
+typedef struct
+{
+    short    vdi_control[VDI_CNTRLMAX];
+    short    vdi_intin[VDI_INTINMAX];
+    short    vdi_intout[VDI_INTOUTMAX];
+    short    vdi_ptsin[VDI_PTSINMAX];
+    short    vdi_ptsout[VDI_PTSOUTMAX];
+} VDIPARBLK;
+
+extern VDIPARBLK _VDIParBlk;
+
 
 static inline void
 _v_bez (short count, short *xyarr, char *bezarr, short *vdi_intin, short *vdi_ptsin)
@@ -46,20 +57,9 @@ _v_bez (short count, short *xyarr, char *bezarr, short *vdi_intin, short *vdi_pt
  *
  *  @since since NVDI 2.10
  *
- *
+ *  @note Use it for work with userdef, not reentrant function!
  *
  */
-
-typedef struct
-{
-    short    vdi_control[VDI_CNTRLMAX];
-    short    vdi_intin[VDI_INTINMAX];
-    short    vdi_intout[VDI_INTOUTMAX];
-    short    vdi_ptsin[VDI_PTSINMAX];
-    short    vdi_ptsout[VDI_PTSOUTMAX];
-} VDIPARBLK;
-
-extern VDIPARBLK _VDIParBlk;
 
 void
 udef_v_bez (short handle, short count, short *xyarr, char *bezarr,
@@ -95,7 +95,7 @@ udef_v_bez (short handle, short count, short *xyarr, char *bezarr,
  *
  *  @since since NVDI 2.10
  *
- *
+ *  @note Use it for work with userdef, not reentrant function!
  *
  */
 

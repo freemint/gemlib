@@ -2,16 +2,6 @@
 
 #include "gem_vdiP.h"
 
-/** This function displays a string. The string starts at the current cursor 
- *  position.
- *
- *  @param handle Device handle
- *  @param str
- *
- *  @since all VDI versions
- *
- */
-
 typedef struct
 {
     short    vdi_control[VDI_CNTRLMAX];
@@ -22,6 +12,16 @@ typedef struct
 } VDIPARBLK;
 
 extern VDIPARBLK _VDIParBlk;
+
+/** This function displays a string. The string starts at the current cursor 
+ *  position.
+ *
+ *  @param handle Device handle
+ *  @param str
+ *
+ *  @since all VDI versions
+ *  @note Use it for work with userdef, not reentrant function!
+ */
 
 void
 udef_v_curtext (short handle, const char *str)

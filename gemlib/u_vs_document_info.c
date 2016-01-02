@@ -3,6 +3,18 @@
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
 
+typedef struct
+{
+    short    vdi_control[VDI_CNTRLMAX];
+    short    vdi_intin[VDI_INTINMAX];
+    short    vdi_intout[VDI_INTOUTMAX];
+    short    vdi_ptsin[VDI_PTSINMAX];
+    short    vdi_ptsout[VDI_PTSOUTMAX];
+} VDIPARBLK;
+
+extern VDIPARBLK _VDIParBlk;
+
+
 /** 
  *
  *  @param handle Device handle
@@ -14,20 +26,9 @@
  *
  *  @since NVDI 5 ?
  *
- *
+ *  @note Use it for work with userdef, not reentrant function!
  *
  */
-
-typedef struct
-{
-    short    vdi_control[VDI_CNTRLMAX];
-    short    vdi_intin[VDI_INTINMAX];
-    short    vdi_intout[VDI_INTOUTMAX];
-    short    vdi_ptsin[VDI_PTSINMAX];
-    short    vdi_ptsout[VDI_PTSOUTMAX];
-} VDIPARBLK;
-
-extern VDIPARBLK _VDIParBlk;
 
 short
 udef_vs_document_info (short handle, short type, char *s, short wchar)

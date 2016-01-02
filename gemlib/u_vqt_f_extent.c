@@ -3,6 +3,18 @@
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
 
+typedef struct
+{
+    short    vdi_control[VDI_CNTRLMAX];
+    short    vdi_intin[VDI_INTINMAX];
+    short    vdi_intout[VDI_INTOUTMAX];
+    short    vdi_ptsin[VDI_PTSINMAX];
+    short    vdi_ptsout[VDI_PTSOUTMAX];
+} VDIPARBLK;
+
+extern VDIPARBLK _VDIParBlk;
+
+
 /** As well as vqt_extent() this function adds the character widths of a string, but 
  *  this function takes track and pair kerning into account and works with a resolution 
  *  of 1/65536 pixels. Text effects like skewing (vst_skew()) and characters which are 
@@ -27,19 +39,8 @@
  *  you should add the maximum character width to the leftmost and rightmost coordinates 
  *  of the rectangle (if the text is skewed you should also add the skewing offset).
  *  To determine a more exact bounding box you should call vqt_real_extent().
- *
+ *  @note Use it for work with userdef, not reentrant function!
  */
-
-typedef struct
-{
-    short    vdi_control[VDI_CNTRLMAX];
-    short    vdi_intin[VDI_INTINMAX];
-    short    vdi_intout[VDI_INTOUTMAX];
-    short    vdi_ptsin[VDI_PTSINMAX];
-    short    vdi_ptsout[VDI_PTSOUTMAX];
-} VDIPARBLK;
-
-extern VDIPARBLK _VDIParBlk;
 
 void
 udef_vqt_f_extent (short handle, const char *str, short extent[])

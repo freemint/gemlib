@@ -3,18 +3,6 @@
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
 
-/** see v_ftext_offset()
- *
- *  @param handle Device handle
- *  @param x 
- *  @param y 
- *  @param wstr 
- *  @param num string len
- *  @param offset 
- *
- *
- */
-
 typedef struct
 {
     short    vdi_control[VDI_CNTRLMAX];
@@ -25,6 +13,18 @@ typedef struct
 } VDIPARBLK;
 
 extern VDIPARBLK _VDIParBlk;
+
+/** see v_ftext_offset()
+ *
+ *  @param handle Device handle
+ *  @param x 
+ *  @param y 
+ *  @param wstr 
+ *  @param num string len
+ *  @param offset 
+ *
+ *  @note Use it for work with userdef, not reentrant function!
+ */
 
 void
 udef_v_ftext_offset16n (short handle, short x, short y,
