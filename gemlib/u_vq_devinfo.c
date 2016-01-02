@@ -4,6 +4,17 @@
 #include "mt_gemx.h"
 #include <string.h>
 
+typedef struct
+{
+    short    vdi_control[VDI_CNTRLMAX];
+    short    vdi_intin[VDI_INTINMAX];
+    short    vdi_intout[VDI_INTOUTMAX];
+    short    vdi_ptsin[VDI_PTSINMAX];
+    short    vdi_ptsout[VDI_PTSOUTMAX];
+} VDIPARBLK;
+
+extern VDIPARBLK _VDIParBlk;
+
 /** reports back, if a driver exists and if he has been opened.
  *  Besides the name of the driver (e.g. "XVGA256.SYS") and the 'readable' name 
  *  ("VGA 256 colors") are returned.
@@ -29,19 +40,8 @@
  *        doesn't deals with the data returned in vdi_intout/ptsout).
  *
  *  @note If the file name is empty, there is no driver with the given id \p device.
- *
+ *  @note Use it for work with userdef, not reentrant function!
  */
-
-typedef struct
-{
-    short    vdi_control[VDI_CNTRLMAX];
-    short    vdi_intin[VDI_INTINMAX];
-    short    vdi_intout[VDI_INTOUTMAX];
-    short    vdi_ptsin[VDI_PTSINMAX];
-    short    vdi_ptsout[VDI_PTSOUTMAX];
-} VDIPARBLK;
-
-extern VDIPARBLK _VDIParBlk;
 
 short
 udef_vq_devinfo (short handle, short device,

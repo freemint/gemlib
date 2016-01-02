@@ -2,6 +2,17 @@
 
 #include "gem_vdiP.h"
 
+typedef struct
+{
+    short    vdi_control[VDI_CNTRLMAX];
+    short    vdi_intin[VDI_INTINMAX];
+    short    vdi_intout[VDI_INTOUTMAX];
+    short    vdi_ptsin[VDI_PTSINMAX];
+    short    vdi_ptsout[VDI_PTSOUTMAX];
+} VDIPARBLK;
+
+extern VDIPARBLK _VDIParBlk;
+
 /** This function should be used to change the name of the metafile. The 
  *  name \p filename must be an absolute path like "E:\\PICS\\FLIWATT.GEM".
  *
@@ -18,19 +29,9 @@
  *  Old metafile driver may not delete the default file "GEMFILE.GEM" when 
  *  you call vm_filename(). That means that you are on the safe side if you 
  *  call Fdelete() after vm_filename() and try to delete GEMFILE.GEM.
- *
+ *Use it for work with userdef, not reentrant function!
+ *  @note Use it for work with userdef, not reentrant function!
  */
-
-typedef struct
-{
-    short    vdi_control[VDI_CNTRLMAX];
-    short    vdi_intin[VDI_INTINMAX];
-    short    vdi_intout[VDI_INTOUTMAX];
-    short    vdi_ptsin[VDI_PTSINMAX];
-    short    vdi_ptsout[VDI_PTSOUTMAX];
-} VDIPARBLK;
-
-extern VDIPARBLK _VDIParBlk;
 
 void
 udef_vm_filename (short handle, const char *filename)

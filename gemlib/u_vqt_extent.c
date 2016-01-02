@@ -2,6 +2,18 @@
 
 #include "gem_vdiP.h"
 
+typedef struct
+{
+    short    vdi_control[VDI_CNTRLMAX];
+    short    vdi_intin[VDI_INTINMAX];
+    short    vdi_intout[VDI_INTOUTMAX];
+    short    vdi_ptsin[VDI_PTSINMAX];
+    short    vdi_ptsout[VDI_PTSOUTMAX];
+} VDIPARBLK;
+
+extern VDIPARBLK _VDIParBlk;
+
+
 /** If the selected font is a bitmap font, this function returns the minimal 
  *  bounding box of a string. If the selected font is a vector font, the character 
  *  widths (vqt_width()) will be added and the string (especially the leftmost and 
@@ -16,19 +28,8 @@
  *  The coordinates of the rectangle are given relative to a coordinate system, 
  *  where the extent rectangle touches both, the x and y axes, and the string is 
  *  in the first quadrant.
- *
+ *  @note Use it for work with userdef, not reentrant function!
  */
-
-typedef struct
-{
-    short    vdi_control[VDI_CNTRLMAX];
-    short    vdi_intin[VDI_INTINMAX];
-    short    vdi_intout[VDI_INTOUTMAX];
-    short    vdi_ptsin[VDI_PTSINMAX];
-    short    vdi_ptsout[VDI_PTSOUTMAX];
-} VDIPARBLK;
-
-extern VDIPARBLK _VDIParBlk;
 
 void
 udef_vqt_extent (short handle, const char *str, short extent[])

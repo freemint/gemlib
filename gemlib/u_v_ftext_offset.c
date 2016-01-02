@@ -3,6 +3,15 @@
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
 
+typedef struct
+{
+    short    vdi_control[VDI_CNTRLMAX];
+    short    vdi_intin[VDI_INTINMAX];
+    short    vdi_intout[VDI_INTOUTMAX];
+    short    vdi_ptsin[VDI_PTSINMAX];
+    short    vdi_ptsout[VDI_PTSOUTMAX];
+} VDIPARBLK;
+
 /** This text function uses track and pair kerning and works with an internal 
  *  resolution of 1/65536 pixels to maintain accurate character placement.
  *  This variant of v_ftext() which allows your application to specifiy 
@@ -19,17 +28,8 @@
  *
  *  @since NVDI 3.00
  *
- *
+ *  @note Use it for work with userdef, not reentrant function!
  */
-
-typedef struct
-{
-    short    vdi_control[VDI_CNTRLMAX];
-    short    vdi_intin[VDI_INTINMAX];
-    short    vdi_intout[VDI_INTOUTMAX];
-    short    vdi_ptsin[VDI_PTSINMAX];
-    short    vdi_ptsout[VDI_PTSOUTMAX];
-} VDIPARBLK;
 
 extern VDIPARBLK _VDIParBlk;
 

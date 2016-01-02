@@ -3,20 +3,6 @@
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
 
-/** 
- *
- *  @param handle Device handle
- *  @param hilite_color  \n
- *         [option CHECK_NULLPTR] hilite_color may be NULL
- *
- *  @return 
- *
- *  @since NVDI 5 ?
- *
- *
- *
- */
-
 typedef struct
 {
     short    vdi_control[VDI_CNTRLMAX];
@@ -27,6 +13,20 @@ typedef struct
 } VDIPARBLK;
 
 extern VDIPARBLK _VDIParBlk;
+
+/** 
+ *
+ *  @param handle Device handle
+ *  @param hilite_color  \n
+ *         [option CHECK_NULLPTR] hilite_color may be NULL
+ *
+ *  @return 
+ *
+ *  @since NVDI 5 ?
+ *
+ *  @note Use it for work with userdef, not reentrant function!
+ *
+ */
 
 long
 udef_vq_hilite_color (short handle, COLOR_ENTRY * hilite_color)

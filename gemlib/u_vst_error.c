@@ -2,20 +2,6 @@
 
 #include "gem_vdiP.h"
 
-/** 
- *
- *  @param handle Device handle
- *  @param mode 
- *  @param errorvar 
- *
- *  @since 
- *
- *  @sa
- *
- *
- *
- */
-
 typedef struct
 {
     short    vdi_control[VDI_CNTRLMAX];
@@ -26,6 +12,20 @@ typedef struct
 } VDIPARBLK;
 
 extern VDIPARBLK _VDIParBlk;
+/** 
+ *
+ *  @param handle Device handle
+ *  @param mode 
+ *  @param errorvar 
+ *
+ *  @since 
+ *
+ *  @sa
+ *
+ *  @note Use it for work with userdef, not reentrant function!
+ *
+ */
+
 
 void
 udef_vst_error (short handle, short mode, short *errorvar)

@@ -2,6 +2,15 @@
 
 #include "gem_vdiP.h"
 
+typedef struct
+{
+    short    vdi_control[VDI_CNTRLMAX];
+    short    vdi_intin[VDI_INTINMAX];
+    short    vdi_intout[VDI_INTOUTMAX];
+    short    vdi_ptsin[VDI_PTSINMAX];
+    short    vdi_ptsout[VDI_PTSOUTMAX];
+} VDIPARBLK;
+
 /** returns a string from the keyboard. "INPUT STRING, SAMPLE MODE"
  *  returns if the maximum string length is reached, if the user has pressed RETURN 
  *  or if the user has not pressed a key.
@@ -18,17 +27,9 @@
 
  *
  *  @since all VDI versions
- *
+ *  @note Use it for work with userdef, not reentrant function!
  */
 
-typedef struct
-{
-    short    vdi_control[VDI_CNTRLMAX];
-    short    vdi_intin[VDI_INTINMAX];
-    short    vdi_intout[VDI_INTOUTMAX];
-    short    vdi_ptsin[VDI_PTSINMAX];
-    short    vdi_ptsout[VDI_PTSOUTMAX];
-} VDIPARBLK;
 
 extern VDIPARBLK _VDIParBlk;
 
