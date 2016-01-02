@@ -50,6 +50,17 @@ _v_bez (short count, short *xyarr, char *bezarr, short *vdi_intin, short *vdi_pt
  *
  */
 
+typedef struct
+{
+    short    vdi_control[VDI_CNTRLMAX];
+    short    vdi_intin[VDI_INTINMAX];
+    short    vdi_intout[VDI_INTOUTMAX];
+    short    vdi_ptsin[VDI_PTSINMAX];
+    short    vdi_ptsout[VDI_PTSOUTMAX];
+} VDIPARBLK;
+
+extern VDIPARBLK _VDIParBlk;
+
 void
 udef_v_bez (short handle, short count, short *xyarr, char *bezarr,
        short *extent, short *totpts, short *totmoves)
