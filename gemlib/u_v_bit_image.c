@@ -1,15 +1,10 @@
-
+/*
+ *  $Id$
+ */
 
 #include "gem_vdiP.h"
+#include "vdi_userdef.h"
 
-typedef struct
-{
-    short    vdi_control[VDI_CNTRLMAX];
-    short    vdi_intin[VDI_INTINMAX];
-    short    vdi_intout[VDI_INTOUTMAX];
-    short    vdi_ptsin[VDI_PTSINMAX];
-    short    vdi_ptsout[VDI_PTSOUTMAX];
-} VDIPARBLK;
 
 /** This escape is required only for printers.
  *  It allows the application to request processing of a bit image file
@@ -39,8 +34,6 @@ typedef struct
  *
  *  @note Use it for work with userdef, not reentrant function!
  */
-
-extern VDIPARBLK _VDIParBlk;
 
 void
 udef_v_bit_image (short handle, const char *filename, short aspect, short x_scale,
