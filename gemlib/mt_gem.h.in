@@ -2372,7 +2372,7 @@ short vst_color     (VdiHdl , short color_idx);
 short vst_effects   (VdiHdl , short effects);
 
 void  udef_vst_error     (VdiHdl , short mode, short *errorvar);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vst_error udef_vst_error
 #else
 void  vst_error     (VdiHdl , short mode, short *errorvar);
@@ -2432,7 +2432,7 @@ void  v_clswk          (VdiHdl );
 short v_flushcache     (VdiHdl );
 
 short udef_v_loadcache      (VdiHdl , const char *filename, short mode);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_loadcache udef_v_loadcache
 #else
 short v_loadcache      (VdiHdl , const char *filename, short mode);
@@ -2441,7 +2441,7 @@ void  v_opnvwk         (short work_in[], VdiHdl *, short work_out[]);
 void  v_opnwk          (short work_in[], VdiHdl *, short work_out[]);
 
 short udef_v_savecache      (VdiHdl , const char *filename);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_savecache udef_v_savecache
 #else
 short v_savecache      (VdiHdl , const char *filename);
@@ -2481,7 +2481,7 @@ void  vst_unload_fonts (VdiHdl , short /* select */);
 void  udef_v_bit_image       (VdiHdl , const char *filename, short aspect,
                                   short x_scale, short y_scale,
                                   short h_align, short v_align, short *pxy);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_bit_image udef_v_bit_image
 #else
 void  v_bit_image       (VdiHdl , const char *filename, short aspect,
@@ -2527,7 +2527,7 @@ void v_write_meta   (VdiHdl , short numvdi_intin, short *avdi_intin,
 void vm_coords      (VdiHdl , short llx, short lly, short urx, short ury);
 
 void udef_vm_filename    (VdiHdl , const char *filename);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vm_filename udef_vm_filename
 #else
 void vm_filename    (VdiHdl , const char *filename);
@@ -2546,7 +2546,7 @@ void v_escape2000 (VdiHdl , short times);
 
 void udef_v_alpha_text  (VdiHdl , const char *str);
 
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_alpha_text udef_v_alpha_text
 #else
 void v_alpha_text  (VdiHdl , const char *str);
@@ -2559,7 +2559,7 @@ void v_curleft     (VdiHdl );
 void v_curright    (VdiHdl );
 
 void udef_v_curtext     (VdiHdl , const char *str);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_curtext udef_v_curtext
 #else
 void v_curtext     (VdiHdl , const char *str);
@@ -2662,7 +2662,7 @@ void  vqt_attributes (VdiHdl , short atrib[]);
 void  vqt_cachesize  (VdiHdl , short which_cache, long *size);
 
 void  udef_vqt_extent     (VdiHdl , const char *str, short extent[]);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vqt_extent udef_vqt_extent
 #else
 void  vqt_extent     (VdiHdl , const char *str, short extent[]);
@@ -2724,7 +2724,7 @@ void  vrq_locator  (VdiHdl , short x, short y,
                              short *xout, short *yout, short *term);
 
 void  udef_vrq_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vrq_string udef_vrq_string
 #else
 void  vrq_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
@@ -2737,7 +2737,7 @@ short vsm_locator  (VdiHdl , short x, short y,
                              short *xout, short *yout, short *term);
 
 short udef_vsm_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vsm_string udef_vsm_string
 #else
 short vsm_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
@@ -2787,7 +2787,7 @@ void v_ellpie      (VdiHdl , short x, short y, short xrad, short yrad,
 void v_fillarea    (VdiHdl , short count, short pxy[]);
 void udef_v_gtext       (VdiHdl , short x, short y, const char *str);
 
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_gtext udef_v_gtext
 #else
 void v_gtext       (VdiHdl , short x, short y, const char *str);
@@ -2798,7 +2798,7 @@ void v_gtext16n    (VdiHdl , PXY pos, const short *wstr, short num);
 
 void udef_v_justified   (VdiHdl , short x, short y, const char *str,
                              short len, short word_space, short char_space);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_justified udef_v_justified
 #else
 void v_justified   (VdiHdl , short x, short y, const char *str,

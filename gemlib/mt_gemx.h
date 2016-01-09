@@ -939,14 +939,14 @@ short	v_bez_on	(short handle);
 void	v_bez_off	(short handle);
 
 void	udef_v_bez		(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_bez udef_v_bez
 #else
 void	v_bez		(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
 #endif
 
 void	udef_v_bez_fill	(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_bez_fill udef_v_bez_fill
 #else
 void	v_bez_fill	(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
@@ -990,7 +990,7 @@ typedef unsigned short WCHAR; /**< 16bit string, eg. for unicode */
 
 
 void	udef_v_ftext         (VdiHdl, short x, short y, const char  *str);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_ftext udef_v_ftext
 #else
 void	v_ftext         (VdiHdl, short x, short y, const char  *str);
@@ -1002,7 +1002,7 @@ void	v_ftext16n      (VdiHdl, PXY pos, const WCHAR *wstr, short num);
 
 void	udef_v_ftext_offset  (VdiHdl, short x, short y,
                                const char  *str,  const short *offset);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_ftext_offset udef_v_ftext_offset
 #else
 void	v_ftext_offset  (VdiHdl, short x, short y,
@@ -1013,7 +1013,7 @@ void	v_ftext_offset  (VdiHdl, short x, short y,
 
 void	udef_v_ftext_offset16(VdiHdl, short x, short y,
                                const WCHAR *wstr, const short *offset);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_ftext_offset16 udef_v_ftext_offset16
 #else
 void	v_ftext_offset16(VdiHdl, short x, short y,
@@ -1022,7 +1022,7 @@ void	v_ftext_offset16(VdiHdl, short x, short y,
 
 void	udef_v_ftext_offset16n(VdiHdl, short x, short y,
                                const WCHAR *wstr, short num, const short *offset);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define v_ftext_offset16n udef_v_ftext_offset16n
 #else
 void	v_ftext_offset16n(VdiHdl, short x, short y,
@@ -1037,7 +1037,7 @@ void	v_getoutline    (VdiHdl, short ch, short *xyarray, char *bezarray,
 
 short	udef_vq_devinfo     (VdiHdl, short device, short *dev_exists,
                               char *file_name, char *device_name);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vq_devinfo udef_vq_devinfo
 #else
 short	vq_devinfo     (VdiHdl, short device, short *dev_exists,
@@ -1055,7 +1055,7 @@ short	vqt_ext_name    (VdiHdl, short __index,
                                char *name, short *font_format, short *flags);
 
 void	udef_vqt_f_extent    (VdiHdl, const char  *str, short extent[]);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vqt_f_extent udef_vqt_f_extent
 #else
 void	vqt_f_extent    (VdiHdl, const char  *str, short extent[]);
@@ -1064,7 +1064,7 @@ void	vqt_f_extent16  (VdiHdl, const WCHAR *str, short extent[]);
 void	vqt_f_extent16n (VdiHdl, const WCHAR *str, short num, short extent[]);
 
 void	udef_vqt_fontheader  (VdiHdl, char *buffer, char *pathname);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vqt_fontheader udef_vqt_fontheader
 #else
 void	vqt_fontheader  (VdiHdl, char *buffer, char *pathname);
@@ -1072,7 +1072,7 @@ void	vqt_fontheader  (VdiHdl, char *buffer, char *pathname);
 
 short	udef_vqt_name_and_id (VdiHdl, short font_format,
                                char *font_name, char *ret_name);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vqt_name_and_id udef_vqt_name_and_id
 #else
 short	vqt_name_and_id (VdiHdl, short font_format,
@@ -1081,7 +1081,7 @@ short	vqt_name_and_id (VdiHdl, short font_format,
 void	vqt_pairkern    (VdiHdl, short ch1, short ch2, long *x, long *y);
 
 void	udef_vqt_real_extent (VdiHdl, short x, short y, char *string, short extent[]);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vqt_real_extent udef_vqt_real_extent
 #else
 void	vqt_real_extent (VdiHdl, short x, short y, char *string, short extent[]);
@@ -1097,7 +1097,7 @@ void  vst_charmap 	(VdiHdl, short mode);
 void  vst_kern	(VdiHdl, short tmode, short pmode, short *tracks, short *pairs);
 
 short udef_vst_name 	(VdiHdl, short font_format, char *font_name, char *ret_name);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vst_name udef_vst_name
 #else
 short vst_name 	(VdiHdl, short font_format, char *font_name, char *ret_name);
@@ -1478,7 +1478,7 @@ long		vq_ctab_id		(short handle);
 short		vq_dflt_ctab		(short handle, long ctab_length, COLOR_TAB *ctab);
 
 long		udef_vq_hilite_color	(short handle, COLOR_ENTRY *hilite_color);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vq_hilite_color udef_vq_hilite_color
 #else
 long		vq_hilite_color		(short handle, COLOR_ENTRY *hilite_color);
@@ -1505,7 +1505,7 @@ short		vs_ctab_entry		(short handle, short __index, long color_space, COLOR_ENTR
 short		vs_dflt_ctab		(short handle);
 
 short		udef_vs_document_info	(short vdi_handle, short type, char *s, short wchar);
-#ifdef VDI_USERDEF_COMPAT
+#ifdef FORCE_GEMLIB_UDEF
 #define vs_document_info udef_vs_document_info
 #else
 short		vs_document_info	(short vdi_handle, short type, char *s, short wchar);
