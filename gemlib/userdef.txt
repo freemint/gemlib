@@ -11,7 +11,7 @@ call but not using the stack. This call is not safe thread (even if shared userd
 in supervisor the system will not interrupt the USERDEF!).
 New functions start with "udef_" and finish with the standard name. 
 This is the clean way to fix this problem but to help with your development and if you not need safe thread 
-feature you can just define "VDI_USERDEF_COMPAT" in your compil option it will redefine critical VDI functions 
+feature you can just define "FORCE_GEMLIB_UDEF" in your compil option it will redefine critical VDI functions 
 using too much the stack.
 
 Olivier Landemarre - December 13 2015
