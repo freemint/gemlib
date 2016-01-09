@@ -1,17 +1,10 @@
-
+/*
+ *  $Id$
+ */
 
 #include "gem_vdiP.h"
+#include "vdi_userdef.h"
 
-typedef struct
-{
-    short    vdi_control[VDI_CNTRLMAX];
-    short    vdi_intin[VDI_INTINMAX];
-    short    vdi_intout[VDI_INTOUTMAX];
-    short    vdi_ptsin[VDI_PTSINMAX];
-    short    vdi_ptsout[VDI_PTSOUTMAX];
-} VDIPARBLK;
-
-extern VDIPARBLK _VDIParBlk;
 
 /** This function should be used to change the name of the metafile. The 
  *  name \p filename must be an absolute path like "E:\\PICS\\FLIWATT.GEM".

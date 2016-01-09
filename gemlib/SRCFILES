@@ -4,6 +4,7 @@
 HEADER = \
 	gem_aesP.h \
 	gem_vdiP.h \
+	vdi_userdef.h \
 	gem.h \
 	gemx.h \
 	mt_gem.h \

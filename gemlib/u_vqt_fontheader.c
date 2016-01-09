@@ -1,18 +1,11 @@
-
+/*
+ *  $Id$
+ */
 
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
+#include "vdi_userdef.h"
 
-typedef struct
-{
-    short    vdi_control[VDI_CNTRLMAX];
-    short    vdi_intin[VDI_INTINMAX];
-    short    vdi_intout[VDI_INTOUTMAX];
-    short    vdi_ptsin[VDI_PTSINMAX];
-    short    vdi_ptsout[VDI_PTSOUTMAX];
-} VDIPARBLK;
-
-extern VDIPARBLK _VDIParBlk;
 
 /** copies the header of a speedo font file into \p buffer and 
  *  returns a pointer to the TDF file. The buffer should have a size of 1 Kb, 

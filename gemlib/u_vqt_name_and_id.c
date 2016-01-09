@@ -1,18 +1,11 @@
-
+/*
+ *  $Id$
+ */
 
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
+#include "vdi_userdef.h"
 
-typedef struct
-{
-    short    vdi_control[VDI_CNTRLMAX];
-    short    vdi_intin[VDI_INTINMAX];
-    short    vdi_intout[VDI_INTOUTMAX];
-    short    vdi_ptsin[VDI_PTSINMAX];
-    short    vdi_ptsout[VDI_PTSOUTMAX];
-} VDIPARBLK;
-
-extern VDIPARBLK _VDIParBlk;
 
 /** This function searches the font specified by \p font_name and \p font_format. 
  *  Missing or extra spaces in the font name are ignored. If the font cannot be 
