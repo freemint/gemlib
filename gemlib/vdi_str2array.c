@@ -31,7 +31,7 @@ vdi_str2array (const char *src, short *des)
  *
  *  @param src input string (standard null-terminated C-string)
  *  @param des output string (VDI format, each char occupied 16 bits)
- *  @param nmax TODO
+ *  @param nmax maximum of char to translate in the output string
  *
  *  @return the len of the string
  *
