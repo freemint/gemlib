@@ -6,24 +6,7 @@
 #include "vdi_userdef.h"
 
 
-/** This function should be used to change the name of the metafile. The 
- *  name \p filename must be an absolute path like "E:\\PICS\\FLIWATT.GEM".
- *
- *  @param handle Device handle
- *  @param filename 
- *
- *  @since all VDI versions
- *
- *  The metafile in the current directory created by v_opnwk() ("GEMFILE.GEM")
- *  will be closed (and deleted by NVDI). Therefore vm_filename() should be 
- *  called after v_opnwk().
- *
- *  Note:
- *  Old metafile driver may not delete the default file "GEMFILE.GEM" when 
- *  you call vm_filename(). That means that you are on the safe side if you 
- *  call Fdelete() after vm_filename() and try to delete GEMFILE.GEM.
- *Use it for work with userdef, not reentrant function!
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of vm_filename(). See \ref overviewUDEF for details about UDEF feature
  */
 
 void

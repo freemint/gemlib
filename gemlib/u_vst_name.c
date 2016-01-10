@@ -7,24 +7,7 @@
 #include "vdi_userdef.h"
 
 
-/** This function selects the font specified by \p font_name and \p font_format. 
- *  Missing or extra spaces in the font name are ignored. If the requested font 
- *  is not available, the system font is selected.
- *
- *  @param handle Device handle
- *  @param font_format possible font formats
- *         - 1: bitmap font
- *         - 2: Speedo font
- *         - 4: TrueType font
- *         - 8: Type 1 font
- *  @param font_name font name
- *  @param ret_name name of the selected font \n
- *         [option CHECK_NULLPTR] ret_name may be NULL
- *
- *  @return selected font id or 0 on failure
- *
- *  @since NVDI 3.02
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of vst_name(). See \ref overviewUDEF for details about UDEF feature
  */
 
 short

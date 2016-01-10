@@ -6,20 +6,7 @@
 #include "vdi_userdef.h"
 
 
-/**
- *
- *  @param handle Device handle
- *  @param filename 
- *  @param mode 
- *
- *  @return 
- *
- *  @since all VDI versions
- *
- *  @sa
- *
- *
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of v_loadcache(). See \ref overviewUDEF for details about UDEF feature
  */
 
 short

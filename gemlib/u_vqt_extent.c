@@ -6,21 +6,7 @@
 #include "vdi_userdef.h"
 
 
-/** If the selected font is a bitmap font, this function returns the minimal 
- *  bounding box of a string. If the selected font is a vector font, the character 
- *  widths (vqt_width()) will be added and the string (especially the leftmost and 
- *  the rightmost character) might exceed the returned rectangle.
- *
- *  @param handle Device handle
- *  @param str string
- *  @param extent coordinates of the rectangle
- *
- *  @since all VDI versions
- *
- *  The coordinates of the rectangle are given relative to a coordinate system, 
- *  where the extent rectangle touches both, the x and y axes, and the string is 
- *  in the first quadrant.
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of vqt_extent(). See \ref overviewUDEF for details about UDEF feature
  */
 
 void

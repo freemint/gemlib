@@ -8,32 +8,7 @@
 #include "vdi_userdef.h"
 
 
-/** reports back, if a driver exists and if he has been opened.
- *  Besides the name of the driver (e.g. "XVGA256.SYS") and the 'readable' name 
- *  ("VGA 256 colors") are returned.
- *
- *  @param handle any Device handle. handle must be a valid VDI handle.
- *         The workstation opened by the AES (see mt_graf_handle() ) seems 
- *         to be a good choice. Some VDI layer crashes is you set handle a nul value.
- *  @param device device id (0-99)
- *  @param dev_exists  
- *         - 0: driver doesn't exist for this device.
- *         - 1: driver exists for this device
- *  @param file_name file name
- *  @param device_name readable device name
- *
- *  @return 0 if the driver is not opened, or can be opened once more.
- *          It's similar to the dev_busy parameter of vqt_devinfo().
- *
- *  @since NVDI 3.00, SpeedoGDOS 4
- *
- *  @sa vqt_devinfo()
- *
- *  @note FontGDOS 2 may crash this binding (vdi_control values returned are
- *        doesn't deals with the data returned in vdi_intout/ptsout).
- *
- *  @note If the file name is empty, there is no driver with the given id \p device.
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of vq_devinfo(). See \ref overviewUDEF for details about UDEF feature
  */
 
 short

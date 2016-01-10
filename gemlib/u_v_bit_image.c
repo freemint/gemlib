@@ -6,33 +6,7 @@
 #include "vdi_userdef.h"
 
 
-/** This escape is required only for printers.
- *  It allows the application to request processing of a bit image file
- *
- *  @param handle Device handle
- *  @param filename 
- *  @param aspect Aspect ratio flag :
- *         - 0 = ignore aspect ratio
- *         - 1 = honor pixel aspect ratio
- *  @param x_scale Scaling for x-axis :
- *         - 0 = fractional scaling
- *         - 1 = integer scaling
- *  @param y_scale  Scaling for y-axis :
- *         - 0 = fractional scaling
- *         - 1 = integer scaling
- *  @param h_align horizontal alignment :
- *         - 0 = left
- *         - 1 = center
- *         - 2 = right
- *  @param v_align vertical alignment :
- *         - 0 = top
- *         - 1 = middle
- *         - 2 = bottom
- *  @param pxy output rectangle
- *
- *  @since all VDI versions
- *
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of v_bit_image(). See \ref overviewUDEF for details about UDEF feature
  */
 
 void

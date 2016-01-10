@@ -29,26 +29,7 @@ _v_bez (short count, short *xyarr, char *bezarr, short *vdi_intin, short *vdi_pt
 }
 
 
-/** This function draws an unfilled bezier curve.
- *
- *  @param handle Device handle
- *  @param count 
- *  @param xyarr xyarr[0..2count-1] = coordinates
- *  @param bezarr bezarr[0..count-1] = point-type flags defined as follow:
- *         - bit 0:   first point in a 4-point bezier curve (two anchor points and two
- *                  direction points). The last point of a bezier segment can be the 
- *                  first point of the next bezier curve (or it can be a jump point).
- *         - bit 1:   jump point - this point and the previous one will not be connected.
- *         - Bit 2-7 are reserved. If bit 0 is 0, v_bez() works like v_pline() and draws 
- *                   a straight line between two points.
- *  @param extent coordinates of the bounding box
- *  @param totpts number of points in the resulting polygon
- *  @param totmoves number of moves in the polygon
- *
- *  @since since NVDI 2.10
- *
- *  @note Use it for work with userdef, not reentrant function!
- *
+/** UDEF version of v_bez(). See \ref overviewUDEF for details about UDEF feature
  */
 
 void
@@ -67,27 +48,9 @@ udef_v_bez (short handle, short count, short *xyarr, char *bezarr,
 	*totmoves = _VDIParBlk.vdi_intout[1];
 }
 
-/** This call draws a filled polygon with bezier curves.
- *
- *  @param handle Device handle
- *  @param count 
- *  @param xyarr xyarr[0..2count-1] = coordinates
- *  @param bezarr bezarr[0..count-1] = point-type flags defined as follow:
- *         - bit 0:   first point in a 4-point bezier curve (two anchor points and two
- *                  direction points). The last point of a bezier segment can be the 
- *                  first point of the next bezier curve (or it can be a jump point).
- *         - bit 1:   jump point - this point and the previous one will not be connected.
- *         - Bit 2-7 are reserved. If bit 0 is 0, v_bez() works like v_pline() and draws 
- *                   a straight line between two points.
- *  @param extent coordinates of the bounding box
- *  @param totpts number of points in the resulting polygon
- *  @param totmoves number of moves in the polygon
- *
- *  @since since NVDI 2.10
- *
- *  @note Use it for work with userdef, not reentrant function!
- *
+/** UDEF version of v_bez_fill(). See \ref overviewUDEF for details about UDEF feature
  */
+
 
 void
 udef_v_bez_fill (short handle, short count, short *xyarr, char *bezarr,

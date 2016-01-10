@@ -229,6 +229,21 @@
  *         any VDI call.
  */
 
+/** @defgroup n_vdi VDI extended functions
+ *
+ */
+
+/** @defgroup force_udef Specific UDEF functions
+ *
+ *  @brief This section contains all VDI functions that have a specific UDEF version.
+ *
+ *  Other UDEF functions are just an alias (define) to the standard VDI function.
+ *
+ *  When FORCE_GEMLIB_UDEF is defined by gemlib user, these functions will be used in place of their standard VDI version. 
+ *  See \ref overviewUDEF for details.
+ *
+ *  \warning These functions are not multithread safe, and should be reserved for userdef usage, as suggested in \ref overviewUDEF. 
+ */
 /**@}*/
 
 
@@ -236,8 +251,120 @@
  *
  *  Welcome to GEMlib documentation main page.
  *
+ *  @section Presentation Overview of gemlib usage
+ *
+ *  GEMlib is a C library that allow your software to access AES and VDI layers.
+ *  If you don't know what AES and VDI are, then this library is probably not for you.
+ *
+ *  A good starting point of this documentation is the <a href="modules.html">Modules page</a>.
+ *
+ *  @subsection overviewAES1 Common usage of AES functions
+ *
+ *  Most of the time, gemlib is used to produce single thread application (only one thread for all AES stuff). In that case, the standard way to use GEMlib is to include gem.h.
+ *  \code
+ *  #include <gem.h>
+ *  #include <gemx.h> // if extended gemlib functions are used
+ *  
+ *  int main() {
+ *  // ...
+ *  appl_init();
+ *  //...
+ *  appl_exit();
+ *  // ...
+ *  }
+ *  \endcode
+ *  
+ *  In that case, AES functions invoked by the application will use the global AES data defined in GEMlib and initialised by appl_init().
+ *
+ *  @subsection overviewAES2 Mutlithread compatible usage of AES functions
+ *
+ *  For a multithread compliant applications, mt_gem.h shall be used. Then, the application shall define its own global AES data, and give a pointer to this
+ *  global AES data as last parameter when invoking AES multithread compatible function, which are prefixed with "mt_".
+ *  
+ *  \code
+ *  #include <mt_gem.h>
+ *  #include <mt_gemx.h> // if extended gemlib functions are used
+ *  
+ *  int main() {
+ *  // ...
+ *  short aes_global[AES_GLOBMAX]; // global aes variable required by mt_ functions
+ *  // ...
+ *  mt_appl_init(aes_global);
+ *  // ...
+ *  mt_appl_exit(aes_global);
+ *  // ...
+ *  }
+ *  \endcode
+ *
+ *  @subsection overviewVDI1 VDI is multithread compatible
+ *
+ *  Whatever the "mt" kind of header used (gem.h or mt_gem.h), VDI functions provided by GEMlib are thread safe.
+ *
+ *  To reach this goal, all the data used by VDI functions are allocated in the stack.
+ *
+ *  @subsection overviewUDEF UDEF version of VDI functions
+ *  
+ *  AES provides a mean for applications to draw its own objects in forms. This is "userdefined" object feature. The application defines a ub_code()
+ *  callback function, and this callback function is called by the AES to redraw the object (by using VDI functions to draw stuff).
+ *
+ *  The issue is the following: some AES (TOS, maybe MagiC ?) have a small supervisor stack, and invoke the userdef callback function in supervisor mode.
+ *  This may lead to a stack overflow if hungry stack consumption VDI calls are used.
+ *
+ *  Note: this is no issue with modern AES (XaAES or MyAES) which invokes the callback function in user mode.
+ *
+ *  In order to generate an application compatible with old fashion AES, the application shall have userdef callback function that are not memory stack hungry.
+ *  For this purpose, userdef version of VDI functions have been introduced in gemlib.
+ * 
+ *  These functions are standard VDI function, prefixed with "udef_".
+ *  A global VDIPB data is defined in gemlib, and this global data will be used by all udef_xxx functions. This way, the amount of memory allocated in the stack
+ *  by udef_xxx functions will remain compatible with old fashion AES.
+ *  For VDI functions that have light usage of the stack, their udef_xxx version is exactly the standard VDI function.
+ *
+ *  The use of udef_xxx functions should not be a problem on modern AES if there are only used in userdef functions : an AES callback function won't be interrupted
+ *  by another AES callback function.
+ *
+ *  To use this feature, replace your VDI call by their udef version in your callback functions : just add "udef_" as prefix to the VDI function.
+ *  \code
+ *  void my_userdefined_callback_function(PARMBLK *pblk)
+ *  {
+ *    // ...
+ *    udef_vswr_mode (vdih, MD_TRANS);   // instead of vswr_mode()
+ *    udef_vsf_color (vdih, WHITE);
+ *    udef_vsf_interior (vdih, FIS_PATTERN);
+ *    udef_vsf_style (vdih, 4);
+ *    udef_vr_recfl (vdih, tab);
+ *    // ...
+ *  }
+ *  \endcode
+ *
+ *  If you don't want to change your callback function (too much work ?), and if you have a .c file that contains only your callback functions, then the option
+ *  FORCE_GEMLIB_UDEF may be used. This option (to be defined before gem.h include) will replace all standard VDI call to their udef version.
+ *  \code
+ *  #define FORCE_GEMLIB_UDEF
+ *  #include <gem.h>  // or mt_gem.h
+ *  // ...
+ *  void my_userdefined_callback_function(PARMBLK *pblk)
+ *  {
+ *    // ...
+ *    vswr_mode (vdih, MD_TRANS);
+ *    vsf_color (vdih, WHITE);
+ *    vsf_interior (vdih, FIS_PATTERN);
+ *    vsf_style (vdih, 4);
+ *    vr_recfl (vdih, tab);
+ *    // ...
+ *  }
+ *  \endcode
+ *  
+ *
+ *  @section Reference
+ * 
  *  If you want to get last news about GEMlib, please visit
  *  http://arnaud.bercegeay.free.fr/gemlib/
+ *
+ *  GEMlib is hosted on sparemint server. For developement access (CVS, bugtracker, mailing list...) please visit
+ *  http://sparemint.org/sparemint/development.html
+ *
+ *  @section History
  *
  *  If you want to get details about last changes done in GEMlib, you can
  *  read the \link Changelog Changelog \endlink (from Dec 2002).

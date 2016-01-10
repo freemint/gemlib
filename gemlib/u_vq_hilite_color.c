@@ -7,18 +7,7 @@
 #include "vdi_userdef.h"
 
 
-/** 
- *
- *  @param handle Device handle
- *  @param hilite_color  \n
- *         [option CHECK_NULLPTR] hilite_color may be NULL
- *
- *  @return 
- *
- *  @since NVDI 5 ?
- *
- *  @note Use it for work with userdef, not reentrant function!
- *
+/** UDEF version of vq_hilite_color(). See \ref overviewUDEF for details about UDEF feature
  */
 
 long

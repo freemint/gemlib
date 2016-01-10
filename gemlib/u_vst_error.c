@@ -6,20 +6,8 @@
 #include "vdi_userdef.h"
 
 
-/** 
- *
- *  @param handle Device handle
- *  @param mode 
- *  @param errorvar 
- *
- *  @since 
- *
- *  @sa
- *
- *  @note Use it for work with userdef, not reentrant function!
- *
+/** UDEF version of vst_error(). See \ref overviewUDEF for details about UDEF feature
  */
-
 
 void
 udef_vst_error (short handle, short mode, short *errorvar)

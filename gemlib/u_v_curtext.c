@@ -6,14 +6,7 @@
 #include "vdi_userdef.h"
 
 
-/** This function displays a string. The string starts at the current cursor 
- *  position.
- *
- *  @param handle Device handle
- *  @param str
- *
- *  @since all VDI versions
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of v_curtext(). See \ref overviewUDEF for details about UDEF feature
  */
 
 void
