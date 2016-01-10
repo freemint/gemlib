@@ -2371,12 +2371,7 @@ void  vst_alignment (VdiHdl , short hin, short vin, short *hout, short *vout);
 short vst_color     (VdiHdl , short color_idx);
 short vst_effects   (VdiHdl , short effects);
 
-void  udef_vst_error     (VdiHdl , short mode, short *errorvar);
-#ifdef FORCE_GEMLIB_UDEF
-#define vst_error udef_vst_error
-#else
 void  vst_error     (VdiHdl , short mode, short *errorvar);
-#endif
 
 short vst_font      (VdiHdl , short font);
 void  vst_height    (VdiHdl , short height, short *charw, short *charh,
@@ -2386,38 +2381,72 @@ short vst_point     (VdiHdl , short point, short *charw, short *charh,
 short vst_rotation  (VdiHdl , short ang);
 void  vst_scratch   (VdiHdl , short mode);
 
+/**@}*/
+
+
+/** UDEF version of vs_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_color vs_color
+/** UDEF version of vswr_mode(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vswr_mode vswr_mode
 
+/** UDEF version of vsf_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsf_color vsf_color
+/** UDEF version of vsf_interior(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsf_interior vsf_interior
+/** UDEF version of vsf_perimeter(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsf_perimeter vsf_perimeter
+/** UDEF version of vsf_xperimeter(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsf_xperimeter vsf_xperimeter
+/** UDEF version of vsf_style(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsf_style vsf_style
+/** UDEF version of vsf_udpat(). See \ref overviewUDEF for details about UDEF feature */
 #define  udef_vsf_udpat vsf_udpat
 
+/** UDEF version of vsl_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsl_color vsl_color
+/** UDEF version of vsl_ends(). See \ref overviewUDEF for details about UDEF feature */
 #define  udef_vsl_ends vsl_ends
+/** UDEF version of vsl_type(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsl_type vsl_type
+/** UDEF version of vsl_udsty(). See \ref overviewUDEF for details about UDEF feature */
 #define  udef_vsl_udsty vsl_udsty
+/** UDEF version of vsl_width(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsl_width vsl_width
 
+/** UDEF version of vsm_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsm_color vsm_color
+/** UDEF version of vsm_height(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsm_height vsm_height
+/** UDEF version of vsm_type(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsm_type vsm_type
 
+/** UDEF version of vst_alignment(). See \ref overviewUDEF for details about UDEF feature */
 #define  udef_vst_alignment vst_alignment
+/** UDEF version of vst_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_color vst_color
+/** UDEF version of vst_effects(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_effects vst_effects
 
+/** @ingroup force_udef */
+void  udef_vst_error     (VdiHdl , short mode, short *errorvar);
+
+/** UDEF version of vst_font(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_font vst_font
+/** UDEF version of vst_height(). See \ref overviewUDEF for details about UDEF feature */
 #define  udef_vst_height vst_height
+/** UDEF version of vst_point(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_point vst_point
+/** UDEF version of vst_rotation(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_rotation vst_rotation
+/** UDEF version of vst_scratch(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_scratch vst_scratch
 
 
-/**@}*/
+#ifdef FORCE_GEMLIB_UDEF
+/** Force usage of UDEF version of vst_error(). See \ref overviewUDEF for details about UDEF feature */
+#define vst_error udef_vst_error
+#endif
+
 
 /*
  * control functions
@@ -2430,22 +2459,10 @@ void  v_clrwk          (VdiHdl );
 void  v_clsvwk         (VdiHdl );
 void  v_clswk          (VdiHdl );
 short v_flushcache     (VdiHdl );
-
-short udef_v_loadcache      (VdiHdl , const char *filename, short mode);
-#ifdef FORCE_GEMLIB_UDEF
-#define v_loadcache udef_v_loadcache
-#else
 short v_loadcache      (VdiHdl , const char *filename, short mode);
-#endif
 void  v_opnvwk         (short work_in[], VdiHdl *, short work_out[]);
 void  v_opnwk          (short work_in[], VdiHdl *, short work_out[]);
-
-short udef_v_savecache      (VdiHdl , const char *filename);
-#ifdef FORCE_GEMLIB_UDEF
-#define v_savecache udef_v_savecache
-#else
 short v_savecache      (VdiHdl , const char *filename);
-#endif
 void  v_set_app_buff   (VdiHdl , void *buf_p, short size);
 void  v_updwk          (VdiHdl );
 void  vs_clip          (VdiHdl , short clip_flag, short pxy[]);
@@ -2453,22 +2470,43 @@ void  vs_clip_pxy      (VdiHdl , PXY pxy[]);
 void  vs_clip_off      (VdiHdl );
 short vst_load_fonts   (VdiHdl , short /* select */);
 void  vst_unload_fonts (VdiHdl , short /* select */);
+/**@}*/
 
+/** UDEF version of v_clrwk(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_clrwk v_clrwk
+/** UDEF version of v_clsvwk(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_clsvwk v_clsvwk
+/** UDEF version of v_clswk(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_clswk v_clswk
+/** UDEF version of v_flushcache(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_flushcache v_flushcache
+/** @ingroup force_udef */
+short udef_v_loadcache      (VdiHdl , const char *filename, short mode);
+/** UDEF version of v_opnvwk(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_opnvwk v_opnvwk
+/** UDEF version of v_opnwk(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_opnwk v_opnwk
+/** @ingroup force_udef */
+short udef_v_savecache      (VdiHdl , const char *filename);
+/** UDEF version of v_set_app_buff(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_set_app_buff v_set_app_buff
+/** UDEF version of v_updwk(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_updwk v_updwk
+/** UDEF version of vs_clip(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_clip vs_clip
+/** UDEF version of vs_clip_pxy(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_clip_pxy vs_clip_pxy
+/** UDEF version of vs_clip_off(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_clip_off vs_clip_off
+/** UDEF version of vst_load_fonts(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_load_fonts vst_load_fonts
+/** UDEF version of vst_unload_fonts(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_unload_fonts vst_unload_fonts
 
-/**@}*/
+#ifdef FORCE_GEMLIB_UDEF
+#define v_loadcache udef_v_loadcache
+#define v_savecache udef_v_savecache
+#endif
 
 /*
  * escape functions
@@ -2478,16 +2516,10 @@ void  vst_unload_fonts (VdiHdl , short /* select */);
  *  @{
  */
 
-void  udef_v_bit_image       (VdiHdl , const char *filename, short aspect,
-                                  short x_scale, short y_scale,
-                                  short h_align, short v_align, short *pxy);
-#ifdef FORCE_GEMLIB_UDEF
-#define v_bit_image udef_v_bit_image
-#else
+
 void  v_bit_image       (VdiHdl , const char *filename, short aspect,
                                   short x_scale, short y_scale,
                                   short h_align, short v_align, short *pxy);
-#endif
 
 void  v_clear_disp_list (VdiHdl );
 short v_copies          (VdiHdl , short count);
@@ -2526,12 +2558,7 @@ void v_write_meta   (VdiHdl , short numvdi_intin, short *avdi_intin,
                               short num_ptsin, short *a_ptsin);
 void vm_coords      (VdiHdl , short llx, short lly, short urx, short ury);
 
-void udef_vm_filename    (VdiHdl , const char *filename);
-#ifdef FORCE_GEMLIB_UDEF
-#define vm_filename udef_vm_filename
-#else
 void vm_filename    (VdiHdl , const char *filename);
-#endif
 void vm_pagesize    (VdiHdl , short pgwidth, short pgheight);
 
 void  vsc_expose	(VdiHdl , short state);
@@ -2543,29 +2570,13 @@ void v_fontinit		(VdiHdl , const void * font_header);
 
 void v_escape2000 (VdiHdl , short times);
 
-
-void udef_v_alpha_text  (VdiHdl , const char *str);
-
-#ifdef FORCE_GEMLIB_UDEF
-#define v_alpha_text udef_v_alpha_text
-#else
 void v_alpha_text  (VdiHdl , const char *str);
-#endif
-
 void v_alpha_text16n  (VdiHdl , const short * wstr, short num);
 void v_curdown     (VdiHdl );
 void v_curhome     (VdiHdl );
 void v_curleft     (VdiHdl );
 void v_curright    (VdiHdl );
-
-void udef_v_curtext     (VdiHdl , const char *str);
-#ifdef FORCE_GEMLIB_UDEF
-#define v_curtext udef_v_curtext
-#else
 void v_curtext     (VdiHdl , const char *str);
-#endif
-
-
 void v_curtext16n     (VdiHdl , const short * wstr, short num);
 void v_curup       (VdiHdl );
 void v_eeol        (VdiHdl );
@@ -2580,66 +2591,135 @@ void vs_curaddress (VdiHdl , short row, short col);
 /** alternative name for vs_curaddress */
 #define v_curaddress vs_curaddress
 
+/**@}*/
+
+/** @ingroup force_udef */
+void  udef_v_bit_image       (VdiHdl , const char *filename, short aspect,
+                                  short x_scale, short y_scale,
+                                  short h_align, short v_align, short *pxy);
+
+/** UDEF version of v_clear_disp_list(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_clear_disp_list v_clear_disp_list
+/** UDEF version of v_copies(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_copies v_copies
+/** UDEF version of v_dspcur(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_dspcur v_dspcur
+/** UDEF version of v_form_adv(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_form_adv v_form_adv
+/** UDEF version of v_hardcopy(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_hardcopy v_hardcopy
+/** UDEF version of v_orient(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_orient v_orient
+/** UDEF version of v_output_window(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_output_window v_output_window
+/** UDEF version of v_page_size(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_page_size v_page_size
+/** UDEF version of v_rmcur(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_rmcur v_rmcur
+/** UDEF version of v_trays(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_trays v_trays
+/** UDEF version of vq_calibrate(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_calibrate vq_calibrate
+/** UDEF version of vq_page_name(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_page_name vq_page_name
+/** UDEF version of vq_scan(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_scan vq_scan
+/** UDEF version of vq_tabstatus(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_tabstatus vq_tabstatus
+/** UDEF version of vq_tray_names(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_tray_names vq_tray_names
+/** UDEF version of vs_calibrate(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_calibrate vs_calibrate
+/** UDEF version of vs_palette(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_palette vs_palette
 
+/** UDEF version of v_sound(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_sound v_sound
+/** UDEF version of vs_mute(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_mute vs_mute
 
+/** UDEF version of vq_tdimensions(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_tdimensions vq_tdimensions
+/** UDEF version of vt_alignment(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vt_alignment vt_alignment
+/** UDEF version of vt_axis(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vt_axis vt_axis
+/** UDEF version of vt_origin(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vt_origin vt_origin
+/** UDEF version of vt_resolution(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vt_resolution vt_resolution
 
+/** UDEF version of v_meta_extents(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_meta_extents v_meta_extents
+/** UDEF version of v_write_meta(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_write_meta v_write_meta
+/** UDEF version of vm_coords(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vm_coords vm_coords
+/** @ingroup force_udef */
+void udef_vm_filename    (VdiHdl , const char *filename);
+/** UDEF version of vm_pagesize(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vm_pagesize vm_pagesize
 
+/** UDEF version of vsc_expose(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsc_expose vsc_expose
+/** UDEF version of vsp_film(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsp_film vsp_film
+/** UDEF version of vqp_filmname(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqp_filmname vqp_filmname
 
+/** UDEF version of v_offset(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_offset v_offset
+/** UDEF version of v_fontinit(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_fontinit v_fontinit
 
+/** UDEF version of v_escape2000(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_escape2000 v_escape2000
 
+/** @ingroup force_udef */
+void udef_v_alpha_text  (VdiHdl , const char *str);
+/** UDEF version of v_alpha_text16n(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_alpha_text16n v_alpha_text16n
+/** UDEF version of v_curdown(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_curdown v_curdown
+/** UDEF version of v_curhome(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_curhome v_curhome
+/** UDEF version of v_curleft(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_curleft v_curleft
+/** UDEF version of v_curright(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_curright v_curright
+/** @ingroup force_udef */
+void udef_v_curtext     (VdiHdl , const char *str);
+/** UDEF version of v_curtext16n(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_curtext16n v_curtext16n
+/** UDEF version of v_curup(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_curup v_curup
+/** UDEF version of v_eeol(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_eeol v_eeol
+/** UDEF version of v_eeos(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_eeos v_eeos
+/** UDEF version of v_enter_cur(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_enter_cur v_enter_cur
+/** UDEF version of v_exit_cur(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_exit_cur v_exit_cur
+/** UDEF version of v_rvoff(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_rvoff v_rvoff
+/** UDEF version of v_rvon(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_rvon v_rvon
+/** UDEF version of vq_chcells(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_chcells vq_chcells
+/** UDEF version of vq_curaddress(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_curaddress vq_curaddress
+/** UDEF version of vs_curaddress(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_curaddress vs_curaddress
+/** UDEF version of vs_curaddress(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_curaddress udef_vs_curaddress
 
-/**@}*/
+#ifdef FORCE_GEMLIB_UDEF
+#define v_bit_image udef_v_bit_image
+#define vm_filename udef_vm_filename
+#define v_alpha_text udef_v_alpha_text
+#define v_curtext udef_v_curtext
+#endif
  
 
 /*
@@ -2660,13 +2740,7 @@ void  vql_attributes (VdiHdl , short atrib[]);
 void  vqm_attributes (VdiHdl , short atrib[]);
 void  vqt_attributes (VdiHdl , short atrib[]);
 void  vqt_cachesize  (VdiHdl , short which_cache, long *size);
-
-void  udef_vqt_extent     (VdiHdl , const char *str, short extent[]);
-#ifdef FORCE_GEMLIB_UDEF
-#define vqt_extent udef_vqt_extent
-#else
 void  vqt_extent     (VdiHdl , const char *str, short extent[]);
-#endif
 void  vqt_extent16   (VdiHdl , const short *wstr, short extent[]);
 void  vqt_extent16n  (VdiHdl , const short *wstr, short num, short extent[]);
 void  vqt_fontinfo   (VdiHdl , short *minade, short *maxade, short distances[],
@@ -2680,26 +2754,50 @@ short vq_gdos  (void);
 
 /** TODO */
 long  vq_vgdos (void);
+/**@}*/
 
+
+/** UDEF version of vq_cellarray(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_cellarray vq_cellarray
+/** UDEF version of vq_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_color vq_color
+/** UDEF version of vq_extnd(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_extnd vq_extnd
+/** UDEF version of vqf_attributes(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqf_attributes vqf_attributes
+/** UDEF version of vqin_mode(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqin_mode vqin_mode
+/** UDEF version of vql_attributes(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vql_attributes vql_attributes
+/** UDEF version of vqm_attributes(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqm_attributes vqm_attributes
+/** UDEF version of vqt_attributes(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_attributes vqt_attributes
+/** UDEF version of vqt_cachesize(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_cachesize vqt_cachesize
+/** @ingroup force_udef */
+void  udef_vqt_extent     (VdiHdl , const char *str, short extent[]);
+/** UDEF version of vqt_extent16(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_extent16 vqt_extent16
+/** UDEF version of vqt_extent16n(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_extent16n vqt_extent16n
+/** UDEF version of vqt_fontinfo(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_fontinfo vqt_fontinfo
+/** UDEF version of vqt_get_table(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_get_table vqt_get_table
+/** UDEF version of vqt_name(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_name vqt_name
+/** UDEF version of vqt_width(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_width vqt_width
+/** UDEF version of vq_gdos(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_gdos vq_gdos
+/** UDEF version of vq_vgdos(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_vgdos vq_vgdos
 
-/**@}*/
+#ifdef FORCE_GEMLIB_UDEF
+#define vqt_extent udef_vqt_extent
+#endif
+
 
 
 /*
@@ -2722,47 +2820,63 @@ void  vq_mouse     (VdiHdl , short *pstatus, short *x, short *y);
 void  vrq_choice   (VdiHdl , short cin, short *cout);
 void  vrq_locator  (VdiHdl , short x, short y,
                              short *xout, short *yout, short *term);
-
-void  udef_vrq_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
-#ifdef FORCE_GEMLIB_UDEF
-#define vrq_string udef_vrq_string
-#else
 void  vrq_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
-#endif
 void  vrq_valuator (VdiHdl , short in, short *out, short *term);
 void  vsc_form     (VdiHdl , short form[]);
 short vsin_mode    (VdiHdl , short dev, short mode);
 short vsm_choice   (VdiHdl , short *choice);
 short vsm_locator  (VdiHdl , short x, short y,
                              short *xout, short *yout, short *term);
-
-short udef_vsm_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
-#ifdef FORCE_GEMLIB_UDEF
-#define vsm_string udef_vsm_string
-#else
 short vsm_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
-#endif
 void  vsm_valuator (VdiHdl , short in, short *out, short *term, short *status);
+/**@}*/
 
+
+/** UDEF version of v_hide_c(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_hide_c v_hide_c
+/** UDEF version of v_show_c(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_show_c v_show_c
+/** UDEF version of vex_butv(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vex_butv vex_butv
+/** UDEF version of vex_curv(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vex_curv vex_curv
+/** UDEF version of vex_motv(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vex_motv vex_motv
+/** UDEF version of vex_wheelv(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vex_wheelv vex_wheelv
+/** UDEF version of vex_timv(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vex_timv vex_timv
+/** UDEF version of vq_key_s(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_key_s vq_key_s
+/** UDEF version of vq_mouse(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_mouse vq_mouse
+/** UDEF version of vrq_choice(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vrq_choice vrq_choice
+/** UDEF version of vrq_locator(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vrq_locator vrq_locator
+/** @ingroup force_udef */
+void  udef_vrq_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
+/** UDEF version of vrq_valuator(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vrq_valuator vrq_valuator
+/** UDEF version of vsc_form(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsc_form vsc_form
+/** UDEF version of vsin_mode(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsin_mode vsin_mode
+/** UDEF version of vsm_choice(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsm_choice vsm_choice
+/** UDEF version of vsm_locator(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsm_locator vsm_locator
+/** @ingroup force_udef */
+short udef_vsm_string   (VdiHdl , short len, short echo, short echoxy[], char *str);
+/** UDEF version of vsm_valuator(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsm_valuator vsm_valuator
 
-/**@}*/
+
+#ifdef FORCE_GEMLIB_UDEF
+#define vrq_string udef_vrq_string
+#define vsm_string udef_vsm_string
+#endif
+
 
 
 /*
@@ -2785,25 +2899,11 @@ void v_ellipse     (VdiHdl , short x, short y, short xrad, short yrad);
 void v_ellpie      (VdiHdl , short x, short y, short xrad, short yrad,
                              short begang, short endang);
 void v_fillarea    (VdiHdl , short count, short pxy[]);
-void udef_v_gtext       (VdiHdl , short x, short y, const char *str);
-
-#ifdef FORCE_GEMLIB_UDEF
-#define v_gtext udef_v_gtext
-#else
 void v_gtext       (VdiHdl , short x, short y, const char *str);
-#endif
-
 void v_gtext16     (VdiHdl , short x, short y, const short *wstr);
 void v_gtext16n    (VdiHdl , PXY pos, const short *wstr, short num);
-
-void udef_v_justified   (VdiHdl , short x, short y, const char *str,
-                             short len, short word_space, short char_space);
-#ifdef FORCE_GEMLIB_UDEF
-#define v_justified udef_v_justified
-#else
 void v_justified   (VdiHdl , short x, short y, const char *str,
                              short len, short word_space, short char_space);
-#endif
 void v_justified16n   (VdiHdl , short x, short y, const short * wstr, short num,
                              short len, short word_space, short char_space);
 void v_pieslice    (VdiHdl , short x, short y,
@@ -2813,29 +2913,56 @@ void v_pmarker     (VdiHdl , short count, short pxy[]);
 void v_rbox        (VdiHdl , short pxy[]);
 void v_rfbox       (VdiHdl , short pxy[]);
 void vr_recfl      (VdiHdl , short pxy[]);
+/**@}*/
 
+/** UDEF version of v_arc(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_arc v_arc
+/** UDEF version of v_bar(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_bar v_bar
+/** UDEF version of v_cellarray(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_cellarray v_cellarray
+/** UDEF version of v_circle(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_circle v_circle
+/** UDEF version of v_contourfill(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_contourfill v_contourfill
+/** UDEF version of v_ellarc(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_ellarc v_ellarc
+/** UDEF version of v_ellipse(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_ellipse v_ellipse
+/** UDEF version of v_ellpie(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_ellpie v_ellpie
+/** UDEF version of v_fillarea(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_fillarea v_fillarea
-
+/** @ingroup force_udef */
+void udef_v_gtext       (VdiHdl , short x, short y, const char *str);
+/** UDEF version of v_gtext16(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_gtext16 v_gtext16
+/** UDEF version of v_gtext16n(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_gtext16n v_gtext16n
-
+/** @ingroup force_udef */
+void udef_v_justified   (VdiHdl , short x, short y, const char *str,
+                             short len, short word_space, short char_space);
+/** UDEF version of v_justified16n(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_justified16n v_justified16n
+/** UDEF version of v_pieslice(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_pieslice v_pieslice
+/** UDEF version of v_pline(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_pline v_pline
+/** UDEF version of v_pmarker(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_pmarker v_pmarker
+/** UDEF version of v_rbox(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_rbox v_rbox
+/** UDEF version of v_rfbox(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_rfbox v_rfbox
+/** UDEF version of vr_recfl(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vr_recfl vr_recfl
 
-/**@}*/
+
+#ifdef FORCE_GEMLIB_UDEF
+#define v_gtext udef_v_gtext
+#define v_justified udef_v_justified
+#endif
+
 
 /*
  * raster functions
@@ -2849,13 +2976,17 @@ void vr_trnfm    (VdiHdl , MFDB *src, MFDB *dst);
 void vro_cpyfm   (VdiHdl , short mode, short pxy[], MFDB *src, MFDB *dst);
 void vrt_cpyfm   (VdiHdl , short mode, short pxy[], MFDB *src, MFDB *dst,
                            short color[]);
+/**@}*/
 
+/** UDEF version of v_get_pixel(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_get_pixel v_get_pixel
+/** UDEF version of vr_trnfm(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vr_trnfm vr_trnfm
+/** UDEF version of vro_cpyfm(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vro_cpyfm vro_cpyfm
+/** UDEF version of vrt_cpyfm(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vrt_cpyfm vrt_cpyfm
 
-/**@}*/
 
 
 /*
@@ -2881,9 +3012,9 @@ short vdi_wstrlen   (const short *wstr);
 
 /* Array sizes in vdi control block as defined in NVDI 4 documentation */
 #define VDI_CNTRLMAX     15		/**< max size of vdi_control[] */
-#define VDI_INTINMAX    1024		/**< max size of vdi_intin[] */
+#define VDI_INTINMAX    1024	/**< max size of vdi_intin[] */
 #define VDI_INTOUTMAX   512		/**< max size of vdi_intout[] */
-#define VDI_PTSINMAX    1024		/**< max size of vdi_ptsin[] */
+#define VDI_PTSINMAX    1024	/**< max size of vdi_ptsin[] */
 #define VDI_PTSOUTMAX   256		/**< max size of vdi_ptsout[] */
 
 /** TODO */

@@ -6,23 +6,7 @@
 #include "vdi_userdef.h"
 
 
-/** returns a string from the keyboard. "INPUT STRING, SAMPLE MODE"
- *  returns if the maximum string length is reached, if the user has pressed RETURN 
- *  or if the user has not pressed a key.
- *
- *  @param handle Device handle
- *  @param len is the maximum length of the string returned in intout. If max_length 
- *         is negative, the absolute value is considered to be the maximum length and scan 
- *         codes are returned instead of ASCII values.
- *  @param echo 0: no output 1: echo
- *  @param echoxy 
- *  @param str input buffer
- *
- *  @return 0 (no input) or the length of the string otherwise.
-
- *
- *  @since all VDI versions
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of vsm_string(). See \ref overviewUDEF for details about UDEF feature
  */
 
 

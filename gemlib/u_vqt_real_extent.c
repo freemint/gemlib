@@ -7,22 +7,7 @@
 #include "vdi_userdef.h"
 
 
-/** This function is only available if you use NVDI.
- *  It returns the bounding box (eventually a quadrilateral, not a rectangle) for 
- *  text output at \p x, \p y. This function considers all text effects, rotation, 
- *  skewing, pair kerning, track kerning, characters which are extending beyond the 
- *  em square, horizontal and vertical alignment.
- *
- *  @param handle Device handle
- *  @param x x-coordinate
- *  @param y y-coordinate
- *  @param string string
- *  @param extent coordinates of the bounding box
- *
- *  @since NVDI 3.00
- *
- *  @note Use it for work with userdef, not reentrant function!
- *
+/** UDEF version of vqt_real_extent(). See \ref overviewUDEF for details about UDEF feature
  */
 
 void

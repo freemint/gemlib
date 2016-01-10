@@ -7,16 +7,7 @@
 #include "vdi_userdef.h"
 
 
-/** see v_ftext_offset()
- *
- *  @param handle Device handle
- *  @param x 
- *  @param y 
- *  @param wstr 
- *  @param num string len
- *  @param offset 
- *
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of v_ftext_offset16n(). See \ref overviewUDEF for details about UDEF feature
  */
 
 void

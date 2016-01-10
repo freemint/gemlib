@@ -8,7 +8,7 @@
 /** 
  *
  *  @param handle Device handle
- *  @param device device id (0-99)
+ *  @param driver_id device id (0-99)
  *
  *  @return A pointer to a DRV_INFO structur or 0L
  *

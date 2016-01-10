@@ -6,24 +6,7 @@
 #include "vdi_userdef.h"
 
 
-/** outputs graphic text and lengthens or shortens 
- *  the string by modifying the interword or intercharacter spacing
- *
- *  @param handle Device handle
- *  @param x 
- *  @param y 
- *  @param str string
- *  @param len length in pixels
- *  @param word_space <> 0: Wortzwischenr„ume dehnen
- *  @param char_space <> 0: Zeichenzwischenr„ume dehnen
- *
- *  @since all VDI versions
- *
- *  If you 
- *  use a vector font, the requested width of the string refers to the sum 
- *  of the character widths - characters extending beyond the left or right
- *  edge of the em square are ot taken into account.
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of v_justified(). See \ref overviewUDEF for details about UDEF feature
  */
 
 void

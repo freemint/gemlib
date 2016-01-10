@@ -7,19 +7,7 @@
 #include "vdi_userdef.h"
 
 
-/** 
- *
- *  @param handle Device handle
- *  @param type 
- *  @param s 
- *  @param wchar 
- *
- *  @return 
- *
- *  @since NVDI 5 ?
- *
- *  @note Use it for work with userdef, not reentrant function!
- *
+/** UDEF version of vs_document_info(). See \ref overviewUDEF for details about UDEF feature
  */
 
 short

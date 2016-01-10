@@ -7,19 +7,7 @@
 #include "vdi_userdef.h"
 
 
-/** This text function uses track and pair kerning and works with an internal 
- *  resolution of 1/65536 pixels to maintain accurate character placement.
- *
- *  @param handle Device handle
- *  @param x 
- *  @param y 
- *  @param str 
- *
- *  @since  NVDI 3.00
- *
- *  @note There is another variant of v_ftext() which allows your application to specifiy
- *  the offset of each character relative to the previous one: v_ftext_offset()
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of v_ftext(). See \ref overviewUDEF for details about UDEF feature
  */
 
 void

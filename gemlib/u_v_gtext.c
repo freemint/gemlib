@@ -6,20 +6,7 @@
 #include "vdi_userdef.h"
 
 
-/** draws a string with the selected text attributes.
- *
- *  @param handle Device handle
- *  @param x 
- *  @param y
- *  @param str string
- *
- *  @since all VDI versions
- *
- *  If you have 
- *  selected a vector font, neither pair nor track kerning are used and the 
- *  character widths are non-fractional (that means the widths returned by 
- *  vqt_width()).
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of v_gtext(). See \ref overviewUDEF for details about UDEF feature
  */
 
 void

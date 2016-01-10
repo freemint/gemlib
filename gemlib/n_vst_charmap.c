@@ -20,7 +20,7 @@
  *  @since NVDI 3.00
  *
  *  @note
- *  If you want to switch on ASCII-mapping, you should use 1 as <mode> and not 
+ *  If you want to switch on ASCII-mapping, you should use 1 as \a mode and not 
  *  any other nonzero value, because other mapping might exist in future 
  *  (e.g. Unicode).
  *  

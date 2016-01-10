@@ -7,6 +7,10 @@
  *
  */
 
+/**@file
+ * GEMlib header for extended functions
+ */
+
 #ifndef _MT_GEMLIB_X_H_
 #define _MT_GEMLIB_X_H_
 
@@ -208,8 +212,10 @@ short		mt_fnts_update		(FNT_DIALOG *fnt_dialog, short button_flags, long id, lon
 /* sozobonx xdlibs defined _file_h_ or _filesys_h_ in both files where the structure XATTR is defined */
 /* in other case (XATTR not defined at this point), we go the old way and use "void" instead */
 #  if defined(__TOS) || defined(_file_h_) || defined(_filesys_h_)
+/** XATTR type used in XFSL_FILTER */
 #    define GEMLIB_XATTR XATTR
 #  else /* struct XATTR defined */
+/** XATTR type used in XFSL_FILTER */
 #    define GEMLIB_XATTR void
 #  endif /* struct XATTR defined */
 #endif /* GEMLIB_XATTR */
@@ -924,39 +930,52 @@ void	mt_edit_get_scrollinfo (OBJECT *tree, short obj, long *nlines, long *yscrol
 /*
  * The following functions requires EdDI version 1.x or higher
  */
+
+/** @addtogroup n_vdi
+ *  @{
+ */
 void	v_clsbm		(short handle);
 void	v_opnbm		(short *work_in, MFDB *bitmap, short *handle, short *work_out);
 void	vq_scrninfo	(short handle, short *work_out);
+/**@}*/
 
+/** UDEF version of v_clsbm(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_clsbm v_clsbm
+/** UDEF version of v_opnbm(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_opnbm v_opnbm
+/** UDEF version of vq_scrninfo(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_scrninfo vq_scrninfo
+
 
 /*
  * The following functions requires NVDI version 2.x or higher
  */
+
+/** @addtogroup n_vdi
+ *  @{
+ */
 short	v_bez_on	(short handle);
 void	v_bez_off	(short handle);
+void	v_bez		(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
+void	v_bez_fill	(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
+void 	v_bez_qual	(short handle, short percent, short *actual);
+/**@}*/
 
+/** UDEF version of (). See \ref overviewUDEF for details about UDEF feature */
+#define udef_v_bez_on v_bez_on
+/** UDEF version of (). See \ref overviewUDEF for details about UDEF feature */
+#define udef_v_bez_off v_bez_off
+/** @ingroup force_udef */
 void	udef_v_bez		(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
+/** @ingroup force_udef */
+void	udef_v_bez_fill	(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
+/** UDEF version of (). See \ref overviewUDEF for details about UDEF feature */
+#define udef_v_bez_qual v_bez_qual
+
 #ifdef FORCE_GEMLIB_UDEF
 #define v_bez udef_v_bez
-#else
-void	v_bez		(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
-#endif
-
-void	udef_v_bez_fill	(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
-#ifdef FORCE_GEMLIB_UDEF
 #define v_bez_fill udef_v_bez_fill
-#else
-void	v_bez_fill	(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
 #endif
-
-void 	v_bez_qual	(short handle, short percent, short *actual);
-
-#define udef_v_bez_on v_bez_on
-#define udef_v_bez_off v_bez_off
-#define udef_v_bez_qual v_bez_qual
 
 
 /*
@@ -988,61 +1007,27 @@ typedef unsigned short WCHAR; /**< 16bit string, eg. for unicode */
 
 #ifdef __GEMLIB_VDI  /* defined in mt_gem.h */
 
+/** @addtogroup n_vdi
+ *  @{
+ */
 
-void	udef_v_ftext         (VdiHdl, short x, short y, const char  *str);
-#ifdef FORCE_GEMLIB_UDEF
-#define v_ftext udef_v_ftext
-#else
 void	v_ftext         (VdiHdl, short x, short y, const char  *str);
-#endif
-
-
 void	v_ftext16       (VdiHdl, short x, short y, const WCHAR *wstr);
 void	v_ftext16n      (VdiHdl, PXY pos, const WCHAR *wstr, short num);
-
-void	udef_v_ftext_offset  (VdiHdl, short x, short y,
-                               const char  *str,  const short *offset);
-#ifdef FORCE_GEMLIB_UDEF
-#define v_ftext_offset udef_v_ftext_offset
-#else
 void	v_ftext_offset  (VdiHdl, short x, short y,
                                const char  *str,  const short *offset);
-#endif
-
-
-
-void	udef_v_ftext_offset16(VdiHdl, short x, short y,
-                               const WCHAR *wstr, const short *offset);
-#ifdef FORCE_GEMLIB_UDEF
-#define v_ftext_offset16 udef_v_ftext_offset16
-#else
 void	v_ftext_offset16(VdiHdl, short x, short y,
                                const WCHAR *wstr, const short *offset);
-#endif
-
-void	udef_v_ftext_offset16n(VdiHdl, short x, short y,
-                               const WCHAR *wstr, short num, const short *offset);
-#ifdef FORCE_GEMLIB_UDEF
-#define v_ftext_offset16n udef_v_ftext_offset16n
-#else
 void	v_ftext_offset16n(VdiHdl, short x, short y,
                                const WCHAR *wstr, short num, const short *offset);
-#endif
 void	v_getbitmap_info(VdiHdl, short ch, long *advancex, long *advancey,
                                long *xoffset, long *yoffset, short *width,
                                short *height, short **bitmap);
 void	v_getoutline    (VdiHdl, short ch, short *xyarray, char *bezarray,
                                short maxverts, short *numverts);
 
-
-short	udef_vq_devinfo     (VdiHdl, short device, short *dev_exists,
-                              char *file_name, char *device_name);
-#ifdef FORCE_GEMLIB_UDEF
-#define vq_devinfo udef_vq_devinfo
-#else
 short	vq_devinfo     (VdiHdl, short device, short *dev_exists,
                               char *file_name, char *device_name);
-#endif
 void	vqt_devinfo    (VdiHdl, short device, short *dev_busy,
                               char *file_name, char *device_name);
 short	vq_ext_devinfo (VdiHdl, short device, short *dev_exists,
@@ -1054,38 +1039,17 @@ void	vqt_advance32   (VdiHdl, short ch, long *advx, long *advy);
 short	vqt_ext_name    (VdiHdl, short __index,
                                char *name, short *font_format, short *flags);
 
-void	udef_vqt_f_extent    (VdiHdl, const char  *str, short extent[]);
-#ifdef FORCE_GEMLIB_UDEF
-#define vqt_f_extent udef_vqt_f_extent
-#else
 void	vqt_f_extent    (VdiHdl, const char  *str, short extent[]);
-#endif
 void	vqt_f_extent16  (VdiHdl, const WCHAR *str, short extent[]);
 void	vqt_f_extent16n (VdiHdl, const WCHAR *str, short num, short extent[]);
 
-void	udef_vqt_fontheader  (VdiHdl, char *buffer, char *pathname);
-#ifdef FORCE_GEMLIB_UDEF
-#define vqt_fontheader udef_vqt_fontheader
-#else
 void	vqt_fontheader  (VdiHdl, char *buffer, char *pathname);
-#endif
 
-short	udef_vqt_name_and_id (VdiHdl, short font_format,
-                               char *font_name, char *ret_name);
-#ifdef FORCE_GEMLIB_UDEF
-#define vqt_name_and_id udef_vqt_name_and_id
-#else
 short	vqt_name_and_id (VdiHdl, short font_format,
                                char *font_name, char *ret_name);
-#endif
 void	vqt_pairkern    (VdiHdl, short ch1, short ch2, long *x, long *y);
 
-void	udef_vqt_real_extent (VdiHdl, short x, short y, char *string, short extent[]);
-#ifdef FORCE_GEMLIB_UDEF
-#define vqt_real_extent udef_vqt_real_extent
-#else
 void	vqt_real_extent (VdiHdl, short x, short y, char *string, short extent[]);
-#endif
 void	vqt_real_extent16n (VdiHdl, short x, short y, const WCHAR *wstring, short num, short extent[]);
 void	vqt_trackkern   (VdiHdl, long *x, long *y);
 short	vqt_xfntinfo    (VdiHdl, short flags, short id,
@@ -1096,50 +1060,113 @@ long  vst_arbpt32 	(VdiHdl, long point, short *wchar, short *hchar, short *wcell
 void  vst_charmap 	(VdiHdl, short mode);
 void  vst_kern	(VdiHdl, short tmode, short pmode, short *tracks, short *pairs);
 
-short udef_vst_name 	(VdiHdl, short font_format, char *font_name, char *ret_name);
-#ifdef FORCE_GEMLIB_UDEF
-#define vst_name udef_vst_name
-#else
 short vst_name 	(VdiHdl, short font_format, char *font_name, char *ret_name);
-#endif
 short vst_setsize 	(VdiHdl, short point, short *wchar, short *hchar, short *wcell, short *hcell);
 long  vst_setsize32 	(VdiHdl, long point, short *wchar, short *hchar, short *wcell, short *hcell);
 short vst_skew 	(VdiHdl, short skew);
 void  vst_track_offset(VdiHdl, long offset, short pairmode, short *tracks, short *pairs);
-/* another name for vst_track_offset */
+/** another name for vst_track_offset */
 #define vst_kern_info vst_track_offset
 void  vst_width	(VdiHdl, short width, short *char_width, short *char_height, short *cell_width, short *cell_height);
+/**@}*/
 
+
+
+/** @ingroup force_udef */
+void	udef_v_ftext         (VdiHdl, short x, short y, const char  *str);
+/** UDEF version of v_ftext16(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_ftext16 v_ftext16
+/** UDEF version of v_ftext16n(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_ftext16n v_ftext16n
+/** @ingroup force_udef */
+void	udef_v_ftext_offset  (VdiHdl, short x, short y,
+                               const char  *str,  const short *offset);
+/** @ingroup force_udef */
+void	udef_v_ftext_offset16(VdiHdl, short x, short y,
+                               const WCHAR *wstr, const short *offset);
+/** @ingroup force_udef */
+void	udef_v_ftext_offset16n(VdiHdl, short x, short y,
+                               const WCHAR *wstr, short num, const short *offset);
+/** UDEF version of v_getbitmap_info(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_getbitmap_info v_getbitmap_info
+/** UDEF version of v_getoutline(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_getoutline v_getoutline
+/** @ingroup force_udef */
+short	udef_vq_devinfo     (VdiHdl, short device, short *dev_exists,
+                              char *file_name, char *device_name);
+/** UDEF version of vqt_devinfo(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_devinfo vqt_devinfo
+/** UDEF version of vq_ext_devinfo(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_ext_devinfo vq_ext_devinfo
 
+/** UDEF version of vqt_advance(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_advance vqt_advance
+/** UDEF version of vqt_advance32(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_advance32 vqt_advance32
+/** UDEF version of vqt_ext_name(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_ext_name vqt_ext_name
+/** @ingroup force_udef */
+void	udef_vqt_f_extent    (VdiHdl, const char  *str, short extent[]);
+/** UDEF version of vqt_f_extent16(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_f_extent16 vqt_f_extent16
+/** UDEF version of vqt_f_extent16n(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_f_extent16n vqt_f_extent16n
+/** @ingroup force_udef */
+void	udef_vqt_fontheader  (VdiHdl, char *buffer, char *pathname);
+/** @ingroup force_udef */
+short	udef_vqt_name_and_id (VdiHdl, short font_format,
+                               char *font_name, char *ret_name);
+/** UDEF version of vqt_pairkern(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_pairkern vqt_pairkern
+/** @ingroup force_udef */
+void	udef_vqt_real_extent (VdiHdl, short x, short y, char *string, short extent[]);
+/** UDEF version of vqt_real_extent16n(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_real_extent16n vqt_real_extent16n
+/** UDEF version of vqt_trackkern(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_trackkern vqt_trackkern
+/** UDEF version of vqt_xfntinfo(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_xfntinfo vqt_xfntinfo
 
+/** UDEF version of vst_arbpt(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_arbpt vst_arbpt
+/** UDEF version of vst_arbpt32(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_arbpt32 vst_arbpt32
+/** UDEF version of vst_charmap(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_charmap vst_charmap
+/** UDEF version of vst_kern(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_kern vst_kern
+/** @ingroup force_udef */
+short udef_vst_name 	(VdiHdl, short font_format, char *font_name, char *ret_name);
+
+/** UDEF version of vst_setsize(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_setsize vst_setsize
+/** UDEF version of vst_setsize32(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_setsize32 vst_setsize32
+/** UDEF version of vst_skew(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_skew vst_skew
+/** UDEF version of vst_track_offset(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_track_offset vst_track_offset
 
+/** UDEF version of vst_kern_info(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_kern_info vst_track_offset
 
-
+/** UDEF version of vst_width(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_width vst_width
+
+
+#ifdef FORCE_GEMLIB_UDEF
+#define v_ftext udef_v_ftext
+#define v_ftext_offset udef_v_ftext_offset
+#define v_ftext_offset16 udef_v_ftext_offset16
+#define v_ftext_offset16n udef_v_ftext_offset16n
+#define vq_devinfo udef_vq_devinfo
+#define vqt_f_extent udef_vqt_f_extent
+#define vqt_fontheader udef_vqt_fontheader
+#define vqt_name_and_id udef_vqt_name_and_id
+#define vqt_real_extent udef_vqt_real_extent
+#define vst_name udef_vst_name
+#endif
+
 
 #endif 
 
@@ -1147,12 +1174,20 @@ void  vst_width	(VdiHdl, short width, short *char_width, short *char_height, sho
 /*
  * The following functions requires NVDI version 4.x or higher
  */
-short	vqt_char_index (short handle, short scr_index, short scr_mode, short dst_mode);
-short vst_map_mode   (short handle, short mode);
 
+/** @addtogroup n_vdi
+ *  @{
+ */
+short vqt_char_index (short handle, short scr_index, short scr_mode, short dst_mode);
+short vst_map_mode   (short handle, short mode);
+/**@}*/
+
+/** UDEF version of vqt_char_index(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_char_index vqt_char_index
+/** UDEF version of vst_map_mode(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_map_mode vst_map_mode
 
+/** TODO */
 #define vqt_is_char_available(handle,unicode) \
 	(vqt_char_index(handle,unicode,CHARIDX_UNICODE,CHARIDX_DIRECT)!=0xFFFF)
 
@@ -1164,109 +1199,145 @@ short vst_map_mode   (short handle, short mode);
 /* Function witch use for the printer dialog from WDialog											*/
 /*----------------------------------------------------------------------------------------*/
 
+/** @addtogroup n_vdi
+ *  @{
+ */
 DRV_INFO *v_create_driver_info( short handle, short driver_id );
 short v_delete_driver_info( short handle, DRV_INFO *drv_info );
 short v_read_default_settings( short handle, PRN_SETTINGS *settings );
 short v_write_default_settings( short handle, PRN_SETTINGS *settings );
+/**@}*/
 
-#define udef_v_create_driver_info
-#define udef_v_delete_driver_info
-#define udef_v_read_default_settings
-#define udef_v_write_default_settings
+/** UDEF version of v_create_driver_info(). See \ref overviewUDEF for details about UDEF feature */
+#define udef_v_create_driver_info v_create_driver_info
+/** UDEF version of v_delete_driver_info(). See \ref overviewUDEF for details about UDEF feature */
+#define udef_v_delete_driver_info v_delete_driver_info
+/** UDEF version of v_read_default_settings(). See \ref overviewUDEF for details about UDEF feature */
+#define udef_v_read_default_settings v_read_default_settings
+/** UDEF version of v_write_default_settings(). See \ref overviewUDEF for details about UDEF feature */
+#define udef_v_write_default_settings v_write_default_settings
 
 
 /*----------------------------------------------------------------------------------------*/
 /* Konstanten fr Pixelformate																				*/
 /*----------------------------------------------------------------------------------------*/
-#define	PX_1COMP		0x01000000L										/* Pixel besteht aus einer benutzten Komponente: Farbindex */
-#define	PX_3COMP		0x03000000L										/* Pixel besteht aus drei benutzten Komponenten, z.B. RGB */
-#define	PX_4COMP		0x04000000L										/* Pixel besteht aus vier benutzten Komponenten, z.B. CMYK */
+#define	PX_1COMP		0x01000000L										/**< Pixel besteht aus einer benutzten Komponente: Farbindex */
+#define	PX_3COMP		0x03000000L										/**< Pixel besteht aus drei benutzten Komponenten, z.B. RGB */
+#define	PX_4COMP		0x04000000L										/**< Pixel besteht aus vier benutzten Komponenten, z.B. CMYK */
 
-#define	PX_REVERSED	0x00800000L										/* Pixel wird in umgekehrter Bytreihenfolge ausgegeben */
-#define	PX_xFIRST	0x00400000L										/* unbenutzte Bits liegen vor den benutzen (im Motorola-Format betrachtet) */
-#define	PX_kFIRST	0x00200000L										/* K liegt vor CMY (im Motorola-Format betrachtet) */
-#define	PX_aFIRST	0x00100000L										/* Alphakanal liegen vor den Farbbits (im Motorola-Format betrachtet) */
+#define	PX_REVERSED	0x00800000L										/**< Pixel wird in umgekehrter Bytreihenfolge ausgegeben */
+#define	PX_xFIRST	0x00400000L										/**< unbenutzte Bits liegen vor den benutzen (im Motorola-Format betrachtet) */
+#define	PX_kFIRST	0x00200000L										/**< K liegt vor CMY (im Motorola-Format betrachtet) */
+#define	PX_aFIRST	0x00100000L										/**< Alphakanal liegen vor den Farbbits (im Motorola-Format betrachtet) */
 
-#define	PX_PACKED	0x00020000L										/* Bits sind aufeinanderfolgend abgelegt */
-#define	PX_PLANES	0x00010000L										/* Bits sind auf mehrere Ebenen verteilt (Reihenfolge: 0, 1, ..., n) */
-#define	PX_IPLANES	0x00000000L										/* Bits sind auf mehrere Worte verteilt (Reihenfolge: 0, 1, ..., n) */
+#define	PX_PACKED	0x00020000L										/**< Bits sind aufeinanderfolgend abgelegt */
+#define	PX_PLANES	0x00010000L										/**< Bits sind auf mehrere Ebenen verteilt (Reihenfolge: 0, 1, ..., n) */
+#define	PX_IPLANES	0x00000000L										/**< Bits sind auf mehrere Worte verteilt (Reihenfolge: 0, 1, ..., n) */
 
-#define	PX_USES1		0x00000100L										/* 1 Bit des Pixels wird benutzt */
-#define	PX_USES2		0x00000200L										/* 2 Bit des Pixels werden benutzt */
-#define	PX_USES3		0x00000300L										/* 3 Bit des Pixels werden benutzt */
-#define	PX_USES4		0x00000400L										/* 4 Bit des Pixels werden benutzt */
-#define	PX_USES8		0x00000800L										/* 8 Bit des Pixels werden benutzt */
-#define	PX_USES15	0x00000f00L										/* 15 Bit des Pixels werden benutzt */
-#define	PX_USES16	0x00001000L										/* 16 Bit des Pixels werden benutzt */
-#define	PX_USES24	0x00001800L										/* 24 Bit des Pixels werden benutzt */
-#define	PX_USES32	0x00002000L										/* 32 Bit des Pixels werden benutzt */
-#define	PX_USES48	0x00003000L										/* 48 Bit des Pixels werden benutzt */
+#define	PX_USES1		0x00000100L										/**< 1 Bit des Pixels wird benutzt */
+#define	PX_USES2		0x00000200L										/**< 2 Bit des Pixels werden benutzt */
+#define	PX_USES3		0x00000300L										/**< 3 Bit des Pixels werden benutzt */
+#define	PX_USES4		0x00000400L										/**< 4 Bit des Pixels werden benutzt */
+#define	PX_USES8		0x00000800L										/**< 8 Bit des Pixels werden benutzt */
+#define	PX_USES15	0x00000f00L										/**< 15 Bit des Pixels werden benutzt */
+#define	PX_USES16	0x00001000L										/**< 16 Bit des Pixels werden benutzt */
+#define	PX_USES24	0x00001800L										/**< 24 Bit des Pixels werden benutzt */
+#define	PX_USES32	0x00002000L										/**< 32 Bit des Pixels werden benutzt */
+#define	PX_USES48	0x00003000L										/**< 48 Bit des Pixels werden benutzt */
 
-#define	PX_1BIT		0x00000001L										/* Pixel besteht aus 1 Bit */
-#define	PX_2BIT		0x00000002L										/* Pixel besteht aus 2 Bit */
-#define	PX_3BIT		0x00000003L										/* Pixel besteht aus 3 Bit */
-#define	PX_4BIT		0x00000004L										/* Pixel besteht aus 4 Bit */
-#define	PX_8BIT		0x00000008L										/* Pixel besteht aus 8 Bit */
-#define	PX_16BIT		0x00000010L										/* Pixel besteht aus 16 Bit */
-#define	PX_24BIT		0x00000018L										/* Pixel besteht aus 24 Bit */
-#define	PX_32BIT		0x00000020L										/* Pixel besteht aus 32 Bit */
-#define	PX_48BIT		0x00000030L										/* Pixel besteht aus 48 Bit */
+#define	PX_1BIT		0x00000001L										/**< Pixel besteht aus 1 Bit */
+#define	PX_2BIT		0x00000002L										/**< Pixel besteht aus 2 Bit */
+#define	PX_3BIT		0x00000003L										/**< Pixel besteht aus 3 Bit */
+#define	PX_4BIT		0x00000004L										/**< Pixel besteht aus 4 Bit */
+#define	PX_8BIT		0x00000008L										/**< Pixel besteht aus 8 Bit */
+#define	PX_16BIT		0x00000010L										/**< Pixel besteht aus 16 Bit */
+#define	PX_24BIT		0x00000018L										/**< Pixel besteht aus 24 Bit */
+#define	PX_32BIT		0x00000020L										/**< Pixel besteht aus 32 Bit */
+#define	PX_48BIT		0x00000030L										/**< Pixel besteht aus 48 Bit */
 
-#define	PX_CMPNTS	0x0f000000L										/* Maske fr Anzahl der Pixelkomponenten */
-#define	PX_FLAGS		0x00f00000L										/* Maske fr diverse Flags */
-#define	PX_PACKING	0x00030000L										/* Maske fr Pixelformat */
-#define	PX_USED		0x00003f00L										/* Maske fr Anzahl der benutzten Bits */
-#define	PX_BITS		0x0000003fL										/* Maske fr Anzahl der Bits pro Pixel */
+#define	PX_CMPNTS	0x0f000000L										/**< Maske fr Anzahl der Pixelkomponenten */
+#define	PX_FLAGS		0x00f00000L										/**< Maske fr diverse Flags */
+#define	PX_PACKING	0x00030000L										/**< Maske fr Pixelformat */
+#define	PX_USED		0x00003f00L										/**< Maske fr Anzahl der benutzten Bits */
+#define	PX_BITS		0x0000003fL										/**< Maske fr Anzahl der Bits pro Pixel */
 
 /*----------------------------------------------------------------------------------------*/
 /* Pixelformate fr ATARI-Grafik																				*/
 /*----------------------------------------------------------------------------------------*/
+/** TODO */
 #define	PX_ATARI1	( PX_PACKED + PX_1COMP + PX_USES1 + PX_1BIT )
+/** TODO */
 #define	PX_ATARI2	( PX_IPLANES + PX_1COMP + PX_USES2 + PX_2BIT )
+/** TODO */
 #define	PX_ATARI4	( PX_IPLANES + PX_1COMP + PX_USES4 + PX_4BIT )
+/** TODO */
 #define	PX_ATARI8	( PX_IPLANES + PX_1COMP + PX_USES8 + PX_8BIT )
+/** TODO */
 #define	PX_FALCON15	( PX_PACKED + PX_3COMP + PX_USES16 + PX_16BIT )
 
 /*----------------------------------------------------------------------------------------*/
 /* Pixelformate fr Macintosh																					*/
 /*----------------------------------------------------------------------------------------*/
+/** TODO */
 #define	PX_MAC1		( PX_PACKED + PX_1COMP + PX_USES1 + PX_1BIT )
+/** TODO */
 #define	PX_MAC4		( PX_PACKED + PX_1COMP + PX_USES4 + PX_4BIT )
+/** TODO */
 #define	PX_MAC8		( PX_PACKED + PX_1COMP + PX_USES8 + PX_8BIT )
+/** TODO */
 #define	PX_MAC15		( PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES15 + PX_16BIT )
+/** TODO */
 #define	PX_MAC32		( PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES24 + PX_32BIT )
 
 /*----------------------------------------------------------------------------------------*/
 /* Pixelformate fr Grafikkarten																				*/
 /*----------------------------------------------------------------------------------------*/
+/** TODO */
 #define	PX_VGA1		( PX_PACKED + PX_1COMP + PX_USES1 + PX_1BIT )
+/** TODO */
 #define	PX_VGA4		( PX_PLANES + PX_1COMP + PX_USES4 + PX_4BIT )
+/** TODO */
 #define	PX_VGA8		( PX_PACKED + PX_1COMP + PX_USES8 + PX_8BIT )
+/** TODO */
 #define	PX_VGA15		( PX_REVERSED + PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES15 + PX_16BIT )
+/** TODO */
 #define	PX_VGA16		( PX_REVERSED + PX_PACKED + PX_3COMP + PX_USES16 + PX_16BIT )
+/** TODO */
 #define	PX_VGA24		( PX_REVERSED + PX_PACKED + PX_3COMP + PX_USES24 + PX_24BIT )
+/** TODO */
 #define	PX_VGA32		( PX_REVERSED + PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES24 + PX_32BIT )
 
+/** TODO */
 #define	PX_MATRIX16	( PX_PACKED + PX_3COMP + PX_USES16 + PX_16BIT )
 
+/** TODO */
 #define	PX_NOVA32	( PX_PACKED + PX_3COMP + PX_USES24 + PX_32BIT )
 
 /*----------------------------------------------------------------------------------------*/
 /* Pixelformate fr Drucker																					*/
 /*----------------------------------------------------------------------------------------*/
+/** TODO */
 #define	PX_PRN1		( PX_PACKED + PX_1COMP + PX_USES1 + PX_1BIT )
+/** TODO */
 #define	PX_PRN8		( PX_PACKED + PX_1COMP + PX_USES8 + PX_8BIT )
+/** TODO */
 #define	PX_PRN32		( PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES24 + PX_32BIT )
 
 /*----------------------------------------------------------------------------------------*/
 /* bevorzugte (schnelle) Pixelformate fr Bitmaps 														*/
 /*----------------------------------------------------------------------------------------*/
 
+/** TODO */
 #define	PX_PREF1		( PX_PACKED + PX_1COMP + PX_USES1 + PX_1BIT )
+/** TODO */
 #define	PX_PREF2		( PX_PACKED + PX_1COMP + PX_USES2 + PX_2BIT )
+/** TODO */
 #define	PX_PREF4		( PX_PACKED + PX_1COMP + PX_USES4 + PX_4BIT )
+/** TODO */
 #define	PX_PREF8		( PX_PACKED + PX_1COMP + PX_USES8 + PX_8BIT )
+/** TODO */
 #define	PX_PREF15	( PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES15 + PX_16BIT )
+/** TODO */
 #define	PX_PREF32	( PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES24 + PX_32BIT )
 
 /*----------------------------------------------------------------------------------------*/
@@ -1362,19 +1433,20 @@ typedef struct
 	long	reserved3;			/**< TODO */
 	long	reserved4;			/**< TODO */
 
-	COLOR_ENTRY	colors[256];			/**< TODO */
+	COLOR_ENTRY	colors[256];	/**< TODO */
 } COLOR_TAB256;
 
-typedef COLOR_TAB *CTAB_PTR;
-typedef COLOR_TAB *CTAB_REF;
+typedef COLOR_TAB *CTAB_PTR;	/**< TODO */
+typedef COLOR_TAB *CTAB_REF;	/**< TODO */
 
 
-typedef void INVERSE_CTAB;
-typedef INVERSE_CTAB *ITAB_REF;
+typedef void INVERSE_CTAB;		/**< TODO */
+typedef INVERSE_CTAB *ITAB_REF;	/**< TODO */
 
+/** TODO */
 #define	CBITMAP_MAGIC	'cbtm'
 
-typedef struct _gcbitmap GCBITMAP;
+typedef struct _gcbitmap GCBITMAP;/**< TODO */
 /** TODO */
 struct _gcbitmap
 {
@@ -1407,35 +1479,35 @@ struct _gcbitmap
 #define	T_NOT				4	/**< Konstante fr Invertierung bei logischen Transfermodi */
 #define	T_COLORIZE			16	/**< Konstante fr Einf„rbung */
 
-#define	T_LOGIC_MODE		0
-#define	T_DRAW_MODE			32
+#define	T_LOGIC_MODE		0   /**< TODO */
+#define	T_DRAW_MODE			32  /**< TODO */
 #define	T_ARITH_MODE		64	/**< Konstante fr Arithmetische Transfermodi */
 #define	T_DITHER_MODE		128	/**< Konstante frs Dithern */
 
 /* logische Transfermodi */
-#define	T_LOGIC_COPY		T_LOGIC_MODE+0
-#define	T_LOGIC_OR			T_LOGIC_MODE+1
-#define	T_LOGIC_XOR			T_LOGIC_MODE+2
-#define	T_LOGIC_AND			T_LOGIC_MODE+3
-#define	T_LOGIC_NOT_COPY	T_LOGIC_MODE+4
-#define	T_LOGIC_NOT_OR		T_LOGIC_MODE+5
-#define	T_LOGIC_NOT_XOR	T_LOGIC_MODE+6
-#define	T_LOGIC_NOT_AND	T_LOGIC_MODE+7
+#define	T_LOGIC_COPY		T_LOGIC_MODE+0   /**< TODO */
+#define	T_LOGIC_OR			T_LOGIC_MODE+1   /**< TODO */
+#define	T_LOGIC_XOR			T_LOGIC_MODE+2   /**< TODO */
+#define	T_LOGIC_AND			T_LOGIC_MODE+3   /**< TODO */
+#define	T_LOGIC_NOT_COPY	T_LOGIC_MODE+4   /**< TODO */
+#define	T_LOGIC_NOT_OR		T_LOGIC_MODE+5   /**< TODO */
+#define	T_LOGIC_NOT_XOR		T_LOGIC_MODE+6   /**< TODO */
+#define	T_LOGIC_NOT_AND		T_LOGIC_MODE+7   /**< TODO */
 
 /* Zeichenmodi */
-#define	T_REPLACE			T_DRAW_MODE+0
-#define	T_TRANSPARENT		T_DRAW_MODE+1
-#define	T_HILITE				T_DRAW_MODE+2
-#define	T_REVERS_TRANSPARENT	T_DRAW_MODE+3
+#define	T_REPLACE				T_DRAW_MODE+0   /**< TODO */
+#define	T_TRANSPARENT			T_DRAW_MODE+1   /**< TODO */
+#define	T_HILITE				T_DRAW_MODE+2   /**< TODO */
+#define	T_REVERS_TRANSPARENT	T_DRAW_MODE+3   /**< TODO */
 
 /* arithmetische Transfermodi */
-#define	T_BLEND				T_ARITH_MODE+0
-#define	T_ADD					T_ARITH_MODE+1
-#define	T_ADD_OVER			T_ARITH_MODE+2
-#define	T_SUB					T_ARITH_MODE+3
-#define	T_MAX					T_ARITH_MODE+5
-#define	T_SUB_OVER			T_ARITH_MODE+6
-#define	T_MIN					T_ARITH_MODE+7
+#define	T_BLEND					T_ARITH_MODE+0   /**< TODO */
+#define	T_ADD					T_ARITH_MODE+1   /**< TODO */
+#define	T_ADD_OVER				T_ARITH_MODE+2   /**< TODO */
+#define	T_SUB					T_ARITH_MODE+3   /**< TODO */
+#define	T_MAX					T_ARITH_MODE+5   /**< TODO */
+#define	T_SUB_OVER				T_ARITH_MODE+6   /**< TODO */
+#define	T_MIN					T_ARITH_MODE+7   /**< TODO */
 
 /** TODO */
 typedef struct			/* Rechteck fr 16-Bit-Koordinaten */
@@ -1455,7 +1527,9 @@ typedef struct			/* Rechteck fr 32-Bit-Koordinaten */
 	long	y2;			/**< TODO */
 } RECT32;
 
-
+/** @addtogroup n_vdi
+ *  @{
+ */
 long		v_color2nearest		(short handle, long color_space, COLOR_ENTRY *color, COLOR_ENTRY *nearest_color);
 unsigned long	v_color2value		(short handle, long color_space, COLOR_ENTRY *color);
 COLOR_TAB *	v_create_ctab		(short handle, long color_space, unsigned long px_format);
@@ -1476,13 +1550,7 @@ short		vq_ctab			(short handle, long ctab_length, COLOR_TAB *ctab);
 long		vq_ctab_entry		(short handle, short __index, COLOR_ENTRY *color);
 long		vq_ctab_id		(short handle);
 short		vq_dflt_ctab		(short handle, long ctab_length, COLOR_TAB *ctab);
-
-long		udef_vq_hilite_color	(short handle, COLOR_ENTRY *hilite_color);
-#ifdef FORCE_GEMLIB_UDEF
-#define vq_hilite_color udef_vq_hilite_color
-#else
 long		vq_hilite_color		(short handle, COLOR_ENTRY *hilite_color);
-#endif
 short		vq_margins		(short handle, short *top_margin, short *bottom_margin, short *left_margin, short *right_margin, short *hdpi, short *vdpi);
 long		vq_max_color		(short handle, COLOR_ENTRY *hilite_color);
 long		vq_min_color		(short handle, COLOR_ENTRY *hilite_color);
@@ -1503,13 +1571,7 @@ void		vr_transfer_bits	(short handle, GCBITMAP *src_bm, GCBITMAP *dst_bm, short 
 short		vs_ctab			(short handle, COLOR_TAB *ctab);
 short		vs_ctab_entry		(short handle, short __index, long color_space, COLOR_ENTRY *color);
 short		vs_dflt_ctab		(short handle);
-
-short		udef_vs_document_info	(short vdi_handle, short type, char *s, short wchar);
-#ifdef FORCE_GEMLIB_UDEF
-#define vs_document_info udef_vs_document_info
-#else
 short		vs_document_info	(short vdi_handle, short type, char *s, short wchar);
-#endif
 short		vs_hilite_color		(short handle, long color_space, COLOR_ENTRY *hilite_color);
 short		vs_max_color		(short handle, long color_space, COLOR_ENTRY *min_color);
 short		vs_min_color		(short handle, long color_space, COLOR_ENTRY *min_color);
@@ -1524,61 +1586,126 @@ short		vsr_bg_color		(short handle, long color_space, COLOR_ENTRY *bg_color);
 short		vsr_fg_color		(short handle, long color_space, COLOR_ENTRY *fg_color);
 short		vst_bg_color		(short handle, long color_space, COLOR_ENTRY *bg_color);
 short		vst_fg_color		(short handle, long color_space, COLOR_ENTRY *fg_color);
+/**@}*/
 
+/** UDEF version of v_color2nearest(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_color2nearest v_color2nearest
+/** UDEF version of v_color2value(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_color2value v_color2value
+/** UDEF version of v_create_ctab(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_create_ctab v_create_ctab
+/** UDEF version of v_create_itab(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_create_itab v_create_itab
+/** UDEF version of v_ctab_idx2value(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_ctab_idx2value v_ctab_idx2value
+/** UDEF version of v_ctab_idx2vdi(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_ctab_idx2vdi v_ctab_idx2vdi
+/** UDEF version of v_ctab_vdi2idx(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_ctab_vdi2idx v_ctab_vdi2idx
+/** UDEF version of v_delete_ctab(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_delete_ctab v_delete_ctab
+/** UDEF version of v_delete_itab(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_delete_itab v_delete_itab
+/** UDEF version of v_get_ctab_id(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_get_ctab_id v_get_ctab_id
+/** UDEF version of v_get_outline(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_get_outline v_get_outline
+/** UDEF version of v_opnprn(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_opnprn v_opnprn
+/** UDEF version of v_open_bm(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_open_bm v_open_bm
+/** UDEF version of v_resize_bm(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_resize_bm v_resize_bm
+/** UDEF version of v_setrgb(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_setrgb v_setrgb
+/** UDEF version of v_value2color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_value2color v_value2color
+/** UDEF version of vq_ctab(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_ctab vq_ctab
+/** UDEF version of vq_ctab_entry(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_ctab_entry vq_ctab_entry
+/** UDEF version of vq_ctab_id(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_ctab_id vq_ctab_id
+/** UDEF version of vq_dflt_ctab(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_dflt_ctab vq_dflt_ctab
+/** @ingroup force_udef */
+long		udef_vq_hilite_color	(short handle, COLOR_ENTRY *hilite_color);
+/** UDEF version of vq_margins(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_margins vq_margins
+/** UDEF version of vq_max_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_max_color vq_max_color
+/** UDEF version of vq_min_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_min_color vq_min_color
+/** UDEF version of vq_prn_scaling(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_prn_scaling vq_prn_scaling
+/** UDEF version of vq_px_format(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_px_format vq_px_format
+/** UDEF version of vq_weight_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vq_weight_color vq_weight_color
+/** UDEF version of vqf_bg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqf_bg_color vqf_bg_color
+/** UDEF version of vqf_fg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqf_fg_color vqf_fg_color
+/** UDEF version of vql_bg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vql_bg_color vql_bg_color
+/** UDEF version of vql_fg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vql_fg_color vql_fg_color
+/** UDEF version of vqm_bg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqm_bg_color vqm_bg_color
+/** UDEF version of vqm_fg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqm_fg_color vqm_fg_color
+/** UDEF version of vqr_bg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqr_bg_color vqr_bg_color
+/** UDEF version of vqr_fg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqr_fg_color vqr_fg_color
+/** UDEF version of vqt_bg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_bg_color vqt_bg_color
+/** UDEF version of vqt_fg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_fg_color vqt_fg_color
+/** UDEF version of vr_transfer_bits(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vr_transfer_bits vr_transfer_bits
+/** UDEF version of vs_ctab(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_ctab vs_ctab
+/** UDEF version of vs_ctab_entry(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_ctab_entry vs_ctab_entry
+/** UDEF version of vs_dflt_ctab(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_dflt_ctab vs_dflt_ctab
+/** @ingroup force_udef */
+short		udef_vs_document_info	(short vdi_handle, short type, char *s, short wchar);
+/** UDEF version of vs_hilite_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_hilite_color vs_hilite_color
+/** UDEF version of vs_max_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_max_color vs_max_color
+/** UDEF version of vs_min_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_min_color vs_min_color
+/** UDEF version of vs_weight_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_weight_color vs_weight_color
+/** UDEF version of vsf_bg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsf_bg_color vsf_bg_color
+/** UDEF version of vsf_fg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsf_fg_color vsf_fg_color
+/** UDEF version of vsl_bg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsl_bg_color vsl_bg_color
+/** UDEF version of vsl_fg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsl_fg_color vsl_fg_color
+/** UDEF version of vsm_bg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsm_bg_color vsm_bg_color
+/** UDEF version of vsm_fg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsm_fg_color vsm_fg_color
+/** UDEF version of vsr_bg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsr_bg_color vsr_bg_color
+/** UDEF version of vsr_fg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vsr_fg_color vsr_fg_color
+/** UDEF version of vst_bg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_bg_color vst_bg_color
+/** UDEF version of vst_fg_color(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_fg_color vst_fg_color
+
+#ifdef FORCE_GEMLIB_UDEF
+#define vq_hilite_color udef_vq_hilite_color
+#define vs_document_info udef_vs_document_info
+#endif
+
 
 __END_DECLS
 

@@ -5,17 +5,7 @@
 #include "gem_vdiP.h"
 #include "vdi_userdef.h"
 
-/** 
- *
- *  @param handle Device handle
- *  @param str 
- *
- *  @since 
- *
- *  @sa
- *
- *
- *  @note Use it for work with userdef, not reentrant function!
+/** UDEF version of v_alpha_text(). See \ref overviewUDEF for details about UDEF feature
  */
 
 void
