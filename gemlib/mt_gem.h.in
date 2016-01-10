@@ -43,15 +43,15 @@ __BEGIN_DECLS
 
 /* Major and minor version number of the GEMLib package.  Use these macros 
    to test for features in specific releases.  */
-#define __GEMLIB__			 __GEMLIB_MAJOR__ 		/**< tell the world this is GEMLIB */
-#define	__GEMLIB_MAJOR__     @MAJOR@				/**< MAJOR version number of gemlib */
-#define	__GEMLIB_MINOR__     @MINOR@				/**< MINOR version number of gemlib */
-#define __GEMLIB_REVISION__  @REVISION@				/**< REVISION version number of gemlib */
-#define __GEMLIB_BETATAG__   @BETATAG@				/**< BETATAG of gemlib */
+#define __GEMLIB__		__GEMLIB_MAJOR__ 		/**< tell the world this is GEMLIB */
+#define	__GEMLIB_MAJOR__	@MAJOR@				/**< MAJOR version number of gemlib */
+#define	__GEMLIB_MINOR__	@MINOR@				/**< MINOR version number of gemlib */
+#define __GEMLIB_REVISION__	@REVISION@				/**< REVISION version number of gemlib */
+#define __GEMLIB_BETATAG__	@BETATAG@				/**< BETATAG of gemlib */
 
-/* the other name of this release is MGEMLIB 42 */
-#define MGEMLIB				42						/**< this gemlib is compatible with MGEMLIB */
-#define __MGEMLIB__			42						/**< another identifier for MGEMLIB */
+/* the other name of this release is MGEMLIB 44 */
+#define MGEMLIB			44						/**< this gemlib is compatible with MGEMLIB */
+#define __MGEMLIB__		44						/**< another identifier for MGEMLIB */
 
 
 #ifdef __GEMLIB_DEFS
@@ -60,23 +60,23 @@ __BEGIN_DECLS
  * The AES specific stuff from old gemfast.h
  */
 
-#define NIL 				-1					/**< Value for no more object in object tree */
+#define NIL 			-1					/**< Value for no more object in object tree */
 #define DESKTOP_HANDLE		0					/**< TODO */
-#define DESK			 	DESKTOP_HANDLE		/**< TODO */
+#define DESK			DESKTOP_HANDLE		/**< TODO */
 
 /* mt_appl_control() mode */
-#define APC_HIDE			10  /**< Hide application -- see mt_appl_control() */
-#define APC_SHOW			11  /**< Show application -- see mt_appl_control() */
-#define APC_TOP 			12  /**< Bring application to front -- see mt_appl_control() */
+#define APC_HIDE		10  /**< Hide application -- see mt_appl_control() */
+#define APC_SHOW		11  /**< Show application -- see mt_appl_control() */
+#define APC_TOP 		12  /**< Bring application to front -- see mt_appl_control() */
 #define APC_HIDENOT 		13  /**< Hide all applications except the one referred to by ap_cid -- see mt_appl_control() */
-#define APC_INFO			14  /**< Get the application parameter -- see mt_appl_control() */
-#define APC_MENU			15  /**< The last used menu tree is returned -- see mt_appl_control() */
-#define APC_WIDGETS			16  /**< Inquires or sets the 'default' positions of the window widgets -- see mt_appl_control() */
-#define APC_APP_CONFIG			17  /**< Change some way to manage application by AES most of them can be already set in configuration file -- see mt_appl_control() */
-#define APC_INFORM_MESAG		18  /**< Request/Remove the sent an user Unix Signal to application when AES message is available -- see mt_appl_control() */
+#define APC_INFO		14  /**< Get the application parameter -- see mt_appl_control() */
+#define APC_MENU		15  /**< The last used menu tree is returned -- see mt_appl_control() */
+#define APC_WIDGETS		16  /**< Inquires or sets the 'default' positions of the window widgets -- see mt_appl_control() */
+#define APC_APP_CONFIG		17  /**< Change some way to manage application by AES most of them can be already set in configuration file -- see mt_appl_control() */
+#define APC_INFORM_MESAG	18  /**< Request/Remove the sent an user Unix Signal to application when AES message is available -- see mt_appl_control() */
 
 /* APC_INFO bits */
-#define APCI_HIDDEN			0x01  /**< the application is hidden -- subopcode for #APC_INFO */
+#define APCI_HIDDEN		0x01  /**< the application is hidden -- subopcode for #APC_INFO */
 #define APCI_HASMBAR		0x02  /**< the application has a menu bar -- subopcode for #APC_INFO */
 #define APCI_HASDESK		0x04  /**< the application has a own desk -- subopcode for #APC_INFO */
 
@@ -104,7 +104,7 @@ __BEGIN_DECLS
 #define AES_WINX		22360	/**< AES WINX information, see  mt_appl_getinfo() */
 
 /* appl_getinfo return values (AES_LARGEFONT, AES_SMALLFONT) */
-#define SYSTEM_FONT			0	/**< see  mt_appl_getinfo() */
+#define SYSTEM_FONT		0	/**< see  mt_appl_getinfo() */
 #define OUTLINE_FONT 		1	/**< see  mt_appl_getinfo() */
 
 /* appl_getinfo return values (AES_LANGUAGE) */
@@ -116,18 +116,18 @@ __BEGIN_DECLS
 #define AESLANG_SWEDISH 	6	/**< see  mt_appl_getinfo() */
 
 /* appl_read modes */
-#define APR_NOWAIT			-1	/**< Do not wait for message -- see mt_appl_read() */
+#define APR_NOWAIT		-1	/**< Do not wait for message -- see mt_appl_read() */
 
 /* appl_search modes */
-#define APP_FIRST 			0	/**< see mt_appl_search() */
-#define APP_NEXT			1	/**< see mt_appl_search() */
-#define APP_DESK			2	/**< see mt_appl_search() */
+#define APP_FIRST 		0	/**< see mt_appl_search() */
+#define APP_NEXT		1	/**< see mt_appl_search() */
+#define APP_DESK		2	/**< see mt_appl_search() */
 
 /* appl_search return values*/
-#define APP_SYSTEM			0x01	/**< see mt_appl_search() */
+#define APP_SYSTEM		0x01	/**< see mt_appl_search() */
 #define APP_APPLICATION		0x02	/**< see mt_appl_search() */
 #define APP_ACCESSORY		0x04	/**< see mt_appl_search() */
-#define APP_SHELL 			0x08	/**< see mt_appl_search() */
+#define APP_SHELL 		0x08	/**< see mt_appl_search() */
 
 /* appl_trecord types */
 #define APPEVNT_TIMER	 	0	/**< see struct pEvntrec */
@@ -157,8 +157,8 @@ typedef struct pEvntrec
 
 /* evnt_button flags */
 #define LEFT_BUTTON		0x0001	/**< mask for left mouse button, see mt_evnt_button() */
-#define RIGHT_BUTTON 	0x0002	/**< mask for right mouse button, see mt_evnt_button() */
-#define MIDDLE_BUTTON	0x0004	/**< mask for middle mouse button, see mt_evnt_button() */
+#define RIGHT_BUTTON 		0x0002	/**< mask for right mouse button, see mt_evnt_button() */
+#define MIDDLE_BUTTON		0x0004	/**< mask for middle mouse button, see mt_evnt_button() */
 
 #define K_RSHIFT		0x0001	/**< mask for right shift key, see mt_evnt_button() */
 #define K_LSHIFT		0x0002	/**< mask for left shift key, see mt_evnt_button() */
@@ -485,7 +485,7 @@ typedef struct pEvntrec
  *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  *
  */
-#define WM_UNICONIFY	35
+#define WM_UNICONIFY		35
 
 /** message received when the user clicks on the #SMALLER window gadget while
  *  the CONTROL key is pressed.
@@ -505,7 +505,7 @@ typedef struct pEvntrec
  *  @since AES version 4.1.  The availability of this feature could
  *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  */
-#define WM_ALLICONIFY	36
+#define WM_ALLICONIFY		36
 
 /** message received when the user clicks on a toolbar object
  *
@@ -708,9 +708,9 @@ typedef struct pEvntrec
  * - msg[6] = 
  * - msg[7] =
  */
-#define SH_WDRAW			72
+#define SH_WDRAW		72
 
-#define SC_CHANGED			80	/**< TODO */
+#define SC_CHANGED		80	/**< TODO */
 #define PRN_CHANGED 		82	/**< TODO */
 #define FNT_CHANGED 		83	/**< TODO */
 
@@ -730,9 +730,9 @@ typedef struct pEvntrec
  *
  *  @since MagiC (?).
  */
-#define THR_EXIT			88
+#define THR_EXIT		88
 
-#define PA_EXIT 			89	/**< TODO */
+#define PA_EXIT 		89	/**< TODO */
 
 /** message received when a child process that this application has
  *  started returns.
@@ -749,7 +749,7 @@ typedef struct pEvntrec
  *  @since AES version 4.0.  The availability of this feature could
  *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
  */
-#define CH_EXIT 			90
+#define CH_EXIT 		90
 
 #define WM_M_BDROPPED		100		/* KAOS 1.4  */	/**< TODO */
 
@@ -774,26 +774,26 @@ typedef struct pEvntrec
  *  @sa mt_appl_control()
  */
 #define SM_M_SPECIAL		101
-#define SM_M_RES2			102		/**< MAG!X screen manager extension */
-#define SM_M_RES3			103		/**< MAG!X screen manager extension */
-#define SM_M_RES4			104		/**< MAG!X screen manager extension */
-#define SM_M_RES5			105		/**< MAG!X screen manager extension */
-#define SM_M_RES6			106		/**< MAG!X screen manager extension */
-#define SM_M_RES7			107		/**< MAG!X screen manager extension */
-#define SM_M_RES8			108		/**< MAG!X screen manager extension */
-#define SM_M_RES9			109		/**< MAG!X screen manager extension */
-#define WM_SHADED			22360	/**< TODO [WM_SHADED apid 0 win 0 0 0 0]   */
+#define SM_M_RES2		102		/**< MAG!X screen manager extension */
+#define SM_M_RES3		103		/**< MAG!X screen manager extension */
+#define SM_M_RES4		104		/**< MAG!X screen manager extension */
+#define SM_M_RES5		105		/**< MAG!X screen manager extension */
+#define SM_M_RES6		106		/**< MAG!X screen manager extension */
+#define SM_M_RES7		107		/**< MAG!X screen manager extension */
+#define SM_M_RES8		108		/**< MAG!X screen manager extension */
+#define SM_M_RES9		109		/**< MAG!X screen manager extension */
+#define WM_SHADED		22360	/**< TODO [WM_SHADED apid 0 win 0 0 0 0]   */
 #define WM_UNSHADED 		22361	/**< TODO [WM_UNSHADED apid 0 win 0 0 0 0] */
 
 /* SM_M_SPECIAL sub-opcode */
 #define SMC_TIDY_UP		0    /* MagiC 2  */ 	 /**< TODO */
-#define SMC_TERMINATE	1    /* MagiC 2  */ 	 /**< TODO */
+#define SMC_TERMINATE		1    /* MagiC 2  */ 	 /**< TODO */
 #define SMC_SWITCH		2    /* MagiC 2  */ 	 /**< TODO */
 #define SMC_FREEZE		3    /* MagiC 2  */ 	 /**< TODO */
-#define SMC_UNFREEZE	4    /* MagiC 2  */ 	 /**< TODO */
+#define SMC_UNFREEZE		4    /* MagiC 2  */ 	 /**< TODO */
 #define SMC_RES5		5    /* MagiC 2  */ 	 /**< TODO */
-#define SMC_UNHIDEALL	6    /* MagiC 3.1	*/   /**< TODO */
-#define SMC_HIDEOTHERS	7    /* MagiC 3.1	*/   /**< TODO */
+#define SMC_UNHIDEALL		6    /* MagiC 3.1	*/   /**< TODO */
+#define SMC_HIDEOTHERS		7    /* MagiC 3.1	*/   /**< TODO */
 #define SMC_HIDEACT		8    /* MagiC 3.1	*/   /**< TODO */
 
 /** Message received when an event occurs on mouse wheel.
@@ -831,14 +831,14 @@ typedef struct pEvntrec
 #define MO_LEAVE		1	/**< Wait for mouse to leave rectangle, see mt_evnt_mouse() */
 
 /* evnt_multi flags */
-#define MU_KEYBD			0x0001	/**< Wait for a user keypress, see mt_evnt_multi() */
-#define MU_BUTTON			0x0002	/**< Wait for the specified mouse button state, see mt_evnt_multi() */
-#define MU_M1				0x0004	/**< Wait for a mouse/rectangle event as specified, see mt_evnt_multi() */
-#define MU_M2				0x0008	/**< Wait for a mouse/rectangle event as specified, see mt_evnt_multi()  */
-#define MU_MESAG			0x0010	/**< Wait for a message, see mt_evnt_multi() */
-#define MU_TIMER			0x0020	/**< Wait the specified amount of time, see mt_evnt_multi() */
-#define MU_WHEEL			0x0040	/**< TODO (XaAES) */
-#define MU_MX				0x0080	/**< TODO (XaAES) */
+#define MU_KEYBD		0x0001	/**< Wait for a user keypress, see mt_evnt_multi() */
+#define MU_BUTTON		0x0002	/**< Wait for the specified mouse button state, see mt_evnt_multi() */
+#define MU_M1			0x0004	/**< Wait for a mouse/rectangle event as specified, see mt_evnt_multi() */
+#define MU_M2			0x0008	/**< Wait for a mouse/rectangle event as specified, see mt_evnt_multi()  */
+#define MU_MESAG		0x0010	/**< Wait for a message, see mt_evnt_multi() */
+#define MU_TIMER		0x0020	/**< Wait the specified amount of time, see mt_evnt_multi() */
+#define MU_WHEEL		0x0040	/**< TODO (XaAES) */
+#define MU_MX			0x0080	/**< TODO (XaAES) */
 #define MU_NORM_KEYBD		0x0100	/**< TODO (XaAES) */
 #define MU_DYNAMIC_KEYBD	0x0200	/**< TODO (XaAES) */
 
@@ -851,17 +851,17 @@ typedef struct pEvntrec
 #define FA_DISK     "[5]"	/**< display Disk icon, see mt_form_alert() */
 
 /* form_dial opcodes */
-#define FMD_START 			0	/**< reserves the screen space for a dialog, see mt_form_dial() */
-#define FMD_GROW			1	/**< draws an expanding box, see mt_form_dial() */
-#define FMD_SHRINK			2	/**< draws a shrinking box, see mt_form_dial()  */
-#define FMD_FINISH			3	/**< releases the screen space for a dialog, see mt_form_dial() */
+#define FMD_START 		0	/**< reserves the screen space for a dialog, see mt_form_dial() */
+#define FMD_GROW		1	/**< draws an expanding box, see mt_form_dial() */
+#define FMD_SHRINK		2	/**< draws a shrinking box, see mt_form_dial()  */
+#define FMD_FINISH		3	/**< releases the screen space for a dialog, see mt_form_dial() */
 
 /* form_error modes */
 #define FERR_FILENOTFOUND	 2	/**< File Not Found (GEMDOS error -33), see mt_form_error() */
 #define FERR_PATHNOTFOUND	 3	/**< Path Not Found (GEMDOS error -34), see mt_form_error() */
 #define FERR_NOHANDLES		 4	/**< No More File Handles (GEMDOS error -35), see mt_form_error() */
 #define FERR_ACCESSDENIED	 5	/**< Access Denied (GEMDOS error -36), see mt_form_error() */
-#define FERR_LOWMEM			 8	/**< Insufficient Memory (GEMDOS error -39), see mt_form_error() */
+#define FERR_LOWMEM		 8	/**< Insufficient Memory (GEMDOS error -39), see mt_form_error() */
 #define FERR_BADENVIRON 	10	/**< Invalid Environment (GEMDOS error -41), see mt_form_error() */
 #define FERR_BADFORMAT		11	/**< Invalid Format (GEMDOS error -42) */
 #define FERR_BADDRIVE		15	/**< Invalid Drive Specification (GEMDOS error -46), see mt_form_error() */
@@ -882,19 +882,19 @@ typedef struct pEvntrec
 #define SCROLL_YES		1	/**< menu may scroll if it is too high, see MENU::mn_scroll structure  */
 
 /* menu_bar modes */
-#define MENU_INQUIRE	-1	/**< inquire the AES application ID of the process which own the displayed menu, see mt_menu_bar() */
+#define MENU_INQUIRE		-1	/**< inquire the AES application ID of the process which own the displayed menu, see mt_menu_bar() */
 #define MENU_REMOVE		0	/**< remove a menu bar, see mt_menu_bar() */
-#define MENU_INSTALL	1	/**< install a menu bar, see mt_menu_bar() */
-#define MENU_GETMODE	3	   /**< Get the menu bar mode, see mt_menu_bar() */
-#define MENU_SETMODE	4	   /**< Set the menu bar mode, see mt_menu_bar() */
-#define MENU_UPDATE 	5	   /**< Update the system part of the menu bar, see mt_menu_bar() */
+#define MENU_INSTALL		1	/**< install a menu bar, see mt_menu_bar() */
+#define MENU_GETMODE		3	   /**< Get the menu bar mode, see mt_menu_bar() */
+#define MENU_SETMODE		4	   /**< Set the menu bar mode, see mt_menu_bar() */
+#define MENU_UPDATE 		5	   /**< Update the system part of the menu bar, see mt_menu_bar() */
 #define MENU_INSTL		100    /**< Install a menu without switching the top application (Magic), see mt_menu_bar() */
 
 
 /* MENU_GETMODE and MENU_SETMODE bits */
-#define  MENU_HIDDEN	0x0001 /**< menu bar only visible when needed, see #MENU_GETMODE or #MENU_SETMODE */
-#define  MENU_PULLDOWN  0x0002 /**< Pulldown-Menus, see #MENU_GETMODE or #MENU_SETMODE */
-#define  MENU_SHADOWED  0x0004 /**< menu bar with shadows, see #MENU_GETMODE or #MENU_SETMODE */
+#define  MENU_HIDDEN		0x0001 /**< menu bar only visible when needed, see #MENU_GETMODE or #MENU_SETMODE */
+#define  MENU_PULLDOWN		0x0002 /**< Pulldown-Menus, see #MENU_GETMODE or #MENU_SETMODE */
+#define  MENU_SHADOWED		0x0004 /**< menu bar with shadows, see #MENU_GETMODE or #MENU_SETMODE */
 
 /* menu_icheck modes */
 #define UNCHECK			0	/**< remove the check mark of a menu item, see mt_menu_icheck() */
@@ -915,8 +915,8 @@ typedef struct pEvntrec
 #define REG_NEWNAME		-1	/**< register your application with a new name, see mt_menu_register() */
 
 /* menu_settings modes */
-#define MN_INQUIRE      0  /**< inquire the current menu settings, see mt_menu_settings() */
-#define MN_CHANGE       1  /**< set the menu settings, see mt_menu_settings() */
+#define MN_INQUIRE		0  /**< inquire the current menu settings, see mt_menu_settings() */
+#define MN_CHANGE		1  /**< set the menu settings, see mt_menu_settings() */
 
 /* menu_tnormal modes */
 #define HIGHLIGHT		0	/**< display the title in reverse mode, see mt_menu_tnormal() */
@@ -1017,20 +1017,20 @@ typedef  struct
 	/** last error 
 	 *  \a lasterr is the return value of the program running previously. If this 
 	 *  was a GEM program then the error will already have been displayed in an 
-	 *  alert box. It is well known that the longword is negative if the error 
-	 *  occurred with Pexec itself; a program return value always has the high 
+	 *  alert box. It is well known that the longword is negative if the error
+	 *  occurred with Pexec itself; a program return value always has the high
 	 *  word 0.
-	 */ 
+	 */
 	long    lasterr;
-	short   wasgr;		/**< Program was a grafic app. */ 
+	short   wasgr;		/**< Program was a grafic app. */
 } SHELTAIL;
 
 
 /* shel_write modes */
-/** Launch a GEM or TOS application or GEM desk accessory 
+/** Launch a GEM or TOS application or GEM desk accessory
  *  depending on the extension of the file. See mt_shel_write()
  */
-#define SWM_LAUNCH			0
+#define SWM_LAUNCH		0
 /** Launch a GEM or TOS application based on the value of \a wisgr, see mt_shel_write()
  */
 #define SWM_LAUNCHNOW		1
@@ -1038,40 +1038,40 @@ typedef  struct
 #define SWM_SHUTDOWN		4	/**< Manipulate 'Shutdown' mode, see mt_shel_write() */
 #define SWM_REZCHANGE		5	/**< Change screen resolution, see mt_shel_write() */
 #define SWM_BROADCAST		7	/**< Broadcast an AES message to all processes, see mt_shel_write() */
-#define SWM_ENVIRON			8	/**< Manipulate the AES environment, see mt_shel_write() */
+#define SWM_ENVIRON		8	/**< Manipulate the AES environment, see mt_shel_write() */
 /** Inform the AES of a new message the current application understands,
  *  see mt_shel_write()
  */
-#define SWM_NEWMSG			9	
-#define SWM_AESMSG			10	/**< Send a message to the AES, see mt_shel_write() */
+#define SWM_NEWMSG		9
+#define SWM_AESMSG		10	/**< Send a message to the AES, see mt_shel_write() */
 #define SWM_THRCREATE		20	/**< create a new thread, see mt_shel_write() */
-#define SWM_THREXIT			21	/**< thread terminates itself, see mt_shel_write() */
-#define SWM_THRKILL			22	/**< parent kills a thread, see mt_shel_write() */
+#define SWM_THREXIT		21	/**< thread terminates itself, see mt_shel_write() */
+#define SWM_THRKILL		22	/**< parent kills a thread, see mt_shel_write() */
 
 /* other names for shel_write modes */
-#define SHW_NOEXEC			SWM_LAUNCH		/**< alias */
-#define SHW_EXEC			SWM_LAUNCHNOW	/**< alias */
+#define SHW_NOEXEC		SWM_LAUNCH		/**< alias */
+#define SHW_EXEC		SWM_LAUNCHNOW	/**< alias */
 #define SHW_EXEC_ACC		SWM_LAUNCHACC	/**< alias */
 #define SHW_SHUTDOWN		SWM_SHUTDOWN	/**< alias */
-#define SHW_RESCHNG			SWM_REZCHANGE	/**< alias */
+#define SHW_RESCHNG		SWM_REZCHANGE	/**< alias */
 #define SHW_BROADCAST		SWM_BROADCAST	/**< alias */
 #define SHW_INFRECGN		SWM_NEWMSG		/**< alias */
-#define SHW_AESSEND			SWM_AESMSG		/**< alias */
+#define SHW_AESSEND		SWM_AESMSG		/**< alias */
 #define SHW_THR_CREATE		SWM_THRCREATE	/**< alias */
 #define SHW_THR_EXIT		SWM_THREXIT		/**< alias */
 #define SHW_THR_KILL		SWM_THRKILL		/**< alias */
 
 /* shel_write, parameter wisgr */
-#define TOSAPP				0  /**< application launched as TOS application, see mt_shel_write() */
-#define GEMAPP				1  /**< application launched as GEM application, see mt_shel_write() */
+#define TOSAPP			0  /**< application launched as TOS application, see mt_shel_write() */
+#define GEMAPP			1  /**< application launched as GEM application, see mt_shel_write() */
 
 /* shel_write, parameter wiscr when wodex=1 (SWM_LAUNCHNOW) */
-#define SHW_IMMED			0	/**< unsupported (PC-GEM  2.x) */
-#define SHW_CHAIN			1	/**< TOS way, see mt_shel_write() */
-#define SHW_DOS				2	/**< unsupported (PC-GEM  2.x) */
+#define SHW_IMMED		0	/**< unsupported (PC-GEM  2.x) */
+#define SHW_CHAIN		1	/**< TOS way, see mt_shel_write() */
+#define SHW_DOS			2	/**< unsupported (PC-GEM  2.x) */
 #define SHW_PARALLEL		100	/**< create a new application to be ran in parallel, see mt_shel_write() */
-#define SHW_SINGLE			101	/**< run an application in single mode (all other applications but apid 0 and 1 are frozen), see mt_shel_write() */
-	
+#define SHW_SINGLE		101	/**< run an application in single mode (all other applications but apid 0 and 1 are frozen), see mt_shel_write() */
+
 /* command line parser (shel_write: parameter "wiscr") */
 #define CL_NORMAL		0	/**< command line passed normaly, see mt_shel_write() */
 #define CL_PARSE		1	/**< command line passed in ARGV environment string, see mt_shel_write() */
@@ -1082,19 +1082,19 @@ typedef  struct
 #define SD_COMPLETE		2		/**< Complete shutdown mode, see mt_shel_write() */
 
 /* shel_write: mode SWM_ENVIRON, parameter 'wisgr' */
-#define ENVIRON_SIZE	0	/**< returns the current size of the environment string, see mt_shel_write() */
-#define ENVIRON_CHANGE	1	/**< modify an environment variable, see mt_shel_write() */
-#define ENVIRON_COPY	2	/**< copy the evironment string in a buffer, see mt_shel_write() */
+#define ENVIRON_SIZE		0	/**< returns the current size of the environment string, see mt_shel_write() */
+#define ENVIRON_CHANGE		1	/**< modify an environment variable, see mt_shel_write() */
+#define ENVIRON_COPY		2	/**< copy the evironment string in a buffer, see mt_shel_write() */
 
 /* shel_write: mode SWM_NEWMSG, parameter 'wisgr' */
 #define NM_APTERM		0x0001	/**< the application understands #AP_TERM messages, see mt_shel_write() and #SWM_NEWMSG */
-#define NM_INHIBIT_HIDE	0x0002	/**< the application won't be hidden, see mt_shel_write() and #SWM_NEWMSG */
+#define NM_INHIBIT_HIDE		0x0002	/**< the application won't be hidden, see mt_shel_write() and #SWM_NEWMSG */
 
 /* Werte fr Modus SWM_AESMSG (fr shel_write) */
 #define AP_AESTERM		52     /* Mode 10: N.AES komplett terminieren. */	/**< TODO */
 
 /* extended shel_write() modes */
-#define SW_PSETLIMIT	0x0100	/**< Initial Psetlimit() , see SHELW::psetlimit */
+#define SW_PSETLIMIT		0x0100	/**< Initial Psetlimit() , see SHELW::psetlimit */
 #define SW_PRENICE		0x0200	/**< Initial Prenice() , see SHELW::prenice */
 #define SW_DEFDIR 		0x0400	/**< Default Directory , see SHELW::defdir */
 #define SW_ENVIRON		0x0800	/**< Environment , see SHELW::env */
@@ -1104,12 +1104,12 @@ typedef  struct
 #define	SW_GID			0x2000	/**< Set group id of launched child, see SHELW::gid */
 
 /* MagiC 6 extensions for shel_write() extended modes*/
-#define SHW_XMDFLAGS	0x1000	/**< magiC 6 extension, see XSHW_COMMAND::flags*/
+#define SHW_XMDFLAGS		0x1000	/**< magiC 6 extension, see XSHW_COMMAND::flags*/
 
 /* other names... */
-#define SHW_XMDLIMIT	SW_PSETLIMIT	/**< alias */
+#define SHW_XMDLIMIT		SW_PSETLIMIT	/**< alias */
 #define SHW_XMDNICE		SW_PRENICE		/**< alias */
-#define SHW_XMDDEFDIR	SW_DEFDIR		/**< alias */
+#define SHW_XMDDEFDIR		SW_DEFDIR		/**< alias */
 #define SHW_XMDENV		SW_ENVIRON		/**< alias */
 
 /* rsrc_gaddr structure types */
@@ -1132,13 +1132,13 @@ typedef  struct
 #define R_FRIMG			16	/**< Free image, see mt_rsrc_gaddr() */
 
 /* scrap_read return values */
-#define SCRAP_CSV       0x0001  /**< clipboard has a scrap.csv file, see mt_scrap_read() */
-#define SCRAP_TXT       0x0002  /**< clipboard has a scrap.txt file, see mt_scrap_read() */
-#define SCRAP_GEM       0x0004  /**< clipboard has a scrap.gem file, see mt_scrap_read() */
-#define SCRAP_IMG       0x0008  /**< clipboard has a scrap.img file, see mt_scrap_read() */
-#define SCRAP_DCA       0x0010  /**< clipboard has a scrap.dca file, see mt_scrap_read() */
-#define SCRAP_DIF       0x0020  /**< clipboard has a scrap.dif file, see mt_scrap_read() */
-#define SCRAP_USR       0x8000  /**< clipboard has a scrap.usr file, see mt_scrap_read() */
+#define SCRAP_CSV 		0x0001  /**< clipboard has a scrap.csv file, see mt_scrap_read() */
+#define SCRAP_TXT		0x0002  /**< clipboard has a scrap.txt file, see mt_scrap_read() */
+#define SCRAP_GEM		0x0004  /**< clipboard has a scrap.gem file, see mt_scrap_read() */
+#define SCRAP_IMG		0x0008  /**< clipboard has a scrap.img file, see mt_scrap_read() */
+#define SCRAP_DCA		0x0010  /**< clipboard has a scrap.dca file, see mt_scrap_read() */
+#define SCRAP_DIF		0x0020  /**< clipboard has a scrap.dif file, see mt_scrap_read() */
+#define SCRAP_USR		0x8000  /**< clipboard has a scrap.usr file, see mt_scrap_read() */
 
 /* Window Attributes */
 #define NAME			0x0001	/**< Window has a title bar */
@@ -1165,45 +1165,45 @@ typedef  struct
 #define WC_WORK		 	1	/**< compute the work_area of a window from its extent, see mt_wind_calc() */
 
 /* wind_get flags */
-#define WF_KIND			  1		/**< get     the actual window attributes, see mt_wind_get() */
-#define WF_NAME			  2 	/**< get/set title name of the window, see mt_wind_get() and mt_wind_set() */
-#define WF_INFO			  3 	/**< get/set info line of the window, see mt_wind_get() and mt_wind_set() */
-#define WF_WORKXYWH		  4 	/**< get     the work area coordinates of the work area, see mt_wind_get() */
-#define WF_CURRXYWH		  5 	/**< get/set current coordinates of the window (external area), see mt_wind_get() and mt_wind_set()  */
-#define WF_PREVXYWH		  6 	/**< get     the previous coordinates of the window (external area), see mt_wind_get() */
-#define WF_FULLXYWH		  7 	/**< get     the coordinates of the window when "fulled" the screen, see mt_wind_get() */
-#define WF_HSLIDE 		  8 	/**< get/set position of the horizontal slider, see mt_wind_get() and mt_wind_set() */
-#define WF_VSLIDE 		  9 	/**< get/set position of the vertical slider, see mt_wind_get() and mt_wind_set() */
-#define WF_TOP 			 10 	/**< get/set top window, see mt_wind_get() and mt_wind_set() */
-#define WF_FIRSTXYWH 	 11 	/**< get     the first rectangle in the list of rectangles for this window, see mt_wind_get() */
-#define WF_NEXTXYWH		 12 	/**< get     the next rectangle in the list of rectangles for this window, see mt_wind_get() */
-#define WF_FIRSTAREAXYWH 13 	/**< get     the first rectangle in the list of rectangles for this window, see mt_wind_xget()*/
-#define WF_NEWDESK		 14 	/**< get/set OBJECT tree installed as desktop, see mt_wind_get() and mt_wind_set() */
-#define WF_HSLSIZE		 15 	/**< get/set size of the horizontal slider, see mt_wind_get() and mt_wind_set() */
-#define WF_VSLSIZE		 16 	/**< get/set size of the vertical slider, see mt_wind_get() and mt_wind_set() */
-#define WF_SCREEN 		 17 	/**< get     current AES menu/alert buffer and its size, see mt_wind_get() */
-#define WF_COLOR		 18 	/**< get/set current color of widget, see mt_wind_get() and mt_wind_set() */
-#define WF_DCOLOR 		 19 	/**< get/set default color of widget, see mt_wind_get() and mt_wind_set() */
-#define WF_OWNER		 20 	/**< get     the owner of the window, see mt_wind_get() */
-#define WF_BEVENT 		 24 	/**< get/set window feature on mouse button event, see mt_wind_get() and mt_wind_set() */
-#define WF_BOTTOM 		 25 	/**< get/set bottom window, see mt_wind_get() and mt_wind_set() */
-#define WF_ICONIFY		 26 	/**< get/set iconification of the window, see mt_wind_get() and mt_wind_set() */
-#define WF_UNICONIFY 	 27 	/**< get/set un-iconification of the window, see mt_wind_get() and mt_wind_set() */
-#define WF_UNICONIFYXYWH 28 	/**<     set window coordinates when uniconified , see mt_wind_set() */
-#define WF_TOOLBAR		 30 	/**< get/set tool bar attached to a window, see mt_wind_get() and mt_wind_set() */
-#define WF_FTOOLBAR		 31 	/**< get     the first rectangle of the toolbar area, see mt_wind_get() */
-#define WF_NTOOLBAR		 32 	/**< get     the next rectangle of the toolbar area, see mt_wind_get() */
-#define WF_MENU			 33 	/**<         TODO (XaAES) */
-#define WF_WHEEL		 40 	/**<     set window feature on mouse wheel event, see mt_wind_set() */
-#define WF_OPTS			 41		/**< get/set window options. See mt_wind_set() and mt_wind_get() for details. */
-#define WF_CALCF2W		 42		/**< Convert FULL coordinates to WORK coordinates */
-#define WF_CALCW2F		 43		/**< Convert WORK coordinates to FULL coordinates */
-#define WF_CALCF2U		 44		/**< Convert FULL coordinates to USER coordinates */
-#define WF_CALCU2F		 45		/**< Convert USER coordinates to FULL coordinates */
-#define WF_MAXWORKXYWH	 46		/**< Get MAX coordinates for this window - WCOWORK mode only*/
-#define WF_M_BACKDROP	100 	/**<		 TODO (KAOS 1.4) */
+#define WF_KIND			1	/**< get     the actual window attributes, see mt_wind_get() */
+#define WF_NAME			2 	/**< get/set title name of the window, see mt_wind_get() and mt_wind_set() */
+#define WF_INFO			3 	/**< get/set info line of the window, see mt_wind_get() and mt_wind_set() */
+#define WF_WORKXYWH		4 	/**< get     the work area coordinates of the work area, see mt_wind_get() */
+#define WF_CURRXYWH		5 	/**< get/set current coordinates of the window (external area), see mt_wind_get() and mt_wind_set()  */
+#define WF_PREVXYWH		6 	/**< get     the previous coordinates of the window (external area), see mt_wind_get() */
+#define WF_FULLXYWH		7 	/**< get     the coordinates of the window when "fulled" the screen, see mt_wind_get() */
+#define WF_HSLIDE 		8 	/**< get/set position of the horizontal slider, see mt_wind_get() and mt_wind_set() */
+#define WF_VSLIDE 		9 	/**< get/set position of the vertical slider, see mt_wind_get() and mt_wind_set() */
+#define WF_TOP 			10 	/**< get/set top window, see mt_wind_get() and mt_wind_set() */
+#define WF_FIRSTXYWH 		11 	/**< get     the first rectangle in the list of rectangles for this window, see mt_wind_get() */
+#define WF_NEXTXYWH		12 	/**< get     the next rectangle in the list of rectangles for this window, see mt_wind_get() */
+#define WF_FIRSTAREAXYWH	13 	/**< get     the first rectangle in the list of rectangles for this window, see mt_wind_xget()*/
+#define WF_NEWDESK		14 	/**< get/set OBJECT tree installed as desktop, see mt_wind_get() and mt_wind_set() */
+#define WF_HSLSIZE		15 	/**< get/set size of the horizontal slider, see mt_wind_get() and mt_wind_set() */
+#define WF_VSLSIZE		16 	/**< get/set size of the vertical slider, see mt_wind_get() and mt_wind_set() */
+#define WF_SCREEN 		17 	/**< get     current AES menu/alert buffer and its size, see mt_wind_get() */
+#define WF_COLOR		18 	/**< get/set current color of widget, see mt_wind_get() and mt_wind_set() */
+#define WF_DCOLOR 		19 	/**< get/set default color of widget, see mt_wind_get() and mt_wind_set() */
+#define WF_OWNER		20 	/**< get     the owner of the window, see mt_wind_get() */
+#define WF_BEVENT 		24 	/**< get/set window feature on mouse button event, see mt_wind_get() and mt_wind_set() */
+#define WF_BOTTOM 		25 	/**< get/set bottom window, see mt_wind_get() and mt_wind_set() */
+#define WF_ICONIFY		26 	/**< get/set iconification of the window, see mt_wind_get() and mt_wind_set() */
+#define WF_UNICONIFY 		27 	/**< get/set un-iconification of the window, see mt_wind_get() and mt_wind_set() */
+#define WF_UNICONIFYXYWH	28 	/**<     set window coordinates when uniconified , see mt_wind_set() */
+#define WF_TOOLBAR		30 	/**< get/set tool bar attached to a window, see mt_wind_get() and mt_wind_set() */
+#define WF_FTOOLBAR		31 	/**< get     the first rectangle of the toolbar area, see mt_wind_get() */
+#define WF_NTOOLBAR		32 	/**< get     the next rectangle of the toolbar area, see mt_wind_get() */
+#define WF_MENU			33 	/**<         TODO (XaAES) */
+#define WF_WHEEL		40 	/**<     set window feature on mouse wheel event, see mt_wind_set() */
+#define WF_OPTS			41		/**< get/set window options. See mt_wind_set() and mt_wind_get() for details. */
+#define WF_CALCF2W		42		/**< Convert FULL coordinates to WORK coordinates */
+#define WF_CALCW2F		43		/**< Convert WORK coordinates to FULL coordinates */
+#define WF_CALCF2U		44		/**< Convert FULL coordinates to USER coordinates */
+#define WF_CALCU2F		45		/**< Convert USER coordinates to FULL coordinates */
+#define WF_MAXWORKXYWH		46		/**< Get MAX coordinates for this window - WCOWORK mode only*/
+#define WF_M_BACKDROP		100 	/**<		 TODO (KAOS 1.4) */
 #define WF_M_OWNER		101 	/**<		 TODO (KAOS 1.4) */
-#define WF_M_WINDLIST	102 	/**<		 TODO (KAOS 1.4) */
+#define WF_M_WINDLIST		102 	/**<		 TODO (KAOS 1.4) */
 #define WF_MINXYWH		103 	/**<		 TODO (MagiC 6) */
 #define WF_INFOXYWH		104 	/**<		 TODO (MagiC 6.10) */
 #define WF_WIDGETS		200		/**< get/set actual positions of the slider widgets, see mt_wind_get() and mt_wind_set() */
@@ -1218,47 +1218,47 @@ typedef  struct
 #define WF_OBSPEC		1003	/**< get/set (doc: TODO) (FreeGEM) */
 #define X_WF_MENU		4352	/**<     set (doc: TODO) (Geneva)  */
 #define X_WF_DIALOG		4608	/**<     set (doc: TODO) (Geneva)  */
-#define X_WF_DIALWID	4864	/**<     set (doc: TODO) (Geneva)  */
+#define X_WF_DIALWID		4864	/**<     set (doc: TODO) (Geneva)  */
 #define X_WF_DIALHT		5120	/**<     set (doc: TODO) (Geneva)  */
-#define X_WF_DFLTDESK	5376	/**<     set (doc: TODO) (Geneva)  */
+#define X_WF_DFLTDESK		5376	/**<     set (doc: TODO) (Geneva)  */
 #define X_WF_MINMAX		5632	/**< get/set (doc: TODO) (Geneva)  */
 #define X_WF_HSPLIT		5888	/**< get/set (doc: TODO) (Geneva)  */
 #define X_WF_VSPLIT		6144	/**< get/set (doc: TODO) (Geneva)  */
 #define X_WF_SPLMIN		6400	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_HSLIDE2	6656	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_VSLIDE2	6144	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_HSLSIZE2	7168	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_VSLSIZE2	7424	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_DIALFLGS	7680	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_OBJHAND	7936	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_DIALEDIT	9182	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_DCOLSTAT	8448	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_HSLIDE2		6656	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_VSLIDE2		6144	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_HSLSIZE2		7168	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_VSLSIZE2		7424	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_DIALFLGS		7680	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_OBJHAND		7936	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_DIALEDIT		9182	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_DCOLSTAT		8448	/**< get/set (doc: TODO) (Geneva)  */
 #define WF_WINX			22360	/**<		 TODO */
 #define WF_WINXCFG		22361	/**<		 TODO */
 #define WF_DDELAY		22362	/**<		 TODO */
-#define WF_SHADE	    22365	/**<		 TODO (WINX 2.3) */
+#define WF_SHADE		22365	/**<		 TODO (WINX 2.3) */
 #define WF_STACK		22366	/**<		 TODO (WINX 2.3) */
 #define WF_TOPALL		22367	/**<		 TODO (WINX 2.3) */
-#define WF_BOTTOMALL	22368	/**<		 TODO (WINX 2.3) */
+#define WF_BOTTOMALL		22368	/**<		 TODO (WINX 2.3) */
 #define WF_XAAES		0x5841	/**<		 TODO (XaAES) : 'XA' */
 
 /* wind_set(WF_BEVENT) */
-#define BEVENT_WORK     0x0001    /**< window not topped when click on the work area, see #WF_BEVENT */
-#define BEVENT_INFO     0x0002    /**< ?????, see #WF_BEVENT */
+#define BEVENT_WORK		0x0001    /**< window not topped when click on the work area, see #WF_BEVENT */
+#define BEVENT_INFO		0x0002    /**< ?????, see #WF_BEVENT */
 
 /* wind_set(WF_OPTS) bitmask flags */
 #define WO0_WHEEL		0x0001  /**< see mt_wind_set() with #WF_OPTS mode */
-#define WO0_FULLREDRAW	0x0002  /**< see mt_wind_set() with #WF_OPTS mode */
+#define WO0_FULLREDRAW		0x0002  /**< see mt_wind_set() with #WF_OPTS mode */
 #define WO0_NOBLITW		0x0004  /**< see mt_wind_set() with #WF_OPTS mode */
 #define WO0_NOBLITH		0x0008  /**< see mt_wind_set() with #WF_OPTS mode */
-#define WO0_SENDREPOS	0x0010  /**< see mt_wind_set() with #WF_OPTS mode */
-#define WO1_NONE        0x0000  /**< see mt_wind_set() with #WF_OPTS mode */
-#define WO2_NONE        0x0000  /**< see mt_wind_set() with #WF_OPTS mode */
+#define WO0_SENDREPOS		0x0010  /**< see mt_wind_set() with #WF_OPTS mode */
+#define WO1_NONE		0x0000  /**< see mt_wind_set() with #WF_OPTS mode */
+#define WO2_NONE		0x0000  /**< see mt_wind_set() with #WF_OPTS mode */
 
 /* wind_set(WF_WHEEL) modes */
 #define WHEEL_MESAG		0	/**< AES will send #WM_WHEEL messages */
-#define WHEEL_ARROWED	1   /**< AES will send #WM_ARROWED messages */
-#define WHEEL_SLIDER	2   /**< AES will convert mouse wheel events to slider events */
+#define WHEEL_ARROWED		1   /**< AES will send #WM_ARROWED messages */
+#define WHEEL_SLIDER		2   /**< AES will convert mouse wheel events to slider events */
 
 /* window elements */
 #define W_BOX			0	/**< widget index of ???, see #WF_COLOR */
@@ -1306,21 +1306,21 @@ typedef  struct
 #define ARROW			 0	/**< see mt_graf_mouse() */
 #define TEXT_CRSR 		 1	/**< see mt_graf_mouse() */
 #define BEE 			 2	/**< see mt_graf_mouse() */
-#define BUSY_BEE	  BEE 	/**< alias for #BEE */
-#define BUSYBEE		  BEE 	/**< alias for #BEE */
+#define BUSY_BEE		BEE 	/**< alias for #BEE */
+#define BUSYBEE			BEE 	/**< alias for #BEE */
 #define HOURGLASS 		 2	/**< see mt_graf_mouse() */
 #define POINT_HAND		 3	/**< see mt_graf_mouse() */
 #define FLAT_HAND 		 4	/**< see mt_graf_mouse() */
 #define THIN_CROSS		 5	/**< see mt_graf_mouse() */
 #define THICK_CROSS		 6	/**< see mt_graf_mouse() */
 #define OUTLN_CROSS		 7	/**< see mt_graf_mouse() */
-#define USER_DEF		  255	/**< see mt_graf_mouse() */
-#define M_OFF			  256	/**< see mt_graf_mouse() */
-#define M_ON			  257	/**< see mt_graf_mouse() */
-#define M_SAVE 			  258	/**< see mt_graf_mouse() */
-#define M_RESTORE 		  259	/**< see mt_graf_mouse() */
-#define M_LAST 			  260	/**< see mt_graf_mouse() */
-#define M_PREVIOUS        M_LAST /**< alias for #M_LAST */
+#define USER_DEF		255	/**< see mt_graf_mouse() */
+#define M_OFF			256	/**< see mt_graf_mouse() */
+#define M_ON			257	/**< see mt_graf_mouse() */
+#define M_SAVE 			258	/**< see mt_graf_mouse() */
+#define M_RESTORE 		259	/**< see mt_graf_mouse() */
+#define M_LAST 			260	/**< see mt_graf_mouse() */
+#define M_PREVIOUS		M_LAST /**< alias for #M_LAST */
 #define M_FORCE			0x8000	/**< see mt_graf_mouse() */
 
 /* objects - general */
@@ -1342,7 +1342,7 @@ typedef  struct
 #define GDOS_PROP		0	/**< TODO */
 #define GDOS_MONO		1	/**< TODO */
 #define GDOS_BITM		2	/**< TODO */
-#define IBM				3	/**< TODO */
+#define IBM			3	/**< TODO */
 #define SMALL			5	/**< TODO */
 
 /* object types */
@@ -1371,14 +1371,14 @@ typedef  struct
 
 
 /* object flags */
-#define OF_NONE		 	0x0000	/**< TODO */
-#define OF_SELECTABLE	0x0001	/**< TODO */
+#define OF_NONE			0x0000	/**< TODO */
+#define OF_SELECTABLE		0x0001	/**< TODO */
 #define OF_DEFAULT		0x0002	/**< TODO */
 #define OF_EXIT			0x0004	/**< TODO */
 #define OF_EDITABLE		0x0008	/**< TODO */
 #define OF_RBUTTON		0x0010	/**< TODO */
 #define OF_LASTOB		0x0020	/**< TODO */
-#define OF_TOUCHEXIT	0x0040	/**< TODO */
+#define OF_TOUCHEXIT		0x0040	/**< TODO */
 #define OF_HIDETREE		0x0080	/**< TODO */
 #define OF_INDIRECT		0x0100	/**< TODO */
 #define OF_FL3DIND		0x0200	/* bit 9 */	/**< TODO */
@@ -1474,7 +1474,7 @@ typedef  struct
 /* Object colors - default pall. */
 #define WHITE			0	/**< TODO */
 #define BLACK			1	/**< TODO */
-#define RED				2	/**< TODO */
+#define RED			2	/**< TODO */
 #define GREEN			3	/**< TODO */
 #define BLUE			4	/**< TODO */
 #define CYAN			5	/**< TODO */
@@ -2133,15 +2133,15 @@ extern void aes (AESPB *pb);
 
 /* v_bez modes */
 #define BEZ_BEZIER		0x01	/**< TODO */
-#define BEZ_POLYLINE	0x00	/**< TODO */
+#define BEZ_POLYLINE		0x00	/**< TODO */
 #define BEZ_NODRAW		0x02	/**< TODO */
 
 /* v_bit_image modes */
 #define IMAGE_LEFT		0	/**< TODO */
-#define IMAGE_CENTER	1	/**< TODO */
+#define IMAGE_CENTER		1	/**< TODO */
 #define IMAGE_RIGHT		2	/**< TODO */
 #define IMAGE_TOP 		0	/**< TODO */
-#define IMAGE_BOTTOM	2	/**< TODO */
+#define IMAGE_BOTTOM		2	/**< TODO */
 
 /* v_justified modes */
 #define NOJUSTIFY		0	/**< TODO */
@@ -2197,9 +2197,9 @@ extern void aes (AESPB *pb);
 #define ROUND			2	/**< TODO */
 
 /* other names */
-#define LE_SQUARED	SQUARE	/**< TODO */
-#define LE_ARROWED	ARROWED	/**< TODO */
-#define LE_ROUNDED	ROUND	/**< TODO */
+#define LE_SQUARED		SQUARE	/**< TODO */
+#define LE_ARROWED		ARROWED	/**< TODO */
+#define LE_ROUNDED		ROUND	/**< TODO */
 
 /* vsl_type modes */
 #define SOLID			1	/**< TODO */
@@ -2216,27 +2216,27 @@ extern void aes (AESPB *pb);
 #define LT_DOTTED		DOTTED		/**< TODO */
 #define LT_DASHDOT		DASHDOT		/**< TODO */
 #define LT_DASHED		DASH		/**< TODO */
-#define LT_DASHDOTDOT	DASHDOTDOT	/**< TODO */
+#define LT_DASHDOTDOT		DASHDOTDOT	/**< TODO */
 #define LT_USERDEF		USERLINE	/**< TODO */
 #define LONGDASH		LDASHED		/**< TODO */
-#define DOT				DOTTED		/**< TODO */
+#define DOT			DOTTED		/**< TODO */
 #define DASH2DOT		DASHDOTDOT	/**< TODO */
 
 /* vsm_type modes */
 #define MRKR_DOT		1	/**< TODO */
 #define MRKR_PLUS 		2	/**< TODO */
-#define MRKR_ASTERISK	3	/**< TODO */
+#define MRKR_ASTERISK		3	/**< TODO */
 #define MRKR_BOX		4	/**< TODO */
 #define MRKR_CROSS		5	/**< TODO */
-#define MRKR_DIAMOND	6	/**< TODO */
+#define MRKR_DIAMOND		6	/**< TODO */
 
 /* other names */
-#define MT_DOT		MRKR_DOT		/**< TODO */
-#define MT_PLUS		MRKR_PLUS		/**< TODO */
-#define MT_ASTERISK	MRKR_ASTERISK	/**< TODO */
-#define MT_SQUARE	MRKR_BOX		/**< TODO */
-#define MT_DCROSS	MRKR_CROSS		/**< TODO */
-#define MT_DIAMOND	MRKR_DIAMOND	/**< TODO */
+#define MT_DOT			MRKR_DOT		/**< TODO */
+#define MT_PLUS			MRKR_PLUS		/**< TODO */
+#define MT_ASTERISK		MRKR_ASTERISK	/**< TODO */
+#define MT_SQUARE		MRKR_BOX		/**< TODO */
+#define MT_DCROSS		MRKR_CROSS		/**< TODO */
+#define MT_DIAMOND		MRKR_DIAMOND	/**< TODO */
 
 /* vst_alignment modes */
 #define TA_LEFT         	0 /* horizontal */	/**< TODO */
@@ -2250,47 +2250,47 @@ extern void aes (AESPB *pb);
 #define TA_TOP          	5	/**< TODO */
 
 /* vst_charmap modes */
-#define MAP_BITSTREAM   0	/**< TODO */
-#define MAP_ATARI       1	/**< TODO */
-#define MAP_UNICODE     2 /* for vst_map_mode, NVDI 4 */	/**< TODO */
+#define MAP_BITSTREAM		0	/**< TODO */
+#define MAP_ATARI		1	/**< TODO */
+#define MAP_UNICODE		2 /* for vst_map_mode, NVDI 4 */	/**< TODO */
 
 /* vst_effects modes */
 #define TXT_NORMAL		0x0000	/**< TODO */
-#define TXT_THICKENED	0x0001	/**< TODO */
+#define TXT_THICKENED		0x0001	/**< TODO */
 #define TXT_LIGHT		0x0002	/**< TODO */
 #define TXT_SKEWED		0x0004	/**< TODO */
-#define TXT_UNDERLINED	0x0008	/**< TODO */
-#define TXT_OUTLINED	0x0010	/**< TODO */
-#define TXT_SHADOWED	0x0020	/**< TODO */
+#define TXT_UNDERLINED		0x0008	/**< TODO */
+#define TXT_OUTLINED		0x0010	/**< TODO */
+#define TXT_SHADOWED		0x0020	/**< TODO */
 
 /* other names */
 #define	TF_NORMAL		TXT_NORMAL		/**< TODO */
-#define TF_THICKENED	TXT_THICKENED	/**< TODO */
-#define TF_LIGHTENED	TXT_LIGHT		/**< TODO */
+#define TF_THICKENED		TXT_THICKENED	/**< TODO */
+#define TF_LIGHTENED		TXT_LIGHT		/**< TODO */
 #define TF_SLANTED		TXT_SKEWED		/**< TODO */
-#define TF_UNDERLINED	TXT_UNDERLINED	/**< TODO */
+#define TF_UNDERLINED		TXT_UNDERLINED	/**< TODO */
 #define TF_OUTLINED		TXT_OUTLINED	/**< TODO */
 #define TF_SHADOWED		TXT_SHADOWED	/**< TODO */
 
 
 /* vst_error modes */
 #define APP_ERROR		0	/**< TODO */
-#define SCREEN_ERROR	1	/**< TODO */
+#define SCREEN_ERROR		1	/**< TODO */
 
 /* vst_error return values */
 #define NO_ERROR		0		/**< TODO */
-#define CHAR_NOT_FOUND	1		/**< TODO */
-#define FILE_READERR 	8		/**< TODO */
-#define FILE_OPENERR 	9		/**< TODO */
+#define CHAR_NOT_FOUND		1		/**< TODO */
+#define FILE_READERR 		8		/**< TODO */
+#define FILE_OPENERR 		9		/**< TODO */
 #define BAD_FORMAT		10		/**< TODO */
 #define CACHE_FULL		11		/**< TODO */
 #define MISC_ERROR		(-1)	/**< TODO */
 
 /* vst_kern tmodes */
 #define TRACK_NONE		0	/**< TODO */
-#define TRACK_NORMAL 	1	/**< TODO */
+#define TRACK_NORMAL 		1	/**< TODO */
 #define TRACK_TIGHT		2	/**< TODO */
-#define TRACK_VERYTIGHT	3	/**< TODO */
+#define TRACK_VERYTIGHT		3	/**< TODO */
 
 /* vst_kern pmodes */
 #define PAIR_OFF		0	/**< TODO */
@@ -3010,11 +3010,11 @@ short vdi_wstrlen   (const short *wstr);
  */
 
 /* Array sizes in vdi control block as defined in NVDI 4 documentation */
-#define VDI_CNTRLMAX     15		/**< max size of vdi_control[] */
-#define VDI_INTINMAX    1024	/**< max size of vdi_intin[] */
-#define VDI_INTOUTMAX   512		/**< max size of vdi_intout[] */
-#define VDI_PTSINMAX    1024	/**< max size of vdi_ptsin[] */
-#define VDI_PTSOUTMAX   256		/**< max size of vdi_ptsout[] */
+#define VDI_CNTRLMAX		15		/**< max size of vdi_control[] */
+#define VDI_INTINMAX		1024	/**< max size of vdi_intin[] */
+#define VDI_INTOUTMAX		512		/**< max size of vdi_intout[] */
+#define VDI_PTSINMAX		1024	/**< max size of vdi_ptsin[] */
+#define VDI_PTSOUTMAX		256		/**< max size of vdi_ptsout[] */
 
 /** TODO */
 typedef struct
