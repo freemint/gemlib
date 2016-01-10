@@ -2443,7 +2443,6 @@ void  udef_vst_error     (VdiHdl , short mode, short *errorvar);
 
 
 #ifdef FORCE_GEMLIB_UDEF
-/** Force usage of UDEF version of vst_error(). See \ref overviewUDEF for details about UDEF feature */
 #define vst_error udef_vst_error
 #endif
 
