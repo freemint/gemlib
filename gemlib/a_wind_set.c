@@ -297,6 +297,7 @@
  *          Hit the key ESC escape from fullscreen mode  
  *
  *          MyAES 0.96 feature
+ *
  *     
  *	</table>
  *
@@ -304,6 +305,8 @@
  *
  *  @sa mt_wind_get()
  *
+ *  @note Under MyAES if \a WindowHandle is set to -2 then it is possible to know if option \a What is avaible or not,
+ *  if available then return is 1 else return value is 0
  */
  
 short 
