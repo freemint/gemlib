@@ -285,6 +285,12 @@
  *
  *          MyAES feature
  *
+ * <tr><td> WF_WIND_ATTACH  <td>      231 <td>
+ *          Get if a window is attach to the requested window
+ *          - \a W1 windows id attached values already set by user with wind_set()
+ *
+ *          MyAES feature
+ *
  * <tr><td> #WF_BITMAP  <td>      233 <td>
  *          Get bitmap content of the window if MyAES "windows_backup" option is set to true, 
  *          any windows of any application can be read
@@ -299,8 +305,10 @@
  *  @note aes_intout[3,4] are initialized to 0 before the AES trap.
  *        It's usefull under NAES for WF_FIRST/NEXTXYWH since lot
  *        of programmers only check for w and h = 0, and not the
- *        return value.
+ *        return value.\n
  *
+ * @note Under MyAES if \a WindowHandle is set to -2 then it is possible to know if option \a What is avaible or not,
+ * if available then return is 1 else return value is 0
  */
 
 short 
