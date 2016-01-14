@@ -1625,20 +1625,20 @@ typedef struct text_edinfo
 /** TODO */
 typedef struct icon_block
 {
-	short		*ib_pmask;			/**< TODO */
-	short		*ib_pdata;			/**< TODO */
-	char		*ib_ptext;			/**< TODO */
-	short		ib_char;			/**< TODO */
-	short		ib_xchar;			/**< TODO */
-	short		ib_ychar;			/**< TODO */
-	short		ib_xicon;			/**< TODO */
-	short		ib_yicon;			/**< TODO */
-	short		ib_wicon;			/**< TODO */
-	short		ib_hicon;			/**< TODO */
-	short		ib_xtext;			/**< TODO */
-	short		ib_ytext;			/**< TODO */
-	short		ib_wtext;			/**< TODO */
-	short		ib_htext;			/**< TODO */
+	short		*ib_pmask;			/**< Ptr to the icon mask*/
+	short		*ib_pdata;			/**< Ptr to the icon image */
+	char		*ib_ptext;			/**< Ptr to the icon text */
+	short		ib_char;			/**< Icon character, foreground and background color \n Bits : \n 15-12 Icon foreground color\n 11-8 Icon Background color \n 7-0 ASCCI value of the Character to be displayed*/
+	short		ib_xchar;			/**< X coordinate of the character */
+	short		ib_ychar;			/**< Y coordinate of the character */
+	short		ib_xicon;			/**< X coordinate of the icon */
+	short		ib_yicon;			/**< Y coordinate of the icon */
+	short		ib_wicon;			/**< Width of the icon */
+	short		ib_hicon;			/**< Height of the icon */
+	short		ib_xtext;			/**< X coordinate of the text (relative to the position of the icon) */
+	short		ib_ytext;			/**< Y coordinate of the text (relative to the position of the icon)*/
+	short		ib_wtext;			/**< Width in pixels of the text */
+	short		ib_htext;			/**< Height in pixels of the text */
 } ICONBLK;
 
 /** TODO */
@@ -1655,19 +1655,19 @@ typedef struct bit_block
 /** TODO */
 typedef struct cicon_data
 {
-	short 		num_planes;			/**< TODO */
-	short 		*col_data;			/**< TODO */
-	short 		*col_mask;			/**< TODO */
-	short 		*sel_data;			/**< TODO */
-	short 		*sel_mask;			/**< TODO */
-	struct cicon_data *next_res;	/**< TODO */
+	short 		num_planes;			/**< Number of color planes */
+	short 		*col_data;			/**< Ptr to colour bitmap in standard form */
+	short 		*col_mask;			/**< Ptr to individual colour plane mask (1 bit)*/
+	short 		*sel_data;			/**< Ptr to colour bitmap of selected icon in standard format */
+	short 		*sel_mask;			/**< Ptr to individual plane mask of the icon (1 bit)*/
+	struct cicon_data *next_res;	/**< Next resolution definition of the icon*/
 } CICON;
 
 /** TODO */
 typedef struct cicon_blk
 {
-	ICONBLK		monoblk;			/**< TODO */
-	CICON 		*mainlist;			/**< TODO */
+	ICONBLK		monoblk;			/**< ICONBLK definition (B&W icon) */
+	CICON 		*mainlist;			/**< list of the different color icon resolution */
 } CICONBLK;
 
 /** TODO */
