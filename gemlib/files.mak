@@ -144,7 +144,6 @@ OBJ = \
  globals.o	\
  n_v_bez.o	\
  u_v_bez.o	\
- n_v_bez_fill.o	\
  n_v_bez_off.o	\
  n_v_bez_on.o	\
  n_v_bez_qual.o	\

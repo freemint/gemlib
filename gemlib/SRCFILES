@@ -194,7 +194,6 @@ _VDI_RASTER = \
 _VDI_EXTENSIONS = \
 	n_v_bez.c \
 	u_v_bez.c \
-	n_v_bez_fill.c \
 	n_v_bez_off.c \
 	n_v_bez_on.c \
 	n_v_bez_qual.c \
