@@ -97,12 +97,19 @@ vbcc:
 	$(MAKE) -f vbcc.mak LIB_VBCC="lib/vbcc/libgem030.a" MORE_CFLAGS="+mint -cpu=68030" MORE_SFLAGS="-m68030"
 #68000 mshort target (+mint16 : unofficial config for vc for 68K target and mint with mshort option, replace "vbccm68k" by "vbccm68ks" in mint config and rename it to mint16 )
 	$(MAKE) -f vbcc.mak LIB_VBCC="lib/vbcc/libgem16.a" MORE_CFLAGS="+mint16" MORE_SFLAGS="-D__MSHORT__"
-	
+
+lattice:
+	mkdir -p .lattice; mkdir -p lib/lattice; make -f lat.mak LIB_LATTICE="lib/lattice/gem.lib" MORE_CFLAGS="" MORE_SFLAGS=""
+	make -f lat.mak LIB_LATTICE="lib/lattice/gem30.lib" MORE_CFLAGS="-m3" MORE_SFLAGS=""
+
+ahcc:
+	mkdir -p lib/ahcc; make -f ahcc.mak LIB_AHCC="lib/ahcc/gem.lib"
+
 zip:
 	make -f zip.mak
 	
 all-compilers:
-	rm -f *.o; mkdir -p lib/sozobon lib/gcc lib/gcc281 lib/vbcc include
+	rm -f *.o; mkdir -p lib/sozobon lib/gcc lib/gcc281 lib/vbcc lib/lattice include
 	make -f sox.mak; rm -f *.o; 
 	make -f gcc.mak; rm -f *.o; 
 	make -f gcc281.mak; rm -f *.o; 
