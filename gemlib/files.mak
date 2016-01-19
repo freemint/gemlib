@@ -554,4 +554,5 @@ SX_OBJ = _sx_asm.o
 GC_OBJ = _gc_asm_aes.o _gc_asm_vdi.o _gc_asm_vq_gdos.o _gc_asm_vq_vgdos.o
 PC_OBJ = _pc_asm.o
 VC_OBJ = _vc_asm_vq_gdos.o _vc_asm_vq_vgdos.o
+LA_OBJ = _lc_asm.o
 
