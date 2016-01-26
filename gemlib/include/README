@@ -16,3 +16,6 @@ copy the file gcc281/compiler.h to your gcc_281/include directory
 
 For GCC >= 2.95 user:
 mintlib already have an up-to-date compiler.h file, nothing to do.
+
+For Lattice C user:
+copy the file lattice/compiler.h to your lattice/H directory (include directory)
