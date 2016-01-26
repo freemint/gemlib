@@ -99,8 +99,13 @@ vbcc:
 	$(MAKE) -f vbcc.mak LIB_VBCC="lib/vbcc/libgem16.a" MORE_CFLAGS="+mint16" MORE_SFLAGS="-D__MSHORT__"
 
 lattice:
-	mkdir -p .lattice; mkdir -p lib/lattice; make -f lat.mak LIB_LATTICE="lib/lattice/gem.lib" MORE_CFLAGS="" MORE_SFLAGS=""
+	rm -f count.txt;
+	echo 1 >> count.txt;
+	mkdir -p .lattice; mkdir -p lib/lattice; make -f lat.mak LIB_LATTICE="lib/lattice/gem.lib" MORE_CFLAGS="" MORE_SFLAGS="" LATTICE_COUNT="1"
+	rm -f count.txt;
+	echo 1 >> count.txt;
 	make -f lat.mak LIB_LATTICE="lib/lattice/gem30.lib" MORE_CFLAGS="-m3" MORE_SFLAGS=""
+	rm -f count.txt
 
 ahcc:
 	mkdir -p lib/ahcc; make -f ahcc.mak LIB_AHCC="lib/ahcc/gem.lib"
