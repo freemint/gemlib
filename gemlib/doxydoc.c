@@ -307,7 +307,7 @@
  *  AES provides a mean for applications to draw its own objects in forms. This is "userdefined" object feature. The application defines a ub_code()
  *  callback function, and this callback function is called by the AES to redraw the object (by using VDI functions to draw stuff).
  *
- *  The issue is the following: some AES (TOS, maybe MagiC ?) have a small supervisor stack, and invoke the userdef callback function in supervisor mode.
+ *  The issue is the following: some AES (TOS, MagiC) have a small supervisor stack, and invoke the userdef callback function in supervisor mode.
  *  This may lead to a stack overflow if hungry stack consumption VDI calls are used.
  *
  *  Note: this is no issue with modern AES (XaAES or MyAES) which invokes the callback function in user mode.
