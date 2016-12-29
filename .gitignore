@@ -1,0 +1,9 @@
+.deps
+.lib*
+gemlib/mt_gem.h
+*.o
+*.a
+*.slb
+*.app
+*.prg
+*~
