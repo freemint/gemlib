@@ -7,6 +7,7 @@ compiler:
    - m68k-atari-mint-gcc
 
 before_install:
+  - 'openssl aes-256-cbc -K $encrypted_184ce553573b_key -iv $encrypted_184ce553573b_iv -in .travis/deploy-key.enc -out .travis/deploy-key -d'
   - 'sh ./.install-cross-mint.sh'
 
 script:
