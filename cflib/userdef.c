@@ -42,7 +42,7 @@
 #include <gemx.h>
 
 #include "inline.rsh"
-#include "inline.rh"
+#include "inline.h"
 
 OBJECT *cf_ascii_tab = NULL;
 OBJECT *cf_alert_box = NULL;

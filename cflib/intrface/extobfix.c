@@ -74,7 +74,7 @@
 #define STATE15			0x8000
 
 #include "exthelp.rsh"
-#include "exthelp.rh"
+#include "exthelp.h"
 
 /****** Functions ************************************************************/
 
@@ -87,6 +87,9 @@ static short test_alert (short def, char *str);
 
 /****** Variables ************************************************************/
 
+#ifdef __GNUC__
+__attribute__((__used__))
+#endif
 static long routines[] =
 {
 	(long) fix_objs,
@@ -154,14 +157,18 @@ int
 main (void)
 {
 	extern char __Ident_cflib[];
-	static long dummy;
 	char pl[10], str[80];
 
 	appl_init ();
 	get_patchlev (__Ident_cflib, pl);
 	sprintf (str, "[0][ExtObFix, used by InterFace.|CF-Lib PL%s, %s][OK]", pl, __DATE__);
 	form_alert (1, str);
+#ifndef __GNUC__
+	{
+	static long dummy;
 	dummy = routines[6];	/* Sonst wird die Struktur von Pure C wegoptimiert... */
+	}
+#endif
 	appl_exit ();
 	return 0;
 }
