@@ -28,10 +28,10 @@ v_color2value (short handle, long color_space, COLOR_ENTRY * color)
 
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 	
-	*(long*)       &vdi_intin[0] = color_space;
+	vdi_intin_long(0) = color_space;
 	*(COLOR_ENTRY*)&vdi_intin[2] = *color;
 
 	VDI_TRAP (vdi_params, handle, 204, 0,6);
 
-	return *(unsigned long *)&vdi_intout[0];
+	return vdi_intout_long(0);
 }

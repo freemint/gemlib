@@ -28,14 +28,12 @@ vsm_string (short handle, short len, short echo, short echoxy[], char *str)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[2];   
-	short vdi_ptsin[2];   
 	short vdi_intout[VDI_INTOUTMAX]; 
 	
-	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_intout, vdi_dummy );
+	VDI_PARAMS(vdi_control, vdi_intin, echoxy, vdi_intout, vdi_dummy);
 	
 	vdi_intin[0]      = len;
 	vdi_intin[1]      = echo;
-	*(long*)vdi_ptsin = *(long*)echoxy;
 	
 	VDI_TRAP (vdi_params, handle, 31, 1,2);
 	

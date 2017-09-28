@@ -24,14 +24,14 @@ v_create_ctab (short handle, long color_space, unsigned long px_format)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[4];   
-	short vdi_intout[2]; 
+	short vdi_intout[N_PTRINTS];
 
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 	
-	*(long*)          &vdi_intin[0] = color_space;
-	*(unsigned long *)&vdi_intin[2] = px_format;
+	vdi_intin_long(0) = color_space;
+	vdi_intin_long(2) = px_format;
 
 	VDI_TRAP_ESC (vdi_params, handle, 206,8, 0,4);
 
-	return *(COLOR_TAB**)&vdi_intout[0];
+	return vdi_intout_ptr(0, COLOR_TAB *);
 }

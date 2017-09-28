@@ -22,7 +22,7 @@ vqt_real_extent16n (short handle, short x, short y, const WCHAR *wstring, short 
 	short vdi_control[VDI_CNTRLMAX];  
 	short vdi_ptsin[2];   
 
-	VDI_PARAMS(vdi_control, wstring, vdi_ptsin, vdi_dummy, extent);
+	VDI_PARAMS(vdi_control, (short *)NO_CONST(wstring), vdi_ptsin, vdi_dummy, extent);
 
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;

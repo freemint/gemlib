@@ -29,7 +29,7 @@ void
 vqt_advance32 (short handle, short ch, long *advx, long *advy)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_ptsout[8]; 
+	short vdi_ptsout[VDI_PTSOUTMAX];
 
 	VDI_PARAMS(vdi_control, &ch, 0L, vdi_dummy, vdi_ptsout);
 	
@@ -38,9 +38,13 @@ vqt_advance32 (short handle, short ch, long *advx, long *advy)
 #if CHECK_NULLPTR
 	if (advx)
 #endif
-	*advx = *(long*)&vdi_ptsout[4];
+	{
+		*advx = vdi_ptsout_long(4);
+	}
 #if CHECK_NULLPTR
 	if (advy)
 #endif
-	*advy = *(long*)&vdi_ptsout[6];
+	{
+		*advy = vdi_ptsout_long(6);
+	}
 }

@@ -22,5 +22,5 @@ udef_vq_hilite_color (short handle, COLOR_ENTRY * hilite_color)
 #endif
 	*hilite_color = *(COLOR_ENTRY*)&_VDIParBlk.vdi_intout[2];
 	
-	return *(long*)_VDIParBlk.vdi_intout;
+	return vdi_intout_long(0);
 }

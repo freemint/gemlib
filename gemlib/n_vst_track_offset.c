@@ -31,7 +31,7 @@ vst_track_offset (short handle, long offset, short pairmode,
 	
 	vdi_intin[0]          = 255;
 	vdi_intin[1]          = pairmode;
-	*(long*)&vdi_intin[2] = offset;
+	vdi_intin_long(2) = offset;
 	
 	VDI_TRAP (vdi_params, handle, 237, 0,4);
 	

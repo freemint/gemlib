@@ -25,8 +25,10 @@ v_value2color (short handle, unsigned long value, COLOR_ENTRY * color)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intout[6]; 
+	short vdi_intin[2];
 
-	VDI_PARAMS(vdi_control, (short*)&value, 0L, vdi_intout, vdi_dummy);
+	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
+	vdi_intin_long(0) = value;
 	
 	VDI_TRAP_ESC (vdi_params, handle, 204,1, 0,2);
 
