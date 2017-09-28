@@ -37,7 +37,7 @@
 OBJECT	*menu, *objdial, *popdial, *wicon, *popups, *about;
 WDIALOG	*wdial;
 short	quit;
-short	msg[8], vdi_handle;
+short	vdi_handle;
 short	event, msx, msy, mbutton, kstate, mclick, kreturn, win_handle;
 short	modal = FALSE;
 short	id = 1, pts = 10;
@@ -165,7 +165,7 @@ appmodal_dial (void)
 {
 	void *mdial;
 	short close = FALSE;
-	short id, exit_obj;
+	short stguide_id, exit_obj;
 
 	mdial = open_mdial (objdial, EDIT1);
 	while (!close)
@@ -185,9 +185,9 @@ appmodal_dial (void)
 				break;
 
 			case HELP:
-				id = appl_find ("ST-GUIDE");
-				if (id > 0)
-					send_vastart (id, "*:\\cflib.hyp");
+				stguide_id = appl_find ("ST-GUIDE");
+				if (stguide_id > 0)
+					send_vastart (stguide_id, "*:\\cflib.hyp");
 				break;
 
 			case UNDO:
@@ -469,6 +469,7 @@ main (void)
 	extern char __Ident_cflib[];
 	OBJECT *tree;
 	char tmp[20];
+	short  msg[8];
 
 	init_app ("demo.rsc");
 	init_colorpop (8);

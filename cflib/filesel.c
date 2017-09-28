@@ -116,7 +116,7 @@ do_magx (char *path, char *name, char *mask, char *title, FSEL_CB open_cb)
 		}
 		pat[j++] = '\0';
 	}
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 3; i++)
 		pat[j++] = def_mask[i];
 
 	if (path[0] != '\0')

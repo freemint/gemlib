@@ -82,7 +82,7 @@ long pinit_obfix (short status);
 
 static void fix_objs (OBJECT * tree, short is_dialog);
 static void (*get_name) (void *window, short obj, char *txt);
-static void test_form (OBJECT *tree, short editobj, long get_n, void *window);
+static void test_form (OBJECT *tree, short editobj, void (*get_n) (void *, short, char *), void *window);
 static short test_alert (short def, char *str);
 
 /****** Variables ************************************************************/
@@ -111,12 +111,12 @@ fix_objs (OBJECT * tree, short is_dialog)
 /*****************************************************************************/
 
 static void
-test_form (OBJECT *tree, short editobj, long get_n, void *window)
+test_form (OBJECT *tree, short editobj, void (*get_n) (void *, short, char *), void *window)
 {
 	short x, y, w, h, but, zw;
 	char name[20], buf[80];
 
-	*(long *) &get_name = get_n;
+	get_name = get_n;
 
 	fix_objs (tree, TRUE);
 
@@ -170,6 +170,7 @@ main (void)
 	}
 #endif
 	appl_exit ();
+	(void) rs_trindex;
 	return 0;
 }
 
