@@ -57,6 +57,11 @@ m5475:
 m5475mshort:
 	$(MAKE) libgemv4e16.a TARGET="v4e16"
 
+clean::
+	for TARGET in "" "16" "020" "02016" "v4e" "v4e16"; do \
+		cd .lib$${TARGET} && $(MAKE) clean; \
+	done; :
+
 .PHONY: doc
 
 ChangeLog:
