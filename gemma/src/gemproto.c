@@ -128,7 +128,7 @@ _fsel_exinput(PROC_ARRAY *proc, char *path, char *name, char *title)
 }
 
 long
-_form_alert(PROC_ARRAY *proc, short button, char *msg)
+_form_alert(PROC_ARRAY *proc, short button, const char *msg)
 {
 	proc->gem.int_in[0] = button;
 	proc->gem.addr_in[0] = (long)msg;

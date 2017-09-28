@@ -28,7 +28,7 @@ typedef struct
 	SLB_EXEC	exec;
 } SLB;
 
-long _slbopen (char *fname, char *path, long ver, void *hnd, void *exec);
+long _slbopen (const char *fname, const char *path, long ver, void *hnd, void *exec);
 
 
 # endif /* mint/slb.h */

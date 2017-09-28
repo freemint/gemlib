@@ -39,7 +39,7 @@ const long sema_users = (const long)get_users;
 
 # ifdef DEBUG
 void
-debug_print(char *function, char *string)
+debug_print(const char *function, const char *string)
 {
 	Cconws(function);
 	Cconws("(): ");

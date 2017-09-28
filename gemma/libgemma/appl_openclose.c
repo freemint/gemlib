@@ -137,7 +137,7 @@ gem_control(void)
 }
 
 long
-appl_open(char *file, short thread, char *pname)
+appl_open(const char *file, short thread, const char *pname)
 {
 	long r;
 	SLB temp;
@@ -159,7 +159,7 @@ appl_open(char *file, short thread, char *pname)
 	 * to call appl_open() twice without calling
 	 * appl_close().
 	 */
-	r = (temp.exec)(temp.handle, (long)AP_OPEN, (short)3, (char *)file, (short)thread, (char *)pname);
+	r = (temp.exec)(temp.handle, (long)AP_OPEN, (short)3, file, (short)thread, pname);
 	if (r > 0)
 	{
 		SLB *kern_p;

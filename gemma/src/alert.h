@@ -15,8 +15,8 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-long _alert(PROC_ARRAY *p, short button, char *msg);
+long _alert(PROC_ARRAY *p, short button, const char *msg);
 long windial_alert(BASEPAGE *bp, long fn, short nargs, short button, long object, PROC_ARRAY *p);
-long windial_error(BASEPAGE *bp, long fn, short nargs, long error, char *msg, PROC_ARRAY *p);
+long windial_error(BASEPAGE *bp, long fn, short nargs, long error, const char *msg, PROC_ARRAY *p);
 
 /* EOF */

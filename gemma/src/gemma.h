@@ -171,7 +171,7 @@ extern short menu_height;		/* in appl.c */
 # define aes40(p) 	(p->gem.global[0] >= 0x0400)
 
 # ifdef DEBUG
-void debug_print(char *fn, char *string);
+void debug_print(const char *fn, const char *string);
 # endif
 
 const long sema_users;

@@ -44,7 +44,7 @@ long _evnt_multi(PROC_ARRAY *proc, short fl, short cl, short mask, short state, 
 			short *msg, unsigned long timer);
 long _evnt_timer(PROC_ARRAY *proc, unsigned long msec);
 long _fsel_exinput(PROC_ARRAY *proc, char *path, char *name, char *title);
-long _form_alert(PROC_ARRAY *proc, short b, char *msg);
+long _form_alert(PROC_ARRAY *proc, short b, const char *msg);
 long _form_button(PROC_ARRAY *proc, OBJECT *tree, short obj, short clk);
 long _form_dial(PROC_ARRAY *proc, short flag, short *dxywh, short *cxywh);
 long _form_keybd(PROC_ARRAY *proc, OBJECT *tree, short obj, short nobj, short tch);

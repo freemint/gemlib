@@ -16,6 +16,8 @@ include $(top_srcdir)/CONFIGVARS
 include $(top_srcdir)/RULES
 include $(top_srcdir)/PHONY
 
+CFLAGS += -Wno-inline
+
 all-here: $(TARGET)
 
 # default overwrites
