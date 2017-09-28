@@ -49,6 +49,9 @@
 #  define uchar unsigned char
 # endif
 
+
+#ifndef __XATTR
+#define __XATTR
 struct xattr
 {
 	ushort	mode;
@@ -68,6 +71,7 @@ struct xattr
 	short	reserved2;
 	long	reserved3[2];
 };
+#endif
 
 struct gemma_flags
 {

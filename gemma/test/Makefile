@@ -23,7 +23,7 @@ INCLUDES += -I../include/
 GENERAL = 
 
 # default definitions
-OBJS =  $(SOBJS:.s=.o) $(COBJS:.c=.o)
+OBJS =  $(SOBJS:.S=.o) $(COBJS:.c=.o)
 LDFLAGS = -nostartfiles -nostdlib -L../libgemma/
 LIBS = -lgemma -lgcc
 GENFILES = $(TARGET)

@@ -1,4 +1,4 @@
-/* Prototypes for internal GEM calls */
+ /* Prototypes for internal GEM calls */
 
 /*  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,12 +20,12 @@ gemsys(long sysopcode, long *params)
 {
 	__asm__ volatile						\
 	(								\
-		"move.l	%0,d0\n\t"					\
-		"move.l	%1,d1\n\t"					\
+		"move.l	%0,%%d0\n\t"					\
+		"move.l	%1,%%d1\n\t"					\
 		"trap	#2\n\t"						\
 		:							\
 		: "g"(sysopcode), "g"(params)				\
-		: "d0", "d1", "d2", "a0", "a1", "a2", "memory"		\
+		: "d0", "d1", "d2", "a0", "a1", "a2", "memory", "cc"		\
 	);
 }
 
