@@ -28,6 +28,10 @@ ifeq ($(WITH_020_LIB),yes)
 ALL_LIBS += normal020
 endif
 
+ifeq ($(WITH_V4E_LIB),yes)
+ALL_LIBS += normalv4e
+endif
+
 libs: $(ALL_LIBS)
 
 normal:
@@ -35,6 +39,9 @@ normal:
 
 normal020:
 	$(MAKE) libgemma020.a TARGET="020"
+
+normalv4e:
+	$(MAKE) libgemmav4e.a TARGET="v4e"
 
 mt:
 	$(MAKE) libgemma_mt.a TARGET="_mt"
@@ -51,7 +58,11 @@ libgemma$(TARGET).a: objs
 
 objs: .lib$(TARGET)
 	cd .lib$(TARGET); $(MAKE)
+.PHONY: objs
 
-.lib$(TARGET):
-	$(MKDIR) $@
+.lib$(TARGET): Makefile.objs
+	$(MKDIR) -p $@
 	$(CP) Makefile.objs $@/Makefile
+
+clean::
+	rm -rf .lib*

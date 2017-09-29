@@ -114,15 +114,23 @@ L_handle	=	L_nargs+4
 L_vec	=	L_handle+4
 L_addr	=	L_vec+4
 
+#ifdef __mcoldfire__
+	lea -56(%sp),%sp
+	movem.l	%d1-%a6,(%sp)
+#else
 	movem.l	%d1-%a6,-(%sp)
+#endif
 
 	move.l	L_handle(%sp),%a5
-	cmp.l	#25091973,L_WB_MAGIC(%a5)
+	move.l	L_WB_MAGIC(%a5),%d0
+	cmp.l	#25091973,%d0
 	beq.s	valid
 	moveq	#EFAULT,%d0
 	bra.s	exit
 
-valid:	cmp.l	#4,L_nargs(%sp)
+valid:
+	move.l	L_nargs(%sp),%d0
+	cmp.l	#4,%d0
 	bpl.s	ok
 	moveq	#EINVAL,%d0
 	bra.s	exit
@@ -152,7 +160,13 @@ ok:	lea	WB_EXTHANDLER(%a5),%a0
 	subq.l	#1,%d0
 	beq.s	set
 	moveq	#EINVAL,%d0
-exit:	movem.l	(%sp)+,%d1-%a6
+exit:
+#ifdef __mcoldfire__
+	movem.l	(%sp),%d1-%a6
+	lea 56(%sp),%sp
+#else
+	movem.l	(%sp)+,%d1-%a6
+#endif
 	rts
 
 set:	lea	60(%sp),%a2
@@ -173,7 +187,12 @@ set:	lea	60(%sp),%a2
 	move.l	-(%a2),(%a1)+	| a6
 	move.l	L_addr(%sp),(%a0)+
 	move.l	%sp,(%a0)+
+#ifdef __mcoldfire__
+	movem.l	(%sp),%d1-%a6
+	lea 56(%sp),%sp
+#else
 	movem.l	(%sp)+,%d1-%a6
+#endif
 	clr.l	%d0
 	rts
 
@@ -186,12 +205,14 @@ L_vec	=	L_handle+4
 
 	move.l	L_handle(%sp),%a5
 
-	cmp.l	#2,L_nargs(%sp)
+	move.l	L_nargs(%sp),%d0
+	cmp.l	#2,%d0
 	bpl.s	1f
 	moveq	#EINVAL,%d0
 	bra.s	exit2
 
-1:	cmp.l	#25091973,L_WB_MAGIC(%a5)
+1:	move.l	L_WB_MAGIC(%a5),%d0
+	cmp.l	#25091973,%d0
 	beq.s	0f
 	moveq	#EFAULT,%d0
 	bra.s	exit2
@@ -247,7 +268,12 @@ set2:	move.l	4(%a0),%sp
 	move.l	(%a1)+,-(%sp)
 	move.l	(%a1)+,-(%sp)
 
+#ifdef __mcoldfire__
+	movem.l	(%sp),%d1-%a6
+	lea 56(%sp),%sp
+#else
 	movem.l	(%sp)+,%d1-%a6
+#endif
 	moveq	#1,%d0
 	rts
 

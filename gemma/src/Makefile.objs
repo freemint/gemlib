@@ -1,0 +1,42 @@
+#
+# Makefile for gemma, a minimal GEM library
+#
+
+SHELL = /bin/sh
+SUBDIRS = 
+
+srcdir = ..
+top_srcdir = ../../..
+subdir = .lib$(TARGET)
+
+default: all
+
+include $(top_srcdir)/CONFIGVARS
+include $(top_srcdir)/RULES
+include $(top_srcdir)/PHONY
+
+all-here: gemma32.slb
+
+# default overwrites
+ifeq ($(TARGET),020)
+GENERAL += -m68020-60
+endif
+
+ifeq ($(TARGET),v4e)
+GENERAL += -mcpu=5475
+endif
+
+# default definitions
+OBJS = $(SOBJS:.S=.o) $(COBJS:.c=.o)
+LDFLAGS = -nostartfiles -nostdlib
+LIBS = -lc -lgcc
+GENFILES = gemma32.slb
+
+VPATH = ..
+
+gemma32.slb: $(OBJS)
+	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS)
+	$(STRIP) $@
+
+
+include $(top_srcdir)/DEPENDENCIES

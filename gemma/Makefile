@@ -9,6 +9,11 @@ srcdir = .
 top_srcdir = ..
 subdir = gemma
 
+libdir = ${PREFIX}/lib
+slblibdir = ${PREFIX}/../mint/slb
+includedir = ${PREFIX}/include
+slbincludedir = ${includedir}/slb
+
 default: all
 
 include $(top_srcdir)/CONFIGVARS
@@ -24,25 +29,39 @@ all-here:
 
 
 install:
-	mkdir -p ${PREFIX}/include/slb
-	mkdir -p ${PREFIX}/local/lib/slb
-	install -m 644 include/slb/gemma.h ${PREFIX}/include/slb
-	install -m 644 include/slb/gemma-struct.h ${PREFIX}/include/slb
-	install -m 644 include/slb/kernel.h ${PREFIX}/include/slb
-	install -m 644 libgemma/libgemma.a ${PREFIX}/lib
+	install -m 755 -d ${libdir}
+	install -m 755 -d ${slblibdir}
+	install -m 644 include/slb/gemma.h ${slbincludedir}
+	install -m 644 include/slb/gemma-struct.h ${slbincludedir}
+	install -m 644 include/slb/kernel.h ${slbincludedir}
+	install -m 644 libgemma/libgemma.a ${libdir}
 ifeq ($(WITH_020_LIB),yes)
-	install -m 644 libgemma/libgemma020.a ${PREFIX}/lib/m68020-60/libgemma.a
+	install -m 755 -d ${libdir}/m68020-60
+	install -m 644 libgemma/libgemma020.a ${libdir}/m68020-60/libgemma.a
 endif
-	install -m 755 src/gemma32.slb ${PREFIX}/local/lib/slb
-	install -m 755 kernel32.slb ${PREFIX}/local/lib/slb
+ifeq ($(WITH_V4E_LIB),yes)
+	install -m 755 -d ${libdir}/m5475
+	install -m 644 libgemma/libgemmav4e.a ${libdir}/m5475/libgemma.a
+endif
+	install -m 755 src/gemma32.slb ${slblibdir}
+ifeq ($(WITH_V4E_LIB),yes)
+	install -m 755 -d ${slblibdir}/m5475
+	install -m 755 src/gemma32v4e.slb ${slblibdir}/m5475/gemma32.slb
+endif
+ifeq ($(WITH_020_LIB),yes)
+	install -m 755 -d ${slblibdir}/m68020-60
+	install -m 755 src/gemma32020.slb ${slblibdir}/m68020-60/gemma32.slb
+endif
+	install -m 755 kernel32.slb ${slblibdir}
 
 uninstall:
-	rm -f ${PREFIX}/include/slb/gemma-struct.h
-	rm -f ${PREFIX}/include/slb/gemma.h
-	rm -f ${PREFIX}/include/slb/kernel.h
-	rm -f ${PREFIX}/lib/libgemma.a
-ifeq ($(WITH_020_LIB),yes)
-	rm -f ${PREFIX}/lib/m68020-60/libgemma.a
-endif
-	rm -f ${PREFIX}/local/lib/slb/gemma32.slb
-	rm -f ${PREFIX}/local/lib/slb/kernel32.slb
+	rm -f ${slbincludedir}/gemma-struct.h
+	rm -f ${slbincludedir}/gemma.h
+	rm -f ${slbincludedir}/kernel.h
+	rm -f ${libdir}/libgemma.a
+	rm -f ${libdir}/m68020-60/libgemma.a
+	rm -f ${libdir}/m5475/libgemma.a
+	rm -f ${slblibdir}/gemma32.slb
+	rm -f ${slblibdir}/m68020-60/gemma32.slb
+	rm -f ${slblibdir}/m5475/gemma32.slb
+	rm -f ${slblibdir}/kernel32.slb
