@@ -4,8 +4,6 @@
  * created by ORCS 2.15
  */
 
-#include <portab.h>
-
 #ifdef OS_WINDOWS
 #  include <portaes.h>
 #  define SHORT _WORD
@@ -245,16 +243,16 @@
 
 #ifdef __STDC__
 #ifndef GetTextSize
-extern _VOID GetTextSize(_WORD *_width, _WORD *_height);
+extern void GetTextSize(_WORD *_width, _WORD *_height);
 #endif
 #ifndef W_Cicon_Setpalette
-extern _BOOL W_Cicon_Setpalette(_WORD *_palette);
+extern int W_Cicon_Setpalette(_WORD *_palette);
 #endif
 #ifndef hrelease_objs
-extern _VOID hrelease_objs(OBJECT *_ob, _WORD _num_objs);
+extern void hrelease_objs(OBJECT *_ob, _WORD _num_objs);
 #endif
 #ifndef hfix_objs
-extern _VOID *hfix_objs(RSHDR *_hdr, OBJECT *_ob, _WORD _num_objs);
+extern void *hfix_objs(RSHDR *_hdr, OBJECT *_ob, _WORD _num_objs);
 #endif
 #endif
 
