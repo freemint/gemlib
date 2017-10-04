@@ -70,7 +70,7 @@ _conws(char *string)
 	while(string[x])
 	{
 		if (string[x] == '\n')
-			Cconws("\r\n");
+			(void) Cconws("\r\n");
 		else
 			Cconout(string[x]);
 		x++;

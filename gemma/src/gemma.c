@@ -41,10 +41,10 @@ const long sema_users = (const long)get_users;
 void
 debug_print(const char *function, const char *string)
 {
-	Cconws(function);
-	Cconws("(): ");
-	Cconws(string);
-	Cconws("\r\n");
+	(void) Cconws(function);
+	(void) Cconws("(): ");
+	(void) Cconws(string);
+	(void) Cconws("\r\n");
 }
 # endif
 
@@ -155,10 +155,11 @@ gemma_open(BASEPAGE *bp)
 {
 	PROC_ARRAY *proc;
 	long pid = Pgetpid();
+	short drv;
 
 	if (pid > MAX_PID)
 	{
-		Cconws("gemma.slb: cannot service so many processes!!\r\n");
+		(void) Cconws("gemma.slb: cannot service so many processes!!\r\n");
 		return -EPROCLIM;
 	}
 
@@ -183,8 +184,9 @@ gemma_open(BASEPAGE *bp)
 	proc->gem.vdiparams[4] = (long)&proc->gem.ptsout[0];
 
 	proc->base = bp;
-	proc->bvset = Dsetdrv(Dgetdrv());
-	
+	drv = Dgetdrv();
+	proc->bvset = Dsetdrv(drv);
+
 	return 0;
 }
 

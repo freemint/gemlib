@@ -19,6 +19,7 @@
 # include <string.h>
 # include <slb/gemma.h>
 # include <slb/kernel.h>
+# include <mintbind.h>
 
 # include "gemma.h"
 
@@ -264,8 +265,11 @@ main(void)
 
 	r = appl_open("gemma.rsc", 0, (char *)PNAME);
 	if (r < 0)
+	{
+		(void) Salert("gemma: appl_open() failed");
 		return r;
-
+	}
+	
 	wd = (WINDIAL *)windial_create(0, WINDOW, 0, BUTTONRELEASE, (char *)WNAME);
 
 	do_window(wd);

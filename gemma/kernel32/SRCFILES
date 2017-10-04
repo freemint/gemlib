@@ -1,0 +1,25 @@
+# This file gets included by the Makefile in this directory to determine
+# the files that should go only into source distributions.
+
+HEADER = \
+	kernel32.h \
+	$(empty)
+
+COBJS = \
+	kernel32.c \
+	console.c \
+	process.c \
+	directory.c \
+	system.c \
+	filesys.c \
+	time.c \
+	memory.c \
+	errlist.c \
+	util.c \
+	$(empty)
+
+SOBJS = \
+	header.S \
+	$(empty)
+
+SRCFILES = $(HEADER) $(COBJS) $(SOBJS)
