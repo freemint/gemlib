@@ -47,7 +47,7 @@ OBJS = $(COBJS:.c=.o) $(SOBJS:.S=.o)
 VPATH = ..
 
 objs: $(OBJS)
-	echo $(OBJS) > $@
+	$(AM_V_GEN)echo $(OBJS) > $@
 
 clean::
 	$(RM) objs

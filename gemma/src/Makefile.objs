@@ -18,6 +18,7 @@ include $(top_srcdir)/PHONY
 all-here: gemma32.slb
 
 # default overwrites
+GENERAL += -Wundef
 ifeq ($(TARGET),020)
 GENERAL += -m68020-60
 endif
@@ -35,8 +36,8 @@ GENFILES = gemma32.slb
 VPATH = ..
 
 gemma32.slb: $(OBJS)
-	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS)
-	$(STRIP) $@
+	$(AM_V_CCLD)$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS)
+	$(AM_V_STRIP)$(STRIP) $@
 
 
 include $(top_srcdir)/DEPENDENCIES

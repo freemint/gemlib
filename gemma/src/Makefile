@@ -42,16 +42,16 @@ normalv4e:
 	$(MAKE) gemma32v4e.slb TARGET="v4e"
 
 gemma32$(TARGET).slb: objs
-	rm -f $@
-	cp .lib$(TARGET)/gemma32.slb $@
+	$(AM_V_at)rm -f $@
+	$(AM_V_at)cp .lib$(TARGET)/gemma32.slb $@
 
 objs: .lib$(TARGET)
 	cd .lib$(TARGET); $(MAKE)
 .PHONY: objs
 
 .lib$(TARGET): Makefile.objs
-	$(MKDIR) -p $@
-	$(CP) Makefile.objs $@/Makefile
+	$(AM_V_at)$(MKDIR) -p $@
+	$(AM_V_at)$(CP) Makefile.objs $@/Makefile
 
 clean::
 	rm -rf .lib* gemma*.slb

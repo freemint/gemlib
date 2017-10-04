@@ -32,8 +32,8 @@ GENFILES = $(TARGET)
 
 
 $(TARGET): $(OBJS)
-	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS)
-	$(STRIP) $@
+	$(AM_V_CCLD)$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS)
+	$(AM_V_STRIP)$(STRIP) $@
 
 
 include $(top_srcdir)/DEPENDENCIES

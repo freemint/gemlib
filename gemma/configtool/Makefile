@@ -45,16 +45,16 @@ normalv4e:
 
 
 gemma$(TARGET).app: objs
-	rm -f $@
-	cp .lib$(TARGET)/gemma.app $@
+	$(AM_V_at)rm -f $@
+	$(AM_V_at)cp .lib$(TARGET)/gemma.app $@
 
 objs: .lib$(TARGET)
 	cd .lib$(TARGET); $(MAKE)
 .PHONY: objs
 
 .lib$(TARGET): Makefile.objs
-	$(MKDIR) -p $@
-	$(CP) Makefile.objs $@/Makefile
+	$(AM_V_at)$(MKDIR) -p $@
+	$(AM_V_at)$(CP) Makefile.objs $@/Makefile
 
 clean::
 	rm -rf .lib* gemma*.app

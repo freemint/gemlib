@@ -50,19 +50,19 @@ mt020:
 	$(MAKE) libgemma020_mt.a TARGET="020_mt"
 
 libgemma$(TARGET).a: objs
-	$(RM) $@
-	$(AR) rc $@ \
+	$(AM_V_at)$(RM) $@
+	$(AM_V_AR)$(AR) rc $@ \
 		$(shell for file in `cat .lib$(TARGET)/objs` ; \
 			do echo .lib$(TARGET)/$$file ; done)
-	$(RANLIB) $@
+	$(AM_V_RANLIB)$(RANLIB) $@
 
 objs: .lib$(TARGET)
 	cd .lib$(TARGET); $(MAKE)
 .PHONY: objs
 
 .lib$(TARGET): Makefile.objs
-	$(MKDIR) -p $@
-	$(CP) Makefile.objs $@/Makefile
+	$(AM_V_at)$(MKDIR) -p $@
+	$(AM_V_at)$(CP) Makefile.objs $@/Makefile
 
 clean::
 	rm -rf .lib*

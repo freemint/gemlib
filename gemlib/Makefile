@@ -128,26 +128,26 @@ all-compilers:
 	make -f zip.mak
 
 libgem$(TARGET).a: objs
-	$(RM) $@
-	$(AR) rc $@ \
+	$(AM_V_at)$(RM) $@
+	$(AM_V_AR)$(AR) rc $@ \
 		$(shell for file in `cat .lib$(TARGET)/objs` ; \
 			do echo .lib$(TARGET)/$$file ; done)
-	$(RANLIB) $@
+	$(AM_V_RANLIB)$(RANLIB) $@
 
 objs: .lib$(TARGET) mt_gem.h
 	cd .lib$(TARGET); $(MAKE)
 
 .lib$(TARGET):
-	$(MKDIR) $@
-	$(CP) Makefile.objs $@/Makefile
+	$(AM_V_at)$(MKDIR) $@
+	$(AM_V_at)$(CP) Makefile.objs $@/Makefile
 
 gemlib.spec: gemlib.spec.in VERSION
-	rm -f $@
-	sed 's,@VERSION@,$(VERSION),g' $@.in >$@
+	$(AM_V_at)rm -f $@
+	$(AM_V_GEN)sed 's,@VERSION@,$(VERSION),g' $@.in >$@
 
 Doxyfile: Doxyfile.in VERSION
-	rm -f $@
-	sed 's,@VERSION@,$(VERSION),g' $@.in >$@
+	$(AM_V_at)rm -f $@
+	$(AM_V_GEN)sed 's,@VERSION@,$(VERSION),g' $@.in >$@
 
 # Special rule for mt_gem.h.  We build that automatically from
 # mt_gem.h.in.

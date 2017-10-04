@@ -26,9 +26,9 @@ GENFILES = $(TARGET)
 
 
 $(TARGET): $(OBJS)
-	$(RM) $@
-	$(AR) r $@ $(OBJS)
-	$(RANLIB) $@
+	$(AM_V_at)$(RM) $@
+	$(AM_V_AR)$(AR) r $@ $(OBJS)
+	$(AM_V_RANLIB)$(RANLIB) $@
 
 
 include $(top_srcdir)/DEPENDENCIES
