@@ -23,10 +23,6 @@
 
 /* ------------------------ User definitions ------------------ */
 
-/* Define this below if your system has MiNT-style GEMDOS.
- */
-# define _HAVE_MINT_GEMDOS
-
 /* Some AES versions completely trust all the pointers programs pass
  * in the parameter arrays and, when such a pointer is invalid, the
  * AES usually dies in flames then (together with all the system).

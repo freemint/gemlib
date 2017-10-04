@@ -152,11 +152,12 @@ _semaphore(short mode, long sema, long time)
 long
 _sgeteuid(void)
 {
-# ifdef _HAVE_MINT_GEMDOS
-	return Pgeteuid();
-# else
-	return 0;
-# endif
+	long r = Pgeteuid();
+	if (r == -ENOSYS)
+		r = Pgetuid();
+	if (r == -ENOSYS)
+		r = 0;
+	return r;
 }
 
 /* EOF */
