@@ -220,7 +220,7 @@ kstroke(PROC_ARRAY *proc, WINDIAL *wd, short key)
 	if (wd->wb_iconified)
 		return 0;
 
-	r = _kbshift(-1);
+	r = Kbshift(-1);
 
 	if (whitebak && (r & 0x08))
 	{
@@ -694,7 +694,7 @@ windial_create(BASEPAGE *bp, long fn, short nargs, \
 	return (long)wd;
 
 fatal:	if (m)
-		_free(proc, (long)wd);
+		dos_mfree(proc, (long)wd);
 
 	DEBUGMSG("exit on error");
 
@@ -835,7 +835,7 @@ windial_delete(BASEPAGE *bp, long fn, short nargs, WINDIAL *wd, PROC_ARRAY *p)
 	wd->wb_magic = 0;		/* invalidate the struct */
 
 	if (wd->wb_autofree)
-		_free(proc, (long)wd);
+		dos_mfree(proc, (long)wd);
 
 	DEBUGMSG("complete");
 

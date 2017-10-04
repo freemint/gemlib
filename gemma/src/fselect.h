@@ -15,6 +15,6 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-long file_select(BASEPAGE *bp, long fn, short nargs, char *title, char *mask, ushort flag, PROC_ARRAY *p);
+long file_select(BASEPAGE *bp, long fn, short nargs, const char *title, const char *mask, ushort flag, PROC_ARRAY *p);
 
 /* EOF */

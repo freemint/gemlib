@@ -20,6 +20,7 @@
 
 # include "gemma.h"
 # include "gemproto.h"
+# include "dosproto.h"
 
 # include "alert.h"
 
@@ -166,7 +167,8 @@ long
 windial_error(BASEPAGE *bp, long fn, short nargs, long error, const char *message, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
-	char msgbuf[256], *m;
+	char msgbuf[256];
+	const char *m;
 
 	if (nargs < 1) return -EINVAL;
 	if (nargs == 3) proc = p;
@@ -193,7 +195,7 @@ windial_error(BASEPAGE *bp, long fn, short nargs, long error, const char *messag
 
 	if (nargs > 1 && (long)message > 0)
 	{
-		m = (char *)obj2addr(proc, R_STRING, (ulong)message);
+		m = (const char *)obj2addr(proc, R_STRING, (ulong)message);
 		if ((long)m > 0)
 		{
 			char trans[256];
@@ -209,7 +211,7 @@ windial_error(BASEPAGE *bp, long fn, short nargs, long error, const char *messag
 		}
 	}
 
-	m = (char *)(proc->kern.exec)(proc->kern.handle, 512L, (short)1, error);
+	m = dos_serror(proc, error);
 
 	strcat(msgbuf, m);
 	

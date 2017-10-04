@@ -15,7 +15,7 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-long proc_exec(BASEPAGE *bp, long fn, short nargs, short mode, long flags, char *cmd, char *tail, char *env, PROC_ARRAY *p);
-long thread_fork(BASEPAGE *bp, long fn, short nargs, void *startup, void *address, char *proctitle, long stacksize, long opt, PROC_ARRAY *p);
+long proc_exec(BASEPAGE *bp, long fn, short nargs, short mode, long flags, const char *cmd, const char *tail, const char *env, PROC_ARRAY *p);
+long thread_fork(BASEPAGE *bp, long fn, short nargs, void *startup, void *address, const char *proctitle, long stacksize, long opt, PROC_ARRAY *p);
 
 /* EOF */

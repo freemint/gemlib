@@ -177,7 +177,8 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 {
 	PROC_ARRAY *proc = 0;
 	long apid, r;
-	char *lname, *home;
+	char *lname;
+	const char *home;
 	short ap[4];
 
 	if (nargs < 3) return -EINVAL;
@@ -207,9 +208,9 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 		goto error;
 	}
 
-	_domain(proc, 1);		/* ... obviously */
+	dos_pdomain(proc, 1);		/* ... obviously */
 
-	home = getenv(proc, "HOME=");
+	home = dos_getenv(proc, "HOME=");
 	if (home && (flag & 4))
 		_setpath(home);
 
@@ -233,7 +234,7 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 				strcat(rscname, "\\");
 				strcat(rscname, name);
 
-				if (_size(proc, rscname) > 0)
+				if (dos_fsize(proc, rscname) > 0)
 					name = rscname;
 			}
 
@@ -304,7 +305,7 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 		char fullname[1024];
 
 		/* Search through the SLBPATH */
-		r = (proc->kern.exec)(proc->kern.handle, 515L, 3, "fileselector.slb", fullname, "SLBPATH=");
+		r = dos_fsearch(proc, "fileselector.slb", fullname, "SLBPATH=");
 
 		if (r == 0)
 			(void)Slbopen("fileselector.slb", 0L, 0x0100L, &proc->fsel.handle, &proc->fsel.exec);

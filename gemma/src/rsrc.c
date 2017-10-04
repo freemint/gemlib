@@ -46,7 +46,7 @@ rsrc_xload(BASEPAGE *bp, long fn, short nargs, char *name, PROC_ARRAY *p)
 	DEBUGMSG("enter");
 	DEBUGMSG(name);
 
-	len = _size(proc, name);
+	len = dos_fsize(proc, name);
 	if (len < 0)
 		return len;
 	if (!len)
@@ -78,7 +78,7 @@ rsrc_xload(BASEPAGE *bp, long fn, short nargs, char *name, PROC_ARRAY *p)
 
 		DEBUGMSG("loading into buffer");
 
-		r = _floadbuf(proc, name, proc->rawrscaddr, len, &mode);
+		r = dos_floadbuf(proc, name, proc->rawrscaddr, len, &mode);
 		if (r < 0)
 			goto error;
 
@@ -140,7 +140,7 @@ rsrc_xload(BASEPAGE *bp, long fn, short nargs, char *name, PROC_ARRAY *p)
 
 	return 0;
 
-error:	_free(proc, (long)proc->rawrscaddr);
+error:	dos_mfree(proc, (long)proc->rawrscaddr);
 	proc->rawrscaddr = 0;
 
 	DEBUGMSG("exit on error");
@@ -171,7 +171,7 @@ rsrc_xalloc(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 	{
 		PROC_ARRAY *pproc;
 
-		ppid = _getppid(proc);
+		ppid = dos_pgetppid(proc);
 		if (ppid < 0)
 			return -EACCES;
 		pproc = pidtable[ppid];
@@ -247,12 +247,12 @@ rsrc_xfree(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 
 	if (proc->rscaddr)
 	{
-		_free(proc, (long)proc->rscaddr);
+		dos_mfree(proc, (long)proc->rscaddr);
 		proc->rscaddr = 0;
 	}
 	if (proc->rawrscaddr)
 	{
-		_free(proc, (long)proc->rawrscaddr);
+		dos_mfree(proc, (long)proc->rawrscaddr);
 		proc->rawrscaddr = 0;
 	}
 	proc->rsclength = 0;

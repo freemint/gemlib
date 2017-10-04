@@ -27,13 +27,13 @@ long
 env_getargc(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
-	char *argv;
+	const char *argv;
 	long r = 0;
 
 	if (nargs) proc = p;
 	if (!proc) proc = get_contrl(bp);
 
-	argv = getenv(proc, "ARGV=");
+	argv = dos_getenv(proc, "ARGV=");
 
 	if (argv)
 	{
@@ -55,7 +55,7 @@ env_getargv(BASEPAGE *bp, long fn, short nargs, long count, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
 	long max, r = 0;
-	char *argv;
+	const char *argv;
 
 	UNUSED(p);
 
@@ -69,7 +69,7 @@ env_getargv(BASEPAGE *bp, long fn, short nargs, long count, PROC_ARRAY *p)
 	if (count >= max)
 		return 0;
 
-	argv = getenv(proc, "ARGV=");
+	argv = dos_getenv(proc, "ARGV=");
 
 	if (argv)
 	{
@@ -89,7 +89,7 @@ env_getargv(BASEPAGE *bp, long fn, short nargs, long count, PROC_ARRAY *p)
 
 
 long
-env_get(BASEPAGE *bp, long fn, ushort nargs, char *var, PROC_ARRAY *p)
+env_get(BASEPAGE *bp, long fn, ushort nargs, const char *var, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
 
@@ -97,17 +97,18 @@ env_get(BASEPAGE *bp, long fn, ushort nargs, char *var, PROC_ARRAY *p)
 	else if (nargs < 2 || !proc) proc = get_contrl(bp);
 
 	if (nargs)
-		return (long)getenv(proc, var);
+		return (long)dos_getenv(proc, var);
 	else
 		return -EINVAL;
 }
 
 long
 env_eval(BASEPAGE *bp, long fn, short nargs, \
-		char *var, char *outbuf, long maxlen, PROC_ARRAY *p)
+		const char *var, char *outbuf, long maxlen, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc;
-	char e, *env, *out = outbuf;
+	char e, *out = outbuf;
+	const char *env;
 
 	if (nargs < 2) return -EINVAL;
 	if (nargs >= 3) proc = p;
@@ -118,7 +119,7 @@ env_eval(BASEPAGE *bp, long fn, short nargs, \
 	if (proc->env_refs > MAX_RECURSION)
 		return -E2BIG;
 
-	env = getenv(proc, var);
+	env = dos_getenv(proc, var);
 	if (!env)
 		return 0;
 

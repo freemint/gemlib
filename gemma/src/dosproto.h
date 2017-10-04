@@ -21,10 +21,6 @@
 # define sema_request(s) _semaphore(2, s, -1L)
 # define sema_release(s) _semaphore(3, s, 0L)
 
-long _getexc(long vec);
-short _kbshift(long wh);
-short _getrez(void);
-
 #undef SLB_NWORDS
 #define SLB_NWORDS(_nargs) ((((long)(_nargs) * 2 + 1l) << 16) | (long)(_nargs))
 #undef SLB_NARGS
@@ -34,188 +30,40 @@ short _getrez(void);
 #  define _CDECL
 #endif
 
-INLINE
-long _floadbuf(PROC_ARRAY *proc, const char *name, char *buf, long len, short *mode)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, const char *, char *, long, short *) = (long _CDECL (*)(SLB_HANDLE, long, long, const char *, char *, long, short *))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x020bL, SLB_NARGS(4), name, buf, len, mode);
-}
+const char *dos_serror(PROC_ARRAY *proc, long error);
+long dos_fsize(PROC_ARRAY *proc, const char *name);
+long dos_fsearch(PROC_ARRAY *proc, const char *name, char *fullname, const char *envvar);
+const char *dos_getenv(PROC_ARRAY *proc, const char *var);
+long dos_floadbuf(PROC_ARRAY *proc, const char *name, char *buf, long len, short *mode);
 
-INLINE
-long _pexec(PROC_ARRAY *proc, long mode, char *cmd, char *tail, char *env)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long, char *, char *, char *) = (long _CDECL (*)(SLB_HANDLE, long, long, long, char *, char *, char *))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 75L, SLB_NARGS(4), mode, cmd, tail, env);
-}
-
-INLINE
-long _wait3(PROC_ARRAY *proc, short flag, long *rus)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long, long *) = (long _CDECL (*)(SLB_HANDLE, long, long, long, long *))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x011cL, SLB_NARGS(2), flag, rus);
-}
-
-INLINE
-long _signal(PROC_ARRAY *proc, short sig, void *hnd)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long, void *) = (long _CDECL (*)(SLB_HANDLE, long, long, long, void *))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x0112L, SLB_NARGS(2), sig, hnd);
-}
-
-INLINE
-long _kill(PROC_ARRAY *proc, short pid, short sig)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long, long, long))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x0111L, SLB_NARGS(2), pid, sig);
-}
-
-INLINE
-char *getenv(PROC_ARRAY *proc, const char *var)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, const char *) = (long _CDECL (*)(SLB_HANDLE, long, long, const char *))proc->kern.exec;
-	return (char *)(*exec)(proc->kern.handle, 0x0208L, SLB_NARGS(1), var);
-}
-
-INLINE
-long _cntl(PROC_ARRAY *proc, short file, void *arg, short cmd)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long, void *, long) = (long _CDECL (*)(SLB_HANDLE, long, long, long, void *, long))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x0104, SLB_NARGS(3), file, arg, cmd);
-}
-
-INLINE
-long _domain(PROC_ARRAY *proc, long dom)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long, long))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x0119L, SLB_NARGS(1), dom);
-}
-
-INLINE
-long _opendir(PROC_ARRAY *proc, const char *name, short flag)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, const char *, long) = (long _CDECL (*)(SLB_HANDLE, long, long, const char *, long))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x0128L, SLB_NARGS(2), name, flag);
-}
-
-INLINE
-long _readdir(PROC_ARRAY *proc, long size, long handle, void *buf)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long, long, void *) = (long _CDECL (*)(SLB_HANDLE, long, long, long, long, void *))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x0129L, SLB_NARGS(3), size, handle, buf);
-}
-
-INLINE
-long _rewinddir(PROC_ARRAY *proc, long handle)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long, long))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x012aL, SLB_NARGS(1), handle);
-}
-
-INLINE
-long _closedir(PROC_ARRAY *proc, long handle)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long, long))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x012bL, SLB_NARGS(1), handle);
-}
-
-INLINE
-void _yield(PROC_ARRAY *proc)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long))proc->kern.exec;
-	(*exec)(proc->kern.handle, 0x00ffL, SLB_NARGS(0));
-}
-
-INLINE
-long _size(PROC_ARRAY *proc, const char *name)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, const char *) = (long _CDECL (*)(SLB_HANDLE, long, long, const char *))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x0201L, SLB_NARGS(1), name);
-}
-
-INLINE
-long _open(PROC_ARRAY *proc, const char *name, short mode)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, const char *, long) = (long _CDECL (*)(SLB_HANDLE, long, long, const char *, long))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x003dL, SLB_NARGS(2), name, mode);
-}
-
-INLINE
-void _close(PROC_ARRAY *proc, long fd)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long, long))proc->kern.exec;
-	(*exec)(proc->kern.handle, 0x003eL, SLB_NARGS(1), fd);
-}
-
-INLINE
-long _read(PROC_ARRAY *proc, long fd, long len, void *buf)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long, long, void *) = (long _CDECL (*)(SLB_HANDLE, long, long, long, long, void *))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x003fL, SLB_NARGS(3), fd, len, buf);
-}
-
-INLINE
-long _write(PROC_ARRAY *proc, long fd, long len, const void *buf)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long, long, const void *) = (long _CDECL (*)(SLB_HANDLE, long, long, long, long, const void *))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x0040L, SLB_NARGS(3), fd, len, buf);
-}
-
-INLINE
-long _delete(PROC_ARRAY *proc, const char *filespec)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, const char *) = (long _CDECL (*)(SLB_HANDLE, long, long, const char *))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x0041L, SLB_NARGS(1), filespec);
-}
-
-INLINE
-long _dup(PROC_ARRAY *proc, short file)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long, long))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x0045L, SLB_NARGS(1), file);
-}
-
-INLINE
-void _force(PROC_ARRAY *proc, short f1, short f2)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long, long, long))proc->kern.exec;
-	(*exec)(proc->kern.handle, 0x0046L, SLB_NARGS(2), f1, f2);
-}
-
-INLINE
-void _shrink(PROC_ARRAY *proc, void *base, long newsize)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, void *, long) = (long _CDECL (*)(SLB_HANDLE, long, long, void *, long))proc->kern.exec;
-	(*exec)(proc->kern.handle, 0x004aL, SLB_NARGS(2), base, newsize);
-}
-
-INLINE
-void _free(PROC_ARRAY *proc, long addr)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long, long))proc->kern.exec;
-	(*exec)(proc->kern.handle, 0x0049L, SLB_NARGS(1), addr);
-}
-
-INLINE
-long _getppid(PROC_ARRAY *proc)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x010cL, SLB_NARGS(0));
-}
-
-# if 0
-INLINE
-long _getpid(PROC_ARRAY *proc)
-{
-	long _CDECL (*exec)(SLB_HANDLE, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long))proc->kern.exec;
-	return (*exec)(proc->kern.handle, 0x010bL, SLB_NARGS(0));
-}
-# endif
+long dos_pexec(PROC_ARRAY *proc, long mode, const char *cmd, const char *tail, const char *env);
+long dos_wait3(PROC_ARRAY *proc, short flag, long *rus);
+long dos_signal(PROC_ARRAY *proc, short sig, void *hnd);
+long dos_kill(PROC_ARRAY *proc, short pid, short sig);
+long dos_fcntl(PROC_ARRAY *proc, short file, void *arg, short cmd);
+long dos_pdomain(PROC_ARRAY *proc, long dom);
+long dos_dopendir(PROC_ARRAY *proc, const char *name, short flag);
+long dos_dreaddir(PROC_ARRAY *proc, long size, long handle, void *buf);
+long dos_drewinddir(PROC_ARRAY *proc, long handle);
+long dos_dclosedir(PROC_ARRAY *proc, long handle);
+void dos_yield(PROC_ARRAY *proc);
+long dos_fopen(PROC_ARRAY *proc, const char *name, short mode);
+void dos_fclose(PROC_ARRAY *proc, long fd);
+long dos_fread(PROC_ARRAY *proc, long fd, long len, void *buf);
+long dos_fwrite(PROC_ARRAY *proc, long fd, long len, const void *buf);
+long dos_fdelete(PROC_ARRAY *proc, const char *filespec);
+long dos_fdup(PROC_ARRAY *proc, short file);
+void dos_fforce(PROC_ARRAY *proc, short f1, short f2);
+void dos_mshrink(PROC_ARRAY *proc, void *base, long newsize);
+void dos_mfree(PROC_ARRAY *proc, long addr);
+long dos_pgetppid(PROC_ARRAY *proc);
+long dos_pgetpid(PROC_ARRAY *proc);
 
 long _sgetpid(void);
 long _sgeteuid(void);
 long _semaphore(short mode, long sema, long time);
 
-void _conws(char *str);
+void _conws(const char *str);
 
 long _alloc(long size);
 long _rdalloc(long size);
@@ -223,8 +71,5 @@ long _rdalloc(long size);
 long _getdrv(void);
 long _setpath(const char *p);
 long _getcwd(void *p, short drv, short len);
-
-#undef SLB_NWORDS
-#undef SLB_NARGS
 
 /* EOF */

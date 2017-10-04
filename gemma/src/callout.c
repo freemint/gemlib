@@ -245,7 +245,7 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 		case 17:	/* appl_yield() */
 		{
 			proc->gem.int_out[0] = 1;
-			_yield(proc);
+			dos_yield(proc); /* wrong; should better call AES trap with #201 */
 
 			return 1;
 		}

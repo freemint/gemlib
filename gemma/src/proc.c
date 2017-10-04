@@ -49,11 +49,11 @@ smswrite(PROC_ARRAY *proc, SMSBLK *smsblk)
 {
 	long file, r;
 
-	file = r = _open(proc, smsname, O_WRONLY|O_DENYNONE);
+	file = r = dos_fopen(proc, smsname, O_WRONLY|O_DENYNONE);
 	if (r < 0)
 		return r;
-	r = _write(proc, file, sizeof(SMSBLK), (void *)smsblk);
-	_close(proc, file);
+	r = dos_fwrite(proc, file, sizeof(SMSBLK), (void *)smsblk);
+	dos_fclose(proc, file);
 
 	return 0;
 }
@@ -68,7 +68,7 @@ sig_child(void)
 
 	proc = pidtable[pid];
 
-	p = _wait3(proc, 1, 0L);
+	p = dos_wait3(proc, 1, 0L);
 	if (p == 0)
 		return;
 	bzero(&sms, sizeof(SMSBLK));
@@ -91,14 +91,14 @@ getprgflags(PROC_ARRAY *proc)
 
 	DEBUGMSG("enter")
 
-	file = r = _open(proc, selfname, O_RDONLY);
+	file = r = dos_fopen(proc, selfname, O_RDONLY);
 	if (r < 0)
 	{
 		DEBUGMSG("opening failed, return");
 		return (F_FASTLOAD | F_ALTLOAD | F_ALTALLOC);
 	}
-	r = _cntl(proc, file, &flags, PGETFLAGS);
-	_close(proc, file);
+	r = dos_fcntl(proc, file, &flags, PGETFLAGS);
+	dos_fclose(proc, file);
 	if (r < 0)
 	{
 		DEBUGMSG("Fcntl() failed, return");
@@ -126,7 +126,7 @@ getprgflags(PROC_ARRAY *proc)
 
 long
 proc_exec(BASEPAGE *bp, long fn, short nargs, \
-		short mode, long flags, char *cmd, char *tail, char *env, PROC_ARRAY *p)
+		short mode, long flags, const char *cmd, const char *tail, const char *env, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
 	short oldout = 0, newout = -1, olderr = 0;
@@ -137,43 +137,42 @@ proc_exec(BASEPAGE *bp, long fn, short nargs, \
 	if ((nargs < 6) || !proc) proc = get_contrl(bp);
 
 	if (flags & 4)
-		_signal(proc, SIGCHLD, sig_child);
+		dos_signal(proc, SIGCHLD, sig_child);
 
 	if (flags & 3)
 	{
-		newout = _open(proc, "u:/dev/null", O_WRONLY);
+		newout = dos_fopen(proc, "u:/dev/null", O_WRONLY);
 		if (newout >= 0)
 		{
 			if (flags & 1)
 			{
-				oldout = _dup(proc, 1);
-				_force(proc, 1, newout);
+				oldout = dos_fdup(proc, 1);
+				dos_fforce(proc, 1, newout);
 			}
 			if (flags & 2)
 			{
-				olderr = _dup(proc, 2);
-				_force(proc, 2, newout);
+				olderr = dos_fdup(proc, 2);
+				dos_fforce(proc, 2, newout);
 			}
 		}
 	}
 
-	r = _pexec(proc, mode, cmd, tail, env);
+	r = dos_pexec(proc, mode, cmd, tail, env);
 
 	if ((flags & 3) && (newout >= 0))
 	{
 		if (flags & 1)
-			_force(proc, 1, oldout);
+			dos_fforce(proc, 1, oldout);
 		if (flags & 2)
-			_force(proc, 2, olderr);
-		_close(proc, newout);
+			dos_fforce(proc, 2, olderr);
+		dos_fclose(proc, newout);
 	}
 
 	return r;
 }
 
 long
-thread_fork(BASEPAGE *bp, long fn, short nargs, \
-		void *startup, void *address, char *proctitle, long stacksize, long opt, PROC_ARRAY *p)
+thread_fork(BASEPAGE *bp, long fn, short nargs, void *startup, void *address, const char *proctitle, long stacksize, long opt, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
 	BASEPAGE *new;
@@ -203,11 +202,11 @@ thread_fork(BASEPAGE *bp, long fn, short nargs, \
 
 	DEBUGMSG("calling Pexec(7)");
 
-	new = (BASEPAGE *)_pexec(proc, 7L, (void *)flags, "", 0L);
+	new = (BASEPAGE *)dos_pexec(proc, 7L, (void *)flags, "", 0L);
 	if ((long)new < 0)
 	{
 		DEBUGMSG("calling Pexec(5)");
-		new = (BASEPAGE *)_pexec(proc, 5L, 0L, "", 0L); 
+		new = (BASEPAGE *)dos_pexec(proc, 5L, 0L, "", 0L); 
 	}
 
 	if ((long)new <= 0)
@@ -227,7 +226,7 @@ thread_fork(BASEPAGE *bp, long fn, short nargs, \
 	else
 		size = 0x00001f00L;
 
-	_shrink(proc, new, size + 256L);
+	dos_mshrink(proc, new, size + 256L);
 
 	DEBUGMSG("release semaphore");
 
@@ -240,23 +239,23 @@ thread_fork(BASEPAGE *bp, long fn, short nargs, \
 	if (mode & 1)
 	{
 		DEBUGMSG("setup SIGCHLD");
-		oldsig = _signal(proc, SIGCHLD, sig_child);
+		oldsig = dos_signal(proc, SIGCHLD, sig_child);
 	}
 
 	DEBUGMSG("executing thread");
 
-	pid = _pexec(proc, execmode, proctitle, (char *)new, 0L);
+	pid = dos_pexec(proc, execmode, proctitle, (char *)new, 0L);
 
 	DEBUGMSG("freeing its memory");
 
-	_free(proc, (long)new->p_env);
-	_free(proc, (long)new);
+	dos_mfree(proc, (long)new->p_env);
+	dos_mfree(proc, (long)new);
 
 	if (oldsig && (pid < 0))
 	{
 		DEBUGMSG("cancelling SIGCHLD");
 
-		_signal(proc, SIGCHLD, (void *)oldsig);
+		dos_signal(proc, SIGCHLD, (void *)oldsig);
 	}
 
 	DEBUGMSG("complete");
