@@ -76,9 +76,13 @@ typedef struct
 {
 	GEM_ARRAY gem;			/* user-visible part of this structure */
 	BASEPAGE *base;			/* process basepage address */
-	SLB *ego;			/* a pointer to the library itself */
-	SLB kern;			/* The kernel library structure */
-	SLB fsel;			/* The fileselector library structure */
+	SLB *ego;				/* a pointer to the library itself */
+#if _USE_KERNEL32
+	SLB kern;				/* The kernel library structure */
+#else
+	SLB kern_unused;		/* The kernel library structure */
+#endif
+	SLB fsel;				/* The fileselector library structure */
 	WINDIAL *wchain;		/* the begin of the window chain */
 	char *rawrscaddr;		/* address for the raw RSC buffer */
 	char *rscaddr;			/* address for the RSC buffer */

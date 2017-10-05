@@ -20,6 +20,7 @@
 # include <string.h>
 # include <mintbind.h>
 # include <limits.h>
+# include <sys/stat.h>
 
 # include "gemma.h"
 # include "dosproto.h"
@@ -128,6 +129,7 @@ _sgeteuid(void)
 	return r;
 }
 
+#if _USE_KERNEL32
 const char *dos_serror(PROC_ARRAY *proc, long error)
 {
 	long _CDECL (*exec)(SLB_HANDLE, long, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long, long))proc->kern.exec;
@@ -294,4 +296,227 @@ long dos_pgetpid(PROC_ARRAY *proc)
 }
 # endif
 
-/* EOF */
+#else
+
+#include "../kernel32/errlist.h"
+
+#ifndef __XATTR
+#define __XATTR
+typedef struct xattr
+{
+	unsigned short st_mode;
+	long           st_ino;	/* must be 32 bits */
+	unsigned short st_dev;	/* must be 16 bits */
+	unsigned short st_rdev;	/* not supported by the kernel */
+	unsigned short st_nlink;
+	unsigned short st_uid;	/* must be 16 bits */
+	unsigned short st_gid;	/* must be 16 bits */
+	long           st_size;
+	long           st_blksize;
+	long           st_blocks;
+	unsigned long  st_mtime;
+	unsigned long  st_atime;
+	unsigned long  st_ctime;
+	short          st_attr;
+	short res1;		/* reserved for future kernel use */
+	long res2[2];
+} XATTR;
+#endif
+
+
+const char *dos_serror(PROC_ARRAY *proc, long error)
+{
+	short i;
+	
+	UNUSED(proc);
+	if (error != 0)
+	{
+		for (i = 0; errorlist[i].code != 0; i++)
+		{
+			if (errorlist[i].code == error)
+				return errorlist[i].text;
+		}
+		return "Unknown error";
+	}
+	return "No errors";
+}
+
+static char *bp_getenv(BASEPAGE *bp, const char *var)
+{
+	char *env = bp->p_env;
+	size_t len = strlen(var);
+
+	do {
+		if (strncmp(env, var, len) == 0)
+			return env + len;
+		while (*env++ != '\0')
+		{
+			/* nothing */
+		}
+	} while (*env != '\0');
+	return NULL;
+}
+
+
+long dos_fsize(PROC_ARRAY *proc, const char *name)
+{
+	struct stat st;
+	struct xattr xattr;
+	_DTA *olddta;
+	_DTA dta;
+	long ret;
+
+	UNUSED(proc);
+	if (Fstat64(0, name, &st) == 0)
+		return st.st_size;
+	if (Fxattr(0, name, &xattr) == 0)
+		return xattr.st_size;
+	olddta = Fgetdta();
+	Fsetdta(&dta);
+	ret = Fsfirst(name, 0);
+	Fsetdta(olddta);
+	if (ret == 0)
+		return dta.dta_size;
+	return ret;
+}
+
+
+long dos_fsearch(PROC_ARRAY *proc, const char *name, char *fullname, const char *pathvar)
+{
+	const char *path;
+	char *end;
+	
+	path = dos_getenv(proc, pathvar == NULL ? "PATH=" : pathvar);
+	if (path == NULL)
+		return -ESRCH;
+	while (*path != '\0')
+	{
+		end = fullname;
+		while (*path != '\0' && *path != ',' && *path != ';')
+			*end++ = *path++;
+		*end = '\0';
+		if (*path != '\0')
+			path++;
+		strcat(fullname, "/");
+		strcat(fullname, name);
+		if (dos_fsize(proc, fullname) >= 0)
+			return 0;
+	}
+	return -ESRCH;
+}
+
+const char *dos_getenv(PROC_ARRAY *proc, const char *var)
+{
+	return bp_getenv(proc->base, var);
+}
+
+
+/*
+ * Simplified version of dos_pexec.
+ * Does not handle ARGV argument passing, or hashbang scripts
+ */
+long dos_pexec(PROC_ARRAY *proc, long mode, const char *ptr1, const char *ptr2, const char *ptr3)
+{
+	short mkname = 0;
+	char *name;
+	char namebuf[PATH_MAX];
+	char pathbuf[PATH_MAX];
+	char tail[128];
+	
+	size_t i, len;
+	
+	if (mode != 5 && mode != 7)
+	{
+		if (mode < 5)
+		{
+			if (mode != 0 && mode != 3)
+				goto do_exec; /* mode 4: just go */
+		} else
+		{
+			if (mode != 100)
+			{
+				if (mode < 100)
+				{
+					if (mode != 7)
+						goto do_exec; /* mode 6: just go */
+				}
+				if (mode != 200)
+					goto do_exec;
+			}
+		}
+		mkname = 1;
+	}
+
+	if (mkname)
+	{
+		strncpy(namebuf, ptr1, sizeof(namebuf));
+		name = namebuf;
+		for (i = 0; i < sizeof(namebuf); i++)
+		{
+			if (name[i] == '\\')
+				name[i] = '/';
+			if (name[i] == '\0')
+				break;
+		}
+		
+		ptr1 = name;
+		if (strchr(name, '/') == NULL)
+		{
+			if (dos_fsize(proc, name) < 0)
+			{
+				if (dos_fsearch(proc, name, pathbuf, NULL) == 0)
+					ptr1 = pathbuf;
+			}
+		}
+	}
+
+	if (ptr2 && *ptr2)
+	{
+		len = strlen(ptr2);
+		if (len > 126)
+			return -EBADARG;
+		strncpy(tail + 1, ptr2, sizeof(tail) - 1);
+		tail[0] = (char)len;
+	} else
+	{
+		tail[0] = tail[1] = '\0';
+	}
+	ptr2 = tail;
+	
+do_exec:
+	return Pexec(mode, ptr1, ptr2, ptr3);
+}
+
+
+long dos_floadbuf(PROC_ARRAY *proc, const char *fname, char *buf, long size, short *mode)
+{
+	long fsize;
+	struct xattr xattr;
+	long ret;
+	long handle;
+
+	fsize = dos_fsize(proc, fname);
+#if 0
+	if (fsize < 0)
+		return fsize;
+#endif
+	if (fsize > size)
+		return -ESRCH;
+	if (Fxattr(0, fname, &xattr) == 0)
+	{
+		*mode = xattr.st_mode;
+	}
+	if ((ret = Fopen(fname, FO_READ)) >= 0)
+	{
+		handle = ret;
+		ret = Fread(handle, fsize, buf);
+		Fclose(handle);
+		if (ret >= 0 && ret != fsize)
+			ret = -EREAD;
+	}
+	if (ret < 0)
+		return ret;
+	return 0;
+}
+
+#endif /* _USE_KERNEL32 */

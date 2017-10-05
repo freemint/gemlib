@@ -155,9 +155,11 @@ appl_close(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 
 	_appl_exit(proc);
 
+#if _USE_KERNEL32
 	Slbclose(proc->kern.handle);
 	proc->kern.exec = 0;
 	proc->kern.handle = 0;
+#endif
 
 	DEBUGMSG("complete");
 
@@ -191,10 +193,12 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 	if (proc->gem.global[0])
 		return proc->gem.global[2];
 
+#if _USE_KERNEL32
 	r = Slbopen("kernel32.slb", 0L, 0x0100L, &proc->kern.handle, &proc->kern.exec);
 
 	if (r < 0)
 		return r;
+#endif
 
 	apid = _appl_init(proc);
 
@@ -319,11 +323,14 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 
 	return apid;
 
-error:	_appl_exit(proc);
+error:
+	_appl_exit(proc);
 
+#if _USE_KERNEL32
 	Slbclose(proc->kern.handle);
 	proc->kern.exec = 0;
 	proc->kern.handle = 0;
+#endif
 
 	DEBUGMSG("error");
 

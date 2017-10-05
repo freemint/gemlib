@@ -37,6 +37,9 @@ const char *dos_getenv(PROC_ARRAY *proc, const char *var);
 long dos_floadbuf(PROC_ARRAY *proc, const char *name, char *buf, long len, short *mode);
 
 long dos_pexec(PROC_ARRAY *proc, long mode, const char *cmd, const char *tail, const char *env);
+
+#if _USE_KERNEL32
+
 long dos_wait3(PROC_ARRAY *proc, short flag, long *rus);
 long dos_signal(PROC_ARRAY *proc, short sig, void *hnd);
 long dos_kill(PROC_ARRAY *proc, short pid, short sig);
@@ -58,6 +61,34 @@ void dos_mshrink(PROC_ARRAY *proc, void *base, long newsize);
 void dos_mfree(PROC_ARRAY *proc, long addr);
 long dos_pgetppid(PROC_ARRAY *proc);
 long dos_pgetpid(PROC_ARRAY *proc);
+
+#else
+
+#include <mintbind.h>
+
+#define dos_wait3(proc, flag, rus) Pwait3(flag, rus)
+#define dos_signal(proc, sig, hnd) Psignal(sig, hnd)
+#define dos_kill(proc, pid, sig) Pkill(pid, sig)
+#define dos_fcntl(proc, file, arg, cmd) Fcntl(file, arg, cmd)
+#define dos_pdomain(proc, dom) Pdomain(dom)
+#define dos_dopendir(proc, name, flag) Dopendir(name, flag)
+#define dos_dreaddir(proc, size, handle, buf) Dreaddir(size, handle, buf)
+#define dos_drewinddir(proc, handle) Drewinddir(handle)
+#define dos_dclosedir(proc, handle) Dclosedir(handle)
+#define dos_yield(proc) Syield()
+#define dos_fopen(proc, name, mode) Fopen(name, mode)
+#define dos_fclose(proc, fd) Fclose(fd)
+#define dos_fread(proc, fd, len, buf) Fread(fd, len, buf)
+#define dos_fwrite(proc, fd, len, buf) Fwrite(fd, len, buf)
+#define dos_fdelete(proc, filespec) Fdelete(filespec)
+#define dos_fdup(proc, file) Fdup(file)
+#define dos_fforce(proc, f1, f2) Fforce(f1, f2)
+#define dos_mshrink(proc, base, newsize) Mshrink(base, newsize)
+#define dos_mfree(proc, addr) Mfree(addr)
+#define dos_pgetppid(proc) Pgetppid()
+#define dos_pgetpid(proc) Pgetpid()
+
+#endif
 
 long _sgetpid(void);
 long _sgeteuid(void);

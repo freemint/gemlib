@@ -91,7 +91,11 @@ lib_control(BASEPAGE *bp, long fn, short nargs, \
 		}
 		case	0x0001:	/* get kern */
 		{
+#if _USE_KERNEL32
 			return (long)&proc->kern;
+#else
+			break;
+#endif
 		}
 		case	0x0002:	/* get version */
 		{

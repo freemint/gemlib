@@ -64,6 +64,11 @@
  */
 # undef _HAVE_FORM_POPUP
 
+/*
+ * Define this to 0/1 wether kernel32.slb should be used.
+ */
+# define _USE_KERNEL32 0
+
 /* ------------------------ Hardcore definitions ------------------ */
 
 /* Define this below if you want a version of the library
