@@ -69,16 +69,22 @@ docu: cflib.stg
 	$(HCP) -ocflib.hyp cflib.stg
 
 install:
+	install -m 755 -d $(PREFIX)/include
 	install -m 644 cflib.h        ${PREFIX}/include
+	install -m 755 -d $(PREFIX)/lib
 	install -m 644 libcflib.a     ${PREFIX}/lib
+	install -m 755 -d $(PREFIX)/lib/mshort
 	install -m 644 libcflib16.a   ${PREFIX}/lib/mshort/libcflib.a
 	ln -sf mshort/libcflib.a	      ${PREFIX}/lib/libcflib16.a
 ifeq ($(WITH_020_LIB),yes)
+	install -m 755 -d $(PREFIX)/lib/m68020-60
 	install -m 644 libcflib020.a  ${PREFIX}/lib/m68020-60/libcflib.a
 endif
 ifeq ($(WITH_V4E_LIB),yes)
+	install -m 755 -d $(PREFIX)/lib/m5475
 	install -m 644 libcflibv4e.a  ${PREFIX}/lib/m5475/libcflib.a
 endif
+	install -m 755 -d $(PREFIX)/lib/stguide
 	install -m 644 cflib.hyp      ${PREFIX}/stguide
 	install -m 644 cflib.ref      ${PREFIX}/stguide
 
