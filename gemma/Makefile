@@ -31,6 +31,7 @@ all-here:
 install:
 	install -m 755 -d ${libdir}
 	install -m 755 -d ${slblibdir}
+	install -m 755 -d ${slbincludedir}
 	install -m 644 include/slb/gemma.h ${slbincludedir}
 	install -m 644 include/slb/gemma-struct.h ${slbincludedir}
 	install -m 644 include/slb/kernel.h ${slbincludedir}
