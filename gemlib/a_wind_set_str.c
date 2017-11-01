@@ -27,6 +27,7 @@ mt_wind_set_str (short WindowHandle, short What, const char *str, short *global_
 	aes_intin[0]                  = WindowHandle;
 	aes_intin[1]                  = What;
 	*(const char**)(aes_intin +2) = str;
+	*(const char**)(aes_intin +4) = 0;
 	
 	AES_TRAP(aes_params);
 
