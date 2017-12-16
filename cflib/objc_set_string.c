@@ -60,7 +60,7 @@ set_string (OBJECT *tree, short obj, char *text)
 
 		default:
 		{
-			char s[30];
+			char s[96];
 
 			sprintf (s,
 				 "[3][CF-Lib Panic: set_string()!|Objekt %d hat unbekannten Typ %d|!][Abbruch]",
