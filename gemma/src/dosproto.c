@@ -95,9 +95,9 @@ __alloc(long size, short mode)
 	long r;
 
 	sema_request(sema_fork);
-	r = Mxalloc(size, mode);
+	r = (long)Mxalloc(size, mode);
 	if (r < 0)
-		r = Malloc(size);	/* No Mxalloc()? Incredible... */
+		r = (long)Malloc(size);	/* No Mxalloc()? Incredible... */
 	sema_release(sema_fork);
 	if (!r)
 		r = -ENOMEM;

@@ -7,7 +7,7 @@ include $(srcdir)/MISCFILES
 
 all: all-here all-recursive
 
-clean: clean-recursive
+clean:: clean-recursive
 	rm -f *.o lib*.a *.tmp
 	rm -f core report nohup.out errlog
 	rm -f foobar foo bar baz junk schrott muell

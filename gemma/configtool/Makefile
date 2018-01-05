@@ -16,6 +16,8 @@ include $(top_srcdir)/CONFIGVARS
 include $(top_srcdir)/RULES
 include $(top_srcdir)/PHONY
 
+CFLAGS += -Wno-inline
+
 all-here: $(TARGET)
 
 # default overwrites
@@ -23,7 +25,7 @@ INCLUDES += -I../include/
 GENERAL += 
 
 # default definitions
-OBJS =  $(SOBJS:.s=.o) $(COBJS:.c=.o)
+OBJS =  $(SOBJS:.S=.o) $(COBJS:.c=.o)
 LDFLAGS = -nostartfiles -nostdlib -L../libgemma/
 LIBS = -lgemma -lgcc
 GENFILES = $(TARGET)

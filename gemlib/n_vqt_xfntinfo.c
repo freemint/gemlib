@@ -35,21 +35,21 @@ short
 vqt_xfntinfo (short handle, short flags, short id, short index, XFNT_INFO *info)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intin[5];   
+	short vdi_intin[3 + N_PTRINTS];
 	short vdi_intout[3]; /* vdi_intout[0..2] will be filled */
 
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 	
-	info->size = sizeof (XFNT_INFO);
+	info->size = sizeof(XFNT_INFO);
 	vdi_intin    [0] = flags;
 	vdi_intin    [1] = id;
 	vdi_intin    [2] = index;
-	vdi_intin_ptr(3) = info;
+	vdi_intin_ptr(3, XFNT_INFO *) = info;
 
 	/* set the 0 as return value in case NVDI is not present */
 	vdi_intout[1]    = 0;
 	
-	VDI_TRAP (vdi_params, handle, 229, 0,5);
+	VDI_TRAP (vdi_params, handle, 229, 0, 3 + N_PTRINTS);
 	
 	info->format	= vdi_intout[0];
 	info->id	= vdi_intout[1];
@@ -57,4 +57,3 @@ vqt_xfntinfo (short handle, short flags, short id, short index, XFNT_INFO *info)
 	
 	return vdi_intout[1];
 }
-

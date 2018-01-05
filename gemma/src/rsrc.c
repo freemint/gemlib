@@ -63,7 +63,8 @@ rsrc_xload(BASEPAGE *bp, long fn, short nargs, char *name, PROC_ARRAY *p)
 
 	if (ap[3])
 	{
-		ushort *wrsc, mode;
+		ushort *wrsc;
+		short mode;
 		ulong *lrsc;
 
 		DEBUGMSG("custom load");

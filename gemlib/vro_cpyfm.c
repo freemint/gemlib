@@ -60,8 +60,8 @@ vro_cpyfm (short handle, short mode, short pxy[], MFDB *src, MFDB *dst)
 	
 	VDI_PARAMS(vdi_control, &mode, pxy, vdi_dummy, vdi_dummy);
 	
-	vdi_control_ptr(7) = src;
-	vdi_control_ptr(9) = dst;
+	vdi_control_ptr(0, MFDB *) = src;
+	vdi_control_ptr(1, MFDB *) = dst;
 	
 	VDI_TRAP (vdi_params, handle, 109, 4,1);
 }

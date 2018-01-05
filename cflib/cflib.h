@@ -480,6 +480,7 @@ void	scrap_wtxt	(char *buf);
 void	fix_dial	(OBJECT *tree);
 void	fix_menu	(OBJECT *tree);
 void	fix_popup	(OBJECT *tree, short thin_line);
+void cf_use_all_userdefs (short all);
 
 /*******************************************************************************
  * vdi functions

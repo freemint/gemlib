@@ -9,6 +9,19 @@
 #  include "mt_gem.h"
 # endif
 
+#ifndef NULL
+#  define NULL ((void *)0)
+#endif
+
+
+#ifndef NO_CONST
+#  ifdef __GNUC__
+#	 define NO_CONST(p) __extension__({ union { const void *cs; void *s; } _x; _x.cs = p; _x.s; })
+#  else
+#	 define NO_CONST(p) ((void *)(p))
+#  endif
+#endif
+
 
 #if defined(__GNUC__) && !defined(__NO_INLINE__)
 
@@ -16,12 +29,12 @@ static inline void
 _aes_trap (AESPB * aespb)
 {
 	__asm__ volatile (
-		"move.l	%0,d1\n\t"	/* &aespb */
-		"move.w	#200,d0\n\t"
+		"move.l	%0,%%d1\n\t"	/* &aespb */
+		"move.w	#200,%%d0\n\t"
 		"trap	#2"
 		:
 		: "g"(aespb)
-		: "d0","d1","d2","a0","a1","a2","memory"
+		: "d0","d1","d2","a0","a1","a2","memory","cc"
 	);
 }
 #define AES_TRAP(aespb) _aes_trap(&aespb)
@@ -63,10 +76,39 @@ __regsused("d0/d1/a0/a1") void _aes_trap(__reg("d1")AESPB *) =
   	aes_params.addrout = &aes_addrout[0]
 
 
-#endif /* _GEM_AES_P_ */
+#ifdef __GNUC__
+
+/* to avoid "dereferencing type-punned pointer" */
+static __inline long *__aes_intout_long(short n, short *aes_intout)
+{
+	return ((long *)(aes_intout   +n));
+}
+#define aes_intout_long(n)  *__aes_intout_long(n, aes_intout)
+
+static __inline void **__aes_intout_ptr(short n, short *aes_intout)
+{
+	return ((void **)(aes_intout   +n));
+}
+#define aes_intout_ptr(n, t)  *((t *)__aes_intout_ptr(n, aes_intout))
+
+static __inline void **__aes_intin_ptr(short n, short *aes_intin)
+{
+	return ((void **)(aes_intin   +n));
+}
+#define aes_intin_ptr(n, t)  *((t *)__aes_intin_ptr(n, aes_intin))
+
+#else
+
+#define aes_intout_long(n)  *((long *)(aes_intout+(n)))
+#define aes_intout_ptr(n, t)  *((t *)((void **)(aes_intout+(n))))
+#define aes_intin_ptr(n, t)  *((t *)((void **)(aes_intin+(n))))
+
+#endif
 
 
 /* special feature for AES bindings: pointer in parameters (for return values)
  * could be NULL (nice idea by Martin Elsasser against dummy variables) 
  */
 #define CHECK_NULLPTR 1
+
+#endif /* _GEM_AES_P_ */

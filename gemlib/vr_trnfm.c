@@ -23,8 +23,8 @@ vr_trnfm (short handle, MFDB * src, MFDB * dst)
 	
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_dummy, vdi_dummy );
 	
-	vdi_control_ptr(7) = src;
-	vdi_control_ptr(9) = dst;
+	vdi_control_ptr(0, MFDB *) = src;
+	vdi_control_ptr(1, MFDB *) = dst;
 
 	VDI_TRAP_00 (vdi_params, handle, 110);
 }
