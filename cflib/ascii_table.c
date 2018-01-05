@@ -49,7 +49,7 @@ _redraw_obj (OBJECT * tree, short obj)
 static void
 set_numbers (short code)
 {
-	char str[6];
+	char str[16];
 
 	sprintf (str, "%03d", code);
 	set_string (cf_ascii_tab, AT_DEZ, str);

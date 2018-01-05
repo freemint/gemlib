@@ -33,6 +33,7 @@
 
 /* GEM Resource C Source */
 
+#if 0
 static ushort RSIB0MASK[] =
 {
   0x0000, 0x0000, 0x0000, 0x0000,
@@ -75,7 +76,7 @@ static ushort RSIB0DATA[] =
 
 static ICONBLK rs_iconblk[1] =
 {
-	{ RSIB0MASK, RSIB0DATA, "", ' ', 0, 0, 0, 0, 32, 32, 0, 0, 0, 0 }
+	{ (short *)RSIB0MASK, (short *)RSIB0DATA, "", ' ', 0, 0, 0, 0, 32, 32, 0, 0, 0, 0 }
 };
 
 static OBJECT rs_object[2] =
@@ -83,6 +84,7 @@ static OBJECT rs_object[2] =
 	{ -1, 1, 1, G_BOX, OF_NONE, OS_NORMAL, {(long)0x00000000L }, 0x0000, 0x0000, 0x000a, 0x0004 } ,
 	{ 0, -1, -1, G_ICON, OF_LASTOB, OS_NORMAL, {(long)&rs_iconblk[0] }, 0x0300, 0x0800, 0x0004, 0x0002 }
 };
+#endif
 
 /* Internal functions */
 

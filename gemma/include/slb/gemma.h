@@ -13,7 +13,7 @@
 extern long _startup(void);
 extern short call_aes(GEM_ARRAY *gemstr, short fn);
 extern GEM_ARRAY *gem_control(void);
-extern long appl_open(char *file, short thread, char *pname);
+extern long appl_open(const char *file, short thread, const char *pname);
 extern long appl_close(void);
 extern SLB *get_gemma_p(void) __attribute__((__const__));
 
@@ -216,7 +216,7 @@ long windial_setjmp(WINDIAL *wd, short vec, void *adr)
 }
 
 static inline
-long windial_alert(short button, char *str)
+long windial_alert(short button, const char *str)
 {
 	SLB *gemma_p = get_gemma_p();
 
@@ -224,7 +224,7 @@ long windial_alert(short button, char *str)
 }
 
 static inline
-void windial_error(long error, char *msg)
+void windial_error(long error, const char *msg)
 {
 	SLB *gemma_p = get_gemma_p();
 

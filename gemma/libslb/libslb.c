@@ -8,9 +8,10 @@
  */
 
 # include <mintbind.h>
+# include "../include/mint/slb.h"
 
 long
-_slbopen(char *fname, char *path, long ver, void *hnd, void *exec)
+_slbopen(const char *fname, const char *path, long ver, void *hnd, void *exec)
 {
 	return Slbopen(fname, path, ver, hnd, exec);
 }

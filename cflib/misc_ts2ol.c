@@ -30,9 +30,12 @@
 long
 ts2ol (short i1, short i2)
 {
-	short va[2];
+	union {
+		short va[2];
+		long l;
+	} u;
 
-	va[0] = i1;
-	va[1] = i2;
-	return *(long *) (va);
+	u.va[0] = i1;
+	u.va[1] = i2;
+	return u.l;
 }

@@ -32,17 +32,17 @@ vq_ext_devinfo (short handle, short device,
                 short *dev_exists, char *file_path, char *file_name, char *name)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intin[7];   
+	short vdi_intin[1 + 3 * N_PTRINTS];
 	short vdi_intout[2]; 
 
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 	
 	vdi_intin    [0] = device;
-	vdi_intin_ptr(1) = file_path;
-	vdi_intin_ptr(3) = file_name;
-	vdi_intin_ptr(5) = name;
+	vdi_intin_ptr(1, char *) = file_path;
+	vdi_intin_ptr(1 + N_PTRINTS, char *) = file_name;
+	vdi_intin_ptr(1 + 2 * N_PTRINTS, char *) = name;
 
-	VDI_TRAP_ESC (vdi_params, handle, 248,4242, 0,7);
+	VDI_TRAP_ESC (vdi_params, handle, 248,4242, 0, 1 + 3 * N_PTRINTS);
 
 	*dev_exists = vdi_intout[0];
 	

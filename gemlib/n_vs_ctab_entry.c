@@ -26,12 +26,14 @@ vs_ctab_entry (short handle, short index, long color_space, COLOR_ENTRY * color)
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[7];   
 	short vdi_intout[1]; 
+	COLOR_ENTRY *ent;
 
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 	
 	vdi_intin                [0] = index;
-	*(long*)       &vdi_intin[1] = color_space;
-	*(COLOR_ENTRY*)&vdi_intin[3] = *color;
+	vdi_intin_long(1) = color_space;
+	ent = (COLOR_ENTRY*)&vdi_intin[3];
+	*ent = *color;
 
 	VDI_TRAP_ESC (vdi_params, handle, 205,1, 0,7);
 

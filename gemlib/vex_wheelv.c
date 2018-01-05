@@ -28,9 +28,10 @@ vex_wheelv (short handle, void *new, void **old)
 
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_dummy, vdi_dummy );
 	
-	vdi_control_ptr(7) = new;
+	vdi_control_ptr(0, void *) = new;
 	
 	VDI_TRAP_00 (vdi_params, handle, 134);
 	
-	*old = vdi_control_ptr(9);
+	if (old)
+		*old = vdi_control_ptr(1, void *);
 }

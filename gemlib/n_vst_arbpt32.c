@@ -40,6 +40,7 @@ vst_arbpt32 (short handle, long point,
 	short vdi_ptsout[4]; 
 
 	VDI_PARAMS(vdi_control, (short*)&point, 0L, vdi_intout, vdi_ptsout);
+	vdi_intout_long(0) = 0;
 	
 	VDI_TRAP (vdi_params, handle, 246, 0,2);
 
@@ -60,5 +61,7 @@ vst_arbpt32 (short handle, long point,
 #endif
 	*hcell = vdi_ptsout[3];
 	
-	return vdi_intout_long(0);
+	if (vdi_control[4] >= 2)
+		return vdi_intout_long(0);
+	return 0;
 }

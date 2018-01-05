@@ -1,4 +1,4 @@
-/* Prototypes for internal GEM calls */
+ /* Prototypes for internal GEM calls */
 
 /*  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,12 +20,12 @@ gemsys(long sysopcode, long *params)
 {
 	__asm__ volatile						\
 	(								\
-		"move.l	%0,d0\n\t"					\
-		"move.l	%1,d1\n\t"					\
+		"move.l	%0,%%d0\n\t"					\
+		"move.l	%1,%%d1\n\t"					\
 		"trap	#2\n\t"						\
 		:							\
 		: "g"(sysopcode), "g"(params)				\
-		: "d0", "d1", "d2", "a0", "a1", "a2", "memory"		\
+		: "d0", "d1", "d2", "a0", "a1", "a2", "memory", "cc"		\
 	);
 }
 
@@ -44,7 +44,7 @@ long _evnt_multi(PROC_ARRAY *proc, short fl, short cl, short mask, short state, 
 			short *msg, unsigned long timer);
 long _evnt_timer(PROC_ARRAY *proc, unsigned long msec);
 long _fsel_exinput(PROC_ARRAY *proc, char *path, char *name, char *title);
-long _form_alert(PROC_ARRAY *proc, short b, char *msg);
+long _form_alert(PROC_ARRAY *proc, short b, const char *msg);
 long _form_button(PROC_ARRAY *proc, OBJECT *tree, short obj, short clk);
 long _form_dial(PROC_ARRAY *proc, short flag, short *dxywh, short *cxywh);
 long _form_keybd(PROC_ARRAY *proc, OBJECT *tree, short obj, short nobj, short tch);

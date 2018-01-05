@@ -144,7 +144,8 @@ appl_close(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 	if (proc->fsel.exec)
 	{
 		Slbclose(proc->fsel.handle);
-		proc->fsel.exec = proc->fsel.handle = 0;
+		proc->fsel.exec = 0;
+		proc->fsel.handle = 0;
 	}
 
 	close_vdi(proc);
@@ -155,7 +156,8 @@ appl_close(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 	_appl_exit(proc);
 
 	Slbclose(proc->kern.handle);
-	proc->kern.exec = proc->kern.handle = 0;
+	proc->kern.exec = 0;
+	proc->kern.handle = 0;
 
 	DEBUGMSG("complete");
 
@@ -319,7 +321,8 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 error:	_appl_exit(proc);
 
 	Slbclose(proc->kern.handle);
-	proc->kern.exec = proc->kern.handle = 0;
+	proc->kern.exec = 0;
+	proc->kern.handle = 0;
 
 	DEBUGMSG("error");
 

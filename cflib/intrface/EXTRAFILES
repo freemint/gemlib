@@ -9,6 +9,5 @@ SRCFILES += \
 	SRCFILES \
 	\
 	exthelp.hrd \
-	exthelp.rh \
 	exthelp.rsc \
 	exthelp.rsh

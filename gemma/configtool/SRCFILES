@@ -8,6 +8,6 @@ COBJS = \
 	main.c
 
 SOBJS = \
-	startup.s
+	startup.S
 
 SRCFILES = $(HEADER) $(COBJS) $(SOBJS)

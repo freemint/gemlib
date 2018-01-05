@@ -84,7 +84,7 @@ deselect(WINDIAL *wd, short obj)
 
 static char *libbuf;
 static long liblen;
-static ushort libmode;
+static short libmode;
 static char fullname[1024];
 
 static long *
@@ -101,7 +101,7 @@ load_library(void)
 
 	if (r == 0)
 	{
-		uchar *buf = libbuf;
+		uchar *buf = (uchar *)libbuf;
 		long x = liblen;
 
 		do
@@ -139,7 +139,7 @@ do_window(WINDIAL *wd)
 
 	if (!prefs || (prefs[1] < 17))
 	{
-		windial_alert(1, (char *)CANNOTLOAD);
+		windial_alert(1, (const char *)CANNOTLOAD);
 		return;
 	}
 
@@ -228,14 +228,14 @@ do_window(WINDIAL *wd)
 				a = dos_fsave(fullname, libbuf, liblen, libmode);
 				if (a < 0)
 				{
-					windial_error(a, (char *)-1);
+					windial_error(a, (const char *)-1);
 					return;
 				}
 
 				users = get_users();
 				if (users > 1)
 				{
-					a = windial_alert(1, (char *)IMMEDIATELY);
+					a = windial_alert(1, (const char *)IMMEDIATELY);
 					if (a == 1)
 					{
 						a = 0;
@@ -246,7 +246,7 @@ do_window(WINDIAL *wd)
 							a |= (g->exec)(g->handle, (long)34, (short)2, (short)x+0x4000, (long)settings[x]);
 						}
 						if (a < 0)
-							windial_error(a, (char *)-1);
+							windial_error(a, (const char *)-1);
 					}
 				}
 			}

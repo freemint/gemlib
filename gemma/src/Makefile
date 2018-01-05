@@ -23,7 +23,7 @@ INCLUDES +=
 GENERAL += -m68020-60
 
 # default definitions
-OBJS =  $(SOBJS:.s=.o) $(COBJS:.c=.o)
+OBJS =  $(SOBJS:.S=.o) $(COBJS:.c=.o)
 LDFLAGS = -nostartfiles -nostdlib
 LIBS = -lc -lgcc
 GENFILES = $(TARGET)
