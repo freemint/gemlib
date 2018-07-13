@@ -74,7 +74,6 @@ mt_evnt_multi (short events, short bclicks, short bmask, short bstate,
 			   short *global_aes)
 {
 	short *ptr;
-	unsigned short *i = (unsigned short *)&interval;
 
 	AES_PARAMS(25,16,7,1,0);
 
@@ -93,8 +92,8 @@ mt_evnt_multi (short events, short bclicks, short bmask, short bstate,
 	*(ptr ++) = m2_y;
 	*(ptr ++) = m2_w;
 	*(ptr ++) = m2_h;
-	*(ptr ++) = i[1];
-	*(ptr) = i[0];										/* [15] */
+	*(ptr ++) = interval;
+	*(ptr) = interval >> 16;							/* [15] */
 
 	aes_addrin[0] = (long)msg;
 

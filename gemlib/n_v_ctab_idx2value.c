@@ -28,5 +28,5 @@ v_ctab_idx2value (short handle, short index)
 	
 	VDI_TRAP_ESC (vdi_params, handle, 206,5, 0,1);
 
-	return *(unsigned long *)&vdi_intout[0];
+	return vdi_intout_long(0);
 }

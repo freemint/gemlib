@@ -32,7 +32,9 @@ vq_px_format (short handle, unsigned long *px_format)
 #if CHECK_NULLPTR
 	if (px_format)
 #endif
-	*px_format = *(unsigned long *)&vdi_intout[2];
+	{
+		*px_format = vdi_intout_long(2);
+	}
 	
 	return vdi_intout_long(0);
 }

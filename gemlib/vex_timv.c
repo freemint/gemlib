@@ -24,12 +24,16 @@ void
 vex_timv (short handle, void *time_addr, void **otime_addr, short *time_conv)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_intout[VDI_INTOUTMAX];
 
-	VDI_PARAMS(vdi_control, 0L, 0L, time_conv, vdi_dummy );
+	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_dummy );
 	
-	vdi_control_ptr(7) = time_addr;
+	vdi_control_ptr(0, void *) = time_addr;
 	
 	VDI_TRAP_00 (vdi_params, handle, 118);
 	
-	*otime_addr = vdi_control_ptr(9);
+	if (otime_addr)
+		*otime_addr = vdi_control_ptr(1, void *);
+	if (time_conv)
+		*time_conv = vdi_intout[0];
 }

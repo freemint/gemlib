@@ -21,14 +21,14 @@
 short v_delete_driver_info( short handle, DRV_INFO *drv_info )
 {
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intin[2]; 
+	short vdi_intin[N_PTRINTS];
 	short vdi_intout[1];
 	
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, 0L);
 
-	*(DRV_INFO **) &vdi_intin[0] = drv_info;
+	vdi_intin_ptr(0, DRV_INFO *) = drv_info;
 		
-	VDI_TRAP (vdi_params, handle, 181, 0,2);
+	VDI_TRAP (vdi_params, handle, 181, 0, N_PTRINTS);
 
 	return vdi_intout[0];
 }

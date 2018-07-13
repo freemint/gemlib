@@ -9,10 +9,18 @@
 #  include "mt_gem.h"
 # endif
 
+#ifndef NULL
+#  define NULL ((void *)0)
+#endif
 
-#define vdi_control_ptr(n)   *((void**)(vdi_control +n))
-#define vdi_intin_ptr(n)     *((void**)(vdi_intin   +n))
-#define vdi_intout_long(n)   *((long*) (vdi_intout  +n))
+#ifndef NO_CONST
+#  ifdef __GNUC__
+#	 define NO_CONST(p) __extension__({ union { const void *cs; void *s; } _x; _x.cs = p; _x.s; })
+#  else
+#	 define NO_CONST(p) ((void *)(p))
+#  endif
+#endif
+
 
 #if defined(__GNUC__) && !defined(__NO_INLINE__)
 
@@ -146,6 +154,66 @@ __regsused("d0/d1/a0/a1") void _vdi_trap_00(
 #else
 	/* replace vdi_dummy in VDIPB by NULL pointer */
 	#define vdi_dummy 0L
+#endif
+
+
+#define N_PTRINTS (sizeof(void *) / sizeof(short))
+
+#ifdef __GNUC__
+
+/* to avoid "dereferencing type-punned pointer" */
+static __inline long *__vdi_intin_long(short n, short *vdi_intin)
+{
+	return ((long *)(vdi_intin   +n));
+}
+#define vdi_intin_long(n)  *__vdi_intin_long(n, vdi_intin)
+
+static __inline long *__vdi_intout_long(short n, short *vdi_intout)
+{
+	return ((long *)(vdi_intout   +n));
+}
+#define vdi_intout_long(n)  *__vdi_intout_long(n, vdi_intout)
+
+static __inline void **__vdi_intout_ptr(short n, short *vdi_intout)
+{
+	return ((void **)(vdi_intout   +n));
+}
+#define vdi_intout_ptr(n, t)  *((t *)__vdi_intout_ptr(n, vdi_intout))
+
+static __inline long *__vdi_ptsout_long(short n, short *vdi_ptsout)
+{
+	return ((long *)(vdi_ptsout   +n));
+}
+#define vdi_ptsout_long(n)  *__vdi_ptsout_long(n, vdi_ptsout)
+
+static __inline long *__vdi_ptsin_long(short n, short *vdi_ptsin)
+{
+	return ((long *)(vdi_ptsin   +n));
+}
+#define vdi_ptsin_long(n)  *__vdi_ptsin_long(n, vdi_ptsin)
+
+static __inline void **__vdi_intin_ptr(short n, short *vdi_intin)
+{
+	return ((void**)(vdi_intin + n * N_PTRINTS));
+}
+#define vdi_intin_ptr(n, t)  *((t *)__vdi_intin_ptr(n, vdi_intin))
+
+static __inline void **__vdi_control_ptr(short n, short *vdi_control)
+{
+	return ((void**)(vdi_control + 7 + n * N_PTRINTS));
+}
+#define vdi_control_ptr(n, t)  *((t *)__vdi_control_ptr(n, vdi_control))
+
+#else
+
+#define vdi_control_ptr(n, t)   *((t *)(vdi_control + 7 + (n) * N_PTRINTS))
+#define vdi_intin_ptr(n, t)     *((t *)(vdi_intin + (n) * N_PTRINTS))
+#define vdi_intin_long(n)       *((long *)(vdi_intin + (n)))
+#define vdi_intout_long(n)      *((long *)(vdi_intout + (n)))
+#define vdi_intout_ptr(n, t)    *((t *)(vdi_intout + n * N_PTRINTS))
+#define vdi_ptsout_long(n)      *((long *)(vdi_ptsout + n))
+#define vdi_ptsin_long(n)       *((long *)(vdi_ptsin + n))
+
 #endif
 
 # endif /* _GEM_VDI_P_ */

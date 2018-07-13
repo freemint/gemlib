@@ -25,15 +25,15 @@ vq_tray_names (short handle, char *input_name, char *output_name,
                short *input, short *output)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intin[4];   
-	short vdi_intout[2]; 
+	short vdi_intin[2 * N_PTRINTS];
+	short vdi_intout[VDI_INTOUTMAX];
 
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy );
 	
-	vdi_intin_ptr(0) = input_name;
-	vdi_intin_ptr(2) = output_name;
+	vdi_intin_ptr(0, char *) = input_name;
+	vdi_intin_ptr(N_PTRINTS, char *) = output_name;
 	
-	VDI_TRAP_ESC (vdi_params, handle, 5,36, 0,4);
+	VDI_TRAP_ESC (vdi_params, handle, 5,36, 0, 2 * N_PTRINTS);
 	
 	if (vdi_control[4]) /* function supported by the driver */
 	{
