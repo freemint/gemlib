@@ -1,20 +1,14 @@
 
-	.globl	_aes
+#include "symbols.h"
 
-_aes:
-	movel	sp@(4), d1		| hier kommt pb Åber den Stack!
-	movew	#200, d0
-#ifdef __mcoldfire__
-	movel	a2, sp@-		| backup registers
-	movel	d2, sp@-
-#else
-	moveml	d2/a2, sp@-		| backup registers
-#endif
+	.globl	C_SYMBOL_NAME(aes)
+
+C_SYMBOL_NAME(aes):
+	movel	%sp@(4), %d1	| pb is passed on the stack
+	movew	#200, %d0
+	movel	%a2, %sp@-		| backup registers
+	movel	%d2, %sp@-
 	trap	#2
-#ifdef __mcoldfire__
-	movel	sp@+, d2		| restore registers
-	movel	sp@+, a2
-#else
-	moveml	sp@+, d2/a2		| restore registers
-#endif
+	movel	%sp@+, %d2		| restore registers
+	movel	%sp@+, %a2
 	rts
