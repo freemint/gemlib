@@ -21,8 +21,9 @@ short
 call_aes(GEM_ARRAY *gemstr, short fn)
 {
 	SLB *g = get_gemma_p();
+	long _CDECL (*exec)(SLB_HANDLE, long, long, GEM_ARRAY *, long) = (long _CDECL (*)(SLB_HANDLE, long, long, GEM_ARRAY *, long))g->exec;
 
-	return (short)(g->exec)(g->handle, (long)CALL_AES, (short)2, gemstr, fn);
+	return (*exec)(g->handle, CALL_AES, SLB_NARGS(2), gemstr, fn);
 }
 
 /* EOF */

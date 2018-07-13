@@ -23,7 +23,7 @@ vqt_f_extent16n (short handle, const WCHAR * wstr, short num, short extent[])
 {
 	short vdi_control[VDI_CNTRLMAX]; 
 
-	VDI_PARAMS(vdi_control, wstr, 0L, vdi_dummy, extent );
+	VDI_PARAMS(vdi_control, (short *)NO_CONST(wstr), 0L, vdi_dummy, extent );
 	
 	VDI_TRAP (vdi_params, handle, 240, 0,num);
 }

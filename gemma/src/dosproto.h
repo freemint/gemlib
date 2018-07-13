@@ -21,167 +21,80 @@
 # define sema_request(s) _semaphore(2, s, -1L)
 # define sema_release(s) _semaphore(3, s, 0L)
 
-long _getexc(long vec);
-short _kbshift(long wh);
-short _getrez(void);
+#undef SLB_NWORDS
+#define SLB_NWORDS(_nargs) ((((long)(_nargs) * 2 + 1l) << 16) | (long)(_nargs))
+#undef SLB_NARGS
+#define SLB_NARGS(_nargs) SLB_NWORDS(_nargs)
 
-INLINE
-long _floadbuf(PROC_ARRAY *proc, const char *name, char *buf, long len, short *mode)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x020bL, (short)4, name, buf, len, mode);
-}
+#ifndef _CDECL
+#  define _CDECL
+#endif
 
-INLINE
-long _pexec(PROC_ARRAY *proc, long mode, char *cmd, char *tail, char *env)
-{
-	return (proc->kern.exec)(proc->kern.handle, 75L, (short)4, (long)mode, (long)cmd, (long)tail, (long)env);
-}
+const char *dos_serror(PROC_ARRAY *proc, long error);
+long dos_fsize(PROC_ARRAY *proc, const char *name);
+long dos_fsearch(PROC_ARRAY *proc, const char *name, char *fullname, const char *envvar);
+const char *dos_getenv(PROC_ARRAY *proc, const char *var);
+long dos_floadbuf(PROC_ARRAY *proc, const char *name, char *buf, long len, short *mode);
 
-INLINE
-long _wait3(PROC_ARRAY *proc, short flag, long *rus)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x011cL, (short)flag, (long)rus);
-}
+long dos_pexec(PROC_ARRAY *proc, long mode, const char *cmd, const char *tail, const char *env);
 
-INLINE
-long _signal(PROC_ARRAY *proc, short sig, void *hnd)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x0112L, (short)sig, (long)hnd);
-}
+#if _USE_KERNEL32
 
-INLINE
-long _kill(PROC_ARRAY *proc, short pid, short sig)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x0111L, (short)pid, (short)sig);
-}
+long dos_wait3(PROC_ARRAY *proc, short flag, long *rus);
+long dos_signal(PROC_ARRAY *proc, short sig, void *hnd);
+long dos_kill(PROC_ARRAY *proc, short pid, short sig);
+long dos_fcntl(PROC_ARRAY *proc, short file, void *arg, short cmd);
+long dos_pdomain(PROC_ARRAY *proc, long dom);
+long dos_dopendir(PROC_ARRAY *proc, const char *name, short flag);
+long dos_dreaddir(PROC_ARRAY *proc, long size, long handle, void *buf);
+long dos_drewinddir(PROC_ARRAY *proc, long handle);
+long dos_dclosedir(PROC_ARRAY *proc, long handle);
+void dos_yield(PROC_ARRAY *proc);
+long dos_fopen(PROC_ARRAY *proc, const char *name, short mode);
+void dos_fclose(PROC_ARRAY *proc, long fd);
+long dos_fread(PROC_ARRAY *proc, long fd, long len, void *buf);
+long dos_fwrite(PROC_ARRAY *proc, long fd, long len, const void *buf);
+long dos_fdelete(PROC_ARRAY *proc, const char *filespec);
+long dos_fdup(PROC_ARRAY *proc, short file);
+void dos_fforce(PROC_ARRAY *proc, short f1, short f2);
+void dos_mshrink(PROC_ARRAY *proc, void *base, long newsize);
+void dos_mfree(PROC_ARRAY *proc, long addr);
+long dos_pgetppid(PROC_ARRAY *proc);
+long dos_pgetpid(PROC_ARRAY *proc);
 
-INLINE
-char *getenv(PROC_ARRAY *proc, const char *var)
-{
-	return (char *)(proc->kern.exec)(proc->kern.handle, 0x0208L, (short)1, (long)var);
-}
+#else
 
-INLINE
-long _cntl(PROC_ARRAY *proc, short file, void *arg, short cmd)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x0104, (short)3, (short)file, (long)arg, (short)cmd);
-}
+#include <mintbind.h>
 
-INLINE
-long _domain(PROC_ARRAY *proc, long dom)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x0119L, (short)1, (long)dom);
-}
+#define dos_wait3(proc, flag, rus) Pwait3(flag, rus)
+#define dos_signal(proc, sig, hnd) Psignal(sig, hnd)
+#define dos_kill(proc, pid, sig) Pkill(pid, sig)
+#define dos_fcntl(proc, file, arg, cmd) Fcntl(file, arg, cmd)
+#define dos_pdomain(proc, dom) Pdomain(dom)
+#define dos_dopendir(proc, name, flag) Dopendir(name, flag)
+#define dos_dreaddir(proc, size, handle, buf) Dreaddir(size, handle, buf)
+#define dos_drewinddir(proc, handle) Drewinddir(handle)
+#define dos_dclosedir(proc, handle) Dclosedir(handle)
+#define dos_yield(proc) Syield()
+#define dos_fopen(proc, name, mode) Fopen(name, mode)
+#define dos_fclose(proc, fd) Fclose(fd)
+#define dos_fread(proc, fd, len, buf) Fread(fd, len, buf)
+#define dos_fwrite(proc, fd, len, buf) Fwrite(fd, len, buf)
+#define dos_fdelete(proc, filespec) Fdelete(filespec)
+#define dos_fdup(proc, file) Fdup(file)
+#define dos_fforce(proc, f1, f2) Fforce(f1, f2)
+#define dos_mshrink(proc, base, newsize) Mshrink(base, newsize)
+#define dos_mfree(proc, addr) Mfree(addr)
+#define dos_pgetppid(proc) Pgetppid()
+#define dos_pgetpid(proc) Pgetpid()
 
-INLINE
-long _opendir(PROC_ARRAY *proc, const char *name, short flag)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x0128L, (short)2, (long)name, (short)flag);
-}
-
-INLINE
-long _readdir(PROC_ARRAY *proc, long size, long handle, void *buf)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x0129L, (short)3, (long)size, (long) handle, (long)buf);
-}
-
-INLINE
-long _rewinddir(PROC_ARRAY *proc, long handle)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x012aL, (short)1, (long) handle);
-}
-
-INLINE
-long _closedir(PROC_ARRAY *proc, long handle)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x012bL, (short)1, (long) handle);
-}
-
-INLINE
-void _yield(PROC_ARRAY *proc)
-{
-	(proc->kern.exec)(proc->kern.handle, 0x00ffL, (short)0);
-}
-
-INLINE
-long _size(PROC_ARRAY *proc, char *name)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x0201L, (short)1, name);
-}
-
-INLINE
-long _open(PROC_ARRAY *proc, const char *name, short mode)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x003dL, (short)2, name, mode);
-}
-
-INLINE
-void _close(PROC_ARRAY *proc, long fd)
-{
-	(proc->kern.exec)(proc->kern.handle, 0x003eL, (short)1, (short)fd);
-}
-
-INLINE
-long _read(PROC_ARRAY *proc, long fd, long len, void *buf)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x003fL, (short)3, (short)fd, len, buf);
-}
-
-INLINE
-long _write(PROC_ARRAY *proc, long fd, long len, void *buf)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x0040L, (short)3, (short)fd, len, buf);
-}
-
-INLINE
-long _delete(PROC_ARRAY *proc, const char *filespec)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x0041L, (short)1, (long)filespec);
-}
-
-INLINE
-long _dup(PROC_ARRAY *proc, short file)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x0045L, (short)1, (short)file);
-}
-
-INLINE
-void _force(PROC_ARRAY *proc, short f1, short f2)
-{
-	(proc->kern.exec)(proc->kern.handle, 0x0046L, (short)2, (short)f1, (short)f2);
-}
-
-INLINE
-void _shrink(PROC_ARRAY *proc, void *base, long newsize)
-{
-	(proc->kern.exec)(proc->kern.handle, 0x004aL, (short)2, (long)base, (long)newsize);
-}
-
-INLINE
-void _free(PROC_ARRAY *proc, long addr)
-{
-	(proc->kern.exec)(proc->kern.handle, 0x0049L, (short)1, (long)addr);
-}
-
-INLINE
-long _getppid(PROC_ARRAY *proc)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x010cL, (short)0);
-}
-
-# if 0
-INLINE
-long _getpid(PROC_ARRAY *proc)
-{
-	return (proc->kern.exec)(proc->kern.handle, 0x010bL, (short)0);
-}
-# endif
+#endif
 
 long _sgetpid(void);
 long _sgeteuid(void);
 long _semaphore(short mode, long sema, long time);
 
-void _conws(char *str);
+void _conws(const char *str);
 
 long _alloc(long size);
 long _rdalloc(long size);

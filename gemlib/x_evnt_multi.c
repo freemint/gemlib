@@ -29,6 +29,7 @@ mt_EVNT_multi( short evtypes, short nclicks, short bmask, short bstate,
 {
 	short *ev;
 	short *intout;
+	MOBLK *m;
 	
 	AES_PARAMS(25,16,7,1,0);
 
@@ -38,12 +39,19 @@ mt_EVNT_multi( short evtypes, short nclicks, short bmask, short bstate,
 	aes_intin[3] = bstate;
 
 	if	( evtypes & MU_M1 )
-		*((MOBLK *)( aes_intin + 4 )) = *m1;
+	{
+		m = (MOBLK *)( aes_intin + 4 );
+		*m = *m1;
+	}
 
 	if	( evtypes & MU_M2 )
-		*((MOBLK *)( aes_intin + 9 )) = *m2;
+	{
+		m = (MOBLK *)( aes_intin + 9 );
+		*m = *m2;
+	}
 
-	*(long*)(&aes_intin[14]) = ms;
+	aes_intin[14] = ms;
+	aes_intin[15] = ms >> 16;
 
 	aes_addrin[0] = (long)event->msg;
 

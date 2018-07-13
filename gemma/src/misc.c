@@ -16,6 +16,7 @@
  */
 
 # include <errno.h>
+# include <mintbind.h>
 
 # include "gemma.h"
 # include "dosproto.h"
@@ -45,7 +46,7 @@ get_users(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 	{
 		if (pidtable[x])
 		{
-			r = _kill(proc, x, 0);	/* SIGNULL */
+			r = dos_kill(proc, x, 0);	/* SIGNULL */
 			if (r < 0)
 				pidtable[x] = 0;
 			else
@@ -90,8 +91,11 @@ lib_control(BASEPAGE *bp, long fn, short nargs, \
 		}
 		case	0x0001:	/* get kern */
 		{
+#if _USE_KERNEL32
 			return (long)&proc->kern;
+#else
 			break;
+#endif
 		}
 		case	0x0002:	/* get version */
 		{

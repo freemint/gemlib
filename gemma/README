@@ -3,10 +3,10 @@ have built the gemlib (for the mt_gem.h header).
 
 The include files will be installed in /usr/include/slb
 The static modules will be installed in /usr/lib
-The shared objects will be installed in /usr/local/lib/slb
+The shared objects will be installed in /mint/slb
 
 To get all this to work you also have to set the SLBPATH variable to 
-point to that last directory (e.g. setenv SLBPATH /usr/local/lib/slb 
+point to that last directory (e.g. setenv SLBPATH /mint/slb 
 in your mint.cnf file).
 
 To check if everything is installed properly, run the test/test.app 

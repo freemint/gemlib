@@ -27,11 +27,11 @@
 static void
 fsel_init(PROC_ARRAY *proc, ushort flag)
 {
-	char *home;
+	const char *home;
 	long r;
 	short x;
 
-	home = getenv(proc, "HOME=");
+	home = dos_getenv(proc, "HOME=");
 
 	if ((flag & 1) || !home)
 	{
@@ -71,8 +71,7 @@ fsel_init(PROC_ARRAY *proc, ushort flag)
 }
 
 long
-file_select(BASEPAGE *bp, long fn, short nargs, \
-		char *title, char *mask, ushort flag, PROC_ARRAY *p)
+file_select(BASEPAGE *bp, long fn, short nargs, const char *title, const char *mask, ushort flag, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
 	char *tit, *msk = 0;

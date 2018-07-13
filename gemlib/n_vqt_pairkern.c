@@ -36,9 +36,13 @@ vqt_pairkern (short handle, short ch1, short ch2, long *x, long *y)
 #if CHECK_NULLPTR
 	if (x)
 #endif
-	*x = *(long*)&vdi_intout[0];
+	{
+		*x = vdi_intout_long(0);
+	}
 #if CHECK_NULLPTR
 	if (y)
 #endif
-	*y = *(long*)&vdi_intout[2];
+	{
+		*y = vdi_intout_long(2);
+	}
 }

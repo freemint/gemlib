@@ -144,7 +144,8 @@ appl_close(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 	if (proc->fsel.exec)
 	{
 		Slbclose(proc->fsel.handle);
-		proc->fsel.exec = proc->fsel.handle = 0;
+		proc->fsel.exec = 0;
+		proc->fsel.handle = 0;
 	}
 
 	close_vdi(proc);
@@ -154,8 +155,11 @@ appl_close(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p)
 
 	_appl_exit(proc);
 
+#if _USE_KERNEL32
 	Slbclose(proc->kern.handle);
-	proc->kern.exec = proc->kern.handle = 0;
+	proc->kern.exec = 0;
+	proc->kern.handle = 0;
+#endif
 
 	DEBUGMSG("complete");
 
@@ -175,7 +179,8 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 {
 	PROC_ARRAY *proc = 0;
 	long apid, r;
-	char *lname, *home;
+	char *lname;
+	const char *home;
 	short ap[4];
 
 	if (nargs < 3) return -EINVAL;
@@ -188,10 +193,12 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 	if (proc->gem.global[0])
 		return proc->gem.global[2];
 
+#if _USE_KERNEL32
 	r = Slbopen("kernel32.slb", 0L, 0x0100L, &proc->kern.handle, &proc->kern.exec);
 
 	if (r < 0)
 		return r;
+#endif
 
 	apid = _appl_init(proc);
 
@@ -205,9 +212,9 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 		goto error;
 	}
 
-	_domain(proc, 1);		/* ... obviously */
+	dos_pdomain(proc, 1);		/* ... obviously */
 
-	home = getenv(proc, "HOME=");
+	home = dos_getenv(proc, "HOME=");
 	if (home && (flag & 4))
 		_setpath(home);
 
@@ -231,7 +238,7 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 				strcat(rscname, "\\");
 				strcat(rscname, name);
 
-				if (_size(proc, rscname) > 0)
+				if (dos_fsize(proc, rscname) > 0)
 					name = rscname;
 			}
 
@@ -302,7 +309,7 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 		char fullname[1024];
 
 		/* Search through the SLBPATH */
-		r = (proc->kern.exec)(proc->kern.handle, 515L, 3, "fileselector.slb", fullname, "SLBPATH=");
+		r = dos_fsearch(proc, "fileselector.slb", fullname, "SLBPATH=");
 
 		if (r == 0)
 			(void)Slbopen("fileselector.slb", 0L, 0x0100L, &proc->fsel.handle, &proc->fsel.exec);
@@ -316,10 +323,14 @@ appl_open(BASEPAGE *bp, long fn, short nargs, \
 
 	return apid;
 
-error:	_appl_exit(proc);
+error:
+	_appl_exit(proc);
 
+#if _USE_KERNEL32
 	Slbclose(proc->kern.handle);
-	proc->kern.exec = proc->kern.handle = 0;
+	proc->kern.exec = 0;
+	proc->kern.handle = 0;
+#endif
 
 	DEBUGMSG("error");
 

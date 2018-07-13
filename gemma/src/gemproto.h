@@ -20,12 +20,12 @@ gemsys(long sysopcode, long *params)
 {
 	__asm__ volatile						\
 	(								\
-		"move.l	%0,d0\n\t"					\
-		"move.l	%1,d1\n\t"					\
+		"move.l	%0,%%d0\n\t"					\
+		"move.l	%1,%%d1\n\t"					\
 		"trap	#2\n\t"						\
 		:							\
 		: "g"(sysopcode), "g"(params)				\
-		: "d0", "d1", "d2", "a0", "a1", "a2", "memory"		\
+		: "d0", "d1", "d2", "a0", "a1", "a2", "memory", "cc"		\
 	);
 }
 
@@ -34,17 +34,17 @@ gemsys(long sysopcode, long *params)
 # define _appl_init(p) call_aes(p->base, 1L, 2, p, 10)
 # define _appl_exit(p) call_aes(p->base, 1L, 2, p, 19)
 long _appl_control(PROC_ARRAY *proc, short opcode, void *out);
-long _appl_find(PROC_ARRAY *proc, char *name);
+long _appl_find(PROC_ARRAY *proc, const char *name);
 long _appl_getinfo(PROC_ARRAY *proc, short fn, short *out);
-long _appl_search(PROC_ARRAY *proc, short mode, char *fname, short *type, short *apid);
+long _appl_search(PROC_ARRAY *proc, short mode, const char *fname, short *type, short *apid);
 long _appl_write(PROC_ARRAY *proc, short id, short len, short *buf);
 long _evnt_multi(PROC_ARRAY *proc, short fl, short cl, short mask, short state, \
 			short m1f, short m1x, short m1y, short m1w, short m1h, \
 			short m2f, short m2x, short m2y, short m2w, short m2h, \
 			short *msg, unsigned long timer);
 long _evnt_timer(PROC_ARRAY *proc, unsigned long msec);
-long _fsel_exinput(PROC_ARRAY *proc, char *path, char *name, char *title);
-long _form_alert(PROC_ARRAY *proc, short b, char *msg);
+long _fsel_exinput(PROC_ARRAY *proc, char *path, char *name, const char *title);
+long _form_alert(PROC_ARRAY *proc, short b, const char *msg);
 long _form_button(PROC_ARRAY *proc, OBJECT *tree, short obj, short clk);
 long _form_dial(PROC_ARRAY *proc, short flag, short *dxywh, short *cxywh);
 long _form_keybd(PROC_ARRAY *proc, OBJECT *tree, short obj, short nobj, short tch);
@@ -55,7 +55,7 @@ long _graf_movebox(PROC_ARRAY *proc, short mx, short my, short sx, short sy, sho
 long _graf_growbox(PROC_ARRAY *proc, short sx, short sy, short mw, short mh, short *xywh);
 long _graf_shrinkbox(PROC_ARRAY *proc, short sx, short sy, short mw, short mh, short *xywh);
 long _menu_popup(PROC_ARRAY *proc, MENU *m1, short x, short y, MENU *m2);
-long _menu_register(PROC_ARRAY *proc, short id, char *name);
+long _menu_register(PROC_ARRAY *proc, short id, const char *name);
 long _objc_draw(PROC_ARRAY *proc, OBJECT *tree, short ob, short dp, short *xywh);
 long _objc_change(PROC_ARRAY *proc, OBJECT *tree, short ob, short *xywh, short nw, short rd);
 long _objc_edit(PROC_ARRAY *proc, OBJECT *tree, short startob, short key, short idx, short mode);
@@ -63,10 +63,10 @@ long _objc_find(PROC_ARRAY *proc, OBJECT *tree, short ob, short depth, short mx,
 long _objc_offset(PROC_ARRAY *proc, OBJECT *tree, short obj);
 long _rsrc_rcfix(PROC_ARRAY *proc, char *buf);
 long _rsrc_obfix(PROC_ARRAY *proc, OBJECT *tree, short ob);
-long _rsrc_load(PROC_ARRAY *proc, char *name);
+long _rsrc_load(PROC_ARRAY *proc, const char *name);
 # define _rsrc_free(p) call_aes(p->base, 1L, 2, p, 111)
 long _scrp_read(PROC_ARRAY *proc, char *path);
-long _shel_help(PROC_ARRAY *proc, short mode, char *file, char *key);
+long _shel_help(PROC_ARRAY *proc, short mode, const char *file, const char *key);
 long _shel_write(PROC_ARRAY *proc, short msg, short wg, short ws, const char *name, const char *env);
 long _wind_get(PROC_ARRAY *proc, short w, short fn);
 long _wind_set(PROC_ARRAY *proc, short w, short fn);

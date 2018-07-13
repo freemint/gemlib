@@ -1,14 +1,13 @@
 #
 # Makefile for gemma, a minimal GEM library
 #
-TARGET = gemma.app
 
 SHELL = /bin/sh
 SUBDIRS = 
 
 srcdir = .
 top_srcdir = ../..
-subdir = src
+subdir = configtool
 
 default: all
 
@@ -16,22 +15,48 @@ include $(top_srcdir)/CONFIGVARS
 include $(top_srcdir)/RULES
 include $(top_srcdir)/PHONY
 
-all-here: $(TARGET)
+CFLAGS += -Wno-inline
 
-# default overwrites
-INCLUDES += -I../include/
-GENERAL += 
+all-here: apps
 
 # default definitions
-OBJS =  $(SOBJS:.s=.o) $(COBJS:.c=.o)
-LDFLAGS = -nostartfiles -nostdlib -L../libgemma/
-LIBS = -lgemma -lgcc
-GENFILES = $(TARGET)
+GENFILES = .lib* gemma*.app
+
+ALL_APPS = normal
+
+ifeq ($(WITH_020_LIB),yes)
+ALL_APPS += normal020
+endif
+
+ifeq ($(WITH_V4E_LIB),yes)
+ALL_APPS += normalv4e
+endif
+
+apps: $(ALL_APPS)
+
+normal:
+	$(MAKE) gemma.app TARGET=""
+
+normal020:
+	$(MAKE) gemma020.app TARGET="020"
+
+normalv4e:
+	$(MAKE) gemmav4e.app TARGET="v4e"
 
 
-$(TARGET): $(OBJS)
-	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(OBJS) $(LIBS)
-	$(STRIP) $@
+gemma$(TARGET).app: objs
+	$(AM_V_at)rm -f $@
+	$(AM_V_at)cp .lib$(TARGET)/gemma.app $@
 
+objs: .lib$(TARGET)
+	cd .lib$(TARGET); $(MAKE)
+.PHONY: objs
+
+.lib$(TARGET): Makefile.objs
+	$(AM_V_at)$(MKDIR) -p $@
+	$(AM_V_at)$(CP) Makefile.objs $@/Makefile
+
+clean::
+	rm -rf .lib* gemma*.app
 
 include $(top_srcdir)/DEPENDENCIES

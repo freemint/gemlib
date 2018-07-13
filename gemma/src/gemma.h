@@ -49,25 +49,6 @@
 #  define uchar unsigned char
 # endif
 
-struct xattr
-{
-	ushort	mode;
-	long	index;
-	ushort	dev;
-	ushort	rdev;		/* "real" device */
-	ushort	nlink;
-	ushort	uid;
-	ushort	gid;
-	long	size;
-	long	blksize;
-	long	nblocks;
-	ushort	mtime, mdate;
-	ushort	atime, adate;
-	ushort	ctime, cdate;
-	short	attr;
-	short	reserved2;
-	long	reserved3[2];
-};
 
 struct gemma_flags
 {
@@ -95,9 +76,13 @@ typedef struct
 {
 	GEM_ARRAY gem;			/* user-visible part of this structure */
 	BASEPAGE *base;			/* process basepage address */
-	SLB *ego;			/* a pointer to the library itself */
-	SLB kern;			/* The kernel library structure */
-	SLB fsel;			/* The fileselector library structure */
+	SLB *ego;				/* a pointer to the library itself */
+#if _USE_KERNEL32
+	SLB kern;				/* The kernel library structure */
+#else
+	SLB kern_unused;		/* The kernel library structure */
+#endif
+	SLB fsel;				/* The fileselector library structure */
 	WINDIAL *wchain;		/* the begin of the window chain */
 	char *rawrscaddr;		/* address for the raw RSC buffer */
 	char *rscaddr;			/* address for the RSC buffer */
@@ -167,7 +152,7 @@ extern short menu_height;		/* in appl.c */
 # define aes40(p) 	(p->gem.global[0] >= 0x0400)
 
 # ifdef DEBUG
-void debug_print(char *fn, char *string);
+void debug_print(const char *fn, const char *string);
 # endif
 
 const long sema_users;

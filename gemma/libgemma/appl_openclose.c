@@ -132,15 +132,20 @@ GEM_ARRAY *
 gem_control(void)
 {
 	SLB *g = get_gemma_p();
+	long _CDECL (*exec)(SLB_HANDLE, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long))g->exec;
 
-	return (GEM_ARRAY *)(g->exec)(g->handle, (long)GEM_CTRL, (short)0);
+	return (GEM_ARRAY *)(*exec)(g->handle, GEM_CTRL, SLB_NARGS(0));
 }
 
 long
-appl_open(char *file, short thread, char *pname)
+appl_open(const char *file, short thread, const char *pname)
 {
 	long r;
 	SLB temp;
+	long _CDECL (*exec)(SLB_HANDLE, long, long, const char *, long, const char *);
+	long _CDECL (*exec2)(SLB_HANDLE, long, long, long, long);
+	long _CDECL (*exec3)(SLB_HANDLE, long, long, long, void *);
+	long _CDECL (*exec4)(SLB_HANDLE, long, long);
 
 	if (!appl_inits)
 	{
@@ -159,16 +164,16 @@ appl_open(char *file, short thread, char *pname)
 	 * to call appl_open() twice without calling
 	 * appl_close().
 	 */
-	r = (temp.exec)(temp.handle, (long)AP_OPEN, (short)3, (char *)file, (short)thread, (char *)pname);
+	exec = (long _CDECL (*)(SLB_HANDLE, long, long, const char *, long, const char *))temp.exec;
+	r = (*exec)(temp.handle, AP_OPEN, SLB_NARGS(3), file, thread, pname);
 	if (r > 0)
 	{
 		SLB *kern_p;
 		long mark = 0, x, pid = Pgetpid();
 
-		/* Sets the gemma pointer inside itself */
-		(temp.exec)(temp.handle, (long)34, (short)2, 0x0003, (long)&temp);
 		/* Gets the kernel library pointer */
-		kern_p = (SLB *)(temp.exec)(temp.handle, (long)34, (short)2, 0x0001, 0);
+		exec2 = (long _CDECL (*)(SLB_HANDLE, long, long, long, long))temp.exec;
+		kern_p = (SLB *)(*exec2)(temp.handle, LIB_CTRL, SLB_NARGS(2), 0x0001, 0);
 
 		/* This operation must be atomic; set a semaphore */
 		sema_request(sema_appl_open);
@@ -178,12 +183,14 @@ appl_open(char *file, short thread, char *pname)
 			if (gemma_ident_array[x].pid == 0)
 			{
 				gemma_ident_array[x].pid = pid;
-				gemma_ident_array[x].lib.exec = temp.exec;
-				gemma_ident_array[x].lib.handle = temp.handle;
+				gemma_ident_array[x].lib = temp;
+				/* Sets the gemma pointer inside itself */
+				exec3 = (long _CDECL (*)(SLB_HANDLE, long, long, long, void *))temp.exec;
+				(*exec3)(temp.handle, LIB_CTRL, SLB_NARGS(2), 0x0003, &gemma_ident_array[x].lib);
 
 				kernel_ident_array[x].pid = pid;
-				kernel_ident_array[x].lib.exec = kern_p->exec;
-				kernel_ident_array[x].lib.handle = kern_p->handle;
+				if (kern_p)
+					kernel_ident_array[x].lib = *kern_p;
 
 				mark = 1;
 
@@ -195,32 +202,32 @@ appl_open(char *file, short thread, char *pname)
 
 		if (mark == 0)
 		{
-			(temp.exec)(temp.handle, (long)AP_CLOSE, (short)0);
-			Slbclose((long)temp.handle);
-
-			return -1;
+			exec4 = (long _CDECL (*)(SLB_HANDLE, long, long))temp.exec;
+			(*exec4)(temp.handle, AP_CLOSE, SLB_NARGS(0));
+			r = -1;
 		}
 
 # if 0
 		Psignal(SIGCHLD, child_died);
 # endif
 	}
-	else
-		Slbclose((long)temp.handle);
+	if (r < 0)
+		Slbclose(temp.handle);
 
 	return r;
 }
 
 long
-appl_close()
+appl_close(void)
 {
 	long r = 0;
 	SLB *g = get_gemma_p();
 
 	if (g->handle)
 	{
-		r = (g->exec)(g->handle, (long)AP_CLOSE, (short)0);
-		Slbclose((long)g->handle);
+		long _CDECL (*exec)(SLB_HANDLE, long, long) = (long _CDECL (*)(SLB_HANDLE, long, long))g->exec;
+		r = (*exec)(g->handle, AP_CLOSE, SLB_NARGS(0));
+		Slbclose(g->handle);
 
 		pid_remove(Pgetpid());
 	}

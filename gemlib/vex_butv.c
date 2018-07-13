@@ -19,15 +19,16 @@
  */
 
 void
-vex_butv (short handle, void *new, void **old)
+vex_butv (short handle, void *newhdlr, void **old)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
 
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_dummy, vdi_dummy );
 	
-	vdi_control_ptr(7) = new;
+	vdi_control_ptr(0, void *) = newhdlr;
 	
 	VDI_TRAP_00 (vdi_params, handle, 125);
 	
-	*old = vdi_control_ptr(9);
+	if (old)
+		*old = vdi_control_ptr(1, void *);
 }

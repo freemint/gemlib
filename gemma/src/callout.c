@@ -235,10 +235,7 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 
 		case 16:	/* odd PC GEM function, appl_bvset() */
 		{
-			ulong bset;
-
-			bset = *(ulong *)&proc->gem.int_in[0];
-			proc->bvset = ((bset >> 16) | (bset << 16));
+			proc->bvset = ((ulong)(ushort)proc->gem.int_in[1] << 16) | ((ulong)(ushort)proc->gem.int_in[0]);
 			proc->gem.int_out[0] = 1;
 
 			return 1;
@@ -248,7 +245,7 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 		case 17:	/* appl_yield() */
 		{
 			proc->gem.int_out[0] = 1;
-			_yield(proc);
+			dos_yield(proc); /* wrong; should better call AES trap with #201 */
 
 			return 1;
 		}
@@ -472,17 +469,27 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 			{
 				case WF_NEWDESK:
 				case WF_TOOLBAR:
+				case WF_USER_POINTER:
+				case WF_WIND_ATTACH:
 				{
-					adr = *(long *)&proc->gem.int_in[0];
+					long *padr = (long *)&proc->gem.int_in[0];
+					adr = *padr;
 					if (adr)
+					{
 						TOUCH(adr);
+					}
 					break;
 				}
 
 				case WF_NAME:
 				case WF_INFO:
 				{
-					TOUCH(*(long *)&proc->gem.int_in[0]);
+					long *padr = (long *)&proc->gem.int_in[0];
+					adr = *padr;
+					if (adr)
+					{
+						TOUCH(adr);
+					}
 					break;
 				}
 			}
@@ -503,7 +510,9 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 
 			_appl_getinfo(proc, AES_PROCESS, ap);
 			if (ap[3])
+			{
 				TOUCH(proc->gem.addr_in[0]);
+			}
 			break;
 		}
 
@@ -524,8 +533,10 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 				{
 
 					if (proc->gem.addr_in[1])
+					{
 						TOUCH(proc->gem.addr_in[1]);
-
+					}
+					
 					if (proc->gem.int_in[0] & 0xff00)
 					{
 						SHELW *shp;
@@ -534,14 +545,20 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 						TOUCH(shp);
 						TOUCH(shp->newcmd);
 						if (shp->defdir)
+						{
 							TOUCH(shp->defdir);
+						}
 						if (shp->env)
+						{
 							TOUCH(shp->env);
+						}
 					}
 					else
 					{
 						if (proc->gem.addr_in[0])
+						{
 							TOUCH(proc->gem.addr_in[0]);
+						}
 					}
 
 					break;
@@ -549,7 +566,9 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 				case SWM_SHUTDOWN:
 				{
 					if (proc->gem.addr_in[0])
+					{
 						TOUCH(proc->gem.addr_in[0]);
+					}
 					break;
 				}
 				case SWM_BROADCAST:
@@ -560,7 +579,9 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 				case SWM_ENVIRON:
 				{
 					if (proc->gem.int_in[1])
+					{
 						TOUCH(proc->gem.addr_in[0]);
+					}
 					break;
 				}
 				case SWM_AESMSG:
@@ -594,10 +615,14 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 
 			adr = proc->gem.addr_in[0];
 			if (adr)
+			{
 				TOUCH(adr);
+			}
 			adr = proc->gem.addr_in[1];
 			if (adr)
+			{
 				TOUCH(adr);
+			}
 			break;
 		}
 
@@ -608,7 +633,9 @@ call_aes(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *proc, short opcode)
 			TOUCH(proc->gem.addr_in[0]);
 			adr = proc->gem.addr_in[1];
 			if (adr)
+			{
 				TOUCH(adr);
+			}
 			break;
 		}
 

@@ -18,6 +18,7 @@
  */
 
 # include <string.h>
+# include <mintbind.h>
 
 # include "gemma.h"
 # include "dosproto.h"
@@ -29,6 +30,16 @@
 # define COOKIE_P	0x05a0L
 # define COOKIE__AKP	0x5f414b50L
 
+static short _getrez(void)
+{
+	short r = Getrez();
+
+	if ((r < 0) || (r == 4))
+		return 2;
+
+	return r;
+}
+
 /* Helper: get the _AKP cookie value language configuration.
  * When not determinable, assume English.
  */
@@ -38,7 +49,7 @@ getakp(void)
 {
 	long *cjar;
 
-	cjar = (long *)_getexc(COOKIE_P);
+	cjar = (long *)Setexc(COOKIE_P >> 2, (void *)-1L);
 	if (!cjar)
 		return 0;
 
@@ -231,17 +242,17 @@ emu_scrp_clear(PROC_ARRAY *proc)
 	{
 		long dh;
 
-		dh = r = _opendir(proc, path, 0);
+		dh = r = dos_dopendir(proc, path, 0);
 		if (r > 0)
 		{
-			while (_readdir(proc, sizeof(fname), dh, fname) >= 0)
+			while (dos_dreaddir(proc, sizeof(fname), dh, fname) >= 0)
 			{
 				strcpy(fpath, path);
 				strcat(fpath, "\\");
 				strcat(fpath, fname + 4);
-				r = _delete(proc, fpath);
+				r = dos_fdelete(proc, fpath);
 			}			
-			_closedir(proc, dh);
+			dos_dclosedir(proc, dh);
 		}
 
 		r = (r < 0) ? 0 : 1;			

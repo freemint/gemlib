@@ -6,7 +6,6 @@ HEADER = \
 	dragdrop.h \
 	file.h \
 	inline.h \
-	inline.rh \
 	inline.rsh \
 	intern.h \
 	magx.h \

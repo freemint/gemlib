@@ -8,16 +8,13 @@ $(DEFS-$(<F)) $(DEFS-$(DIRSTEM)))
 # compile rule
 #
 %.o: %.c
-	@echo "$(COMPILE) -c $< -o $@"; \
-	$(COMPILE) -Wp,-MD,.deps/$(@:.o=.P) -c $< -o $@
+	$(AM_V_CC)$(COMPILE) -Wp,-MD,.deps/$(@:.o=.P) -c $< -o $@
 
 %.o: %.S
-	@echo '$(COMPILE) -c $< -o $@'; \
-	$(COMPILE) -Wp,-MD,.deps/$(@:.o=.P) -c $< -o $@
+	$(AM_V_CPPAS)$(COMPILE) -Wp,-MD,.deps/$(@:.o=.P) -c $< -o $@
 
 %.o: %.s
-	@echo "$(COMPILE) -c $< -o $@"; \
-	$(COMPILE) -Wp,-MD,.deps/$(@:.o=.P) -c $< -o $@
+	$(AM_V_AS)$(COMPILE) -Wp,-MD,.deps/$(@:.o=.P) -c $< -o $@
 
 #
 # dependencies

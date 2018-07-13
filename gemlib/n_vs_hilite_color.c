@@ -28,7 +28,7 @@ vs_hilite_color (short handle, long color_space, COLOR_ENTRY * hilite_color)
 
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_intout, vdi_dummy);
 	
-	*(long*)       &vdi_intin[0] = color_space;
+	vdi_intin_long(0) = color_space;
 	*(COLOR_ENTRY*)&vdi_intin[2] = *hilite_color;
 
 	VDI_TRAP (vdi_params, handle, 207, 0,6);

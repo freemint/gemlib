@@ -74,7 +74,7 @@
 #define STATE15			0x8000
 
 #include "exthelp.rsh"
-#include "exthelp.rh"
+#include "exthelp.h"
 
 /****** Functions ************************************************************/
 
@@ -82,11 +82,14 @@ long pinit_obfix (short status);
 
 static void fix_objs (OBJECT * tree, short is_dialog);
 static void (*get_name) (void *window, short obj, char *txt);
-static void test_form (OBJECT *tree, short editobj, long get_n, void *window);
+static void test_form (OBJECT *tree, short editobj, void (*get_n) (void *, short, char *), void *window);
 static short test_alert (short def, char *str);
 
 /****** Variables ************************************************************/
 
+#ifdef __GNUC__
+__attribute__((__used__))
+#endif
 static long routines[] =
 {
 	(long) fix_objs,
@@ -108,12 +111,12 @@ fix_objs (OBJECT * tree, short is_dialog)
 /*****************************************************************************/
 
 static void
-test_form (OBJECT *tree, short editobj, long get_n, void *window)
+test_form (OBJECT *tree, short editobj, void (*get_n) (void *, short, char *), void *window)
 {
 	short x, y, w, h, but, zw;
 	char name[20], buf[80];
 
-	*(long *) &get_name = get_n;
+	get_name = get_n;
 
 	fix_objs (tree, TRUE);
 
@@ -154,15 +157,20 @@ int
 main (void)
 {
 	extern char __Ident_cflib[];
-	static long dummy;
 	char pl[10], str[80];
 
 	appl_init ();
 	get_patchlev (__Ident_cflib, pl);
 	sprintf (str, "[0][ExtObFix, used by InterFace.|CF-Lib PL%s, %s][OK]", pl, __DATE__);
 	form_alert (1, str);
+#ifndef __GNUC__
+	{
+	static long dummy;
 	dummy = routines[6];	/* Sonst wird die Struktur von Pure C wegoptimiert... */
+	}
+#endif
 	appl_exit ();
+	(void) rs_trindex;
 	return 0;
 }
 

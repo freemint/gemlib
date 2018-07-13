@@ -30,7 +30,7 @@ _appl_control(PROC_ARRAY *proc, short opcode, void *out)
 }
 
 long
-_appl_find(PROC_ARRAY *proc, char *name)
+_appl_find(PROC_ARRAY *proc, const char *name)
 {
 	proc->gem.addr_in[0] = (long)name;
 
@@ -38,7 +38,7 @@ _appl_find(PROC_ARRAY *proc, char *name)
 }
 
 long
-_appl_search(PROC_ARRAY *proc, short mode, char *fname, short *type, short *apid)
+_appl_search(PROC_ARRAY *proc, short mode, const char *fname, short *type, short *apid)
 {
 	long r;
 
@@ -118,7 +118,7 @@ _evnt_timer(PROC_ARRAY *proc, ulong timer)
 }
 
 long
-_fsel_exinput(PROC_ARRAY *proc, char *path, char *name, char *title)
+_fsel_exinput(PROC_ARRAY *proc, char *path, char *name, const char *title)
 {
 	proc->gem.addr_in[0] = (long)path;
 	proc->gem.addr_in[1] = (long)name;
@@ -128,7 +128,7 @@ _fsel_exinput(PROC_ARRAY *proc, char *path, char *name, char *title)
 }
 
 long
-_form_alert(PROC_ARRAY *proc, short button, char *msg)
+_form_alert(PROC_ARRAY *proc, short button, const char *msg)
 {
 	proc->gem.int_in[0] = button;
 	proc->gem.addr_in[0] = (long)msg;
@@ -237,7 +237,7 @@ _menu_popup(PROC_ARRAY *proc, MENU *m1, short x, short y, MENU *m2)
 }
 
 long
-_menu_register(PROC_ARRAY *proc, short id, char *name)
+_menu_register(PROC_ARRAY *proc, short id, const char *name)
 {
 	proc->gem.int_in[0] = id;
 	proc->gem.addr_in[0] = (long)name;
@@ -309,7 +309,7 @@ _objc_offset(PROC_ARRAY *proc, OBJECT *tree, short obj)
 }
 
 long
-_rsrc_load(PROC_ARRAY *proc, char *name)
+_rsrc_load(PROC_ARRAY *proc, const char *name)
 {
 	proc->gem.addr_in[0] = (long)name;
 
@@ -342,7 +342,7 @@ _scrp_read(PROC_ARRAY *proc, char *path)
 }
 
 long
-_shel_help(PROC_ARRAY *proc, short mode, char *file, char *key)
+_shel_help(PROC_ARRAY *proc, short mode, const char *file, const char *key)
 {
 	proc->gem.int_in[0] = mode;
 	proc->gem.addr_in[0] = (long)file;

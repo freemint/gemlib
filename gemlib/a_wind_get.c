@@ -279,6 +279,7 @@
  *          - \a W3 and \a W4 are the horizontal elements of type bottomwidgets.
  *            (\a W3 is the left and \a W4 is the right widget of the horizotal
  *		      slider).
+ *
  * <tr><td> #WF_USER_POINTER  <td>      230 <td>
  *          Get the user value of the window
  *          - \a W1 and \a W2 are the 2 values already set by user with wind_set()
@@ -305,7 +306,7 @@
  *  @note aes_intout[3,4] are initialized to 0 before the AES trap.
  *        It's usefull under NAES for WF_FIRST/NEXTXYWH since lot
  *        of programmers only check for w and h = 0, and not the
- *        return value.\n
+ *        return value.
  *
  * @note Under MyAES if \a WindowHandle is set to -2 then it is possible to know if option \a What is avaible or not,
  * if available then return is 1 else return value is 0
@@ -344,7 +345,7 @@ mt_wind_get (short WindowHandle, short What,
 			break;
 		case WF_INFO:
 		case WF_NAME:
-			*(short**)&aes_intin[2] = W1;
+			aes_intin_ptr(2, short *) = W1;
 			*(ptr ++) = 4;								/* aes_control[1] */
 			break;
 		default:

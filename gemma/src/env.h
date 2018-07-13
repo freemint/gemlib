@@ -17,7 +17,7 @@
 
 long env_getargc(BASEPAGE *bp, long fn, short nargs, PROC_ARRAY *p);
 long env_getargv(BASEPAGE *bp, long fn, short nargs, long count, PROC_ARRAY *p);
-long env_get(BASEPAGE *bp, long fn, ushort nargs, char *var, PROC_ARRAY *p);
-long env_eval(BASEPAGE *bp, long fn, short nargs, char *var, char *outbuf, long maxlen, PROC_ARRAY *p);
+long env_get(BASEPAGE *bp, long fn, ushort nargs, const char *var, PROC_ARRAY *p);
+long env_eval(BASEPAGE *bp, long fn, short nargs, const char *var, char *outbuf, long maxlen, PROC_ARRAY *p);
 
 /* EOF */

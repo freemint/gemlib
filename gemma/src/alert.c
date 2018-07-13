@@ -20,6 +20,7 @@
 
 # include "gemma.h"
 # include "gemproto.h"
+# include "dosproto.h"
 
 # include "alert.h"
 
@@ -92,13 +93,13 @@ line_break(char *line, const short rmargin)
 /* Skeleton routine for putting code doing windowed alerts
  */
 static long
-_wind_alert(PROC_ARRAY *proc, short button, char *msg)
+_wind_alert(PROC_ARRAY *proc, short button, const char *msg)
 {
 	return _form_alert(proc, button, msg);
 }
 
 long
-_alert(PROC_ARRAY *proc, short button, char *msg)
+_alert(PROC_ARRAY *proc, short button, const char *msg)
 {
 	char tmp[512], c;
 	short x, y = 0, forcesys = 0;
@@ -157,16 +158,17 @@ windial_alert(BASEPAGE *bp, long fn, short nargs, short button, long object, PRO
 
 	r = (long)obj2addr(proc, R_STRING, (ulong)obj);
 	if (r > 0)
-		r = _alert(proc, button, (char *)r);
+		r = _alert(proc, button, (const char *)r);
 
 	return r;
 }
 
 long
-windial_error(BASEPAGE *bp, long fn, short nargs, long error, char *message, PROC_ARRAY *p)
+windial_error(BASEPAGE *bp, long fn, short nargs, long error, const char *message, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
-	char msgbuf[256], *m;
+	char msgbuf[256];
+	const char *m;
 
 	if (nargs < 1) return -EINVAL;
 	if (nargs == 3) proc = p;
@@ -193,7 +195,7 @@ windial_error(BASEPAGE *bp, long fn, short nargs, long error, char *message, PRO
 
 	if (nargs > 1 && (long)message > 0)
 	{
-		m = (char *)obj2addr(proc, R_STRING, (ulong)message);
+		m = (const char *)obj2addr(proc, R_STRING, (ulong)message);
 		if ((long)m > 0)
 		{
 			char trans[256];
@@ -209,7 +211,7 @@ windial_error(BASEPAGE *bp, long fn, short nargs, long error, char *message, PRO
 		}
 	}
 
-	m = (char *)(proc->kern.exec)(proc->kern.handle, 512L, (short)1, error);
+	m = dos_serror(proc, error);
 
 	strcat(msgbuf, m);
 	

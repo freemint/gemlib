@@ -64,7 +64,7 @@ v_opnbm (short *work_in, MFDB *bitmap, short *handle, short *work_out)
 
 	VDI_PARAMS(vdi_control, work_in, 0L, &work_out[0], &work_out[45]);
 	
-	vdi_control_ptr(7) = bitmap;
+	vdi_control_ptr(0, MFDB *) = bitmap;
 
 	VDI_TRAP_ESC (vdi_params, *handle, 100,1, 0,20);
 	

@@ -50,7 +50,7 @@ v_getbitmap_info (short handle, short ch, long *advancex, long *advancey,
                   short **bitmap)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intout[12]; 
+	short vdi_intout[10 + N_PTRINTS];
 
 	VDI_PARAMS(vdi_control, &ch, 0L, vdi_intout, vdi_dummy );
 		
@@ -83,5 +83,5 @@ v_getbitmap_info (short handle, short ch, long *advancex, long *advancey,
 #if CHECK_NULLPTR
 	if (bitmap)
 #endif
-	*bitmap   = (short*)vdi_intout_long(10);
+	*bitmap   = vdi_intout_ptr(10, short *);
 }

@@ -18,7 +18,8 @@ udef_vsm_string (short handle, short len, short echo, short echoxy[], char *str)
 	
 	_VDIParBlk.vdi_intin[0]      = len;
 	_VDIParBlk.vdi_intin[1]      = echo;
-	*(long*)_VDIParBlk.vdi_ptsin = *(long*)echoxy;
+	_VDIParBlk.vdi_ptsin[0]      = echoxy[0];
+	_VDIParBlk.vdi_ptsin[1]      = echoxy[1];
 	
 	VDI_TRAP (vdi_params, handle, 31, 1,2);
 	

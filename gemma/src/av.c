@@ -17,6 +17,7 @@
 
 # include <errno.h>
 # include <string.h>
+# include <limits.h>
 
 # include "gemma.h"
 # include "dosproto.h"
@@ -32,16 +33,17 @@ static void
 _mrelease(PROC_ARRAY *proc, long adr)
 {
 	_evnt_timer(proc, sflags.release_delay);
-	_free(proc, adr);
+	dos_mfree(proc, adr);
 }
 
 static long
-get_server(PROC_ARRAY *proc, char *server)
+get_server(PROC_ARRAY *proc, const char *server)
 {
-	char *av, tmp[64];
+	char tmp[64];
+	const char *av;
 	short x;
 
-	av = getenv(proc, server);
+	av = dos_getenv(proc, server);
 
 	if (!av)
 		return -ENOENT;
@@ -59,7 +61,7 @@ get_server(PROC_ARRAY *proc, char *server)
 }
 
 long
-_send(PROC_ARRAY *proc, short command, short dest, char *buf, long blen)
+_send(PROC_ARRAY *proc, short command, short dest, const char *buf, long blen)
 {
 	short *avbuf;
 	long r;
@@ -70,7 +72,7 @@ _send(PROC_ARRAY *proc, short command, short dest, char *buf, long blen)
 		return r;
 
 	avbuf = (short *)r;
-	bzero(avbuf, sflags.pagesize);
+	bzero(avbuf, blen + 16);
 
 	msg = (char *)(avbuf+8);
 	r = (long)msg;
@@ -92,7 +94,7 @@ _send(PROC_ARRAY *proc, short command, short dest, char *buf, long blen)
 }
 
 static long
-_va_send(PROC_ARRAY *proc, short command, char *buf, long buflen)
+_va_send(PROC_ARRAY *proc, short command, const char *buf, long buflen)
 {
 	short avpid;
 
@@ -106,8 +108,7 @@ _va_send(PROC_ARRAY *proc, short command, char *buf, long buflen)
 /* User functions */
 
 long
-va_send(BASEPAGE *bp, long fn, short nargs, \
-		short command, char *msg, long len, PROC_ARRAY *p)
+va_send(BASEPAGE *bp, long fn, short nargs, short command, const char *msg, long len, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
 
@@ -185,10 +186,11 @@ av_dir_update(BASEPAGE *bp, long fn, short nargs, short drive, PROC_ARRAY *p)
 }
 
 long
-av_view(BASEPAGE *bp, long fn, short nargs, char *pathname, PROC_ARRAY *p)
+av_view(BASEPAGE *bp, long fn, short nargs, const char *pathname, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
-	char path[1024], *pname;
+	char path[1024];
+	const char *pname;
 	long r;
 
 	if (!nargs) return -EINVAL;
@@ -229,11 +231,12 @@ av_view(BASEPAGE *bp, long fn, short nargs, char *pathname, PROC_ARRAY *p)
 }
 
 long
-av_help(BASEPAGE *bp, long fn, short nargs, char *pathname, PROC_ARRAY *p)
+av_help(BASEPAGE *bp, long fn, short nargs, const char *pathname, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
 	short ap[4];
-	char *stg, path[1024];
+	const char *stg;
+	char path[PATH_MAX];
 	long r, len = strlen(pathname) + 1;
 
 	if (!nargs) return -EINVAL;
@@ -262,7 +265,7 @@ av_help(BASEPAGE *bp, long fn, short nargs, char *pathname, PROC_ARRAY *p)
 			return 0;
 	}
 
-	stg = getenv(proc, "STGUIDE=");
+	stg = dos_getenv(proc, "STGUIDE=");
 	if (stg)
 	{
 		strcpy(path + 1, pathname);
@@ -279,20 +282,20 @@ av_help(BASEPAGE *bp, long fn, short nargs, char *pathname, PROC_ARRAY *p)
 	return -ESRCH;
 }
 
-static const char *services[] =
+static const char *const services[] =
 {
   "ftp:", "http:", "file:", "mail:", "mailto:",
   "telnet:", "news:", "nntp:", "gopher:", 0
 };
 
-static const char *clients[] =
+static const char *const clients[] =
 {
   "GEMFTP=", "GEMWWW=", "GEMWWW=", "GEMMAIL=",
   "GEMMAIL=", "GEMTELNET=", "GEMNEWS=",
   "GEMNEWS=", "GEMGOPHER="
 };
 
-static const char *alt_clients[] =
+static const char *const alt_clients[] =
 {
   "FTP_CLIENT=", "BROWSER=", "BROWSER=", "MAIL_CLIENT=",
   "MAIL_CLIENT=", "TELNET=", "NEWS_CLIENT=",
@@ -300,7 +303,7 @@ static const char *alt_clients[] =
 };
 
 long
-open_url(BASEPAGE *bp, long fn, short nargs, char *url, PROC_ARRAY *p)
+open_url(BASEPAGE *bp, long fn, short nargs, const char *url, PROC_ARRAY *p)
 {
 	PROC_ARRAY *proc = 0;
 	short astrid, x;
@@ -340,11 +343,11 @@ open_url(BASEPAGE *bp, long fn, short nargs, char *url, PROC_ARRAY *p)
 		}
 	}
 
-	cli = getenv(proc, cli);
+	cli = dos_getenv(proc, cli);
 	if (!cli)
 	{
 		cli = alt_clients[x];
-		cli = getenv(proc, cli);
+		cli = dos_getenv(proc, cli);
 		if (!cli)
 			return -ESRCH;
 	}

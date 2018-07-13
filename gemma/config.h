@@ -23,10 +23,6 @@
 
 /* ------------------------ User definitions ------------------ */
 
-/* Define this below if your system has MiNT-style GEMDOS.
- */
-# define _HAVE_MINT_GEMDOS
-
 /* Some AES versions completely trust all the pointers programs pass
  * in the parameter arrays and, when such a pointer is invalid, the
  * AES usually dies in flames then (together with all the system).
@@ -67,6 +63,11 @@
  * does, the Atari AES 4.10 does not). It will be emulated otherwise.
  */
 # undef _HAVE_FORM_POPUP
+
+/*
+ * Define this to 0/1 wether kernel32.slb should be used.
+ */
+# define _USE_KERNEL32 0
 
 /* ------------------------ Hardcore definitions ------------------ */
 

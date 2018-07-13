@@ -2,7 +2,7 @@
 # 
 # cross compiling
 #CROSS = yes
-CROSS = no
+#CROSS = no
 
 #
 # build alternate libraries for processor variants
@@ -13,15 +13,29 @@ WITH_V4E_LIB = yes
 #
 # target and host compiler
 # 
+# Define this to "m68k-atari-mint" if you cross compile.
+ifneq ($(CROSS_TOOL),)
+ CROSSPREFIX=$(CROSS_TOOL)-
+ CROSS := yes
+else
 ifeq ($(CROSS),yes)
+ CROSS_TOOL=m68k-atari-mint
+ CROSSPREFIX=$(CROSS_TOOL)-
+else
+ CROSSPREFIX=
+endif
+endif
 
-CROSSPREFIX=m68k-atari-mint-
+ifeq ($(CROSS),yes)
 
 NATIVECC = gcc
 NATIVECFLAGS = -O
 CRLF = echo crlf -s
 
-PREFIX=/usr/m68k-atari-mint
+PREFIX=$(shell $(CROSSPREFIX)gcc -print-sysroot)/usr
+ifeq ($(PREFIX),)
+  PREFIX=/usr/$(CROSS_TOOL)
+endif
 
 else
 

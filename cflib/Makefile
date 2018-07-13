@@ -48,22 +48,22 @@ normalv4e:
 	$(MAKE) libcflibv4e.a TARGET="v4e"
 
 libcflib$(TARGET).a: objs
-	$(RM) $@
-	$(AR) rc $@ \
+	$(AM_V_at)$(RM) $@
+	$(AM_V_AR)$(AR) rc $@ \
 		$(shell for file in `cat .lib$(TARGET)/objs` ; \
 			do echo .lib$(TARGET)/$$file ; done)
-	$(RANLIB) $@
+	$(AM_V_RANLIB)$(RANLIB) $@
 
 objs: .lib$(TARGET)
 	cd .lib$(TARGET); $(MAKE)
 
 .lib$(TARGET):
-	$(MKDIR) $@
-	$(CP) Makefile.objs $@/Makefile
+	$(AM_V_at)$(MKDIR) $@
+	$(AM_V_at)$(CP) Makefile.objs $@/Makefile
 
 cflib.spec: cflib.spec.in VERSION
-	rm -f $@
-	sed 's,@VERSION@,$(VERSION),g' $@.in >$@
+	$(AM_V_at)rm -f $@
+	$(AM_V_GEN)sed 's,@VERSION@,$(VERSION),g' $@.in >$@
 
 docu: cflib.stg
 	$(HCP) -ocflib.hyp cflib.stg
