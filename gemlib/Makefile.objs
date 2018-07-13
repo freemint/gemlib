@@ -49,6 +49,8 @@ VPATH = ..
 objs: $(OBJS)
 	echo $(OBJS) > $@
 
+clean::
+	$(RM) objs
 
 # default dependencies
 # must be included last
