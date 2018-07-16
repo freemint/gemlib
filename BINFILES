@@ -1,4 +1,12 @@
 # This file gets included by the Makefile in this directory to determine
 # the files that should go only into binary distributions.
 
-BINFILES = 
+BINFILES = libgem.a libgem16.a
+
+ifeq ($(WITH_020_LIB),yes)
+BINFILES += libgem020.a libgem02016.a
+endif
+
+ifeq ($(WITH_V4E_LIB),yes)
+BINFILES += libgemv4e.a libgemv4e16.a
+endif

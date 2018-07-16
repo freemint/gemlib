@@ -147,8 +147,8 @@ install-recursive uninstall-recursive dist-recursive::
 #
 # global CFLAGS and ASFLAGS
 #
-INCLUDES = -I$(top_srcdir)/gemlib
+INCLUDES = -I$(top_srcdir)
 DEFINITIONS = 
 CFLAGS = $(INCLUDES) $(DEFINITIONS) $(GENERAL) $(OPTS) $(WARN)
 ASFLAGS = $(INCLUDES) $(DEFINITIONS) $(GENERAL)
-LDFLAGS = -L$(top_srcdir)/gemlib
+LDFLAGS = 

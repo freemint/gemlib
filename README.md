@@ -1,3 +1,1 @@
-[![Build Status](https://travis-ci.org/freemint/lib.svg?branch=master)](https://travis-ci.org/freemint/lib)
-
-# gemlib, cflib and gemma
+[![Build Status](https://travis-ci.org/freemint/gemlib.svg?branch=master)](https://travis-ci.org/freemint/gemlib)
