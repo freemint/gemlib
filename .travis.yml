@@ -20,5 +20,9 @@ before_script:
 script:
   - sh ./.travis/build.sh "${PWD}/.travis/tmp" "${PWD}/.travis/out"
 
-after_success:
-  - sh ./.travis/deploy.sh "${PWD}/.travis/out" $encrypted_184ce553573b_key $encrypted_184ce553573b_iv
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: sh ./.travis/deploy.sh "${PWD}/.travis/out" $encrypted_184ce553573b_key $encrypted_184ce553573b_iv
+  on:
+    repo: freemint/gemlib
