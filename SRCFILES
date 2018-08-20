@@ -339,6 +339,7 @@ COBJS = \
 	a_form_center.c \
 	a_form_center_grect.c \
 	a_form_dial.c \
+	a_form_dial_grect.c \
 	a_form_do.c \
 	a_form_error.c \
 	a_form_keybd.c \

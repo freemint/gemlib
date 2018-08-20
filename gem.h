@@ -131,6 +131,8 @@ static inline short appl_init( void) {
 #define form_center_grect(a,b) mt_form_center_grect(a,b,aes_global)
 /** single-thread version of mt_form_dial() */
 #define form_dial(a, b,c,d,e, f,g,h,i) mt_form_dial(a,b,c,d,e,f,g,h,i,aes_global)
+/** single-thread version of mt_form_dial_grect() */
+#define form_dial_grect(a,b,c) mt_form_dial_grect(a,b,c,aes_global)
 /** single-thread version of mt_form_do() */
 #define form_do(a,b) mt_form_do(a,b,aes_global)
 /** single-thread version of mt_form_error() */

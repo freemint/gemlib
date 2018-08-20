@@ -1885,6 +1885,7 @@ short mt_form_center (OBJECT *, short *Cx, short *Cy, short *Cw, short *Ch, shor
 short mt_form_center_grect (OBJECT *, GRECT *r, short *global_aes);
 short mt_form_dial   (short Flag, short Sx, short Sy, short Sw, short Sh,
                                short Bx, short By, short Bw, short Bh, short *global_aes);
+short mt_form_dial_grect(short Flag, const GRECT *little, const GRECT *big, short *global_aes);
 short mt_form_do     (OBJECT *, short StartObj, short *global_aes);
 short mt_form_error  (short ErrorCode, short *global_aes);
 short mt_form_keybd  (OBJECT *, short Kobject, short Kobnext, short Kchar,
