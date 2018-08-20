@@ -1934,9 +1934,9 @@ short 	mt_menu_icheck		   (OBJECT *me_tree, short me_item, short me_check, short
 short 	mt_menu_ienable 	   (OBJECT *me_tree, short me_item, short me_enable, short *global);
 short 	mt_menu_istart		   (short me_flag, OBJECT *me_tree, short me_imenu, short me_item, short *global);
 short 	mt_menu_popup		   (MENU *me_menu, short me_xpos, short me_ypos, MENU *me_mdata, short *global);
-short 	mt_menu_register	   (short ap_id, char *me_text, short *global);
+short 	mt_menu_register	   (short ap_id, const char *me_text, short *global);
 short 	mt_menu_settings	   (short me_flag, MN_SET *me_values, short *global);
-short 	mt_menu_text		   (OBJECT *me_tree, short me_item, char *me_text, short *global);
+short 	mt_menu_text		   (OBJECT *me_tree, short me_item, const char *me_text, short *global);
 short 	mt_menu_tnormal 	   (OBJECT *me_tree, short me_item, short me_normal, short *global);
 short	mt_menu_unregister	   (short id, short *global);
 /**@}*/
@@ -1990,7 +1990,7 @@ short 	mt_shel_put		(const char *Buf, short Len, short *global_aes);
 short	mt_shel_rdef	(char *lpcmd, char *lpdir, short *global_aes);
 short	mt_shel_read 	(char *Command, char *Tail, short *global_aes);
 short	mt_shel_wdef	(const char *lpcmd, const char *lpdir, short *global_aes);
-short	mt_shel_write	(short Exit, short Graphic, short Aes, void *Command, char *Tail, short *global_aes);
+short	mt_shel_write	(short Exit, short Graphic, short Aes, const void *Command, const char *Tail, short *global_aes);
 /**@}*/
 
 /** @addtogroup a_wind

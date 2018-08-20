@@ -325,7 +325,7 @@
  */
  
 short 
-mt_shel_write(short wodex, short wisgr, short wiscr, void *cmd, char *tail, short *global_aes)
+mt_shel_write(short wodex, short wisgr, short wiscr, const void *cmd, const char *tail, short *global_aes)
 {
 	AES_PARAMS(121,3,1,2,0);
                     

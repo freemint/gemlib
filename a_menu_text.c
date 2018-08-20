@@ -20,7 +20,7 @@
  */
 
 short
-mt_menu_text(OBJECT *me_tree, short me_item, char *me_text, short *global_aes)
+mt_menu_text(OBJECT *me_tree, short me_item, const char *me_text, short *global_aes)
 {
 	AES_PARAMS(34,1,1,2,0);
                     

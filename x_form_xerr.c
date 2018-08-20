@@ -31,7 +31,7 @@
  */
 
 short 
-mt_form_xerr(long errcode, char *errfile, short *global_aes)
+mt_form_xerr(long errcode, const char *errfile, short *global_aes)
 {
 	unsigned short *i = (unsigned short *)&errcode;
 	

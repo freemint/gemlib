@@ -45,7 +45,7 @@
  */
 
 short
-mt_menu_register(short ap_id, char *me_text, short *global_aes)
+mt_menu_register(short ap_id, const char *me_text, short *global_aes)
 {
 	AES_PARAMS(35,1,1,1,0);
                     

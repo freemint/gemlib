@@ -90,7 +90,7 @@ short	mt_form_wkeybd	(OBJECT *fo_ktree, short fo_kobject, short fo_kobnext, shor
 short	mt_form_xdial 	(short fo_diflag, short fo_dilittlx, short fo_dilittly, short fo_dilittlw, short fo_dilittlh, short fo_dibigx, short fo_dibigy, short fo_dibigw, short fo_dibigh, void **flydial, short * global);
 short	mt_form_xdial_grect (short fo_diflag, const GRECT *fo_dilittl, const GRECT *fo_dibig, void **flydial, short * global);
 short	mt_form_xdo		(OBJECT *tree, short startob, short *lastcrsr, XDO_INF *tabs, void *flydial, short * global); 
-short	mt_form_xerr	(long errcode, char *errfile, short * global);
+short	mt_form_xerr	(long errcode, const char *errfile, short * global);
 short	mt_xfrm_popup 	(OBJECT *tree, short x, short y, short firstscrlob, short lastscrlob, short nlines,
 						 void __CDECL (*init)(struct POPUP_INIT_args),
 						 void *param, short *lastscrlpos, short * global);
