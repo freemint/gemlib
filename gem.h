@@ -327,6 +327,16 @@ static inline short appl_init( void) {
 #define wind_set(a,b,c,d,e,f) mt_wind_set(a,b,c,d,e,f,aes_global)
 /** single-thread version of mt_wind_update() */
 #define wind_update(a) mt_wind_update(a,aes_global)
+/** single-thread version of mt_wind_get_int() */
+#define wind_get_int(a,b,c) mt_wind_get_int(a,b,c,aes_global) 
+/** single-thread version of mt_wind_get_ptr() */
+#define wind_get_ptr(a,b,c) mt_wind_get_ptr(a,b,c,aes_global) 
+/** single-thread version of mt_wind_set_int() */
+#define wind_set_int(a,b,c) mt_wind_set_int(a,b,c,aes_global) 
+/** single-thread version of mt_wind_set_ptr() */
+#define wind_set_ptr(a,b,c) mt_wind_set_ptr(a,b,c,aes_global) 
+/** single-thread version of mt_wind_set_ptr_int() */
+#define wind_set_ptr_int(a,b,c,d) mt_wind_set_ptr_int(a,b,c,d,aes_global) 
 
 /*
  * Some useful extensions

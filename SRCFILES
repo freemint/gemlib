@@ -413,6 +413,8 @@ COBJS = \
 	a_wind_draw.c \
 	a_wind_find.c \
 	a_wind_get.c \
+	a_wind_get_int.c \
+	a_wind_get_ptr.c \
 	a_wind_get_grect.c \
 	a_wind_xget_grect.c \
 	a_wind_new.c \
@@ -420,6 +422,9 @@ COBJS = \
 	a_wind_open_grect.c \
 	a_wind_set.c \
 	a_wind_set_grect.c \
+	a_wind_set_int.c \
+	a_wind_set_ptr.c \
+	a_wind_set_ptr_int.c \
 	a_wind_xset_grect.c \
 	a_wind_set_str.c \
 	a_wind_update.c \

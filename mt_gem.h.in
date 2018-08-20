@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 /**@file
  * main GEMlib header
  */
@@ -2021,6 +2017,11 @@ short	mt_wind_open_grect   (short WindowHandle, const GRECT *r, short *global_ae
 short	mt_wind_set_grect    (short WindowHandle, short What, const GRECT *r, short *global_aes);
 short	mt_wind_xset_grect   (short WindowHandle, short What, const GRECT *s, GRECT *r, short *global_aes);
 short	mt_wind_set_str      (short WindowHandle, short What, const char *str, short *global_aes);
+short   mt_wind_get_int      (short WindowHandle, short What, short *W1, short *global_aes);
+short   mt_wind_get_ptr      (short WindowHandle, short What, void **v, short *global_aes);
+short   mt_wind_set_int      (short WindowHandle, short What, short W1, short *global_aes);
+short   mt_wind_set_ptr      (short WindowHandle, short What, void *v, short *global_aes);
+short   mt_wind_set_ptr_int  (short WindowHandle, short What, void *v, short W3, short *global_aes);
 /**@}*/
 
 /** @addtogroup a_util
