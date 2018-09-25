@@ -22,7 +22,7 @@ __BEGIN_DECLS
 
 
 /*******************************************************************************
- * The AES extentsions of MagiC
+ * The AES extensions of MagiC
  */
 
 /** TODO */
@@ -233,7 +233,7 @@ typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, GEMLIB_XATTR *xattr
 #define SORTBYSIZE		2			/**< TODO */
 #define SORTBYTYPE		3			/**< TODO */
 #define SORTBYNONE		4			/**< TODO */
-#define SORTDEFAULT		-1			/**< TODO */
+#define SORTDEFAULT		(-1)		/**< TODO */
 
 /* Flags fr Dateiauswahl */
 #define DOSMODE			1			/**< TODO */
@@ -1705,6 +1705,33 @@ short		udef_vs_document_info	(short vdi_handle, short type, char *s, short wchar
 #define vq_hilite_color udef_vq_hilite_color
 #define vs_document_info udef_vs_document_info
 #endif
+
+
+/*
+ * speedo functions
+ */
+
+/** @addtogroup v_speedo
+ *  @{
+ */
+
+typedef struct
+{
+	short nbplanes;
+	short width;
+	short height;
+} BIT_IMAGE;
+
+short vq_margins(short handle, short *top, short *bot, short *lft, short *rgt, short *xdpi, short *ydpi);
+short vq_driver_info(short handle, short *lib, short *drv, short *plane, short *attr, char name[27]);
+short vq_bit_image(short handle, short *ver, short *maximg, short *form);
+short vs_page_info(short handle, short type, const char txt[60]);
+short vs_crop(short handle, short ltx1, short lty1, short ltx2, short lty2, short ltlen, short ltoffset);
+short vq_image_type(short handle, const char *file, BIT_IMAGE *img);
+short vs_save_disp_list(short handle, const char *name);
+short vs_load_disp_list(short handle, const char *name);
+
+/**@}*/
 
 
 __END_DECLS

@@ -56,7 +56,7 @@ __BEGIN_DECLS
  * The AES specific stuff from old gemfast.h
  */
 
-#define NIL 			-1					/**< Value for no more object in object tree */
+#define NIL 			(-1)					/**< Value for no more object in object tree */
 #define DESKTOP_HANDLE		0					/**< TODO */
 #define DESK			DESKTOP_HANDLE		/**< TODO */
 
@@ -2304,10 +2304,10 @@ extern void aes (AESPB *pb);
 #define SCRATCH_NONE		2	/**< TODO */
 
 /* v_updwk return values */
-#define SLM_OK			0x00	/**< TODO */
-#define SLM_ERROR		0x02	/**< TODO */
-#define SLM_NOTONER		0x03	/**< TODO */
-#define SLM_NOPAPER		0x04	/**< TODO */
+#define SLM_OK			0	/* no error */
+#define SLM_ERROR		2	/* general printer error */
+#define SLM_NOTONER		3	/* toner empty */
+#define SLM_NOPAPER		5	/* paper empty */
 
 /** VDI Memory Form Definition Block */
 typedef struct memory_form

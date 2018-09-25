@@ -9,7 +9,8 @@ HEADER = \
 	gemx.h \
 	mt_gem.h \
 	mt_gemx.h \
-	symbols.h
+	symbols.h \
+	$(empty)
 
 
 _VDI_ATTRIB = \
@@ -39,7 +40,8 @@ _VDI_ATTRIB = \
 	vst_point.c \
 	vst_rotation.c \
 	vst_scratch.c \
-	vswr_mode.c
+	vswr_mode.c \
+	$(empty)
 
 _VDI_CONTRL = \
 	v_opnwk.c \
@@ -58,7 +60,8 @@ _VDI_CONTRL = \
 	vs_clip_pxy.c \
 	vs_clip_off.c \
 	vst_load_fonts.c \
-	vst_unload_fonts.c
+	vst_unload_fonts.c \
+	$(empty)
 
 _VDI_ESCAPE = \
 	v_alpha_text.c \
@@ -117,7 +120,8 @@ _VDI_ESCAPE = \
 	vt_alignment.c \
 	vt_axis.c \
 	vt_origin.c \
-	vt_resolution.c
+	vt_resolution.c \
+	$(empty)
 
 _VDI_INPUT = \
 	v_hide_c.c \
@@ -140,7 +144,8 @@ _VDI_INPUT = \
 	vsm_locator.c \
 	vsm_string.c \
 	u_vsm_string.c \
-	vsm_valuator.c
+	vsm_valuator.c \
+	$(empty)
 
 _VDI_INQUIRE = \
 	vq_calibrate.c \
@@ -160,7 +165,8 @@ _VDI_INQUIRE = \
 	vqt_fontinfo.c \
 	vqt_get_table.c \
 	vqt_name.c \
-	vqt_width.c
+	vqt_width.c \
+	$(empty)
 
 _VDI_OUTPUT = \
 	v_arc.c \
@@ -184,13 +190,15 @@ _VDI_OUTPUT = \
 	v_pmarker.c \
 	v_rbox.c \
 	v_rfbox.c \
-	vr_recfl.c
+	vr_recfl.c \
+	$(empty)
 
 _VDI_RASTER = \
 	v_get_pixel.c \
 	vr_trnfm.c \
 	vro_cpyfm.c \
-	vrt_cpyfm.c
+	vrt_cpyfm.c \
+	$(empty)
 
 _VDI_EXTENSIONS = \
 	n_v_bez.c \
@@ -308,7 +316,15 @@ _VDI_EXTENSIONS = \
 	n_vst_setsize32.c \
 	n_vst_skew.c \
 	n_vst_track_offset.c \
-	n_vst_width.c
+	n_vst_width.c \
+	n_vq_driver_info.c \
+	n_vq_bit_image.c \
+	n_vs_page_info.c \
+	n_vs_crop.c \
+	n_vq_image_type.c \
+	n_vs_save_disp_list.c \
+	n_vs_load_disp_list.c \
+	$(empty)
 
 
 COBJS = \
@@ -425,8 +441,8 @@ COBJS = \
 	a_wind_set_int.c \
 	a_wind_set_ptr.c \
 	a_wind_set_ptr_int.c \
-	a_wind_xset_grect.c \
 	a_wind_set_str.c \
+	a_wind_xset_grect.c \
 	a_wind_update.c \
 	\
 	a_glue.c \
@@ -442,7 +458,7 @@ COBJS = \
 	vdi_array2str.c \
 	vdi_str2array.c \
 	vdi_wstrlen.c \
-	vdi_userdef.c\
+	vdi_userdef.c \
 	vdi_dummy.c \
 	\
 	$(_VDI_ATTRIB) \
@@ -575,14 +591,16 @@ COBJS = \
 	x_wdlg_set_iconify.c \
 	x_wdlg_set_size.c \
 	x_wdlg_set_tree.c \
-	x_wdlg_set_uniconify.c
+	x_wdlg_set_uniconify.c \
+	$(empty)
 
 
 SOBJS = \
 	_gc_asm_aes.S \
 	_gc_asm_vdi.S \
 	_gc_asm_vq_gdos.S \
-	_gc_asm_vq_vgdos.S
+	_gc_asm_vq_vgdos.S \
+	$(empty)
 
 
 SRCFILES = $(HEADER) $(COBJS) $(SOBJS)
