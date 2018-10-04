@@ -107,8 +107,8 @@ static inline short appl_init( void) {
 #define evnt_keybd()					mt_evnt_keybd(aes_global)
 /** single-thread version of mt_evnt_mesag() */
 #define evnt_mesag(a)					mt_evnt_mesag(a,aes_global)
-/** single-thread version of mt_event_mouse() */
-#define evnt_mouse(a,b,c,d,e,f,g,h,i)	mt_event_mouse(a,b,c,d,e,f,g,h,i,aes_global)
+/** single-thread version of mt_evnt_mouse() */
+#define evnt_mouse(a,b,c,d,e,f,g,h,i)	mt_evnt_mouse(a,b,c,d,e,f,g,h,i,aes_global)
 /** single-thread version of mt_evnt_multi() */
 #define evnt_multi(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v) \
 										mt_evnt_multi(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,aes_global)
