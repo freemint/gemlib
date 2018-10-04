@@ -2310,6 +2310,8 @@ extern void aes (AESPB *pb);
 #define SLM_NOPAPER		5	/* paper empty */
 
 /** VDI Memory Form Definition Block */
+#ifndef __MFDB__
+#define __MFDB__
 typedef struct memory_form
 {
 	void	*fd_addr;	/**< TODO */
@@ -2322,6 +2324,7 @@ typedef struct memory_form
 	short 	fd_r2;		/**< Reserved */
 	short 	fd_r3;		/**< Reserved */
 } MFDB;
+#endif
 
 /** RGB intesities in promille */
 typedef struct rgb_1000
