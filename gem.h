@@ -231,6 +231,8 @@ static inline short appl_init( void) {
 #define objc_add(a,b,c)					mt_objc_add(a,b,c,aes_global)
 /** single-thread version of mt_objc_change() */
 #define objc_change(a,b,c,d,e,f,g,h,i)	mt_objc_change(a,b,c,d,e,f,g,h,i,aes_global)
+/** single-thread version of mt_objc_change_grect() */
+#define objc_change_grect(a,b,c,d,e,f)		mt_objc_change_grect(a,b,c,d,e,f,aes_global)
 /** single-thread version of mt_objc_delete() */
 #define objc_delete(a,b)				mt_objc_delete(a,b,aes_global)
 /** single-thread version of mt_objc_draw() */

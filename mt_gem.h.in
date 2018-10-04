@@ -1944,6 +1944,7 @@ short	mt_objc_add		(OBJECT *, short Parent, short Child, short *global);
 short	mt_objc_change	(OBJECT *, short Object, short Res,
 						 short Cx, short Cy, short Cw, short Ch,
 						 short NewState,short Redraw, short *global_aes);
+short	mt_objc_change_grect	(OBJECT *, short Start, short Depth, const GRECT *r, short NewState,short Redraw, short *global_aes);
 short	mt_objc_delete	(OBJECT *, short Object, short *global_aes);
 short	mt_objc_draw	(OBJECT *, short Start, short Depth,
 						 short Cx, short Cy, short Cw, short Ch, short *global_aes);

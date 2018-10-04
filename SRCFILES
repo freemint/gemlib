@@ -391,6 +391,7 @@ COBJS = \
 	a_menu_unregister.c \
 	a_objc_add.c \
 	a_objc_change.c \
+	a_objc_change_grect.c \
 	a_objc_delete.c \
 	a_objc_draw.c \
 	a_objc_draw_grect.c \
