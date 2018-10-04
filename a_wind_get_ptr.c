@@ -4,7 +4,6 @@ short
 mt_wind_get_ptr (short WindowHandle, short What, void **v, short *global_aes)
 {
 	short *ptr;
-	void **pptr;
 	short aes_control[AES_CTRLMAX],
 	      aes_intin[AES_INTINMAX],
 		  aes_intout[AES_INTOUTMAX];
@@ -37,8 +36,7 @@ mt_wind_get_ptr (short WindowHandle, short What, void **v, short *global_aes)
 
 	AES_TRAP(aes_params);
 	
-	pptr = &aes_intout[1];
-	*v = *pptr;
+	*v = aes_intout_ptr(1, void *);
 
 	return (aes_intout[0]);
 }
