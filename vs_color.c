@@ -36,7 +36,7 @@
  */
 
 void
-vs_color (short handle, short index, short rgb[])
+vs_color (short handle, short index, const short rgb[])
 {
 	short *ptr;
 	short vdi_control[VDI_CNTRLMAX]; 

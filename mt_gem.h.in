@@ -2353,7 +2353,7 @@ typedef short VdiHdl;   /**< for better readability */
 /** @addtogroup v_attr
  *  @{
  */
-void  vs_color  (VdiHdl , short color_idx, short rgb[]);
+void  vs_color  (VdiHdl , short color_idx, const short rgb[]);
 short vswr_mode (VdiHdl , short mode);
 
 short vsf_color     (VdiHdl , short color_idx);
