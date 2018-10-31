@@ -873,7 +873,7 @@ void	 mt_wdlg_redraw			(DIALOG *dialog, GRECT *rect, short obj, short depth, sho
 
 /* Function numbers for <obj> with handle_exit(...) */
 #define  HNDL_INIT   -1          /**< Initialise dialog */
-#define  HNDL_MESG   -2          /**< Initialise dialog */
+#define  HNDL_MESG   -2          /**< Handle message */
 #define  HNDL_CLSD   -3          /**< Dialog window was closed */
 #define  HNDL_OPEN   -5          /**< End of dialog initialisation (second  call at end of wdlg_init) */
 #define  HNDL_EDIT   -6          /**< Test characters for an edit-field */
