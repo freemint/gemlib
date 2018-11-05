@@ -53,6 +53,7 @@ mt_fnts_create(short vdi_handle, short no_fonts, short font_flags, short dialog_
 	
 	aes_addrin[0] = (long)sample;
 	aes_addrin[1] = (long)opt_button;
+	aes_addrout[0] = 0;
 
 	AES_TRAP(aes_params);
 

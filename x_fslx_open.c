@@ -96,6 +96,7 @@ mt_fslx_open(char *title, short x, short y, short *handle, char *path, short pat
 	aes_addrin[3] = (long)patterns;
 	aes_addrin[4] = (long)filter;
 	aes_addrin[5] = (long)paths;
+	aes_addrout[0] = 0;
 
 	AES_TRAP(aes_params);
 

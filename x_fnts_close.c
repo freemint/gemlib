@@ -30,6 +30,7 @@ mt_fnts_close(FNT_DIALOG *fnt_dialog, short *x, short *y, short *global_aes)
 	AES_PARAMS(183,0,3,1,0);
                     
 	aes_addrin[0] = (long)fnt_dialog;
+	aes_intout[0] = 0;
 	aes_intout[1] = -1;	/* ab 6: Position kommt zurÅck */
 	aes_intout[2] = -1;
 

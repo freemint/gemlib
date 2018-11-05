@@ -27,6 +27,7 @@ mt_fnts_delete(FNT_DIALOG *fnt_dialog, short vdi_handle, short *global_aes)
                     
 	aes_intin[0]  = vdi_handle;
 	aes_addrin[0] = (long)fnt_dialog;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

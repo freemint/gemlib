@@ -30,6 +30,7 @@ mt_pdlg_use_settings(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, short *glob
 
 	aes_addrin[0] = (long)prn_dialog;
 	aes_addrin[1] = (long)settings;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

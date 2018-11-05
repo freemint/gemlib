@@ -24,18 +24,15 @@ short
 mt_fnts_get_name(FNT_DIALOG *fnt_dialog, long id, char *full_name, char *family_name,
                  char *style_name, short *global_aes)
 {
-	unsigned short *i;
-	
 	AES_PARAMS(184,3,1,4,0);
                     
 	aes_intin[0] = 2;
-	i = (unsigned short *)&id;
-	aes_intin[1] = i[0];
-	aes_intin[2] = i[1];
+	aes_intin_long(1) = id;
 	aes_addrin[0] = (long)fnt_dialog;
 	aes_addrin[1] = (long)full_name;
 	aes_addrin[2] = (long)family_name;
 	aes_addrin[3] = (long)style_name;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

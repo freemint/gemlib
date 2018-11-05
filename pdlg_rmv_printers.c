@@ -26,6 +26,7 @@ mt_pdlg_remove_printers(PRN_DIALOG *prn_dialog, short *global_aes)
 	aes_intin[0] = 1;
 
 	aes_addrin[0] = (long) prn_dialog;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

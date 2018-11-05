@@ -44,6 +44,7 @@ mt_fnts_evnt(FNT_DIALOG *fnt_dialog, EVNT *events, short *button, short *check_b
                     
 	aes_addrin[0] = (long)fnt_dialog;
 	aes_addrin[1] = (long)events;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

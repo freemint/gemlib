@@ -57,6 +57,7 @@ mt_pdlg_open(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, char *document_name
 	aes_addrin[0] = (long)prn_dialog;
 	aes_addrin[1] = (long)settings;
 	aes_addrin[2] = (long)document_name;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

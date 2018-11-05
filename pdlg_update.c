@@ -29,6 +29,7 @@ mt_pdlg_update(PRN_DIALOG *prn_dialog, char *document_name, short *global_aes)
 	aes_addrin[0] = (long)prn_dialog;
 	aes_addrin[1] = 0L;
 	aes_addrin[2] = (long)document_name;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

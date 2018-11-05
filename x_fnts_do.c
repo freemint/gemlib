@@ -36,21 +36,14 @@ short
 mt_fnts_do(FNT_DIALOG *fnt_dialog, short button_flags, long id_in, long pt_in, 
 		   long ratio_in, short *check_boxes, long *id, long *pt, long *ratio, short *global_aes)
 {
-	unsigned short *i;
-	
 	AES_PARAMS(187,7,8,1,0);
 
 	aes_intin[0] = button_flags;
-	i = (unsigned short *)&id_in;
-	aes_intin[1] = i[0];
-	aes_intin[2] = i[1];
-	i = (unsigned short *)&pt_in;
-	aes_intin[3] = i[0];
-	aes_intin[4] = i[1];
-	i = (unsigned short *)&ratio_in;
-	aes_intin[5] = i[0];
-	aes_intin[6] = i[1];
+	aes_intin_long(1) = id_in;
+	aes_intin_long(3) = pt_in;
+	aes_intin_long(5) = ratio_in;
 	aes_addrin[0] = (long)fnt_dialog;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 
@@ -61,15 +54,15 @@ mt_fnts_do(FNT_DIALOG *fnt_dialog, short button_flags, long id_in, long pt_in,
 #if CHECK_NULLPTR
 	if (id)
 #endif
-	*id = ((long)aes_intout[2] << 16) | (aes_intout[3]);
+	*id = aes_intout_long(2);
 #if CHECK_NULLPTR
 	if (pt)
 #endif
-	*pt = ((long)aes_intout[4] << 16) | (aes_intout[5]);
+	*pt = aes_intout_long(4);
 #if CHECK_NULLPTR
 	if (ratio)
 #endif
-	*ratio = ((long)aes_intout[6] << 16) | (aes_intout[7]);
+	*ratio = aes_intout_long(6);
 	
 	return aes_intout[0];
 }

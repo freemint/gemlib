@@ -265,6 +265,7 @@ mt_lbox_create( OBJECT *tree, SLCT_ITEM slct, SET_ITEM set, LBOX_ITEM *items,
 	aes_addrin[5]	= (long)objs;
 	aes_addrin[6]	= (long)user_data;
 	aes_addrin[7]	= (long)dialog;
+	aes_addrout[0] = 0;
 
 	AES_TRAP(aes_params);
 

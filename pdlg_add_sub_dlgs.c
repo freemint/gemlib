@@ -33,6 +33,7 @@ mt_pdlg_add_sub_dialogs(PRN_DIALOG *prn_dialog, PDLG_SUB *sub_dialogs, short *gl
 
 	aes_addrin[0] = (long)prn_dialog;
 	aes_addrin[1] = (long)sub_dialogs;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

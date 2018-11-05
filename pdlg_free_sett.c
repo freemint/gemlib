@@ -24,6 +24,7 @@ mt_pdlg_free_settings(PRN_SETTINGS *settings, short *global_aes)
 	aes_intin[0] = 6;
 
 	aes_addrin[0] = (long)settings;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

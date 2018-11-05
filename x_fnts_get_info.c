@@ -24,15 +24,12 @@
 short 
 mt_fnts_get_info(FNT_DIALOG *fnt_dialog, long id, short *mono, short *outline, short *global_aes)
 {
-	unsigned short *i;
-	
 	AES_PARAMS(184,3,3,1,0);
                     
 	aes_intin[0]  = 3;
-	i = (unsigned short *)&id;
-	aes_intin[1]  = i[0];
-	aes_intin[2]  = i[1];
+	aes_intin_long(1) = id;
 	aes_addrin[0] = (long)fnt_dialog;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

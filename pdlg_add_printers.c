@@ -30,6 +30,7 @@ mt_pdlg_add_printers(PRN_DIALOG *prn_dialog, DRV_INFO *drv_info, short *global_a
 
 	aes_addrin[0] = (long)prn_dialog;
 	aes_addrin[1] = (long)drv_info;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

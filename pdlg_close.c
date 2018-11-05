@@ -29,6 +29,7 @@ mt_pdlg_close(PRN_DIALOG *prn_dialog, short *x, short *y, short *global_aes)
 	aes_intout[2] = -1;
 
 	aes_addrin[0] = (long)prn_dialog;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

@@ -24,6 +24,7 @@ mt_pdlg_remove_sub_dialogs(PRN_DIALOG *prn_dialog, short *global_aes)
 	aes_intin[0] = 4;
 
 	aes_addrin[0] = (long)prn_dialog;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

@@ -25,6 +25,7 @@ mt_pdlg_new_settings(PRN_DIALOG *prn_dialog, short *global_aes)
 	aes_intin[0] = 5;
 	
 	aes_addrin[0] = (long)prn_dialog;
+	aes_addrout[0] = 0;
 
 	AES_TRAP(aes_params);
 	

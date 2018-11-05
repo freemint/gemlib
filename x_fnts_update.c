@@ -41,22 +41,15 @@
 short 
 mt_fnts_update(FNT_DIALOG *fnt_dialog, short button_flags, long id, long pt, long ratio, short *global_aes)
 {
-	unsigned short *i;
-	
 	AES_PARAMS(185,8,1,1,0);
 
 	aes_intin[0] = 2;
 	aes_intin[1] = button_flags;
-	i = (unsigned short *)&id;
-	aes_intin[2] = i[0];
-	aes_intin[3] = i[1];
-	i = (unsigned short *)&pt;
-	aes_intin[4] = i[0];
-	aes_intin[5] = i[1];
-	i = (unsigned short *)&ratio;
-	aes_intin[6] = i[0];
-	aes_intin[7] = i[1];
+	aes_intin_long(2) = id;
+	aes_intin_long(4) = pt;
+	aes_intin_long(6) = ratio;
 	aes_addrin[0] = (long)fnt_dialog;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 

@@ -47,14 +47,15 @@ mt_edit_evnt(OBJECT *tree, short obj, short whdl,
 	aes_intin[1]  = whdl;
 	aes_addrin[0] = (long)tree;
 	aes_addrin[1] = (long)ev;
-	*((long *) (aes_intout+1)) = 0L;	/* For old SLB */
+	aes_intout[0] = 0;
+	aes_intout_long(1) = 0;	/* For old SLB */
 
 	AES_TRAP(aes_params);
 
 #if CHECK_NULLPTR
 	if (errc)
 #endif
-	*errc = *((long *) (aes_intout+1));
+	*errc = aes_intout_long(1);
 
 	return(aes_intout[0]);
 }

@@ -27,6 +27,7 @@ mt_pdlg_create(short dialog_flags, short *global_aes)
 	AES_PARAMS(200,1,0,0,1);
 
 	aes_intin[0] = dialog_flags;
+	aes_addrout[0] = 0;
 
 	AES_TRAP(aes_params);
 

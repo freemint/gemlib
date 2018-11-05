@@ -85,6 +85,12 @@ static __inline long *__aes_intout_long(short n, short *aes_intout)
 }
 #define aes_intout_long(n)  *__aes_intout_long(n, aes_intout)
 
+static __inline long *__aes_intin_long(short n, short *aes_intin)
+{
+	return ((long *)(aes_intin   +n));
+}
+#define aes_intin_long(n)  *__aes_intin_long(n, aes_intin)
+
 static __inline void **__aes_intout_ptr(short n, short *aes_intout)
 {
 	return ((void **)(aes_intout   +n));
@@ -100,6 +106,7 @@ static __inline void **__aes_intin_ptr(short n, short *aes_intin)
 #else
 
 #define aes_intout_long(n)  *((long *)(aes_intout+(n)))
+#define aes_intin_long(n)  *((long *)(aes_intin+(n)))
 #define aes_intout_ptr(n, t)  *((t *)((void **)(aes_intout+(n))))
 #define aes_intin_ptr(n, t)  *((t *)((void **)(aes_intin+(n))))
 

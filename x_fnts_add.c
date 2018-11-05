@@ -30,6 +30,7 @@ mt_fnts_add(FNT_DIALOG *fnt_dialog, FNTS_ITEM *user_fonts, short *global_aes)
 	
 	aes_addrin[0] = (long)fnt_dialog;
 	aes_addrin[1] = (long)user_fonts;
+	aes_intout[0] = 0;
 
 	AES_TRAP(aes_params);
 	

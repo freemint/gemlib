@@ -39,6 +39,7 @@ mt_wdlg_create( HNDL_OBJ handle_exit, OBJECT *tree, void *user_data,
 	aes_addrin[1]	= (long)tree;
 	aes_addrin[2]	= (long)user_data;
 	aes_addrin[3]	= (long)data;
+	aes_addrout[0] = 0;
 
 	AES_TRAP(aes_params);
 
