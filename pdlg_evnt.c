@@ -39,6 +39,7 @@ mt_pdlg_evnt(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, EVNT *events,
 	aes_addrin[1] = (long)settings;
 	aes_addrin[2] = (long)events;
 	aes_intout[0] = 0;
+	aes_intout[1] = 0;
 
 	AES_TRAP(aes_params);
 
