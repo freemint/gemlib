@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** is required only for printers.

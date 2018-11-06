@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** "SAMPLE KEYBOARD STATE INFORMATION" returns the state of CONTROL, ALTERNATE 

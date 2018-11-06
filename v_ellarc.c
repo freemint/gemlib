@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** draw an elliptical arc, whose start and end angle can be set

@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 /**@file
  * main GEMlib header for non-multithread AES functions
  */

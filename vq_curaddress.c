@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** This call returns the current cursor position

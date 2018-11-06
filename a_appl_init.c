@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_aesP.h"
 
 /** should be the first function called in any application that intends

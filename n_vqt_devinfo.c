@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "mt_gem.h"
 #include "mt_gemx.h"
 

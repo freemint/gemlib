@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_aesP.h"
 
 /** is used to determine the current application's

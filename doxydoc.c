@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 /* This file just contains some documentation for doxygen,
    nothing to be compiled here */
 

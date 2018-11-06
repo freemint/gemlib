@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "mt_gem.h"
 
 /** copy a GRECT structure

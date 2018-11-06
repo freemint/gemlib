@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** is a sub-opcode of WRITE METAFILE ITEM and sets the used coordinate system.

@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** Use v_copies() to set the number of copies of a page. If \p count is 

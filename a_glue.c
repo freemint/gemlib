@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "mt_gem.h"
 
 #define appl_init _appl_init  /* to disable the appl_init inline function from gem.h */

@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** turns the outline of a filled area (rectangle, polygone, ellipse, ...)

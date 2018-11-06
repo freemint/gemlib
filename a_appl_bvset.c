@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_aesP.h"
 
 /** tell PC-GEM which logical drives are connected to the system (for the file selector box).

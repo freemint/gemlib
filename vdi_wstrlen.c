@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "mt_gem.h"
 
 /** return the length of a w-string

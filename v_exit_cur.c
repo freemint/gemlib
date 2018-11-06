@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** "EXIT ALPHA MODE" switches back to graphics mode.

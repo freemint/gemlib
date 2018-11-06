@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_aesP.h"
 
 /** displays an animated box shrinking from
@@ -22,7 +18,7 @@
  *  @since All AES versions.
  *
  *  @sa mt_form_dial(), mt_graf_growbox()
-
+ *
  *  It should be used to provide the
  *  user with a visual 'clue' to an action. It is the
  *  complement function to mt_graf_growbox().

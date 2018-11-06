@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** 'neutralizes' a preceding call of "HIDE CURSOR". If you want to 

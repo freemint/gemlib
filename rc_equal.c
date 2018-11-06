@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "mt_gem.h"
 
 /** return non-zero value if both area are equal

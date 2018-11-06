@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_aesP.h"
 
 /** sets the mouse double-click response rate. This call is global, and thus,

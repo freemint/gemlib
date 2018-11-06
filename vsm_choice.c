@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** If a function key has been pressed "INPUT CHOICE" returns its number.

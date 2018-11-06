@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "mt_gem.h"
 
 /** transform VDI-string (each character is 16-bit wide, the string is not

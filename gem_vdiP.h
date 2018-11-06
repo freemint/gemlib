@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #ifndef _GEM_VDI_P_
 # define _GEM_VDI_P_
 

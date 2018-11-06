@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** This function either returns the output arguments of v_opnwk()/v_opnvwk() or 

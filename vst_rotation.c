@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** enables text rotation in 1/10 of degrees. If the selected font 

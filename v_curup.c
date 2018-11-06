@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** The cursor is moved up one row. If the cursor is already in the first row, 

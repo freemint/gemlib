@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #ifndef _GEM_AES_P_
 # define _GEM_AES_P_
 

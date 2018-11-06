@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
- 
 #include "gem_aesP.h"
 
 /** closes and deletes all of the application's

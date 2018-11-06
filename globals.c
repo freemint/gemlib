@@ -1,8 +1,3 @@
-/*
- *  $Id$
- */
-
-
 #include "mt_gem.h"
 #include "gem.h"
 

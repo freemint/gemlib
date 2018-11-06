@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** returns a string from the keyboard, and returns if the maximum string length is reached or if the user has pressed 

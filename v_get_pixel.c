@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** On a device with up to 8 planes (256 simultaneously displayable colors) this 

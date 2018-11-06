@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_aesP.h"
 
 /** Draws the Non-Client-Area (window widgets) of a window and checks the

@@ -1,7 +1,3 @@
-/*
- *  $Id$
- */
-
 #include "gem_vdiP.h"
 
 /** returns a string from the keyboard. "INPUT STRING, SAMPLE MODE" 
