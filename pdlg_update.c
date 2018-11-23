@@ -16,7 +16,7 @@
  */
 
 short
-mt_pdlg_update(PRN_DIALOG *prn_dialog, char *document_name, short *global_aes)
+mt_pdlg_update(PRN_DIALOG *prn_dialog, const char *document_name, short *global_aes)
 {
 	AES_PARAMS(205,1,1,3,0);
 

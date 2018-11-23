@@ -34,7 +34,7 @@
  */
 
 short
-mt_wdlg_set_iconify( DIALOG *dialog, GRECT *g, char *title,
+mt_wdlg_set_iconify( DIALOG *dialog, GRECT *g, const char *title,
 					 OBJECT *tree, short obj, short *global_aes )
 {
 	AES_PARAMS(165,2,1,4,0);

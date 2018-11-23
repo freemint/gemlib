@@ -19,7 +19,7 @@
  */
 
 short 
-mt_fslx_getnxtfile(void *fsd, char *fname, short *global_aes)
+mt_fslx_getnxtfile(XFSL_DIALOG *fsd, char *fname, short *global_aes)
 {
 	AES_PARAMS(192,0,1,2,0);
 

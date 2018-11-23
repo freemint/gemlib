@@ -1240,7 +1240,7 @@ typedef  struct
 
 /* wind_set(WF_BEVENT) */
 #define BEVENT_WORK		0x0001    /**< window not topped when click on the work area, see #WF_BEVENT */
-#define BEVENT_INFO		0x0002    /**< ?????, see #WF_BEVENT */
+#define BEVENT_INFO		0x0002    /**< window not topped when click on the info area, see #WF_BEVENT */
 
 /* wind_set(WF_OPTS) bitmask flags */
 #define WO0_WHEEL		0x0001  /**< see mt_wind_set() with #WF_OPTS mode */
@@ -1257,28 +1257,28 @@ typedef  struct
 #define WHEEL_SLIDER		2   /**< AES will convert mouse wheel events to slider events */
 
 /* window elements */
-#define W_BOX			0	/**< widget index of ???, see #WF_COLOR */
-#define W_TITLE			1	/**< widget index of ???, see #WF_COLOR */
-#define W_CLOSER		2	/**< widget index of ???, see #WF_COLOR */
-#define W_NAME 			3	/**< widget index of ???, see #WF_COLOR */
-#define W_FULLER		4	/**< widget index of ???, see #WF_COLOR */
-#define W_INFO 			5	/**< widget index of ???, see #WF_COLOR */
+#define W_BOX			0	/**< widget index of root object, see #WF_COLOR */
+#define W_TITLE			1	/**< widget index of titlebar, see #WF_COLOR */
+#define W_CLOSER		2	/**< widget index of closer gadget, see #WF_COLOR */
+#define W_NAME 			3	/**< widget index of window name, see #WF_COLOR */
+#define W_FULLER		4	/**< widget index of fuller gadget, see #WF_COLOR */
+#define W_INFO 			5	/**< widget index of info bar, see #WF_COLOR */
 #define W_DATA 			6	/**< widget index of ???, see #WF_COLOR */
-#define W_WORK 			7	/**< widget index of ???, see #WF_COLOR */
-#define W_SIZER			8	/**< widget index of ???, see #WF_COLOR */
-#define W_VBAR 			9	/**< widget index of ???, see #WF_COLOR */
-#define W_UPARROW		10	/**< widget index of ???, see #WF_COLOR */
-#define W_DNARROW		11	/**< widget index of ???, see #WF_COLOR */
-#define W_VSLIDE		12	/**< widget index of ???, see #WF_COLOR */
-#define W_VELEV			13	/**< widget index of ???, see #WF_COLOR */
-#define W_HBAR			14	/**< widget index of ???, see #WF_COLOR */
-#define W_LFARROW		15	/**< widget index of ???, see #WF_COLOR */
-#define W_RTARROW		16	/**< widget index of ???, see #WF_COLOR */
-#define W_HSLIDE		17	/**< widget index of ???, see #WF_COLOR */
-#define W_HELEV			18	/**< widget index of ???, see #WF_COLOR */
-#define W_SMALLER		19	/**< widget index of ???, see #WF_COLOR */
-#define W_BOTTOMER		20  /**< widget index of ???, see #WF_COLOR */
-#define W_HIDER			30	/**< widget index of ???, see #WF_COLOR */
+#define W_WORK 			7	/**< widget index of work area, see #WF_COLOR */
+#define W_SIZER			8	/**< widget index of sizer gadget, see #WF_COLOR */
+#define W_VBAR 			9	/**< widget index of vertical bar background, see #WF_COLOR */
+#define W_UPARROW		10	/**< widget index of up arrow, see #WF_COLOR */
+#define W_DNARROW		11	/**< widget index of down arrow, see #WF_COLOR */
+#define W_VSLIDE		12	/**< widget index of vertical slider, see #WF_COLOR */
+#define W_VELEV			13	/**< widget index of vertical bar, see #WF_COLOR */
+#define W_HBAR			14	/**< widget index of horizontal bar background, see #WF_COLOR */
+#define W_LFARROW		15	/**< widget index of left arrow, see #WF_COLOR */
+#define W_RTARROW		16	/**< widget index of right arrow, see #WF_COLOR */
+#define W_HSLIDE		17	/**< widget index of horizontal slider, see #WF_COLOR */
+#define W_HELEV			18	/**< widget index of horizontal bar, see #WF_COLOR */
+#define W_SMALLER		19	/**< widget index of smaller gadget, see #WF_COLOR */
+#define W_BOTTOMER		20 	/**< widget index of bottomer widget, see #WF_COLOR */
+#define W_HIDER			30	/**< widget index of hide widget, see #WF_COLOR */
 
 /* arrow message */
 #define WA_UPPAGE 		0	/**< Page Up,      see #WM_ARROWED  */

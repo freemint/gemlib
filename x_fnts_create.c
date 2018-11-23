@@ -38,7 +38,7 @@
  
 FNT_DIALOG *
 mt_fnts_create(short vdi_handle, short no_fonts, short font_flags, short dialog_flags,
-               char *sample, char *opt_button, short *global_aes)
+               const char *sample, const char *opt_button, short *global_aes)
 {
 	AES_PARAMS(180,4,0,2,1);
                     

@@ -40,7 +40,7 @@
  */
 
 short 
-mt_fslx_evnt(void *fsd, EVNT *events, char *path, char *fname, short *button, 
+mt_fslx_evnt(XFSL_DIALOG *fsd, EVNT *events, char *path, char *fname, short *button,
 			 short *nfiles, short *sort_mode, char **pattern, short *global_aes)
 {
 	AES_PARAMS(193,0,4,4,1);

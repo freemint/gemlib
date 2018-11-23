@@ -207,7 +207,7 @@
  *           - \a W1 is interpreted as bit arrays whose bits indicate supported
  *             window features. These bits are:
  *              - #BEVENT_WORK : window not topped when click on the work area
- *              - #BEVENT_INFO : ???
+ *              - #BEVENT_INFO : window not topped when click on the info area
  *
  *           This mode is only available as of AES version 4.0 (and when indicated by
  *           mt_appl_getinfo() with mode #AES_WINDOW).

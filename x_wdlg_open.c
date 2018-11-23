@@ -22,7 +22,7 @@
  */
 
 short
-mt_wdlg_open( DIALOG *dialog, char *title, short kind,
+mt_wdlg_open( DIALOG *dialog, const char *title, short kind,
 			  short x, short y, short code, void *data, short *global_aes )
 {
 	AES_PARAMS(161,4,1,3,0);

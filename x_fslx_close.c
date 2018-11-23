@@ -18,7 +18,7 @@
  */
 
 short 
-mt_fslx_close(void *fsd, short *global_aes)
+mt_fslx_close(XFSL_DIALOG *fsd, short *global_aes)
 {
 	AES_PARAMS(191,0,1,1,0);
 

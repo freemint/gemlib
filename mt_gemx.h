@@ -23,7 +23,13 @@ __BEGIN_DECLS
  * The AES extensions of MagiC
  */
 
+/** an opaque structure. One should not access the
+    structure directly. The mt_wdlg_xx functions should be used! */
+typedef void * DIALOG;
+
 /** TODO */
+#ifndef __EVNT
+#define __EVNT
 typedef struct
 {
 	short		mwhich;		/**< Type of events */
@@ -36,6 +42,7 @@ typedef struct
 	short		reserved[9];/**< Reserved */
 	short		msg[16]; 	/**< Message-buffer */
 } EVNT;
+#endif
 
 
 /** @addtogroup a_evnt
@@ -54,23 +61,27 @@ void mt_EVNT_multi( short evtypes, short nclicks, short bmask, short bstate,
  *  @{
  */
 
-/** TODO */
+#ifndef _SCANX
+#define _SCANX
 typedef struct
 {
 	char		scancode;  /**< TODO */
 	char		nclicks;   /**< TODO */
 	short		objnr;     /**< TODO */
 } SCANX;
+#endif
 
-/** TODO */
+#ifndef _XDO_INF
+#define _XDO_INF
 typedef struct
 {
-	SCANX		*unsh;		/**< Tabellen fr UnShift-Kombinationen */
-	SCANX		*shift;		/**< Tabellen fr Shift-Kombinationen */
-	SCANX		*ctrl;		/**< Tabellen fr Control-Kombinationen */
-	SCANX		*alt; 		/**< Tabellen fr Alternate-Kombinationen */
-	void		*resvd;		/**< reserviert */
+	SCANX		*unsh;		/**< table for unshifted keys */
+	SCANX		*shift;		/**< table for shifted keys */
+	SCANX		*ctrl;		/**< table for ctrl-key */
+	SCANX		*alt; 		/**< table for alt-key */
+	void		*resvd;		/**< reserved */
 } XDO_INF;
+#endif
 
 /** parameters for the init callback function (7th parameter of mt_xfrm_popup() )
  */
@@ -188,7 +199,7 @@ struct _fnts_item
 
 short		mt_fnts_add			(FNT_DIALOG *fnt_dialog, FNTS_ITEM *user_fonts, short *global);
 short		mt_fnts_close		(FNT_DIALOG *fnt_dialog, short *x, short *y, short *global);
-FNT_DIALOG *mt_fnts_create		(short vdi_handle, short no_fonts, short font_flags, short dialog_flags, char *sample, char *opt_button, short *global);
+FNT_DIALOG *mt_fnts_create		(short vdi_handle, short no_fonts, short font_flags, short dialog_flags, const char *sample, const char *opt_button, short *global);
 short		mt_fnts_delete		(FNT_DIALOG *fnt_dialog, short vdi_handle, short *global);
 short		mt_fnts_do			(FNT_DIALOG *fnt_dialog, short button_flags, long id_in, long pt_in, long ratio_in, short *check_boxes, long *id, long *pt, long *ratio, short *global);
 short		mt_fnts_evnt		(FNT_DIALOG *fnt_dialog, EVNT *events, short *button, short *check_boxes, long *id, long *pt, long *ratio, short *global);
@@ -225,7 +236,7 @@ short		mt_fnts_update		(FNT_DIALOG *fnt_dialog, short button_flags, long id, lon
 /** TODO */
 typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, GEMLIB_XATTR *xattr);
 
-/* Sortiermodi */
+/* sort modes */
 #define SORTBYNAME		0			/**< TODO */
 #define SORTBYDATE		1			/**< TODO */
 #define SORTBYSIZE		2			/**< TODO */
@@ -233,7 +244,7 @@ typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, GEMLIB_XATTR *xattr
 #define SORTBYNONE		4			/**< TODO */
 #define SORTDEFAULT		(-1)		/**< TODO */
 
-/* Flags fr Dateiauswahl */
+/* flags for file selection */
 #define DOSMODE			1			/**< TODO */
 #define NFOLLOWSLKS		2			/**< TODO */
 #define GETMULTI		8			/**< TODO */
@@ -241,11 +252,13 @@ typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, GEMLIB_XATTR *xattr
 /* fslx_set_flags */
 #define SHOW8P3			1			/**< TODO */
 
-short	mt_fslx_close		(void *fsd, short *global);
-void *	mt_fslx_do			(char *title, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode, short flags, short *button, short *nfiles, char **pattern, short *global);
-short	mt_fslx_evnt		(void *fsd, EVNT *events, char *path, char *fname, short *button, short *nfiles, short *sort_mode, char **pattern, short *global); 
-short	mt_fslx_getnxtfile	(void *fsd, char *fname, short *global);
-void *	mt_fslx_open		(char *title, short x, short y, short *handle, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short sort_mode, short flags, short *global);
+typedef void *XFSL_DIALOG;
+
+short	mt_fslx_close		(XFSL_DIALOG *fsd, short *global);
+XFSL_DIALOG *mt_fslx_do			(const char *title, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode, short flags, short *button, short *nfiles, char **pattern, short *global);
+short	mt_fslx_evnt		(XFSL_DIALOG *fsd, EVNT *events, char *path, char *fname, short *button, short *nfiles, short *sort_mode, char **pattern, short *global);
+short	mt_fslx_getnxtfile	(XFSL_DIALOG *fsd, char *fname, short *global);
+XFSL_DIALOG *mt_fslx_open		(const char *title, short x, short y, short *handle, char *path, short pathlen, char *fname, short fnamelen, const char *patterns, XFSL_FILTER filter, char *paths, short sort_mode, short flags, short *global);
 short	mt_fslx_set_flags 	(short flags, short *oldval, short *global);
 /**@}*/
 
@@ -302,9 +315,9 @@ struct _prn_mode
 	short 		hdpi; 				/**< Horizontal resolution in dpi */
 	short 		vdpi; 				/**< Vertical resolution in dpi */
 	long		mode_capabilities;	/**< Mode capabilities */
-	long		color_capabilities;	/**< Colour capabilities */
+	long		color_capabilities;	/**< Color capabilities */
 	long		dither_flags;		/**< Flags specifying whether the
-	                                     corresponding colour mode is accessible
+	                                     corresponding color mode is accessible
 										 with or without dithering */
 	MEDIA_TYPE	*paper_types;		/**< Suitable paper types */
 	long		reserved;			/**< Reserved */
@@ -312,9 +325,9 @@ struct _prn_mode
 };
 
 /* sub_flags */
-#define	PRN_STD_SUBS	0x0001			/**< Standard-Unterdialoge fr NVDI-Drucker */
-#define	PRN_FSM_SUBS	0x0002			/**< Standard-Unterdialoge fr FSM-Drucker */
-#define	PRN_QD_SUBS 	0x0004			/**< Standard-Unterdialoge fr QuickDraw-Drucker */
+#define	PRN_STD_SUBS	0x0001			/**< standard sub-dialogs for NVDI printer */
+#define	PRN_FSM_SUBS	0x0002			/**< standard sub-dialogs for FSM printer */
+#define	PRN_QD_SUBS 	0x0004			/**< standard sub-dialogs for QuickDraw printer */
 
 /** old_printer can also be 0L */
 typedef long __CDECL (*PRN_SWITCH)(DRV_ENTRY *drivers, PRN_SETTINGS *settings, PRN_ENTRY *old_printer, PRN_ENTRY *new_printer);
@@ -350,7 +363,7 @@ struct _dither_mode
 	long		format;			/**< Data format */
 	long		reserved;		/**< Reserved */
 	long		dither_id;		/**< Dither ID */
-	long		color_modes;	/**< Colour depths supported */
+	long		color_modes;	/**< Color depths supported */
 	long		reserved1;		/**< Reserved */
 	long		reserved2;		/**< Reserved */
 	char		name[32];		/**< Name of the dither process */
@@ -474,28 +487,28 @@ struct _pdlg_sub
 #define	NO_CC_BITS		16			/**< TODO */
 
 /*----------------------------------------------------------------------------------------*/ 
-/* einstellbare Rasterverfahren																				*/
+/* settable dither modes                                                                  */
 /*----------------------------------------------------------------------------------------*/ 
 #define	DC_NONE			0			/**< keine Rasterverfahren */
 #define	DC_FLOYD 		1			/**< einfacher Floyd-Steinberg */
 #define	NO_DC_BITS		1			/**< TODO */
 
 /*----------------------------------------------------------------------------------------*/ 
-/* Druckereigenschaften 																						*/
+/* printer characteristics                                                                */
 /*----------------------------------------------------------------------------------------*/ 
-#define	PC_FILE			0x0001		/**< Drucker kann ber GEMDOS-Dateien angesprochen werden */
-#define	PC_SERIAL		0x0002		/**< Drucker kann auf der seriellen Schnittstelle angesteuert werden */
-#define	PC_PARALLEL 	0x0004		/**< Drucker kann auf der parallelen Schnittstelle angesteuert werden */
-#define	PC_ACSI			0x0008		/**< Drucker kann auf der ACSI-Schnittstelle ausgeben */
-#define	PC_SCSI			0x0010		/**< Drucker kann auf der SCSI-Schnittstelle ausgeben */
+#define	PC_FILE			0x0001		/**< printer can be accessed with GEMDOS calls */
+#define	PC_SERIAL		0x0002		/**< printer can be attached to serial interface */
+#define	PC_PARALLEL 	0x0004		/**< printer can be attached to parallel interface */
+#define	PC_ACSI			0x0008		/**< printer can be attached to ACSI interface */
+#define	PC_SCSI			0x0010		/**< printer can be attached to SCSI interface */
 
-#define	PC_BACKGROUND	0x0080		/**< Treiber kann im Hintergrund ausdrucken */
+#define	PC_BACKGROUND	0x0080		/**< driver can do background jobs */
 
-#define	PC_SCALING		0x0100		/**< Treiber kann Seite skalieren */
-#define	PC_COPIES		0x0200		/**< Treiber kann Kopien einer Seite erstellen */
+#define	PC_SCALING		0x0100		/**< driver can scale pages */
+#define	PC_COPIES		0x0200		/**< driver can copy pages */
 
 /*----------------------------------------------------------------------------------------*/ 
-/* Moduseigenschaften																							*/
+/* mode characteristics                                                                   */
 /*----------------------------------------------------------------------------------------*/ 
 #define	MC_PORTRAIT 	0x0001		/**< Seite kann im Hochformat ausgegeben werden */
 #define	MC_LANDSCAPE	0x0002		/**< Seite kann im Querformat ausgegeben werden */
@@ -546,7 +559,7 @@ struct _pdlg_sub
  *  - driver_id
  *  .
  *  All other entries should not be accessed. Data such as the printer 
- *  resolution or colour planes, for instance, should not be taken from the 
+ *  resolution or color planes, for instance, should not be taken from the
  *  settings structure but requested from the printer at the start of printing 
  *  (it is possible, for instance, that the printer driver is forced by a 
  *  shortage of memory to reduce the print resolution below the value entered 
@@ -579,8 +592,8 @@ struct _prn_settings
 	long		quality_id; 	/**< Print mode (hardware-dependent quality,
                                      e.g. Microweave or Econofast) */
 
-	long		color_mode; 	/**< Colour mode */
-	long		plane_flags;	/**< Flags for colour planes to be output
+	long		color_mode; 	/**< Color mode */
+	long		plane_flags;	/**< Flags for color planes to be output
                                      (e.g. cyan only) */
 	long		dither_mode;	/**< Dither process */
 	long		dither_value;	/**< Parameter for the dither process */
@@ -634,16 +647,16 @@ short		   mt_pdlg_close	    		(PRN_DIALOG *prn_dialog, short *x, short *y, short
 PRN_DIALOG *   mt_pdlg_create				(short dialog_flags, short *global);
 short		   mt_pdlg_delete		    	(PRN_DIALOG *prn_dialog, short *global);
 short		   mt_pdlg_dflt_settings    	(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, short *global);
-short		   mt_pdlg_do			    	(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, char *document_name, short option_flags, short *global);
+short		   mt_pdlg_do			    	(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, const char *document_name, short option_flags, short *global);
 short		   mt_pdlg_evnt 		    	(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, EVNT *events, short *button, short *global);
 short		   mt_pdlg_free_settings    	(PRN_SETTINGS *settings, short *global);
 long		   mt_pdlg_get_setsize      	(short *global);
 PRN_SETTINGS * mt_pdlg_new_settings			(PRN_DIALOG *prn_dialog, short *global);
-short		   mt_pdlg_open 			    (PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, char *document_name, short option_flags, short x, short y, short *global);
+short		   mt_pdlg_open 			    (PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, const char *document_name, short option_flags, short x, short y, short *global);
 short		   mt_pdlg_remove_printers      (PRN_DIALOG *prn_dialog, short *global);
 short		   mt_pdlg_remove_sub_dialogs   (PRN_DIALOG *prn_dialog, short *global);
 short		   mt_pdlg_save_default_settings(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, short *global);
-short		   mt_pdlg_update			    (PRN_DIALOG *prn_dialog, char *document_name, short *global);
+short		   mt_pdlg_update			    (PRN_DIALOG *prn_dialog, const char *document_name, short *global);
 short		   mt_pdlg_use_settings 	    (PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, short *global);
 short		   mt_pdlg_validate_settings    (PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, short *global);
 /**@}*/
@@ -711,8 +724,8 @@ typedef short __CDECL (*SET_ITEM)(struct SET_ITEM_args);		/**< TODO */
 
 LIST_BOX *	mt_lbox_create (OBJECT *tree, SLCT_ITEM slct, SET_ITEM set,
 		    LBOX_ITEM *items, short visible_a, short first_a,
-		    short *ctrl_objs, short *objs, short flags,
-		    short pause_a, void *user_data, void *dialog,
+		    const short *ctrl_objs, const short *objs, short flags,
+		    short pause_a, void *user_data, DIALOG *dialog,
 		    short visible_b, short first_b, short entries_b,
 		    short pause_b, short *global);
 void		mt_lbox_update (LIST_BOX *box, GRECT *rect, short *global);
@@ -756,10 +769,6 @@ void		mt_lbox_bscroll_to (LIST_BOX *box, short first, GRECT *box_rect,
 /** @addtogroup x_wdlg
  *  @{
  */
-
-/** an opaque structure. One should not access the 
-    structure directly. The mt_wdlg_xx functions should be used! */
-typedef void * DIALOG;
 
 /** parameters of HNDL_OBJ callback functions */
 struct HNDL_OBJ_args 
@@ -851,7 +860,7 @@ struct HNDL_OBJ_args
 typedef short __CDECL (*HNDL_OBJ)(struct HNDL_OBJ_args);
 
 DIALOG * mt_wdlg_create			(HNDL_OBJ handle_exit, OBJECT *tree, void *user_data, short code, void *data, short flags, short *global);
-short	 mt_wdlg_open			(DIALOG *dialog, char *title, short kind, short x, short y, short code, void *data, short *global);
+short	 mt_wdlg_open			(DIALOG *dialog, const char *title, short kind, short x, short y, short code, void *data, short *global);
 short	 mt_wdlg_close			(DIALOG *dialog, short *x, short *y, short *global);
 short	 mt_wdlg_delete			(DIALOG *dialog, short *global);
 short	 mt_wdlg_get_tree		(DIALOG *dialog, OBJECT **tree, GRECT *r, short *global);
@@ -861,8 +870,8 @@ short	 mt_wdlg_get_handle		(DIALOG *dialog, short *global);
 short	 mt_wdlg_set_edit		(DIALOG *dialog, short obj, short *global);
 short	 mt_wdlg_set_tree		(DIALOG *dialog, OBJECT *tree, short *global);
 short	 mt_wdlg_set_size		(DIALOG *dialog, GRECT *size, short *global);
-short	 mt_wdlg_set_iconify	(DIALOG *dialog, GRECT *g, char *title, OBJECT *tree, short obj, short *global);
-short	 mt_wdlg_set_uniconify	(DIALOG *dialog, GRECT *g, char *title, OBJECT *tree, short *global);
+short	 mt_wdlg_set_iconify	(DIALOG *dialog, GRECT *g, const char *title, OBJECT *tree, short obj, short *global);
+short	 mt_wdlg_set_uniconify	(DIALOG *dialog, GRECT *g, const char *title, OBJECT *tree, short *global);
 short	 mt_wdlg_evnt			(DIALOG *dialog, EVNT *events, short *global );
 void	 mt_wdlg_redraw			(DIALOG *dialog, GRECT *rect, short obj, short depth, short *global);
 
@@ -870,16 +879,16 @@ void	 mt_wdlg_redraw			(DIALOG *dialog, GRECT *rect, short obj, short depth, sho
 #define  WDLG_BKGD   1           /**< Permit background operation */
 
 /* Function numbers for <obj> with handle_exit(...) */
-#define  HNDL_INIT   -1          /**< Initialise dialog */
-#define  HNDL_MESG   -2          /**< Handle message */
-#define  HNDL_CLSD   -3          /**< Dialog window was closed */
-#define  HNDL_OPEN   -5          /**< End of dialog initialisation (second  call at end of wdlg_init) */
-#define  HNDL_EDIT   -6          /**< Test characters for an edit-field */
-#define  HNDL_EDDN   -7          /**< Character was entered in edit-field */
-#define  HNDL_EDCH   -8          /**< Edit-field was changed */
-#define  HNDL_MOVE   -9          /**< Dialog was moved */
-#define  HNDL_TOPW   -10         /**< Dialog-window has been topped */
-#define  HNDL_UNTP   -11         /**< Dialog-window is not active */
+#define  HNDL_INIT   (-1)          /**< Initialise dialog */
+#define  HNDL_MESG   (-2)          /**< Handle message */
+#define  HNDL_CLSD   (-3)          /**< Dialog window was closed */
+#define  HNDL_OPEN   (-5)          /**< End of dialog initialisation (second  call at end of wdlg_init) */
+#define  HNDL_EDIT   (-6)          /**< Test characters for an edit-field */
+#define  HNDL_EDDN   (-7)          /**< Character was entered in edit-field */
+#define  HNDL_EDCH   (-8)          /**< Edit-field was changed */
+#define  HNDL_MOVE   (-9)          /**< Dialog was moved */
+#define  HNDL_TOPW   (-10)         /**< Dialog-window has been topped */
+#define  HNDL_UNTP   (-11)         /**< Dialog-window is not active */
 /**@}*/
 
 
@@ -899,7 +908,7 @@ short	mt_edit_cursor 		(OBJECT *tree, short obj, short whdl, short show, short *
 short	mt_edit_evnt		(OBJECT *tree, short obj, short whdl,	EVNT *ev, long *errc, short *global);
 short	mt_edit_get_buf		(OBJECT *tree, short obj, char **buf, long *buflen, long *txtlen, short *global);
 short	mt_edit_get_format	(OBJECT *tree, short obj, short *tabwidth, short *autowrap, short *global);
-short	mt_edit_get_colour	(OBJECT *tree, short obj, short *tcolour, short *bcolour, short *global);
+short	mt_edit_get_colour	(OBJECT *tree, short obj, short *tcolor, short *bcolor, short *global);
 /** another name, with "color" instead of "colour" to be consistent with AES/VDI function naming rules */
 #define mt_edit_get_color	mt_edit_get_colour
 short	mt_edit_get_cursor	(OBJECT *tree, short obj, char **cursorpos, short *global);
@@ -907,7 +916,7 @@ short	mt_edit_get_font	(OBJECT *tree, short obj, short *fontID, short *fontH, sh
 void	mt_edit_set_buf		(OBJECT *tree, short obj, char *buf, long buflen, short *global);
 void	mt_edit_set_format	(OBJECT *tree, short obj, short tabwidth, short autowrap, short *global);
 void	mt_edit_set_font	(OBJECT *tree, short obj, short fontID, short fontH, short fontPix, short mono, short *global);
-void	mt_edit_set_colour	(OBJECT *tree, short obj, short tcolour, short bcolour, short *global);
+void	mt_edit_set_colour	(OBJECT *tree, short obj, short tcolor, short bcolor, short *global);
 /** another name, with "color" instead of "colour" to be consistent with AES/VDI function naming rules */
 #define mt_edit_set_color	mt_edit_set_colour
 void	mt_edit_set_cursor	(OBJECT *tree, short obj, char *cursorpos, short *global);

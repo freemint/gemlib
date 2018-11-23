@@ -72,9 +72,9 @@
  */
 
 
-void *
-mt_fslx_open(char *title, short x, short y, short *handle, char *path, short pathlen,
-			 char *fname, short fnamelen, char *patterns, XFSL_FILTER filter,
+XFSL_DIALOG *
+mt_fslx_open(const char *title, short x, short y, short *handle, char *path, short pathlen,
+			 char *fname, short fnamelen, const char *patterns, XFSL_FILTER filter,
 			 char *paths, short sort_mode, short flags, short *global_aes)
 {
 	AES_PARAMS(190,6,1,6,1);

@@ -238,8 +238,8 @@ typedef WORD (cdecl *SET_ITEM)( LIST_BOX *box, OBJECT *tree,
 
 LIST_BOX *
 mt_lbox_create( OBJECT *tree, SLCT_ITEM slct, SET_ITEM set, LBOX_ITEM *items,
-				short visible_a, short first_a, short *ctrl_objs, short *objs, short flags,
-				short pause_a, void *user_data, void *dialog, short visible_b,
+				short visible_a, short first_a, const short *ctrl_objs, const short *objs, short flags,
+				short pause_a, void *user_data, DIALOG *dialog, short visible_b,
 				short first_b, short entries_b, short pause_b, short *global_aes )
 {
 	AES_PARAMS(170,8,0,8,1);

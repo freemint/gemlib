@@ -41,7 +41,7 @@
  */
 
 short
-mt_pdlg_open(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, char *document_name,
+mt_pdlg_open(PRN_DIALOG *prn_dialog, PRN_SETTINGS *settings, const char *document_name,
              short option_flags, short x, short y, short *global_aes)
 {
 	AES_PARAMS(202,3,1,3,0);
