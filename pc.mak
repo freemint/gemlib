@@ -1,7 +1,3 @@
-#
-# $Id$
-#
-
 # makefile for gemlib 
 # purec version
 

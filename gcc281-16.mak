@@ -1,7 +1,3 @@
-#
-# $Id$
-#
-
 # makefile for gemlib 
 # gcc 2.81 version (16 bits)
 
