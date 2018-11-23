@@ -25,12 +25,12 @@ static inline void
 _aes_trap (AESPB * aespb)
 {
 	__asm__ volatile (
-		"move.l	%0,d1\n\t"	/* &aespb */
-		"move.w	#200,d0\n\t"
+		"move.l	%0,%%d1\n\t"	/* &aespb */
+		"move.w	#200,%%d0\n\t"
 		"trap	#2"
 		:
 		: "g"(aespb)
-		: "d0","d1","d2","a0","a1","a2","memory"
+		: "d0","d1","d2","a0","a1","a2","memory","cc"
 	);
 }
 #define AES_TRAP(aespb) _aes_trap(&aespb)
