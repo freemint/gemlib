@@ -1474,7 +1474,7 @@ struct _gcbitmap
 
 	CTAB_REF	ctab;			/**< TODO */
 	ITAB_REF 	itab;			/**< TODO */
-	long		reserved0;		/**< TODO */
+	long		color_space;	/**< TODO */
 	long		reserved1;		/**< TODO */
 };
 
