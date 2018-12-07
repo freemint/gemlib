@@ -23,8 +23,23 @@ mt_form_xdial_grect(short fo_diflag, const GRECT *fo_dilittl, const GRECT *fo_di
 	AES_PARAMS(51,9,1,1,0);
                     
 	aes_intin[0] = fo_diflag;
-	*(GRECT*)(aes_intin+1) = *fo_dilittl;
-	*(GRECT*)(aes_intin+5) = *fo_dibig;
+	if (fo_dilittl)
+	{
+		aes_intin[1] = fo_dilittl->g_x;
+		aes_intin[2] = fo_dilittl->g_y;
+		aes_intin[3] = fo_dilittl->g_w;
+		aes_intin[4] = fo_dilittl->g_h;
+	} else
+	{
+		aes_intin[1] = 0;
+		aes_intin[2] = 0;
+		aes_intin[3] = 0;
+		aes_intin[4] = 0;
+	}
+	aes_intin[5] = fo_dibig->g_x;
+	aes_intin[6] = fo_dibig->g_y;
+	aes_intin[7] = fo_dibig->g_w;
+	aes_intin[8] = fo_dibig->g_h;
 
 	aes_addrin[0] = (long)flydial;
 

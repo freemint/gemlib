@@ -49,10 +49,19 @@ mt_form_dial_grect(short mode, const GRECT *little, const GRECT *big, short *glo
 	AES_PARAMS(51,9,1,0,0);
 
 	aes_intin[0] = mode;
-	aes_intin[1] = little->g_x;
-	aes_intin[2] = little->g_y;
-	aes_intin[3] = little->g_w;
-	aes_intin[4] = little->g_h;
+	if (little)
+	{
+		aes_intin[1] = little->g_x;
+		aes_intin[2] = little->g_y;
+		aes_intin[3] = little->g_w;
+		aes_intin[4] = little->g_h;
+	} else
+	{
+		aes_intin[1] = 0;
+		aes_intin[2] = 0;
+		aes_intin[3] = 0;
+		aes_intin[4] = 0;
+	}
 	aes_intin[5] = big->g_x;
 	aes_intin[6] = big->g_y;
 	aes_intin[7] = big->g_w;
