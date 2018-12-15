@@ -20,7 +20,7 @@
 short 
 mt_form_xdial_grect(short fo_diflag, const GRECT *fo_dilittl, const GRECT *fo_dibig, void **flydial, short *global_aes)
 {
-	AES_PARAMS(51,9,1,1,0);
+	AES_PARAMS(51,9,1,2,0);
                     
 	aes_intin[0] = fo_diflag;
 	if (fo_dilittl)
@@ -42,6 +42,7 @@ mt_form_xdial_grect(short fo_diflag, const GRECT *fo_dilittl, const GRECT *fo_di
 	aes_intin[8] = fo_dibig->g_h;
 
 	aes_addrin[0] = (long)flydial;
+	aes_addrin[1] = 0;
 
 	AES_TRAP(aes_params);
 

@@ -40,7 +40,7 @@ mt_form_xdial(short fo_diflag, short fo_dilittlx, short fo_dilittly, short fo_di
 			  short fo_dilittlh, short fo_dibigx, short fo_dibigy, short fo_dibigw,
 			  short fo_dibigh, void **flydial, short *global_aes)
 {
-	AES_PARAMS(51,9,1,1,0);
+	AES_PARAMS(51,9,1,2,0);
                     
 	aes_intin[0] = fo_diflag;
 	aes_intin[1] = fo_dilittlx;
@@ -53,6 +53,7 @@ mt_form_xdial(short fo_diflag, short fo_dilittlx, short fo_dilittly, short fo_di
 	aes_intin[8] = fo_dibigh;
 
 	aes_addrin[0] = (long)flydial;
+	aes_addrin[1] = 0;
 
 	AES_TRAP(aes_params);
 
