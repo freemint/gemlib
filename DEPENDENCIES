@@ -36,7 +36,7 @@ define CC_MULTI_TEMPLATE
 	$$(AM_V_CC)$$(COMPILE)  -Wp,-MD,$$(@:.o=.d) -c $$< -o $$@
 .mlibs/$(1)/%.o : %.S
 	$$(AM_V_CPPAS)$$(COMPILE) -Wp,-MD,.$$(@:.o=.d) -c $$< -o $$@
-.mlibs/$(1)/%.o : %.S
+.mlibs/$(1)/%.o : %.s
 	$$(AM_V_AS)$$(COMPILE) -Wp,-MD,$$(@:.o=.d) -c $$< -o $$@
 
 #
