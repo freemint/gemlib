@@ -41,11 +41,6 @@ v_opnvwk (short work_in[], short *handle, short work_out[])
 		vsl_width(vdi_control[6],1);
 		vst_effects(vdi_control[6],0);
 		vsm_height(vdi_control[6],9);
-#if CHECK_NULLPTR
-		vst_height(vdi_control[6],13,0L,0L,0L,0L);
-#else
-		vst_height(vdi_control[6],13,&dummy,&dummy,&dummy,&dummy);
-#endif
 	}
 }
 
