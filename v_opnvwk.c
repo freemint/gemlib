@@ -32,10 +32,6 @@ v_opnvwk (short work_in[], short *handle, short work_out[])
 	
 	if (vdi_control[6]!=0)
 	{ 
-#if !(CHECK_NULLPTR)
-		short dummy;
-#endif
-		
 		vsf_perimeter(vdi_control[6],PERIMETER_ON);
 		vsl_ends(vdi_control[6],0,0);
 		vsl_width(vdi_control[6],1);
