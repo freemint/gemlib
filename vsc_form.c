@@ -6,7 +6,7 @@
  *  @param form  cursor data:
  *         - form[0]:       x-coordinate of hot spot
  *         - form[1]:       y-coordinate of hot spot
- *         - form[2]:       must be 1 (REPLACE)
+ *         - form[2]:       must be 1 (reserved; number of planes)
  *         - form[3]:       background color
  *         - form[4]:       foreground color
  *         - form[5..20]:   background mask
