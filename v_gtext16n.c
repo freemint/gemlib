@@ -3,7 +3,7 @@
 /** same as v_gtext()
  *
  *  @param handle Device handle
- *  @param pos 
+ *  @param pos coordinate
  *  @param wstr string, with 16 bits per character.
  *  @param num len of the string
  *

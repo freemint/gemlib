@@ -3,13 +3,9 @@
 /** 
  *
  *  @param handle Device handle
- *  @param mode 
+ *  @param mode type of buffer
  *
- *  @return 
- *
- *  @since 
- *
- *  @sa
+ *  @since SpeedoGDOS 4.0
  *
  *
  *

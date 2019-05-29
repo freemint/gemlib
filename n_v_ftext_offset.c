@@ -7,9 +7,9 @@
  *  the offset of each character relative to the previous one
  *
  *  @param handle Device handle
- *  @param x 
- *  @param y 
- *  @param str 
+ *  @param x x-coordinate
+ *  @param y y-coordinate
+ *  @param str string
  *  @param offset 
  *         - offset[0] : x-offset of the first character
  *         - offset[1] : y-offset of the first character

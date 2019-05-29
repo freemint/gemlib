@@ -3,8 +3,8 @@
 /** This escape plays a sound with the given frequency and duration
  *
  *  @param handle Device handle
- *  @param freq 
- *  @param duration 
+ *  @param freq tone frequency in hertz
+ *  @param duration tone length im timer ticks
  *
  *  @since PC-GEM >= 2.00
  *

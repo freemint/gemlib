@@ -23,7 +23,7 @@
  *	       Note that the
  *	       writing mode must be set to replace (mode MR_REPLACE = 1),
  *	       when using a multiplane fill pattern.
- *  @param planes 
+ *  @param planes number of planes
  *
  *  @since all VDI versions
  *

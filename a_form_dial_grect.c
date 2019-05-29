@@ -29,7 +29,6 @@
  *                               was covering.
  *  @param little the first rectangle (usage depends on \a mode)
  *  @param big the second rectangle (usage depends on \a mode)
- *  @param global_aes global AES array
  *
  *  @return non-zero if succeeded.
  *

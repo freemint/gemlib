@@ -4,10 +4,10 @@
  *  metafile header.
  *
  *  @param handle Device handle
- *  @param min_x 
- *  @param min_y 
- *  @param max_x 
- *  @param max_y 
+ *  @param min_x minimum x-value
+ *  @param min_y minimum y-value
+ *  @param max_x maximum x-value
+ *  @param max_y maximum y-value
  *
  *  @since all VDI versions
  *

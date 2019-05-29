@@ -4,9 +4,9 @@
 /** 
  *
  *  @param handle Device handle
- *  @param index 
+ *  @param index color table index
  *
- *  @return 
+ *  @return pixel value
  *
  *  @since NVDI 5 ?
  *

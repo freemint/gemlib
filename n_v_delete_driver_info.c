@@ -6,7 +6,7 @@
  *  @param handle Device handle
  *  @param drv_info Pointer from v_create_driver_info
  *
- *  @return
+ *  @return unknown
  *
  *  @since NVDI 5.00
  *

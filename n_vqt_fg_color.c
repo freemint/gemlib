@@ -7,7 +7,7 @@
  *  @param fg_color  \n
  *         [option CHECK_NULLPTR] fg_color may be NULL
  *
- *  @return 
+ *  @return color space set 
  *
  *  @since NVDI 5 ?
  *

@@ -3,8 +3,8 @@
 /** same as v_gtext()
  *
  *  @param handle Device handle
- *  @param x 
- *  @param y
+ *  @param x x-coordinate
+ *  @param y y-coordinate
  *  @param wstr string, with 16 bits per character.
  *
  *  @since all VDI versions

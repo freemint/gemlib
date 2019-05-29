@@ -13,7 +13,7 @@ short vq_image_type(short handle, const char *file, BIT_IMAGE *image)
 	
 	i = vdi_str2array(file, vdi_intin);
 	vdi_intin[i++] = 0;
-	vdi_ptsin_long(0) = (long)image;
+	vdi_ptsin_ptr(0, BIT_IMAGE *) = image;
 	vdi_intout[0] = 0;
 	VDI_TRAP_ESC (vdi_params, handle, 5,2105, 1, i);
 	

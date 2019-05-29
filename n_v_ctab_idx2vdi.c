@@ -4,9 +4,9 @@
 /** 
  *
  *  @param handle Device handle
- *  @param index 
+ *  @param index Index of colortab entry
  *
- *  @return 
+ *  @return Index of VDI color
  *
  *  @since NVDI 5 ?
  *

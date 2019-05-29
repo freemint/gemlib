@@ -5,7 +5,7 @@
  *
  *  @param handle Device handle
  *
- *  @return 
+ *  @return id of the current color table 
  *
  *  @since NVDI 5 ?
  *

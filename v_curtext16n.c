@@ -4,7 +4,7 @@
  *  position.
  *
  *  @param handle Device handle
- *  @param wstr 
+ *  @param wstr string (16 bits per character)
  *  @param num string len 
  *
  *  @since all VDI versions

@@ -4,13 +4,13 @@
 /** 
  *
  *  @param base_handle Device handle
- *  @param bitmap 
- *  @param color_flags 
- *  @param unit_flags 
- *  @param pixel_width 
- *  @param pixel_height 
+ *  @param bitmap pointer to GCBITMAP
+ *  @param color_flags treatment of the color tables
+ *  @param unit_flags measurement unit of pixel size
+ *  @param pixel_width pixel width, or 0
+ *  @param pixel_height pixel height, or 0
  *
- *  @return 
+ *  @return handle of the bitmap
  *
  *  @since NVDI 5 ?
  *

@@ -4,10 +4,10 @@
  *  metafile. Opcodes 0 to 100 are reserved, the range above it can be used.
  *
  *  @param handle Device handle
- *  @param numvdi_intin 
- *  @param avdi_intin 
- *  @param num_ptsin 
- *  @param a_ptsin 
+ *  @param numvdi_intin number of values in intin arra
+ *  @param avdi_intin user-defined information
+ *  @param num_ptsin number of values in ptsin array
+ *  @param a_ptsin user-defined information
  *
  *  @since all VDI versions
  *

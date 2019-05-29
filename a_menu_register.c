@@ -8,13 +8,10 @@
  *  @param me_text points to a NULL-terminated
  *         string containing the title which is to appear in the
  *         'Desk' menu for the accessory or application.
- *  @param global_aes global AES array
  *
  *  @return -1 if an error occurred or the menu identifier otherwise.
  *
  *  @since All AES versions.
- *
- *  @sa 
  *
  *  @note Applications other than desk accessories should not call
  *        this function unless they are running under MultiTOS.

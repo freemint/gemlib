@@ -7,7 +7,7 @@
  *  @param bg_color  \n
  *         [option CHECK_NULLPTR] bg_color may be NULL
  *
- *  @return 
+ *  @return color space
  *
  *  @since NVDI 5 ?
  *

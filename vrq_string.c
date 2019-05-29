@@ -9,7 +9,7 @@
  *         is negative, the absolute value is considered to be the maximum length and scan 
  *         codes are returned instead of ASCII values.
  *  @param echo 0: no output 1: echo
- *  @param echoxy 
+ *  @param echoxy coordinate of echo area
  *  @param str input buffer
  *
  *  @since all VDI versions

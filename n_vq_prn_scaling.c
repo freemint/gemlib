@@ -5,7 +5,7 @@
  *
  *  @param handle Device handle
  *
- *  @return 
+ *  @return -1 if scaling did not take place, else fix31 value of scaling factor
  *
  *  @since NVDI 5 ?
  *

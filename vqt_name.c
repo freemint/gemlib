@@ -3,8 +3,8 @@
 /** This function returns a 32-character string that describes the face.
  *
  *  @param handle Device handle
- *  @param element 
- *  @param name 
+ *  @param element number of the font
+ *  @param name name of the font
  *
  *  @return ID number
  *

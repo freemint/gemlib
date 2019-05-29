@@ -3,18 +3,14 @@
 /** 
  *
  *  @param handle Device handle
- *  @param xres 
- *  @param yres 
+ *  @param xres desired resolution in lines in x-direction
+ *  @param yres desired resolution in lines in y-direction
  *  @param xset  \n
  *         [option CHECK_NULLPTR] xset may be NULL
  *  @param yset  \n
  *         [option CHECK_NULLPTR] yset may be NULL
  *
- *  @return 
- *
- *  @since 
- *
- *  @sa
+ *  @since supported by all tablet drivers
  *
  *
  *

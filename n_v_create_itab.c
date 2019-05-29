@@ -4,10 +4,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param ctab 
- *  @param bits 
+ *  @param ctab pointer to color table
+ *  @param bits preferred resolution
  *
- *  @return 
+ *  @return handle of a inverse color table
  *
  *  @since NVDI 5 ?
  *

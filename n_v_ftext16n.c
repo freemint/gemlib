@@ -4,7 +4,8 @@
 /** see v_ftext()
  *
  *  @param handle Device handle
- *  @param pos 
+ *  @param x x-coordinate
+ *  @param y y-coordinate
  *  @param wstr string (16 bits per character)
  *  @param num string len
  *

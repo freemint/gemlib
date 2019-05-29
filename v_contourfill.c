@@ -4,8 +4,8 @@
  *  the display. Use this function on the screen only!
  *
  *  @param handle Device handle
- *  @param x 
- *  @param y 
+ *  @param x x-coordinate
+ *  @param y y-coordinate
  *  @param index color index
  *
  *  @since all VDI versions

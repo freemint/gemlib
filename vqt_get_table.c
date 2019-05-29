@@ -3,9 +3,9 @@
 /** 
  *
  *  @param handle Device handle
- *  @param map 
+ *  @param map address of character allocation table
  *
- *  @since 
+ *  @since SpeedoGDOS 4.0
  *
  *
  *

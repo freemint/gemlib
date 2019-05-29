@@ -2,8 +2,6 @@
 
 /** Unregister an application from the AES and free its AES ID.
  *
- *  @param global_aes global AES array
- *
  *  @return 0 if an error occurred or non-zero otherwise.
  *
  *  @since All AES versions.

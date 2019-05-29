@@ -5,7 +5,7 @@
  *
  *  @param handle Device handle
  *
- *  @return 
+ *  @return number of entries set 
  *
  *  @since NVDI 5 ?
  *

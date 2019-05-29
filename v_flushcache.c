@@ -4,11 +4,9 @@
  *
  *  @param handle Device handle
  *
- *  @return 
+ *  @return -1 in case of error, else 0
  *
- *  @since 
- *
- *  @sa
+ *  @since NVDI 3.0
  *
  *
  *

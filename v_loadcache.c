@@ -3,14 +3,12 @@
 /** 
  *
  *  @param handle Device handle
- *  @param filename 
- *  @param mode 
+ *  @param filename name of the file
+ *  @param mode fill mode
  *
- *  @return 
+ *  @return -1 i case of error, else 0
  *
- *  @since all VDI versions
- *
- *  @sa
+ *  @since FSMGDOS, SpeedoGDOS 4.0
  *
  *
  *

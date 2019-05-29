@@ -3,10 +3,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param which_cache 
- *  @param size 
+ *  @param which_cache 0=character bitmap cache, 1=data cache
+ *  @param size size of largest allocatable block in cache
  *
- *  @since 
+ *  @since SpeedoGDOS 4.0
  *
  */
 

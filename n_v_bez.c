@@ -27,7 +27,7 @@ _v_bez (short count, short *xyarr, char *bezarr, short *vdi_intin, short *vdi_pt
 /** This function draws an unfilled bezier curve.
  *
  *  @param handle Device handle
- *  @param count 
+ *  @param count number of coordinates
  *  @param xyarr xyarr[0..2count-1] = coordinates
  *  @param bezarr bezarr[0..count-1] = point-type flags defined as follow:
  *         - bit 0:   first point in a 4-point bezier curve (two anchor points and two

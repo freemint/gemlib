@@ -4,10 +4,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param color_space 
- *  @param weight_color 
+ *  @param color_space color space
+ *  @param weight_color COLOR_ENTRY of the weighting
  *
- *  @return 
+ *  @return -1=wrong subfunction number, 0=function not present, 1=all ok
  *
  *  @since NVDI 5 ?
  *

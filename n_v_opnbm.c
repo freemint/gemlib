@@ -42,7 +42,7 @@
  *         the number of colors, planes and the organisation), a zero-handle will 
  *         indicate an error. 
  *  @param handle Device handle
- *  @param work_out 
+ *  @param work_out output values
  *
  *  @since since EdDI 1.00
  *

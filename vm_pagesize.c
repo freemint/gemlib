@@ -6,7 +6,7 @@
  *  @param pgwidth width in 1/10 mm
  *  @param pgheight height in 1/10 mm
  *
- *  @since 
+ *  @since supported by all metafile drivers
  *
  *
  */

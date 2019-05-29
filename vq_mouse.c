@@ -4,8 +4,8 @@
  *
  *  @param handle Device handle
  *  @param pstatus button status
- *  @param x 
- *  @param y 
+ *  @param x x-coordinate
+ *  @param y y-coordinate
  *
  *  @since all VDI versions
  *

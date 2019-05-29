@@ -3,11 +3,9 @@
 /** 
  *
  *  @param handle Device handle
- *  @param str 
+ *  @param str string
  *
- *  @since 
- *
- *  @sa
+ *  @since all VDI versions
  *
  *
  *

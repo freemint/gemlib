@@ -6,7 +6,7 @@
  *
  *  @param handle Device handle
  *  @param device device id (0-99)
- *  @param dev_exists: \n
+ *  @param dev_exists \n
  *         - 0: no driver
  *         - != 0: driver exists 
  *  @param file_path pointer to the file path

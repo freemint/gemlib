@@ -4,10 +4,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param color_space 
- *  @param bg_color 
+ *  @param color_space color space
+ *  @param bg_color COLOR_ENTRY of the background color
  *
- *  @return 
+ *  @return -1=wrong sunfunction number, 0=function not present, 1=all ok
  *
  *  @since NVDI 5 ?
  *

@@ -8,9 +8,7 @@
  *  @param ydimension  \n
  *         [option CHECK_NULLPTR] ydimension may be NULL
  *
- *  @since 
- *
- *  @sa
+ *  @since supported by all table drivers
  *
  *
  *

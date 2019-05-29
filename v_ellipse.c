@@ -3,10 +3,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param x 
- *  @param y 
- *  @param xrad 
- *  @param yrad 
+ *  @param x x-coordinate
+ *  @param y y-coordinate
+ *  @param xrad radius of x-axis
+ *  @param yrad radius of y-axis
  *
  *  @since all VDI versions
  *

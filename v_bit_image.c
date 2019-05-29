@@ -4,7 +4,7 @@
  *  It allows the application to request processing of a bit image file
  *
  *  @param handle Device handle
- *  @param filename 
+ *  @param filename pointer to file name
  *  @param aspect Aspect ratio flag :
  *         - 0 = ignore aspect ratio
  *         - 1 = honor pixel aspect ratio

@@ -4,12 +4,12 @@
 /** 
  *
  *  @param handle Device handle
- *  @param width 
- *  @param height 
- *  @param byte_width 
- *  @param addr 
+ *  @param width new width in pixels
+ *  @param height new height in pixels
+ *  @param byte_width width of a line in bytes
+ *  @param addr pointer to own memory block
  *
- *  @return 
+ *  @return 0=error 
  *
  *  @since NVDI 5 ?
  *

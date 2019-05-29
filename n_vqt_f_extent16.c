@@ -4,8 +4,8 @@
 /** see vqt_f_extent()
  *
  *  @param handle Device handle
- *  @param wstr 
- *  @param extent 
+ *  @param wstr string (16 bits per character)
+ *  @param extent extent[0..7] : coordinates of the rectangle
  *
  *  @since NVDI 3.00
  *

@@ -3,12 +3,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param xorigin 
- *  @param yorigin 
+ *  @param xorigin x-coordinate
+ *  @param yorigin y-coordinate
  *
- *  @since 
- *
- *  @sa
+ *  @since supported by all tablet drivers
  *
  *
  *

@@ -11,7 +11,7 @@
  *	specifies the color for each cell.
  *
  *  @param handle Device handle
- *  @param pxy
+ *  @param pxy coordinates of the bounding rectangle
  *  @param row_length Length of each row in color
  *		   index array(size as declared
  *		   in a high-level language).

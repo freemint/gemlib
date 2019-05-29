@@ -3,8 +3,8 @@
 /** this escape returns the name of a film.
  *
  *  @param handle Device handle
- *  @param index
- *  @param name
+ *  @param index ???
+ *  @param name ???
  *
  *  @return 0 (function not supported or wrong film index), or any positive
  *   value otherwise.

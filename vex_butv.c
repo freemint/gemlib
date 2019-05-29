@@ -4,7 +4,7 @@
  *  button is pressed
  *
  *  @param handle Device handle
- *  @param new address of the new routine
+ *  @param newhdlr address of the new routine
  *  @param old address of the old routine
  *
  *  @since all VDI versions

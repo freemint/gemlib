@@ -4,11 +4,11 @@
 /** 
  *
  *  @param handle Device handle
- *  @param type 
- *  @param s 
- *  @param wchar 
+ *  @param type type of information
+ *  @param s information to set
+ *  @param wchar 0=8 bits per character, 1=16 bits per character
  *
- *  @return 
+ *  @return 0=function not present, 1=all ok
  *
  *  @since NVDI 5 ?
  *

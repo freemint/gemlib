@@ -194,6 +194,12 @@ static __inline void **__vdi_intin_ptr(short n, short *vdi_intin)
 }
 #define vdi_intin_ptr(n, t)  *((t *)__vdi_intin_ptr(n, vdi_intin))
 
+static __inline void **__vdi_ptsin_ptr(short n, short *vdi_ptsin)
+{
+	return ((void**)(vdi_ptsin + n * N_PTRINTS));
+}
+#define vdi_ptsin_ptr(n, t)  *((t *)__vdi_ptsin_ptr(n, vdi_ptsin))
+
 static __inline void **__vdi_control_ptr(short n, short *vdi_control)
 {
 	return ((void**)(vdi_control + 7 + n * N_PTRINTS));
@@ -209,6 +215,7 @@ static __inline void **__vdi_control_ptr(short n, short *vdi_control)
 #define vdi_intout_ptr(n, t)    *((t *)(vdi_intout + n * N_PTRINTS))
 #define vdi_ptsout_long(n)      *((long *)(vdi_ptsout + n))
 #define vdi_ptsin_long(n)       *((long *)(vdi_ptsin + n))
+#define vdi_ptsin_ptr(n, t)     *((t *)(vdi_ptsin + n * N_PTRINTS))
 
 #endif
 

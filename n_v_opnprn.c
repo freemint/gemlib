@@ -4,10 +4,10 @@
 /** 
  *
  *  @param aes_handle Device handle
- *  @param settings 
- *  @param work_out 
+ *  @param settings pointer to printer settings
+ *  @param work_out pointer to work_out[57]
  *
- *  @return 
+ *  @return device handle
  *
  *  @since NVDI 5 ?
  *

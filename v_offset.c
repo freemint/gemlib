@@ -4,7 +4,7 @@
  *  of the logical screen.
  *
  *  @param handle Device handle
- *  @param offset
+ *  @param offset offset in raster lines to the start of the logical screen
  *
  *  @since ???
  *

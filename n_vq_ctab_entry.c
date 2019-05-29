@@ -4,11 +4,11 @@
 /** 
  *
  *  @param handle Device handle
- *  @param index 
+ *  @param index Index of colortab entry
  *  @param color  \n
  *         [option CHECK_NULLPTR] color may be NULL
  *
- *  @return 
+ *  @return currently active color space
  *
  *  @since NVDI 5 ?
  *

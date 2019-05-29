@@ -3,7 +3,7 @@
 /** This escape set/unset/return the tone mute flag
  *
  *  @param handle Device handle
- *  @param action:
+ *  @param action
  *         - (-1) inquire the mute flag
  *         - 0 clear the mute flag (sound on)
  *         - 1 set the mute flag (sound off)

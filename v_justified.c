@@ -4,8 +4,8 @@
  *  the string by modifying the interword or intercharacter spacing
  *
  *  @param handle Device handle
- *  @param x 
- *  @param y 
+ *  @param x x-coordinate
+ *  @param y y-coordinate
  *  @param str string
  *  @param len length in pixels
  *  @param word_space <> 0: Wortzwischenr„ume dehnen

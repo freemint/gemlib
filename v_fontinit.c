@@ -3,7 +3,7 @@
 /** this escape install the given font as font system.
  *
  *  @param handle Device handle
- *  @param font_header
+ *  @param font_header address of the font header
  *
  *  @since ???
  *

@@ -4,10 +4,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param ctab_length 
- *  @param ctab 
+ *  @param ctab_length length of memory block to which ctab points
+ *  @param ctab memory block to which the color table is copied
  *
- *  @return 
+ *  @return 0=error, 1=all ok 
  *
  *  @since NVDI 5 ?
  *

@@ -3,7 +3,7 @@
 /** draws markers
  *
  *  @param handle Device handle
- *  @param count 
+ *  @param count number of coordinates
  *  @param pxy coordinates
  *
  *  @since all VDI versions

@@ -3,12 +3,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param index 
- *  @param lightness 
+ *  @param index ???
+ *  @param lightness ???
  *
  *  @since all VDI versions
- *
- *  @sa
  *
  *
  *

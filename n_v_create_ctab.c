@@ -4,10 +4,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param color_space 
- *  @param px_format 
+ *  @param color_space color space
+ *  @param px_format pixel format
  *
- *  @return 
+ *  @return pointer to the color table
  *
  *  @since NVDI 5 ?
  *

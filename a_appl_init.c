@@ -3,8 +3,6 @@
 /** should be the first function called in any application that intends
  *  to use GEM calls.
  *
- *  @param global_aes global AES array
- *
  *  @return the applications' global identifier if
  *			successful or -1 if the AES cannot register the
  *			application. If successful, the global identifier should

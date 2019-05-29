@@ -4,11 +4,11 @@
 /** 
  *
  *  @param handle Device handle
- *  @param value 
+ *  @param value pixel value
  *  @param color  \n
  *         [option CHECK_NULLPTR] color may be NULL
  *
- *  @return 
+ *  @return color value
  *
  *  @since NVDI 5 ?
  *

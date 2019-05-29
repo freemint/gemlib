@@ -8,7 +8,7 @@
  *  @param urx x-Koordinate rechts oben
  *  @param ury y-Koordinate rechts oben
  *
- *  @since 
+ *  @since supported by all metafile drivers 
  *
  */
 

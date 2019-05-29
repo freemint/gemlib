@@ -4,7 +4,7 @@
 /** 
  *
  *  @param handle Device handle
- *  @param point 
+ *  @param point desired character width in points
  *  @param wchar  \n
  *         [option CHECK_NULLPTR] wchar may be NULL
  *  @param hchar  \n
@@ -14,9 +14,9 @@
  *  @param hcell  \n
  *         [option CHECK_NULLPTR] hcell may be NULL
  *
- *  @return 
+ *  @return character cell width in points
  *
- *  @since 
+ *  @since SpeedoGDOS 4.0
  *
  *
  *

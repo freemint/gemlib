@@ -3,7 +3,7 @@
 /** returns the cell array definition of the specified pixels
  *
  *  @param handle Device handle
- *  @param pxy 
+ *  @param pxy coordinates of bounding rectangle
  *  @param row_len Length of each row in color index array.
  *  @param nrows Number of rows in color index array
  *  @param el_used Number of elements used in each row of color index array \n

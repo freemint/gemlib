@@ -4,8 +4,8 @@
  *  tenths of degrees from 0 to 3600.
  *
  *  @param handle Device handle
- *  @param x 
- *  @param y 
+ *  @param x x-coordinate
+ *  @param y y-coordinate
  *  @param radius radius
  *  @param begang start angle
  *  @param endang end angle

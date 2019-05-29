@@ -4,9 +4,9 @@
 /** 
  *
  *  @param handle Device handle
- *  @param ctab 
+ *  @param ctab memory block for color table
  *
- *  @return 
+ *  @return number of entries set
  *
  *  @since NVDI 5 ?
  *

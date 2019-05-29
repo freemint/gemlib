@@ -14,7 +14,6 @@
  *         [option CHECK_NULLPTR] \a W3 may be NULL
  *  @param W4 4th returned value \n
  *         [option CHECK_NULLPTR] \a W4 may be NULL
- *  @param global_aes global AES array
  *
  *  @return a 0 if an error occurred or non-zero otherwise.
  *

@@ -7,7 +7,7 @@
  *  @param hilite_color  \n
  *         [option CHECK_NULLPTR] hilite_color may be NULL
  *
- *  @return 
+ *  @return color space set
  *
  *  @since NVDI 5 ?
  *

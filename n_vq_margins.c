@@ -4,12 +4,12 @@
 /** 
  *
  *  @param handle Device handle
- *  @param top_margin 
- *  @param bottom_margin 
- *  @param left_margin 
- *  @param right_margin 
- *  @param hdpi 
- *  @param vdpi 
+ *  @param top_margin top margin in pixels
+ *  @param bottom_margin bottom margin in pixels
+ *  @param left_margin left margin in pixels
+ *  @param right_margin right margin in pixels
+ *  @param hdpi horizontal dpi resolution
+ *  @param vdpi vertical dpi resolution
  *
  *  @return 0 if this function is not supported by the driver, any other value if
  *          the driver support this function.

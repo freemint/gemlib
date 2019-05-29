@@ -4,14 +4,14 @@
 /** 
  *
  *  @param handle Device handle
- *  @param index 
- *  @param x_offset 
- *  @param y_offset 
- *  @param pts 
- *  @param flags 
- *  @param max_pts 
+ *  @param index character index
+ *  @param x_offset is added to all x-coordinates
+ *  @param y_offset is added to all y-coordinates
+ *  @param pts coordinates
+ *  @param flags buffer for vertices information
+ *  @param max_pts maximum number of vertices to be output
  *
- *  @return 
+ *  @return number of vertices output
  *
  *  @since NVDI 5 ?
  *

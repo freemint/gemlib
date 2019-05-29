@@ -15,7 +15,6 @@
  *  @param hbox pointer to a short int which will contain (on function exit)
  *               the height of the minimum bounding box of a BOXCHAR character. \n
  *               [option CHECK_NULLPTR] \a hbox may be NULL
- *  @param global_aes global AES array
  *
  *  @return the VDI handle for the current physical workstation used
  *          by the AES which is required to open a virtual screen

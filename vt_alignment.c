@@ -3,12 +3,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param dx 
- *  @param dy 
+ *  @param dx x-offset from origin
+ *  @param dy y-offset from origin
  *
- *  @since 
- *
- *  @sa
+ *  @since supported by all table drivers
  *
  *
  *

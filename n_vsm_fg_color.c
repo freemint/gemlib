@@ -4,10 +4,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param color_space 
- *  @param fg_color 
+ *  @param color_space color space
+ *  @param fg_color COLOR_ENTRY of foreground color
  *
- *  @return 
+ *  @return -1=wrong subfunction number, 0=function not present, 1=all ok
  *
  *  @since NVDI 5 ?
  *

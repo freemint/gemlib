@@ -4,9 +4,9 @@
 /** 
  *
  *  @param handle Device handle
- *  @param ctab 
+ *  @param ctab reference to color table
  *
- *  @return 
+ *  @return 0=error, 1=all ok
  *
  *  @since NVDI 5 ?
  *

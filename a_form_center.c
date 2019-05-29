@@ -5,13 +5,12 @@
  *
  *  @param tree points to a valid #OBJECT structure which the
  *               application wishes to have centered.
- *  @param cx
- *  @param cy
- *  @param cw
+ *  @param cx ,
+ *  @param cy ,
+ *  @param cw ,
  *  @param ch is a clipping rectangle suitable for
  *            use in objc_draw() returned. \n
  *             [option CHECK_NULLPTR] cx, cy, cw and/or ch may be NULL
- *  @param global_aes global AES array
  *
  *  @return is currently reserved. Currently it equals 1.
  *

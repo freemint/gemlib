@@ -14,9 +14,7 @@
  *  @param div_fac  \n
  *         [option CHECK_NULLPTR] div_fac may be NULL
  *
- *  @since 
- *
- *  @sa
+ *  @since supported by all printer drivers
  *
  *
  *

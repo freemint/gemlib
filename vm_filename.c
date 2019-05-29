@@ -4,7 +4,7 @@
  *  name \p filename must be an absolute path like "E:\\PICS\\FLIWATT.GEM".
  *
  *  @param handle Device handle
- *  @param filename 
+ *  @param filename name of the metafile
  *
  *  @since all VDI versions
  *

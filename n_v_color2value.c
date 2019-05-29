@@ -4,10 +4,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param color_space 
- *  @param color 
+ *  @param color_space color space
+ *  @param color COLOR_ENTRY of the color
  *
- *  @return 
+ *  @return the pixel value
  *
  *  @since NVDI 5 ?
  *

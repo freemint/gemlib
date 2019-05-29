@@ -20,7 +20,6 @@
  *                 up to 10 characters each. If only one button is used, its
  *                 text may be as long as 30 characters. Again, each button is
  *                 separated by a '|' character.
- *  @param global_aes global AES array
  *
  *  @return a word indicating which button was used
  *               to exit by the user (A possible value of 1-3).

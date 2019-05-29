@@ -5,9 +5,9 @@
  *  resolution of 1/65536 pixels to maintain accurate character placement.
  *
  *  @param handle Device handle
- *  @param x 
- *  @param y 
- *  @param str 
+ *  @param x x-coordinate
+ *  @param y y-coordinate
+ *  @param str string
  *
  *  @since  NVDI 3.00
  *

@@ -4,11 +4,11 @@
 /** 
  *
  *  @param handle Device handle
- *  @param index 
- *  @param color_space 
- *  @param color 
+ *  @param index color table index
+ *  @param color_space color space
+ *  @param color color table
  *
- *  @return 
+ *  @return number of entries set
  *
  *  @since NVDI 5 ?
  *

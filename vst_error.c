@@ -3,12 +3,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param mode 
- *  @param errorvar 
+ *  @param mode type of error handling
+ *  @param errorvar address of the error variable
  *
- *  @since 
- *
- *  @sa
+ *  @since SpeedoGDOS 4.0
  *
  *
  *

@@ -4,11 +4,11 @@
 /** 
  *
  *  @param handle Device handle
- *  @param src_bm 
- *  @param dst_bm 
- *  @param src_rect 
- *  @param dst_rect 
- *  @param mode 
+ *  @param src_bm source bitmap
+ *  @param dst_bm destination bitmap
+ *  @param src_rect source rectangle
+ *  @param dst_rect destination rectangle
+ *  @param mode transfer mode
  *
  *  @since NVDI 5 ?
  *

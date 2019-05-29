@@ -3,8 +3,8 @@
 /** draws a string with the selected text attributes.
  *
  *  @param handle Device handle
- *  @param x 
- *  @param y 
+ *  @param x x-coordinate
+ *  @param y y-coordinate
  *  @param str string
  *
  *  @since all VDI versions

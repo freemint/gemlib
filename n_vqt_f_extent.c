@@ -7,7 +7,7 @@
  *  extending beyond the em square are ignored.
  *
  *  @param handle Device handle
- *  @param str Zeichenkette
+ *  @param str string
  *  @param extent extent[0..7] : coordinates of the rectangle
  * 
  *  @since NVDI 3.00

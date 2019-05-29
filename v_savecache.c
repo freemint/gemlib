@@ -3,13 +3,11 @@
 /** 
  *
  *  @param handle Device handle
- *  @param filename
+ *  @param filename name of the file
  *
- *  @return 
+ *  @return -1 in case of error, else 0
  *
- *  @since 
- *
- *  @sa
+ *  @since SpeedoGDOS 5.1
  *
  *
  *

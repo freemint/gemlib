@@ -4,10 +4,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param type 
- *  @param r 
- *  @param g 
- *  @param b 
+ *  @param type 0=text color, 1=fill color, 2=line color, 3=marker color
+ *  @param r red portion in tenth of a precent
+ *  @param g green portion in tenth of a precent
+ *  @param b blue portion in tenth of a precent
  *
  *  @since NVDI 5 ?
  *

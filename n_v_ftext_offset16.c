@@ -4,10 +4,10 @@
 /** see v_ftext_offset()
  *
  *  @param handle Device handle
- *  @param x 
- *  @param y 
- *  @param wstr 
- *  @param offset 
+ *  @param x x-coordinate
+ *  @param y y-coordinate
+ *  @param wstr string (16 bits per character)
+ *  @param offset offsets for the characters
  *
  *
  */

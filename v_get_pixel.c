@@ -4,8 +4,8 @@
  *  function returns the value and the color index of a pixel.
  *
  *  @param handle Device handle
- *  @param x 
- *  @param y 
+ *  @param x x-coordinate
+ *  @param y y-coordinate
  *  @param pel pixel value \n
  *         [option CHECK_NULLPTR] pel may be NULL
  *  @param index color index \n

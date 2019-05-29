@@ -3,12 +3,10 @@
 /** 
  *
  *  @param handle Device handle
- *  @param buf_p 
- *  @param size 
+ *  @param buf_p address of the buffer
+ *  @param size buffer size in 16-byte blocks
  *
- *  @since 
- *
- *  @sa
+ *  @since NVDI 2.0, SpeedoGDOS 4.0
  *
  *
  *
