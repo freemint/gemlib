@@ -29,7 +29,7 @@ v_getoutline (short handle, short ch, short *xyarray, char *bezarray,
               short maxverts, short *numverts)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intin[2 + N_PTRINTS];
+	short vdi_intin[2 + 2 * N_PTRINTS];
 
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, numverts, vdi_dummy);
 	
