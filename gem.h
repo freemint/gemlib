@@ -90,6 +90,9 @@ static inline short appl_init( void) {
 	return gl_apid;
 }
 
+/** fast version of appl_yield that does not use the AES arrays */
+void _appl_yield(void);
+
 /**@}*/
 
 /** @addtogroup a_evnt
