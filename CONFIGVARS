@@ -4,6 +4,20 @@
 #CROSS = yes
 #CROSS = no
 
+# 
+# cross compiling
+#
+ifneq (yes,$(M68K_ATARI_MINT_CROSS))
+ifeq (no,$(M68K_ATARI_MINT_CROSS))
+CROSS = no
+else
+EVAL_CROSS := case `uname -s` in *MiNT*) echo no;; *) echo yes; esac
+CROSS := $(shell $(EVAL_CROSS))
+endif
+else
+CROSS = yes
+endif
+
 #
 # build alternate libraries for processor variants
 #
