@@ -25,7 +25,7 @@ __BEGIN_DECLS
 
 /** an opaque structure. One should not access the
     structure directly. The mt_wdlg_xx functions should be used! */
-typedef void * DIALOG;
+typedef struct _dialog DIALOG;
 
 /** TODO */
 #ifndef __EVNT
@@ -98,7 +98,7 @@ short	mt_form_wbutton	(OBJECT *fo_btree, short fo_bobject, short fo_bclicks, sho
 short	mt_form_wkeybd	(OBJECT *fo_ktree, short fo_kobject, short fo_kobnext, short fo_kchar, short *fo_knxtobject, short *fo_knxtchar, short whandle, short * global);
 short	mt_form_xdial 	(short fo_diflag, short fo_dilittlx, short fo_dilittly, short fo_dilittlw, short fo_dilittlh, short fo_dibigx, short fo_dibigy, short fo_dibigw, short fo_dibigh, void **flydial, short * global);
 short	mt_form_xdial_grect (short fo_diflag, const GRECT *fo_dilittl, const GRECT *fo_dibig, void **flydial, short * global);
-short	mt_form_xdo		(OBJECT *tree, short startob, short *lastcrsr, XDO_INF *tabs, void *flydial, short * global); 
+short	mt_form_xdo		(OBJECT *tree, short startob, short *lastcrsr, XDO_INF *tabs, void *flydial, short * global);
 short	mt_form_xerr	(long errcode, const char *errfile, short * global);
 short	mt_xfrm_popup 	(OBJECT *tree, short x, short y, short firstscrlob, short lastscrlob, short nlines,
 						 void __CDECL (*init)(struct POPUP_INIT_args),
@@ -127,8 +127,8 @@ short	mt_objc_xedit	(OBJECT *tree, short obj, short key, short *xpos, short subf
  *  @{
  */
 
-/** opaque structure (internal management structure) */ 
-typedef void *FNT_DIALOG;
+/** opaque structure (internal management structure) */
+typedef struct _fnt_dialog FNT_DIALOG;
 
 /** parameters for UTXT_FN callback functions
  */
@@ -174,6 +174,7 @@ struct _fnts_item
 
 /* Definition  of <dialog_flags> in mt_fnts_create() */
 #define FNTS_3D			1			/**< Display selector in 3D-look */
+#define FNTS_DISPLAY	2
 
 /* Definition of <button_flags> in mt_fnts_open() */
 #define FNTS_SNAME		0x01		/**< Select checkbox for names */
@@ -191,7 +192,7 @@ struct _fnts_item
 
 /* Definition of <button> in mt_fnts_evnt() */
 #define FNTS_CANCEL		1			/**< TODO */
-#define FNTS_OK			2			/**< TODO */		
+#define FNTS_OK			2			/**< TODO */
 #define FNTS_SET		3			/**< TODO */
 #define FNTS_MARK 		4			/**< TODO */
 #define FNTS_OPT		5			/**< TODO */
@@ -252,13 +253,13 @@ typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, GEMLIB_XATTR *xattr
 /* fslx_set_flags */
 #define SHOW8P3			1			/**< TODO */
 
-typedef void *XFSL_DIALOG;
+typedef struct _fslx_dialog XFSL_DIALOG;
 
 short	mt_fslx_close		(XFSL_DIALOG *fsd, short *global);
-XFSL_DIALOG *mt_fslx_do			(const char *title, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode, short flags, short *button, short *nfiles, char **pattern, short *global);
+XFSL_DIALOG *mt_fslx_do		(const char *title, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode, short flags, short *button, short *nfiles, char **pattern, short *global);
 short	mt_fslx_evnt		(XFSL_DIALOG *fsd, EVNT *events, char *path, char *fname, short *button, short *nfiles, short *sort_mode, char **pattern, short *global);
 short	mt_fslx_getnxtfile	(XFSL_DIALOG *fsd, char *fname, short *global);
-XFSL_DIALOG *mt_fslx_open		(const char *title, short x, short y, short *handle, char *path, short pathlen, char *fname, short fnamelen, const char *patterns, XFSL_FILTER filter, char *paths, short sort_mode, short flags, short *global);
+XFSL_DIALOG *mt_fslx_open	(const char *title, short x, short y, short *handle, char *path, short pathlen, char *fname, short fnamelen, const char *patterns, XFSL_FILTER filter, char *paths, short sort_mode, short flags, short *global);
 short	mt_fslx_set_flags 	(short flags, short *oldval, short *global);
 /**@}*/
 
@@ -271,7 +272,7 @@ short	mt_fslx_set_flags 	(short flags, short *oldval, short *global);
  */
 
 /** TODO */
-typedef void *PRN_DIALOG;
+typedef struct _prn_dialog PRN_DIALOG;
 
 typedef struct _prn_tray		PRN_TRAY;			/**< TODO */
 typedef struct _media_size		MEDIA_SIZE;			/**< TODO */
@@ -292,7 +293,7 @@ struct _prn_tray
 };
 
 /** Description of a paper format */
-struct _media_size 
+struct _media_size
 {
 	MEDIA_SIZE	*next;		/**< Pointer to next paper format description */
 	long		size_id; 	/**< Paper format size ID */
@@ -437,7 +438,7 @@ struct _pdlg_sub
 	long		reserved;		/**< Reserved */
 	void		*drivers;		/**< Only for internal dialogs */
 	short 		option_flags;	/**< Flags, inc. PDLG_PRINTING, PDLG_PREFS */
-	short 		sub_id;			/**< Sub-dialog ID, entered for global 
+	short 		sub_id;			/**< Sub-dialog ID, entered for global
                                      sub-dialogs of mt_pdlg_add() */
 	void		*dialog; 		/**< Pointer to the structure of the window
                                      dialog or 0L */
@@ -452,7 +453,7 @@ struct _pdlg_sub
 	PDLG_RESET	reset_dlg;		/**< Reset function */
 	long		reserved5;		/**< Reserved */
 	OBJECT		*sub_icon;		/**< Pointer to the icon for the list box */
-	OBJECT		*sub_tree;		/**< Pointer to the object tree of the 
+	OBJECT		*sub_tree;		/**< Pointer to the object tree of the
                                      sub-dialog */
 	long		reserved6;		/**< Reserved */
 	long		reserved7;		/**< Reserved */
@@ -463,9 +464,9 @@ struct _pdlg_sub
 };
 
 
-/*----------------------------------------------------------------------------------------*/ 
+/*----------------------------------------------------------------------------------------*/
 /* einstellbare Farbmodi eines Druckermodus																*/
-/*----------------------------------------------------------------------------------------*/ 
+/*----------------------------------------------------------------------------------------*/
 #define	CC_MONO			0x0001		/**< 2 Graut”ne */
 #define	CC_4_GREY		0x0002		/**< 4 Graut”ne */
 #define	CC_8_GREY		0x0004		/**< 8 Graut”ne */
@@ -486,16 +487,18 @@ struct _pdlg_sub
 
 #define	NO_CC_BITS		16			/**< TODO */
 
-/*----------------------------------------------------------------------------------------*/ 
+/*----------------------------------------------------------------------------------------*/
 /* settable dither modes                                                                  */
-/*----------------------------------------------------------------------------------------*/ 
+/*----------------------------------------------------------------------------------------*/
 #define	DC_NONE			0			/**< keine Rasterverfahren */
 #define	DC_FLOYD 		1			/**< einfacher Floyd-Steinberg */
 #define	NO_DC_BITS		1			/**< TODO */
 
-/*----------------------------------------------------------------------------------------*/ 
+/*----------------------------------------------------------------------------------------*/
 /* printer characteristics                                                                */
-/*----------------------------------------------------------------------------------------*/ 
+/*----------------------------------------------------------------------------------------*/
+#define PDLG_OUTFILES		5
+
 #define	PC_FILE			0x0001		/**< printer can be accessed with GEMDOS calls */
 #define	PC_SERIAL		0x0002		/**< printer can be attached to serial interface */
 #define	PC_PARALLEL 	0x0004		/**< printer can be attached to parallel interface */
@@ -507,9 +510,9 @@ struct _pdlg_sub
 #define	PC_SCALING		0x0100		/**< driver can scale pages */
 #define	PC_COPIES		0x0200		/**< driver can copy pages */
 
-/*----------------------------------------------------------------------------------------*/ 
+/*----------------------------------------------------------------------------------------*/
 /* mode characteristics                                                                   */
-/*----------------------------------------------------------------------------------------*/ 
+/*----------------------------------------------------------------------------------------*/
 #define	MC_PORTRAIT 	0x0001		/**< Seite kann im Hochformat ausgegeben werden */
 #define	MC_LANDSCAPE	0x0002		/**< Seite kann im Querformat ausgegeben werden */
 #define	MC_REV_PTRT 	0x0004		/**< Seite kann um 180 Grad gedreht im Hochformat ausgegeben werden */
@@ -519,19 +522,20 @@ struct _pdlg_sub
 #define	MC_SLCT_CMYK	0x0400		/**< Treiber kann bestimmte Farbebenen ausgeben */
 #define	MC_CTRST_BRGHT	0x0800		/**< Treiber kann Kontrast und Helligkeit ver„ndern */
 
-/*----------------------------------------------------------------------------------------*/ 
+/*----------------------------------------------------------------------------------------*/
 /* plane_flags 																									*/
-/*----------------------------------------------------------------------------------------*/ 
+/*----------------------------------------------------------------------------------------*/
 #define	PLANE_BLACK 	0x0001		/**< TODO */
 #define	PLANE_YELLOW	0x0002		/**< TODO */
 #define	PLANE_MAGENTA	0x0004		/**< TODO */
 #define	PLANE_CYAN		0x0008		/**< TODO */
+#define PLANE_MASK	(PLANE_BLACK|PLANE_YELLOW|PLANE_MAGENTA|PLANE_CYAN)
 
 
 /* <driver_mode> */
 #define	DM_BG_PRINTING	0x0001		/**< Flag fr Hintergrunddruck */
 
-/*----------------------------------------------------------------------------------------*/ 
+/*----------------------------------------------------------------------------------------*/
 
 /* <page_flags> */
 #define  PG_EVEN_PAGES  0x0001  	/**< Only output pages with even page numbers */
@@ -547,7 +551,7 @@ struct _pdlg_sub
 #define  PG_LANDSCAPE   0x0002  	/**< Output page in landscape format */
 
 /** printer settings
- * 
+ *
  *  The following structure items can be read by the application:
  *  - length
  *  - page_flags
@@ -558,11 +562,11 @@ struct _pdlg_sub
  *  - scale
  *  - driver_id
  *  .
- *  All other entries should not be accessed. Data such as the printer 
+ *  All other entries should not be accessed. Data such as the printer
  *  resolution or color planes, for instance, should not be taken from the
- *  settings structure but requested from the printer at the start of printing 
- *  (it is possible, for instance, that the printer driver is forced by a 
- *  shortage of memory to reduce the print resolution below the value entered 
+ *  settings structure but requested from the printer at the start of printing
+ *  (it is possible, for instance, that the printer driver is forced by a
+ *  shortage of memory to reduce the print resolution below the value entered
  *  in PRN_SETTINGS).
  */
 struct _prn_settings
@@ -584,7 +588,7 @@ struct _prn_settings
 	long		driver_mode;	/**< Flags, inc. for background printing */
 	long		reserved1;		/**< Reserved */
 	long		reserved2;		/**< Reserved */
-	
+
 	long		printer_id; 	/**< Printer number */
 	long		mode_id; 		/**< Mode number */
 	short		mode_hdpi;		/**< Horizontal resolution in dpi */
@@ -669,9 +673,9 @@ short		   mt_pdlg_validate_settings    (PRN_DIALOG *prn_dialog, PRN_SETTINGS *se
 /** @addtogroup x_lbox
  *  @{
  */
- 
+
  /** opaque structure */
-typedef void * LIST_BOX;
+typedef struct _list_box LIST_BOX;
 
 typedef struct lbox_item LBOX_ITEM;		/**< TODO */
 
@@ -782,16 +786,16 @@ struct HNDL_OBJ_args
 
 /** service routine that is called, among others, by mt_wdlg_evnt().
  *
- *  This function may be called if an exit or touchexit 
- *  object was clicked on (in that case \p obj is a positive object number) 
- *  or when an event has occurred that affects the dialog (in that case 
- *  \p obj is negative and contains a corresponding function number such as 
+ *  This function may be called if an exit or touchexit
+ *  object was clicked on (in that case \p obj is a positive object number)
+ *  or when an event has occurred that affects the dialog (in that case
+ *  \p obj is negative and contains a corresponding function number such as
  *  HNDL_CLSD, for instance).
- *  
- *  If \p obj is an object number (>= 0), then \p events points to 
+ *
+ *  If \p obj is an object number (>= 0), then \p events points to
  *  the EVNT structure that was passed by mt_wdlg_evnt().
  *  Otherwise \p events is basically 0L and can  not be used for addressing.
- *  
+ *
  *  \p clicks contains then number of mouse clicks (if \p obj is an object number)
  *
  *  Here is a list of event (value given in the \p obj parameter):
@@ -807,7 +811,7 @@ struct HNDL_OBJ_args
  *    \p data is \p user_data. If handle_exit() returns 0,
  *    the dialog will be closed -- mt_wdlg_evnt() returns 0
  *    \p events points to the EVNT structure passed by
- *    mt_wdlg_evnt(). 
+ *    mt_wdlg_evnt().
  *  - HNDL_MOVE (-9) : \n
  *    \p data is \p user_data. If handle_exit() returns 0,
  *    the dialog will be closed -- mt_wdlg_evnt() returns 0.
@@ -816,19 +820,19 @@ struct HNDL_OBJ_args
  *  - HNDL_TOPW (-10) : \n
  *    \p data is \p user_data. If handle_exit() returns 0,
  *    the dialog will be closed -- mt_wdlg_evnt() returns 0.
- *    \p events points to the EVNT structure passed by 
+ *    \p events points to the EVNT structure passed by
  *    mt_wdlg_evnt().
  *  - HNDL_UNTP (-11) : \n
  *    \p data is \p user_data. If handle_exit() returns 0,
  *    the dialog will be closed -- mt_wdlg_evnt() returns 0.
- *    \p events points to the EVNT structure passed by 
+ *    \p events points to the EVNT structure passed by
  *    mt_wdlg_evnt().
  *  - HNDL_EDIT (-6) : \n
  *    \p data points to a word with the key code.
  *    If handle_exit() returns 1, the key press will be
  *    evaluated, if 0 ignored.
  *    \p events points to the EVNT structure passed by
- *    mt_wdlg_evnt().  
+ *    mt_wdlg_evnt().
  *  - HNDL_EDDN (-7) : \n
  *    \p data points to a word with the key code.
  *    \p events points to the EVNT structure passed by
@@ -846,15 +850,15 @@ struct HNDL_OBJ_args
  *    opcodes.
  *    Is required for iconification, for instance.\n
  *    Warning: This opcode is only present from MagiC 4.5
- *    of 18.4.96 
+ *    of 18.4.96
  *  .
- *  Of these function numbers one only has to react to HNDL_CLSD. All other 
+ *  Of these function numbers one only has to react to HNDL_CLSD. All other
  *  events need only be paid attention to when needed.\n
- *  If handle_exit is called with an unknown function number in \p obj, or 
- *  one of the above function numbers is to be ignored, then 1 has to be 
+ *  If handle_exit is called with an unknown function number in \p obj, or
+ *  one of the above function numbers is to be ignored, then 1 has to be
  *  returned.
- * 
- *  The parameters are passed via the stack and the routine may alter 
+ *
+ *  The parameters are passed via the stack and the routine may alter
  *  registers d0-d2/a0-a2.
  */
 typedef short __CDECL (*HNDL_OBJ)(struct HNDL_OBJ_args);
@@ -892,7 +896,7 @@ void	 mt_wdlg_redraw			(DIALOG *dialog, GRECT *rect, short obj, short depth, sho
 /**@}*/
 
 
-/* 
+/*
  *    Editor extensions for Magic
  */
 
@@ -1072,7 +1076,7 @@ short vst_setsize 	(VdiHdl, short point, short *wchar, short *hchar, short *wcel
 long  vst_setsize32 	(VdiHdl, long point, short *wchar, short *hchar, short *wcell, short *hcell);
 short vst_skew 	(VdiHdl, short skew);
 void  vst_track_offset(VdiHdl, long offset, short pairmode, short *tracks, short *pairs);
-/** another name for vst_track_offset */
+/* another name for vst_track_offset */
 #define vst_kern_info vst_track_offset
 void  vst_width	(VdiHdl, short width, short *char_width, short *char_height, short *cell_width, short *cell_height);
 /**@}*/
@@ -1175,7 +1179,7 @@ short udef_vst_name 	(VdiHdl, short font_format, char *font_name, char *ret_name
 #endif
 
 
-#endif 
+#endif
 
 
 /*
@@ -1203,7 +1207,7 @@ short vst_map_mode   (short handle, short mode);
  */
  
 /*----------------------------------------------------------------------------------------*/
-/* Function witch use for the printer dialog from WDialog											*/
+/* Functions which use the printer dialog from WDialog									  */
 /*----------------------------------------------------------------------------------------*/
 
 /** @addtogroup n_vdi
