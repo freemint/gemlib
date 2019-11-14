@@ -55,15 +55,15 @@ mt_fnts_evnt(FNT_DIALOG *fnt_dialog, EVNT *events, short *button, short *check_b
 #if CHECK_NULLPTR
 	if (id)
 #endif
-	*id = ((long)aes_intout[3] << 16) | (aes_intout[4]);
+	*id = aes_intout_long(3);
 #if CHECK_NULLPTR
 	if (pt)
 #endif
-	*pt = ((long)aes_intout[5] << 16) | (aes_intout[6]);
+	*pt = aes_intout_long(5);
 #if CHECK_NULLPTR
 	if (ratio)
 #endif
-	*ratio = ((long)aes_intout[7] << 16) | (aes_intout[8]);
+	*ratio = aes_intout_long(7);
 	
 	return aes_intout[0];
 }
