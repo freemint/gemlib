@@ -35,7 +35,7 @@
 
 XFSL_DIALOG *
 mt_fslx_do(const char *title, char *path, short pathlen, char *fname, short fnamelen,
-		   char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode,
+		   const char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode,
 		   short flags, short *button, short *nfiles, char **pattern, short *global_aes)
 {
 	AES_PARAMS(194,4,4,6,2);

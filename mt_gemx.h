@@ -256,7 +256,7 @@ typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, GEMLIB_XATTR *xattr
 typedef struct _fslx_dialog XFSL_DIALOG;
 
 short	mt_fslx_close		(XFSL_DIALOG *fsd, short *global);
-XFSL_DIALOG *mt_fslx_do		(const char *title, char *path, short pathlen, char *fname, short fnamelen, char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode, short flags, short *button, short *nfiles, char **pattern, short *global);
+XFSL_DIALOG *mt_fslx_do		(const char *title, char *path, short pathlen, char *fname, short fnamelen, const char *patterns, XFSL_FILTER filter, char *paths, short *sort_mode, short flags, short *button, short *nfiles, char **pattern, short *global);
 short	mt_fslx_evnt		(XFSL_DIALOG *fsd, EVNT *events, char *path, char *fname, short *button, short *nfiles, short *sort_mode, char **pattern, short *global);
 short	mt_fslx_getnxtfile	(XFSL_DIALOG *fsd, char *fname, short *global);
 XFSL_DIALOG *mt_fslx_open	(const char *title, short x, short y, short *handle, char *path, short pathlen, char *fname, short fnamelen, const char *patterns, XFSL_FILTER filter, char *paths, short sort_mode, short flags, short *global);
