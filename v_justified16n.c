@@ -45,7 +45,7 @@ v_justified16n (short handle, short x, short y,
 		vdi_ptsin[2] = len;
 		vdi_ptsin[3] = 0;
 
-		VDI_TRAP_ESC (vdi_params, handle, 11,10, 2,num);
+		VDI_TRAP_ESC (vdi_params, handle, 11,10, 2,num+2);
 	}
 	else /* gemlib limitation use v_gtext in replacement */
 	{
