@@ -12,11 +12,15 @@
  */
 
 void
-v_gtext16n (short handle, PXY pos, const short *wstr, short num)
+v_gtext16n (short handle, short x, short y, const short *wstr, short num)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_ptsin[2];   
 
-	VDI_PARAMS(vdi_control, wstr, (short*)&pos, vdi_dummy, vdi_dummy );
+	vdi_ptsin[0] = x;
+	vdi_ptsin[1] = y;
+
+	VDI_PARAMS(vdi_control, wstr, vdi_ptsin, vdi_dummy, vdi_dummy );
 	
 	VDI_TRAP (vdi_params, handle, 8, 1,num);
 }

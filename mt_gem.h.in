@@ -3016,7 +3016,9 @@ void v_ellpie      (VdiHdl , short x, short y, short xrad, short yrad,
 void v_fillarea    (VdiHdl , short count, short pxy[]);
 void v_gtext       (VdiHdl , short x, short y, const char *str);
 void v_gtext16     (VdiHdl , short x, short y, const short *wstr);
-void v_gtext16n    (VdiHdl , PXY pos, const short *wstr, short num);
+void v_gtext16n    (VdiHdl , short x, short y, const short *wstr, short num);
+/* old version, using an PXY parameter */
+#define v_gtext16n_pxy(h, pos, wstr, num) v_gtext16n(h, (pos).p_x, (pos).p_y, wstr, num)
 void v_justified   (VdiHdl , short x, short y, const char *str,
                              short len, short word_space, short char_space);
 void v_justified16n   (VdiHdl , short x, short y, const short * wstr, short num,
