@@ -17,8 +17,7 @@
  *  after completion of the current (f.e. the Desktop).
  */
 
-short 
-mt_shel_rdef(char *lpcmd, char *lpdir, short *global_aes)
+void mt_shel_rdef(char *lpcmd, char *lpdir, short *global_aes)
 {
 	AES_PARAMS(126,0,1,2,0);
                     
@@ -26,6 +25,4 @@ mt_shel_rdef(char *lpcmd, char *lpdir, short *global_aes)
 	aes_addrin[1] = (long)lpdir;
 
 	AES_TRAP(aes_params);
-
-	return aes_intout[0];
 }

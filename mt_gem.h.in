@@ -2094,9 +2094,9 @@ short	mt_shel_find 	(char *buf, short *global_aes);
 short 	mt_shel_get 	(char *Buf, short Len, short *global_aes);
 short	mt_shel_help	(short sh_hmode, const char *sh_hfile, const char *sh_hkey, short *global_aes);
 short 	mt_shel_put		(const char *Buf, short Len, short *global_aes);
-short	mt_shel_rdef	(char *lpcmd, char *lpdir, short *global_aes);
+void	mt_shel_rdef	(char *lpcmd, char *lpdir, short *global_aes);
 short	mt_shel_read 	(char *Command, char *Tail, short *global_aes);
-short	mt_shel_wdef	(const char *lpcmd, const char *lpdir, short *global_aes);
+void	mt_shel_wdef	(const char *lpcmd, const char *lpdir, short *global_aes);
 short	mt_shel_write	(short Exit, short Graphic, short Aes, const void *Command, const char *Tail, short *global_aes);
 /**@}*/
 

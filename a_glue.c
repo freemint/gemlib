@@ -901,12 +901,11 @@ shel_put(const char *Buf, short Len)
 #ifdef shel_rdef
 #undef shel_rdef
 #endif
-short shel_rdef(char *lpcmd, char *lpdir);
+void shel_rdef(char *lpcmd, char *lpdir);
 
-short 
-shel_rdef(char *lpcmd, char *lpdir)
+void shel_rdef(char *lpcmd, char *lpdir)
 {
-	return(mt_shel_rdef(lpcmd, lpdir, aes_global));
+	mt_shel_rdef(lpcmd, lpdir, aes_global);
 }
 
 #ifdef shel_read
@@ -923,12 +922,11 @@ shel_read(char *Command, char *Tail)
 #ifdef shel_wdef
 #undef shel_wdef
 #endif
-short shel_wdef(const char *lpcmd, const char *lpdir);
+void shel_wdef(const char *lpcmd, const char *lpdir);
 
-short 
-shel_wdef(const char *lpcmd, const char *lpdir)
+void shel_wdef(const char *lpcmd, const char *lpdir)
 {
-	return(mt_shel_wdef(lpcmd, lpdir, aes_global));
+	mt_shel_wdef(lpcmd, lpdir, aes_global);
 }
 
 #ifdef shel_write

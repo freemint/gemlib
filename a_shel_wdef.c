@@ -17,8 +17,7 @@
  *  is to be the default program (normally the Desktop).
  */
 
-short 
-mt_shel_wdef(const char *lpcmd, const char *lpdir, short *global_aes)
+void mt_shel_wdef(const char *lpcmd, const char *lpdir, short *global_aes)
 {
 	AES_PARAMS(127,0,1,2,0);
    
@@ -26,6 +25,4 @@ mt_shel_wdef(const char *lpcmd, const char *lpdir, short *global_aes)
 	aes_addrin[1] = (long)lpdir;
 
 	AES_TRAP(aes_params);
-
-	return aes_intout[0];
 }
