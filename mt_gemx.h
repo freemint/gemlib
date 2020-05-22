@@ -1398,7 +1398,7 @@ typedef union
 } COLOR_ENTRY;
 
 /** TODO */
-#define	COLOR_TAB_MAGIC	'ctab'
+#define	COLOR_TAB_MAGIC	0x63746162L /* 'ctab' */
 
 /** TODO */
 typedef struct
@@ -1455,7 +1455,7 @@ typedef void INVERSE_CTAB;		/**< TODO */
 typedef INVERSE_CTAB *ITAB_REF;	/**< TODO */
 
 /** TODO */
-#define	CBITMAP_MAGIC	'cbtm'
+#define	CBITMAP_MAGIC	0x6362746dL /* 'cbtm' */
 
 typedef struct _gcbitmap GCBITMAP;/**< TODO */
 /** TODO */
