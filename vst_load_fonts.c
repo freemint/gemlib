@@ -23,6 +23,9 @@ vst_load_fonts (short handle, short select)
 	
 	VDI_PARAMS(vdi_control, &select, 0L, vdi_intout, vdi_dummy );
 		
+	/* NVDI expects a FONTHDR ptr here */
+	*__vdi_array_ptr(10, vdi_control) = 0;
+
 	VDI_TRAP (vdi_params, handle, 119, 0,1);
 	
 	return vdi_intout[0];
