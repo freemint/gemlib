@@ -127,7 +127,7 @@ __BEGIN_DECLS
 #define AES_ARCH_M68040    	4	/**< see  mt_appl_getinfo() */
 #define AES_ARCH_M68060  	5	/**< see  mt_appl_getinfo() */
 #define AES_ARCH_M6802060	6	/**< see  mt_appl_getinfo() */
-#define AES_ARCH_COLDFILRE	7	/**< see  mt_appl_getinfo() */
+#define AES_ARCH_COLDFIRE	7	/**< see  mt_appl_getinfo() */
 
 /* appl_getinfo(AES_FUNCTIONS) return values */
 #define AGI_WFORM			1	/**< see  mt_appl_getinfo() */
