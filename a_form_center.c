@@ -5,12 +5,9 @@
  *
  *  @param tree points to a valid #OBJECT structure which the
  *               application wishes to have centered.
- *  @param cx ,
- *  @param cy ,
- *  @param cw ,
- *  @param ch is a clipping rectangle suitable for
- *            use in objc_draw() returned. \n
- *             [option CHECK_NULLPTR] cx, cy, cw and/or ch may be NULL
+ *  @param cx,cy,cw,ch is a clipping rectangle suitable for
+ *               use in objc_draw() returned.
+ *               [option CHECK_NULLPTR] \a cx, \a cy, \a cw and/or \a ch may be NULL
  *
  *  @return is currently reserved. Currently it equals 1.
  *
@@ -18,7 +15,7 @@
  *
  *  @sa mt_objc_draw()
  *
- *  The values that mt_form_center() returns in cx, cy, cw, and ch,
+ *  The values that mt_form_center() returns in \a cx, \a cy, \a cw, and \a ch,
  *  are not necessarily the same as the object's. These values
  *  take into account negative borders, outlining, and
  *  shadowing. This is meant to provide a suitable clipping
