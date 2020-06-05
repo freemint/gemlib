@@ -27,14 +27,8 @@
  *                               side-effects of this call is a #WM_REDRAW
  *                               message sent to any window which the dialog
  *                               was covering.
- *  @param x1 ,
- *  @param y1 ,
- *  @param w1 ,
- *  @param h1 the first rectangle (usage depends on \a mode)
- *  @param x2 ,
- *  @param y2 ,
- *  @param w2 ,
- *  @param h2 the second rectangle (usage depends on \a mode)
+ *  @param x1,y1,w1,h1 the first rectangle (usage depends on \a mode)
+ *  @param x2,y2,w2,h2 the second rectangle (usage depends on \a mode)
  *
  *  @return non-zero if succeeded.
  *
