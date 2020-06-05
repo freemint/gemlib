@@ -73,7 +73,7 @@ ChangeLog:
 	perl cvs2cl.pl --separate-header --no-wrap --usermap users --stdin --stdout <ChangeLog.tmp >ChangeLog
 	rm -f ChangeLog.tmp
 	
-doc: Doxyfile ChangeLog
+doc: Doxyfile ChangeLog mt_gem.h
 	doxygen Doxyfile
 # 	udo -s -l -W -y doc/udo/index.u -o doc/stg/gemlib.stg
 # 	udo -h -l -W -y doc/udo/index.u -o doc/html/index.htm
