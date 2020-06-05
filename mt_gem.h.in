@@ -2864,10 +2864,22 @@ void  vqt_get_table  (VdiHdl , short **map);
 short vqt_name       (VdiHdl , short element, char *name);
 short vqt_width      (VdiHdl , short chr, short *cw,
                                short *ldelta, short *rdelta);
-/** TODO */
+/** check if a GDOS is installed
+ *
+ * @return 1 if any version of GDOS is installed, otherwise 0
+ *
+ * @sa vq_vgdos()
+ */
 short vq_gdos  (void);
 
-/** TODO */
+/** check which GDOS version is installed
+ *
+ * @return one of the following values:
+ *        - #GDOS_NONE: GDOS is not installed
+ *        - #GDOS_FNT: FontGDOS is installed
+ *        - #GDOS_FSM: FSM GDOS or SpeedoGDOS is installed; check the 'FSMC' cookie to find which one
+ *        - any other value: GDOS 1.x is installed
+ */
 long  vq_vgdos (void);
 /**@}*/
 
