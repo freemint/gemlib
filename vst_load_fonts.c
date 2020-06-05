@@ -10,7 +10,7 @@
  *
  *  @since all VDI versions
  *
- *  Before you call vst_load_fonts(), call vq_gdos() and make sure that the VDI can 
+ *  Before you call vst_load_fonts(), call vq_gdos() or vq_vgdos() and make sure that the VDI can
  *  load additional fonts.
  *  
  */
