@@ -35,8 +35,14 @@ extern short aes_global[];
 /** LONG global available for use by the application */
 #define	_AESappglobal (*((long *)&aes_global[3]))
 
-/** Pointer to the base of the resource loaded via rsrc_load(). */
-#define	_AESrscfile   ((OBJECT **)(*((long *)&aes_global[5])))
+/** Pointer to the base of the trees loaded via rsrc_load(). */
+#define	_AESrscfile   (*((OBJECT ***)&aes_global[5]))
+
+/** Pointer to the memory of the resource loaded via mt_rsrc_load(). */
+#define	_AESrscmem   (*((void **)&aes_global[7]))
+
+/* length of that memory. Only valid for resource files <64K */
+#define	_AESrsclen   (aes_global[9])
 
 /** Current maximum character used by the AES to do vst_height() prior to
     writing to the screen. This entry is only present as of AES version 0x0400.*/
