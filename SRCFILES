@@ -181,6 +181,7 @@ _VDI_OUTPUT = \
 	v_fillarea.c \
 	v_gtext.c \
 	u_v_gtext.c \
+	v_gtextn.c \
 	v_gtext16.c \
 	v_gtext16n.c \
 	v_justified.c \

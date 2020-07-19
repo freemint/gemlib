@@ -3028,6 +3028,7 @@ void v_ellpie      (VdiHdl , short x, short y, short xrad, short yrad,
                              short begang, short endang);
 void v_fillarea    (VdiHdl , short count, short pxy[]);
 void v_gtext       (VdiHdl , short x, short y, const char *str);
+void v_gtextn      (VdiHdl , short x, short y, const char *str, short num);
 void v_gtext16     (VdiHdl , short x, short y, const short *wstr);
 void v_gtext16n    (VdiHdl , short x, short y, const short *wstr, short num);
 /* old version, using an PXY parameter */

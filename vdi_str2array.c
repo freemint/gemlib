@@ -39,7 +39,7 @@ vdi_str2array_n (const char *src, short *des, int nmax)
 	short                 len = 0;
 	const unsigned char *c  = (const unsigned char *) src;
 
-	while (*c && (len<nmax))
+	while (len < nmax && *c)
 	{
 		*(des++) = *(c++);
 		len++;
