@@ -2856,6 +2856,7 @@ void  vqm_attributes (VdiHdl , short atrib[]);
 void  vqt_attributes (VdiHdl , short atrib[]);
 void  vqt_cachesize  (VdiHdl , short which_cache, long *size);
 void  vqt_extent     (VdiHdl , const char *str, short extent[]);
+void  vqt_extentn    (VdiHdl , const char *str, short num, short extent[]);
 void  vqt_extent16   (VdiHdl , const short *wstr, short extent[]);
 void  vqt_extent16n  (VdiHdl , const short *wstr, short num, short extent[]);
 void  vqt_fontinfo   (VdiHdl , short *minade, short *maxade, short distances[],

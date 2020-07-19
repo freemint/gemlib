@@ -160,6 +160,7 @@ _VDI_INQUIRE = \
 	vqt_cachesize.c \
 	vqt_extent.c \
 	u_vqt_extent.c \
+	vqt_extentn.c \
 	vqt_extent16.c \
 	vqt_extent16n.c \
 	vqt_fontinfo.c \
