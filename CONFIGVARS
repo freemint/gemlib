@@ -100,6 +100,7 @@ WARN = \
 	-Wshadow \
 	-Wpointer-arith \
 	-Wcast-qual \
+	-Wdeclaration-after-statement \
 	-Waggregate-return
 
 #

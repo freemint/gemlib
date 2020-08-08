@@ -18,12 +18,11 @@ v_gtextn (short handle, short x, short y, const char *str, short num)
 	short vdi_intin[VDI_INTINMAX];   
 	short vdi_ptsin[2];   
 
+	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy );
+
 	num = vdi_str2array_n (str, vdi_intin, num);
 	vdi_ptsin[0] = x;
 	vdi_ptsin[1] = y;
 
-	VDI_PARAMS(vdi_control, vdi_intin, vdi_ptsin, vdi_dummy, vdi_dummy );
-	
 	VDI_TRAP (vdi_params, handle, 8, 1,num);
 }
-

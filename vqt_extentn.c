@@ -15,8 +15,8 @@ vqt_extentn (short handle, const char *str, short num, short extent[])
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[VDI_INTINMAX];   
 
-	num = vdi_str2array_n (str, vdi_intin, num);
 	VDI_PARAMS(vdi_control, vdi_intin, 0L, vdi_dummy, extent );
+	num = vdi_str2array_n (str, vdi_intin, num);
 	
 	VDI_TRAP (vdi_params, handle, 116, 0,num);
 }
