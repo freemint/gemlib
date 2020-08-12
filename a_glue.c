@@ -1,6 +1,5 @@
 #include "mt_gem.h"
 
-#define appl_init _appl_init  /* to disable the appl_init inline function from gem.h */
 #include "gem.h"
 
 /*
@@ -83,19 +82,6 @@ short
 appl_xgetinfo(short type, short *out1, short *out2, short *out3, short *out4)
 {
 	return(mt_appl_getinfo(type,out1, out2, out3, out4, aes_global));
-}
-
-#ifdef appl_init
-#undef appl_init
-#endif
-short appl_init(void);
-
-short
-appl_init(void)
-{
-	gl_apid = mt_appl_init(aes_global);
-	gl_ap_version = aes_global[0];
-	return gl_apid;
 }
 
 #ifdef appl_read
