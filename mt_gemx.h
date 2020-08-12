@@ -1051,6 +1051,7 @@ short	vqt_ext_name    (VdiHdl, short __index,
                                char *name, short *font_format, short *flags);
 
 void	vqt_f_extent    (VdiHdl, const char  *str, short extent[]);
+void	vqt_f_extentn   (VdiHdl, const char  *str, short num, short extent[]);
 void	vqt_f_extent16  (VdiHdl, const WCHAR *str, short extent[]);
 void	vqt_f_extent16n (VdiHdl, const WCHAR *str, short num, short extent[]);
 
@@ -1118,6 +1119,7 @@ short	udef_vq_devinfo     (VdiHdl, short device, short *dev_exists,
 #define udef_vqt_ext_name vqt_ext_name
 /** @ingroup force_udef */
 void	udef_vqt_f_extent    (VdiHdl, const char  *str, short extent[]);
+void	udef_vqt_f_extentn    (VdiHdl, const char  *str, short num, short extent[]);
 /** UDEF version of vqt_f_extent16(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_f_extent16 vqt_f_extent16
 /** UDEF version of vqt_f_extent16n(). See \ref overviewUDEF for details about UDEF feature */
@@ -1172,6 +1174,7 @@ short udef_vst_name 	(VdiHdl, short font_format, char *font_name, char *ret_name
 #define v_ftext_offset16n udef_v_ftext_offset16n
 #define vq_devinfo udef_vq_devinfo
 #define vqt_f_extent udef_vqt_f_extent
+#define vqt_f_extentn udef_vqt_f_extentn
 #define vqt_fontheader udef_vqt_fontheader
 #define vqt_name_and_id udef_vqt_name_and_id
 #define vqt_real_extent udef_vqt_real_extent

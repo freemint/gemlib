@@ -272,7 +272,9 @@ _VDI_EXTENSIONS = \
 	n_vqt_devinfo.c \
 	n_vqt_ext_name.c \
 	n_vqt_f_extent.c \
+	n_vqt_f_extentn.c \
 	u_vqt_f_extent.c \
+	u_vqt_f_extentn.c \
 	n_vqt_f_extent16.c \
 	n_vqt_f_extent16n.c \
 	n_vqt_fg_color.c \
