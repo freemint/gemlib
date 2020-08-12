@@ -5,13 +5,9 @@
  *  @param src
  *  @param dst
  *
- *  @return always 1.
- *
  */
  
-short
-rc_copy (const GRECT * src, GRECT * dst)
+void rc_copy (const GRECT * src, GRECT * dst)
 {
 	*dst = *src;
-	return 1;
 }

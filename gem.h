@@ -96,6 +96,8 @@ static inline short appl_init(void) {
 	gl_ap_version = aes_global[0];
 	return gl_apid;
 }
+#else
+short appl_init(void);
 #endif
 
 /** fast version of appl_yield that does not use the AES arrays */

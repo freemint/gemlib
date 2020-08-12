@@ -2138,7 +2138,7 @@ short   mt_wind_set_ptr_int  (short WindowHandle, short What, void *v, short W3,
 /** @addtogroup a_util
  *  @{
  */
-short	rc_copy        (const GRECT *src, GRECT *dst);
+void	rc_copy        (const GRECT *src, GRECT *dst);
 short	rc_equal       (const GRECT *r1,  const GRECT *r2);
 short	rc_intersect   (const GRECT *src, GRECT *dst);
 GRECT * array_to_grect (const short *array, GRECT *area);
