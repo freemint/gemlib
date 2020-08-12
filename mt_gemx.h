@@ -1023,6 +1023,7 @@ typedef unsigned short WCHAR; /**< 16bit string, eg. for unicode */
  */
 
 void	v_ftext         (VdiHdl, short x, short y, const char  *str);
+void	v_ftextn        (VdiHdl, short x, short y, const char  *str, short num);
 void	v_ftext16       (VdiHdl, short x, short y, const WCHAR *wstr);
 void	v_ftext16n      (VdiHdl, PXY pos, const WCHAR *wstr, short num);
 void	v_ftext_offset  (VdiHdl, short x, short y,
@@ -1086,6 +1087,7 @@ void  vst_width	(VdiHdl, short width, short *char_width, short *char_height, sho
 
 /** @ingroup force_udef */
 void	udef_v_ftext         (VdiHdl, short x, short y, const char  *str);
+void	udef_v_ftextn         (VdiHdl, short x, short y, const char  *str, short num);
 /** UDEF version of v_ftext16(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_v_ftext16 v_ftext16
 /** UDEF version of v_ftext16n(). See \ref overviewUDEF for details about UDEF feature */
@@ -1169,6 +1171,7 @@ short udef_vst_name 	(VdiHdl, short font_format, char *font_name, char *ret_name
 
 #ifdef FORCE_GEMLIB_UDEF
 #define v_ftext udef_v_ftext
+#define v_ftextn udef_v_ftextn
 #define v_ftext_offset udef_v_ftext_offset
 #define v_ftext_offset16 udef_v_ftext_offset16
 #define v_ftext_offset16n udef_v_ftext_offset16n

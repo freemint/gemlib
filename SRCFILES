@@ -220,7 +220,9 @@ _VDI_EXTENSIONS = \
 	n_v_delete_driver_info.c \
 	n_v_delete_itab.c \
 	n_v_ftext.c \
+	n_v_ftextn.c \
 	u_v_ftext.c \
+	u_v_ftextn.c \
 	n_v_ftext16.c \
 	n_v_ftext16n.c \
 	n_v_ftext_offset.c \
