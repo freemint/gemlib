@@ -969,7 +969,7 @@ short	v_bez_on	(short handle);
 void	v_bez_off	(short handle);
 void	v_bez		(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
 void	v_bez_fill	(short handle, short count, short *xyarr, char *bezarr, short *extent, short *totpts, short *totmoves);
-void 	v_bez_qual	(short handle, short percent, short *actual);
+short 	v_bez_qual	(short handle, short percent, short *actual);
 /**@}*/
 
 /** UDEF version of (). See \ref overviewUDEF for details about UDEF feature */

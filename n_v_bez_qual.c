@@ -14,7 +14,7 @@
  *
  */
 
-void
+short
 v_bez_qual (short handle, short percent, short *actual)
 {
 	short vdi_control[VDI_CNTRLMAX]; 
@@ -27,4 +27,5 @@ v_bez_qual (short handle, short percent, short *actual)
 	vdi_intin[2] = percent;
 	
 	VDI_TRAP_ESC (vdi_params, handle, 5,99, 0,3);
+	return *actual;
 }
