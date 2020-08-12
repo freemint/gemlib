@@ -9,7 +9,6 @@ HEADER = \
 	gemx.h \
 	mt_gem.h \
 	mt_gemx.h \
-	symbols.h \
 	$(empty)
 
 
@@ -596,14 +595,15 @@ COBJS = \
 	x_wdlg_set_size.c \
 	x_wdlg_set_tree.c \
 	x_wdlg_set_uniconify.c \
+	\
+	_gc_vq_gdos.c \
+	_gc_vq_vgdos.c \
+	_gc_aes.c \
+	_gc_vdi.c \
 	$(empty)
 
 
 SOBJS = \
-	_gc_asm_aes.S \
-	_gc_asm_vdi.S \
-	_gc_asm_vq_gdos.S \
-	_gc_asm_vq_vgdos.S \
 	$(empty)
 
 

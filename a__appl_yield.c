@@ -10,6 +10,7 @@
  *  
  */
 
+#ifdef __GNUC__
 void _appl_yield(void)
 {
 	__asm__ volatile (
@@ -20,3 +21,20 @@ void _appl_yield(void)
 		: "d0","d1","d2","a0","a1","a2","memory","cc"
 	);
 }
+#endif
+
+
+#ifdef __VBCC__
+static void _asm_appl_yield(void) =
+  "\tmove.l\td2,-(sp)\n"
+  "\tmove.l\ta2,-(sp)\n"
+  "\tmove.w\t#201,d0\n"
+  "\ttrap\t#2\n"
+  "\tmove.l\t(sp)+,a2\n"
+  "\tmove.l\t(sp)+,d2";
+
+void _appl_yield(void)
+{
+	_asm_appl_yield();
+}
+#endif

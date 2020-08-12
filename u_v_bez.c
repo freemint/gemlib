@@ -3,7 +3,11 @@
 #include "vdi_userdef.h"
 
 
-static inline void
+static
+#if defined(__GNUC__) || (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L)
+inline
+#endif
+void
 _v_bez (short count, short *xyarr, char *bezarr, short *vdi_intin, short *vdi_ptsin)
 {
 	char  *opbd = (char*)vdi_intin;

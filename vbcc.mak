@@ -15,9 +15,6 @@ SFLAGS += $(MORE_SFLAGS)
 
 include files.mak
 
-
-
-
 .SUFFIXES:
 .SUFFIXES: .c .S .o
 
@@ -27,10 +24,10 @@ include files.mak
 .S.o:
 	$(AS) $(SFLAGS) $*.S -o .vbcc/$*.o
 
-TARGET = $(LIB_VBCC)
+TARGET = libgem.a
 
-all: $(TARGET)
+all: libgem.a
 
 $(TARGET):  $(OBJ) $(VC_OBJ)
 	$(RM) $@
-	cd .vbcc; $(AR) -r ../$@ $^; $(RM) $^; cd ..
+	cd .vbcc; $(AR) -rcs ../$@ $^; $(RM) $^

@@ -90,11 +90,13 @@ extern short aes_global[];
 #define appl_get_cicon(a,b,c,d,e,f) mt_appl_get_cicon(a,b,c,d,e,f, aes_global)
 
 /** single-thread version of mt_appl_init() */
-static inline short appl_init( void) {
+#if defined(__GNUC__) || (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L)
+static inline short appl_init(void) {
 	gl_apid = mt_appl_init(aes_global);
 	gl_ap_version = aes_global[0];
 	return gl_apid;
 }
+#endif
 
 /** fast version of appl_yield that does not use the AES arrays */
 void _appl_yield(void);
