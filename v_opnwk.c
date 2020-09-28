@@ -123,11 +123,11 @@ void
 v_opnwk (short work_in[], short *handle, short work_out[])
 {
 	short vdi_control[VDI_CNTRLMAX]; 
+	short vdi_ptsin[8];
 
-	VDI_PARAMS(vdi_control, work_in, 0L, work_out, &work_out[45] );
+	VDI_PARAMS(vdi_control, work_in, vdi_ptsin, work_out, &work_out[45]);
 	
 	VDI_TRAP (vdi_params, *handle, 1, 0,11);
 
 	*handle = vdi_control[6];
 }
-
