@@ -20,7 +20,7 @@ vql_attributes (short handle, short attrib[])
 {
 	short *ptr;
 	short vdi_control[VDI_CNTRLMAX]; 
-	short vdi_intout[5]; 
+	short vdi_intout[5];
 	short vdi_ptsout[2]; 
 
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_ptsout );
@@ -32,6 +32,14 @@ vql_attributes (short handle, short attrib[])
 	*(attrib ++) = *(ptr ++);	  /* attrib[1] = vdi_intout[1]; */
 	*(attrib ++) = *(ptr ++);	  /* attrib[2] = vdi_intout[2]; */
 	*(attrib ++) = vdi_ptsout[0]; /* attrib[3] = vdi_ptsout[0]; */
-	*(attrib ++) = *(ptr ++);	  /* attrib[4] = vdi_intout[3]; */
-	*(attrib   ) = *(ptr   );	  /* attrib[5] = vdi_intout[4]; */
+	/* TOS/EmuTOS do not return the line end styles in intout[3/4] */
+	if (vdi_control[4] >= 5)
+	{
+		*(attrib ++) = *(ptr ++);	  /* attrib[4] = vdi_intout[3]; */
+		*(attrib   ) = *(ptr   );	  /* attrib[5] = vdi_intout[4]; */
+	} else
+	{
+		*(attrib ++) = 0;
+		*(attrib   ) = 0;
+	}
 }
