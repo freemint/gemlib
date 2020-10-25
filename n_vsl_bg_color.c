@@ -26,6 +26,7 @@ vsl_bg_color (short handle, long color_space, COLOR_ENTRY * bg_color)
 	
 	vdi_intin_long(0) = color_space;
 	*(COLOR_ENTRY*)&vdi_intin[2] = *bg_color;
+	vdi_intout[0] = 0;
 
 	VDI_TRAP_ESC (vdi_params, handle, 201,2, 0,6);
 

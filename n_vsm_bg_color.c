@@ -7,7 +7,7 @@
  *  @param color_space color space
  *  @param bg_color COLOR_ENTRY of background color
  *
- *  @return -1=wrong function number, 0=function not present, 1=all ok 
+ *  @return -1=wrong subfunction number, 0=function not present, 1=all ok 
  *
  *  @since NVDI 5 ?
  *
@@ -26,6 +26,7 @@ vsm_bg_color (short handle, long color_space, COLOR_ENTRY * bg_color)
 	
 	vdi_intin_long(0) = color_space;
 	*(COLOR_ENTRY*)&vdi_intin[2] = *bg_color;
+	vdi_intout[0] = 0;
 
 	VDI_TRAP_ESC (vdi_params, handle, 201,3, 0,6);
 
