@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/freemint/gemlib.svg?branch=master)](https://travis-ci.org/freemint/gemlib) [ ![Download](https://api.bintray.com/packages/freemint/freemint/gemlib/images/download.svg) ](https://bintray.com/freemint/freemint/gemlib/_latestVersion)
+[![Build Status](https://travis-ci.org/freemint/gemlib.svg?branch=master)](https://travis-ci.org/freemint/gemlib) [ ![Download](https://api.bintray.com/packages/freemint/lib/gemlib/images/download.svg) ](https://bintray.com/freemint/lib/gemlib/_latestVersion)
