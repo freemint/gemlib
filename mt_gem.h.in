@@ -85,6 +85,7 @@ __BEGIN_DECLS
 #define AES_PROCESS 		4	/**< see  mt_appl_getinfo() */
 #define AES_PCGEM		5	/**< see  mt_appl_getinfo() */
 #define AES_INQUIRE 		6	/**< see  mt_appl_getinfo() */
+#define AES_WDIALOG 		7	/**< see  mt_appl_getinfo() */
 #define AES_MOUSE		8	/**< see  mt_appl_getinfo() */
 #define AES_MENU		9	/**< see  mt_appl_getinfo() */
 #define AES_SHELL		10	/**< see  mt_appl_getinfo() */

@@ -115,8 +115,8 @@
  *                         a valid mode parameter to mt_menu_bar()
  *                         or 1 if it is.
  *
- *  <tr><td> #(reserved)   <td>   7    <td>
- *     	              Currently reserved.
+ *  <tr><td> #AES_WDIALOG  <td>   7    <td>
+ *     	              Reserved for MagiC and other OS extensions; MultiTOS sets all return values always to 0
  *
  *  <tr><td> #AES_MOUSE    <td>   8    <td>
  *     	              AES Mouse Support
