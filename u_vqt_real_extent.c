@@ -7,7 +7,7 @@
  */
 
 void
-udef_vqt_real_extent (short handle, short x, short y, char *string, short extent[])
+udef_vqt_real_extent (short handle, short x, short y, const char *string, short extent[])
 {
 	short n = vdi_str2array_n (string, _VDIParBlk.vdi_intin, VDI_INTINMAX);
 

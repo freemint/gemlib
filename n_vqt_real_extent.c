@@ -20,7 +20,7 @@
  */
 
 void
-vqt_real_extent (short handle, short x, short y, char *string, short extent[])
+vqt_real_extent (short handle, short x, short y, const char *string, short extent[])
 {
 	short vdi_control[VDI_CNTRLMAX]; 
 	short vdi_intin[VDI_INTINMAX];   

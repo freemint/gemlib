@@ -1062,7 +1062,7 @@ short	vqt_name_and_id (VdiHdl, short font_format,
                                char *font_name, char *ret_name);
 void	vqt_pairkern    (VdiHdl, short ch1, short ch2, long *x, long *y);
 
-void	vqt_real_extent (VdiHdl, short x, short y, char *string, short extent[]);
+void	vqt_real_extent (VdiHdl, short x, short y, const char *string, short extent[]);
 void	vqt_real_extent16n (VdiHdl, short x, short y, const WCHAR *wstring, short num, short extent[]);
 void	vqt_trackkern   (VdiHdl, long *x, long *y);
 short	vqt_xfntinfo    (VdiHdl, short flags, short id,
@@ -1134,7 +1134,7 @@ short	udef_vqt_name_and_id (VdiHdl, short font_format,
 /** UDEF version of vqt_pairkern(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_pairkern vqt_pairkern
 /** @ingroup force_udef */
-void	udef_vqt_real_extent (VdiHdl, short x, short y, char *string, short extent[]);
+void	udef_vqt_real_extent (VdiHdl, short x, short y, const char *string, short extent[]);
 /** UDEF version of vqt_real_extent16n(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vqt_real_extent16n vqt_real_extent16n
 /** UDEF version of vqt_trackkern(). See \ref overviewUDEF for details about UDEF feature */
