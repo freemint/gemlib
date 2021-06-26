@@ -1,1 +1,3 @@
-[![Build Status](https://travis-ci.org/freemint/gemlib.svg?branch=master)](https://travis-ci.org/freemint/gemlib) [ ![Download](https://api.bintray.com/packages/freemint/lib/gemlib/images/download.svg) ](https://bintray.com/freemint/lib/gemlib/_latestVersion)
+[![Build Status](https://github.com/freemint/gemlib/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/freemint/gemlib/actions) 
+
+Latest snapshot: [Download](https://tho-otto.de/snapshots/gemlib/gemlib-latest.tar.bz2)
