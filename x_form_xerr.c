@@ -29,12 +29,9 @@
 short 
 mt_form_xerr(long errcode, const char *errfile, short *global_aes)
 {
-	unsigned short *i = (unsigned short *)&errcode;
-	
 	AES_PARAMS(136,2,1,1,0);
                     
-	aes_intin[0] = i[1];
-	aes_intin[1] = i[0];
+	*__aes_intin_long(0, aes_intin) = errcode;
 
 	aes_addrin[0] = (long)errfile;
 
