@@ -35,6 +35,10 @@ _vq_vgdos:
 	moveq	#-2,d0
 	trap	#2
 	movem.l	(a7)+,d2/a2
+	cmp.w	#-2,d0
+	bne.b	gdos_found
+	moveq	#-2,d0
+gdos_found:
 	rts
 
 	end

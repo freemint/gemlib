@@ -12,6 +12,6 @@ long vq_vgdos(void)
 		:
 		: "d1", "d2", "a0", "a1", "a2", "memory", "cc"
 	);
-	return ret;
+	return (short)ret == -2 ? (short)ret : ret;
 }
 #endif

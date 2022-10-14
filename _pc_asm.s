@@ -34,4 +34,8 @@ vq_vgdos:
 	movem.l	d2/a2,-(sp)	; backup registers
 	trap    #2
 	movem.l	(sp)+,d2/a2	; restore registers
+	cmp.w	#-2,d0
+	bne.b	gdos_found
+	moveq	#-2,d0
+gdos_found:
 	rts
