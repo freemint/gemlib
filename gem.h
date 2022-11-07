@@ -157,8 +157,8 @@ void _appl_yield(void);
 #define fsel_exinput(a,b,c,d)		mt_fsel_exinput(a,b,c,d,aes_global)
 /** single-thread version of mt_fsel_input() */
 #define fsel_input(a,b,c)			mt_fsel_input(a,b,c,aes_global)
-/** single-thread version of mt_fsel_exinput() */
-#define fsel_boxinput(a,b,c,d,e)	mt_fsel_exinput(a,b,c,d,e,aes_global)
+/** single-thread version of mt_fsel_boxinput() */
+#define fsel_boxinput(a,b,c,d,e)	mt_fsel_boxinput(a,b,c,d,e,aes_global)
 /**@}*/
 
 /** @addtogroup a_graf
