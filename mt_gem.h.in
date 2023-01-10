@@ -133,6 +133,7 @@ __BEGIN_DECLS
 /* appl_getinfo(AES_FUNCTIONS) return values */
 #define AGI_WFORM			1	/**< see  mt_appl_getinfo() */
 #define AGI_AOPTS			2	/**< see  mt_appl_getinfo() */
+#define AGI_OBJCDATA			4	/**< see  mt_appl_getinfo() */
 
 /* appl_options(AES_AOPTS) return values and appl_options() settings */
 #define AO0_WF_SLIDE		1	/**< see  mt_appl_options() */
