@@ -17,7 +17,11 @@ endif
 endif
 
 ifeq ($(ECHO_E),)
-ECHO_E=echo -e
+ifeq ($(shell /bin/echo -e),-e)
+ECHO_E=/bin/echo
+else
+ECHO_E=/bin/echo -e
+endif
 endif
 
 am__v_CC_0     = @$(ECHO_E) "  $(am__v_color_cc)CC$(am__v_color_off)      " $@;
