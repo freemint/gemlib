@@ -1263,23 +1263,23 @@ typedef  struct
 #define WF_OBFLAG		1001	/**< get/set (doc: TODO) (FreeGEM) */
 #define WF_OBTYPE		1002	/**< get     (doc: TODO) (FreeGEM) */
 #define WF_OBSPEC		1003	/**< get/set (doc: TODO) (FreeGEM) */
-#define X_WF_MENU		4352	/**<     set (doc: TODO) (Geneva)  */
-#define X_WF_DIALOG		4608	/**<     set (doc: TODO) (Geneva)  */
-#define X_WF_DIALWID	4864	/**<     set (doc: TODO) (Geneva)  */
-#define X_WF_DIALHT		5120	/**<     set (doc: TODO) (Geneva)  */
-#define X_WF_DFLTDESK	5376	/**<     set (doc: TODO) (Geneva)  */
-#define X_WF_MINMAX		5632	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_HSPLIT		5888	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_VSPLIT		6144	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_SPLMIN		6400	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_HSLIDE2	6656	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_VSLIDE2	6144	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_HSLSIZE2	7168	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_VSLSIZE2	7424	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_DIALFLGS	7680	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_OBJHAND	7936	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_DIALEDIT	9182	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_DCOLSTAT	8448	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_MENU		0x1100	/**<     set (doc: TODO) (Geneva)  */
+#define X_WF_DIALOG		0x1200	/**<     set (doc: TODO) (Geneva)  */
+#define X_WF_DIALWID	0x1300	/**<     set (doc: TODO) (Geneva)  */
+#define X_WF_DIALHT		0x1400	/**<     set (doc: TODO) (Geneva)  */
+#define X_WF_DFLTDESK	0x1500	/**<     set (doc: TODO) (Geneva)  */
+#define X_WF_MINMAX		0x1600	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_HSPLIT		0x1700	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_VSPLIT		0x1800	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_SPLMIN		0x1900	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_HSLIDE2	0x1a00	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_VSLIDE2	0x1b00	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_HSLSIZE2	0x1c00	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_VSLSIZE2	0x1d00	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_DIALFLGS	0x1e00	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_OBJHAND	0x1f00	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_DIALEDIT	0x2000	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_DCOLSTAT	0x2100	/**< get/set (doc: TODO) (Geneva)  */
 #define WF_WINX			22360	/**<		 TODO */
 #define WF_WINXCFG		22361	/**<		 TODO */
 #define WF_DDELAY		22362	/**<		 TODO */
