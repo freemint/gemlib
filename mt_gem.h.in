@@ -2182,13 +2182,28 @@ short * grect_to_array (const GRECT *area, short *array);
 #define mt_AESapid(aes_global)          (aes_global[2])
 
 /** LONG global available for use by the application */
+#ifdef __GNUC__
+static __inline__ long *_mt_AESappglobal_p(short *global) { return (long*)&global[3]; }
+#define mt_AESappglobal(aes_global) (*_mt_AESappglobal_p(aes_global))
+#else
 #define mt_AESappglobal(aes_global) (*((long *)&aes_global[3]))
+#endif
 
 /** Pointer to the base of the trees loaded via rsrc_load(). */
+#ifdef __GNUC__
+static __inline__ OBJECT ***_mt_AESrscfile_p(short *global) { return (OBJECT ***)&global[5]; }
+#define	mt_AESrscfile(aes_global)   (*_mt_AESrscfile_p(global))
+#else
 #define	mt_AESrscfile(aes_global)   (*((OBJECT ***)&aes_global[5]))
+#endif
 
 /** Pointer to the memory of the resource loaded via mt_rsrc_load(). */
+#ifdef __GNUC__
+static __inline__ void **_mt_AESrscmem_p(short *global) { return (void **)&global[7]; }
+#define	mt_AESrscmem(aes_global)   (*_mt_AESrscmem_p(aes_global))
+#else
 #define	mt_AESrscmem(aes_global)   (*((void **)&aes_global[7]))
+#endif
 
 /* length of that memory. Only valid for resource files <64K */
 #define	mt_AESrsclen(aes_global)   (aes_global[9])

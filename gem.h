@@ -33,13 +33,28 @@ extern short aes_global[];
 #define	_AESapid 	  (aes_global[2])
 
 /** LONG global available for use by the application */
+#ifdef __GNUC__
+static __inline__ long *_AESappglobal_p(void) { return (long*)&aes_global[3]; }
+#define	_AESappglobal (*_AESappglobal_p())
+#else
 #define	_AESappglobal (*((long *)&aes_global[3]))
+#endif
 
 /** Pointer to the base of the trees loaded via rsrc_load(). */
+#ifdef __GNUC__
+static __inline__ OBJECT ***_AESrscfile_p(void) { return (OBJECT ***)&aes_global[5]; }
+#define	_AESrscfile   (*_AESrscfile_p())
+#else
 #define	_AESrscfile   (*((OBJECT ***)&aes_global[5]))
+#endif
 
 /** Pointer to the memory of the resource loaded via mt_rsrc_load(). */
+#ifdef __GNUC__
+static __inline__ void **_AESrscmem_p(void) { return (void **)&aes_global[7]; }
+#define	_AESrscmem   (*_AESrscmem_p())
+#else
 #define	_AESrscmem   (*((void **)&aes_global[7]))
+#endif
 
 /* length of that memory. Only valid for resource files <64K */
 #define	_AESrsclen   (aes_global[9])
