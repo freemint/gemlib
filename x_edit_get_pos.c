@@ -19,7 +19,6 @@
  *         [option CHECK_NULLPTR] cy may be NULL
  *  @param global_aes global AES array
  *
- *  @return 
  *
  *  @since from MagiC 5.20 onwards. As it is 
  *         implemented as part of the shared library (SLB or SharedLib), 

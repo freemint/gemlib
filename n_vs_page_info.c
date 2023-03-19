@@ -1,6 +1,26 @@
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
 
+/** This function should be used to change the information about a document.
+ *  They will be wrote to the job printing history as well as to the log file 
+ *  when printing.
+ *
+ *  @param handle Device handle
+ *  @param type kind of info
+ *         - 0 (APPL):  application name
+ *         - 1 (DOC):   document title
+ *         - 2 (CREAT): author name
+ *         - 3 (REM):   comment
+ *  @param txt text to send (max 60 characters, including null-byte)
+ *
+ *  @return 0 if this function is not supported by the driver, any other value if
+ *          the driver support this function. 
+ * 
+ * 
+ *  @since depend of the driver
+ *
+ */
+
 short vs_page_info(short handle, short type, const char txt[60])
 {
 	short vdi_control[VDI_CNTRLMAX];

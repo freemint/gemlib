@@ -11,6 +11,7 @@
  *  @param x x-coordinate
  *  @param y y-coordinate
  *  @param string string
+ *  @param num length of the string
  *  @param extent coordinates of the bounding box
  *
  *  @since NVDI 3.00

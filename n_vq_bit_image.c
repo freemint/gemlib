@@ -1,6 +1,37 @@
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
 
+/** This function returns information about file formats supported by v_bit_image().  
+ *
+ *  @param handle Device handle
+ *  @param ver v_bit_image() version number
+ *  @param maximg maximum image number per page
+ *  @param form available image format
+ *         - bit 0 & 1:  IMG
+ *           - 00: IMG mono
+ *           - 01: reserved
+ *           - 10: reserved 
+ *           - 11: reserved 
+ *         - bit 2 & 3:  TGA
+ *           - 00: TGA unknown 
+ *           - 01: TGA type 2 unpacked
+ *           - 10: reserved 
+ *           - 11: reserved 
+ *         - bit 4 to 15:  reserved
+ * 
+ * 
+ *  @return 0 if this function is not supported by the driver, any other value if
+ *          the driver support this function. 
+ * 
+ * 
+ * 
+ *  @since depend of the driver
+ *
+ *  
+ *
+ *
+ */
+
 short vq_bit_image(short handle, short *ver, short *maximg, short *form)
 {
 	short vdi_control[VDI_CNTRLMAX];

@@ -1,6 +1,23 @@
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
 
+/** This function returns information about the specified bitmap file.
+ *
+ *  @param handle Device handle
+ *  @param file pointer to file name
+ *  @param image pointer to a BIT_IMAGE structure
+ * 
+ * 
+ *  @return 0 if this function is not supported by the driver, any other value if
+ *          the driver support this function.
+ * 
+ *  @since depend of the driver
+ *
+ *  
+ *
+ *
+ */
+
 short vq_image_type(short handle, const char *file, BIT_IMAGE *image)
 {
 	short vdi_control[VDI_CNTRLMAX];

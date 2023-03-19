@@ -9,6 +9,7 @@
  *  @param W2 see hereafter
  *  @param W3 see hereafter
  *  @param W4 see hereafter
+ *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.
  *

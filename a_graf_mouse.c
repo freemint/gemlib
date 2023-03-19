@@ -36,6 +36,14 @@
  *                                provided buffer. 
  *  <tr><td> #M_RESTORE <td> 259 <td>  Restore the most recently saved mouse form
  *  <tr><td> #M_PREVIOUS <td> 260 <td>  Restore the mouse form to its last shape
+ *  <tr><td> #X_MRESET <td> 1000 <td>  Resets the mouse so that it is ON just once
+ *                                and update the hide count (Geneva only)
+ *  <tr><td> #X_MGET <td> 1001 <td>  Fill shape_addr with the shape of the last 
+ *                                mouse set with graf_mouse (if non-zero) and
+ *                                return the hide count (Geneva only)
+ *  <tr><td> #X_SET_SHAPE <td> 1100+i<td>  Change the mouse cursor shape whose
+ *                                number is i. shap_addr is a pointer
+ *                                to a ANI_MOUSE structure (Geneva only) 
  *  </table>
  *
  *	@note As of AES 4.0 and beyond,

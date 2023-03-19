@@ -8,6 +8,7 @@
  *  @param cx,cy,cw,ch is a clipping rectangle suitable for
  *               use in objc_draw() returned.
  *               [option CHECK_NULLPTR] \a cx, \a cy, \a cw and/or \a ch may be NULL
+ *  @param global_aes global AES array
  *
  *  @return is currently reserved. Currently it equals 1.
  *

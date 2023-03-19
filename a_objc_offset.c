@@ -8,6 +8,7 @@
  *         [option CHECK_NULLPTR] \a x may be NULL
  *  @param y will be filled with the absolute Y screen position of \a object \n
  *         [option CHECK_NULLPTR] \a y may be NULL
+ *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred or non-zero otherwise.
  *

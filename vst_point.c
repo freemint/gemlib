@@ -6,7 +6,7 @@
  *  heights can be selected (usually 8, 9, 10, 11, 12, 14, 18, 24, 36, and 48 pt).
  *
  *  @param handle Device handle
- *  @param point requested character cell height (1/72").
+ *  @param point requested character cell height (1/72inch).
  *         The specified height is the
  *         distance between the baseline of one line of
  *         text and the baseline of the next line of text,

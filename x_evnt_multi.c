@@ -13,7 +13,6 @@
  *  @param event see mt_evnt_multi()
  *  @param global_aes global AES array
  *
- *  @return  see mt_evnt_multi()
  *
  *  @since  see mt_evnt_multi()
  *  

@@ -61,7 +61,7 @@ __BEGIN_DECLS
 #define DESK			DESKTOP_HANDLE		/**< TODO */
 
 /* mt_appl_control() mode */
-#define APC_SYSTEM		 2
+#define APC_SYSTEM		 2  /**< XaAES internal mode */
 #define APC_HIDE		10  /**< Hide application -- see mt_appl_control() */
 #define APC_SHOW		11  /**< Show application -- see mt_appl_control() */
 #define APC_TOP 		12  /**< Bring application to front -- see mt_appl_control() */
@@ -1343,10 +1343,10 @@ typedef  struct
 #define WA_LFLINE 		6	/**< Column Left,  see #WM_ARROWED  */
 #define WA_RTLINE 		7	/**< Column Right, see #WM_ARROWED  */
 #define WA_WHEEL		8	/**< deprecated (introduced in XaAES release 0.964)  */
-#define WA_UPSCAN		8	/* XaAES only */
-#define WA_DNSCAN		9	/* XaAES only */
-#define WA_LFSCAN		10	/* XaAES only */
-#define WA_RTSCAN		11	/* XaAES only */
+#define WA_UPSCAN		8	/**< XaAES only */
+#define WA_DNSCAN		9	/**< XaAES only */
+#define WA_LFSCAN		10	/**< XaAES only */
+#define WA_RTSCAN		11	/**< XaAES only */
 
 /* wind_update flags */
 #define END_UPDATE		0	/**< release the screen lock, see mt_wind_update() */
@@ -1374,9 +1374,9 @@ typedef  struct
 #define M_RESTORE 		259	/**< see mt_graf_mouse() */
 #define M_LAST 			260	/**< see mt_graf_mouse() */
 #define M_PREVIOUS		M_LAST /**< alias for #M_LAST */
-#define X_MRESET      1000	/* geneva */
-#define X_MGET        1001	/* geneva */
-#define X_MSET_SHAPE  1100	/* geneva */
+#define X_MRESET      1000	/**< Geneva only, see mt_graf_mouse() */
+#define X_MGET        1001	/**< Geneva only, see mt_graf_mouse() */
+#define X_SET_SHAPE  1100	/**< Geneva only, see mt_graf_mouse() */
 #define M_FORCE			0x8000	/**< see mt_graf_mouse() */
 
 /* objects - general */
@@ -1440,7 +1440,7 @@ typedef  struct
 #define OF_FL3DIND		0x0200	/* bit 9 */	/**< TODO */
 #define OF_FL3DBAK		0x0400	/* bit 10 */	/**< TODO */
 #define OF_FL3DACT		0x0600	/**< TODO */
-#define OF_FL3DMASK		(OF_FL3DIND|OF_FL3DBAK|OF_FL3DACT)
+#define OF_FL3DMASK		(OF_FL3DIND|OF_FL3DBAK|OF_FL3DACT)	/**< TODO */
 #define OF_SUBMENU		0x0800	/* bit 11 */	/**< TODO */
 #define OF_FLAG11		OF_SUBMENU	/**< TODO */
 #define OF_FLAG12		0x1000	/**< TODO */
@@ -1561,29 +1561,29 @@ typedef  struct
 #define EDEND 			ED_END		/**< alias */
 
 /* XaAES extensions to objc_edit() */
-#define ED_DISABLE		5
-#define ED_ENABLE		6
-#define ED_CRSRON		7
-#define ED_CRSROFF		8
+#define ED_DISABLE		5	/**< TODO */
+#define ED_ENABLE		6	/**< TODO */
+#define ED_CRSRON		7	/**< TODO */
+#define ED_CRSROFF		8	/**< TODO */
 
-#define ED_MARK			9
-#define ED_STRING		10
-#define ED_SETPTEXT		11
-#define ED_SETPTMPLT	12
-#define ED_SETPVALID	13
-#define ED_GETPTEXT		14
-#define ED_GETPTMPLT	15
-#define ED_GETPVALID	16
+#define ED_MARK			9	/**< TODO */
+#define ED_STRING		10	/**< TODO */
+#define ED_SETPTEXT		11	/**< TODO */
+#define ED_SETPTMPLT	12	/**< TODO */
+#define ED_SETPVALID	13	/**< TODO */
+#define ED_GETPTEXT		14	/**< TODO */
+#define ED_GETPTMPLT	15	/**< TODO */
+#define ED_GETPVALID	16	/**< TODO */
 
 #define ED_CRSR			100	/**< TO BE COMPLETED (MagiC), see mt_objc_edit() */
 #define ED_DRAW			103	/**< TO BE COMPLETED (MagiC), see mt_objc_edit() */
 
-#define ED_REDRAW		200		/* XaAES only */
-#define ED_XINIT		201
-#define ED_XCHAR		202
-#define ED_XEND			203		/* Redraw cursor, XaAES only */
-#define ED_CHGTEXTPTR	204
-#define ED_CHGTMPLPTR	205
+#define ED_REDRAW		200		/**< XaAES only */
+#define ED_XINIT		201             /**< XaAES only */
+#define ED_XCHAR		202             /**< XaAES only */
+#define ED_XEND			203		/**< Redraw cursor, XaAES only */
+#define ED_CHGTEXTPTR	204		/**< XaAES only */
+#define ED_CHGTMPLPTR	205		/**< XaAES only */
 
 /* editable text justification */
 #define TE_LEFT			0	/**< TODO */
@@ -1794,6 +1794,7 @@ typedef struct object
 	short 		ob_height;		/**< height of obj */
 } OBJECT;
 
+/** TODO */
 typedef struct parm_block
 {
 	OBJECT	*pb_tree;			/**< Pointer to the object tree         */
@@ -1841,31 +1842,33 @@ typedef struct rshdr
 	unsigned short	rsh_rssize;			/**< total bytes in resource */
 } RSHDR;
 
+/** TODO */
 #ifndef __RSXHDR
 #define __RSXHDR
+/** TODO */
 typedef struct rsxhdr
 {
-	unsigned short	rsh_vrsn;     /* should be 3                                 */
-	unsigned short	rsh_extvrsn;  /* not used, initialised to 'IN' for Interface */
+	unsigned short	rsh_vrsn;     /**< Version, should be 3 for extended (32bit) format */
+	unsigned short	rsh_extvrsn;  /**< Not used, initialised to 'IN' for Interface */
 
-	unsigned long	rsh_object;
-	unsigned long	rsh_tedinfo;
-	unsigned long	rsh_iconblk;  /* list of ICONBLKS                            */
-	unsigned long	rsh_bitblk;
-	unsigned long	rsh_frstr;
-	unsigned long	rsh_string;
-	unsigned long	rsh_imdata;   /* image data                                  */
-	unsigned long	rsh_frimg;
-	unsigned long	rsh_trindex;
+	unsigned long	rsh_object;     /**< Offset to OBJECT structures from file start */
+	unsigned long	rsh_tedinfo;        /**< Offset to TEDINFO structures */
+	unsigned long	rsh_iconblk;  /**< Offset to ICONBLK structures */
+	unsigned long	rsh_bitblk;     /**< Offset to BITBLK structures */
+	unsigned long	rsh_frstr;      /**< Offset to string pointer table */
+	unsigned long	rsh_string;     /**< Offset to string data */
+	unsigned long	rsh_imdata;   /**< Offset to image data */
+	unsigned long	rsh_frimg;      /**< Offset to image pointer table */
+	unsigned long	rsh_trindex;        /**< Offset to tree pointer table */
 
-	unsigned long	rsh_nobs;     /* counts of various structs                   */
-	unsigned long	rsh_ntree;
-	unsigned long	rsh_nted;
-	unsigned long	rsh_nib;
-	unsigned long	rsh_nbb;
-	unsigned long	rsh_nstring;
-	unsigned long	rsh_nimages;
-	unsigned long	rsh_rssize;   /* total bytes in resource                     */
+	unsigned long	rsh_nobs;     /**< Number of OBJECTs in the file */
+	unsigned long	rsh_ntree;      /**< Number of object tress in the file */
+	unsigned long	rsh_nted;       /**< Number of TEDINFOs in the file */
+	unsigned long	rsh_nib;        /**< Number of ICONBLKs in the file */
+	unsigned long	rsh_nbb;        /**< Number of BITBLKs in the file */
+	unsigned long	rsh_nstring;        /**< Number of free strings in the file */
+	unsigned long	rsh_nimages;        /**< Number of free images in the file */
+	unsigned long	rsh_rssize;   /**< Total bytes in resource                     */
 } RSXHDR;
 #endif
 
@@ -2206,7 +2209,7 @@ static __inline__ void **_mt_AESrscmem_p(short *global) { return (void **)&globa
 #define	mt_AESrscmem(aes_global)   (*((void **)&aes_global[7]))
 #endif
 
-/* length of that memory. Only valid for resource files <64K */
+/** length of that memory. Only valid for resource files <64K */
 #define	mt_AESrsclen(aes_global)   (aes_global[9])
 
 /** Current maximum character used by the AES to do vst_height() prior to
@@ -2439,14 +2442,15 @@ extern void aes (AESPB *pb);
 #define SCRATCH_NONE		2	/**< TODO */
 
 /* v_updwk return values */
-#define SLM_OK			0	/* no error */
-#define SLM_ERROR		2	/* general printer error */
-#define SLM_NOTONER		3	/* toner empty */
-#define SLM_NOPAPER		5	/* paper empty */
+#define SLM_OK			0	/**< no error, SLM driver */
+#define SLM_ERROR		2	/**< general printer error, SLM driver */
+#define SLM_NOTONER		3	/**< toner empty, SLM driver */
+#define SLM_NOPAPER		5	/**< paper empty, SLM driver */
 
-/** VDI Memory Form Definition Block */
+/** TODO */
 #ifndef __MFDB__
 #define __MFDB__
+/** VDI Memory Form Definition Block */
 typedef struct memory_form
 {
 	void	*fd_addr;	/**< TODO */
@@ -3055,7 +3059,7 @@ void v_gtext       (VdiHdl , short x, short y, const char *str);
 void v_gtextn      (VdiHdl , short x, short y, const char *str, short num);
 void v_gtext16     (VdiHdl , short x, short y, const short *wstr);
 void v_gtext16n    (VdiHdl , short x, short y, const short *wstr, short num);
-/* old version, using an PXY parameter */
+/** old version for v_gtext16n, using an PXY parameter */
 #define v_gtext16n_pxy(h, pos, wstr, num) v_gtext16n(h, (pos).p_x, (pos).p_y, wstr, num)
 void v_justified   (VdiHdl , short x, short y, const char *str,
                              short len, short word_space, short char_space);

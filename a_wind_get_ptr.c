@@ -1,5 +1,17 @@
 #include "gem_aesP.h"
 
+/** returns various information about a window.
+ *
+ *  @param WindowHandle specifies the handle of the window to return
+ *         information about (0 is the desktop window)
+ *  @param What specifies the information to return and the value
+ *         placed into \a v.
+ *  @param v
+ *  @param global_aes global AES array
+ *
+ *  see mt_wind_get() documentation for more details.
+ */
+
 short 
 mt_wind_get_ptr (short WindowHandle, short What, void **v, short *global_aes)
 {

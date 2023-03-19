@@ -14,8 +14,6 @@
  *  @param cellh selected character cell height \n
  *         [option CHECK_NULLPTR] cellh may be NULL
  *
- *  @return AFAIK, nothing... who know what VDI puts in vdi_intout[0] ?
- *
  *  @since all VDI versions
  *
  *  @note NVDI doc says that if the font is a bitmap and the requested height does

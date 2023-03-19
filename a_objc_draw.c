@@ -16,6 +16,7 @@
  *         to enforce during drawing.
  *  @param ch height of the the clipping rectangle
  *         to enforce during drawing.
+ *  @param global_aes global AES array
  *
  *  @return 0 if an error occurred and non-zero otherwise.
  *

@@ -1,5 +1,19 @@
 #include "gem_aesP.h"
 
+/** sets various window attributes.
+ *
+ *  @param WindowHandle specifies the window handle of the window to modify.
+ *  @param What specifies the attribute to change
+ *  @param W1 see hereafter
+ *  @param global_aes global AES array
+ *
+ *  see mt_wind_set() documentation for more details
+ *  
+ *  the \a W1 value (16 bits) is sent in place of the first parameter
+ *  \a w1 of mt_wind_set(). Parameters \a w2, \a w3 and \a w4 of mt_wind_set()
+ *  are undefined.
+ */
+
 short 
 mt_wind_set_int (short WindowHandle, short What, short W1, short *global_aes)
 {

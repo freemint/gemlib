@@ -6,7 +6,6 @@
  *  @param box Pointer to the list box structure
  *  @param global_aes global AES array
  *
- *  @return 
  *
  *  @since mt_appl_getinfo(7) give informations on mt_lbox_xx() functions availability
  *

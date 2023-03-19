@@ -29,6 +29,7 @@
  *                               was covering.
  *  @param x1,y1,w1,h1 the first rectangle (usage depends on \a mode)
  *  @param x2,y2,w2,h2 the second rectangle (usage depends on \a mode)
+ *  @param global_aes global AES array
  *
  *  @return non-zero if succeeded.
  *

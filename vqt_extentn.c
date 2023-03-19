@@ -3,7 +3,7 @@
 /** see vqt_extent()
  *
  *  @param handle Device handle
- *  @param wstr string in 16-bit format (16 bits per character)
+ *  @param str string
  *  @param num length of the string
  *  @param extent coordinates of the rectangle
  *

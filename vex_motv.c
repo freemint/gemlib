@@ -3,7 +3,7 @@
 /** establishes a routine in the mouse interrupt
  *
  *  @param handle Device handle
- *  @param newhdlr address of the new routine
+ *  @param new address of the new routine
  *  @param old address of the old routine
  *
  *  @since all VDI versions

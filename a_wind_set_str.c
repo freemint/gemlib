@@ -5,6 +5,7 @@
  *  @param WindowHandle specifies the window handle of the window to modify.
  *  @param What specifies the attribute to change
  *  @param str a string
+ *  @param global_aes global AES array
  *
  *  see mt_wind_set() documentation for more details.
  *

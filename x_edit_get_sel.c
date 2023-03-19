@@ -13,7 +13,6 @@
  *         [option CHECK_NULLPTR] esel may be NULL
  *  @param global_aes global AES array
  *
- *  @return Unknown
  *
  *  @since from MagiC 5.20 onwards. As it is 
  *         implemented as part of the shared library (SLB or SharedLib), 

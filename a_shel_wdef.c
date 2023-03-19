@@ -6,8 +6,6 @@
  *  @param lpdir
  *  @param global_aes global AES array
  *
- *  @return The return value is not at present well-known.
- *
  *  @since The presence of this function can be determined by mt_appl_getinfo() with mode
  *        #AES_PCGEM. Under PC-GEM, this function is available since release 2.0
  *

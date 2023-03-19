@@ -17,7 +17,11 @@ __BEGIN_DECLS
  *  @{
  */
 
-extern short gl_apid, gl_ap_version;			/* initialized in appl_init */
+/** initialized in appl_init */
+extern short gl_apid;
+
+/** initialized in appl_init */
+extern short gl_ap_version;			/** initialized in appl_init */
 
 /** global AES array */
 extern short aes_global[];
@@ -56,7 +60,7 @@ static __inline__ void **_AESrscmem_p(void) { return (void **)&aes_global[7]; }
 #define	_AESrscmem   (*((void **)&aes_global[7]))
 #endif
 
-/* length of that memory. Only valid for resource files <64K */
+/** length of that memory. Only valid for resource files <64K */
 #define	_AESrsclen   (aes_global[9])
 
 /** Current maximum character used by the AES to do vst_height() prior to

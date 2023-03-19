@@ -30,6 +30,7 @@ typedef struct _dialog DIALOG;
 /** TODO */
 #ifndef __EVNT
 #define __EVNT
+/** TODO */
 typedef struct
 {
 	short		mwhich;		/**< Type of events */
@@ -61,8 +62,10 @@ void mt_EVNT_multi( short evtypes, short nclicks, short bmask, short bstate,
  *  @{
  */
 
+/** TODO */
 #ifndef _SCANX
 #define _SCANX
+/** TODO */
 typedef struct
 {
 	char		scancode;  /**< TODO */
@@ -71,8 +74,10 @@ typedef struct
 } SCANX;
 #endif
 
+/** TODO */
 #ifndef _XDO_INF
 #define _XDO_INF
+/** TODO */
 typedef struct
 {
 	SCANX		*unsh;		/**< table for unshifted keys */
@@ -174,7 +179,7 @@ struct _fnts_item
 
 /* Definition  of <dialog_flags> in mt_fnts_create() */
 #define FNTS_3D			1			/**< Display selector in 3D-look */
-#define FNTS_DISPLAY	2
+#define FNTS_DISPLAY	2			/**< TODO */
 
 /* Definition of <button_flags> in mt_fnts_open() */
 #define FNTS_SNAME		0x01		/**< Select checkbox for names */
@@ -253,6 +258,7 @@ typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, GEMLIB_XATTR *xattr
 /* fslx_set_flags */
 #define SHOW8P3			1			/**< TODO */
 
+/** TODO */
 typedef struct _fslx_dialog XFSL_DIALOG;
 
 short	mt_fslx_close		(XFSL_DIALOG *fsd, short *global);
@@ -497,7 +503,7 @@ struct _pdlg_sub
 /*----------------------------------------------------------------------------------------*/
 /* printer characteristics                                                                */
 /*----------------------------------------------------------------------------------------*/
-#define PDLG_OUTFILES		5
+#define PDLG_OUTFILES		5		/**< TODO */
 
 #define	PC_FILE			0x0001		/**< printer can be accessed with GEMDOS calls */
 #define	PC_SERIAL		0x0002		/**< printer can be attached to serial interface */
@@ -529,7 +535,7 @@ struct _pdlg_sub
 #define	PLANE_YELLOW	0x0002		/**< TODO */
 #define	PLANE_MAGENTA	0x0004		/**< TODO */
 #define	PLANE_CYAN		0x0008		/**< TODO */
-#define PLANE_MASK	(PLANE_BLACK|PLANE_YELLOW|PLANE_MAGENTA|PLANE_CYAN)
+#define PLANE_MASK	(PLANE_BLACK|PLANE_YELLOW|PLANE_MAGENTA|PLANE_CYAN)		/**< TODO */
 
 
 /* <driver_mode> */
@@ -1079,7 +1085,7 @@ short vst_setsize 	(VdiHdl, short point, short *wchar, short *hchar, short *wcel
 long  vst_setsize32 	(VdiHdl, long point, short *wchar, short *hchar, short *wcell, short *hcell);
 short vst_skew 	(VdiHdl, short skew);
 void  vst_track_offset(VdiHdl, long offset, short pairmode, short *tracks, short *pairs);
-/* another name for vst_track_offset */
+/** another name for vst_track_offset */
 #define vst_kern_info vst_track_offset
 void  vst_width	(VdiHdl, short width, short *char_width, short *char_height, short *cell_width, short *cell_height);
 /**@}*/
@@ -1734,11 +1740,12 @@ short		udef_vs_document_info	(short vdi_handle, short type, char *s, short wchar
  *  @{
  */
 
+/** TODO */
 typedef struct
 {
-	short nbplanes;
-	short width;
-	short height;
+	short nbplanes;     /**< Number of planes */
+	short width;        /**< Width in pixels */
+	short height;       /**< Height in pixels */
 } BIT_IMAGE;
 
 short vq_margins(short handle, short *top, short *bot, short *lft, short *rgt, short *xdpi, short *ydpi);

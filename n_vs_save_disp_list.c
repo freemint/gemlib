@@ -1,6 +1,18 @@
 #include "gem_vdiP.h"
 #include "mt_gemx.h"
 
+/** This function is not documented. Dont use it!
+ *
+ *  @param handle Device handle
+ *  @param name name
+ *
+ *  @return unknow
+ * 
+ *  @since depend of the driver
+ *
+ */
+
+
 short vs_save_disp_list(short handle, const char *name)
 {
 	short vdi_control[VDI_CNTRLMAX];

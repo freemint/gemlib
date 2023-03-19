@@ -18,6 +18,7 @@
  *                              mode must
  *								indicate that this is feature is
  *								supported.
+ *  @param global_aes global AES array
  *
  *  @return The return value depend on \a me_mode parameter as follow:
  *          - If \a me_mode is #MENU_REMOVE or #MENU_INSTALL, the return

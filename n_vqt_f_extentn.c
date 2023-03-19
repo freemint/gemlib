@@ -8,6 +8,7 @@
  *
  *  @param handle Device handle
  *  @param str string
+ *  @param num len of the string
  *  @param extent extent[0..7] : coordinates of the rectangle
  * 
  *  @since NVDI 3.00

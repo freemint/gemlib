@@ -8,6 +8,7 @@
  *  @param x x-coordinate
  *  @param y y-coordinate
  *  @param str string
+ *  @param num length of the string
  *
  *  @since  NVDI 3.00
  *

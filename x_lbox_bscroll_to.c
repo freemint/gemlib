@@ -9,7 +9,6 @@
  *  @param slider_rect Pointer to redraw rectangle or 0L
  *  @param global_aes global AES array
  *
- *  @return 
  *
  *  @since mt_appl_getinfo(7) give informations on mt_lbox_xx() functions availability
  *

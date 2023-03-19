@@ -5,3 +5,5 @@ mt_gem.h
 *.a
 *.tar.gz
 *~
+Doxyfile
+html/

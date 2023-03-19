@@ -26,6 +26,7 @@
  *                  which display a dialog outside of a window
  *                  must use this function to prevent button
  *                  clicks from falling through to the desktop.
+ *  @param global_aes global AES array
  *
  *  @return  returns 0 if an error occurred or non-zero otherwise.
  *
