@@ -135,6 +135,10 @@ __BEGIN_DECLS
 #define AGI_AOPTS			2	/**< see  mt_appl_getinfo() */
 #define AGI_OBJCDATA			4	/**< see  mt_appl_getinfo() */
 
+/* appl_options() mode */
+#define AOPT_CLEAR		 0  /**< disable the selected options -- see  mt_appl_options() */
+#define AOPT_SET		 1  /**< enable the selected options -- see  mt_appl_options() */
+
 /* appl_options(AES_AOPTS) return values and appl_options() settings */
 #define AO0_WF_SLIDE		1	/**< see  mt_appl_options() */
 #define AO0_OBJC_EDIT		2	/**< see  mt_appl_options() */
@@ -1956,6 +1960,7 @@ short	mt_appl_getinfo (short type,
 short	mt_appl_getinfo_str (short type,
 						 char *out1, char *out2, char *out3, char *out4, short *global_aes);
 short	mt_appl_init    (short *global_aes);
+short	mt_appl_options (short mode, short aopts0, short aopts1, short aopts2, short aopts3, short *out1, short *out2, short *out3, short *out4, short *global_aes);
 short	mt_appl_read    (short ap_id, short length, void *ap_pbuff, short *global_aes);
 short	mt_appl_search  (short mode, char *fname, short *type, short *ap_id, short *global_aes);
 short	mt_appl_tplay   (void *mem, short num, short scale, short *global_aes);
@@ -2139,6 +2144,7 @@ short   mt_wind_get_ptr      (short WindowHandle, short What, void **v, short *g
 short   mt_wind_set_int      (short WindowHandle, short What, short W1, short *global_aes);
 short   mt_wind_set_ptr      (short WindowHandle, short What, void *v, short *global_aes);
 short   mt_wind_set_ptr_int  (short WindowHandle, short What, void *v, short W3, short *global_aes);
+short   mt_wind_sget         (short WindowHandle, short What, char *str, short *global_aes);
 /**@}*/
 
 /** @addtogroup a_util

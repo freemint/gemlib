@@ -91,6 +91,8 @@ static __inline__ void **_AESrscmem_p(void) { return (void **)&aes_global[7]; }
 #define appl_xgetinfo(a,b,c,d,e) mt_appl_getinfo(a,b,c,d,e,aes_global)
 /** single-thread version of mt_appl_getinfo_str() */
 #define appl_getinfo_str(a,b,c,d,e) mt_appl_getinfo_str(a,b,c,d,e,aes_global)
+/** single-thread version of mt_appl_options() */
+#define appl_options(a,b,c,d,e,f,g,h,i) mt_appl_options(a,b,c,d,e,f,g,h,i,aes_global)
 /** single-thread version of mt_appl_read() */
 #define appl_read(a,b,c) mt_appl_read(a,b,c,aes_global)
 /** single-thread version of mt_appl_search() */
@@ -367,6 +369,8 @@ void _appl_yield(void);
 #define wind_set_ptr(a,b,c) mt_wind_set_ptr(a,b,c,aes_global) 
 /** single-thread version of mt_wind_set_ptr_int() */
 #define wind_set_ptr_int(a,b,c,d) mt_wind_set_ptr_int(a,b,c,d,aes_global) 
+/** single-thread version of mt_wind_sget() */
+#define wind_sget(a,b,c) mt_wind_sget(a,b,c,aes_global)
 
 /*
  * Some useful extensions
