@@ -605,6 +605,8 @@ COBJS = \
 	x_wdlg_set_tree.c \
 	x_wdlg_set_uniconify.c \
 	\
+	x_appl_sleep.c \
+	\
 	_gc_vq_gdos.c \
 	_gc_vq_vgdos.c \
 	_gc_aes.c \
