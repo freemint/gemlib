@@ -303,6 +303,76 @@ __BEGIN_DECLS
 #define edit_scroll(a,b,c,d,e)					mt_edit_scroll(a,b,c,d,e,aes_global)
 /**@}*/
 
+/** @addtogroup geneva
+ *  @{
+ */
+/** single-thread version of mt_x_settings() */
+#define x_settings(a,b,c) mt_x_settings(a,b,c,aes_global)
+/** single-thread version of mt_x_shel_get() */
+#define x_shel_get(a,b,c) mt_x_shel_get(a,b,c,aes_global)
+/** single-thread version of mt_x_shel_put() */
+#define x_shel_put(a,b,c) mt_x_shel_put(a,b,c,aes_global)
+/** single-thread version of mt_x_wind_create() */
+#define x_wind_create(a,b,c,d,e,f) mt_x_wind_create(a,b,c,d,e,f,aes_global)
+/** single-thread version of mt_x_wind_calc() */
+#define x_wind_calc(a,b,c,d,e,f,g,h,i,j,k) mt_x_wind_calc(a,b,c,d,e,f,g,h,i,j,k,aes_global)
+/** single-thread version of mt_x_wind_tree() */
+#define x_wind_tree(a,b) mt_x_wind_tree(a,b,aes_global)
+/** single-thread version of mt_x_appl_flags() */
+#define x_appl_flags(a,b,c) mt_x_appl_flags(a,b,c,aes_global)
+/** single-thread version of mt_x_appl_font() */
+#define x_appl_font(a,b,c) mt_x_appl_font(a,b,c,aes_global)
+/** single-thread version of mt_x_appl_term() */
+#define x_appl_term(a,b,c) mt_x_appl_term(a,b,c,aes_global)
+/** single-thread version of mt_x_appl_trecord() */
+#define x_appl_trecord(a,b,c,d) mt_x_appl_trecord(a,b,c,d,aes_global)
+/** single-thread version of mt_x_appl_tplay() */
+#define x_appl_tplay(a,b,c,d) mt_x_appl_tplay(a,b,c,d,aes_global)
+/** single-thread version of mt_x_appl_sleep() */
+#define x_appl_sleep(a,b) mt_x_appl_sleep(a,b,aes_global)
+/** single-thread version of mt_x_form_center() */
+#define x_form_center(a,b,c,d,e) mt_x_form_center(a,b,c,d,e,aes_global)
+/** single-thread version of mt_x_form_error() */
+#define x_form_error(a,b) mt_x_form_error(a,b,aes_global)
+/** single-thread version of mt_x_form_filename() */
+#define x_form_filename(a,b,c,d) mt_x_form_filename(a,b,c,d,aes_global)
+/** single-thread version of mt_x_form_mouse() */
+#define x_form_mouse(a,b,c,d,e,f,g) mt_x_form_mouse(a,b,c,d,e,f,g,aes_global)
+/** single-thread version of mt_x_fsel_input() */
+#define x_fsel_input(a,b,c,d,e,f) mt_x_fsel_input(a,b,c,d,e,f,aes_global)
+/** single-thread version of mt_x_graf_blit() */
+#define x_graf_blit(a,b) mt_x_graf_blit(a,b,aes_global)
+/** single-thread version of mt_x_graf_rubberbox() */
+#define x_graf_rubberbox(a,b,c,d,e,f,g,h) mt_x_graf_rubberbox(a,b,c,d,e,f,g,h,aes_global)
+/** single-thread version of mt_x_graf_rast2rez() */
+#define x_graf_rast2rez(a,b,c,d,e) mt_x_graf_rast2rez(a,b,c,d,e,aes_global)
+/** single-thread version of mt_x_help() */
+#define x_help(a,b,c) mt_x_help(a,b,c,aes_global)
+/** single-thread version of mt_x_malloc() */
+#define x_malloc(a,b) mt_x_malloc(a,b,aes_global)
+/** single-thread version of mt_x_mfree() */
+#define x_mfree(a) mt_x_mfree(a,aes_global)
+/** single-thread version of mt_x_shrink() */
+#define x_mshrink(a,b) mt_x_mshrink(a,b,aes_global)
+/** single-thread version of mt_x_realloc() */
+#define x_realloc(a,b) mt_x_realloc(a,b,aes_global)
+/** single-thread version of mt_x_objc_edit() */
+#define x_objc_edit(a,b,c,d,e,f) mt_x_objc_edit(a,b,c,d,e,f,aes_global)
+/** single-thread version of mt_x_scrp_get() */
+#define x_scrp_get(a,b) mt_x_scrp_get(a,b,aes_global)
+/** single-thread version of mt_x_wdial_draw() */
+#define x_wdial_draw(a,b,c) mt_x_wdial_draw(a,b,c,aes_global)
+/** single-thread version of mt_x_wdial_change() */
+#define x_wdial_change(a,b,c) mt_x_wdial_change(a,b,c,aes_global)
+#ifdef __MSHORT__
+/** single-thread version of mt_x_sprint() */
+#define x_sprintf mt_x_x_sprintf
+/** single-thread version of mt_x_sscanf() */
+#define x_sscanf mt_x_sscanf
+#endif
+
+/**@}*/
+
 __END_DECLS
 
 #endif /* _GEMLIB_X_H_ */

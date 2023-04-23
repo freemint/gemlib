@@ -164,6 +164,11 @@
  *  says that mt_pdlg_xx() functions are available.
  */
 
+/** @defgroup geneva Geneva extensions
+ *
+ *  @brief geneva specific funcions
+ */
+
 /**@}*/
 
 /** @defgroup VDI VDI  Function Reference

@@ -151,6 +151,9 @@ __BEGIN_DECLS
 #define APP_FIRST 		0	/**< see mt_appl_search() */
 #define APP_NEXT		1	/**< see mt_appl_search() */
 #define APP_DESK		2	/**< see mt_appl_search() */
+#define X_APS_CHILD0            0x7100	/**< see mt_appl_search() (Geneva) */
+#define X_APS_CHILD             0x7101	/**< see mt_appl_search() (Geneva) */
+#define X_APS_CHEXIT            (-1)	/**< see mt_appl_search() (Geneva) */
 
 /* appl_search return values*/
 #define APP_SYSTEM			0x01	/**< see mt_appl_search() */
@@ -804,7 +807,7 @@ typedef struct pEvntrec
  *	-  #SMC_SWITCH	 
  *	-  #SMC_FREEZE	 
  *	-  #SMC_UNFREEZE  
- *	-  #SMC_RES5 	 
+ *	-  #SMC_TASKSWITCH
  *	-  #SMC_UNHIDEALL 
  *	-  #SMC_HIDEOTHERS
  *	-  #SMC_HIDEACT
@@ -837,15 +840,15 @@ typedef struct pEvntrec
 	msg[7] = 0;
 	appl_write(msg, 16, 1);		 apid #1 is the SCREENMGR
 */
-#define SMC_TIDY_UP			0    /* MagiC 2  */ 	 /**< TODO */
-#define SMC_TERMINATE		1    /* MagiC 2  */ 	 /**< TODO */
-#define SMC_SWITCH			2    /* MagiC 2  */ 	 /**< TODO */
-#define SMC_FREEZE			3    /* MagiC 2  */ 	 /**< TODO */
-#define SMC_UNFREEZE		4    /* MagiC 2  */ 	 /**< TODO */
-#define SMC_RES5			5    /* MagiC 2  */ 	 /**< TODO */
-#define SMC_UNHIDEALL		6    /* MagiC 3.1	*/   /**< TODO */
-#define SMC_HIDEOTHERS		7    /* MagiC 3.1	*/   /**< TODO */
-#define SMC_HIDEACT			8    /* MagiC 3.1	*/   /**< TODO */
+#define SMC_TIDY_UP		0    /* MagiC 2  */ 	 /**< clean up screen */
+#define SMC_TERMINATE		1    /* MagiC 2  */ 	 /**< terminate app */
+#define SMC_SWITCH		2    /* MagiC 2  */ 	 /**< switch to app */
+#define SMC_FREEZE		3    /* MagiC 2  */ 	 /**< freeze app */
+#define SMC_UNFREEZE		4    /* MagiC 2  */ 	 /**< unfreeze apo */
+#define SMC_TASKSWITCH		5    /* MagiC 2  */ 	 /**< invoked by alt-ctrl-tab */
+#define SMC_UNHIDEALL		6    /* MagiC 3.1	*/   /**< unhide all apps */
+#define SMC_HIDEOTHERS		7    /* MagiC 3.1	*/   /**< hide others */
+#define SMC_HIDEACT		8    /* MagiC 3.1	*/   /**< hide current app */
 
 /** Message received when an event occurs on mouse wheel.
  *
@@ -877,6 +880,21 @@ typedef struct pEvntrec
  */
 #define WM_WHEEL		345
 
+
+#define X_MN_SELECTED   0xE000          /**< (Geneva) */
+#define X_WM_SELECTED   0xE100          /**< Only if X_WTFL_CLICKS is off (Geneva) */
+#define X_GET_HELP      0xE200          /**< (Geneva) */
+#define X_WM_HSPLIT     0xE400          /**< (Geneva) */
+#define X_WM_VSPLIT     0xE500          /**< (Geneva) */
+#define X_WM_ARROWED2   0xE600          /**< (Geneva) */
+#define X_WM_HSLID2     0xE700          /**< (Geneva) */
+#define X_WM_VSLID2     0xE800          /**< (Geneva) */
+#define X_WM_OBJECT     0xE900          /**< (Geneva) */
+#define X_WM_VECKEY     0xEA00          /**< keypress vector event (Geneva rel 004) */
+#define X_WM_VECSW      0xEA01          /**< switch vector event (Geneva rel 004) */
+#define X_WM_VECEVNT    0xEA02          /**< user-defined event (Geneva rel 004) */
+#define X_WM_RECSTOP    0xEA10          /**< x_appl_trecord finished (Geneva) */
+
 /* evnt_mouse modes */
 #define MO_ENTER		0	/**< Wait for mouse to enter rectangle, see mt_evnt_mouse() */
 #define MO_LEAVE		1	/**< Wait for mouse to leave rectangle, see mt_evnt_mouse() */
@@ -892,6 +910,7 @@ typedef struct pEvntrec
 #define MU_MX				0x0080	/**< TODO (XaAES) */
 #define MU_NORM_KEYBD		0x0100	/**< TODO (XaAES) */
 #define MU_DYNAMIC_KEYBD	0x0200	/**< TODO (XaAES) */
+#define X_MU_DIALOG     0x4000          /**< evnt_multi (only) type (Geneva) */
 
 /* constants for form_alert */
 #define FA_NOICON   "[0]"	/**< display no icon, see mt_form_alert() */
@@ -906,6 +925,8 @@ typedef struct pEvntrec
 #define FMD_GROW		1	/**< draws an expanding box, see mt_form_dial() */
 #define FMD_SHRINK		2	/**< draws a shrinking box, see mt_form_dial()  */
 #define FMD_FINISH		3	/**< releases the screen space for a dialog, see mt_form_dial() */
+#define X_FMD_START     1000    /**< Save area under dialog (Geneva) */
+#define X_FMD_FINISH    1003    /**< Restore area under dialog (Geneva) */
 
 /* form_error modes */
 #define FERR_FILENOTFOUND	 2	/**< File Not Found (GEMDOS error -33), see mt_form_error() */
@@ -1157,6 +1178,12 @@ typedef  struct
 /* MagiC 6 extensions for shel_write() extended modes*/
 #define SHW_XMDFLAGS		0x1000	/**< magiC 6 extension, see XSHW_COMMAND::flags*/
 
+/* Geneva extensions */
+#define XSHW_RUNANY     0x00E0  /**< rel 004 */
+#define XSHW_RUNAPP     0x00E1  /**< rel 004 */
+#define XSHW_RUNACC     0x00E3  /**< rel 004 */
+#define XSHD_FLAGS      (1<<15) /**< APFLG in long[9] of SHWRCMD */
+
 /* other names... */
 #define SHW_XMDLIMIT	SW_PSETLIMIT	/**< alias */
 #define SHW_XMDNICE		SW_PRENICE		/**< alias */
@@ -1281,6 +1308,9 @@ typedef  struct
 #define X_WF_VSLIDE2	0x1b00	/**< get/set (doc: TODO) (Geneva)  */
 #define X_WF_HSLSIZE2	0x1c00	/**< get/set (doc: TODO) (Geneva)  */
 #define X_WF_VSLSIZE2	0x1d00	/**< get/set (doc: TODO) (Geneva)  */
+  #define X_WD_ACTIVE   1       /**< Mouse/keyboard events processed */
+  #define X_WD_BLITSCRL 2       /**< Use blit for realtime scroll */
+  #define X_WD_KEYS     4       /**< 004: Pass through unused keyclicks */
 #define X_WF_DIALFLGS	0x1e00	/**< get/set (doc: TODO) (Geneva)  */
 #define X_WF_OBJHAND	0x1f00	/**< get/set (doc: TODO) (Geneva)  */
 #define X_WF_DIALEDIT	0x2000	/**< get/set (doc: TODO) (Geneva)  */
@@ -1371,6 +1401,8 @@ typedef  struct
 #define THIN_CROSS		 5	/**< see mt_graf_mouse() */
 #define THICK_CROSS		 6	/**< see mt_graf_mouse() */
 #define OUTLN_CROSS		 7	/**< see mt_graf_mouse() */
+#define X_LFTRT			 8	/**< Left-right arrow; Geneva only, see mt_graf_mouse() */
+#define X_UPDOWN		 9	/**< Up-down arrow; Geneva only, see mt_graf_mouse() */
 #define USER_DEF		255	/**< see mt_graf_mouse() */
 #define M_OFF			256	/**< see mt_graf_mouse() */
 #define M_ON			257	/**< see mt_graf_mouse() */
@@ -1826,23 +1858,23 @@ typedef struct user_block
 /** TODO */
 typedef struct rshdr
 {
-	short			rsh_vrsn;			/**< TODO */
-	unsigned short	rsh_object;			/**< TODO */
-	unsigned short	rsh_tedinfo;		/**< TODO */
-	unsigned short	rsh_iconblk;		/**< list of ICONBLKS */
-	unsigned short	rsh_bitblk;			/**< TODO */
-	unsigned short	rsh_frstr;			/**< TODO */
-	unsigned short	rsh_string;			/**< TODO */
-	unsigned short	rsh_imdata;			/**< image data */
-	unsigned short	rsh_frimg;			/**< TODO */
-	unsigned short	rsh_trindex;		/**< TODO */
-	short			rsh_nobs;			/**< counts of various structs */
-	short			rsh_ntree;			/**< TODO */
-	short			rsh_nted;			/**< TODO */
-	short			rsh_nib;			/**< TODO */
-	short			rsh_nbb;			/**< TODO */
-	short			rsh_nstring;		/**< TODO */
-	short			rsh_nimages;		/**< TODO */
+	short			rsh_vrsn;			/**< Version, should be 1 for standard format */
+	unsigned short	rsh_object;			/**< Offset to OBJECT structures from file start */
+	unsigned short	rsh_tedinfo;		/**< Offset to TEDINFO structures */
+	unsigned short	rsh_iconblk;		/**< Offset to ICONBLK structures */
+	unsigned short	rsh_bitblk;			/**< Offset to BITBLK structures */
+	unsigned short	rsh_frstr;			/**< Offset to string pointer table */
+	unsigned short	rsh_string;			/**< Offset to string data */
+	unsigned short	rsh_imdata;			/**< Offset to image data */
+	unsigned short	rsh_frimg;			/**< Offset to image pointer table */
+	unsigned short	rsh_trindex;		/**< Offset to tree pointer table */
+	short			rsh_nobs;			/**< Number of OBJECTs in the file */
+	short			rsh_ntree;			/**< Number of object tress in the file */
+	short			rsh_nted;			/**< Number of TEDINFOs in the file */
+	short			rsh_nib;			/**< Number of ICONBLKs in the file */
+	short			rsh_nbb;			/**< Number of BITBLKs in the file */
+	short			rsh_nstring;		/**< Number of free strings in the file */
+	short			rsh_nimages;		/**< Number of free images in the file */
 	unsigned short	rsh_rssize;			/**< total bytes in resource */
 } RSHDR;
 
@@ -1874,6 +1906,8 @@ typedef struct rsxhdr
 	unsigned long	rsh_nimages;        /**< Number of free images in the file */
 	unsigned long	rsh_rssize;   /**< Total bytes in resource                     */
 } RSXHDR;
+typedef RSXHDR RSHDR2; /**< Geneva's name */
+#define X_LONGRSC       0x494E /**< "IN" */
 #endif
 
 /** MENU structure, used by mt_menu_attach() and mt_menu_popup() */

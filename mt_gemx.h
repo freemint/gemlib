@@ -49,7 +49,7 @@ typedef struct
 /** @addtogroup a_evnt
  *  @{
  */
-void mt_EVNT_multi( short evtypes, short nclicks, short bmask, short bstate,
+void mt_EVNT_multi(short evtypes, short nclicks, short bmask, short bstate,
                     const MOBLK *m1, const MOBLK *m2, unsigned long ms, EVNT *event, short *global_aes );
 
 /**@}*/
@@ -930,7 +930,7 @@ void	mt_edit_set_colour	(OBJECT *tree, short obj, short tcolor, short bcolor, sh
 /** another name, with "color" instead of "colour" to be consistent with AES/VDI function naming rules */
 #define mt_edit_set_color	mt_edit_set_colour
 void	mt_edit_set_cursor	(OBJECT *tree, short obj, char *cursorpos, short *global);
-short	mt_edit_resized		(OBJECT *tree, short obj, short *oldrh, short *newrh, short *global);
+short	mt_edit_resized		(OBJECT *tree, short obj, short *oldrh, short *newrh, short *globalo);
 short	mt_edit_get_dirty	(OBJECT *tree, short obj, short *global);
 void	mt_edit_set_dirty	(OBJECT *tree, short obj, short dirty, short *global);
 void	mt_edit_get_sel		(OBJECT *tree, short obj, char **bsel, char **esel, short *global);
@@ -938,6 +938,359 @@ void	mt_edit_get_pos		(OBJECT *tree, short obj, short *xscroll, long *yscroll, c
 void	mt_edit_set_pos		(OBJECT *tree, short obj, short xscroll, long yscroll, char *cyscroll, char *cursorpos, short cx, short cy, short *global);
 short	mt_edit_scroll		(OBJECT *tree, short obj, short whdl, long yscroll, short xscroll, short *global);
 void	mt_edit_get_scrollinfo (OBJECT *tree, short obj, long *nlines, long *yscroll, short *yvis, short *yval, short *ncols, short *xscroll, short *xvis, short *global);
+/**@}*/
+
+/*
+ * Geneva extensions
+ */
+
+/** @addtogroup geneva
+ *  @{
+ */
+
+/** TODO */
+#ifndef GENEVA_COOKIE
+#define GENEVA_COOKIE   0x476E7661L     /**< "Gnva" */
+#define GENEVA_VER      0x0106          /**< current Geneva version */
+/** TODO */
+typedef struct
+{
+	short ver;                  /**< TODO */
+	char *process_name;         /**< TODO */
+	short apid;                 /**< TODO */
+	short (**aes_funcs)(void);  /**< TODO */
+	short (**xaes_funcs)(void); /**< TODO */
+	struct G_vectors *vectors;	/**< rel 004 */
+} G_COOKIE;
+
+typedef struct G_vectors        /**< rel 004 */
+{
+	short used;                         /**< TODO */
+	short (*keypress)(long *key);     /**< TODO */
+	short (*app_switch)(const char *process_name, short apid);     /**< TODO */
+	short (*gen_event)(void);           /**< TODO */
+} G_VECTORS;
+#endif
+
+/********************** form_do/objc_edit **********************/
+/* Value for long edits into TEDINFO->te_tmplen */
+#define X_LONGEDIT      -71     /**< rel 004 */
+
+/** TODO */
+typedef struct
+{
+	short frames;                      /**< TODO */
+	short delay;                       /**< TODO */
+	MFORM form[32];                    /**< TODO */
+} ANI_MOUSE;
+#define X_SET_SHAPE     1100    /**< Add to mouse shape index to change shape */
+
+/************************** objc_draw **************************/
+#define X_MAGMASK       0xF000 /**< ob_state: Mask for X_MAGIC                  */
+#define X_MAGIC         0x9000 /**<           Must be set this way              */
+#define X_PREFER        0x0040 /**<           User-defined fill                 */
+#define X_DRAW3D        0x0080 /**<           3D                                */
+#define X_ROUNDED       0x0100 /**<           Rounded                           */
+#define X_KBD_EQUIV     0x0200 /**<           Scan for ['s; Root: no auto equivs*/
+#define X_SMALLTEXT     0x0400 /**<           Small font                        */
+#define X_SHADOWTEXT    0x0800 /**<           Shadowed text (rel 004)           */
+#define X_BOLD          0x4000 /**< ob_flags: With X_MAGIC, bold text           */
+#define X_ITALICS       0x8000 /**<           With X_MAGIC, italic text         */
+/* Extended ob_types */
+#define X_MOVER         17     /**< Dialog mover box                            */
+#define X_RADCHKUND     18     /**< Radio/check/Undo                            */
+#define X_UNDERLINE     19     /**< Title (G_STRING)                            */
+#define X_GROUP         20     /**< Group (G_BUTTON)                            */
+#define X_HELP          21     /**< Activated with Help key                     */
+#define X_UNDO          31     /**< Activated with Undo key                     */
+#define X_USRDEFPRE     90     /**< With X_MAGIC, call USERBLK before drawing   */
+#define X_USRDEFPOST    91     /**< With X_MAGIC, call USERBLK after drawing    */
+#define X_GRAYMENU      92     /**< root object: draw DISABLED G_STRING children in gray (rel 004) */
+
+/************************** x_settings *************************/
+#define SET_VER         0x0106   /**< the last time SETTINGS changed */
+
+/** TODO */
+typedef struct
+{
+	unsigned char shift;   /**< TODO */
+	unsigned char scan;    /**< TODO */
+	unsigned char ascii;   /**< TODO */
+} KEYCODE;
+
+/** TODO */
+typedef union
+{
+	struct
+	{
+		unsigned outlined   :1;   /**< TODO */
+		unsigned shadowed   :1;   /**< TODO */
+		unsigned draw_3D    :1;   /**< TODO */
+		unsigned rounded    :1;   /**< TODO */
+		unsigned atari_3D   :1;   /**< TODO rel 004 */
+		unsigned shadow_text:1;   /**< TODO rel 004 */
+		unsigned bold_shadow:1;   /**< TODO rel 004 */
+		unsigned reserved   :9;   /**< TODO */
+		unsigned framecol   :4;   /**< TODO */
+		unsigned textcol    :4;   /**< TODO */
+		unsigned textmode   :1;   /**< TODO */
+		unsigned fillpattern:3;   /**< TODO */
+		unsigned interiorcol:4;   /**< TODO */
+	} s; /**< TODO */
+	unsigned long l;              /**< TODO */
+} OB_PREFER;
+
+/** parameters for x_settings() */
+typedef struct Settings
+{
+	short version;                /**< TODO */
+	short struct_len;             /**< TODO */
+	short boot_rez;               /**< TODO */
+	short falcon_rez;             /**< TODO */
+	union
+	{
+		struct
+		{
+			unsigned pulldown          :1;  /**< TODO */
+			unsigned insert_mode       :1;  /**< TODO */
+			unsigned long_titles       :1;  /**< TODO */
+			unsigned alerts_under_mouse:1;  /**< TODO */
+			unsigned fsel_1col         :1;  /**< TODO */
+			unsigned grow_shrink       :1;  /**< TODO */
+			unsigned tear_aways_topped :1;  /**< TODO */
+			unsigned auto_update_shell :1;  /**< TODO */
+			unsigned alert_mode_change :1;  /**< TODO */
+			unsigned ignore_video_mode :1;  /**< TODO */
+			unsigned no_alt_modal_equiv:1;	/**< rel 004 */
+			unsigned no_alt_modeless_eq:1;	/**< rel 004 */
+			unsigned preserve_palette  :1;	/**< rel 004 */
+			unsigned mouse_on_off      :1;	/**< rel 004 */
+			unsigned top_all_at_once   :1;	/**< rel 005 */
+			unsigned child_pexec_single:1;	/**< rel 006: undocumented */
+		} s;                                /**< TODO */
+		unsigned short i;                   /**< */
+	} flags;                                /**< TODO */
+	short gadget_pause;						/**< 50 Hz timer tics */
+	KEYCODE menu_start;                     /**< TODO */
+	KEYCODE app_switch;                     /**< TODO */
+	KEYCODE app_sleep;                      /**< TODO */
+	KEYCODE ascii_table;                    /**< TODO */
+	KEYCODE redraw_all;                     /**< TODO */
+	KEYCODE wind_keys[13];                  /**< TODO */
+	OB_PREFER color_3D[4];                  /**< TODO */
+	OB_PREFER color_root[4];                /**< TODO */
+	OB_PREFER color_exit[4];                /**< TODO */
+	OB_PREFER color_other[4];               /**< TODO */
+	char sort_type;                         /**< TODO */
+	char find_file[26];                     /**< TODO */
+	char fsel_path[10][35];                 /**< TODO */
+	char fsel_ext[10][6];                   /**< TODO */
+	KEYCODE cycle_in_app;		            /**< TODO rel 004 */
+	KEYCODE iconify;                        /**< TODO rel 004 */
+	KEYCODE alliconify;                     /**< TODO rel 004 */
+	KEYCODE procman;                        /**< TODO rel 006 */
+	KEYCODE unused[4];                      /**< unused */
+	char graymenu;	                        /**< TODO rel 004 */
+	char reserved;                          /**< reserved */
+	union
+	{
+		struct
+		{
+			unsigned procman_details  :1;
+			unsigned reserved         :15;
+			unsigned reserved2        :16;
+		} s;
+		unsigned long l;
+	} flags2;				                /**< rel 006 */
+} SETTINGS;
+
+#define XS_UPPAGE WA_UPPAGE	/**< TODO */
+#define XS_DNPAGE WA_DNPAGE	/**< TODO */
+#define XS_UPLINE WA_UPLINE	/**< TODO */
+#define XS_DNLINE WA_DNLINE	/**< TODO */
+#define XS_LFPAGE WA_LFPAGE	/**< TODO */
+#define XS_RTPAGE WA_RTPAGE	/**< TODO */
+#define XS_LFLINE WA_LFLINE	/**< TODO */
+#define XS_RTLINE WA_RTLINE	/**< TODO */
+#define XS_CLOSE		8	/**< TODO */
+#define XS_CYCLE		9	/**< TODO */
+#define XS_FULL			10	/**< TODO */
+#define XS_LFINFO		11	/**< TODO */
+#define XS_RTINFO		12	/**< TODO */
+
+/** TODO */
+short mt_x_settings(short getset, short length, SETTINGS *user, short *global);
+
+/************************ x_shel_get/put ************************/
+#define X_SHLOADSAVE    -1      /**< Load/save SETTINGS */
+#define X_SHOPEN        0       /**< Start read/write   */
+#define X_SHACCESS      1       /**< Read/write         */
+#define X_SHCLOSE       2       /**< Close              */
+
+
+/** TODO */
+short mt_x_shel_get(short mode, short length, char *buf, short *global);
+/** TODO */
+short mt_x_shel_put(short mode, const char *buf, short *global);
+
+/***************** x_wind_create, x_wind_calc *******************/
+#define X_MENU          0x0001	/**< TODO */
+#define X_HSPLIT        0x0002	/**< TODO */
+#define X_VSPLIT        0x0004	/**< TODO */
+
+/** TODO */
+short mt_x_wind_create(short kind, short xkind, short wx, short wy, short ww, short wh, short *global);
+/** TODO */
+short mt_x_wind_calc(short type, short kind, short xkind, short inx, short iny,  short inw, short inh,
+	short *outx, short *outy, short *outw, short *outh, short *global);
+
+/************************** x_wind_tree *************************/
+/** TODO */
+typedef struct WindTree
+{
+	short handle;	/**< TODO */
+	short count;	/**< TODO */
+	short flag;		/**< TODO */
+	OBJECT *tree;	/**< TODO */
+} WIND_TREE;
+
+#define X_WT_GETCNT     0       /**< Get count and flag */
+#define X_WT_READ       1       /**< Copy window tree   */
+#define X_WT_SET        2       /**< Set new tree       */
+
+#define X_WTFL_RESIZE   1       /**< Flags bit 0: Auto resize                  */
+#define X_WTFL_CLICKS   2       /**<           1: Process clicks               */
+#define X_WTFL_SLIDERS  4       /**<           2: Resize sliders, info         */
+
+/* window gadgets */
+#define WGCLOSE   1   /**< BOXCHAR */
+#define WGMOVE    2   /**< BOXTEXT */
+#define WGICONIZ  3   /**< BOXCHAR */
+#define WGBACK    4   /**< BOXCHAR */
+#define WGFULL    5   /**< BOXCHAR */
+#define WGILEFT   6   /**< BOXCHAR */
+#define WGINFO    7   /**< BOXTEXT */
+#define WGIRT     8   /**< BOXCHAR */
+#define WGTOOLBOX 9   /**< IBOX */
+#define WGMNLEFT  10  /**< BOXCHAR */
+#define WGMENU    11  /**< BOX */
+#define WGMNRT    12  /**< BOXCHAR */
+#define WGUP      13  /**< BOXCHAR */
+#define WGVBIGSL  14  /**< BOX */
+#define WGVSMLSL  15  /**< BOX */
+#define WGDOWN    16  /**< BOXCHAR */
+#define WGVSPLIT  17  /**< BOX */
+#define WGUP2     18  /**< BOXCHAR */
+#define WGVBIGSL2 19  /**< BOX */
+#define WGVSMLSL2 20  /**< BOX */
+#define WGDOWN2   21  /**< BOXCHAR */
+#define WGLEFT    22  /**< BOXCHAR */
+#define WGHBIGSL  23  /**< BOX */
+#define WGHSMLSL  24  /**< BOX */
+#define WGRT      25  /**< BOXCHAR */
+#define WGHSPLIT  26  /**< BOX */
+#define WGLEFT2   27  /**< BOXCHAR */
+#define WGHBIGSL2 28  /**< BOX */
+#define WGHSMLSL2 29  /**< BOX */
+#define WGRT2     30  /**< BOXCHAR */
+#define WGSIZE    31  /**< BOXCHAR */
+
+/** TODO */
+short mt_x_wind_tree(short mode, WIND_TREE *wt, short *global);
+
+/************************* x_appl_flags *************************/
+/** TODO */
+typedef union
+{
+	struct
+	{
+		unsigned multitask    :1;
+		unsigned special_types:1;
+		unsigned round_buttons:1;
+		unsigned kbd_equivs   :1;
+		unsigned undo_equivs  :1;
+		unsigned off_left     :1;
+		unsigned exit_redraw  :1;
+		unsigned AES40_msgs   :1;
+		unsigned limit_handles:1;
+		unsigned limit_memory :1;
+		unsigned keep_deskmenu:1;
+		unsigned clear_memory :1;
+		unsigned maximize_wind:1;
+		unsigned optim_redraws:1;   /* rel 004 */
+		unsigned unused       :2;   /* Reserved for future use */
+		unsigned mem_limit    :16;  /* Kb to limit memory allocation */
+	} s; /**< TODO */
+	unsigned long l; /**< TODO */
+} APFLG;
+
+/** TODO */
+typedef struct
+{
+	char name[13];           /**< TODO */
+	char desc[17];           /**< TODO */
+	APFLG flags;             /**< TODO */
+	KEYCODE open_key;        /**< TODO */
+	KEYCODE reserve_key[3];  /**< reserved */
+} APPFLAGS;
+
+#define X_APF_GET_INDEX 0    /**< TODO */
+#define X_APF_SET_INDEX 1    /**< TODO */
+#define X_APF_DEL_INDEX 2    /**< TODO */
+#define X_APF_GET_ID    3    /**< TODO */
+#define X_APF_SET_ID    4    /**< TODO */
+#define X_APF_SEARCH    5    /**< TODO rel 004 */
+
+/** TODO */
+short mt_x_appl_flags(short getset, short index, APPFLAGS *flags, short *global);
+
+/*********************** x_appl_font ****************************/
+/** TODO */
+typedef struct
+{
+	short font_id;       /**< TODO */
+	short point_size;    /**< TODO */
+	short gadget_wid;    /**< TODO */
+	short gadget_ht;     /**< TODO */
+} XFONTINFO;
+
+/** TODO */
+short mt_x_appl_font(short getset, short zero, XFONTINFO *info, short *global);
+
+short  mt_x_appl_term(short apid, short retrn, short set_me, short *global);
+short  mt_x_appl_trecord(void *mem, short count, KEYCODE *cancel, short mode, short *global);
+short  mt_x_appl_tplay(void *mem, short num, short scale, short mode, short *global);
+short  mt_x_appl_sleep(short id, short sleep, short *global);
+short  mt_x_form_center(OBJECT *tree, short *cx, short *cy, short *cw, short *ch, short *global);
+short  mt_x_form_error(const char *fmt, short num, short *global);
+short  mt_x_form_filename(OBJECT *tree, short obj, short to_from, char *string, short *global);
+short  mt_x_form_mouse(OBJECT *tree, short mouse_x, short mouse_y, short clicks,
+     short *edit_obj, short *next_obj, short *edit_idx, short *global);
+short  mt_x_fsel_input(char *inpath, short pathlen, char *insel, short sels,
+     short *exbutton, const char *label, short *global);
+short  mt_x_graf_blit(GRECT *r1, GRECT *r2, short *global);
+short  mt_x_graf_rubberbox(GRECT *area, GRECT *outer, short minwidth,
+     short minheight, short maxwidth, short maxheight, short snap, short lag, short *global);
+void mt_x_graf_rast2rez(unsigned short *src_data, long plane_len,
+     short old_planes, MFDB *mfdb, short devspef, short *global);         /* rel 004 */
+short  mt_x_help(const char *topic, const char *helpfile, short sensitive, short *global);
+void mt_x_malloc(void **addr, long size, short *global);                /* rel 004 */
+short  mt_x_mfree(void *addr, short *global);                             /* rel 004 */
+short  mt_x_mshrink(void *addr, long newsize, short *global);                 /* rel 004 */
+short  mt_x_realloc(void **addr, long size, short *global);               /* rel 004 */
+short  mt_x_objc_edit(OBJECT *tree, short edit_obj, short key_press,
+     short shift_state, short *edit_idx, short mode, short *global);
+short  mt_x_scrp_get(char *out, short deleteit, short *global);               /* rel 004 */
+short  mt_x_wdial_draw(short handle, short start, short depth, short *global);
+short  mt_x_wdial_change(short handle, short object, short newstate, short *global);
+
+/* these two are only available with -mshort, because otherwise size of int does not match */
+#ifdef __MSHORT__
+void mt_x_sprintf(char *buf, const char *fmt, ...);
+short  mt_x_sscanf(const char *buf, const char *fmt, ...);
+#endif
+
+
 /**@}*/
 
 /*******************************************************************************
@@ -1227,10 +1580,10 @@ short vst_map_mode   (short handle, short mode);
 /** @addtogroup n_vdi
  *  @{
  */
-DRV_INFO *v_create_driver_info( short handle, short driver_id );
-short v_delete_driver_info( short handle, DRV_INFO *drv_info );
-short v_read_default_settings( short handle, PRN_SETTINGS *settings );
-short v_write_default_settings( short handle, PRN_SETTINGS *settings );
+DRV_INFO *v_create_driver_info(short handle, short driver_id );
+short v_delete_driver_info(short handle, DRV_INFO *drv_info );
+short v_read_default_settings(short handle, PRN_SETTINGS *settings );
+short v_write_default_settings(short handle, PRN_SETTINGS *settings );
 /**@}*/
 
 /** UDEF version of v_create_driver_info(). See \ref overviewUDEF for details about UDEF feature */
