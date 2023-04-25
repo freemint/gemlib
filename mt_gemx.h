@@ -1193,7 +1193,6 @@ typedef struct WindTree
 #define WGRT2     30  /**< BOXCHAR */
 #define WGSIZE    31  /**< BOXCHAR */
 
-/** TODO */
 short mt_x_wind_tree(short mode, WIND_TREE *wt, short *global);
 
 /************************* x_appl_flags *************************/
