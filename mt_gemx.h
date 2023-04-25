@@ -1255,37 +1255,37 @@ typedef struct
 
 short mt_x_appl_font(short getset, short zero, XFONTINFO *info, short *global);
 
-short  mt_x_appl_term(short apid, short retrn, short set_me, short *global);
-short  mt_x_appl_trecord(void *mem, short count, KEYCODE *cancel, short mode, short *global);
-short  mt_x_appl_tplay(void *mem, short num, short scale, short mode, short *global);
-short  mt_x_appl_sleep(short id, short sleep, short *global);
-short  mt_x_form_center(OBJECT *tree, short *cx, short *cy, short *cw, short *ch, short *global);
-short  mt_x_form_error(const char *fmt, short num, short *global);
-short  mt_x_form_filename(OBJECT *tree, short obj, short to_from, char *string, short *global);
-short  mt_x_form_mouse(OBJECT *tree, short mouse_x, short mouse_y, short clicks,
+short mt_x_appl_term(short apid, short retrn, short set_me, short *global);
+short mt_x_appl_trecord(void *mem, short count, KEYCODE *cancel, short mode, short *global);
+short mt_x_appl_tplay(void *mem, short num, short scale, short mode, short *global);
+short mt_x_appl_sleep(short id, short sleep, short *global);
+short mt_x_form_center(OBJECT *tree, short *cx, short *cy, short *cw, short *ch, short *global);
+short mt_x_form_error(const char *fmt, short num, short *global);
+short mt_x_form_filename(OBJECT *tree, short obj, short to_from, char *string, short *global);
+short mt_x_form_mouse(OBJECT *tree, short mouse_x, short mouse_y, short clicks,
      short *edit_obj, short *next_obj, short *edit_idx, short *global);
-short  mt_x_fsel_input(char *inpath, short pathlen, char *insel, short sels,
+short mt_x_fsel_input(char *inpath, short pathlen, char *insel, short sels,
      short *exbutton, const char *label, short *global);
-short  mt_x_graf_blit(GRECT *r1, GRECT *r2, short *global);
-short  mt_x_graf_rubberbox(GRECT *area, GRECT *outer, short minwidth,
+short mt_x_graf_blit(GRECT *r1, GRECT *r2, short *global);
+short mt_x_graf_rubberbox(GRECT *area, GRECT *outer, short minwidth,
      short minheight, short maxwidth, short maxheight, short snap, short lag, short *global);
 void mt_x_graf_rast2rez(unsigned short *src_data, long plane_len,
      short old_planes, MFDB *mfdb, short devspef, short *global);         /* rel 004 */
-short  mt_x_help(const char *topic, const char *helpfile, short sensitive, short *global);
+short mt_x_help(const char *topic, const char *helpfile, short sensitive, short *global);
 void mt_x_malloc(void **addr, long size, short *global);                /* rel 004 */
-short  mt_x_mfree(void *addr, short *global);                             /* rel 004 */
-short  mt_x_mshrink(void *addr, long newsize, short *global);                 /* rel 004 */
-short  mt_x_realloc(void **addr, long size, short *global);               /* rel 004 */
-short  mt_x_objc_edit(OBJECT *tree, short edit_obj, short key_press,
+short mt_x_mfree(void *addr, short *global);                             /* rel 004 */
+short mt_x_mshrink(void *addr, long newsize, short *global);                 /* rel 004 */
+short mt_x_realloc(void **addr, long size, short *global);               /* rel 004 */
+short mt_x_objc_edit(OBJECT *tree, short edit_obj, short key_press,
      short shift_state, short *edit_idx, short mode, short *global);
-short  mt_x_scrp_get(char *out, short deleteit, short *global);               /* rel 004 */
-short  mt_x_wdial_draw(short handle, short start, short depth, short *global);
-short  mt_x_wdial_change(short handle, short object, short newstate, short *global);
+short mt_x_scrp_get(char *out, short deleteit, short *global);               /* rel 004 */
+short mt_x_wdial_draw(short handle, short start, short depth, short *global);
+short mt_x_wdial_change(short handle, short object, short newstate, short *global);
 
 /* these two are only available with -mshort, because otherwise size of int does not match */
 #ifdef __MSHORT__
 void mt_x_sprintf(char *buf, const char *fmt, ...);
-short  mt_x_sscanf(const char *buf, const char *fmt, ...);
+short mt_x_sscanf(const char *buf, const char *fmt, ...);
 #endif
 
 
