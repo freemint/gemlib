@@ -1241,7 +1241,6 @@ typedef struct
 #define X_APF_SET_ID    4    /**< TODO */
 #define X_APF_SEARCH    5    /**< TODO rel 004 */
 
-/** TODO */
 short mt_x_appl_flags(short getset, short index, APPFLAGS *flags, short *global);
 
 /*********************** x_appl_font ****************************/
