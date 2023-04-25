@@ -615,6 +615,7 @@ COBJS = \
 	x_form_error.c \
 	x_form_filename.c \
 	x_form_mouse.c \
+	x_fsel_input.c \
 	\
 	_gc_vq_gdos.c \
 	_gc_vq_vgdos.c \
