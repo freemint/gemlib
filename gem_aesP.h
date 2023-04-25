@@ -56,8 +56,8 @@ __regsused("d0/d1/a0/a1") void _aes_trap(__reg("d1")AESPB *) =
 #endif
 
 
-#define AES_PARAMS(a,b,c,d,e) \
-	static short    aes_control[AES_CTRLMAX]={a,b,c,d,e}; \
+#define AES_PARAMS(opcode,num_intin,num_intout,num_addrin,num_addrout) \
+	static short    aes_control[AES_CTRLMAX]={opcode,num_intin,num_intout,num_addrin,num_addrout}; \
 	short			aes_intin[AES_INTINMAX];			  \
 	short			aes_intout[AES_INTOUTMAX];			  \
 	long			aes_addrin[AES_ADDRINMAX];			  \

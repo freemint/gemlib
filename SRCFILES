@@ -613,6 +613,7 @@ COBJS = \
 	x_appl_tplay.c \
 	x_form_center.c \
 	x_form_error.c \
+	x_form_filename.c \
 	\
 	_gc_vq_gdos.c \
 	_gc_vq_vgdos.c \

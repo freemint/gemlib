@@ -53,7 +53,7 @@
  *          mt_form_alert(). It is, however, insignifigant as all of the
  *          error alerts have only one button.
  *
- *  @since All AES versions.
+ *  @since Geneva
  *
  *  @sa mt_form_alert()
  *
