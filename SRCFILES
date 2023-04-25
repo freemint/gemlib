@@ -630,6 +630,7 @@ COBJS = \
 	x_shel_put.c \
 	x_sprintf.c \
 	x_sscanf.c \
+	x_help.c \
 	\
 	_gc_vq_gdos.c \
 	_gc_vq_vgdos.c \
