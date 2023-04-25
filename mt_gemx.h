@@ -1118,7 +1118,6 @@ typedef struct Settings
 #define XS_LFINFO		11	/**< TODO */
 #define XS_RTINFO		12	/**< TODO */
 
-/** TODO */
 short mt_x_settings(short getset, short length, SETTINGS *user, short *global);
 
 /************************ x_shel_get/put ************************/
