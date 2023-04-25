@@ -1253,7 +1253,6 @@ typedef struct
 	short gadget_ht;     /**< TODO */
 } XFONTINFO;
 
-/** TODO */
 short mt_x_appl_font(short getset, short zero, XFONTINFO *info, short *global);
 
 short  mt_x_appl_term(short apid, short retrn, short set_me, short *global);
