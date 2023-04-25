@@ -1279,7 +1279,7 @@ short mt_x_wdial_change(short handle, short object, short newstate, short *globa
 /* these two are only available with -mshort, because otherwise size of int does not match */
 #ifdef __MSHORT__
 void mt_x_sprintf(char *buf, const char *fmt, ...);
-short mt_x_sscanf(const char *buf, const char *fmt, ...);
+void mt_x_sscanf(const char *buf, const char *fmt, ...);
 #endif
 
 
