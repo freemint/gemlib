@@ -621,6 +621,7 @@ COBJS = \
 	x_graf_rast2rez.c \
 	x_objc_edit.c \
 	x_wdial_draw.c \
+	x_wdial_change.c \
 	\
 	_gc_vq_gdos.c \
 	_gc_vq_vgdos.c \
