@@ -618,6 +618,7 @@ COBJS = \
 	x_fsel_input.c \
 	x_graf_blit.c \
 	x_graf_rubberbox.c \
+	x_graf_rast2rez.c \
 	\
 	_gc_vq_gdos.c \
 	_gc_vq_vgdos.c \
