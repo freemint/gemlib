@@ -633,6 +633,7 @@ COBJS = \
 	x_help.c \
 	x_scrp_get.c \
 	x_malloc.c \
+	x_mfree.c \
 	\
 	_gc_vq_gdos.c \
 	_gc_vq_vgdos.c \
