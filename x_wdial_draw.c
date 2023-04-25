@@ -4,7 +4,7 @@
 /** Redraw a dialog within a window.
  *
  *  @param handle
- *  @param statr
+ *  @param start
  *  @param depth
  *  @param global_aes global AES array
  *

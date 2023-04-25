@@ -10,8 +10,6 @@
  *  @param devspef
  *  @param global_aes global AES array
  *
- *  @return 0 if an error occured or non-zero otherwise.
- *
  *  @since Geneva
  *
  */

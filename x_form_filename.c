@@ -3,7 +3,7 @@
 
 /** Convert to/from a standard GEMDOS filename in editable field in a dialog.
  *
- *  @param fmt
+ *  @param tree
  *  @param obj
  *  @param to_from
  *  @param string

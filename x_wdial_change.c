@@ -4,7 +4,7 @@
 /** Redraw one object within a window dialog, showing a new state.
  *
  *  @param handle
- *  @param statr
+ *  @param start
  *  @param newstate
  *  @param global_aes global AES array
  *
@@ -15,9 +15,9 @@
  */
 
 short
-mt_x_wdial_draw(short handle, short start, short newstate, short *global_aes)
+mt_x_wdial_change(short handle, short start, short newstate, short *global_aes)
 {
-	AES_PARAMS(0x7150,3,1,0,0);
+	AES_PARAMS(0x7151,3,1,0,0);
 
 	aes_intin[0] = handle;
 	aes_intin[1] = start;
