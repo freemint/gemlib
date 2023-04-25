@@ -1139,7 +1139,6 @@ short mt_x_shel_put(short mode, const char *buf, short *global);
 #define X_VSPLIT        0x0004	/**< TODO */
 
 short mt_x_wind_create(short kind, short xkind, short wx, short wy, short ww, short wh, short *global);
-/** TODO */
 short mt_x_wind_calc(short type, short kind, short xkind, short inx, short iny,  short inw, short inh,
 	short *outx, short *outy, short *outw, short *outh, short *global);
 
