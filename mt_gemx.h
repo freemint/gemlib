@@ -1128,7 +1128,6 @@ short mt_x_settings(short getset, short length, SETTINGS *user, short *global);
 
 
 short mt_x_shel_get(short mode, short length, char *buf, short *global);
-/** TODO */
 short mt_x_shel_put(short mode, const char *buf, short *global);
 
 /***************** x_wind_create, x_wind_calc *******************/
