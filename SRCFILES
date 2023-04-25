@@ -611,6 +611,8 @@ COBJS = \
 	x_appl_term.c \
 	x_appl_trecord.c \
 	x_appl_tplay.c \
+	x_form_center.c \
+	x_form_error.c \
 	\
 	_gc_vq_gdos.c \
 	_gc_vq_vgdos.c \
