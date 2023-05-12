@@ -1252,7 +1252,7 @@ short mt_x_appl_font(short getset, short zero, XFONTINFO *info, short *global);
 short mt_x_appl_term(short apid, short retrn, short set_me, short *global);
 short mt_x_appl_trecord(void *mem, short count, KEYCODE *cancel, short mode, short *global);
 short mt_x_appl_tplay(void *mem, short num, short scale, short mode, short *global);
-short mt_x_appl_sleep(short id, short sleep, short *global);
+short mt_x_appl_sleep(short id, short _sleep, short *global);
 short mt_x_form_center(OBJECT *tree, short *cx, short *cy, short *cw, short *ch, short *global);
 short mt_x_form_error(const char *fmt, short num, short *global);
 short mt_x_form_filename(OBJECT *tree, short obj, short to_from, char *string, short *global);
