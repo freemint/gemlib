@@ -57,8 +57,8 @@ __BEGIN_DECLS
  */
 
 #define NIL 			(-1)					/**< Value for no more object in object tree */
-#define DESKTOP_HANDLE		0					/**< TODO */
-#define DESK			DESKTOP_HANDLE		/**< TODO */
+#define DESKTOP_HANDLE		0					/**< Handle of the desktop window  */
+#define DESK			DESKTOP_HANDLE		/**< Desktop identifier on single-task system */
 
 /* mt_appl_control() mode */
 #define APC_SYSTEM		 2  /**< XaAES internal mode */
@@ -284,7 +284,7 @@ typedef struct pEvntrec
  * - msg[7] = 
  *
  *  When an application received this message, if the window is not at
- *  full size, the window should ne resized using mt_wind_set() and #WF_CURRXYWH
+ *  full size, the window should be resized using mt_wind_set() and #WF_CURRXYWH
  *  to occupy the entire screen area minus the menu bar (see mt_wind_get()).
  *  If the window was previously 'fulled' and has not been resized since, the
  *  application should return the window to its previous size.
@@ -671,11 +671,28 @@ typedef struct pEvntrec
 
 #define AP_RESCHG 		57  /**< indicates a resolution change, see #AP_TERM */
 
-/* Xcontrol messages */
-#define CT_UPDATE		50	/**< TODO */
-#define CT_MOVE			51	/**< TODO */
-#define CT_NEWTOP		52	/**< TODO */
-#define CT_KEY			53	/**< TODO */
+/* GEM/XM messages */
+#define CT_UPDATE		50	/**< unused (GEM/XM) */
+#define CT_MOVE			51	/**< unused (GEM/XM) */
+#define CT_NEWTOP		52	/**< unused (GEM/XM) */
+#define CT_SWITCH		53	/**< used internally to switch to another process (GEM/XM) */
+
+/** message sent by the modular control panel XCONTROL to be able
+ *  to evaluate key-presses that can have no effect on editable
+ *  fields, such as [Help] or [Undo], for instance.
+ *
+ * - msg[0] = #CT_KEY
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = pressed-key:
+ *            - High byte: Scancode of the pressed key
+ *            - Low byte : ASCII-code of the key
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ */
+#define CT_KEY			53
 
 /** message received by the application which requested a shutdown, when the
  *  shutdown is complete and was successful.
@@ -727,7 +744,7 @@ typedef struct pEvntrec
  *            or -1 if no specific window was targeted
  * - msg[4] = x
  * - msg[5] = y position of the mouse when the object was dropped
- * - msg[6] = keybord shift state at the time of the drop as
+ * - msg[6] = keyboard shift state at the time of the drop as
  *            in mt_evnt_keybd()
  * - msg[7] = two bytes ASCII packed pipe identifier which gives the
  *            file extension of the pipe to open.
@@ -751,9 +768,68 @@ typedef struct pEvntrec
  */
 #define SH_WDRAW			72
 
-#define SC_CHANGED			80	/**< TODO */
-#define PRN_CHANGED 		82	/**< TODO */
-#define FNT_CHANGED 		83	/**< TODO */
+/** message sent by a program to all other applications when the
+ *  contents of the GEM clipboard have been changed.
+ *
+ * - msg[0] = #SC_CHANGED
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = description of the file format:
+ *            - 0x0000 No more exact specification
+ *            - 0x0001 Data for a database
+ *            - 0x0002 Text files
+ *            - 0x0004 Vector graphics
+ *            - 0x0008 Raster graphics
+ *            - 0x0010 Spreadsheet data
+ *            - 0x0020 Samples, MIDI files, Sound
+ *            - 0x0040 Archive files (e.g. ".zip", ".lzh")
+ *            - 0x8000 System files (e.g. colour palettes)
+ *            If possible the format 0x0000 should be avoided! 
+ * - msg[4] = 4 characters that describe the "best" and format
+ * - msg[5] = (least loss of information) for the data import;
+ *            example ".RTF" rather than ".TXT"
+ * - msg[6] = reserved, 0
+ * - msg[7] = reserved, 0
+ */
+#define SC_CHANGED			80
+
+/** message sent by the GDOS configuration program to all reachable
+ *  applications, to inform them about changes to device drivers;
+ *  the following apply:
+ *
+ * - msg[0] = #PRN_CHANGED
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = Device number
+ * - msg[4] = Action
+ *            - 0 New
+ *            - 1 Changed
+ *            - 2 Removed
+ * - msg[5] =
+ * - msg[6] =
+ * - msg[7] =
+ *
+ * After receipt of this message, an application can re-open the
+ * corresponding workstation, for instance, obtain the current
+ * settings, and perhaps offer a new preview
+ */
+#define PRN_CHANGED 		82
+
+/** message sent if GDOS fonts were loaded or unloaded at run-time.
+ *  At the receipt of this message the reaction should be
+ *  vst_unload_fonts, followed directly by vst_load_fonts; this
+ *  ensures that the application can work with the current fonts.
+ *
+ * - msg[0] = #FNT_CHANGED
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] =
+ * - msg[4] =
+ * - msg[5] =
+ * - msg[6] =
+ * - msg[7] =
+ */
+#define FNT_CHANGED 		83
 
 /** message received when a child thread that this application has
  *  started returns.
@@ -792,7 +868,30 @@ typedef struct pEvntrec
  */
 #define CH_EXIT 			90
 
-#define WM_M_BDROPPED		100		/* KAOS 1.4  */	/**< TODO */
+/** message received when the user act on the window to sent it to the bottom
+ *  of the window stack.
+ *
+ * - msg[0] = #WM_M_BDROPPED
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  The application should then sent the window to the bottom of the windows stack
+ *  by calling mt_wind_set() with #WF_BOTTOM command.
+ *
+ *  Note: the way the user may send a window to the bottom depend on the AES and its
+ *  configuration.
+ *
+ *  @since KAOS 1.4.  The availability of this feature could
+ *  be check by calling mt_appl_getinfo() with the parameter #AES_MESSAGE.
+ *
+ *  Affected by WCOWORK mode.
+ */
+#define WM_M_BDROPPED		100
 
 /** MAG!X screen manager extension
  *
@@ -823,8 +922,6 @@ typedef struct pEvntrec
 #define SM_M_RES7			107		/**< MAG!X screen manager extension */
 #define SM_M_RES8			108		/**< MAG!X screen manager extension */
 #define SM_M_RES9			109		/**< MAG!X screen manager extension */
-#define WM_SHADED			22360	/**< TODO [WM_SHADED apid 0 win 0 0 0 0]   */
-#define WM_UNSHADED 		22361	/**< TODO [WM_UNSHADED apid 0 win 0 0 0 0] */
 
 /* SM_M_SPECIAL sub-opcodes
 	used:
@@ -844,7 +941,7 @@ typedef struct pEvntrec
 #define SMC_TERMINATE		1    /* MagiC 2  */ 	 /**< terminate app */
 #define SMC_SWITCH		2    /* MagiC 2  */ 	 /**< switch to app */
 #define SMC_FREEZE		3    /* MagiC 2  */ 	 /**< freeze app */
-#define SMC_UNFREEZE		4    /* MagiC 2  */ 	 /**< unfreeze apo */
+#define SMC_UNFREEZE		4    /* MagiC 2  */ 	 /**< unfreeze app */
 #define SMC_TASKSWITCH		5    /* MagiC 2  */ 	 /**< invoked by alt-ctrl-tab */
 #define SMC_UNHIDEALL		6    /* MagiC 3.1	*/   /**< unhide all apps */
 #define SMC_HIDEOTHERS		7    /* MagiC 3.1	*/   /**< hide others */
@@ -880,15 +977,176 @@ typedef struct pEvntrec
  */
 #define WM_WHEEL		345
 
+/** message sent when a window has been shaded.
+ *
+ * - msg[0] = #WM_SHADED
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = handle of the window
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ */
+#define WM_SHADED			22360
 
-#define X_MN_SELECTED   0xE000          /**< (Geneva) */
-#define X_WM_SELECTED   0xE100          /**< Only if X_WTFL_CLICKS is off (Geneva) */
-#define X_GET_HELP      0xE200          /**< (Geneva) */
-#define X_WM_HSPLIT     0xE400          /**< (Geneva) */
-#define X_WM_VSPLIT     0xE500          /**< (Geneva) */
-#define X_WM_ARROWED2   0xE600          /**< (Geneva) */
-#define X_WM_HSLID2     0xE700          /**< (Geneva) */
-#define X_WM_VSLID2     0xE800          /**< (Geneva) */
+/** message sent when a window has been unshaded.
+ *
+ * - msg[0] = #WM_UNSHADED
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = handle of the window
+ * - msg[4] = 
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ */
+#define WM_UNSHADED 		22361
+
+/** message received when a window menu entry has been selected
+ *
+ * - msg[0] = #X_MN_SELECTED
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = title menu index
+ * - msg[4] = item menu index
+ * - msg[5] = address of the menu root object (most significant bits)
+ * - msg[6] = address of the menu root object (less significant bits)
+ * - msg[7] = handle of the window containing the menu
+ *
+ *  @since Geneva.
+ */
+#define X_MN_SELECTED   0xE000
+
+/** message received when the user clicks on a window gadget in
+ *  a window whose flags were modified with the wind_tree()
+ *  function. It only occurs when the X_WTFL_CLICKS attribute is off.
+ *
+ * - msg[0] = #X_WM_SELECTED
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = object index of the window tree object the user clicked on
+ * - msg[4] =
+ * - msg[5] =
+ * - msg[6] =
+ * - msg[7] =
+ *
+ *  @since Geneva.
+ */
+#define X_WM_SELECTED   0xE100
+
+/** message sent to the help display program when the user request
+ *  help on a certain topic.
+ *
+ * - msg[0] = #X_GET_HELP
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = length of the second part of the message
+ * - msg[3] = length of the topic portion of the message, including the NUL terminator
+ * - msg[4] = length of the filename portion of the message, including the NUL terminator
+ * - msg[5] = upper/lowercase sensitivity. If non-zero, the topic is case-sensitive.
+ * - msg[6] =
+ * - msg[7] =
+ *
+ *  @since Geneva.
+ */
+#define X_GET_HELP      0xE200
+
+/** message sent to an application when the position of the horizontal
+ *  split bar has changed.
+ *
+ * - msg[0] = #X_WM_HSPLIT
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = handle of the window being affected
+ * - msg[4] = the new offset (in pixels) of the split bar
+ * - msg[5] =
+ * - msg[6] =
+ * - msg[7] =
+ *
+ *  @since Geneva.
+ */
+#define X_WM_HSPLIT     0xE400
+
+/** message sent to an application when the position of the vertical
+ *  split bar has changed.
+ *
+ * - msg[0] = #X_WM_VSPLIT
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = handle of the window being affected
+ * - msg[4] = the new offset (in pixels) of the split bar
+ * - msg[5] =
+ * - msg[6] =
+ * - msg[7] =
+ *
+ *  @since Geneva.
+ */
+#define X_WM_VSPLIT     0xE500
+
+/** message sent to an application when the user has clicked on
+ *  one of the arrow or scroll bar gadgets which are not reported
+ *  by the normal WM_ARROWED message. X_WM_ARROWED2 reports changes
+ *  in gadgets which are below a vertical split bar and/or to the
+ *  right of a horizontal split bar. The format of a X_WM_ARROWED2
+ *  message is identical to that of WM_ARROWED.
+ *
+ * - msg[0] = #X_WM_ARROWED2
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = handle of the window
+ * - msg[4] = one of the following operation code:
+ *            - #WA_UPPAGE ( Page Up )
+ *            - #WA_DNPAGE ( Page Down )
+ *            - #WA_UPLINE ( Row Up )
+ *            - #WA_DNLINE ( Row Down )
+ *            - #WA_LFPAGE ( Page Left )
+ *            - #WA_RTPAGE ( Page Right )
+ *            - #WA_LFLINE ( Column Left )
+ *            - #WA_RTLINE ( Column Right )
+ * - msg[5] =
+ * - msg[6] =
+ * - msg[7] =
+ *
+ *  @since Geneva.
+ */
+#define X_WM_ARROWED2   0xE600
+
+/** message sent to an application when the user has dragged
+ *  the second horizontal scroll gadget, which appears to the
+ *  right of a horizontal split bar. The format of this message
+ *  is identical to that of WM_HSLID.
+ *
+ * - msg[0] = #X_WM_HSLID2
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = new slider position from 0 to 1000.
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  Note: Slider position is relative and not related to slider size.
+ */
+#define X_WM_HSLID2     0xE700
+
+/** message sent to an application when the user has dragged
+ *  the second vertical scroll gadget, which appears below a
+ *  vertical split bar. The format of this message is identical
+ *  to that of WM_VSLID.
+ *
+ * - msg[0] = #X_WM_VSLID2
+ * - msg[1] = AES application ID of the sender
+ * - msg[2] = 0
+ * - msg[3] = handle of the window 
+ * - msg[4] = new slider position from 0 to 1000.
+ * - msg[5] = 
+ * - msg[6] = 
+ * - msg[7] = 
+ *
+ *  Note: Slider position is relative and not related to slider size.
+ */
+#define X_WM_VSLID2     0xE800
+
 #define X_WM_OBJECT     0xE900          /**< (Geneva) */
 #define X_WM_VECKEY     0xEA00          /**< keypress vector event (Geneva rel 004) */
 #define X_WM_VECSW      0xEA01          /**< switch vector event (Geneva rel 004) */
@@ -906,10 +1164,10 @@ typedef struct pEvntrec
 #define MU_M2				0x0008	/**< Wait for a mouse/rectangle event as specified, see mt_evnt_multi()  */
 #define MU_MESAG			0x0010	/**< Wait for a message, see mt_evnt_multi() */
 #define MU_TIMER			0x0020	/**< Wait the specified amount of time, see mt_evnt_multi() */
-#define MU_WHEEL			0x0040	/**< TODO (XaAES) */
-#define MU_MX				0x0080	/**< TODO (XaAES) */
-#define MU_NORM_KEYBD		0x0100	/**< TODO (XaAES) */
-#define MU_DYNAMIC_KEYBD	0x0200	/**< TODO (XaAES) */
+#define MU_WHEEL			0x0040	/**< Wait for a mouse-wheel event as specified, see mt_evnt_multi() (XaAES) */
+#define MU_MX				0x0080	/**< Wait for a mouse movement, see mt_evnt_multi() (XaAES) */
+#define MU_NORM_KEYBD		0x0100	/**< Wait for a user keypress (returns NKCC key-code instead of AES key-code), see mt_evnt_multi() (XaAES) */
+#define MU_DYNAMIC_KEYBD	0x0200	/**< Not yet implemented (XaAES) */
 #define X_MU_DIALOG     0x4000          /**< evnt_multi (only) type (Geneva) */
 
 /* constants for form_alert */
@@ -1156,14 +1414,14 @@ typedef  struct
 /* shel_write: mode SWM_ENVIRON, parameter 'wisgr' */
 #define ENVIRON_SIZE		0	/**< returns the current size of the environment string, see mt_shel_write() */
 #define ENVIRON_CHANGE		1	/**< modify an environment variable, see mt_shel_write() */
-#define ENVIRON_COPY		2	/**< copy the evironment string in a buffer, see mt_shel_write() */
+#define ENVIRON_COPY		2	/**< copy the environment string in a buffer, see mt_shel_write() */
 
 /* shel_write: mode SWM_NEWMSG, parameter 'wisgr' */
 #define NM_APTERM		0x0001	/**< the application understands #AP_TERM messages, see mt_shel_write() and #SWM_NEWMSG */
 #define NM_INHIBIT_HIDE		0x0002	/**< the application won't be hidden, see mt_shel_write() and #SWM_NEWMSG */
 
-/* Werte fr Modus SWM_AESMSG (fr shel_write) */
-#define AP_AESTERM		52     /* Mode 10: N.AES komplett terminieren. */	/**< TODO */
+/* Word for SWM_AESMSG mode (for shel_write) */
+#define AP_AESTERM		52     /**< Mode 10: N.AES system shutdown. */
 
 /* extended shel_write() modes */
 #define SW_PSETLIMIT	0x0100	/**< Initial Psetlimit() , see SHELW::psetlimit */
@@ -1271,7 +1529,7 @@ typedef  struct
 #define WF_TOOLBAR		30 	/**< get/set tool bar attached to a window, see mt_wind_get() and mt_wind_set() */
 #define WF_FTOOLBAR		31 	/**< get     the first rectangle of the toolbar area, see mt_wind_get() */
 #define WF_NTOOLBAR		32 	/**< get     the next rectangle of the toolbar area, see mt_wind_get() */
-#define WF_MENU			33 	/**<         TODO (XaAES) */
+#define WF_MENU			33 	/**< get/set menu bar attached to a window, see mt_wind_get() and mt_wind_set() (XaAES) */
 #define WF_WHEEL		40 	/**<     set window feature on mouse wheel event, see mt_wind_set() */
 #define WF_OPTS			41	/**< get/set window options. See mt_wind_set() and mt_wind_get() for details. */
 #define WF_CALCF2W		42	/**< Convert FULL coordinates to WORK coordinates */
@@ -1279,11 +1537,11 @@ typedef  struct
 #define WF_CALCF2U		44	/**< Convert FULL coordinates to USER coordinates */
 #define WF_CALCU2F		45	/**< Convert USER coordinates to FULL coordinates */
 #define WF_MAXWORKXYWH	46	/**< Get MAX coordinates for this window - WCOWORK mode only*/
-#define WF_M_BACKDROP	100 /**<		 TODO (KAOS 1.4) */
-#define WF_M_OWNER		101 /**<		 TODO (KAOS 1.4) */
-#define WF_M_WINDLIST	102 /**<		 TODO (KAOS 1.4) */
-#define WF_MINXYWH		103 /**<		 TODO (MagiC 6) */
-#define WF_INFOXYWH		104 /**<		 TODO (MagiC 6.10) */
+#define WF_M_BACKDROP	100 /**<     set bottom window, see mt_wind_set() (KAOS 1.4) */
+#define WF_M_OWNER		101 /**< get     owner of the window, see mt_wind_set() (KAOS 1.4) */
+#define WF_M_WINDLIST	102 /**< get     a pointer to a NULL-terminated table of the opened windows (KAOS 1.4) */
+#define WF_MINXYWH		103 /**< get     the minimum size of the window (MagiC 6) */
+#define WF_INFOXYWH		104 /**< get     the position of the INFO window component (MagiC 6.10) */
 #define WF_WIDGETS		200	/**< get/set actual positions of the slider widgets, see mt_wind_get() and mt_wind_set() */
 #define WF_APPICON		201	/**< N.AES 3.0 - set application icon attached to the titlebar of a window, see mt_wind_set() */
 #define WF_USER_POINTER	230	/**< MyAES - attach a 32 bit value to window see  mt_wind_set() see mt_wind_get() */
@@ -1292,37 +1550,37 @@ typedef  struct
 #define WF_BITMAP		233	/**< MyAES 0.96	get bitmap of the window, see  mt_wind_get() */
 #define WF_OPTIONS		234	/**< MyAES 0.96 at this time use only to request automaticaly close if application lost focus and appear when focus is back, see mt_wind_set() */
 #define WF_FULLSCREEN	235	/**< MyAES 0.96 set window in fullscreen without widget, see mt_wind_set() */
-#define WF_OBFLAG		1001	/**< get/set (doc: TODO) (FreeGEM) */
-#define WF_OBTYPE		1002	/**< get     (doc: TODO) (FreeGEM) */
-#define WF_OBSPEC		1003	/**< get/set (doc: TODO) (FreeGEM) */
-#define X_WF_MENU		0x1100	/**<     set (doc: TODO) (Geneva)  */
-#define X_WF_DIALOG		0x1200	/**<     set (doc: TODO) (Geneva)  */
-#define X_WF_DIALWID	0x1300	/**<     set (doc: TODO) (Geneva)  */
-#define X_WF_DIALHT		0x1400	/**<     set (doc: TODO) (Geneva)  */
-#define X_WF_DFLTDESK	0x1500	/**<     set (doc: TODO) (Geneva)  */
-#define X_WF_MINMAX		0x1600	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_HSPLIT		0x1700	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_VSPLIT		0x1800	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_SPLMIN		0x1900	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_HSLIDE2	0x1a00	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_VSLIDE2	0x1b00	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_HSLSIZE2	0x1c00	/**< get/set (doc: TODO) (Geneva)  */
-#define X_WF_VSLSIZE2	0x1d00	/**< get/set (doc: TODO) (Geneva)  */
+#define WF_OBFLAG		1001	/**< get/set object flags for decoration of the window element specified by first parameter (FreeGEM) */
+#define WF_OBTYPE		1002	/**< get     object type of decoration of the window element specified by first parameter (FreeGEM) */
+#define WF_OBSPEC		1003	/**< get/set object specification for decoration of the window element specified by first parameter (FreeGEM) */
+#define X_WF_MENU		0x1100	/**< get/set menu bar attached to a window, see mt_wind_get() and mt_wind_set() (Geneva)  */
+#define X_WF_DIALOG		0x1200	/**< get/set dialog box attached to a window, see mt_wind_get() and mt_wind_set() (Geneva)  */
+#define X_WF_DIALWID	0x1300	/**< get/set interval (in pixels) at which horizontal scrolling by the user occurs, see mt_wind_get() and mt_wind_set() (Geneva)  */
+#define X_WF_DIALHT		0x1400	/**< get/set interval (in pixels) at which vertical scrolling by the user occurs, see mt_wind_get() and mt_wind_set() (Geneva)  */
+#define X_WF_DFLTDESK	0x1500	/**<     set OBJECT tree installed as default desktop, see mt_wind_set() (Geneva)  */
+#define X_WF_MINMAX		0x1600	/**< get/set minimum and maximum sizes to which the user can resize the window (Geneva)  */
+#define X_WF_HSPLIT		0x1700	/**< get/set the location of the horizontal split bar (Geneva)  */
+#define X_WF_VSPLIT		0x1800	/**< get/set the location of the vertical split bar (Geneva)  */
+#define X_WF_SPLMIN		0x1900	/**< get/set the minimum sizes of the areas defined by the horizontal and vertical split bars (Geneva)  */
+#define X_WF_HSLIDE2	0x1a00	/**< get/set the position of the second horizontal slider (Geneva)  */
+#define X_WF_VSLIDE2	0x1b00	/**< get/set the position of the second vertical slider (Geneva)  */
+#define X_WF_HSLSIZE2	0x1c00	/**< get/set the size of the second horizontal slider (Geneva)  */
+#define X_WF_VSLSIZE2	0x1d00	/**< get/set the size of the second vertical slider (Geneva)  */
   #define X_WD_ACTIVE   1       /**< Mouse/keyboard events processed */
   #define X_WD_BLITSCRL 2       /**< Use blit for realtime scroll */
   #define X_WD_KEYS     4       /**< 004: Pass through unused keyclicks */
-#define X_WF_DIALFLGS	0x1e00	/**< get/set (doc: TODO) (Geneva)  */
+#define X_WF_DIALFLGS	0x1e00	/**< get/set flags related to the way dialogs within windows are handled (Geneva)  */
 #define X_WF_OBJHAND	0x1f00	/**< get/set (doc: TODO) (Geneva)  */
 #define X_WF_DIALEDIT	0x2000	/**< get/set (doc: TODO) (Geneva)  */
 #define X_WF_DCOLSTAT	0x2100	/**< get/set (doc: TODO) (Geneva)  */
-#define WF_WINX			22360	/**<		 TODO */
-#define WF_WINXCFG		22361	/**<		 TODO */
-#define WF_DDELAY		22362	/**<		 TODO */
-#define WF_SHADE		22365	/**<		 TODO (WINX 2.3) */
-#define WF_STACK		22366	/**<		 TODO (WINX 2.3) */
-#define WF_TOPALL		22367	/**<		 TODO (WINX 2.3) */
-#define WF_BOTTOMALL	22368	/**<		 TODO (WINX 2.3) */
-#define WF_XAAES		0x5841	/**<		 TODO (XaAES) : 'XA' */
+#define WF_WINX			22360	/**< get     information about an installed WINX version (WINX 2.1) */
+#define WF_WINXCFG		22361	/**< get     the application-specific configuration switches of the currently running application */
+#define WF_DDELAY		22362	/**< get/set delay values */
+#define WF_SHADE		22365	/**< get/set the shading state of the window (WINX 2.3) */
+#define WF_STACK		22366	/**< put the window below an other window in the window stack (WINX 2.3) */
+#define WF_TOPALL		22367	/**< bring all windows of the application to the front (WINX 2.3) */
+#define WF_BOTTOMALL	22368	/**< place all windows of the application at the back (WINX 2.3) */
+#define WF_XAAES		0x5841	/**< deprecated (XaAES) : 'XA' */
 
 /* wind_set(WF_BEVENT) */
 #define BEVENT_WORK		0x0001    /**< window not topped when click on the work area, see #WF_BEVENT */
@@ -1417,170 +1675,175 @@ typedef  struct
 
 /* objects - general */
 #define ROOT		 	0 	 /**< index of the root object of a formular */
-#define MAX_LEN			81 	 /* max string length */	/**< TODO */
-#define MAX_DEPTH		8 	 /* max depth of search or draw */	/**< TODO */
+#define MAX_LEN			81 	 /**< max string length */
+#define MAX_DEPTH		8 	 /**< max depth of search or draw */
 
 /* inside fill patterns */
-#define IP_HOLLOW		0	/**< TODO */
-#define IP_1PATT		1	/**< TODO */
-#define IP_2PATT		2	/**< TODO */
-#define IP_3PATT		3	/**< TODO */
-#define IP_4PATT		4	/**< TODO */
-#define IP_5PATT		5	/**< TODO */
-#define IP_6PATT		6	/**< TODO */
-#define IP_SOLID		7	/**< TODO */
+#define IP_HOLLOW		0	/**< pattern is hollow */
+#define IP_1PATT		1	/**< fill pattern intensity */
+#define IP_2PATT		2	/**< fill pattern intensity */
+#define IP_3PATT		3	/**< fill pattern intensity */
+#define IP_4PATT		4	/**< fill pattern intensity */
+#define IP_5PATT		5	/**< fill pattern intensity */
+#define IP_6PATT		6	/**< fill pattern intensity */
+#define IP_SOLID		7	/**< pattern is a solid area */
 
 /* font types */
-#define GDOS_PROP		0	/**< TODO */
-#define GDOS_MONO		1	/**< TODO */
-#define GDOS_BITM		2	/**< TODO */
-#define IBM				3	/**< TODO */
-#define SMALL			5	/**< TODO */
+#define GDOS_PROP		0	/**< SpeedoGDOS proportional font */
+#define GDOS_MONO		1	/**< SpeedoGDOS monospaced font */
+#define GDOS_BITM		2	/**< GDOS bitmap font */
+#define IBM				3	/**< standard monospaced system font */
+#define SMALL			5	/**< small monospaced system font */
 
 /* object types */
-#define G_BOX			20	/**< TODO */
-#define G_TEXT			21	/**< TODO */
-#define G_BOXTEXT		22	/**< TODO */
-#define G_IMAGE			23	/**< TODO */
-#define G_USERDEF		24	/**< TODO */
-#define G_PROGDEF		G_USERDEF	/**< TODO */
-#define G_IBOX			25	/**< TODO */
-#define G_BUTTON		26	/**< TODO */
-#define G_BOXCHAR		27	/**< TODO */
-#define G_STRING		28	/**< TODO */
-#define G_FTEXT			29	/**< TODO */
-#define G_FBOXTEXT		30	/**< TODO */
-#define G_ICON			31	/**< TODO */
-#define G_TITLE			32	/**< TODO */
-#define G_CICON			33	/**< TODO */
+#define G_BOX			20	/**< object is a rectangular box */
+#define G_TEXT			21	/**< object is a formatted graphic text */
+#define G_BOXTEXT		22	/**< object is a rectangular box with formatted graphic text */
+#define G_IMAGE			23	/**< object is a monochrome image */
+#define G_USERDEF		24	/**< object has a user-defined function for drawing a customized object */
+#define G_PROGDEF		G_USERDEF	/**< alias for #G_USERDEF */
+#define G_IBOX			25	/**< object is a transparent rectangle */
+#define G_BUTTON		26	/**< object is a push-button text with border for option selection */
+#define G_BOXCHAR		27	/**< object is a rectangle containing a character */
+#define G_STRING		28	/**< object is a character string */
+#define G_FTEXT			29	/**< object is an editable formatted graphic text */
+#define G_FBOXTEXT		30	/**< object is a rectangle with editable formatted graphic text */
+#define G_ICON			31	/**< object is a monochrome icon symbol with mask */
+#define G_TITLE			32	/**< object is a title of a drop-down menu */
+#define G_CICON			33	/**< object is a colour icon (available as of AES V3.3) */
 
 /* extended object types, MagiC only */
-#define G_SWBUTTON		34	/**< TODO */
-#define G_POPUP			35	/**< TODO */
-#define G_WINTITLE		36	/**< TODO */
-#define G_EDIT			37	/**< TODO */
-#define G_SHORTCUT		38	/**< TODO */
+#define G_SWBUTTON		34	/**< object is a cycle button */
+#define G_POPUP			35	/**< object is a popup menu */
+#define G_WINTITLE		36	/**< object is a window title */
+#define G_EDIT			37	/**< object is an editable object implemented in a shared library */
+#define G_SHORTCUT		38	/**< object is a character string whose keyboard shortcut is split off and output ranged right */
 
+/* extended object types, XaAES only */
+#define G_SLIST			39	/**< object is a scroll list */
+#define G_EXTBOX		40	/**< object is an extended box */
+#define G_OBLINK		41	/**< object link (?) */
+#define G_UNKNOWN		42	/**< object types from this number are unassigned */
 
 /* object flags */
-#define OF_NONE			0x0000	/**< TODO */
-#define OF_SELECTABLE	0x0001	/**< TODO */
-#define OF_DEFAULT		0x0002	/**< TODO */
-#define OF_EXIT			0x0004	/**< TODO */
-#define OF_EDITABLE		0x0008	/**< TODO */
-#define OF_RBUTTON		0x0010	/**< TODO */
-#define OF_LASTOB		0x0020	/**< TODO */
-#define OF_TOUCHEXIT	0x0040	/**< TODO */
-#define OF_HIDETREE		0x0080	/**< TODO */
-#define OF_INDIRECT		0x0100	/**< TODO */
-#define OF_FL3DIND		0x0200	/* bit 9 */	/**< TODO */
-#define OF_FL3DBAK		0x0400	/* bit 10 */	/**< TODO */
-#define OF_FL3DACT		0x0600	/**< TODO */
-#define OF_FL3DMASK		(OF_FL3DIND|OF_FL3DBAK|OF_FL3DACT)	/**< TODO */
-#define OF_SUBMENU		0x0800	/* bit 11 */	/**< TODO */
-#define OF_FLAG11		OF_SUBMENU	/**< TODO */
-#define OF_FLAG12		0x1000	/**< TODO */
-#define OF_FLAG13		0x2000	/**< TODO */
-#define OF_FLAG14		0x4000	/**< TODO */
-#define OF_FLAG15		0x8000	/**< TODO */
+#define OF_NONE			0x0000	/**< object has no properties */
+#define OF_SELECTABLE	0x0001	/**< object is selectable by clicking on it with the mouse */
+#define OF_DEFAULT		0x0002	/**< object will be selected if the user presses the Return or Enter key */
+#define OF_EXIT			0x0004	/**< clicking on this object will terminate the dialog */
+#define OF_EDITABLE		0x0008	/**< object may be edited by the user by means of the keyboard */
+#define OF_RBUTTON		0x0010	/**< object is a radio-button */
+#define OF_LASTOB		0x0020	/**< object is the last object within an object tree */
+#define OF_TOUCHEXIT	0x0040	/**< the dialog will be exited as soon as the mouse pointer lies above this object and the left mouse button is pressed */
+#define OF_HIDETREE		0x0080	/**< object and its children are hidden */
+#define OF_INDIRECT		0x0100	/**< ob_spec of this object points to a further pointer that in turn points to the actual value of ob_spec */
+#define OF_FL3DIND		0x0200	/* bit 9 */	/**< object is a 3D-indicator (MultiTOS) */
+#define OF_FL3DBAK		0x0400	/* bit 10 */	/**< object is a 3D-background object (MultiTOS) */
+#define OF_FL3DACT		0x0600	/**< object is a 3D-activator (MultiTOS) */
+#define OF_FL3DMASK		(OF_FL3DIND|OF_FL3DBAK|OF_FL3DACT)	/**< object is a three-dimensional object (MultiTOS) */
+#define OF_SUBMENU		0x0800	/**< object has a submenu attached to it (MultiTOS, MagiC 5.10) */
+#define OF_FLAG11		OF_SUBMENU	/**< alias for #OF_SUBMENU */
+#define OF_FLAG12		0x1000	/**< object flag 12 is unassigned */
+#define OF_FLAG13		0x2000	/**< object flag 13 is unassigned */
+#define OF_FLAG14		0x4000	/**< object flag 14 is unassigned */
+#define OF_FLAG15		0x8000	/**< object flag 15 is unassigned */
 
 /* Object states */
-#define OS_NORMAL		0x0000	/**< TODO */
-#define OS_SELECTED		0x0001	/**< TODO */
-#define OS_CROSSED		0x0002	/**< TODO */
-#define OS_CHECKED		0x0004	/**< TODO */
-#define OS_DISABLED		0x0008	/**< TODO */
-#define OS_OUTLINED		0x0010	/**< TODO */
-#define OS_SHADOWED		0x0020	/**< TODO */
-#define OS_WHITEBAK		0x0040	/**< TODO */
-#define OS_DRAW3D		0x0080	/**< TODO */
-#define OS_STATE08		0x0100	/**< TODO */
-#define OS_STATE09		0x0200	/**< TODO */
-#define OS_STATE10		0x0400	/**< TODO */
-#define OS_STATE11		0x0800	/**< TODO */
-#define OS_STATE12		0x1000	/**< TODO */
-#define OS_STATE13		0x2000	/**< TODO */
-#define OS_STATE14		0x4000	/**< TODO */
-#define OS_STATE15		0x8000	/**< TODO */
+#define OS_NORMAL		0x0000	/**< object has normal representation */
+#define OS_SELECTED		0x0001	/**< object has a inverse representation */
+#define OS_CROSSED		0x0002	/**< object will be drawn with a white diagonal cross over it */
+#define OS_CHECKED		0x0004	/**< object has a checkmark tick displayed at the left edge of it */
+#define OS_DISABLED		0x0008	/**< object will be displayed greyed out and is no longer selectable */
+#define OS_OUTLINED		0x0010	/**< object gets a border */
+#define OS_SHADOWED		0x0020	/**< a shadow is drawn under the object */
+#define OS_WHITEBAK		0x0040	/**< as of MagiC 3, this controls the underscoring of character strings */
+#define OS_DRAW3D		0x0080	/**< object is to be drawn with a 3D effect */
+#define OS_STATE08		0x0100	/**< from MagiC 20 onwards, 1st bit of UNDERLINE (position and size of the underscore for G_STRING, G_TITLE and G_BUTTON) */
+#define OS_STATE09		0x0200	/**< from MagiC 20 onwards, 2nd bit of UNDERLINE (position and size of the underscore for G_STRING, G_TITLE and G_BUTTON) */
+#define OS_STATE10		0x0400	/**< from MagiC 20 onwards, 3rd bit of UNDERLINE (position and size of the underscore for G_STRING, G_TITLE and G_BUTTON) */
+#define OS_STATE11		0x0800	/**< from MagiC 20 onwards, 4th bit of UNDERLINE (position and size of the underscore for G_STRING, G_TITLE and G_BUTTON) */
+#define OS_STATE12		0x1000	/**< from MagiC 20 onwards, 1st bit of XSTATE (for switching for the various button types) */
+#define OS_STATE13		0x2000	/**< from MagiC 20 onwards, 2nd bit of XSTATE (for switching for the various button types) */
+#define OS_STATE14		0x4000	/**< from MagiC 20 onwards, 3rd bit of XSTATE (for switching for the various button types) */
+#define OS_STATE15		0x8000	/**< from MagiC 20 onwards, 4th bit of XSTATE (for switching for the various button types) */
 
 /* Object colors - default pall. */
-#define G_WHITE			0	/**< TODO */
-#define G_BLACK			1	/**< TODO */
-#define G_RED			2	/**< TODO */
-#define G_GREEN			3	/**< TODO */
-#define G_BLUE			4	/**< TODO */
-#define G_CYAN			5	/**< TODO */
-#define G_YELLOW		6	/**< TODO */
-#define G_MAGENTA		7	/**< TODO */
-#define G_LWHITE		8	/**< TODO */
-#define G_LBLACK		9	/**< TODO */
-#define G_LRED			10	/**< TODO */
-#define G_LGREEN		11	/**< TODO */
-#define G_LBLUE			12	/**< TODO */
-#define G_LCYAN			13	/**< TODO */
-#define G_LYELLOW		14	/**< TODO */
-#define G_LMAGENTA		15	/**< TODO */
+#define G_WHITE			0	/**< white */
+#define G_BLACK			1	/**< black */
+#define G_RED			2	/**< red */
+#define G_GREEN			3	/**< green */
+#define G_BLUE			4	/**< blue */
+#define G_CYAN			5	/**< cyan */
+#define G_YELLOW		6	/**< yellow */
+#define G_MAGENTA		7	/**< magenta */
+#define G_LWHITE		8	/**< light gray */
+#define G_LBLACK		9	/**< gray */
+#define G_LRED			10	/**< dark red */
+#define G_LGREEN		11	/**< dark green */
+#define G_LBLUE			12	/**< dark blue */
+#define G_LCYAN			13	/**< dark cyan */
+#define G_LYELLOW		14	/**< dark yellow */
+#define G_LMAGENTA		15	/**< dark magenta */
 
 
 #ifdef __GEMLIB_OLDNAMES
 
 /* object flags */
-#define NONE		 	0x0000	/**< TODO */
-#define SELECTABLE		0x0001	/**< TODO */
-#define DEFAULT			0x0002	/**< TODO */
-#define EXIT			0x0004	/**< TODO */
-#define EDITABLE		0x0008	/**< TODO */
-#define RBUTTON			0x0010	/**< TODO */
-#define LASTOB			0x0020	/**< TODO */
-#define TOUCHEXIT		0x0040	/**< TODO */
-#define HIDETREE		0x0080	/**< TODO */
-#define INDIRECT		0x0100	/**< TODO */
-#define FL3DIND			0x0200	/* bit 9 */	/**< TODO */
-#define FL3DBAK			0x0400	/* bit 10 */	/**< TODO */
-#define FL3DACT			0x0600	/**< TODO */
-#define SUBMENU			0x0800	/* bit 11 */	/**< TODO */
-#define FLAG11			SUBMENU	/**< TODO */
-#define FLAG12			0x1000	/**< TODO */
-#define FLAG13			0x2000	/**< TODO */
-#define FLAG14			0x4000	/**< TODO */
-#define FLAG15			0x8000	/**< TODO */
+#define NONE		 	0x0000	/**< old name for #OF_NONE */
+#define SELECTABLE		0x0001	/**< old name for #OF_SELECTABLE */
+#define DEFAULT			0x0002	/**< old name for #OF_DEFAULT */
+#define EXIT			0x0004	/**< old name for #OF_EXIT */
+#define EDITABLE		0x0008	/**< old name for #OF_EDITABLE */
+#define RBUTTON			0x0010	/**< old name for #OF_RBUTTON */
+#define LASTOB			0x0020	/**< old name for #OF_LASTOB */
+#define TOUCHEXIT		0x0040	/**< old name for #OF_TOUCHEXIT */
+#define HIDETREE		0x0080	/**< old name for #OF_HIDETREE */
+#define INDIRECT		0x0100	/**< old name for #OF_INDIRECT */
+#define FL3DIND			0x0200	/**< old name for #OF_FL3DIND */
+#define FL3DBAK			0x0400	/**< old name for #OF_FL3DBAK */
+#define FL3DACT			0x0600	/**< old name for #OF_FL3DACT */
+#define SUBMENU			0x0800	/**< old name for #OF_SUBMENU */
+#define FLAG11			SUBMENU	/**< old name for #OF_FLAG11 */
+#define FLAG12			0x1000	/**< old name for #OF_FLAG12 */
+#define FLAG13			0x2000	/**< old name for #OF_FLAG13 */
+#define FLAG14			0x4000	/**< old name for #OF_FLAG14 */
+#define FLAG15			0x8000	/**< old name for #OF_FLAG15 */
 
 /* Object states */
-#define NORMAL			0x0000	/**< TODO */
-#define SELECTED		0x0001	/**< TODO */
-#define CROSSED			0x0002	/**< TODO */
-#define CHECKED			0x0004	/**< TODO */
-#define DISABLED		0x0008	/**< TODO */
-#define OUTLINED		0x0010	/**< TODO */
-#define SHADOWED		0x0020	/**< TODO */
-#define WHITEBAK		0x0040	/**< TODO */
-#define DRAW3D			0x0080	/**< TODO */
-#define STATE08			0x0100	/**< TODO */
-#define STATE09			0x0200	/**< TODO */
-#define STATE10			0x0400	/**< TODO */
-#define STATE11			0x0800	/**< TODO */
-#define STATE12			0x1000	/**< TODO */
-#define STATE13			0x2000	/**< TODO */
-#define STATE14			0x4000	/**< TODO */
-#define STATE15			0x8000	/**< TODO */
+#define NORMAL			0x0000	/**< other name for #OS_NORMAL */
+#define SELECTED		0x0001	/**< other name for #OS_SELECTED */
+#define CROSSED			0x0002	/**< other name for #OS_CROSSED */
+#define CHECKED			0x0004	/**< other name for #OS_CHECKED */
+#define DISABLED		0x0008	/**< other name for #OS_DISABLED */
+#define OUTLINED		0x0010	/**< other name for #OS_OUTLINED */
+#define SHADOWED		0x0020	/**< other name for #OS_SHADOWED */
+#define WHITEBAK		0x0040	/**< other name for #OS_WHITEBAK */
+#define DRAW3D			0x0080	/**< other name for #OS_DRAW3D */
+#define STATE08			0x0100	/**< other name for #OS_STATE08 */
+#define STATE09			0x0200	/**< other name for #OS_STATE09 */
+#define STATE10			0x0400	/**< other name for #OS_STATE10 */
+#define STATE11			0x0800	/**< other name for #OS_STATE11 */
+#define STATE12			0x1000	/**< other name for #OS_STATE12 */
+#define STATE13			0x2000	/**< other name for #OS_STATE13 */
+#define STATE14			0x4000	/**< other name for #OS_STATE14 */
+#define STATE15			0x8000	/**< other name for #OS_STATE15 */
 
 /* Object colors - default pall. */
-#define WHITE			0	/**< TODO */
-#define BLACK			1	/**< TODO */
-#define RED				2	/**< TODO */
-#define GREEN			3	/**< TODO */
-#define BLUE			4	/**< TODO */
-#define CYAN			5	/**< TODO */
-#define YELLOW			6	/**< TODO */
-#define MAGENTA			7	/**< TODO */
-#define LWHITE			8	/**< TODO */
-#define LBLACK			9	/**< TODO */
-#define LRED			10	/**< TODO */
-#define LGREEN			11	/**< TODO */
-#define LBLUE			12	/**< TODO */
-#define LCYAN			13	/**< TODO */
-#define LYELLOW			14	/**< TODO */
-#define LMAGENTA		15	/**< TODO */
+#define WHITE			0	/**< white */
+#define BLACK			1	/**< black */
+#define RED				2	/**< red */
+#define GREEN			3	/**< green */
+#define BLUE			4	/**< blue */
+#define CYAN			5	/**< cyan */
+#define YELLOW			6	/**< yellow */
+#define MAGENTA			7	/**< magenta */
+#define LWHITE			8	/**< light gray */
+#define LBLACK			9	/**< gray */
+#define LRED			10	/**< dark red */
+#define LGREEN			11	/**< dark green */
+#define LBLUE			12	/**< dark blue */
+#define LCYAN			13	/**< dark cyan */
+#define LYELLOW			14	/**< dark yellow */
+#define LMAGENTA		15	/**< dark magenta */
 
 #endif
 
@@ -1591,28 +1854,28 @@ typedef  struct
 #define ED_CHAR 		2	/**< insert a character in the editable field, see mt_objc_ecit() */
 #define ED_END			3	/**< turn OFF the cursor, see mt_objc_edit() */
 
-#define EDSTART			ED_START	/**< alias */
-#define EDINIT			ED_INIT		/**< alias */
-#define EDCHAR			ED_CHAR		/**< alias */
-#define EDEND 			ED_END		/**< alias */
+#define EDSTART			ED_START	/**< alias for #ED_START */
+#define EDINIT			ED_INIT		/**< alias for #ED_INIT */
+#define EDCHAR			ED_CHAR		/**< alias for #ED_CHAR */
+#define EDEND 			ED_END		/**< alias for #ED_END */
 
 /* XaAES extensions to objc_edit() */
-#define ED_DISABLE		5	/**< TODO */
-#define ED_ENABLE		6	/**< TODO */
-#define ED_CRSRON		7	/**< TODO */
-#define ED_CRSROFF		8	/**< TODO */
+#define ED_DISABLE		5	/**< turn OFF the cursor */
+#define ED_ENABLE		6	/**< unsupported */
+#define ED_CRSRON		7	/**< draw the cursor */
+#define ED_CRSROFF		8	/**< undraw the cursor */
 
-#define ED_MARK			9	/**< TODO */
-#define ED_STRING		10	/**< TODO */
-#define ED_SETPTEXT		11	/**< TODO */
-#define ED_SETPTMPLT	12	/**< TODO */
-#define ED_SETPVALID	13	/**< TODO */
-#define ED_GETPTEXT		14	/**< TODO */
-#define ED_GETPTMPLT	15	/**< TODO */
-#define ED_GETPVALID	16	/**< TODO */
+#define ED_MARK			9	/**< init the cursor in the editable field */
+#define ED_STRING		10	/**< insert a character string in the editable field */
+#define ED_SETPTEXT		11	/**< set pointer to text in the editable field */
+#define ED_SETPTMPLT	12	/**< unimplemented */
+#define ED_SETPVALID	13	/**< unimplemented */
+#define ED_GETPTEXT		14	/**< unimplemented */
+#define ED_GETPTMPLT	15	/**< unimplemented */
+#define ED_GETPVALID	16	/**< unimplemented */
 
-#define ED_CRSR			100	/**< TO BE COMPLETED (MagiC), see mt_objc_edit() */
-#define ED_DRAW			103	/**< TO BE COMPLETED (MagiC), see mt_objc_edit() */
+#define ED_CRSR			100	/**< extended replacement for ED_INIT (MagiC), see mt_objc_edit() */
+#define ED_DRAW			103	/**< draw the cursor in XOR mode (MagiC), see mt_objc_edit() */
 
 #define ED_REDRAW		200		/**< XaAES only */
 #define ED_XINIT		201             /**< XaAES only */
@@ -1622,9 +1885,9 @@ typedef  struct
 #define ED_CHGTMPLPTR	205		/**< XaAES only */
 
 /* editable text justification */
-#define TE_LEFT			0	/**< TODO */
-#define TE_RIGHT		1	/**< TODO */
-#define TE_CNTR			2	/**< TODO */
+#define TE_LEFT			0	/**< left justify */
+#define TE_RIGHT		1	/**< right justify */
+#define TE_CNTR			2	/**< center */
 
 /* objc_change modes */
 #define NO_DRAW			0	/**< object will not be redrawn, see mt_objc_change() */
@@ -1646,7 +1909,7 @@ typedef  struct
 #define BACKGRCOL 		5	/**< default color for background objects, see mt_objc_sysvar()  */
 #define AD3DVAL			6	/**< number of extra pixels to accomodate 3D effects, see mt_objc_sysvar() */
 #define MX_ENABLE3D		10  /**< enable or disable the 3D look (MagiC 3), see mt_objc_sysvar() */
-#define MENUCOL			11  /**< TO BE COMPLETED (MagiC 6), see mt_objc_sysvar() */
+#define MENUCOL			11  /**< get current color of menu bar (MagiC 6), see mt_objc_sysvar() */
 
 /** Mouse Form Definition Block, see mt_graf_mouse() */
 typedef struct mouse_form
@@ -1690,38 +1953,38 @@ typedef struct mouse_form
 } MFORM;
 
 #ifndef __PXY
-# define __PXY	/**< TODO */
-/** TODO */
+# define __PXY	/**< Point coordinates */
+/** Point coordinates structure */
 typedef struct point_coord
 {
-	short p_x;			/**< TODO */
-	short p_y;			/**< TODO */
+	short p_x;			/**< X coordinate of the point */
+	short p_y;			/**< Y coordinate of the point */
 } PXY;
 #endif
 
 #ifndef __GRECT
-# define __GRECT	/**< TODO */
-/** TODO */
+# define __GRECT	/**< Graphic rectangle */
+/** Graphic rectangle */
 typedef struct graphic_rectangle
 {
-	short g_x;			/**< TODO */
-	short g_y;			/**< TODO */
-	short g_w;			/**< TODO */
-	short g_h;			/**< TODO */
+	short g_x;			/**< X coordinate of the graphic rectangle */
+	short g_y;			/**< Y coordinate of the graphic rectangle */
+	short g_w;			/**< Width of the graphic rectangle */
+	short g_h;			/**< Height of the graphic rectangle */
 } GRECT;
 #endif
 
-/** TODO */
+/** Color information word */
 typedef struct objc_colorword
 {
-	unsigned	borderc : 4;			/**< TODO */
-	unsigned	textc   : 4;			/**< TODO */
-	unsigned	opaque  : 1;			/**< TODO */
-	unsigned	pattern : 3;			/**< TODO */
-	unsigned	fillc   : 4;			/**< TODO */
+	unsigned	borderc : 4;			/**< border color */
+	unsigned	textc   : 4;			/**< text color */
+	unsigned	opaque  : 1;			/**< transparent or opaque */
+	unsigned	pattern : 3;			/**< intensity */
+	unsigned	fillc   : 4;			/**< inner color */
 } OBJC_COLORWORD;
 
-/** TODO */
+/** Editable text information structure */
 typedef struct text_edinfo
 {
 	char		*te_ptext;		/**< ptr to text */
@@ -1737,7 +2000,7 @@ typedef struct text_edinfo
 	short		te_tmplen;		/**< length of template string */
 } TEDINFO;
 
-/** TODO */
+/** Icon block structure */
 typedef struct icon_block
 {
 	short		*ib_pmask;			/**< Ptr to the icon mask*/
@@ -1756,7 +2019,7 @@ typedef struct icon_block
 	short		ib_htext;			/**< Height in pixels of the text */
 } ICONBLK;
 
-/** TODO */
+/** Bit block */
 typedef struct bit_block
 {
 	short		*bi_pdata;	/**< ptr to bit forms data  */
@@ -1767,7 +2030,7 @@ typedef struct bit_block
 	short		bi_color;	/**< fg color of blt */
 } BITBLK;
 
-/** TODO */
+/** Color icon data */
 typedef struct cicon_data
 {
 	short 		num_planes;			/**< Number of color planes */
@@ -1778,43 +2041,43 @@ typedef struct cicon_data
 	struct cicon_data *next_res;	/**< Next resolution definition of the icon*/
 } CICON;
 
-/** TODO */
+/** Color icon block structure */
 typedef struct cicon_blk
 {
 	ICONBLK		monoblk;			/**< ICONBLK definition (B&W icon) */
 	CICON 		*mainlist;			/**< list of the different color icon resolution */
 } CICONBLK;
 
-/** TODO */
+/** Bit Field OBject SPECification */
 typedef struct
 {
-	 unsigned	character   :  8;			/**< TODO */
-	 signed		framesize   :  8;			/**< TODO */
-	 unsigned	framecol    :  4;			/**< TODO */
-	 unsigned	textcol	    :  4;			/**< TODO */
-	 unsigned	textmode    :  1;			/**< TODO */
-	 unsigned	fillpattern :  3;			/**< TODO */
-	 unsigned	interiorcol :  4;			/**< TODO */
+	 unsigned	character   :  8;			/**< character to display (BOXCHAR) */
+	 signed		framesize   :  8;			/**< size of frame */
+	 unsigned	framecol    :  4;			/**< color of frame */
+	 unsigned	textcol	    :  4;			/**< color of text */
+	 unsigned	textmode    :  1;			/**< transparent or replace */
+	 unsigned	fillpattern :  3;			/**< fill pattern index */
+	 unsigned	interiorcol :  4;			/**< color of interior */
 } BFOBSPEC;
 
-/** TODO */
+/** User block */
 struct user_block;	/* forward declaration */
 
-/** TODO */
+/** Object specification pointer */
 typedef union obspecptr
 {
-	long		index;				/**< TODO */
-	union obspecptr	*indirect;		/**< TODO */
-	BFOBSPEC 	obspec;				/**< TODO */
-	TEDINFO		*tedinfo;			/**< TODO */
-	BITBLK		*bitblk;			/**< TODO */
-	ICONBLK		*iconblk;			/**< TODO */
-	CICONBLK 	*ciconblk;			/**< TODO */
-	struct user_block *userblk;		/**< TODO */
-	char		*free_string;		/**< TODO */
+	long		index;				/**< actuel value as long */
+	union obspecptr	*indirect;		/**< Ptr to the actual obspecptr */
+	BFOBSPEC 	obspec;				/**< actual value as bit field */
+	TEDINFO		*tedinfo;			/**< Ptr to the TEDINFO structure */
+	BITBLK		*bitblk;			/**< Ptr to the BITBLK structure */
+	ICONBLK		*iconblk;			/**< Ptr to the ICONBLK structure */
+	CICONBLK 	*ciconblk;			/**< Ptr to the CICONBLK structure */
+	struct user_block *userblk;		/**< Ptr to the user_block structure */
+	char		*free_string;		/**< Ptr to the free string */
 } OBSPEC;
 
-/** TODO */
+/** Object structure */
 typedef struct object
 {
 	short 		ob_next;		/**< object's next sibling */
@@ -1830,7 +2093,7 @@ typedef struct object
 	short 		ob_height;		/**< height of obj */
 } OBJECT;
 
-/** TODO */
+/** Parameter block structure */
 typedef struct parm_block
 {
 	OBJECT	*pb_tree;			/**< Pointer to the object tree         */
@@ -1848,14 +2111,14 @@ typedef struct parm_block
 	long	pb_parm;			/**< Parameter of USERBLK structure     */
 } PARMBLK;
 
-/** TODO */
+/** User block structure */
 typedef struct user_block
 {
-	short __CDECL (*ub_code)(PARMBLK *parmblock);	/**< TODO */
-	long ub_parm;									/**< TODO */
+	short __CDECL (*ub_code)(PARMBLK *parmblock);	/**< drawing code for self-drawing object */
+	long ub_parm;									/**< application-defined parameter for the object */
 } USERBLK;
 
-/** TODO */
+/** Resource file header structure */
 typedef struct rshdr
 {
 	short			rsh_vrsn;			/**< Version, should be 1 for standard format */
@@ -1878,10 +2141,10 @@ typedef struct rshdr
 	unsigned short	rsh_rssize;			/**< total bytes in resource */
 } RSHDR;
 
-/** TODO */
+/** Extended resource file header */
 #ifndef __RSXHDR
 #define __RSXHDR
-/** TODO */
+/** Extended resource file header structure */
 typedef struct rsxhdr
 {
 	unsigned short	rsh_vrsn;     /**< Version, should be 3 for extended (32bit) format */
@@ -1927,23 +2190,23 @@ typedef struct _menu
 	short  mn_keystate; /**< key state */
 } MENU;
 
-/** TODO */
+/** Mouse rectangle */
 typedef struct
 {
-	short m_out;	/**< TODO */
-	short m_x;		/**< TODO */
-	short m_y;		/**< TODO */
-	short m_w;		/**< TODO */
-	short m_h;		/**< TODO */
+	short m_out;	/**< Wait for enter (0) or exit (1) */
+	short m_x;		/**< X coordinate of the rectangle */
+	short m_y;		/**< Y coordinate of the rectangle */
+	short m_w;		/**< Width of the rectangle */
+	short m_h;		/**< Height of the rectangle */
 } MOBLK;
 
-/** TODO */
+/** Mouse event */
 typedef struct mouse_event_type
 {
-	short *x;	/**< TODO */
-	short *y;	/**< TODO */
-	short *b;	/**< TODO */
-	short *k;	/**< TODO */
+	short *x;	/**< X coordinate of the mouse */
+	short *y;	/**< Y coordinate of the mouse */
+	short *b;	/**< Button state of the mouse */
+	short *k;	/**< Key state of the special keys */
 } MOUSE_EVENT;
 
 /** structure comprising the most of the input arguments of mt_evnt_multi()
@@ -1953,9 +2216,9 @@ typedef struct {
 	short emi_bclicks;		  /**< see mt_evnt_multi() */
 	short emi_bmask;		  /**< see mt_evnt_multi() */
 	short emi_bstate;		  /**< see mt_evnt_multi() */
-	short emi_m1leave;		  /**< TODO */
+	short emi_m1leave;		  /**< see mt_evnt_multi() */
 	GRECT emi_m1;             /**< the first rectangle to watch */
-	short emi_m2leave;		  /**< TODO */
+	short emi_m2leave;		  /**< see mt_evnt_multi() */
 	GRECT emi_m2;             /**< the second rectangle to watch */
 	short emi_tlow;		  	  /**< see mt_evnt_multi() */
 	short emi_thigh;          /**< the timer 32-bit value of interval split into short type member */
@@ -1967,11 +2230,11 @@ typedef struct {
  */
 typedef struct {
 	short emo_events;	/**< the bitfield of events occured (also a return value of mt_evnt_multi_fast() */
-	PXY   emo_mouse;	/**< TODO */
-	short emo_mbutton;	/**< TODO */
-	short emo_kmeta;	/**< TODO */
-	short emo_kreturn;	/**< TODO */
-	short emo_mclicks;	/**< TODO */
+	PXY   emo_mouse;	/**< see mt_evnt_multi() */
+	short emo_mbutton;	/**< see mt_evnt_multi() */
+	short emo_kmeta;	/**< see mt_evnt_multi() */
+	short emo_kreturn;	/**< see mt_evnt_multi() */
+	short emo_mclicks;	/**< see mt_evnt_multi() */
 } EVMULT_OUT;
 
 #endif
@@ -2287,199 +2550,199 @@ extern void aes (AESPB *pb);
  */
 
 /* normal graphics drawing modes */
-#define MD_REPLACE		1	/**< TODO */
-#define MD_TRANS		2	/**< TODO */
-#define MD_XOR			3	/**< TODO */
-#define MD_ERASE		4	/**< TODO */
+#define MD_REPLACE		1	/**< replace mode, see vrt_cpyfm() */
+#define MD_TRANS		2	/**< transparent mode, see vrt_cpyfm() */
+#define MD_XOR			3	/**< XOR mode, see vrt_cpyfm() */
+#define MD_ERASE		4	/**< erase mode, see vrt_cpyfm() */
 
 /* bit blt rules */
-#define ALL_WHITE		0	/**< TODO */
-#define S_AND_D			1	/**< TODO */
-#define S_AND_NOTD		2	/**< TODO */
-#define S_ONLY			3	/**< TODO */
-#define NOTS_AND_D		4	/**< TODO */
-#define D_ONLY			5	/**< TODO */
-#define S_XOR_D			6	/**< TODO */
-#define S_OR_D			7	/**< TODO */
-#define NOT_SORD		8	/**< TODO */
-#define NOT_SXORD		9	/**< TODO */
-#define D_INVERT		10	/**< TODO */
-#define NOT_D			10	/**< TODO */
-#define S_OR_NOTD		11	/**< TODO */
-#define NOT_S			12	/**< TODO */
-#define NOTS_OR_D		13	/**< TODO */
-#define NOT_SANDD		14	/**< TODO */
-#define ALL_BLACK		15	/**< TODO */
+#define ALL_WHITE		0	/**< see vro_cpyfm() */
+#define S_AND_D			1	/**< see vro_cpyfm() */
+#define S_AND_NOTD		2	/**< see vro_cpyfm() */
+#define S_ONLY			3	/**< see vro_cpyfm() */
+#define NOTS_AND_D		4	/**< see vro_cpyfm() */
+#define D_ONLY			5	/**< see vro_cpyfm() */
+#define S_XOR_D			6	/**< see vro_cpyfm() */
+#define S_OR_D			7	/**< see vro_cpyfm() */
+#define NOT_SORD		8	/**< see vro_cpyfm() */
+#define NOT_SXORD		9	/**< see vro_cpyfm() */
+#define D_INVERT		10	/**< see vro_cpyfm() */
+#define NOT_D			10	/**< see vro_cpyfm() */
+#define S_OR_NOTD		11	/**< see vro_cpyfm() */
+#define NOT_S			12	/**< see vro_cpyfm() */
+#define NOTS_OR_D		13	/**< see vro_cpyfm() */
+#define NOT_SANDD		14	/**< see vro_cpyfm() */
+#define ALL_BLACK		15	/**< see vro_cpyfm() */
 
 /* v_bez modes */
-#define BEZ_BEZIER		0x01	/**< TODO */
-#define BEZ_POLYLINE	0x00	/**< TODO */
-#define BEZ_NODRAW		0x02	/**< TODO */
+#define BEZ_BEZIER		0x01	/**< begin a 4-point bezier segment, see v_bez() */
+#define BEZ_POLYLINE	0x00	/**< begin a polyline segment, see v_bez() */
+#define BEZ_NODRAW		0x02	/**< if set, jump to this point without drawing, see v_bez() */
 
 /* v_bit_image modes */
-#define IMAGE_LEFT		0	/**< TODO */
-#define IMAGE_CENTER	1	/**< TODO */
-#define IMAGE_RIGHT		2	/**< TODO */
-#define IMAGE_TOP 		0	/**< TODO */
-#define IMAGE_BOTTOM	2	/**< TODO */
+#define IMAGE_LEFT		0	/**< horizontal alignment, left, see v_bit_image() */
+#define IMAGE_CENTER	1	/**< alignment, center or middle, see v_bit_image() */
+#define IMAGE_RIGHT		2	/**< horizontal alignment, right, see v_bit_image() */
+#define IMAGE_TOP 		0	/**< vertical alignment, top, see v_bit_image() */
+#define IMAGE_BOTTOM	2	/**< vertical alignment, bottom, see v_bit_image() */
 
 /* v_justified modes */
-#define NOJUSTIFY		0	/**< TODO */
-#define JUSTIFY			1	/**< TODO */
+#define NOJUSTIFY		0	/**< do not allow VDI to modify inter-character/word spacing, see v_justified() */
+#define JUSTIFY			1	/**< allow VDI to modify inter-character/word spacing, see v_justified() */
 
 /* vq_color modes */
-#define COLOR_REQUESTED		0	/**< TODO */
-#define COLOR_ACTUAL		1	/**< TODO */
+#define COLOR_REQUESTED		0	/**< return color values last requested by user at vs_color(), see vq_color() */
+#define COLOR_ACTUAL		1	/**< return realized color values, see vq_color() */
 
 /* return values for vq_vgdos() inquiry */
-#define GDOS_NONE		(-2L) 		 /* no GDOS installed */	/**< TODO */
-#define GDOS_FSM		0x5F46534DL /* '_FSM' */	/**< TODO */
-#define GDOS_FNT		0x5F464E54L /* '_FNT' */	/**< TODO */
+#define GDOS_NONE		(-2L) 		 /**< no GDOS installed */
+#define GDOS_FSM		0x5F46534DL /* '_FSM' */	/**< FSMGDOS */
+#define GDOS_FNT		0x5F464E54L /* '_FNT' */	/**< FONTGDOS */
 
 /* vqin_mode & vsin_mode modes */
-#define VINMODE_LOCATOR		1	/**< TODO */
-#define VINMODE_VALUATOR	2	/**< TODO */
-#define VINMODE_CHOICE		3	/**< TODO */
-#define VINMODE_STRING		4	/**< TODO */
+#define VINMODE_LOCATOR		1	/**< locator (mouse, keyboard) */
+#define VINMODE_VALUATOR	2	/**< valuator (cursor) */
+#define VINMODE_CHOICE		3	/**< choice (function keys) */
+#define VINMODE_STRING		4	/**< string (keyboard) */
 
 #ifdef __GEMLIB_OLDNAMES
-#define LOCATOR			1	/**< TODO */
-#define VALUATOR		2	/**< TODO */
-#define CHOICE			3	/**< TODO */
-#define STRING			4	/**< TODO */
+#define LOCATOR			1	/**< old name for #VINMODE_LOCATOR */
+#define VALUATOR		2	/**< old name for #VINMODE_VALUATOR */
+#define CHOICE			3	/**< old name for #VINMODE_CHOICE */
+#define STRING			4	/**< old name for #VINMODE_STRING */
 #endif
 
 /* vqt_cachesize modes */
-#define CACHE_CHAR		0	/**< TODO */
-#define CACHE_MISC		1	/**< TODO */
+#define CACHE_CHAR		0	/**< character bitmap cache, see vqt_cachesize() */
+#define CACHE_MISC		1	/**< cache for data structure, see vqt_cachesize() */
 
 /* vqt_devinfo return values */
-#define DEV_MISSING		0	/**< TODO */
-#define DEV_INSTALLED	1	/**< TODO */
+#define DEV_MISSING		0	/**< device not installed, see vqt_devinfo() */
+#define DEV_INSTALLED	1	/**< device installed, see vqt_devinfo() */
 
 /* vqt_name return values */
-#define BITMAP_FONT		0	/**< TODO */
+#define BITMAP_FONT		0	/**< bitmap font, see vqt_name() */
 
 /* vsf_interior modes */
-#define FIS_HOLLOW		0	/**< TODO */
-#define FIS_SOLID		1	/**< TODO */
-#define FIS_PATTERN		2	/**< TODO */
-#define FIS_HATCH		3	/**< TODO */
-#define FIS_USER		4	/**< TODO */
+#define FIS_HOLLOW		0	/**< hollow interior, see vsf_interior() */
+#define FIS_SOLID		1	/**< solid interior, see vsf_interior() */
+#define FIS_PATTERN		2	/**< patterned fill, see vsf_interior() */
+#define FIS_HATCH		3	/**< hatched fill, see vsf_interior() */
+#define FIS_USER		4	/**< user-defined fill, see vsf_interior() */
 
 /* vsf_perimeter modes */
-#define PERIMETER_OFF		0	/**< TODO */
-#define PERIMETER_ON		1	/**< TODO */
+#define PERIMETER_OFF		0	/**< turn off perimeter drawing, see vsf_perimeter() */
+#define PERIMETER_ON		1	/**< turn on perimeter drawing, see vsf_perimeter() */
 
 /* vsl_ends modes */
-#define SQUARE			0	/**< TODO */
-#define ARROWED			1	/**< TODO */
-#define ROUND			2	/**< TODO */
+#define SQUARE			0	/**< squared line end, see vsl_ends() */
+#define ARROWED			1	/**< arrowed line end, see vsl_ends() */
+#define ROUND			2	/**< rounded line end, see vsl_ends() */
 
 /* other names */
-#define LE_SQUARED		SQUARE	/**< TODO */
-#define LE_ARROWED		ARROWED	/**< TODO */
-#define LE_ROUNDED		ROUND	/**< TODO */
+#define LE_SQUARED		SQUARE	/**< alias for #SQUARE */
+#define LE_ARROWED		ARROWED	/**< alias for #ARROWED */
+#define LE_ROUNDED		ROUND	/**< alias for #ROUND */
 
 /* vsl_type modes */
-#define SOLID			1	/**< TODO */
-#define LDASHED			2	/**< TODO */
-#define DOTTED			3	/**< TODO */
-#define DASHDOT			4	/**< TODO */
-#define DASH			5	/**< TODO */
-#define DASHDOTDOT		6	/**< TODO */
-#define USERLINE		7	/**< TODO */
+#define SOLID			1	/**< solid, see vsl_type() */
+#define LDASHED			2	/**< long dashed, see vsl_type() */
+#define DOTTED			3	/**< dot, see vsl_type() */
+#define DASHDOT			4	/**< dash, dot, see vsl_type() */
+#define DASH			5	/**< dash, see vsl_type() */
+#define DASHDOTDOT		6	/**< dash, dot, dot, see vsl_type() */
+#define USERLINE		7	/**< user-defined with vsl_udsty(), see vsl_type() */
 
 /* other names */
-#define LT_SOLID		SOLID		/**< TODO */
-#define LT_LONGDASH		LDASHED		/**< TODO */
-#define LT_DOTTED		DOTTED		/**< TODO */
-#define LT_DASHDOT		DASHDOT		/**< TODO */
-#define LT_DASHED		DASH		/**< TODO */
-#define LT_DASHDOTDOT	DASHDOTDOT	/**< TODO */
-#define LT_USERDEF		USERLINE	/**< TODO */
-#define LONGDASH		LDASHED		/**< TODO */
-#define DOT				DOTTED		/**< TODO */
-#define DASH2DOT		DASHDOTDOT	/**< TODO */
+#define LT_SOLID		SOLID		/**< alias for #SOLID */
+#define LT_LONGDASH		LDASHED		/**< alias for #LDASHED */
+#define LT_DOTTED		DOTTED		/**< alias for #DOTTED */
+#define LT_DASHDOT		DASHDOT		/**< alias for #DASHDOT */
+#define LT_DASHED		DASH		/**< alias for #DASH */
+#define LT_DASHDOTDOT	DASHDOTDOT	/**< alias for #DASHDOTDOT */
+#define LT_USERDEF		USERLINE	/**< alias for #USERLINE */
+#define LONGDASH		LDASHED		/**< alias for #LDASHED */
+#define DOT				DOTTED		/**< alias for #DOTTED */
+#define DASH2DOT		DASHDOTDOT	/**< alias for #DASHDOTDOT */
 
 /* vsm_type modes */
-#define MRKR_DOT		1	/**< TODO */
-#define MRKR_PLUS 		2	/**< TODO */
-#define MRKR_ASTERISK	3	/**< TODO */
-#define MRKR_BOX		4	/**< TODO */
-#define MRKR_CROSS		5	/**< TODO */
-#define MRKR_DIAMOND	6	/**< TODO */
+#define MRKR_DOT		1	/**< dot marker type, see vsm_type() */
+#define MRKR_PLUS 		2	/**< plus marker type, see vsm_type() */
+#define MRKR_ASTERISK	3	/**< asterisk marker type, see vsm_type() */
+#define MRKR_BOX		4	/**< square marker type, see vsm_type() */
+#define MRKR_CROSS		5	/**< diagonal cross marker type, see vsm_type() */
+#define MRKR_DIAMOND	6	/**< diamond marker type, see vsm_type() */
 
 /* other names */
-#define MT_DOT			MRKR_DOT		/**< TODO */
-#define MT_PLUS			MRKR_PLUS		/**< TODO */
-#define MT_ASTERISK		MRKR_ASTERISK	/**< TODO */
-#define MT_SQUARE		MRKR_BOX		/**< TODO */
-#define MT_DCROSS		MRKR_CROSS		/**< TODO */
-#define MT_DIAMOND		MRKR_DIAMOND	/**< TODO */
+#define MT_DOT			MRKR_DOT		/**< alias for #MRKR_DOT */
+#define MT_PLUS			MRKR_PLUS		/**< alias for #MRKR_PLUS */
+#define MT_ASTERISK		MRKR_ASTERISK	/**< alias for #MRKR_ASTERISK */
+#define MT_SQUARE		MRKR_BOX		/**< alias for #MRKR_BOX */
+#define MT_DCROSS		MRKR_CROSS		/**< alias for #MRKR_CROSS */
+#define MT_DIAMOND		MRKR_DIAMOND	/**< alias for #MRKR_DIAMOND */
 
 /* vst_alignment modes */
-#define TA_LEFT         	0 /* horizontal */	/**< TODO */
-#define TA_CENTER       	1	/**< TODO */
-#define TA_RIGHT        	2	/**< TODO */
-#define TA_BASE         	0 /* vertical */	/**< TODO */
-#define TA_HALF         	1	/**< TODO */
-#define TA_ASCENT       	2	/**< TODO */
-#define TA_BOTTOM       	3	/**< TODO */
-#define TA_DESCENT      	4	/**< TODO */
-#define TA_TOP          	5	/**< TODO */
+#define TA_LEFT         	0 /**< horizontal alignment, left justified (default), see vst_alignment() */
+#define TA_CENTER       	1	/**< horizontal alignment, centered, see vst_alignment() */
+#define TA_RIGHT        	2	/**< horizontal alignment, right justified, see vst_alignment() */
+#define TA_BASE         	0 /**< vertical alignment, baseline (default), see vst_alignment() */
+#define TA_HALF         	1	/**< vertical alignment, half line, see vst_alignment() */
+#define TA_ASCENT       	2	/**< vertical alignment, ascent line, see vst_alignment() */
+#define TA_BOTTOM       	3	/**< vertical alignment, bottom line, see vst_alignment() */
+#define TA_DESCENT      	4	/**< vertical alignment, descent line, see vst_alignment() */
+#define TA_TOP          	5	/**< vertical alignment, top line, see vst_alignment() */
 
 /* vst_charmap modes */
-#define MAP_BITSTREAM		0	/**< TODO */
-#define MAP_ATARI			1	/**< TODO */
-#define MAP_UNICODE			2 /* for vst_map_mode, NVDI 4 */	/**< TODO */
+#define MAP_BITSTREAM		0	/**< direct mapping (word, no translation of the character index), see vst_charmap()  */
+#define MAP_ATARI			1	/**< ASCII mapping (char-sized), see vst_charmap() */
+#define MAP_UNICODE			2 /**< Unicode mapping (word), for vst_map_mode(), NVDI 4, see vst_charmap() */
 
 /* vst_effects modes */
-#define TXT_NORMAL			0x0000	/**< TODO */
-#define TXT_THICKENED		0x0001	/**< TODO */
-#define TXT_LIGHT			0x0002	/**< TODO */
-#define TXT_SKEWED			0x0004	/**< TODO */
-#define TXT_UNDERLINED		0x0008	/**< TODO */
-#define TXT_OUTLINED		0x0010	/**< TODO */
-#define TXT_SHADOWED		0x0020	/**< TODO */
+#define TXT_NORMAL			0x0000	/**< normal text, see vst_effects() */
+#define TXT_THICKENED		0x0001	/**< thickened text, see vst_effects() */
+#define TXT_LIGHT			0x0002	/**< lightened text, see vst_effects() */
+#define TXT_SKEWED			0x0004	/**< skewed text, see vst_effects() */
+#define TXT_UNDERLINED		0x0008	/**< underlined text, see vst_effects() */
+#define TXT_OUTLINED		0x0010	/**< outlined text, see vst_effects() */
+#define TXT_SHADOWED		0x0020	/**< shadowed text, see vst_effects() */
 
 /* other names */
-#define	TF_NORMAL			TXT_NORMAL		/**< TODO */
-#define TF_THICKENED		TXT_THICKENED	/**< TODO */
-#define TF_LIGHTENED		TXT_LIGHT		/**< TODO */
-#define TF_SLANTED			TXT_SKEWED		/**< TODO */
-#define TF_UNDERLINED		TXT_UNDERLINED	/**< TODO */
-#define TF_OUTLINED			TXT_OUTLINED	/**< TODO */
-#define TF_SHADOWED			TXT_SHADOWED	/**< TODO */
+#define	TF_NORMAL			TXT_NORMAL		/**< alias for #TXT_NORMAL */
+#define TF_THICKENED		TXT_THICKENED	/**< alias for #TXT_THICKENED */
+#define TF_LIGHTENED		TXT_LIGHT		/**< alias for #TXT_LIGHT */
+#define TF_SLANTED			TXT_SKEWED		/**< alias for #TXT_SKEWED */
+#define TF_UNDERLINED		TXT_UNDERLINED	/**< alias for #TXT_UNDERLINED */
+#define TF_OUTLINED			TXT_OUTLINED	/**< alias for #TXT_OUTLINED */
+#define TF_SHADOWED			TXT_SHADOWED	/**< alias for #TXT_SHADOWED */
 
 
 /* vst_error modes */
-#define APP_ERROR			0	/**< TODO */
-#define SCREEN_ERROR		1	/**< TODO */
+#define APP_ERROR			0	/**< errors reported in error variable errorvar, see vst_error() (mode) */
+#define SCREEN_ERROR		1	/**< errors go to screen (default), see vst_error() (mode) */
 
 /* vst_error return values */
-#define NO_ERROR			0	/**< TODO */
-#define CHAR_NOT_FOUND		1	/**< TODO */
-#define FILE_READERR 		8	/**< TODO */
-#define FILE_OPENERR 		9	/**< TODO */
-#define BAD_FORMAT			10	/**< TODO */
-#define CACHE_FULL			11	/**< TODO */
-#define MISC_ERROR			(-1)	/**< TODO */
+#define NO_ERROR			0	/**< no error, see vst_error() */
+#define CHAR_NOT_FOUND		1	/**< character not found in font, see vst_error() */
+#define FILE_READERR 		8	/**< error reading file, see vst_error() */
+#define FILE_OPENERR 		9	/**< error opening file, see vst_error() */
+#define BAD_FORMAT			10	/**< bad file format, see vst_error() */
+#define CACHE_FULL			11	/**< out of memory/cache full, see vst_error() */
+#define MISC_ERROR			(-1)	/**< miscellaneous error, see vst_error() */
 
 /* vst_kern tmodes */
-#define TRACK_NONE			0	/**< TODO */
-#define TRACK_NORMAL 		1	/**< TODO */
-#define TRACK_TIGHT			2	/**< TODO */
-#define TRACK_VERYTIGHT		3	/**< TODO */
+#define TRACK_NONE			0	/**< no tracking kerning, see vst_kern() */
+#define TRACK_NORMAL 		1	/**< normal tracking kerning, see vst_kern() */
+#define TRACK_TIGHT			2	/**< tight tracking kerning, see vst_kern() */
+#define TRACK_VERYTIGHT		3	/**< very tight tracking kerning, see vst_kern() */
 
 /* vst_kern pmodes */
-#define PAIR_OFF		0	/**< TODO */
-#define PAIR_ON			1	/**< TODO */
+#define PAIR_OFF		0	/**< no pair kerning, see vst_kern() */
+#define PAIR_ON			1	/**< use pair kerning, see vst_kern() */
 
 /* vst_scratch modes */
-#define SCRATCH_BOTH		0	/**< TODO */
-#define SCRATCH_BITMAP		1	/**< TODO */
-#define SCRATCH_NONE		2	/**< TODO */
+#define SCRATCH_BOTH		0	/**< allocated size is large enough for bitmap and vector fonts, see vst_scratch() */
+#define SCRATCH_BITMAP		1	/**< size is governed by the bitmap fonts, see vst_scratch() */
+#define SCRATCH_NONE		2	/**< do not create a scratch buffer, see vst_scratch() */
 
 /* v_updwk return values */
 #define SLM_OK			0	/**< no error, SLM driver */
@@ -2487,13 +2750,13 @@ extern void aes (AESPB *pb);
 #define SLM_NOTONER		3	/**< toner empty, SLM driver */
 #define SLM_NOPAPER		5	/**< paper empty, SLM driver */
 
-/** TODO */
+/** VDI Memory Form Definition Block */
 #ifndef __MFDB__
 #define __MFDB__
 /** VDI Memory Form Definition Block */
 typedef struct memory_form
 {
-	void	*fd_addr;	/**< TODO */
+	void	*fd_addr;	/**< Pointer to the start of memory block */
 	short 	fd_w;		/**< Form Width in Pixels */
 	short 	fd_h; 		/**< Form Height in Pixels */
 	short 	fd_wdwidth;	/**< Form Width in shorts(fd_w/sizeof(short) */
@@ -2505,7 +2768,7 @@ typedef struct memory_form
 } MFDB;
 #endif
 
-/** RGB intesities in promille */
+/** RGB intensities in promille */
 typedef struct rgb_1000
 {
 	short  red;    /**< Red-Intensity in range [0..1000] */
@@ -3216,17 +3479,17 @@ short vdi_wstrlen   (const short *wstr);
 #define VDI_PTSINMAX		1024	/**< max size of vdi_ptsin[] */
 #define VDI_PTSOUTMAX		256		/**< max size of vdi_ptsout[] */
 
-/** TODO */
+/** VDI parameter block structure */
 typedef struct
 {
-	short       *control;	/**< TODO */
-	const short *intin;		/**< TODO */
-	const short *ptsin;		/**< TODO */
-	short       *intout;	/**< TODO */
-	short       *ptsout;	/**< TODO */
+	short       *control;	/**< vdi_control[] array */
+	const short *intin;		/**< vdi_intinn[] array */
+	const short *ptsin;		/**< vdi_ptsin[] array */
+	short       *intout;	/**< vdi_intout[] array */
+	short       *ptsout;	/**< vdi_ptsout[] array */
 } VDIPB;
 
-/** TODO */
+/** perform VDI trap */
 void vdi (VDIPB *pb);
 /**@}*/
 
