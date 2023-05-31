@@ -1,7 +1,7 @@
 /*
  * gemx.h - main header file for new gem-lib extensions
  *
- * This lib contains all GEM extensions of MagiC and NVDI/FSM/Speedo
+ * This lib contains all GEM extensions of MagiC/Geneva and NVDI/FSM/Speedo
  *
  */
 
@@ -27,10 +27,10 @@ __BEGIN_DECLS
     structure directly. The mt_wdlg_xx functions should be used! */
 typedef struct _dialog DIALOG;
 
-/** TODO */
+/** EVNT structure */
 #ifndef __EVNT
 #define __EVNT
-/** TODO */
+/** Event structure */
 typedef struct
 {
 	short		mwhich;		/**< Type of events */
@@ -62,22 +62,22 @@ void mt_EVNT_multi(short evtypes, short nclicks, short bmask, short bstate,
  *  @{
  */
 
-/** TODO */
+/** SCANX structure */
 #ifndef _SCANX
 #define _SCANX
-/** TODO */
+/** SCANX assignment, perform mouse click on an object when a key is pressed */
 typedef struct
 {
-	char		scancode;  /**< TODO */
-	char		nclicks;   /**< TODO */
-	short		objnr;     /**< TODO */
+	char		scancode;	/**< scancode of the key */
+	char		nclicks;	/**< mouse click to perform */
+	short		objnr;		/**< object index number */
 } SCANX;
 #endif
 
-/** TODO */
+/** XDO_INF strcture */
 #ifndef _XDO_INF
 #define _XDO_INF
-/** TODO */
+/** XDO_INF contains pointers to tables that assign to a scancode an object index of the dialog box */
 typedef struct
 {
 	SCANX		*unsh;		/**< table for unshifted keys */
@@ -92,10 +92,10 @@ typedef struct
  */
 struct POPUP_INIT_args
 {
-	OBJECT *tree;		/**< TODO */
-	short scrollpos;	/**< TODO */
-	short nlines;		/**< TODO */
-	void *param;		/**< TODO */
+	OBJECT *tree;		/**< address of the object tree */
+	short scrollpos;	/**< scroll position */
+	short nlines;		/**< number of lines */
+	void *param;		/**< user-defined parameter */
 };
 
 short	mt_form_popup 	(OBJECT *tree, short x, short y, short * global);
@@ -139,19 +139,19 @@ typedef struct _fnt_dialog FNT_DIALOG;
  */
 struct UTXT_FN_args
 {
-	short x;			/**< TODO */
-	short y;			/**< TODO */
-	short *clip_rect;	/**< TODO */
-	long id;			/**< TODO */
-	long pt;			/**< TODO */
-	long ratio;			/**< TODO */
-	char *string;		/**< TODO */
+	short x;			/**< X-coordinate of the window's top left corner, or -1 (centered) */
+	short y;			/**< Y-coordinate of the window's top left corner, or -1 (centered) */
+	short *clip_rect;	/**< Clipping rectangle */
+	long id;			/**< Font ID */
+	long pt;			/**< Height in 1/65536 point */
+	long ratio;			/**< Width/height ratio in 1/65536 */
+	char *string;		/**< String */
 };
 
-/** TODO */
+/** void __CDECL (*UTXT_FN)(struct UTXT_FN_args) */
 typedef void __CDECL (*UTXT_FN)(struct UTXT_FN_args);
 
-/** TODO */
+/** FNTS_ITEM */
 typedef struct _fnts_item FNTS_ITEM;
 
 /** FNTS_ITEM data structure */
@@ -179,7 +179,7 @@ struct _fnts_item
 
 /* Definition  of <dialog_flags> in mt_fnts_create() */
 #define FNTS_3D			1			/**< Display selector in 3D-look */
-#define FNTS_DISPLAY	2			/**< TODO */
+#define FNTS_DISPLAY	2			/**< Display available display types (XaAES) */
 
 /* Definition of <button_flags> in mt_fnts_open() */
 #define FNTS_SNAME		0x01		/**< Select checkbox for names */
@@ -196,11 +196,11 @@ struct _fnts_item
 #define FNTS_BMARK		0x4000		/**< Button "Mark" selectable */
 
 /* Definition of <button> in mt_fnts_evnt() */
-#define FNTS_CANCEL		1			/**< TODO */
-#define FNTS_OK			2			/**< TODO */
-#define FNTS_SET		3			/**< TODO */
-#define FNTS_MARK 		4			/**< TODO */
-#define FNTS_OPT		5			/**< TODO */
+#define FNTS_CANCEL		1			/**< Cancel button */
+#define FNTS_OK			2			/**< OK button */
+#define FNTS_SET		3			/**< Set button */
+#define FNTS_MARK 		4			/**< Mark button */
+#define FNTS_OPT		5			/**< Options button */
 #define FNTS_OPTION		FNTS_OPT	/**< see FNTS_OPT */
 
 short		mt_fnts_add			(FNT_DIALOG *fnt_dialog, FNTS_ITEM *user_fonts, short *global);
@@ -239,26 +239,26 @@ short		mt_fnts_update		(FNT_DIALOG *fnt_dialog, short button_flags, long id, lon
  *  @{
  */
 
-/** TODO */
+/** short __CDECL (*XFSL_FILTER)(char *path, char *name, GEMLIB_XATTR *xattr) */
 typedef short __CDECL (*XFSL_FILTER)(char *path, char *name, GEMLIB_XATTR *xattr);
 
 /* sort modes */
-#define SORTBYNAME		0			/**< TODO */
-#define SORTBYDATE		1			/**< TODO */
-#define SORTBYSIZE		2			/**< TODO */
-#define SORTBYTYPE		3			/**< TODO */
-#define SORTBYNONE		4			/**< TODO */
-#define SORTDEFAULT		(-1)		/**< TODO */
+#define SORTBYNAME		0			/**< Sort by name */
+#define SORTBYDATE		1			/**< Sort by date */
+#define SORTBYSIZE		2			/**< Sort by size */
+#define SORTBYTYPE		3			/**< Sort by type */
+#define SORTBYNONE		4			/**< Unsorted (physical order) */
+#define SORTDEFAULT		(-1)		/**< Default mode saved in system (from MagiC 6.10 onwards) */
 
 /* flags for file selection */
-#define DOSMODE			1			/**< TODO */
-#define NFOLLOWSLKS		2			/**< TODO */
-#define GETMULTI		8			/**< TODO */
+#define DOSMODE			1			/**< Compatibility mode that returns filenames in the 8.3 format */
+#define NFOLLOWSLKS		2			/**< Symbolic links will not be followed */
+#define GETMULTI		8			/**< If set, one can select and pass several files at the same time */
 
 /* fslx_set_flags */
-#define SHOW8P3			1			/**< TODO */
+#define SHOW8P3			1			/**< Show TOS files as 8+3 (on DOS drives only) */
 
-/** TODO */
+/** XFSL_DIALOG */
 typedef struct _fslx_dialog XFSL_DIALOG;
 
 short	mt_fslx_close		(XFSL_DIALOG *fsd, short *global);
@@ -277,18 +277,18 @@ short	mt_fslx_set_flags 	(short flags, short *oldval, short *global);
  *  @{
  */
 
-/** TODO */
+/** PRN_DIALOG */
 typedef struct _prn_dialog PRN_DIALOG;
 
-typedef struct _prn_tray		PRN_TRAY;			/**< TODO */
-typedef struct _media_size		MEDIA_SIZE;			/**< TODO */
-typedef struct _media_type		MEDIA_TYPE;			/**< TODO */
-typedef struct _prn_mode		PRN_MODE;			/**< TODO */
-typedef struct _prn_entry		PRN_ENTRY;			/**< TODO */
-typedef struct _dither_mode 	DITHER_MODE;		/**< TODO */
-typedef struct _drv_entry		DRV_ENTRY;			/**< TODO */
-typedef struct _pdlg_sub		PDLG_SUB;			/**< TODO */
-typedef struct _prn_settings	PRN_SETTINGS;		/**< TODO */
+typedef struct _prn_tray		PRN_TRAY;			/**< PRN_TRAY */
+typedef struct _media_size		MEDIA_SIZE;			/**< MEDIA_SIZE */
+typedef struct _media_type		MEDIA_TYPE;			/**< MEDIA_TYPE */
+typedef struct _prn_mode		PRN_MODE;			/**< PRN_MODE */
+typedef struct _prn_entry		PRN_ENTRY;			/**< PRN_ENTRY */
+typedef struct _dither_mode 	DITHER_MODE;		/**< DITHER_MODE */
+typedef struct _drv_entry		DRV_ENTRY;			/**< DRV_ENTRY */
+typedef struct _pdlg_sub		PDLG_SUB;			/**< PDLG_SUB */
+typedef struct _prn_settings	PRN_SETTINGS;		/**< PRN_SETTINGS */
 
 /** Description of a feed/output tray */
 struct _prn_tray
@@ -351,7 +351,7 @@ struct _prn_entry
 	long		printer_id; 			/**< Printer ID */
 	long		printer_capabilities;	/**< Printer capabilities */
 	long		reserved1;      /**< reserved */
-	long		sub_flags;		/**< TODO */
+	long		sub_flags;		/**< Various flags */
 	PDLG_SUB	*sub_dialogs;	/**< Pointer to the list of sub-dialogs for this printer */
 	PRN_SWITCH	setup_panel;	/**< Initialise sub-dialog at printer change  */
 	PRN_SWITCH	close_panel;	/**< Close sub-dialog at printer change */
@@ -365,7 +365,7 @@ struct _prn_entry
 /** TODO */
 struct _dither_mode
 {
-	DITHER_MODE	*next;          /**< TODO */
+	DITHER_MODE	*next;			/**< Pointer to successor */
 	long		length;			/**< Structure length */
 	long		format;			/**< Data format */
 	long		reserved;		/**< Reserved */
@@ -376,7 +376,7 @@ struct _dither_mode
 	char		name[32];		/**< Name of the dither process */
 };
 
-/** TODO */
+/** Driver information structure */
 typedef struct
 {
 	long		magic;			/**< 'pdnf' */
@@ -399,40 +399,40 @@ typedef struct
 	char		device[128];	/**< Printer driver output file */
 } DRV_INFO;
 
-/** TODO */
+/** Driver entry structure */
 struct _drv_entry
 {
-	 DRV_ENTRY	*next; /**< TODO */
+	 DRV_ENTRY	*next; /**< Pointer to successor */
 };
 
-#define	PDLG_CHG_SUB	0x80000000L 	/**< TODO */
-#define	PDLG_IS_BUTTON	0x40000000L 	/**< TODO */
+#define	PDLG_CHG_SUB	0x80000000L 	/**< Change sub-dialog */
+#define	PDLG_IS_BUTTON	0x40000000L 	/**< Is button */
 
 #define	PDLG_PREBUTTON	0x20000000L 	/**< TODO */
-#define	PDLG_PB_OK		1 				/**< TODO */
-#define	PDLG_PB_CANCEL	2 				/**< TODO */
-#define	PDLG_PB_DEVICE	3 				/**< TODO */
+#define	PDLG_PB_OK		1 				/**< OK button */
+#define	PDLG_PB_CANCEL	2 				/**< Cancel button */
+#define	PDLG_PB_DEVICE	3 				/**< Device button */
 
-#define	PDLG_BUT_OK 	(PDLG_PREBUTTON + PDLG_PB_OK) 		/**< TODO */
-#define	PDLG_BUT_CNCL	(PDLG_PREBUTTON + PDLG_PB_CANCEL) 	/**< TODO */
-#define	PDLG_BUT_DEV	(PDLG_PREBUTTON + PDLG_PB_DEVICE) 	/**< TODO */
+#define	PDLG_BUT_OK 	(PDLG_PREBUTTON + PDLG_PB_OK) 		/**< OK button */
+#define	PDLG_BUT_CNCL	(PDLG_PREBUTTON + PDLG_PB_CANCEL) 	/**< Cancel button */
+#define	PDLG_BUT_DEV	(PDLG_PREBUTTON + PDLG_PB_DEVICE) 	/**< Change device */
 
-/** TODO */
+/** Initialization function */
 typedef long __CDECL (*PDLG_INIT)(PRN_SETTINGS *settings, PDLG_SUB *sub);
 
 /** parameters for PDLG_HNDL callback functions
  */
 struct PDLG_HNDL_args
 {
-	PRN_SETTINGS *settings;	/**< TODO */
-	PDLG_SUB *sub;			/**< TODO */
-	short exit_obj; 		/**< TODO */
+	PRN_SETTINGS *settings;	/**< Settings */
+	PDLG_SUB *sub;			/**< Sub-dialog */
+	short exit_obj; 		/**< Exit object */
 };
 
-/** TODO */
+/** Handling function */
 typedef long __CDECL (*PDLG_HNDL)(struct PDLG_HNDL_args);
 
-/** TODO */
+/** Reset function */
 typedef long __CDECL (*PDLG_RESET)(PRN_SETTINGS *settings, PDLG_SUB *sub);
 
 /** Sub-dialog for setting device */
@@ -523,7 +523,7 @@ struct _pdlg_sub
 #define	MC_LANDSCAPE	0x0002		/**< Seite kann im Querformat ausgegeben werden */
 #define	MC_REV_PTRT 	0x0004		/**< Seite kann um 180 Grad gedreht im Hochformat ausgegeben werden */
 #define	MC_REV_LNDSCP	0x0008		/**< Seite kann um 180 Grad gedreht im Querformat ausgegeben werden */
-#define	MC_ORIENTATION	0x000f		/**< TODO */
+#define	MC_ORIENTATION	0x000f		/**< Orientation mask */
 
 #define	MC_SLCT_CMYK	0x0400		/**< Treiber kann bestimmte Farbebenen ausgeben */
 #define	MC_CTRST_BRGHT	0x0800		/**< Treiber kann Kontrast und Helligkeit ver„ndern */
@@ -531,15 +531,15 @@ struct _pdlg_sub
 /*----------------------------------------------------------------------------------------*/
 /* plane_flags 																									*/
 /*----------------------------------------------------------------------------------------*/
-#define	PLANE_BLACK 	0x0001		/**< TODO */
-#define	PLANE_YELLOW	0x0002		/**< TODO */
-#define	PLANE_MAGENTA	0x0004		/**< TODO */
-#define	PLANE_CYAN		0x0008		/**< TODO */
-#define PLANE_MASK	(PLANE_BLACK|PLANE_YELLOW|PLANE_MAGENTA|PLANE_CYAN)		/**< TODO */
+#define	PLANE_BLACK 	0x0001		/**< Black plane */
+#define	PLANE_YELLOW	0x0002		/**< Yellow plane */
+#define	PLANE_MAGENTA	0x0004		/**< Magenta plane */
+#define	PLANE_CYAN		0x0008		/**< Cyan plane */
+#define PLANE_MASK	(PLANE_BLACK|PLANE_YELLOW|PLANE_MAGENTA|PLANE_CYAN)		/**< Plane mask */
 
 
 /* <driver_mode> */
-#define	DM_BG_PRINTING	0x0001		/**< Flag fr Hintergrunddruck */
+#define	DM_BG_PRINTING	0x0001		/**< Flag for background printing */
 
 /*----------------------------------------------------------------------------------------*/
 
@@ -548,8 +548,8 @@ struct _pdlg_sub
 #define  PG_ODD_PAGES   0x0002  	/**< Only output pages with odd page numbers */
 
 /* <first_page/last_page> */
-#define	PG_MIN_PAGE 	1			/**< TODO */
-#define	PG_MAX_PAGE 	9999		/**< TODO */
+#define	PG_MIN_PAGE 	1			/**< First page to output */
+#define	PG_MAX_PAGE 	9999		/**< Last page to output */
 
 /* <orientation> */
 #define  PG_UNKNOWN     0x0000  	/**< Orientation unknown and not adjustable */
@@ -580,7 +580,7 @@ struct _prn_settings
 	long		magic;			/**< 'pset' */
 	long		length;			/**< Structure length */
 	long		format;			/**< Structure type */
-	long		reserved;		/**< TODO */
+	long		reserved;		/**< Reserved */
 
 	long		page_flags; 	/**< Flags, inc. even pages, odd pages */
 	short		first_page; 	/**< First page to be printed */
@@ -629,7 +629,7 @@ struct _prn_settings
 
 	struct	             		/**< Settings of the Mac printer driver */
 	{
-		char	inside[120];	/**< TODO */
+		char	inside[120];	/**< Content of settings of the Mac printer driver */
 	} mac_settings;             /**< Settings of the Mac printer driver */
 };
 
@@ -683,9 +683,9 @@ short		   mt_pdlg_validate_settings    (PRN_DIALOG *prn_dialog, PRN_SETTINGS *se
  /** opaque structure */
 typedef struct _list_box LIST_BOX;
 
-typedef struct lbox_item LBOX_ITEM;		/**< TODO */
+typedef struct lbox_item LBOX_ITEM;		/**< List box item */
 
-/** TODO */
+/** List box item structure */
 struct lbox_item
 {
 	LBOX_ITEM	*next;		/**< Pointer to the next entry in the list */
@@ -700,28 +700,28 @@ struct lbox_item
 /** parameters for SLCT_ITEM callback function */
 struct SLCT_ITEM_args
 {
-	LIST_BOX *box;			/**< TODO */
-	OBJECT *tree;			/**< TODO */
-	struct lbox_item *item;	/**< TODO */
-	void *user_data;		/**< TODO */
-	short obj_index;		/**< TODO */
-	short last_state;		/**< TODO */
+	LIST_BOX *box;			/**< Points to the list box structure */
+	OBJECT *tree;			/**< Points to the object tree of the dialog */
+	struct lbox_item *item;	/**< Points to the LBOX_ITEM-structure of the selected entry */
+	void *user_data;		/**< Is the pointer passed by lbox_create() */
+	short obj_index;		/**< Is the number of the selected object */
+	short last_state;		/**< Is the previous status of the object */
 };
 
 /** parameters for SET_ITEM callback function */
 struct SET_ITEM_args
 {
-	LIST_BOX *box;			/**< TODO */
-	OBJECT *tree;			/**< TODO */
-	struct lbox_item *item;	/**< TODO */
-	short obj_index;		/**< TODO */
-	void *user_data;		/**< TODO */
-	GRECT *rect;			/**< TODO */
-	short first;			/**< TODO */
+	LIST_BOX *box;			/**< Points to the list box structure */
+	OBJECT *tree;			/**< Points to the object tree of the dialog */
+	struct lbox_item *item;	/**< Points to the LBOX_ITEM structure of the entry to be set */
+	short obj_index;		/**< Is the number of the object to be set */
+	void *user_data;		/**< Is the pointer passed by lbox_create() */
+	GRECT *rect;			/**< Is the pointer to the GRECT for the object redraw or 0L */
+	short first;			/**< Contains the number of the first visible item for Slider B */
 };
 
-typedef void  __CDECL (*SLCT_ITEM)(struct SLCT_ITEM_args);		/**< TODO */
-typedef short __CDECL (*SET_ITEM)(struct SET_ITEM_args);		/**< TODO */
+typedef void  __CDECL (*SLCT_ITEM)(struct SLCT_ITEM_args);		/**< Selection routine */
+typedef short __CDECL (*SET_ITEM)(struct SET_ITEM_args);		/**< Set routine */
 
 #define	LBOX_VERT		1	/**< Listbox with vertical slider */
 #define	LBOX_AUTO		2	/**< Auto-scrolling */
@@ -783,11 +783,11 @@ void		mt_lbox_bscroll_to (LIST_BOX *box, short first, GRECT *box_rect,
 /** parameters of HNDL_OBJ callback functions */
 struct HNDL_OBJ_args 
 {
-	DIALOG *dialog;	/**< TODO */
-	EVNT *events;	/**< TODO */
-	short obj;		/**< TODO */
-	short clicks;	/**< TODO */
-	void *data;		/**< TODO */
+	DIALOG *dialog;	/**< Pointer to a dialog structure. One should not access the structure directly; the wdlg_xx functions should be used! */
+	EVNT *events;	/**< If obj is an object number (>=0), then events points to the EVNT structure that was passed by wdlg_evnt; otherwise events is basically 0L and can not be used for addressing */
+	short obj;		/**< Object number (>=0) or function number (<0) */
+	short clicks;	/**< Number of mouse clicks (if obj is an object number) */
+	void *data;		/**< If the parameter obj is a positive object number, then the variable user_data from wdlg_create() function will be passed here; otherwise the value depends on the corresponding function number */
 };
 
 /** service routine that is called, among others, by mt_wdlg_evnt().
@@ -948,27 +948,27 @@ void	mt_edit_get_scrollinfo (OBJECT *tree, short obj, long *nlines, long *yscrol
  *  @{
  */
 
-/** TODO */
+/** Geneva cookie */
 #ifndef GENEVA_COOKIE
 #define GENEVA_COOKIE   0x476E7661L     /**< "Gnva" */
 #define GENEVA_VER      0x0106          /**< current Geneva version */
-/** TODO */
+/** Geneva cookie structure */
 typedef struct
 {
-	short ver;                  /**< TODO */
-	char *process_name;         /**< TODO */
-	short apid;                 /**< TODO */
-	short (**aes_funcs)(void);  /**< TODO */
-	short (**xaes_funcs)(void); /**< TODO */
+	short ver;			/**< Geneva version */
+	char *process_name;		/**< Points to the name of the process currently using Geneva */
+	short apid;			/**< Application ID of the process */
+	short (**aes_funcs)(void);	/**< Internal table of AES functions */
+	short (**xaes_funcs)(void);	/**< Internal table of extended functions */
 	struct G_vectors *vectors;	/**< rel 004 */
 } G_COOKIE;
 
-typedef struct G_vectors        /**< rel 004 */
+typedef struct G_vectors		/**< Vectors used by Geneva, rel 004 */
 {
-	short used;                         /**< TODO */
-	short (*keypress)(long *key);     /**< TODO */
-	short (*app_switch)(const char *process_name, short apid);     /**< TODO */
-	short (*gen_event)(void);           /**< TODO */
+	short used;			/**< Bitmap of which vectors in the rest of the structure are used. Currently this is 7 */
+	short (*keypress)(long *key);	/**< Called whenever Geneva receives a key from the keyboard */
+	short (*app_switch)(const char *process_name, short apid);	/**< Called whenever the user performs some action that causes the topmost application to change */
+	short (*gen_event)(void);	/**< Called continually by Geneva to poll a certain condition and generate an event if something occurs */
 } G_VECTORS;
 #endif
 
@@ -976,12 +976,12 @@ typedef struct G_vectors        /**< rel 004 */
 /* Value for long edits into TEDINFO->te_tmplen */
 #define X_LONGEDIT      -71     /**< rel 004 */
 
-/** TODO */
+/** Animated mouse shape */
 typedef struct
 {
-	short frames;                      /**< TODO */
-	short delay;                       /**< TODO */
-	MFORM form[32];                    /**< TODO */
+	short frames;		/**< Number of frames in shape */
+	short delay;		/**< 60Hz ticks to pause between frames */
+	MFORM form[32];		/**< List of mouse forms */
 } ANI_MOUSE;
 #define X_SET_SHAPE     1100    /**< Add to mouse shape index to change shape */
 
@@ -1010,54 +1010,54 @@ typedef struct
 /************************** x_settings *************************/
 #define SET_VER         0x0106   /**< the last time SETTINGS changed */
 
-/** TODO */
+/** Keypress description structure */
 typedef struct
 {
-	unsigned char shift;   /**< TODO */
-	unsigned char scan;    /**< TODO */
-	unsigned char ascii;   /**< TODO */
+	unsigned char shift;	/**< State of special keys */
+	unsigned char scan;	/**< Scancode or zero */
+	unsigned char ascii;	/**< ASCII value or zero */
 } KEYCODE;
 
-/** TODO */
+/** Extended object description */
 typedef union
 {
 	struct
 	{
-		unsigned outlined   :1;   /**< TODO */
-		unsigned shadowed   :1;   /**< TODO */
-		unsigned draw_3D    :1;   /**< TODO */
-		unsigned rounded    :1;   /**< TODO */
+		unsigned outlined   :1;	/**< Object is OUTLINED */
+		unsigned shadowed   :1;	/**< Object is SHADOWED */
+		unsigned draw_3D    :1;	/**< Object is drawn in 3D */
+		unsigned rounded    :1;	/**< Object has rounded corners */
 		unsigned atari_3D   :1;   /**< TODO rel 004 */
 		unsigned shadow_text:1;   /**< TODO rel 004 */
 		unsigned bold_shadow:1;   /**< TODO rel 004 */
-		unsigned reserved   :9;   /**< TODO */
-		unsigned framecol   :4;   /**< TODO */
-		unsigned textcol    :4;   /**< TODO */
-		unsigned textmode   :1;   /**< TODO */
-		unsigned fillpattern:3;   /**< TODO */
-		unsigned interiorcol:4;   /**< TODO */
-	} s; /**< TODO */
-	unsigned long l;              /**< TODO */
+		unsigned reserved   :9;	/**< Reserved for future use */
+		unsigned framecol   :4;	/**< Color of frame */
+		unsigned textcol    :4;	/**< Color of text */
+		unsigned textmode   :1;	/**< 0: transparent, 1:replace */
+		unsigned fillpattern:3;	/**< Fill pattern index */
+		unsigned interiorcol:4;	/**< Color of interior */
+	} s; /**< Bitmapped flags */
+	unsigned long l;		/**< Longword for accessing all flags */
 } OB_PREFER;
 
 /** parameters for x_settings() */
 typedef struct Settings
 {
-	short version;                /**< TODO */
-	short struct_len;             /**< TODO */
-	short boot_rez;               /**< TODO */
-	short falcon_rez;             /**< TODO */
+	short version;		/**< Version SETTINGS is for, in BCD */
+	short struct_len;	/**< Total # of bytes in SETTINGS */
+	short boot_rez;		/**< ST/TT resolution at startup */
+	short falcon_rez;	/**< Falcon video mode at startup */
 	union
 	{
 		struct
 		{
-			unsigned pulldown          :1;  /**< TODO */
-			unsigned insert_mode       :1;  /**< TODO */
-			unsigned long_titles       :1;  /**< TODO */
-			unsigned alerts_under_mouse:1;  /**< TODO */
-			unsigned fsel_1col         :1;  /**< TODO */
-			unsigned grow_shrink       :1;  /**< TODO */
-			unsigned tear_aways_topped :1;  /**< TODO */
+			unsigned pulldown          :1;	/**< 1: use pulldown menus */
+			unsigned insert_mode       :1;	/**< 1: insert in dialog edits */
+			unsigned long_titles       :1;	/**< long underlines X_UNDERLINE */
+			unsigned alerts_under_mouse:1;	/**< alerts appear under mouse */
+			unsigned fsel_1col         :1;	/**< 1 column in item selector */
+			unsigned grow_shrink       :1;	/**< 1: FMD_GROW/SHRINK on */
+			unsigned tear_aways_topped :1;	/**< 1: tear aways always usable */
 			unsigned auto_update_shell :1;  /**< TODO */
 			unsigned alert_mode_change :1;  /**< TODO */
 			unsigned ignore_video_mode :1;  /**< TODO */
@@ -1067,24 +1067,24 @@ typedef struct Settings
 			unsigned mouse_on_off      :1;	/**< rel 004 */
 			unsigned top_all_at_once   :1;	/**< rel 005 */
 			unsigned child_pexec_single:1;	/**< rel 006: undocumented */
-		} s;                                /**< TODO */
-		unsigned short i;                   /**< */
-	} flags;                                /**< TODO */
+		} s;					/**< Bitmapped flags */
+		unsigned short i;			/**< Word for accessing all flags */
+	} flags;					/**< Preferences */
 	short gadget_pause;						/**< 50 Hz timer tics */
-	KEYCODE menu_start;                     /**< TODO */
-	KEYCODE app_switch;                     /**< TODO */
+	KEYCODE menu_start;			/**< Key to start menus */
+	KEYCODE app_switch;			/**< Key to toggle between apps */
 	KEYCODE app_sleep;                      /**< TODO */
-	KEYCODE ascii_table;                    /**< TODO */
-	KEYCODE redraw_all;                     /**< TODO */
-	KEYCODE wind_keys[13];                  /**< TODO */
-	OB_PREFER color_3D[4];                  /**< TODO */
-	OB_PREFER color_root[4];                /**< TODO */
-	OB_PREFER color_exit[4];                /**< TODO */
-	OB_PREFER color_other[4];               /**< TODO */
-	char sort_type;                         /**< TODO */
-	char find_file[26];                     /**< TODO */
-	char fsel_path[10][35];                 /**< TODO */
-	char fsel_ext[10][6];                   /**< TODO */
+	KEYCODE ascii_table;			/**< Key to open ASCII table */
+	KEYCODE redraw_all;			/**< Key to redraw whole screen */
+	KEYCODE wind_keys[13];			/**< Keys for window events */
+	OB_PREFER color_3D[4];			/**< Colors for 3D objects */
+	OB_PREFER color_root[4];		/**< Colors for root objects */
+	OB_PREFER color_exit[4];		/**< Colors for EXIT objects */
+	OB_PREFER color_other[4];		/**< Colors for other objects */
+	char sort_type;				/**< fsel sort type, 0(name) - 4(None) */
+	char find_file[26];			/**< fsel Search string */
+	char fsel_path[10][35];			/**< Item Selector paths */
+	char fsel_ext[10][6];			/**< Item Selector extension strings */
 	KEYCODE cycle_in_app;		            /**< TODO rel 004 */
 	KEYCODE iconify;                        /**< TODO rel 004 */
 	KEYCODE alliconify;                     /**< TODO rel 004 */
@@ -1104,19 +1104,19 @@ typedef struct Settings
 	} flags2;				                /**< rel 006 */
 } SETTINGS;
 
-#define XS_UPPAGE WA_UPPAGE	/**< TODO */
-#define XS_DNPAGE WA_DNPAGE	/**< TODO */
-#define XS_UPLINE WA_UPLINE	/**< TODO */
-#define XS_DNLINE WA_DNLINE	/**< TODO */
-#define XS_LFPAGE WA_LFPAGE	/**< TODO */
-#define XS_RTPAGE WA_RTPAGE	/**< TODO */
-#define XS_LFLINE WA_LFLINE	/**< TODO */
-#define XS_RTLINE WA_RTLINE	/**< TODO */
-#define XS_CLOSE		8	/**< TODO */
-#define XS_CYCLE		9	/**< TODO */
-#define XS_FULL			10	/**< TODO */
-#define XS_LFINFO		11	/**< TODO */
-#define XS_RTINFO		12	/**< TODO */
+#define XS_UPPAGE WA_UPPAGE	/**< Index for up page key */
+#define XS_DNPAGE WA_DNPAGE	/**< Index for down page key */
+#define XS_UPLINE WA_UPLINE	/**< Index for up line key */
+#define XS_DNLINE WA_DNLINE	/**< Index for down line key */
+#define XS_LFPAGE WA_LFPAGE	/**< Index for page left key */
+#define XS_RTPAGE WA_RTPAGE	/**< Index for page right key */
+#define XS_LFLINE WA_LFLINE	/**< Index for line left key */
+#define XS_RTLINE WA_RTLINE	/**< Index for line right key */
+#define XS_CLOSE		8	/**< Index for close box key */
+#define XS_CYCLE		9	/**< Index for cycle window key */
+#define XS_FULL			10	/**< Index for full window key */
+#define XS_LFINFO		11	/**< Index for info left key */
+#define XS_RTINFO		12	/**< Index for info right key */
 
 short mt_x_settings(short getset, short length, SETTINGS *user, short *global);
 
@@ -1131,22 +1131,22 @@ short mt_x_shel_get(short mode, short length, char *buf, short *global);
 short mt_x_shel_put(short mode, const char *buf, short *global);
 
 /***************** x_wind_create, x_wind_calc *******************/
-#define X_MENU          0x0001	/**< TODO */
-#define X_HSPLIT        0x0002	/**< TODO */
-#define X_VSPLIT        0x0004	/**< TODO */
+#define X_MENU		0x0001	/**< Extended window type to attach a menu bar to a window */
+#define X_HSPLIT	0x0002	/**< Extended window type to add a horizontal split bar to a window */
+#define X_VSPLIT	0x0004	/**< Extended window type to add a vertical split bar to a window */
 
 short mt_x_wind_create(short kind, short xkind, short wx, short wy, short ww, short wh, short *global);
 short mt_x_wind_calc(short type, short kind, short xkind, short inx, short iny,  short inw, short inh,
 	short *outx, short *outy, short *outw, short *outh, short *global);
 
 /************************** x_wind_tree *************************/
-/** TODO */
+/** Window tree structure for x_wind_tree() */
 typedef struct WindTree
 {
-	short handle;	/**< TODO */
-	short count;	/**< TODO */
-	short flag;		/**< TODO */
-	OBJECT *tree;	/**< TODO */
+	short handle;	/**< Handle of window */
+	short count;	/**< Number of objects in window */
+	short flag;	/**< Location to copy to/from */
+	OBJECT *tree;	/**< Pointer to object tree */
 } WIND_TREE;
 
 #define X_WT_GETCNT     0       /**< Get count and flag */
@@ -1193,58 +1193,58 @@ typedef struct WindTree
 short mt_x_wind_tree(short mode, WIND_TREE *wt, short *global);
 
 /************************* x_appl_flags *************************/
-/** TODO */
+/** Application bit flags */
 typedef union
 {
 	struct
 	{
-		unsigned multitask    :1;
-		unsigned special_types:1;
-		unsigned round_buttons:1;
-		unsigned kbd_equivs   :1;
-		unsigned undo_equivs  :1;
-		unsigned off_left     :1;
-		unsigned exit_redraw  :1;
-		unsigned AES40_msgs   :1;
-		unsigned limit_handles:1;
-		unsigned limit_memory :1;
-		unsigned keep_deskmenu:1;
-		unsigned clear_memory :1;
-		unsigned maximize_wind:1;
-		unsigned optim_redraws:1;   /* rel 004 */
+		unsigned multitask    :1;	/**< 1: Multitasking */
+		unsigned special_types:1;	/**< 1: Use extended objects types */
+		unsigned round_buttons:1;	/**< 1: Use rounded EXIT buttons */
+		unsigned kbd_equivs   :1;	/**< 1: Use auto keyboard equivs */
+		unsigned undo_equivs  :1;	/**< 1: Undraw when form_do exits */
+		unsigned off_left     :1;	/**< 1: Allow windows off left edge */
+		unsigned exit_redraw  :1;	/**< 1: Redraw everything at quit */
+		unsigned AES40_msgs   :1;	/**< 1: New messages for AES 4.0 OK */
+		unsigned limit_handles:1;	/**< 1: Limit window handles to 1-7 */
+		unsigned limit_memory :1;	/**< 1: Limit Malloc's */
+		unsigned keep_deskmenu:1;	/**< 1: Keep desktop/menu nar */
+		unsigned clear_memory :1;	/**< 1: Clear Malloc'd memory */
+		unsigned maximize_wind:1;	/**< 1: Omit unnecessary gadgets */
+		unsigned optim_redraws:1;	/**< 1: Optimize redraws, rel 004 */
 		unsigned unused       :2;   /* Reserved for future use */
 		unsigned mem_limit    :16;  /* Kb to limit memory allocation */
-	} s; /**< TODO */
-	unsigned long l; /**< TODO */
+	} s; /**< Bitmapped flags */
+	unsigned long l; /**< Longword for accessing all flags */
 } APFLG;
 
-/** TODO */
+/** Application flags */
 typedef struct
 {
-	char name[13];           /**< TODO */
-	char desc[17];           /**< TODO */
-	APFLG flags;             /**< TODO */
-	KEYCODE open_key;        /**< TODO */
-	KEYCODE reserve_key[3];  /**< reserved */
+	char name[13];		/**< Filename pattern to use these flags */
+	char desc[17];		/**< User-defined description flags */
+	APFLG flags;		/**< Execution flags */
+	KEYCODE open_key;	/**< Open application when this key is pressed */
+	KEYCODE reserve_key[3];	/**< Application uses these keys, so don't let Geneva process them */
 } APPFLAGS;
 
-#define X_APF_GET_INDEX 0    /**< TODO */
-#define X_APF_SET_INDEX 1    /**< TODO */
-#define X_APF_DEL_INDEX 2    /**< TODO */
-#define X_APF_GET_ID    3    /**< TODO */
-#define X_APF_SET_ID    4    /**< TODO */
-#define X_APF_SEARCH    5    /**< TODO rel 004 */
+#define X_APF_GET_INDEX	0	/**< Get the Nth block of global application flags */
+#define X_APF_SET_INDEX	1	/**< Set the Nth block of global application flags */
+#define X_APF_DEL_INDEX	2	/**< Delete the Nth block of global application flags */
+#define X_APF_GET_ID	3	/**< Get the application flags for a particular process */
+#define X_APF_SET_ID	4	/**< Set the application flags for a particular process */
+#define X_APF_SEARCH	5	/**< TODO rel 004 */
 
 short mt_x_appl_flags(short getset, short index, APPFLAGS *flags, short *global);
 
 /*********************** x_appl_font ****************************/
-/** TODO */
+/** Font being used and window gadget borders */
 typedef struct
 {
-	short font_id;       /**< TODO */
-	short point_size;    /**< TODO */
-	short gadget_wid;    /**< TODO */
-	short gadget_ht;     /**< TODO */
+	short font_id;		/**< VDI font ID */
+	short point_size;	/**< Point size of the font */
+	short gadget_wid;	/**< Width of border around a char in a window gadget */
+	short gadget_ht;	/**< Height of border around a char in a window gadget */
 } XFONTINFO;
 
 short mt_x_appl_font(short getset, short zero, XFONTINFO *info, short *global);
@@ -1286,7 +1286,7 @@ void mt_x_sscanf(const char *buf, const char *fmt, ...);
 /**@}*/
 
 /*******************************************************************************
- * The VDI extentsions of NVDI/FSM/Speedo
+ * The VDI extensions of NVDI/FSM/Speedo
  */
 
 /*
@@ -1557,7 +1557,7 @@ short vst_map_mode   (short handle, short mode);
 /** UDEF version of vst_map_mode(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vst_map_mode vst_map_mode
 
-/** TODO */
+/** vqt_is_char_available() */
 #define vqt_is_char_available(handle,unicode) \
 	(vqt_char_index(handle,unicode,CHARIDX_UNICODE,CHARIDX_DIRECT)!=0xFFFF)
 
@@ -1589,312 +1589,312 @@ short v_write_default_settings(short handle, PRN_SETTINGS *settings );
 
 
 /*----------------------------------------------------------------------------------------*/
-/* Konstanten fr Pixelformate																				*/
+/* Constants for pixel formats								*/
 /*----------------------------------------------------------------------------------------*/
-#define	PX_1COMP		0x01000000L										/**< Pixel besteht aus einer benutzten Komponente: Farbindex */
-#define	PX_3COMP		0x03000000L										/**< Pixel besteht aus drei benutzten Komponenten, z.B. RGB */
-#define	PX_4COMP		0x04000000L										/**< Pixel besteht aus vier benutzten Komponenten, z.B. CMYK */
+#define	PX_1COMP		0x01000000L										/**< Pixel consists of one used component: Color index */
+#define	PX_3COMP		0x03000000L										/**< Pixel consists of three used components, e.g. RGB */
+#define	PX_4COMP		0x04000000L										/**< Pixel consists of four used component, e.g. CMYK */
 
-#define	PX_REVERSED	0x00800000L										/**< Pixel wird in umgekehrter Bytreihenfolge ausgegeben */
-#define	PX_xFIRST	0x00400000L										/**< unbenutzte Bits liegen vor den benutzen (im Motorola-Format betrachtet) */
-#define	PX_kFIRST	0x00200000L										/**< K liegt vor CMY (im Motorola-Format betrachtet) */
-#define	PX_aFIRST	0x00100000L										/**< Alphakanal liegen vor den Farbbits (im Motorola-Format betrachtet) */
+#define	PX_REVERSED	0x00800000L										/**< Pixel will be output in reverse byte order */
+#define	PX_xFIRST	0x00400000L										/**< Unused bits lie before the used ones (viewed in Motorola format) */
+#define	PX_kFIRST	0x00200000L										/**< K lies before CMY (viewed in Motorola format) */
+#define	PX_aFIRST	0x00100000L										/**< Alpha channel lies before the color bits (viewed in Motorola format) */
 
-#define	PX_PACKED	0x00020000L										/**< Bits sind aufeinanderfolgend abgelegt */
-#define	PX_PLANES	0x00010000L										/**< Bits sind auf mehrere Ebenen verteilt (Reihenfolge: 0, 1, ..., n) */
-#define	PX_IPLANES	0x00000000L										/**< Bits sind auf mehrere Worte verteilt (Reihenfolge: 0, 1, ..., n) */
+#define	PX_PACKED	0x00020000L										/**< Bits are stored sequentially */
+#define	PX_PLANES	0x00010000L										/**< Bits are distributed over several planes (order: 0, 1, ..., n) */
+#define	PX_IPLANES	0x00000000L										/**< Bits are distributed over several words (order: 0, 1, ..., n) */
 
-#define	PX_USES1		0x00000100L										/**< 1 Bit des Pixels wird benutzt */
-#define	PX_USES2		0x00000200L										/**< 2 Bit des Pixels werden benutzt */
-#define	PX_USES3		0x00000300L										/**< 3 Bit des Pixels werden benutzt */
-#define	PX_USES4		0x00000400L										/**< 4 Bit des Pixels werden benutzt */
-#define	PX_USES8		0x00000800L										/**< 8 Bit des Pixels werden benutzt */
-#define	PX_USES15	0x00000f00L										/**< 15 Bit des Pixels werden benutzt */
-#define	PX_USES16	0x00001000L										/**< 16 Bit des Pixels werden benutzt */
-#define	PX_USES24	0x00001800L										/**< 24 Bit des Pixels werden benutzt */
-#define	PX_USES32	0x00002000L										/**< 32 Bit des Pixels werden benutzt */
-#define	PX_USES48	0x00003000L										/**< 48 Bit des Pixels werden benutzt */
+#define	PX_USES1		0x00000100L										/**< 1 bit of the pixel is used */
+#define	PX_USES2		0x00000200L										/**< 2 bits of the pixel are used */
+#define	PX_USES3		0x00000300L										/**< 3 bits of the pixel are used */
+#define	PX_USES4		0x00000400L										/**< 4 bits of the pixel are used */
+#define	PX_USES8		0x00000800L										/**< 8 bits of the pixel are used */
+#define	PX_USES15	0x00000f00L										/**< 15 bits of the pixel are used */
+#define	PX_USES16	0x00001000L										/**< 16 bits of the pixel are used */
+#define	PX_USES24	0x00001800L										/**< 24 bits of the pixel are used */
+#define	PX_USES32	0x00002000L										/**< 32 bits of the pixel are used */
+#define	PX_USES48	0x00003000L										/**< 48 bits of the pixel are used */
 
-#define	PX_1BIT		0x00000001L										/**< Pixel besteht aus 1 Bit */
-#define	PX_2BIT		0x00000002L										/**< Pixel besteht aus 2 Bit */
-#define	PX_3BIT		0x00000003L										/**< Pixel besteht aus 3 Bit */
-#define	PX_4BIT		0x00000004L										/**< Pixel besteht aus 4 Bit */
-#define	PX_8BIT		0x00000008L										/**< Pixel besteht aus 8 Bit */
-#define	PX_16BIT		0x00000010L										/**< Pixel besteht aus 16 Bit */
-#define	PX_24BIT		0x00000018L										/**< Pixel besteht aus 24 Bit */
-#define	PX_32BIT		0x00000020L										/**< Pixel besteht aus 32 Bit */
-#define	PX_48BIT		0x00000030L										/**< Pixel besteht aus 48 Bit */
+#define	PX_1BIT		0x00000001L										/**< Pixel consists of 1 bit */
+#define	PX_2BIT		0x00000002L										/**< Pixel consists of 2 bits */
+#define	PX_3BIT		0x00000003L										/**< Pixel consists of 3 bits */
+#define	PX_4BIT		0x00000004L										/**< Pixel consists of 4 bits */
+#define	PX_8BIT		0x00000008L										/**< Pixel consists of 8 bits */
+#define	PX_16BIT		0x00000010L										/**< Pixel consists of 16 bits */
+#define	PX_24BIT		0x00000018L										/**< Pixel consists of 24 bits */
+#define	PX_32BIT		0x00000020L										/**< Pixel consists of 32 bits */
+#define	PX_48BIT		0x00000030L										/**< Pixel consists of 48 bits */
 
-#define	PX_CMPNTS	0x0f000000L										/**< Maske fr Anzahl der Pixelkomponenten */
-#define	PX_FLAGS		0x00f00000L										/**< Maske fr diverse Flags */
-#define	PX_PACKING	0x00030000L										/**< Maske fr Pixelformat */
-#define	PX_USED		0x00003f00L										/**< Maske fr Anzahl der benutzten Bits */
-#define	PX_BITS		0x0000003fL										/**< Maske fr Anzahl der Bits pro Pixel */
+#define	PX_CMPNTS	0x0f000000L										/**< Mask for number of pixel components */
+#define	PX_FLAGS		0x00f00000L										/**< Mask for various flags */
+#define	PX_PACKING	0x00030000L										/**< Mask for pixel format */
+#define	PX_USED		0x00003f00L										/**< Mask for number of used bits */
+#define	PX_BITS		0x0000003fL										/**< Mask for number of bits per pixel */
 
 /*----------------------------------------------------------------------------------------*/
-/* Pixelformate fr ATARI-Grafik																				*/
+/* Pixel formats for ATARI graphics							*/
 /*----------------------------------------------------------------------------------------*/
-/** TODO */
+/** Atari graphics, 1 plane */
 #define	PX_ATARI1	( PX_PACKED + PX_1COMP + PX_USES1 + PX_1BIT )
-/** TODO */
+/** Atari graphics, 2 planes */
 #define	PX_ATARI2	( PX_IPLANES + PX_1COMP + PX_USES2 + PX_2BIT )
-/** TODO */
+/** Atari graphics, 4 planes */
 #define	PX_ATARI4	( PX_IPLANES + PX_1COMP + PX_USES4 + PX_4BIT )
-/** TODO */
+/** Atari graphics, 8 planes */
 #define	PX_ATARI8	( PX_IPLANES + PX_1COMP + PX_USES8 + PX_8BIT )
-/** TODO */
+/** Atari graphics, 15bit Falcon mode */
 #define	PX_FALCON15	( PX_PACKED + PX_3COMP + PX_USES16 + PX_16BIT )
 
 /*----------------------------------------------------------------------------------------*/
-/* Pixelformate fr Macintosh																					*/
+/* Pixel formats for Macintosh								*/
 /*----------------------------------------------------------------------------------------*/
-/** TODO */
+/** Macintosh, 1 plane */
 #define	PX_MAC1		( PX_PACKED + PX_1COMP + PX_USES1 + PX_1BIT )
-/** TODO */
+/** Macintosh, 4 planes */
 #define	PX_MAC4		( PX_PACKED + PX_1COMP + PX_USES4 + PX_4BIT )
-/** TODO */
+/** Macintosh, 256 colors */
 #define	PX_MAC8		( PX_PACKED + PX_1COMP + PX_USES8 + PX_8BIT )
-/** TODO */
+/** Macintosh, 15bit mode*/
 #define	PX_MAC15		( PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES15 + PX_16BIT )
-/** TODO */
+/** Macintosh, 32bit mode */
 #define	PX_MAC32		( PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES24 + PX_32BIT )
 
 /*----------------------------------------------------------------------------------------*/
-/* Pixelformate fr Grafikkarten																				*/
+/* Pixel formats for graphic cards							*/
 /*----------------------------------------------------------------------------------------*/
-/** TODO */
+/** VGA, 1 plane */
 #define	PX_VGA1		( PX_PACKED + PX_1COMP + PX_USES1 + PX_1BIT )
-/** TODO */
+/** VGA, 4 planes */
 #define	PX_VGA4		( PX_PLANES + PX_1COMP + PX_USES4 + PX_4BIT )
-/** TODO */
+/** VGA, 256 colors */
 #define	PX_VGA8		( PX_PACKED + PX_1COMP + PX_USES8 + PX_8BIT )
-/** TODO */
+/** VGA, 15bit */
 #define	PX_VGA15		( PX_REVERSED + PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES15 + PX_16BIT )
-/** TODO */
+/** VGA, 16bit */
 #define	PX_VGA16		( PX_REVERSED + PX_PACKED + PX_3COMP + PX_USES16 + PX_16BIT )
-/** TODO */
+/** VGA, 24bit */
 #define	PX_VGA24		( PX_REVERSED + PX_PACKED + PX_3COMP + PX_USES24 + PX_24BIT )
-/** TODO */
+/** VGA, 32bit */
 #define	PX_VGA32		( PX_REVERSED + PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES24 + PX_32BIT )
 
-/** TODO */
+/** Matrix graphic card, 16bit */
 #define	PX_MATRIX16	( PX_PACKED + PX_3COMP + PX_USES16 + PX_16BIT )
 
-/** TODO */
+/** Nova graphic card, 32bit */
 #define	PX_NOVA32	( PX_PACKED + PX_3COMP + PX_USES24 + PX_32BIT )
 
 /*----------------------------------------------------------------------------------------*/
-/* Pixelformate fr Drucker																					*/
+/* Pixel formats for printers								*/
 /*----------------------------------------------------------------------------------------*/
-/** TODO */
+/** Pixel format for printer, B&W */
 #define	PX_PRN1		( PX_PACKED + PX_1COMP + PX_USES1 + PX_1BIT )
-/** TODO */
+/** Pixel format for printer, color */
 #define	PX_PRN8		( PX_PACKED + PX_1COMP + PX_USES8 + PX_8BIT )
-/** TODO */
+/** Pixel format for printer, 3 components */
 #define	PX_PRN32		( PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES24 + PX_32BIT )
 
 /*----------------------------------------------------------------------------------------*/
-/* bevorzugte (schnelle) Pixelformate fr Bitmaps 														*/
+/* Preferred (fast) pixel formats for bitmaps						*/
 /*----------------------------------------------------------------------------------------*/
 
-/** TODO */
+/** Monochrome */
 #define	PX_PREF1		( PX_PACKED + PX_1COMP + PX_USES1 + PX_1BIT )
-/** TODO */
+/** 4 colors */
 #define	PX_PREF2		( PX_PACKED + PX_1COMP + PX_USES2 + PX_2BIT )
-/** TODO */
+/** 16 colors */
 #define	PX_PREF4		( PX_PACKED + PX_1COMP + PX_USES4 + PX_4BIT )
-/** TODO */
+/** 256 colors */
 #define	PX_PREF8		( PX_PACKED + PX_1COMP + PX_USES8 + PX_8BIT )
-/** TODO */
+/** 15bit */
 #define	PX_PREF15	( PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES15 + PX_16BIT )
-/** TODO */
+/** 32bit */
 #define	PX_PREF32	( PX_xFIRST + PX_PACKED + PX_3COMP + PX_USES24 + PX_32BIT )
 
 /*----------------------------------------------------------------------------------------*/
-/* Farbtabellen																									*/
+/* Color palettes									*/
 /*----------------------------------------------------------------------------------------*/
 
-/** TODO */
+/** Color space */
 enum
 {
-	CSPACE_RGB		=	0x0001,			/**< TODO */
-	CSPACE_ARGB		=	0x0002,			/**< TODO */
-	CSPACE_CMYK		=	0x0004			/**< TODO */
+	CSPACE_RGB		=	0x0001,			/**< RGB color space */
+	CSPACE_ARGB		=	0x0002,			/**< ARGB color space */
+	CSPACE_CMYK		=	0x0004			/**< CMYK color space */
 };
 
-/** TODO */
+/** Components */
 enum
 {
-	CSPACE_1COMPONENT	=	0x0001,		/**< TODO */
-	CSPACE_2COMPONENTS	=	0x0002,		/**< TODO */
-	CSPACE_3COMPONENTS	= 	0x0003,		/**< TODO */
-	CSPACE_4COMPONENTS	=	0x0004		/**< TODO */
+	CSPACE_1COMPONENT	=	0x0001,		/**< 1 component */
+	CSPACE_2COMPONENTS	=	0x0002,		/**< 2 components */
+	CSPACE_3COMPONENTS	= 	0x0003,		/**< 3 components */
+	CSPACE_4COMPONENTS	=	0x0004		/**< 4 components */
 };
 
-/** TODO */
+/** RGB color structure */
 typedef struct
 {
-	unsigned short	reserved;			/**< TODO */
-	unsigned short	red;				/**< TODO */
-	unsigned short	green;				/**< TODO */
-	unsigned short	blue;				/**< TODO */
+	unsigned short	reserved;			/**< Reserved */
+	unsigned short	red;				/**< Red */
+	unsigned short	green;				/**< Green */
+	unsigned short	blue;				/**< Blue */
 } COLOR_RGB;
 
-/** TODO */
+/** CMYK color structure */
 typedef struct
 {
-	unsigned short	cyan;				/**< TODO */
-	unsigned short	magenta;			/**< TODO */
-	unsigned short	yellow;				/**< TODO */
-	unsigned short	black;				/**< TODO */
+	unsigned short	cyan;				/**< Cyan */
+	unsigned short	magenta;			/**< Magenta */
+	unsigned short	yellow;				/**< Yellow */
+	unsigned short	black;				/**< Black */
 } COLOR_CMYK;
 
-/** TODO */
+/** Color entry */
 typedef union
 {
-	COLOR_RGB	rgb;			/**< TODO */
-	COLOR_CMYK	cmyk;			/**< TODO */
+	COLOR_RGB	rgb;			/**< RGB color */
+	COLOR_CMYK	cmyk;			/**< CMYK color */
 } COLOR_ENTRY;
 
-/** TODO */
+/** Magic value for color table */
 #define	COLOR_TAB_MAGIC	0x63746162L /* 'ctab' */
 
-/** TODO */
+/** Color table */
 typedef struct
 {
 	long		magic;				/**< 'ctab' */
-	long		length;				/**< TODO */
-	long		format;				/**< TODO */
-	long		reserved;			/**< TODO */
+	long		length;				/**< Structure length */
+	long		format;				/**< Format */
+	long		reserved;			/**< Reserved, set to 0 */
 
-	long		map_id;				/**< TODO */
-	long		color_space;		/**< TODO */
-	long		flags;				/**< TODO */
-	long		no_colors;			/**< TODO */
+	long		map_id;				/**< Color table ID */
+	long		color_space;		/**< Color space (at present only CSPACE_RGB) */
+	long		flags;				/**< VDI-internal flags, set to 0 */
+	long		no_colors;			/**< Number of color entries */
 
-	long		reserved1;			/**< TODO */
-	long		reserved2;			/**< TODO */
-	long		reserved3;			/**< TODO */
-	long		reserved4;			/**< TODO */
+	long		reserved1;			/**< Reserved, must be 0 */
+	long		reserved2;			/**< Reserved, must be 0 */
+	long		reserved3;			/**< Reserved, must be 0 */
+	long		reserved4;			/**< Reserved, must be 0 */
 
 #if defined(__GNUC__) || defined (__LATTICE__) || defined(__VBCC__)
-	COLOR_ENTRY	colors[0];			/**< TODO */
+	COLOR_ENTRY	colors[0];			/**< Color entries */
 #else
-	COLOR_ENTRY	colors[];			/**< TODO */
+	COLOR_ENTRY	colors[];			/**< Color entries */
 #endif
 
 } COLOR_TAB;
 
-/** TODO */
+/** Color table with 256 colors */
 typedef struct
 {
 	long	magic;			/**< set to 'ctab' */
-	long	length;			/**< TODO */
-	long	format;			/**< TODO */
-	long	reserved;			/**< TODO */
+	long	length;			/**< Structure length */
+	long	format;			/**< Format */
+	long	reserved;			/**< Reserved, set to 0 */
 	
-	long	map_id;			/**< TODO */
-	long	color_space;			/**< TODO */
-	long	flags;			/**< TODO */
-	long	no_colors;			/**< TODO */
+	long	map_id;			/**< Color table ID */
+	long	color_space;			/**< Color space (at present only CSPACE_RGB) */
+	long	flags;			/**< VDI-internal flags, set to 0 */
+	long	no_colors;			/**< Number of color entries (256) */
 
-	long	reserved1;			/**< TODO */
-	long	reserved2;			/**< TODO */
-	long	reserved3;			/**< TODO */
-	long	reserved4;			/**< TODO */
+	long	reserved1;			/**< Reserved, must be 0 */
+	long	reserved2;			/**< Reserved, must be 0 */
+	long	reserved3;			/**< Reserved, must be 0 */
+	long	reserved4;			/**< Reserved, must be 0 */
 
-	COLOR_ENTRY	colors[256];	/**< TODO */
+	COLOR_ENTRY	colors[256];	/**< Color entries (256) */
 } COLOR_TAB256;
 
-typedef COLOR_TAB *CTAB_PTR;	/**< TODO */
-typedef COLOR_TAB *CTAB_REF;	/**< TODO */
+typedef COLOR_TAB *CTAB_PTR;	/**< Pointer to color table */
+typedef COLOR_TAB *CTAB_REF;	/**< Reference to color table */
 
 
-typedef void INVERSE_CTAB;		/**< TODO */
-typedef INVERSE_CTAB *ITAB_REF;	/**< TODO */
+typedef void INVERSE_CTAB;		/**< Inverse color table */
+typedef INVERSE_CTAB *ITAB_REF;	/**< Reference to inverse color table */
 
-/** TODO */
+/** Magic value for color bitmap */
 #define	CBITMAP_MAGIC	0x6362746dL /* 'cbtm' */
 
-typedef struct _gcbitmap GCBITMAP;/**< TODO */
-/** TODO */
+typedef struct _gcbitmap GCBITMAP;/**< GCBITMAP */
+/** GCBITMAP structure */
 struct _gcbitmap
 {
-	long		magic;			/**< TODO */
-	long		length;			/**< TODO */
-	long		format;			/**< TODO */
-	long		reserved;		/**< TODO */
+	long		magic;			/**< Structure identifier 'cbtm' */
+	long		length;			/**< Structure length */
+	long		format;			/**< Structure format (0) */
+	long		reserved;		/**< Reserved (0) */
 
-	unsigned char	*addr;		/**< TODO */
-	long		width;			/**< TODO */
-	long		bits;			/**< TODO */
-	unsigned long	px_format;	/**< TODO */
+	unsigned char	*addr;		/**< Address of bitmap */
+	long		width;			/**< Width of a line in bytes */
+	long		bits;			/**< Bit-depth */
+	unsigned long	px_format;	/**< Pixel format */
 
-	long		xmin;			/**< TODO */
-	long		ymin;			/**< TODO */
-	long		xmax;			/**< TODO */
-	long		ymax;			/**< TODO */
+	long		xmin;			/**< Minimum discrete X-coordinate of bitmap */
+	long		ymin;			/**< Minimum discrete Y-coordinate of bitmap */
+	long		xmax;			/**< Maximum discrete X-coordinate of bitmap + 1 */
+	long		ymax;			/**< Maximum discrete Y-coordinate of bitmap + 1 */
 
-	CTAB_REF	ctab;			/**< TODO */
-	ITAB_REF 	itab;			/**< TODO */
-	long		color_space;	/**< TODO */
-	long		reserved1;		/**< TODO */
+	CTAB_REF	ctab;			/**< Reference to color table, or 0L */
+	ITAB_REF 	itab;			/**< Reference to inverse color table, or 0L */
+	long		color_space;	/**< Color space */
+	long		reserved1;		/**< Reserved, must be 0 */
 };
 
 /*----------------------------------------------------------------------------------------*/
-/* Transfermodi fr Bitmaps																					*/
+/* Transfer modes for bitmaps								*/
 /*----------------------------------------------------------------------------------------*/
 
-/* Moduskonstanten */
-#define	T_NOT				4	/**< Konstante fr Invertierung bei logischen Transfermodi */
-#define	T_COLORIZE			16	/**< Konstante fr Einf„rbung */
+/* Constants for modes */
+#define	T_NOT				4	/**< Constant to reverse logical transfer mode */
+#define	T_COLORIZE			16	/**< Colorize source */
 
-#define	T_LOGIC_MODE		0   /**< TODO */
-#define	T_DRAW_MODE			32  /**< TODO */
-#define	T_ARITH_MODE		64	/**< Konstante fr Arithmetische Transfermodi */
-#define	T_DITHER_MODE		128	/**< Konstante frs Dithern */
+#define	T_LOGIC_MODE		0	/**< Constant for logical transfer mode */
+#define	T_DRAW_MODE			32	/**< Constant for drawing mode */
+#define	T_ARITH_MODE		64	/**< Constant for arithmetic transfer mode */
+#define	T_DITHER_MODE		128	/**< Dither source data */
 
-/* logische Transfermodi */
-#define	T_LOGIC_COPY		T_LOGIC_MODE+0   /**< TODO */
-#define	T_LOGIC_OR			T_LOGIC_MODE+1   /**< TODO */
-#define	T_LOGIC_XOR			T_LOGIC_MODE+2   /**< TODO */
-#define	T_LOGIC_AND			T_LOGIC_MODE+3   /**< TODO */
-#define	T_LOGIC_NOT_COPY	T_LOGIC_MODE+4   /**< TODO */
-#define	T_LOGIC_NOT_OR		T_LOGIC_MODE+5   /**< TODO */
-#define	T_LOGIC_NOT_XOR		T_LOGIC_MODE+6   /**< TODO */
-#define	T_LOGIC_NOT_AND		T_LOGIC_MODE+7   /**< TODO */
+/* Logical transfer modes */
+#define	T_LOGIC_COPY		T_LOGIC_MODE+0	/**< dst = src */
+#define	T_LOGIC_OR			T_LOGIC_MODE+1	/**< dst = src OR dst */
+#define	T_LOGIC_XOR			T_LOGIC_MODE+2	/**< dst = src XOR dst*/
+#define	T_LOGIC_AND			T_LOGIC_MODE+3	/**< dst = src AND dst */
+#define	T_LOGIC_NOT_COPY	T_LOGIC_MODE+4	/**< dst = ( NOT src ) */
+#define	T_LOGIC_NOT_OR		T_LOGIC_MODE+5	/**< dst = ( NOT src ) OR dst */
+#define	T_LOGIC_NOT_XOR		T_LOGIC_MODE+6	/**< dst = ( NOT src ) XOR dst */
+#define	T_LOGIC_NOT_AND		T_LOGIC_MODE+7	/**< dst = ( NOT src ) AND dst */
 
-/* Zeichenmodi */
-#define	T_REPLACE				T_DRAW_MODE+0   /**< TODO */
-#define	T_TRANSPARENT			T_DRAW_MODE+1   /**< TODO */
-#define	T_HILITE				T_DRAW_MODE+2   /**< TODO */
-#define	T_REVERS_TRANSPARENT	T_DRAW_MODE+3   /**< TODO */
+/* Writing modes */
+#define	T_REPLACE				T_DRAW_MODE+0	/**< dst = src */
+#define	T_TRANSPARENT			T_DRAW_MODE+1	/**< if ( src != bg_col ) dst = src */
+#define	T_HILITE				T_DRAW_MODE+2	/**< if ( src != bg_col ) { if ( dst == bg_col ) dst = hilite_col; else if ( dst == hilite_col ) dst = bg_col } */
+#define	T_REVERS_TRANSPARENT	T_DRAW_MODE+3	/**< if ( src == bg_col ) dst = src */
 
-/* arithmetische Transfermodi */
-#define	T_BLEND					T_ARITH_MODE+0   /**< TODO */
-#define	T_ADD					T_ARITH_MODE+1   /**< TODO */
-#define	T_ADD_OVER				T_ARITH_MODE+2   /**< TODO */
-#define	T_SUB					T_ARITH_MODE+3   /**< TODO */
-#define	T_MAX					T_ARITH_MODE+5   /**< TODO */
-#define	T_SUB_OVER				T_ARITH_MODE+6   /**< TODO */
-#define	T_MIN					T_ARITH_MODE+7   /**< TODO */
+/* Arithmetic transfer modes */
+#define	T_BLEND					T_ARITH_MODE+0	/**< Mix source and destination color */
+#define	T_ADD					T_ARITH_MODE+1	/**< Add source and destination color */
+#define	T_ADD_OVER				T_ARITH_MODE+2	/**< Add source and destination color, do not catch overflows */
+#define	T_SUB					T_ARITH_MODE+3	/**< Substract source from destination color */
+#define	T_MAX					T_ARITH_MODE+5	/**< Maximum RGB components */
+#define	T_SUB_OVER				T_ARITH_MODE+6	/**< Substract source from destination color, do not catch overflows */
+#define	T_MIN					T_ARITH_MODE+7	/**< Minimum RGB components */
 
-/** TODO */
-typedef struct			/* Rechteck fr 16-Bit-Koordinaten */
+/** 16b rectangle */
+typedef struct			/* Rectangle with 16-Bit-coordinates */
 {
-	short	x1;			/**< TODO */
-	short	y1;			/**< TODO */
-	short	x2;			/**< TODO */
-	short	y2;			/**< TODO */
+	short	x1;			/**< X coordinate of the top left corner */
+	short	y1;			/**< Y coordinate of the top left corner */
+	short	x2;			/**< X coordinate of the bottom right corner + 1 */
+	short	y2;			/**< Y coordinate of the bottom right corner + 1 */
 } RECT16;
 
-/** TODO */
-typedef struct			/* Rechteck fr 32-Bit-Koordinaten */
+/** 32b rectangle */
+typedef struct			/* Rectangle with 32-Bit-coordinates */
 {
-	long	x1;			/**< TODO */
-	long	y1;			/**< TODO */
-	long	x2;			/**< TODO */
-	long	y2;			/**< TODO */
+	long	x1;			/**< X coordinate of the top left corner */
+	long	y1;			/**< Y coordinate of the top left corner */
+	long	x2;			/**< X coordinate of the bottom right corner + 1 */
+	long	y2;			/**< Y coordinate of the bottom right corner + 1 */
 } RECT32;
 
 /** @addtogroup n_vdi
@@ -2085,7 +2085,7 @@ short		udef_vs_document_info	(short vdi_handle, short type, char *s, short wchar
  *  @{
  */
 
-/** TODO */
+/** Bit image structure */
 typedef struct
 {
 	short nbplanes;     /**< Number of planes */
