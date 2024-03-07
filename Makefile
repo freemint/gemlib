@@ -33,6 +33,9 @@ GENFILES = .lib* libgem*.a
 GENFILES += mt_gem.h Doxyfile gemlib.spec
 GENFILES += html
 
+ifeq ($(MULTILIBDIRS),)
+	# gcc don't supports multilibs --> old stuff
+
 ALL_LIBS = normal mshort
 
 ifeq ($(WITH_020_LIB),yes)
@@ -42,6 +45,13 @@ endif
 ifeq ($(WITH_V4E_LIB),yes)
 ALL_LIBS += m5475 m5475mshort
 endif
+
+else
+	ALL_LIBS = $(patsubst %,.mlibs/%/libgem.a, $(MULTILIBDIRS))
+endif
+
+
+
 
 libs: $(ALL_LIBS)
 
@@ -131,6 +141,18 @@ all-compilers:
 	make -f vbcc.mak;
 	make -f zip.mak
 
+define MULTI_TEMPLATE
+.mlibs/$(1) :
+	$$(AM_V_at)$$(MKDIR) -p $$@
+.mlibs/$(1)/libgem.a : GENERAL += $(call MULTILIBFLAGS,$(1))
+.mlibs/$(1)/libgem.a : mt_gem.h .mlibs/$(1) $(addprefix .mlibs/$(1)/, $(COBJS:.c=.o) $(SOBJS:.S=.o))
+	$$(AM_V_at)$$(RM) $$@
+	$$(AM_V_AR)$$(AR) rc $$@ $(addprefix .mlibs/$(1)/, $(COBJS:.c=.o) $(SOBJS:.S=.o))
+	$(AM_V_RANLIB)$(RANLIB) $$@
+
+endef
+$(foreach DIR,$(MULTILIBDIRS),$(eval $(call MULTI_TEMPLATE,$(DIR))))
+
 libgem$(TARGET).a: objs
 	$(AM_V_at)$(RM) $@
 	$(AM_V_AR)$(AR) rc $@ \
@@ -176,6 +198,8 @@ mt_gem.h: mt_gem.h.in VERSION
 #	$(MOVEIFCHANGE) $(srcdir)/mt_gem.tmp $(srcdir)/mt_gem.h
 
 install:
+ifeq ($(MULTILIBDIRS),)
+	# gcc don't supports multilibs --> old stuff
 	install -m 755 -d $(PREFIX)/lib
 	install -m 644 libgem.a $(PREFIX)/lib/libgem.a
 	install -m 755 -d $(PREFIX)/lib/mshort
@@ -193,6 +217,12 @@ ifeq ($(WITH_V4E_LIB),yes)
 	install -m 755 -d $(PREFIX)/lib/m5475/mshort
 	install -m 644 libgemv4e16.a $(PREFIX)/lib/m5475/mshort/libgem.a
 endif
+else
+	for lib in $(MULTILIBDIRS); do \
+		install -m 755 -d $(PREFIX)/lib/$$lib; \
+		install -m 644 ./.mlibs/$$lib/libgem.a $(PREFIX)/lib/$$lib/libgem.a; \
+	done
+endif
 	install -m 755 -d $(PREFIX)/include
 	install -m 644 gem.h $(PREFIX)/include
 	install -m 644 gemx.h $(PREFIX)/include
@@ -200,6 +230,7 @@ endif
 	install -m 644 mt_gemx.h $(PREFIX)/include
 
 uninstall:
+ifeq ($(MULTILIBDIRS),)
 	rm -f $(PREFIX)/lib/libgem.a
 	rm -f $(PREFIX)/lib/libgem16.a
 	rm -f $(PREFIX)/lib/mshort/libgem.a
@@ -211,7 +242,16 @@ ifeq ($(WITH_V4E_LIB),yes)
 	rm -f $(PREFIX)/lib/m5475/libgem.a
 	rm -f $(PREFIX)/lib/m5475/mshort/libgem.a
 endif
+else
+	for lib in $(MULTILIBDIRS); do \
+		rm -f $(PREFIX)/lib/$$lib; \
+	done
+endif
 	rm -f $(PREFIX)/include/gem.h
 	rm -f $(PREFIX)/include/gemx.h
 	rm -f $(PREFIX)/include/mt_gem.h
 	rm -f $(PREFIX)/include/mt_gemx.h
+
+ifneq ($(MULTILIBDIRS),)
+include $(top_srcdir)/DEPENDENCIES
+endif

@@ -23,6 +23,7 @@ endif
 #
 WITH_020_LIB = yes
 WITH_V4E_LIB = yes
+WITH_FASTCALL_LIB = yes
 
 #
 # target and host compiler
@@ -87,7 +88,7 @@ TAR   = tar
 #
 # optimizations
 # 
-OPTS = -O2 -fomit-frame-pointer
+OPTS = -O2 -fomit-frame-pointer $(EXTRA_OPTS)
 
 
 #
@@ -113,3 +114,28 @@ DEFINITIONS =
 # model type
 #
 MODEL = 
+
+# Multilib
+
+MULTILIBDIRS :=
+MULTILIBFLAGS =
+
+ifneq (,$(strip $(shell $(CC) -print-multi-lib | sed -e 's/\.;//')))
+	# gcc supports multilibs
+	# get multi-lib-dirs
+	MULTILIBDIRS := $(shell $(CC) -print-multi-lib | sed -e "s:;.*::")
+	ifneq ($(WITH_FASTCALL_LIB),yes)
+		# filter out fastcall
+		MULTILIBDIRS := $(shell echo $(MULTILIBDIRS) | sed -e 's/\S*mfastcall\S*/ /g')
+	endif
+	ifneq ($(WITH_V4E_LIB),yes)
+		# filter-out coldfire libs
+		MULTILIBDIRS := $(shell echo $(MULTILIBDIRS) | sed -e 's/\S*m5475\S*/ /g')
+	endif
+	ifneq ($(WITH_020_LIB),yes)
+		# filter-out 68020 libs
+		MULTILIBDIRS := $(shell echo $(MULTILIBDIRS) | sed -e 's/\S*m68020\S*/ /g')
+	endif
+	MULTILIBFLAGS = $(shell $(CC) -print-multi-lib | grep '^$(1);' | sed -e 's/^.*;//' -e 's/@/ -/g')
+
+endif

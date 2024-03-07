@@ -4,6 +4,7 @@ COMPILE = $(filter-out $(NOCFLAGS-$(<F)), $(filter-out $(nocflags),\
 $(CC) $(cflags) $(CFLAGS) $(CFLAGS-$(<F)) $(CFLAGS-$(DIRSTEM))) \
 $(DEFS-$(<F)) $(DEFS-$(DIRSTEM)))
 
+ifeq ($(MULTILIBDIRS),)
 #
 # compile rule
 #
@@ -20,6 +21,35 @@ $(DEFS-$(<F)) $(DEFS-$(DIRSTEM)))
 # dependencies
 #
 DEP_FILES = $(addprefix ./.deps/, $(patsubst %.o,%.P,$(OBJS)))
+
+else
+
+DEP_FILES :=
+
+define CC_MULTI_TEMPLATE
+
+#
+# compile rule
+#
+
+.mlibs/$(1)/%.o : %.c
+	$$(AM_V_CC)$$(COMPILE)  -Wp,-MD,$$(@:.o=.d) -c $$< -o $$@
+.mlibs/$(1)/%.o : %.S
+	$$(AM_V_CPPAS)$$(COMPILE) -Wp,-MD,$$(@:.o=.d) -c $$< -o $$@
+.mlibs/$(1)/%.o : %.s
+	$$(AM_V_AS)$$(COMPILE) -Wp,-MD,$$(@:.o=.d) -c $$< -o $$@
+
+#
+# dependencies
+#
+DEP_FILES += $(addprefix ./.mlibs/$(1)/, $(patsubst %.o,%.d,$(OBJS)))
+
+
+endef
+$(foreach DIR,$(MULTILIBDIRS),$(eval $(call CC_MULTI_TEMPLATE,$(DIR))))
+
+endif
+
 
 # These are automatically remade, no need for make to worry about
 # them.
