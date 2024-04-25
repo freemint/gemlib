@@ -48,13 +48,13 @@ endif
 FLAVOUR=$(addprefix -m,$(wordlist 2,100, $(subst ., ,$(CPU-FPU))))
 
 define LIB_TEMPLATE
-.lib$(1)/libgem.a::
+.lib$(1)/libgem.a:: mt_gem.h
 	@test -d .lib$(1) || mkdir .lib$(1)
 	$(MAKE) -C .lib$(1) -f ../Makefile CPU-FPU=$(1) top_srcdir=.. srcdir=.. libgem.a
 endef
 define CC_TEMPLATE
 $(1).o: $$(srcdir)/$(1)
-	$$(AM_V_CC)$$(CC) $$(CPU) $$(FLAVOUR) $$(CFLAGS) -c -o $$@ $$<
+	$$(AM_V_CC)$$(CC) $$(CPU) $$(FLAVOUR) $$(CFLAGS) -I$$(srcdir) -c -o $$@ $$<
 endef
 
 $(foreach DIR,$(ALL_LIBS),$(eval $(call LIB_TEMPLATE,$(DIR))))
