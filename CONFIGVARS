@@ -19,12 +19,6 @@ CROSS = yes
 endif
 
 #
-# build alternate libraries for processor variants
-#
-WITH_020_LIB = yes
-WITH_V4E_LIB = yes
-
-#
 # target and host compiler
 # 
 # Define this to "m68k-atari-mint" if you cross compile.

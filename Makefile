@@ -19,7 +19,13 @@ include $(top_srcdir)/RULES
 include $(top_srcdir)/PHONY
 include $(srcdir)/VERSION
 
-all-here: libs
+ALL_LIBS = 68000 68020-60 68000.short 68020-60.short 5475 5475.short
+BUILD_FAST=$(shell if $(CC) -mfastcall -E - < /dev/null >/dev/null 2>&1; then echo Y; else echo N; fi)
+ifeq ($(BUILD_FAST), Y)
+ALL_LIBS += 68000.fastcall 68020-60.fastcall 68000.short.fastcall 68020-60.short.fastcall 5475.fastcall 5475.short.fastcall
+endif
+
+all-here: $(addsuffix /libgem.a, $(addprefix .lib, $(ALL_LIBS)))
 
 dist: distdir
 	-chmod -R a+r $(distdir) 
@@ -33,35 +39,32 @@ GENFILES = .lib* libgem*.a
 GENFILES += mt_gem.h Doxyfile gemlib.spec
 GENFILES += html
 
-ALL_LIBS = normal mshort
-
-ifeq ($(WITH_020_LIB),yes)
-ALL_LIBS += m68020 m68020mshort
+cpu=$(word 1, $(subst ., ,$(CPU-FPU)))
+ifeq ($(cpu),5475)
+	CPU=-mcpu=$(cpu)
+else
+	CPU=-m$(cpu)
 endif
+FLAVOUR=$(addprefix -m,$(wordlist 2,100, $(subst ., ,$(CPU-FPU))))
 
-ifeq ($(WITH_V4E_LIB),yes)
-ALL_LIBS += m5475 m5475mshort
-endif
+define LIB_TEMPLATE
+.lib$(1)/libgem.a::
+	@test -d .lib$(1) || mkdir .lib$(1)
+	$(MAKE) -C .lib$(1) -f ../Makefile CPU-FPU=$(1) top_srcdir=.. srcdir=.. libgem.a
+endef
+define CC_TEMPLATE
+$(1).o: $$(srcdir)/$(1)
+	$$(AM_V_CC)$$(CC) $$(CPU) $$(FLAVOUR) $$(CFLAGS) -c -o $$@ $$<
+endef
 
-libs: $(ALL_LIBS)
+$(foreach DIR,$(ALL_LIBS),$(eval $(call LIB_TEMPLATE,$(DIR))))
+$(foreach FILE,$(COBJS) $(SOBJS),$(eval $(call CC_TEMPLATE,$(FILE))))
 
-normal:
-	$(MAKE) libgem.a TARGET=""
+OBJS = $(addsuffix .o,$(COBJS) $(SOBJS))
 
-mshort:
-	$(MAKE) libgem16.a TARGET="16"
-
-m68020:
-	$(MAKE) libgem020.a TARGET="020"
-
-m68020mshort:
-	$(MAKE) libgem02016.a TARGET="02016"
-
-m5475:
-	$(MAKE) libgemv4e.a TARGET="v4e"
-
-m5475mshort:
-	$(MAKE) libgemv4e16.a TARGET="v4e16"
+libgem.a: $(OBJS)
+	$(AM_V_at)$(RM) $@
+	$(AM_V_AR)$(AR) crs $@ $(OBJS)
 
 clean::
 	rm -rf .lib*
@@ -97,7 +100,6 @@ pc:
 	mkdir -p lib/purec; make -f pc.mak
 
 vbcc:
-
 #68000 target (+mint : official config for vc for 68K target and mint)
 	mkdir -p .vbcc; mkdir -p lib/vbcc; $(MAKE) -f vbcc.mak LIB_VBCC="lib/vbcc/libgem.a" MORE_CFLAGS="+mint" MORE_SFLAGS=""
 #coldfire target (+mintcf : official config for vc for coldfire target and mint)
@@ -131,20 +133,6 @@ all-compilers:
 	make -f vbcc.mak;
 	make -f zip.mak
 
-libgem$(TARGET).a: objs
-	$(AM_V_at)$(RM) $@
-	$(AM_V_AR)$(AR) rc $@ \
-		$(shell for file in `cat .lib$(TARGET)/objs` ; \
-			do echo .lib$(TARGET)/$$file ; done)
-	$(AM_V_RANLIB)$(RANLIB) $@
-
-objs: .lib$(TARGET) mt_gem.h
-	cd .lib$(TARGET); $(MAKE)
-
-.lib$(TARGET):
-	$(AM_V_at)$(MKDIR) $@
-	$(AM_V_at)$(CP) Makefile.objs $@/Makefile
-
 gemlib.spec: gemlib.spec.in VERSION
 	$(AM_V_at)rm -f $@
 	$(AM_V_GEN)sed 's,@VERSION@,$(VERSION),g' $@.in >$@
@@ -176,23 +164,16 @@ mt_gem.h: mt_gem.h.in VERSION
 #	$(MOVEIFCHANGE) $(srcdir)/mt_gem.tmp $(srcdir)/mt_gem.h
 
 install:
-	install -m 755 -d $(PREFIX)/lib
-	install -m 644 libgem.a $(PREFIX)/lib/libgem.a
-	install -m 755 -d $(PREFIX)/lib/mshort
-	install -m 644 libgem16.a $(PREFIX)/lib/mshort/libgem.a
+	@for i in $(ALL_LIBS); do \
+            cpu=`echo $$i | cut -d . -f 1`; \
+            if test $$cpu = 5475; then cpu=-mcpu=$$cpu; else cpu=-m$$cpu; fi; \
+            flavour=`echo "$$i." | sed -e 's/\./ -m/g' -e 's/[^ ]* //' -e 's/-m$$//'`; \
+            multilibdir=`$(CC) $$cpu $$flavour -print-multi-directory`; \
+	    echo install $$i/libgem.a $(PREFIX)/lib/$$multilibdir/libgem.a; \
+	    install -m 755 -d $(PREFIX)/lib/$$multilibdir; \
+	    install -m 644 .lib$$i/libgem.a $(PREFIX)/lib/$$multilibdir/libgem.a; \
+        done
 	ln -sf mshort/libgem.a $(PREFIX)/lib/libgem16.a
-ifeq ($(WITH_020_LIB),yes)
-	install -m 755 -d $(PREFIX)/lib/m68020-60
-	install -m 644 libgem020.a $(PREFIX)/lib/m68020-60/libgem.a
-	install -m 755 -d $(PREFIX)/lib/m68020-60/mshort
-	install -m 644 libgem02016.a $(PREFIX)/lib/m68020-60/mshort/libgem.a
-endif
-ifeq ($(WITH_V4E_LIB),yes)
-	install -m 755 -d $(PREFIX)/lib/m5475
-	install -m 644 libgemv4e.a $(PREFIX)/lib/m5475/libgem.a
-	install -m 755 -d $(PREFIX)/lib/m5475/mshort
-	install -m 644 libgemv4e16.a $(PREFIX)/lib/m5475/mshort/libgem.a
-endif
 	install -m 755 -d $(PREFIX)/include
 	install -m 644 gem.h $(PREFIX)/include
 	install -m 644 gemx.h $(PREFIX)/include
@@ -200,17 +181,14 @@ endif
 	install -m 644 mt_gemx.h $(PREFIX)/include
 
 uninstall:
-	rm -f $(PREFIX)/lib/libgem.a
-	rm -f $(PREFIX)/lib/libgem16.a
-	rm -f $(PREFIX)/lib/mshort/libgem.a
-ifeq ($(WITH_020_LIB),yes)
-	rm -f $(PREFIX)/lib/m68020-60/libgem.a
-	rm -f $(PREFIX)/lib/m68020-60/mshort/libgem.a
-endif
-ifeq ($(WITH_V4E_LIB),yes)
-	rm -f $(PREFIX)/lib/m5475/libgem.a
-	rm -f $(PREFIX)/lib/m5475/mshort/libgem.a
-endif
+	@for i in $(ALL_LIBS); do \
+            cpu=`echo $$i | cut -d . -f 1`; \
+            if test $$cpu = 5475; then cpu=-mcpu=$$cpu; else cpu=-m$$cpu; fi; \
+            flavour=`echo "$$i." | sed -e 's/\./ -m/g' -e 's/[^ ]* //' -e 's/-m$$//'`; \
+            multilibdir=`$(CC) $$cpu $$flavour -print-multi-directory`; \
+	    echo rm $(PREFIX)/lib/libgem.a; \
+	    rm -f $(PREFIX)/lib/$$multilibdir/libgem.a; \
+        done
 	rm -f $(PREFIX)/include/gem.h
 	rm -f $(PREFIX)/include/gemx.h
 	rm -f $(PREFIX)/include/mt_gem.h

@@ -10,7 +10,6 @@ SRCFILES += \
 	EXTRAFILES \
 	MISCFILES \
 	Makefile \
-	Makefile.objs \
 	SRCFILES \
 	\
 	gemlib.spec \

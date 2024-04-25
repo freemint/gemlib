@@ -102,7 +102,6 @@ _VDI_ESCAPE = \
 	vm_filename.c \
 	u_vm_filename.c \
 	vm_pagesize.c \
-	vq_calibrate.c \
 	vq_chcells.c \
 	vq_curaddress.c \
 	vq_page_name.c \
