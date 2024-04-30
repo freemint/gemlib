@@ -3,6 +3,6 @@
 # -u: Treat unset variables as an error when substituting.
 # -x: Display expanded script commands
 
-make && make PREFIX="${INSTALL_DIR}" install
+make && make DESTDIR="${INSTALL_DIR}" PREFIX=/usr install
 
-find "${INSTALL_DIR}" -type f \( -name '*.a' -o -name '*.o' \) -exec m68k-atari-mint-strip -S -X -w -N '.L[0-9]*' {} \;
+find "${INSTALL_DIR}" -type f \( -name '*.a' -o -name '*.o' \) -exec ${CROSS_TOOL}-strip -S -X -w -N '.L[0-9]*' {} \;

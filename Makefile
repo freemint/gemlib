@@ -169,16 +169,16 @@ install:
             if test $$cpu = 5475; then cpu=-mcpu=$$cpu; else cpu=-m$$cpu; fi; \
             flavour=`echo "$$i." | sed -e 's/\./ -m/g' -e 's/[^ ]* //' -e 's/-m$$//'`; \
             multilibdir=`$(CC) $$cpu $$flavour -print-multi-directory`; \
-	    echo install $$i/libgem.a $(PREFIX)/lib/$$multilibdir/libgem.a; \
-	    install -m 755 -d $(PREFIX)/lib/$$multilibdir; \
-	    install -m 644 .lib$$i/libgem.a $(PREFIX)/lib/$$multilibdir/libgem.a; \
+	    echo install $$i/libgem.a $(DESTDIR)$(PREFIX)/lib/$$multilibdir/libgem.a; \
+	    install -m 755 -d $(DESTDIR)$(PREFIX)/lib/$$multilibdir; \
+	    install -m 644 .lib$$i/libgem.a $(DESTDIR)$(PREFIX)/lib/$$multilibdir/libgem.a; \
         done
-	ln -sf mshort/libgem.a $(PREFIX)/lib/libgem16.a
-	install -m 755 -d $(PREFIX)/include
-	install -m 644 gem.h $(PREFIX)/include
-	install -m 644 gemx.h $(PREFIX)/include
-	install -m 644 mt_gem.h $(PREFIX)/include
-	install -m 644 mt_gemx.h $(PREFIX)/include
+	ln -sf mshort/libgem.a $(DESTDIR)$(PREFIX)/lib/libgem16.a
+	install -m 755 -d $(DESTDIR)$(PREFIX)/include
+	install -m 644 gem.h $(DESTDIR)$(PREFIX)/include
+	install -m 644 gemx.h $(DESTDIR)$(PREFIX)/include
+	install -m 644 mt_gem.h $(DESTDIR)$(PREFIX)/include
+	install -m 644 mt_gemx.h $(DESTDIR)$(PREFIX)/include
 
 uninstall:
 	@for i in $(ALL_LIBS); do \
@@ -186,10 +186,10 @@ uninstall:
             if test $$cpu = 5475; then cpu=-mcpu=$$cpu; else cpu=-m$$cpu; fi; \
             flavour=`echo "$$i." | sed -e 's/\./ -m/g' -e 's/[^ ]* //' -e 's/-m$$//'`; \
             multilibdir=`$(CC) $$cpu $$flavour -print-multi-directory`; \
-	    echo rm $(PREFIX)/lib/libgem.a; \
-	    rm -f $(PREFIX)/lib/$$multilibdir/libgem.a; \
+	    echo rm $(DESTDIR)$(PREFIX)/lib/libgem.a; \
+	    rm -f $(DESTDIR)$(PREFIX)/lib/$$multilibdir/libgem.a; \
         done
-	rm -f $(PREFIX)/include/gem.h
-	rm -f $(PREFIX)/include/gemx.h
-	rm -f $(PREFIX)/include/mt_gem.h
-	rm -f $(PREFIX)/include/mt_gemx.h
+	rm -f $(DESTDIR)$(PREFIX)/include/gem.h
+	rm -f $(DESTDIR)$(PREFIX)/include/gemx.h
+	rm -f $(DESTDIR)$(PREFIX)/include/mt_gem.h
+	rm -f $(DESTDIR)$(PREFIX)/include/mt_gemx.h
