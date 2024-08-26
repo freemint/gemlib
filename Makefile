@@ -19,13 +19,27 @@ include $(top_srcdir)/RULES
 include $(top_srcdir)/PHONY
 include $(srcdir)/VERSION
 
+CFLAGS_68000 = -m68000
+CFLAGS_68000.short = -m68000 -mshort
+CFLAGS_68020-60 = -m68020-60
+CFLAGS_68020-60.short = -m68020-60 -mshort
+CFLAGS_5475 = -mcpu=5475
+CFLAGS_5475.short = -mcpu=5475 -mshort
+
+CFLAGS_68000.fastcall = -m68000 -mfastcall
+CFLAGS_68000.short.fastcall = -m68000 -mshort -mfastcall
+CFLAGS_68020-60.fastcall = -m68020-60 -mfastcall
+CFLAGS_68020-60.short.fastcall = -m68020-60 -mshort -mfastcall
+CFLAGS_5475.fastcall = -mcpu=5475 -mfastcall
+CFLAGS_5475.short.fastcall = -mcpu=5475 -mshort -mfastcall
+
 ALL_LIBS = 68000 68020-60 68000.short 68020-60.short 5475 5475.short
 BUILD_FAST=$(shell if $(CC) -mfastcall -E - < /dev/null >/dev/null 2>&1; then echo Y; else echo N; fi)
 ifeq ($(BUILD_FAST), Y)
 ALL_LIBS += 68000.fastcall 68020-60.fastcall 68000.short.fastcall 68020-60.short.fastcall 5475.fastcall 5475.short.fastcall
 endif
 
-all-here: $(addsuffix /libgem.a, $(addprefix .lib, $(ALL_LIBS)))
+all-here: $(foreach LIB, $(ALL_LIBS), .lib$(LIB)/libgem.a)
 
 dist: distdir
 	-chmod -R a+r $(distdir) 
@@ -39,32 +53,21 @@ GENFILES = .lib* libgem*.a
 GENFILES += mt_gem.h Doxyfile gemlib.spec
 GENFILES += html
 
-cpu=$(word 1, $(subst ., ,$(CPU-FPU)))
-ifeq ($(cpu),5475)
-	CPU=-mcpu=$(cpu)
-else
-	CPU=-m$(cpu)
-endif
-FLAVOUR=$(addprefix -m,$(wordlist 2,100, $(subst ., ,$(CPU-FPU))))
-
 define LIB_TEMPLATE
-.lib$(1)/libgem.a:: mt_gem.h
-	@test -d .lib$(1) || mkdir .lib$(1)
-	$(MAKE) -C .lib$(1) -f ../Makefile CPU-FPU=$(1) top_srcdir=.. srcdir=.. libgem.a
+
+OBJS_$(1) = $(foreach FILE, $(COBJS) $(SOBJS), .lib$(1)/$(notdir $(basename $(FILE))).o)
+
+.lib$(1)/libgem.a:: $$(OBJS_$(1))
+	$$(AM_V_at)$(RM) $$@
+	$$(AM_V_AR)$$(AR) crs $$@ $$(OBJS_$(1))
 endef
 define CC_TEMPLATE
-$(1).o: $$(srcdir)/$(1)
-	$$(AM_V_CC)$$(CC) $$(CPU) $$(FLAVOUR) $$(CFLAGS) -I$$(srcdir) -c -o $$@ $$<
+.lib$(1)/$(notdir $(basename $(2))).o: $(2) mt_gem.h Makefile
+	$$(AM_V_CC)$$(CC) $$(CFLAGS_$(1)) $$(CFLAGS) -I$$(srcdir) -c -o $$@ $$<
 endef
 
 $(foreach DIR,$(ALL_LIBS),$(eval $(call LIB_TEMPLATE,$(DIR))))
-$(foreach FILE,$(COBJS) $(SOBJS),$(eval $(call CC_TEMPLATE,$(FILE))))
-
-OBJS = $(addsuffix .o,$(COBJS) $(SOBJS))
-
-libgem.a: $(OBJS)
-	$(AM_V_at)$(RM) $@
-	$(AM_V_AR)$(AR) crs $@ $(OBJS)
+$(foreach DIR,$(ALL_LIBS),$(foreach FILE,$(COBJS) $(SOBJS),$(eval $(call CC_TEMPLATE,$(DIR),$(FILE)))))
 
 clean::
 	rm -rf .lib*
@@ -193,3 +196,8 @@ uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/include/gemx.h
 	rm -f $(DESTDIR)$(PREFIX)/include/mt_gem.h
 	rm -f $(DESTDIR)$(PREFIX)/include/mt_gemx.h
+
+
+ifneq (clean,$(findstring clean,$(MAKECMDGOALS)))
+DEPS_MAGIC := $(shell mkdir -p $(foreach LIB, $(ALL_LIBS), .lib$(LIB))) > /dev/null 2>&1 || :)
+endif
