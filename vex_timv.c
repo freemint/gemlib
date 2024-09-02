@@ -25,6 +25,7 @@ vex_timv (short handle, void *time_addr, void **otime_addr, short *time_conv)
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_intout, vdi_dummy );
 	
 	vdi_control_ptr(0, void *) = time_addr;
+	vdi_control_ptr(1, void *) = 0;
 	
 	VDI_TRAP_00 (vdi_params, handle, 118);
 	

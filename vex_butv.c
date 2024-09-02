@@ -22,6 +22,7 @@ vex_butv (short handle, void *newhdlr, void **old)
 	VDI_PARAMS(vdi_control, 0L, 0L, vdi_dummy, vdi_dummy );
 	
 	vdi_control_ptr(0, void *) = newhdlr;
+	vdi_control_ptr(1, void *) = 0;
 	
 	VDI_TRAP_00 (vdi_params, handle, 125);
 	

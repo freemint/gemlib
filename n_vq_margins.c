@@ -50,7 +50,9 @@ vq_margins (short handle, short *top_margin, short *bottom_margin,
 	 * NVDI 5.x printer drivers have a bug, and write some output parameters
 	 * directly to the VDIPB instead of the intout array.
 	 * Because of another bug in the same routine,
-	 * it also does not return the value of vdpi
+	 * it also does not return the value of vdpi.
+	 * Because of another bug in the same routine,
+	 * top and bottom margins are swapped
 	 */
 	if (vdi_params.control != vdi_control)
 	{
@@ -68,6 +70,8 @@ vq_margins (short handle, short *top_margin, short *bottom_margin,
 		/* vdpi is not accessible; pb[3] will contain the y-resolution */
 		/* assume vdpi == hdpi */
 		*vdpi = pb[2];
+		*bottom_margin = vdi_intout[1];
+		*top_margin = vdi_intout[2];
 	}
 
 	return vdi_intout[0];
