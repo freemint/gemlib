@@ -318,6 +318,7 @@ mt_wind_get (short WindowHandle, short What,
 		  aes_intout[AES_INTOUTMAX];
 	long  aes_addrin[AES_ADDRINMAX], 
 	      aes_addrout[AES_ADDROUTMAX];
+	short namebuf[64];
 	AESPB aes_params;
 
 	aes_params.control = &aes_control[0];				/* AES Control Array */
@@ -337,11 +338,16 @@ mt_wind_get (short WindowHandle, short What,
 		case WF_DCOLOR:
 		case WF_COLOR:
 			aes_intin[2] = *W1;
+			/* older versions of XaAES expect the element in intout[1] */
+			aes_intout[1] = *W1;
+			/* AES 4.1/N.AES do not return the 3d flags */
+			aes_intout[4] = 0x0f0f;
 			*(ptr ++) = 3;								/* aes_control[1] */
 			break;
 		case WF_INFO:
 		case WF_NAME:
-			aes_intin_ptr(2, short *) = W1;
+			aes_intin_ptr(2, short *) = namebuf;
+			namebuf[0] = -1;
 			*(ptr ++) = 4;								/* aes_control[1] */
 			break;
 		default:
@@ -355,12 +361,82 @@ mt_wind_get (short WindowHandle, short What,
 	/* ol: this line is required for WF_FIRSTXYWH and WF_NEXTXYWH because
 	   lot of programmers doesn't verify the return value and espect W or H
 	   will be 0 it's not true for NAES */
+	aes_intout[0] = 0;
+	aes_intout[1] = aes_intout[2] = -1;
 	aes_intout[3] = aes_intout[4] = 0;
 
 	AES_TRAP(aes_params);
 	
 	if (What == WF_INFO || What == WF_NAME) {
-		/* special case where W1 shall not be overwritten */
+		/*
+		 * we want to behave like documented above (copying the string to
+		 * where the first parameter points to), however things are a bit
+		 * more complicated:
+		 * - XaAES will already do that, if nintin is 4
+		 * - N.AES will do that regardless of nintin
+		 * - MagiC does not return the string, but instead its address in intout[1/2]
+		 * There are applications that expect MagiC's behaviour,
+		 * so we must handle all cases.
+		 */
+		char *name;
+		char *dst;
+
+		name = aes_intout_ptr(1, char *);
+		if (name != (char *)-1)
+		{
+			/* name was returned as address (MagiC) */
+			if (W2 != NULL && W2 == (W1 + 1))
+			{
+				/* application passed two pointers, to get the address as hi/lo */
+				*W1 = aes_intout[1];
+				*W2 = aes_intout[2];
+			} else
+			{
+				/* application passed only one pointer */
+				if (name == 0)
+				{
+					dst = (char *)W1;
+					if (dst != NULL)
+					{
+						if (name == NULL)
+						{
+							*dst = '\0';
+						} else
+						{
+							while ((*dst++ = *name++) != '\0')
+								;
+						}
+					}
+				}
+			}
+		} else if (namebuf[0] != -1)
+		{
+			/* name was written to buffer */
+			if (W2 != NULL && W2 == (W1 + 1))
+			{
+				/* application passed two pointers, to get the address */
+				/* no way to support this, since we only have the string */
+				*W1 = 0;
+				*W2 = 0;
+				aes_intout[0] = 0;
+			} else
+			{
+				/* application passed only one pointer */
+				name = (char *)namebuf;
+				dst = (char *)W1;
+				if (dst != NULL)
+				{
+					while ((*dst++ = *name++) != '\0')
+						;
+				}
+			}
+		} else
+		{
+			/*
+			 * nothing was returned?
+			 * hopefully return code will indicate error
+			 */
+		}
 	} else {
 #if CHECK_NULLPTR
 		if (W1)	*W1 = aes_intout[1];

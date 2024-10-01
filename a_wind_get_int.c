@@ -39,6 +39,10 @@ mt_wind_get_int (short WindowHandle, short What, short *W1, short *global_aes)
 		case WF_DCOLOR:
 		case WF_COLOR:
 			aes_intin[2] = *W1;
+			/* older versions of XaAES expect the element in intout[1] */
+			aes_intout[1] = *W1;
+			/* AES 4.1/N.AES do not return the 3d flags */
+			aes_intout[4] = 0x0f0f;
 			*(ptr ++) = 3;								/* aes_control[1] */
 			break;
 		default:
@@ -58,6 +62,7 @@ mt_wind_get_int (short WindowHandle, short What, short *W1, short *global_aes)
 	
 	if (What == WF_INFO || What == WF_NAME) {
 		/* special case where W1 shall not be overwritten */
+		/* actually should not get here; use wind_get() instead */
 	} else {
 #if CHECK_NULLPTR
 		if (W1)	*W1 = aes_intout[1];
