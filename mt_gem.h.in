@@ -175,10 +175,10 @@ __BEGIN_DECLS
  *  as follows:
  *  <table>
  *  <tr><td>\a ap_event <td> \a ap_value
- *  <tr><td> #APPEVNT_TIMER (0) <td> Elapsed Time (in milliseconds)
- *  <tr><td> #APPEVNT_BUTTON (1) <td> low word  = state (1 = down), high word = # of clicks
- *  <tr><td> #APPEVNT_MOUSE (2) <td> low word  = X pos, high word = Y pos
- *  <tr><td> #APPEVNT_KEYBOARD (3) <td> bits 0-7 = ASCII code, bits 8-15 = scan code, bits 16-31 = shift key
+ *  <tr><td> #APPEVNT_TIMER (0) <td> Elapsed Time (in 20ms ticks)
+ *  <tr><td> #APPEVNT_BUTTON (1) <td> high word  = state (1 = down), low word = # of clicks
+ *  <tr><td> #APPEVNT_MOUSE (2) <td> high word  = X pos, low word = Y pos
+ *  <tr><td> #APPEVNT_KEYBOARD (3) <td> bits 24-31 = scan code, bits 16-23 = ASCII code, bits 0-7 = shift state
  *
  *  Please read documentation of mt_appl_trecord() and mt_appl_tplay() for more details and
  *  known bugs related to this structure.
