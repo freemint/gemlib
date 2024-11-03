@@ -1855,29 +1855,29 @@ struct _gcbitmap
 #define	T_DITHER_MODE		128	/**< Dither source data */
 
 /* Logical transfer modes */
-#define	T_LOGIC_COPY		T_LOGIC_MODE+0	/**< dst = src */
-#define	T_LOGIC_OR			T_LOGIC_MODE+1	/**< dst = src OR dst */
-#define	T_LOGIC_XOR			T_LOGIC_MODE+2	/**< dst = src XOR dst*/
-#define	T_LOGIC_AND			T_LOGIC_MODE+3	/**< dst = src AND dst */
-#define	T_LOGIC_NOT_COPY	T_LOGIC_MODE+4	/**< dst = ( NOT src ) */
-#define	T_LOGIC_NOT_OR		T_LOGIC_MODE+5	/**< dst = ( NOT src ) OR dst */
-#define	T_LOGIC_NOT_XOR		T_LOGIC_MODE+6	/**< dst = ( NOT src ) XOR dst */
-#define	T_LOGIC_NOT_AND		T_LOGIC_MODE+7	/**< dst = ( NOT src ) AND dst */
+#define	T_LOGIC_COPY		(T_LOGIC_MODE+0)	/**< dst = src */
+#define	T_LOGIC_OR			(T_LOGIC_MODE+1)	/**< dst = src OR dst */
+#define	T_LOGIC_XOR			(T_LOGIC_MODE+2)	/**< dst = src XOR dst*/
+#define	T_LOGIC_AND			(T_LOGIC_MODE+3)	/**< dst = src AND dst */
+#define	T_LOGIC_NOT_COPY	(T_LOGIC_MODE+4)	/**< dst = ( NOT src ) */
+#define	T_LOGIC_NOT_OR		(T_LOGIC_MODE+5)	/**< dst = ( NOT src ) OR dst */
+#define	T_LOGIC_NOT_XOR		(T_LOGIC_MODE+6)	/**< dst = ( NOT src ) XOR dst */
+#define	T_LOGIC_NOT_AND		(T_LOGIC_MODE+7)	/**< dst = ( NOT src ) AND dst */
 
 /* Writing modes */
-#define	T_REPLACE				T_DRAW_MODE+0	/**< dst = src */
-#define	T_TRANSPARENT			T_DRAW_MODE+1	/**< if ( src != bg_col ) dst = src */
-#define	T_HILITE				T_DRAW_MODE+2	/**< if ( src != bg_col ) { if ( dst == bg_col ) dst = hilite_col; else if ( dst == hilite_col ) dst = bg_col } */
-#define	T_REVERS_TRANSPARENT	T_DRAW_MODE+3	/**< if ( src == bg_col ) dst = src */
+#define	T_REPLACE				(T_DRAW_MODE+0)	/**< dst = src */
+#define	T_TRANSPARENT			(T_DRAW_MODE+1)	/**< if ( src != bg_col ) dst = src */
+#define	T_HILITE				(T_DRAW_MODE+2)	/**< if ( src != bg_col ) { if ( dst == bg_col ) dst = hilite_col; else if ( dst == hilite_col ) dst = bg_col } */
+#define	T_REVERS_TRANSPARENT	(T_DRAW_MODE+3)	/**< if ( src == bg_col ) dst = src */
 
 /* Arithmetic transfer modes */
-#define	T_BLEND					T_ARITH_MODE+0	/**< Mix source and destination color */
-#define	T_ADD					T_ARITH_MODE+1	/**< Add source and destination color */
-#define	T_ADD_OVER				T_ARITH_MODE+2	/**< Add source and destination color, do not catch overflows */
-#define	T_SUB					T_ARITH_MODE+3	/**< Substract source from destination color */
-#define	T_MAX					T_ARITH_MODE+5	/**< Maximum RGB components */
-#define	T_SUB_OVER				T_ARITH_MODE+6	/**< Substract source from destination color, do not catch overflows */
-#define	T_MIN					T_ARITH_MODE+7	/**< Minimum RGB components */
+#define	T_BLEND					(T_ARITH_MODE+0)	/**< Mix source and destination color */
+#define	T_ADD					(T_ARITH_MODE+1)	/**< Add source and destination color */
+#define	T_ADD_OVER				(T_ARITH_MODE+2)	/**< Add source and destination color, do not catch overflows */
+#define	T_SUB					(T_ARITH_MODE+3)	/**< Substract source from destination color */
+#define	T_MAX					(T_ARITH_MODE+5)	/**< Maximum RGB components */
+#define	T_SUB_OVER				(T_ARITH_MODE+6)	/**< Substract source from destination color, do not catch overflows */
+#define	T_MIN					(T_ARITH_MODE+7)	/**< Minimum RGB components */
 
 /** 16b rectangle */
 typedef struct			/* Rectangle with 16-Bit-coordinates */
