@@ -17,7 +17,7 @@
 short
 mt_x_appl_font(short getset, short zero, XFONTINFO *info, short *global_aes)
 {
-	AES_PARAMS(0x7101,2,1,0,0);
+	AES_PARAMS(0x7101,2,1,1,0);
 
 	aes_intin[0] = getset;
 	aes_intin[1] = zero;
