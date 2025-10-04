@@ -22,7 +22,7 @@
 
 static inline void
 _vdi_trap_esc (VDIPB * vdipb,
-               long cntrl_0_1, long cntrl_3, long cntrl_5, short handle)
+               long cntrl_0_1, long cntrl_2_3, long cntrl_4_5, short handle)
 {
 	__asm__ volatile (
 		"movea.l	%0,%%a0\n\t"	/* &vdipb */
@@ -35,12 +35,12 @@ _vdi_trap_esc (VDIPB * vdipb,
 		"move.w	#115,%%d0\n\t"	/* 0x0073 */
 		"trap	#2"
 		:
-		: "g"(vdipb), "g"(cntrl_0_1), "g"(cntrl_3), "g"(cntrl_5), "g"(handle)
+		: "g"(vdipb), "g"(cntrl_0_1), "g"(cntrl_2_3), "g"(cntrl_4_5), "g"(handle)
 		: "d0", "d1", "d2", "a0", "a1", "a2", "memory", "cc"
 	);
 }
-#define VDI_TRAP_ESC(vdipb, handle, opcode, subop, cntrl_1, cntrl_3) \
-	_vdi_trap_esc (&vdipb, (opcode##uL<<16)|cntrl_1, cntrl_3, subop, handle)
+#define VDI_TRAP_ESC(vdipb, handle, opcode, subop, nptsin, nintin) \
+	_vdi_trap_esc (&vdipb, (opcode##uL<<16)|nptsin, nintin, subop, handle)
 
 static inline void
 _vdi_trap_00 (VDIPB * vdipb, long cntrl_0_1, short handle)
@@ -83,8 +83,8 @@ __regsused("d0/d1/a0/a1") void _vdi_trap_esc(
   "\tmove.l\t(sp)+,a2\n"
   "\tmove.l\t(sp)+,d2";
   
-#define VDI_TRAP_ESC(vdipb, handle, opcode, subop, cntrl_1, cntrl_3) \
-        _vdi_trap_esc (&vdipb, (opcode##uL<<16)|cntrl_1, cntrl_3, subop, handle)
+#define VDI_TRAP_ESC(vdipb, handle, opcode, subop, nptsin, nintin) \
+        _vdi_trap_esc (&vdipb, (opcode##uL<<16)|nptsin, nintin, subop, handle)
 
 __regsused("d0/d1/a0/a1") void _vdi_trap_00(
         __reg("a0")VDIPB *,__reg("d0")long,__reg("d1")short) =
@@ -107,10 +107,10 @@ __regsused("d0/d1/a0/a1") void _vdi_trap_00(
  
 #else /* no usage of inlines, go the old way */
 
-#define VDI_TRAP_ESC(vdipb, handle, opcode, subop, cntrl_1, cntrl_3) \
+#define VDI_TRAP_ESC(vdipb, handle, opcode, subop, nptsin, nintin) \
 	vdipb.control[0] = opcode;  \
-	vdipb.control[1] = cntrl_1; \
-	vdipb.control[3] = cntrl_3; \
+	vdipb.control[1] = nptsin; \
+	vdipb.control[3] = nintin; \
 	vdipb.control[5] = subop;   \
 	vdipb.control[6] = handle;  \
 	vdi (&vdipb);
@@ -121,8 +121,8 @@ __regsused("d0/d1/a0/a1") void _vdi_trap_00(
 #endif
 
 
-#define VDI_TRAP(vdipb, handle, opcode, cntrl_1, cntrl_3) \
-	VDI_TRAP_ESC(vdipb, handle, opcode, 0, cntrl_1, cntrl_3)
+#define VDI_TRAP(vdipb, handle, opcode, nptsin, nintin) \
+	VDI_TRAP_ESC(vdipb, handle, opcode, 0, nptsin, nintin)
 
 #define VDI_PARAMS(a,b,c,d,e) \
 	VDIPB vdi_params;         \
