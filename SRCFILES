@@ -292,6 +292,10 @@ _VDI_EXTENSIONS = \
 	n_vqt_trackkern.c \
 	n_vqt_xfntinfo.c \
 	n_vr_transfer_bits.c \
+	n_vr_clip_rects_by_dst.c \
+	n_vr_clip_rects_by_src.c \
+	n_vr_clip_rects32_by_dst.c \
+	n_vr_clip_rects32_by_src.c \
 	n_vs_ctab.c \
 	n_vs_ctab_entry.c \
 	n_vs_dflt_ctab.c \

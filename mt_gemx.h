@@ -1937,7 +1937,11 @@ long		vqr_bg_color		(short handle, COLOR_ENTRY *fg_color);
 long		vqr_fg_color		(short handle, COLOR_ENTRY *fg_color);
 long		vqt_bg_color		(short handle, COLOR_ENTRY *fg_color);
 long		vqt_fg_color		(short handle, COLOR_ENTRY *fg_color);
-void		vr_transfer_bits	(short handle, GCBITMAP *src_bm, GCBITMAP *dst_bm, short *src_rect, short *dst_rect, short mode);
+void		vr_transfer_bits	(short handle, GCBITMAP *src_bm, GCBITMAP *dst_bm, const short *src_rect, const short *dst_rect, short mode);
+short		vr_clip_rects_by_dst	(short handle, const RECT16 *dst_clip_rect, const RECT16 *src_rect, const RECT16 *dst_rect, RECT16 *clipped_src_rect, RECT16 *clipped_dst_rect);
+short		vr_clip_rects_by_src	(short handle, const RECT16 *src_clip_rect, const RECT16 *src_rect, const RECT16 *dst_rect, RECT16 *clipped_src_rect, RECT16 *clipped_dst_rect);
+short		vr_clip_rects32_by_dst	(short handle, const RECT32 *dst_clip_rect, const RECT32 *src_rect, const RECT32 *dst_rect, RECT32 *clipped_src_rect, RECT32 *clipped_dst_rect);
+short		vr_clip_rects32_by_src	(short handle, const RECT32 *src_clip_rect, const RECT32 *src_rect, const RECT32 *dst_rect, RECT32 *clipped_src_rect, RECT32 *clipped_dst_rect);
 short		vs_ctab			(short handle, COLOR_TAB *ctab);
 short		vs_ctab_entry		(short handle, short __index, long color_space, COLOR_ENTRY *color);
 short		vs_dflt_ctab		(short handle);
@@ -2034,6 +2038,14 @@ long		udef_vq_hilite_color	(short handle, COLOR_ENTRY *hilite_color);
 #define udef_vqt_fg_color vqt_fg_color
 /** UDEF version of vr_transfer_bits(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vr_transfer_bits vr_transfer_bits
+/** UDEF version of vr_clip_rects_by_dst (). See \ref overviewUDEF for details about UDEF feature */
+#define udef_vr_clip_rects_by_dst vr_clip_rects_by_dst
+/** UDEF version of vr_clip_rects_by_src (). See \ref overviewUDEF for details about UDEF feature */
+#define udef_vr_clip_rects_by_src vr_clip_rects_by_src
+/** UDEF version of vr_clip_rects32_by_dst (). See \ref overviewUDEF for details about UDEF feature */
+#define udef_vr_clip_rects32_by_dst vr_clip_rects32_by_dst
+/** UDEF version of vr_clip_rects32_by_src (). See \ref overviewUDEF for details about UDEF feature */
+#define udef_vr_clip_rects32_by_src vr_clip_rects32_by_src
 /** UDEF version of vs_ctab(). See \ref overviewUDEF for details about UDEF feature */
 #define udef_vs_ctab vs_ctab
 /** UDEF version of vs_ctab_entry(). See \ref overviewUDEF for details about UDEF feature */
