@@ -1580,7 +1580,6 @@ typedef  struct
 #define WF_STACK		22366	/**< put the window below an other window in the window stack (WINX 2.3) */
 #define WF_TOPALL		22367	/**< bring all windows of the application to the front (WINX 2.3) */
 #define WF_BOTTOMALL	22368	/**< place all windows of the application at the back (WINX 2.3) */
-#define WF_XAAES		0x5841	/**< deprecated (XaAES) : 'XA' */
 
 /* wind_set(WF_BEVENT) */
 #define BEVENT_WORK		0x0001    /**< window not topped when click on the work area, see #WF_BEVENT */
